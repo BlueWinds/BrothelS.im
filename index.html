@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <title>Brothel S.im</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link type="text/css" rel="stylesheet" href="libraries/ui-darkness.css">
+  <link type="text/css" rel="stylesheet" href="style.css">
+  <script src="libraries/jquery.js"></script>
+  <script src="libraries/require.js"></script>
+  <script>
+    require.config({
+      baseUrl: "modules",
+      map: {
+        "*": {
+          "text": "libraries/text"
+        }
+      },
+      paths: {
+        "content": "../content",
+        "libraries": "../libraries"
+      },
+      shim: {
+        "libraries/jquery-ui": ["libraries/jquery"],
+        "libraries/jquery.sparkline": ["libraries/jquery"],
+        "libraries/cycle": [],
+        "libraries/globalize": [],
+        "libraries/ejs": [],
+        "libraries/namegen": [],
+      }
+    });
+
+    // Wait until the DOM is ready, so various modules can bind events to the page when they initialize.
+    $(function() {
+      require(["game/game", "missions/missions", "prostitution/prostitution"], function(Game) {
+        Game.load();
+      });
+    });
+  </script>
+</head>
+<body>
+  <div id="header-wrapper">
+    <div id="header">
+      <img src="content/logo.png">
+      <ul>
+        <li><a id="save">Save</a></li>
+        <li><a id="load">Load</a></li>
+        <li><a id="new">New</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="menu"></div>
+  <div id="content-wrapper">
+    <div id="content" class="ui-helper-clearfix">
+      <img src="content/loader.gif" style="display: block; margin: 10em auto 0px;">
+    </div>
+  </div>
+</body></html>

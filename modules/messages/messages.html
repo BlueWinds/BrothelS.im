@@ -1,0 +1,45 @@
+<% function renderDelta(delta) { %>
+  <div class="message-delta">
+    <% $.each(delta, function(stat, value) {
+      var text;
+      if (stat == 'money') {
+        text = value < 0 ? '-$' + (-value) : '+$' + value;
+      } else {
+        text = value < 0 ? value : '+' + value;
+      } %>
+      <span class="delta <%= stat %>"><%= text %></span>
+    <% }) %>
+  </div>
+<%} %>
+
+<div class="vertical-tabs navigable">
+  <ul>
+    <% var i = 0 %>
+    <% for (var subject in messages) { %>
+      <% i++ %>
+      <li>
+        <a href="#message-tab-<%= i %>"><%= subject %></a>
+      </li>
+    <% } %>
+  </ul>
+  <% i = 0 %>
+  <% $.each(messages, function(subject, sub_messages) { %>
+    <% i++ %>
+    <% var time = '' %>
+    <div id="message-tab-<%= i %>" class="accordion"><% sub_messages.forEach(function(message) { %>
+      <% var text = message.type %>
+      <% if (message.time && message.time != time) {
+          time = message.time;
+          text += ' - ' + time;
+      } %>
+      <h3><%= text %></h3>
+      <div class="message ui-helper-clearfix <%= message.text.length > 300 ? 'long' : '' %>">
+        <img src="<%= message.image %>">
+        <% if (message.delta && !$.isEmptyObject(message.delta)) { renderDelta(message.delta); } %>
+        <div class="message-content">
+          <%- message.text %>
+        </div>
+      </div>
+    <% }) %></div>
+  <% }) %>
+</div>

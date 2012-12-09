@@ -1,0 +1,270 @@
+body {
+  background: #1A1A1A;
+  color: #DDD;
+  margin: 0;
+  padding: 0;
+  font: 14px "proxima-nova-condensed",helvetica,arial,sans-serif;
+}
+
+#header, #content {
+  max-width: 720px;
+  margin: auto;
+  position: relative;
+}
+
+#header-wrapper {
+  background: url("content/header_sky.jpg") repeat scroll 50% 0 transparent;
+  height: 100px;
+  margin: 0;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+#header {
+  height: 75px;
+  padding-top: 25px;
+}
+
+#header img {
+  cursor: pointer;
+}
+
+#header ul {
+  display: inline-block;
+  float: right;
+  line-height: 41px;
+  margin: 0;
+  padding: 0;
+}
+
+#header li {
+  float: left;
+  list-style: none outside none;
+  margin: 0 0 0 1.5em;
+}
+
+#header li a {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+#menu {
+  height: 40px;
+  background: #351510;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#1A1A1A');
+  background: -webkit-gradient(linear, left top, left bottom, from(#666666), to(#1A1A1A));
+  background: -moz-linear-gradient(center top , #666666, #1A1A1A);
+}
+
+.column {
+  float: left;
+  margin: 1em 0;
+}
+
+.pct-10 { width: 10%; }
+.pct-20 { width: 20%; }
+.pct-25 { width: 25%; }
+.pct-30 { width: 30%; }
+.pct-35 { width: 35%; }
+.pct-40 { width: 40%; }
+.pct-50 { width: 50%; }
+.pct-60 { width: 60%; }
+.pct-70 { width: 70%; }
+.pct-80 { width: 80%; }
+
+.em-2 { width: 2em; }
+.em-3 { width: 3em; }
+.em-4 { width: 4em; }
+.em-5 { width: 5em; }
+.em-6 { width: 6em; }
+.em-7 { width: 7em; }
+.em-10 { width: 10em; }
+.em-20 { width: 20em; }
+
+.block { display: block; }
+.inline-block { display: inline-block; }
+.center { text-align: center; }
+.indent { margin-left: 2em; }
+.half-indent { margin-left: 1em; }
+.clear { clear: both; }
+.big { font-size: 1.5em; }
+
+a, a:visited {
+  color: #E3AC00;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover, a:focus, a.active {
+  color: #DDD;
+  outline: none;
+}
+
+a.disabled, a.disabled:hover, a.disabled:focus, a.disabled:active {
+  color: #666;
+  cursor: default;
+}
+
+blockquote {
+  color: #BBBBBB;
+  margin: 1em;
+  padding-left: 1em;
+}
+
+blockquote:before {
+  color: #666;
+  content:open-quote;
+  font-size:4em;
+  line-height:.1em;
+  margin-right:.25em;
+  vertical-align:-.4em;
+}
+
+blockquote p:first-child {
+  display: inline;
+}
+
+label {
+  display: inline-block;
+}
+
+input {
+  background: none;
+  border: 1px solid #E3AC00;
+  border-radius: 6px;
+  color: #BBB;
+  outline: 0 none;
+  padding: 0 4px;
+  margin: 3px 0;
+  max-width: 100%;
+}
+
+input:focus {
+  border-color: #FF5000;
+}
+
+img { max-width: 100%; }
+
+.ui-button-text-only .ui-button-text {
+  padding: 0.1em 0.5em;
+}
+
+.actions button, .actions a.button {
+  margin: 10px 10px 10px 0;
+}
+
+.ui-widget-content {
+  background: #000;
+}
+
+.ui-dialog .ui-dialog-content {
+  overflow: hidden;
+}
+
+.error_msg {
+  color: #DE0000;
+  font-size: 0.8em;
+  margin: 0.2em 0 0;
+}
+
+.ui-button-icon-only {
+  width: auto;
+}
+
+.ui-button-icon-only .ui-button-text {
+  height: 16px;
+  padding: 0;
+  width: 16px;
+}
+
+.ui-widget-overlay {
+  background: #000;
+  opacity: .5;
+  width: 100% !important;
+}
+
+input.hidden-input {
+  display: none;
+}
+
+input.hidden-input + label {
+  border: 1px solid #E3AC00;
+  border-radius: 6px;
+  padding: 2%;
+  width: 96%;
+}
+
+input.hidden-input:checked + label {
+  border-color: #FF5000;
+  border-width: 2px;
+}
+
+.ui-accordion .ui-accordion-header .ui-accordion-header-icon {
+  left: 0.15em;
+}
+
+.ui-accordion .ui-accordion-header {
+  padding: 0.1em 1.2em;
+}
+
+.ui-accordion .ui-accordion-content {
+  padding: 1em;
+}
+
+hr {
+  margin-top: 1em;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid #666;
+}
+
+td p {
+  margin: 0.3em 0;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+h6 {
+  font-size: 1em;
+  margin: 0;
+}
+
+button, a.button {
+  margin: 1em 0;
+}
+
+li:focus {
+  outline: none;
+}
+
+#new-game label {
+  width: 6em;
+}
+
+#save-game label {
+  width: 3em;
+}
+
+#top-right {
+  text-align: center;
+}
+
+#top-right button {
+  margin: 1em;
+}
+
+#top-right #next {
+  display: block;
+  margin: 1em auto;
+}

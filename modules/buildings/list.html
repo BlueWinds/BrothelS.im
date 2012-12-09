@@ -1,0 +1,28 @@
+<div class="column pct-50" id="buildings">
+  <% if (buildings.length < g.maxBuildings) { %>
+    <h3 class="center">
+      <a id="buy-building">Buy Building</a>
+    </h3>
+  <% } %>
+  <% buildings.forEach(function(building) { %>
+    <div class="ui-helper-clearfix no-cursor building" name="<%= building.name %>">
+      <div class="column pct-20">
+        <img src="<%= building._.image %>">
+      </div>
+      <div class="column pct-40 middle">
+        <h6 class="center"><%= building.name %></h6>
+        <div><label>Clean:</label><%- building.S("clean") %></div>
+        <div><label>Rooms:</label><%- building.S("rooms") %></div>
+        <% building.rooms.forEach(function (room) { %>
+          <div class="room"><%= room.type.capitalize() %></div>
+        <% }) %>
+      </div>
+      <div class="column pct-40 right center">
+        <div><strong>Residents</strong></div>
+        <% $.each(building.girls(), function(name, girl) { %>
+          <div><%= name %></div>
+        <% }) %>
+      </div>
+    </div>
+  <% }) %>
+</div>
