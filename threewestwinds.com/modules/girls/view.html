@@ -1,0 +1,63 @@
+<div id="girl-view" name="<%= girl.name %>" class="ui-helper-clearfix">
+  <div class="column pct-30 left">
+    <img src="<%= girl.image("base") %>" title="<%= girl._.description %>">
+  </div>
+  <div class="column pct-70">
+    <div class="column pct-50 middle">
+      <div><label>Endurance</label><%- girl.S("endurance") %></div>
+      <div><label>Happiness</label><%- girl.S("happiness") %></div>
+      <div><label>Obedience</label><%- girl.S("obedience") %></div>
+      <div><label>Charisma</label><%- girl.S("charisma") %></div>
+      <div><label>Intelligence</label><%- girl.S("intelligence") %></div>
+      <div><label>Constitution</label><%- girl.S("constitution") %></div>
+      <div id="pay">
+        <label>Pay</label>
+        <input value="$<%= girl.actions.pay %>">
+        <span class="delta happiness"></span>
+      </div>
+    </div>
+    <div class="column pct-50 right">
+      <div class="checkbox">
+        <label for="soft" class="<%- girl.actions.soft ? 'checked' : '' %>">Softcore</label>
+        <input id="soft" type="checkbox" <%- girl.actions.soft ? 'checked="checked"' : '' %>>
+      </div>
+      <div><label>Libido:</label><span class="soft libido"><%- girl.S("soft libido") %></span></div>
+      <div><label>Experience:</label><span class="soft experience"><%- girl.S("soft experience") %></span></div>
+      <div class="checkbox">
+        <label for="hard" class="<%- girl.actions.hard ? 'checked' : '' %>">Hardcore</label>
+        <input id="hard" type="checkbox" <%- girl.actions.hard ? 'checked="checked"' : '' %>>
+      </div>
+      <div><label>Libido:</label><span class="hard libido"><%- girl.S("hard libido") %></span></div>
+      <div><label>Experience:</label><span class="hard experience"><%- girl.S("hard experience") %></span></div>
+      <div class="checkbox">
+        <label for="anal" class="<%- girl.actions.anal ? 'checked' : '' %>">Anal</label>
+        <input id="anal" type="checkbox" <%- girl.actions.anal ? 'checked="checked"' : '' %>>
+      </div>
+      <div><label>Libido:</label><span class="anal libido"><%- girl.S("anal libido") %></span></div>
+      <div><label>Experience:</label><span class="anal experience"><%- girl.S("anal experience") %></span></div>
+      <div class="checkbox">
+        <label for="fetish" class="<%- girl.actions.fetish ? 'checked' : '' %>">Fetish</label>
+        <input id="fetish" type="checkbox" <%- girl.actions.fetish ? 'checked="checked"' : '' %>>
+      </div>
+      <div><label>Libido:</label><span class="fetish libido"><%- girl.S("fetish libido") %></span></div>
+      <div><label>Experience:</label><span class="fetish experience"><%- girl.S("fetish experience") %></span></div>
+    </div>
+    <hr class="clear">
+    <div class="column pct-50">
+      <label for="morning">Morning</label>
+      <select id="morning">
+        <% $.each(potentialMorning, function (_id, action) { %>
+          <option value="<%= _id %>" title="<%= action.description %>" <%= (girl.actions.morning == _id) ? 'selected' : '' %>><%= action.label %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="column pct-50">
+      <label for="evening">Evening</label>
+      <select id="evening" value="<%= girl.actions.evening %>">
+        <% $.each(potentialEvening, function (_id, action) { %>
+          <option value="<%= _id %>" title="<%= action.description %>" <%= (girl.actions.evening == _id) ? 'selected' : '' %>><%= action.label %></option>
+        <% }) %>
+      </select>
+    </div>
+  </div>
+</div>

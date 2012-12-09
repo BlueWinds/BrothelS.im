@@ -1,0 +1,148 @@
+.styled-select {
+  border: 1px solid #666;
+  border-radius: 6px;
+  margin-top: .4em;
+  overflow: hidden;
+  padding-bottom: 3px;
+  position: relative;
+  width: 9em;
+}
+
+.styled-select:after {
+  color: #AAA;
+  content: "▾";
+  cursor: default;
+  margin: 0.2em 0.4em 0 0;
+  position: absolute;
+  right: 0;
+}
+
+.styled-select select {
+  background-color: transparent;
+  border: medium none;
+  color: rgba(0,0,0,0);
+  margin: 0;
+  text-shadow: 0 0 0 #FFF;
+  padding: 0.3em 0 0 0.3em;
+  width: 115%;
+}
+
+.styled-select option {
+  background: transparent;
+  color: #FFF;
+}
+
+.styled-select select:focus {
+  background-color: #001C23;
+  outline: none;
+}
+
+.spinner {
+  width: 3em;
+}
+
+.ui-tabs {
+  padding: 0;
+}
+
+.ui-widget-content.vertical-tabs {
+  border: none;
+  background: none;
+}
+
+.vertical-tabs .ui-tabs-nav {
+  background: #000;
+  border-color: #666666 -moz-use-text-color #666666 #666666;
+  border-image: none;
+  border-style: solid none solid solid;
+  border-width: 1px medium 1px 1px;
+  float: left;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.vertical-tabs .ui-tabs-nav li {
+  background: none;
+  border: none;
+  float: none;
+  margin: 0;
+  width: 6em;
+}
+
+.vertical-tabs .ui-tabs-nav li.ui-state-hover {
+  background: url("../../libraries/images/ui-bg_glass_40_0078a3_1x400.png") repeat-x scroll 50% 50% #0078A3;
+}
+
+.vertical-tabs .ui-tabs-nav li.ui-tabs-active {
+  background: url("../../libraries/images/ui-bg_inset-soft_30_f58400_1x100.png") repeat-x scroll 50% 50% #F58400;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-active a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-tabs-loading a {
+  cursor: pointer;
+}
+
+.vertical-tabs .ui-tabs-panel {
+  background: #000;
+  border: 1px solid #666;
+  margin-left: 6em;
+}
+
+.tab-dialog {
+  background: none;
+  border: none;
+  height: 100px;
+  overflow: hidden;
+}
+
+.tab-dialog .ui-dialog-titlebar {
+  display: none;
+}
+
+.tab-dialog .ui-tabs-panel {
+  padding: 2.5em 1em 1em;
+}
+
+.tab-dialog .accordion .ui-state-active {
+  background: url("../../libraries/images/ui-bg_glass_20_555555_1x400.png") repeat-x scroll 50% 50% #555555;
+  border: 1px solid #666;
+}
+
+.tab-dialog .nav {
+  position: absolute;
+  right: 1em;
+  top: 0.5em;
+}
+
+.tab-dialog .nav .previous {
+  border-radius: 0 0 0 6px;
+  margin: 0;
+}
+
+.tab-dialog .nav .next {
+  border-radius: 0;
+  margin: 0;
+}
+
+.tab-dialog .nav .close {
+  border-radius: 0 6px 0 0;
+  margin: 0;
+}
+
+.tab-dialog .nav .ui-state-disabled {
+  color: #999;
+  opacity: 1;
+  background-image: url("../../libraries/images/ui-bg_glass_20_555555_1x400.png");
+}
+
+.ui-tooltip {
+  pointer-events: none;
+}
+
+.ui-tooltip p:first-child {
+  margin-top: 0;
+}
+
+.ui-tooltip p:last-child {
+  margin-bottom: 0;
+}
