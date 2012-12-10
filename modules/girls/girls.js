@@ -1,4 +1,4 @@
-define(['content/girls.js', './girlList', './schema', 'text!./list.html', 'text!./view.html', 'text!./hire.html', 'game/game'], function(config, girls, Girl, list_template, view_template, hire_template) {
+define(['content/girls', 'content/girls/girlList', './schema', 'text!./list.html', 'text!./view.html', 'text!./hire.html', 'game/game'], function(config, girls, Girl, list_template, view_template, hire_template) {
 
   $('head').append('<link type="text/css" rel="stylesheet" href="modules/girls/style.css">');
 

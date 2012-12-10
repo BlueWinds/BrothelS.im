@@ -1,4 +1,4 @@
-define(['./girlList', 'content/girls', 'messages/messages', './actionsList'], function(girls, config, Message, actionsList) {
+define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content/actions/actionsList'], function(girls, config, Message, actionsList) {
   var stats = [
     'happiness', 'endurance', 'obedience', 'charisma', 'intelligence', 'constitution',
     'soft libido', 'hard libido', 'anal libido', 'fetish libido',
