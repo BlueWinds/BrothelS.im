@@ -1,6 +1,6 @@
 var e = {};
 
-define(['autorender/autorender', 'libraries/jquery-ui'], function(autorender) {
+define(['autorender/autorender'], function(autorender) {
   e.invokeAll = function(hook) {
     if (!e[hook]) { return; }
     var args = Array.prototype.slice.call(arguments, 1);

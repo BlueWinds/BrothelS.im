@@ -1,4 +1,4 @@
-define(['content/game', 'text!./game.html', 'libraries/jquery'], function(config, template) {
+define(['content/game', 'text!./game.html'], function(config, template) {
 
   var Game = function(obj) {
     jQuery.extend(this, obj);

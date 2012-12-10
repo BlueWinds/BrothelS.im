@@ -1,4 +1,4 @@
-define(['content/randomPerson', 'libraries/namegen'], function(config) {
+define(['content/randomPerson'], function(config) {
   return function(class_) {
     var keys = Object.keys(config);
     if (!class_) {

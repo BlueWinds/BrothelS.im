@@ -6,6 +6,12 @@
   <link type="text/css" rel="stylesheet" href="libraries/ui-darkness.css">
   <link type="text/css" rel="stylesheet" href="style.css">
   <script src="libraries/jquery.js"></script>
+  <script src="libraries/jquery-ui.js"></script>
+  <script src="libraries/cycle.js"></script>
+  <script src="libraries/globalize.js"></script>
+  <script src="libraries/ejs.js"></script>
+  <script src="libraries/namegen.js"></script>
+  <script src="libraries/jquery.sparkline.js"></script>
   <script src="libraries/require.js"></script>
   <script>
     require.config({
@@ -19,14 +25,6 @@
         "content": "../content",
         "libraries": "../libraries"
       },
-      shim: {
-        "libraries/jquery-ui": ["libraries/jquery"],
-        "libraries/jquery.sparkline": ["libraries/jquery"],
-        "libraries/cycle": [],
-        "libraries/globalize": [],
-        "libraries/ejs": [],
-        "libraries/namegen": [],
-      }
     });
 
     // Wait until the DOM is ready, so various modules can bind events to the page when they initialize.

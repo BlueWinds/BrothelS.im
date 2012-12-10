@@ -1,4 +1,4 @@
-define(['libraries/jquery.sparkline', 'libraries/globalize'], function() {
+define(function() {
   $('head').append('<link type="text/css" rel="stylesheet" href="modules/autorender/autorender.css">');
 
   Globalize.cultures.en.numberFormat.currency.decimals = 0;
