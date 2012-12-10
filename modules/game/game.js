@@ -23,17 +23,20 @@ define(['text!./intro.html', './schema', 'text!./new-form.html', 'text!./save-fo
       var list = localStorage.getObject('saved-games') || {};
       var value = localStorage.getItem(list[name]);
       if (value) {
-        value = JSON.retrocycle(JSON.parse(value));
-        g = new Game(value);
-        e.invokeAll('GameInit');
-        g.render();
-        $('#save').removeClass('disabled');
+        module.loadFromText(value);
       } else {
         $('#content').html(intro);
         e.invokeAll('Autorender', $('#content'));
         $('#save').addClass('disabled');
       }
       localStorage.setItem('current-game', name);
+    },
+    loadFromText: function(value) {
+      value = JSON.retrocycle(JSON.parse(value));
+      g = new Game(value);
+      e.invokeAll('GameInit');
+      g.render();
+      $('#save').removeClass('disabled');
     },
     save: function(name) {
       if (name != g.name || !g._id) {
@@ -117,6 +120,17 @@ define(['text!./intro.html', './schema', 'text!./new-form.html', 'text!./save-fo
     if (g.name) {
       $('#game-name', form).val(g.name);
     }
+    $('#export-game', form).click(function(event) {
+      var game = JSON.stringify(JSON.decycle(g), function(key, val) {
+        if (key == '_' || key.substr(0, 6) == 'jQuery') {
+          return undefined;
+        }
+        return val;
+      });
+      $('<div>').text(game).dialog();
+      event.preventDefault();
+      return false;
+    });
     form.submit(function(event) {
       event.preventDefault();
       module.save($('#game-name', form).val());
@@ -145,6 +159,13 @@ define(['text!./intro.html', './schema', 'text!./new-form.html', 'text!./save-fo
         $('#load').addClass('disabled');
       }
       $('#load').click();
+      return false;
+    });
+    $('#import', form).click(function(event) {
+      event.preventDefault();
+      var game = $('textarea', form).val();
+      module.loadFromText(game);
+      form.dialog('close');
       return false;
     });
     form.submit(function(event) {

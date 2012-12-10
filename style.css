@@ -268,3 +268,12 @@ li:focus {
   display: block;
   margin: 1em auto;
 }
+
+textarea {
+  background: none repeat scroll 0 0 #000000;
+  border: 1px solid #666666;
+  border-radius: 6px 6px 6px 6px;
+  color: #DDDDDD;
+  display: block;
+  padding: 0.4em;
+}

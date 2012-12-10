@@ -37,6 +37,11 @@
   outline: none;
 }
 
+.center .styled-select {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .spinner {
   width: 3em;
 }
