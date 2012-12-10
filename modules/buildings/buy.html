@@ -21,7 +21,7 @@
             if (stat == 'money') {
               text = value < 0 ? '-$' + (-value) : '+$' + value;
             } else {
-              text = value < 0 ? value : '+' + value;
+              text = value < 0 ? '' + value : '+' + value;
             } %>
             <span class="delta <%= stat %>"><%= text.substr(0, 5) %></span>
           <% }) %></div>
