@@ -4,22 +4,22 @@ define({
     soft: {
       r: 0.4,
       endurance: -6,
-      pays: 70
+      pays: 100
     },
     hard: {
       r: 0.6,
       endurance: -9,
-      pays: 120
+      pays: 150
     },
     anal: {
       r: 0.8,
       endurance: -14,
-      pays: 200
+      pays: 230
     },
     fetish: {
       r: 1,
       endurance: -16,
-      pays: 400
+      pays: 450
     }
   },
   results: {

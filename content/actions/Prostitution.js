@@ -4,7 +4,7 @@ define([], [
     label: 'Streetwalk',
     description: 'She will wander the streets looking for customers to service. This tends to be quite tiring, and not as profitable as other options, but it won\'t count against the customers or reputation of your buildings.',
     mins: {
-      obedience: 40,
+      obedience: 20,
       happiness: 20,
       endurance: 25
     },

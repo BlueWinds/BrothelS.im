@@ -17,7 +17,7 @@ define([], [
   {
     _id: 'firstMoney',
     name: 'Earn $1000',
-    description: 'Earn $1000 as fast as you can. Something good will happen!<br><br>My arms are getting tired!',
+    description: 'Earn $1000 as fast as you can. Something good will happen!<br><br>My arms are getting tired!<br><br>One important thing to keep in mind is that customers have certain preferences - they\'ll pay significantly better for their first or second choices of sex types. Girls willing to do only one thing will make much less money.',
     image: 'content/missions/firstMoneyStart.png',
     end: {
       money: 1000
