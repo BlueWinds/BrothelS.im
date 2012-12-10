@@ -3,7 +3,7 @@
     <h2>Day <%= g.day %></h2>
     <div>
       Cash on hand:
-      <strong class="money"><%= g.money < 0 : "-$" + (-g.money) : "$" + g.money %></strong>
+      <strong class="money"><%= g.money < 0 ? "-$" + (-g.money) : "$" + g.money %></strong>
     </div>
     <div>
       Payment of
