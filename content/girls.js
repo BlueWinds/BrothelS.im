@@ -21,6 +21,6 @@ define({
     intelligence: "Intelligence is how quickly she learns. Girls with higher intelligence will gain experience and levels more quickly.",
     constitution: "Constitution is a measure of how quickly she tires. A higher constitution means that Endurance will fall more slowly and recover more quickly.",
     libido: "Libido measures how much she enjoys a particular sex act. Higher values mean she's less likely to refuse and will provide a customer with a better experience.",
-    experience: "Experience measures how often a girl has done a particular sex act, and how good she is at pleasuring customers. Higher values will provide a better experience."
+    experience: "Experience measures how often a girl has done a particular sex act, and how good she is at pleasuring customers. Higher values will make her less likely to refuse, and customers will pay more."
   }
 });
