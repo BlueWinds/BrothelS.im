@@ -47,7 +47,7 @@
       <label for="morning">Morning</label>
       <select id="morning">
         <% $.each(potentialMorning, function (_id, action) { %>
-          <option value="<%= _id %>" title="<%= action.description %>" <%= (girl.actions.morning == _id) ? 'selected' : '' %>><%= action.label %></option>
+          <option value="<%= _id %>" title="<%= action.description %>" <%= (girl.actions.morning == _id) ? 'selected' : '' %> <%= action.disabled ? "disabled" : '' %>><%= action.label %></option>
         <% }) %>
       </select>
     </div>
@@ -55,7 +55,7 @@
       <label for="evening">Evening</label>
       <select id="evening" value="<%= girl.actions.evening %>">
         <% $.each(potentialEvening, function (_id, action) { %>
-          <option value="<%= _id %>" title="<%= action.description %>" <%= (girl.actions.evening == _id) ? 'selected' : '' %>><%= action.label %></option>
+          <option value="<%= _id %>" title="<%= action.description %>" <%= (girl.actions.evening == _id) ? 'selected' : '' %> <%= action.disabled ? "disabled" : '' %>><%= action.label %></option>
         <% }) %>
       </select>
     </div>

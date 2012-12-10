@@ -17,10 +17,6 @@ define(['girls/schema', './schema', 'content/buildings', './buildingList', 'text
   e.GamePreDay.push(function() {
     $.each(g.buildings, function(name, building) {
       building.turnDelta = building.startDelta();
-    });
-  });
-  e.GameNextDay.push(function() {
-    $.each(g.buildings, function(name, building) {
       building.runDay();
     });
   });

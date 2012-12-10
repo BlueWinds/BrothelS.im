@@ -49,8 +49,8 @@ define(['content/girls.js', './girlList', './schema', 'text!./list.html', 'text!
       var girl = g.girls[$(this).attr('name')];
       var context = {
         girl: girl,
-        potentialMorning: girl.potentialActions('morning'),
-        potentialEvening: girl.potentialActions('evening')
+        potentialMorning: girl.potentialActions('morning', true),
+        potentialEvening: girl.potentialActions('evening', true)
       };
       var view = $(ejs.render(view_template, context));
 

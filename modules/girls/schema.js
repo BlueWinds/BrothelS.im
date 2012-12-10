@@ -91,18 +91,22 @@ define(['./girlList', 'content/girls', 'messages/messages', './actionsList'], fu
 
   Girl.actionFunctions = {};
 
-  Girl.prototype.potentialActions = function(time) {
+  Girl.prototype.potentialActions = function(time, ignoreMin) {
     var actions = {};
     for (var id_ in actionsList) {
       var action = actionsList[id_];
       if (!action.conditions || action.conditions.call(this, time)) {
-        var match = true;
+        var fail = false;
         for (var stat in action.mins) {
-          if (this[stat] < action.mins[stat]) { match = false; break; }
+          if (this[stat] < action.mins[stat]) { fail = stat; break; }
         }
-        if (!match) { continue; }
+        if (fail && !ignoreMin) { continue; }
         actions[id_] = $.extend(true, {}, action);
         actions[id_].label = ejs.render(actions[id_].label, this);
+        if (ignoreMin && fail) {
+          actions[id_].label += ' - ' + fail + ' too low';
+          actions[id_].disabled = true;
+        }
         actions[id_].description = ejs.render(actions[id_].description, this);
       }
     }
