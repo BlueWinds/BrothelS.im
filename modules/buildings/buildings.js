@@ -60,20 +60,19 @@ define(['girls/schema', './schema', 'content/buildings', './buildingList', 'text
           div.addClass('room');
           $('#rooms', view).append(div);
         });
-        var old_view = $('#building-view');
-        if (old_view.length) {
-          old_view.empty().html(view.children());
-          e.invokeAll('Autorender', old_view);
-        }
-        return view;
+        var old_view = $('#building-view')
+        old_view.remove();
+        var opt = {
+          title: building.name,
+          width: '35em',
+          beforeClose: function() { g.render(); }
+        };
+        if (old_view) { opt.show = false; }
+        view.dialog(opt);
+        $('select').blur();
       }
 
-      render().dialog({
-        title: building.name,
-        width: '35em',
-        beforeClose: function() { g.render(); }
-      });
-      $('select').blur();
+      render();
     });
 
     $('#buy-building').click(function() {
