@@ -1,15 +1,22 @@
 .message {
   display: none;
   padding: 1em 0 2em 1.5em;
-  width: 32em;
+  width: 40em;
 }
 
 .message img {
   vertical-align: middle;
-  width: 12em;
+  width: 20em;
 }
 
-.message > div {
+.message .message-delta {
+  display: inline-block;
+  margin-left: 1em;
+  max-width: 2em;
+  vertical-align: middle;
+}
+
+.message .message-content {
   display: inline-block;
   margin-left: 1em;
   max-width: 15em;
