@@ -18,7 +18,8 @@
 }
 
 .styled-select select {
-  background-color: transparent;
+  background-color: #000;
+  border-radius: 6px;
   border: medium none;
   color: rgba(0,0,0,0);
   margin: 0;
