@@ -55,6 +55,10 @@ define([], [
     image: 'content/missions/firstBuilding.jpg',
     end: {
       buildings: 1
+    },
+    success: {
+      image: 'content/missions/firstBuilding.jpg',
+       description: "Be sure to click on your new building and assign your girls to the bedrooms - once that's done, check back with them, and you'll find that they're happier with much lower wages since they don't have to rent a room every night.<br><br>The other new task you have is keeping the building clean by assigning the Clean action to girls. The cleaner a building is the better of an effect it has on its residents - dirty buildings may even penalize those living there!<br><br>Sadly, you've reached the end of the tutorial so far, and almost the end of the implemented content. Try buying a dungeon for your building (the option to add rooms shows up when you have enough money). Thanks for playing!"
     }
   }
 ]);
