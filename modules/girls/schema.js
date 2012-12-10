@@ -69,8 +69,8 @@ define(['./girlList', 'content/girls', 'messages/messages', './actionsList'], fu
     }
   };
 
-  Girl.prototype.desiredPay = function(happiness) {
-    var pay = Math.floor(this.hirePrice(happiness) / 20);
+  Girl.prototype.desiredPay = function() {
+    var pay = Math.floor(this.hirePrice(50) / 20);
     if (this._.specialRules.payRatio !== undefined) {
       pay *= this._.specialRules.payRatio;
     }

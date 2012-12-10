@@ -46,7 +46,6 @@ define(['messages/messages'], function(Message) {
       money += this.get(client.wants[2]) * config.money[2];
       money += this.get(client.wants[3]) * config.money[3];
       reward.money = money;
-      console.log(reward);
 
       reward[client.sex[0] + ' libido'] = config.libido[0];
       reward[client.sex[1] + ' libido'] = config.libido[1];

@@ -101,8 +101,8 @@ define(['girls/schema', './schema', 'content/buildings', './buildingList', 'text
   });
 
   var originalPay = Girl.prototype.desiredPay;
-  Girl.prototype.desiredPay = function(happiness) {
-    var pay = originalPay.call(this, happiness);
+  Girl.prototype.desiredPay = function() {
+    var pay = originalPay.call(this);
     return this.bedroom() ? pay : pay + config.noRoomDailyCost;
   };
 
