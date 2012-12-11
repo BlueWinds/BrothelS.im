@@ -23,13 +23,13 @@ define({
   specialRules: {},
   images: {
     basePath: "content/girls/Sakuya/images",
-    base: "Base.png",
+    base: "Base.jpg",
     refuse: "Refuse.jpg",
     tired: ["Tired1.jpg", "Tired2.jpg"],
     soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg", "Soft6.jpg"],
     hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg"],
     anal: ["Anal1.jpg", "Anal2.jpg", "Anal3.jpg", "Anal4.jpg"],
-    fetish: ["Fetish1.jpg", "Fetish2.png", "Fetish3.jpg", "Fetish4.jpg", "Fetish5.jpg"],
+    fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4.jpg", "Fetish5.jpg"],
     cleaning: ["Cleaning1.jpg", "Cleaning2.jpg"]
   }
 });

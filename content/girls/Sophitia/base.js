@@ -23,7 +23,7 @@ define({
   images: {
     basePath: "content/girls/Sophitia/images",
     base: "Base.png",
-    refuse: "Refuse.png",
+    refuse: "Refuse.jpg",
     tired: "Tired.jpg",
     soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg", "Soft6.jpg"],
     hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg"],
