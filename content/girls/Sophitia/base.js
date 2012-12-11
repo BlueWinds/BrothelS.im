@@ -30,6 +30,7 @@ define({
     anal: ["Anal1.jpg", "Anal2.jpg", "Anal3.jpg", "Anal4.jpg"],
     fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4.jpg", "Fetish5.jpg", "Fetish6.jpg"],
     cleaning: "Cleaning.jpg",
-    exercise: "Exercise.jpg"
+    exercise: "Exercise.jpg",
+    tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg", "Tentacles5.jpg"]
   }
 });

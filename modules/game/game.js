@@ -101,7 +101,7 @@ define(['text!./intro.html', './schema', 'text!./new-form.html', 'text!./save-fo
     form.submit(function(event) {
       event.preventDefault();
       module.start({
-        tentacles: Boolean($('game-tentacles', form).val())
+        tentacles: Boolean($('#game-tentacles', form).val())
       });
       form.dialog('close');
       return false;

@@ -93,21 +93,21 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
 
   Girl.prototype.potentialActions = function(time, ignoreMin) {
     var actions = {};
-    for (var id_ in actionsList) {
-      var action = actionsList[id_];
+    for (var _id in actionsList) {
+      var action = actionsList[_id];
       if (!action.conditions || action.conditions.call(this, time)) {
         var fail = false;
         for (var stat in action.mins) {
           if (this[stat] < action.mins[stat]) { fail = stat; break; }
         }
         if (fail && !ignoreMin) { continue; }
-        actions[id_] = $.extend(true, {}, action);
-        actions[id_].label = ejs.render(actions[id_].label, this);
+        actions[_id] = $.extend(true, {}, action);
+        actions[_id].label = ejs.render(actions[_id].label, this);
         if (ignoreMin && fail) {
-          actions[id_].label += ' - ' + fail + ' too low';
-          actions[id_].disabled = true;
+          actions[_id].label += ' - ' + fail + ' too low';
+          actions[_id].disabled = true;
         }
-        actions[id_].description = ejs.render(actions[id_].description, this);
+        actions[_id].description = ejs.render(actions[_id].description, this);
       }
     }
     return actions;
@@ -169,8 +169,14 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
       this.status = this.randomStatus();
       return;
     }
-    this.doAction('morning');
-    this.doAction('evening');
+    var actions = this.potentialActions('morning');
+    var type = this.actions.morning;
+    var action = actions[type] || actions.Rest;
+    this.doAction('morning', action);
+    actions = this.potentialActions('evening');
+    type = this.actions.evening;
+    action = actions[type] || actions.Rest;
+    this.doAction('evening', action);
     this.apply('money', -this.actions.pay);
     var change = this.actions.pay - this.desiredPay();
     change = change > 0 ? change * config.pay.above : change * config.pay.below;

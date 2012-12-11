@@ -30,12 +30,12 @@ define([], [
         endurance: -20,
         constitution: 1,
         happiness: -3
-      },
+      }
     ],
-    image: ['exercise', 'tired'],
+    image: ['exercise', 'exercise', 'tired'],
     tags: {
       outdoors: true
     }
-  },
+  }
 
 ]);

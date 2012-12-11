@@ -29,7 +29,7 @@
 
     // Wait until the DOM is ready, so various modules can bind events to the page when they initialize.
     $(function() {
-      require(["game/game", "missions/missions", "prostitution/prostitution"], function(Game) {
+      require(["game/game", "missions/missions", "prostitution/prostitution", "events/events"], function(Game) {
         Game.load();
       });
     });
