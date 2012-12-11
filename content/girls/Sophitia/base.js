@@ -29,6 +29,7 @@ define({
     hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg"],
     anal: ["Anal1.jpg", "Anal2.jpg", "Anal3.jpg", "Anal4.jpg"],
     fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4.jpg", "Fetish5.jpg", "Fetish6.jpg"],
-    cleaning: "Cleaning.jpg"
+    cleaning: "Cleaning.jpg",
+    exercise: "Exercise.jpg"
   }
 });

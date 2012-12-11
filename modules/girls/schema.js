@@ -137,13 +137,28 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
     }
     else {
       var endDelta = this.startDelta();
-      this.apply(action.delta || {});
-      var text = typeof(action.message) == 'object' ? Math.choice(action.message) : action.message;
+      var delta = action.delta;
+      var text = action.message;
+      var image = action.image;
+      if (action.chances) {
+        var rand = Math.random();
+        var i = 0;
+        while (i < action.chances.length) {
+          if (rand < action.chances[i]) { break; }
+          rand -= action.chances[i];
+          i++;
+        }
+        delta = delta[i];
+        text = text[i];
+        image = image[i];
+      }
+      this.apply(delta || {});
+      text = typeof(text) == 'object' ? Math.choice(text) : text;
       var message = new Message({
         type: type,
         text: ejs.render(text, this),
         delta: endDelta(),
-        image: this.image(action.image || type),
+        image: this.image(image),
         time: time
       }).save(this.name);
     }

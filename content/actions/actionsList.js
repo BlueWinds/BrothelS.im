@@ -2,7 +2,8 @@
   var files = [
     'Simple',
     'Prostitution',
-    'specialParty'
+    'specialParty',
+    'Schools'
   ];
   for (var i in files) {
     files[i] = 'content/actions/' + files[i];

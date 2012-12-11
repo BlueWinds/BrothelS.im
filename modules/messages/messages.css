@@ -6,7 +6,8 @@
 
 .message img {
   vertical-align: middle;
-  width: 20em;
+  max-height: 20em;
+  max-width: 20em;
 }
 
 .message .message-delta {
