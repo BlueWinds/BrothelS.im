@@ -2,7 +2,8 @@
   var files = [
     'Kirino',
     'Sakuya',
-    'Sophitia'
+    'Sophitia',
+    'Dark Magician Girl'
   ];
   for (var i in files) {
     files[i] = 'content/girls/' + files[i] + '/base';
