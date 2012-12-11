@@ -72,6 +72,10 @@ define(['messages/messages'], function(Message) {
         }
         message.save(this.name);
       }
+    },
+    tags: {
+      outdoors: true,
+      uninteruptable: true
     }
   };
 });

@@ -34,7 +34,8 @@ define([], [
     allDay: true,
     mins: {
       endurance: 30,
-      happiness: 50
+      happiness: 50,
+      constitution: 10
     },
     description: 'She will be bound and gagged in the dungeon for most of the day to increase her obedience. This action takes all day.',
     conditions: function(time) {

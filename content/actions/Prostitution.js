@@ -18,6 +18,9 @@ define([], [
         endurance: -10,
         happiness: -5
       }
+    },
+    tags: {
+      outdoors: true
     }
   }
 ]);
