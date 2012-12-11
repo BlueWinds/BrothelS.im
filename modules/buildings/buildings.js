@@ -60,7 +60,7 @@ define(['girls/schema', './schema', 'content/buildings', './buildingList', 'text
           div.addClass('room');
           $('#rooms', view).append(div);
         });
-        var old_view = $('#building-view')
+        var old_view = $('#building-view');
         old_view.remove();
         var opt = {
           title: building.name,
