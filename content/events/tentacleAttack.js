@@ -49,6 +49,9 @@ define([], [
       // The number of items in results *must* be equal to the number of items in variants - they directly correspond.
       {
         // This image will be used from the girl the event is occurring to. See the "creating a girl" tutorial for more on how this works.
+        // There is also a second option: you can use an "absolute path" to choose a specific image file. For example:
+        // image: '/content/girls/Sophitia/images/Tentacles4.jpg',
+        // Any image starting with a '/' will be considered absolute.
         image: 'tentacles',
         // message can be as simple or complicated as you like. It's really simple if it's just text - but you can also use replacements from the girl or anywhere else in the game!
 
@@ -125,8 +128,8 @@ define([], [
     // variants: [1],
     results: [
       {
-        // Since one time events aren't associated with a particular girl, you have to use the full path to the image file you want to use.
-        image: 'content/girls/Sophitia/images/Tentacles4.jpg',
+        // Since one time events aren't associated with a particular girl, you must use an absolute path for the image.
+        image: '/content/girls/Sophitia/images/Tentacles4.jpg',
         // Without a girl to pull data from or an action interrupted, the message can't have any replacement patterns in it. Told you one time events were simpler!
         message: "The streets are not safe. Tentacled monstrosities have been seen in town. The authorities are hunting them, but there have been attacks as they seek to breed. These monsters are cunning and wise, almost intelligent, but full of lust and the desire for human women. Be wary of sending girls into the city in the evening.<br><br>Some actions are safer than others - Streetwalking is relatively safe, since she will be searching crowded areas, while Exercise is less so - a girl jogging alone at night is a prefect target for the beasts."
         // One time events can't have deltas either. There's no girl to apply them to.

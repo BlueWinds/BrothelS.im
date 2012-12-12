@@ -15,7 +15,7 @@ define(['girls/schema', 'content/events/eventList.js', 'messages/messages'], fun
         var message = new Message({
           type: event.label,
           text: text,
-          image: image
+          image: image.substr(1)
         }).save('Events');
       }
       var results = event.results[i];
@@ -51,11 +51,12 @@ define(['girls/schema', 'content/events/eventList.js', 'messages/messages'], fun
       action: action
     };
     function doMessage(image, text, delta) {
+      var image = ejs.render(image, context);
       var message = new Message({
         type: ejs.render(event.label, context),
         text: ejs.render(text, context),
         delta: delta,
-        image: context.girl.image(image),
+        image: image[0] == '/' ? image.substr(1) : context.girl.image(image),
         time: time
       }).save(context.girl.name);
     }

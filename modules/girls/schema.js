@@ -157,11 +157,12 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
         time: time
       };
       var doMessage = function(image, text, delta) {
+        image = ejs.render(image, context);
         var message = new Message({
           type: action.label,
           text: ejs.render(text, context),
           delta: delta,
-          image: context.girl.image(image),
+          image: image[0] == '/' ? image.substr(1) : context.girl.image(image),
           time: time
         }).save(context.girl.name);
       };
