@@ -138,39 +138,40 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
 
   Girl.prototype.doAction = function(time, action) {
     if (time == 'morning' && action.allDay) { return; }
-    if (action.extraData) {
-      if (action.func) {
-        action.func.call(this, action.extraData, time);
-      } else {
-        Girl.actionFunctions[action._id].call(this, action.extraData, time);
-      }
+    if (action.externalFunction) {
+      Girl.actionFunctions[action._id].call(this, time);
     }
     else {
       var endDelta = this.startDelta();
-      var delta = action.delta;
-      var text = action.message;
-      var image = action.image;
-      if (action.chances) {
-        var rand = Math.random();
-        var i = 0;
-        while (i < action.chances.length) {
-          if (rand < action.chances[i]) { break; }
-          rand -= action.chances[i];
-          i++;
-        }
-        delta = delta[i];
-        text = text[i];
-        image = image[i];
+      if (typeof(action.variants) == 'function') {
+        i = action.variants.call(action, this);
+      } else {
+        i = Math.weightedRandom(action.variants || [1]);
       }
-      this.apply(delta || {});
-      text = typeof(text) == 'object' ? Math.choice(text) : text;
-      var message = new Message({
-        type: action.label,
-        text: ejs.render(text, this),
-        delta: endDelta(),
-        image: this.image(image),
+      var context = {
+        girl: this,
+        action: action,
         time: time
-      }).save(this.name);
+      };
+      var doMessage = function(image, text, delta) {
+        var message = new Message({
+          type: action.label,
+          text: ejs.render(text, context),
+          delta: delta,
+          image: context.girl.image(image),
+          time: time
+        }).save(context.girl.name);
+      };
+      var results = action.results[i];
+      this.apply(results.delta || {});
+      if (typeof(results.message) == 'object') {
+        for (var j in results.message) {
+          var d = results.message.length == j + 1 ? endDelta() : {};
+          doMessage(results.image[j], results.message[j], d);
+        }
+      } else {
+        doMessage(results.image, results.message, endDelta());
+      }
     }
   };
 

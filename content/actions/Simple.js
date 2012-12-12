@@ -4,13 +4,17 @@ define([], [
     label: 'Rest',
     group: 'Chores',
     description: 'Giving a girl time off increases both endurance and happiness.',
-    message: '<%= name %> took some time off to recover.',
-    delta: {
-      endurance: 12,
-      happiness: 5
-    },
-    mins: {},
-    image: 'tired'
+    results: [
+      {
+        image: 'tired',
+        message: '<%= girl.name %> took some time off to recover.',
+        delta: {
+          endurance: 12,
+          happiness: 5
+        }
+      }
+    ],
+    mins: {}
   },
   {
     _id: 'Clean',
@@ -22,13 +26,17 @@ define([], [
     label: 'Clean <%= building() ? building().name : "" %>',
     group: 'Chores',
     description: 'She will spend time tidying up, repairing and cleaning the <%= building().name %>.',
-    message: '<%= name %> spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <%= building().name %>. Even if it doesn\'t sparkle, it\'s at least in better shape than it was.',
-    delta: {
-      clean: 10,
-      money: -10,
-      endurance: -6
-    },
-    image: 'cleaning'
+    results: [
+      {
+        image: 'cleaning',
+        message: '<%= girl.name %> spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <%= building().name %>. Even if it doesn\'t sparkle, it\'s at least in better shape than it was.',
+        delta: {
+          clean: 10,
+          money: -10,
+          endurance: -6
+        }
+      }
+    ]
   },
   {
     _id: 'Lockdown',
@@ -51,16 +59,28 @@ define([], [
       }
       return 'You only have enough dungeons to lockdown ' + count + ' girls at a time.';
     },
-    image: 'fetish',
-    message: [
-      '<%= name %> spent the day bound, gagged and naked in the dungeon, hands tied above her head and wishing something interesting would happen.',
-      '<%= name %> spent the day in the dungeon\'s stockade without clothes. You checked in occasionally to spank her or have her blow you.'
-    ],
-    delta: {
-      endurance: -10,
-      happiness: -10,
-      obedience: 4,
-      constitution: -0.5
-    }
+    variants: [0.5, 0.5],
+    results: [
+      {
+        image: 'fetish',
+        message: '<%= girl.name %> spent the day bound, gagged and naked in the dungeon, hands tied above her head and wishing something interesting would happen.',
+        delta: {
+          endurance: -10,
+          happiness: -10,
+          obedience: 4,
+          constitution: -0.5
+        }
+      },
+      {
+        image: 'fetish',
+        message: "<%= girl.name %> spent the day in the dungeon's stockade without clothes. You checked in occasionally to spank her or have her blow you.",
+        delta: {
+          endurance: -10,
+          happiness: -10,
+          obedience: 4,
+          constitution: -0.5
+        }
+      }
+    ]
   }
 ]);

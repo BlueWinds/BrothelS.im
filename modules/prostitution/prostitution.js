@@ -13,19 +13,19 @@ define(['girls/schema', 'randomPerson/randomPerson', 'content/game', 'messages/m
     interest -= config.types[type].r;
     return Math.max(interest, 0);
   };
-  Girl.actionFunctions.Streetwalk = function(extra, time) {
+  Girl.actionFunctions.Streetwalk = function(time) {
     var context = {
       girl: this,
       Str: strings
     };
     var endDelta = this.startDelta();
-    this.apply(extra.delta);
+    this.apply(config.streetwalkDelta);
     if (!this.actions.soft && !this.actions.hard && !this.actions.anal && !this.actions.fetish) {
       new Message({
         type: 'Confused',
         time: time,
         image: this.image('base', true),
-        text: ejs.render(extra.confused, context),
+        text: ejs.render(config.confused, context),
         delta: endDelta()
       }).save(this.name);
       return;
@@ -34,7 +34,7 @@ define(['girls/schema', 'randomPerson/randomPerson', 'content/game', 'messages/m
       type: 'Streetwalk',
       time: time,
       image: this.image('base', true),
-      text: ejs.render(extra.action, context),
+      text: ejs.render(config.action, context),
       delta: endDelta()
     }).save(this.name);
     var found = Math.pow(this.charisma / 100, 0.5);
@@ -42,11 +42,11 @@ define(['girls/schema', 'randomPerson/randomPerson', 'content/game', 'messages/m
     found = Math.ceil(found * this.maxCustomers());
 
     for (var i = 0; i < found; i++) {
-      doCustomer.call(this, extra, time);
+      doCustomer.call(this, time);
     }
   };
 
-  function doCustomer(extra, time) {
+  function doCustomer(time) {
     var customer = randomPerson('Very Low Class');
     var context = {
       girl: this,
@@ -66,13 +66,13 @@ define(['girls/schema', 'randomPerson/randomPerson', 'content/game', 'messages/m
     context.sex = sex;
     var interest = this.checkInterest(sex);
     if (interest === 0) {
-      context.result = ejs.render(extra.uncooperative, context);
+      context.result = ejs.render(config.uncooperative, context);
       this.apply(config.refuseDelta);
       new Message({
         type: 'Refused',
         time: time,
         image: this.image('refuse', true),
-        text: ejs.render(extra.message, context),
+        text: ejs.render(config.message, context),
         delta: endDelta()
       }).save(this.name);
       return;
@@ -107,7 +107,7 @@ define(['girls/schema', 'randomPerson/randomPerson', 'content/game', 'messages/m
       type: 'Prostitution',
       time: time,
       image: this.image(sex, true),
-      text: ejs.render(extra.message, context),
+      text: ejs.render(config.message, context),
       delta: endDelta()
     }).save(this.name);
   }

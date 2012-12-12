@@ -30,6 +30,17 @@ Copy the base.js file into that folder from the Theater. Open it up and start ed
 
 Just like creating a girl, open up buildingList.js in "content/buildings" and add your new folder name to the list at the top of the file. Tada! It will show up next time you load the game (including in games already in progress).
 
+Creating Events
+=============
+
+This guide assumes you're familiar with creating girls. It's not hard, but I don't want to have to repeat myself. ^^;;
+
+Unlike buildings and girls, events don't need their own folder, just a single file. In content/events, copy tentacleAttack.js and give the copy a new name - pick a descriptive name for the event(s) you want to add.
+
+Open up your new something.js file, and read through the documentation. The tentacleAttack file is very well documented, and contains all options, even the ones it doesn't use.
+
+When you're done editing your events file, open up (you probably guessed it) eventList.js, and add your file to the list. Save it. Reload the page. Tada! If you didn't break anything, your new events are present.
+
 License
 =============
 

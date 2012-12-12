@@ -1,29 +1,31 @@
 define(['girls/schema', 'content/events/eventList.js', 'messages/messages'], function(Girl, events, Message) {
 
-  Girl.eventFunctions = {};
-
   e.GamePreDay.push(function() {
     $.each(events, function(_id, event) {
-      if (!event.day || event.day != g.day) { return; }
-      var text = event.message;
-      var image = event.image;
-      if (event.chances) {
-        var rand = Math.random();
-        var i = 0;
-        while (i < event.chances.length) {
-          if (rand < event.chances[i]) { break; }
-          rand -= event.chances[i];
-          i++;
-        }
-        text = text[i];
-        image = image[i];
+      if (!event.oneTime) { return; }
+
+      if (event.day != g.day) { return; }
+      var i;
+      if (typeof(event.variants) == 'function') {
+        i = event.variants.call(event, this);
+      } else {
+        i = Math.weightedRandom(event.variants || [1]);
       }
-      text = typeof(text) == 'object' ? Math.choice(text) : text;
-      var message = new Message({
-        type: event.label,
-        text: text,
-        image: image
-      }).save('Events');
+      function doMessage(image, text) {
+        var message = new Message({
+          type: event.label,
+          text: text,
+          image: image
+        }).save('Events');
+      }
+      var results = event.results[i];
+      if (typeof(results.message) == 'object') {
+        for (var j in results.message) {
+          doMessage(results.image[j], results.message[j]);
+        }
+      } else {
+        doMessage(results.image, results.message);
+      }
     });
   });
 
@@ -34,46 +36,40 @@ define(['girls/schema', 'content/events/eventList.js', 'messages/messages'], fun
       oldDoAction.call(this, time, action);
       return;
     }
-    if (event.extraData) {
-      if (event.func) {
-        event.func.call(this, event.extraData, time);
-      } else {
-        Girl.eventFunctions[event._id].call(this, event.extraData, time);
-      }
+    var i;
+    if (typeof(event.variants) == 'function') {
+      i = event.variants.call(event, this);
     } else {
-      var endDelta = this.startDelta();
-      var delta = event.delta;
-      var text = event.message;
-      var image = event.image;
-      if (event.chances) {
-        var rand = Math.random();
-        var i = 0;
-        while (i < event.chances.length) {
-          if (rand < event.chances[i]) { break; }
-          rand -= event.chances[i];
-          i++;
-        }
-        delta = delta[i];
-        text = text[i];
-        image = image[i];
-      }
-      this.apply(delta || {});
-      text = typeof(text) == 'object' ? Math.choice(text) : text;
-      var context = {
-        event: event,
-        girl: this,
-        time: time,
-        action: action
-      };
+      i = Math.weightedRandom(event.variants || [1]);
+    }
+    var endDelta = this.startDelta();
+    this.apply(event.results[i].delta || {});
+    var context = {
+      event: event,
+      girl: this,
+      time: time,
+      action: action
+    };
+    function doMessage(image, text, delta) {
       var message = new Message({
         type: ejs.render(event.label, context),
         text: ejs.render(text, context),
-        delta: endDelta(),
-        image: this.image(image),
+        delta: delta,
+        image: context.girl.image(image),
         time: time
-      }).save(this.name);
+      }).save(context.girl.name);
     }
-    if (!event.disruptive || action.tags && action.tags.uninteruptable) {
+    var results = event.results[i];
+    if (typeof(results.message) == 'object') {
+      for (var j in results.message) {
+        var d = results.message.length == j + 1 ? endDelta() : {};
+        doMessage(results.image[j], results.message[j], d);
+      }
+    } else {
+      doMessage(results.image, results.message, endDelta());
+    }
+
+    if (!event.disruptive || action.uninteruptable) {
       oldDoAction.call(this, time, action);
     }
   };
@@ -85,7 +81,7 @@ define(['girls/schema', 'content/events/eventList.js', 'messages/messages'], fun
       var event = potentialEvents[_id];
       if (event.minDay && g.day < event.minDay) { continue; }
       var likelyhood = event.likelyhood;
-      if (action.safety && event.tags.dangerous) { likelyhood *= (1 - action.safety); }
+      if (action.safety && event.dangerous) { likelyhood *= (1 - action.safety); }
       if (Math.random() < likelyhood) {
         return event;
       }
@@ -95,11 +91,13 @@ define(['girls/schema', 'content/events/eventList.js', 'messages/messages'], fun
   function getEventsWithTags(time, tags) {
     var potentialEvents = {};
     $.each(events, function(_id, event) {
-      if (event.day) { return; }
-      if (event.tags.tentacles && !g.tentacles) { return; }
+      if (event.oneTime) { return true; }
+      for (var fet in event.fetishes) {
+        if (event.fetishes[fet] && !g[fet]) { return; }
+      }
       if (event.time && event.time != time) { return; }
       for (var tag in tags) {
-        if (event.tags[tag]) { potentialEvents[_id] = event; }
+        if (event.tags[tag]) { potentialEvents[_id] = event; break; }
       }
     });
     return potentialEvents;

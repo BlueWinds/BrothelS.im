@@ -187,6 +187,16 @@ Math.choice = function(obj) {
   return obj[keys[i]];
 };
 
+Math.weightedRandom = function(variants) {
+  var i = 0;
+  var rand = Math.random();
+  while (i < variants.length) {
+    if (rand < variants[i]) { break; }
+    rand -= variants[i];
+    i++;
+  }
+  return i;
+};
 
 $(function() {
   $.ui.dialog.prototype.options.show = 'fade';
