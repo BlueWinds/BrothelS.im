@@ -23,13 +23,13 @@ define([], [
       happiness: 20,
       endurance: 15
     },
-    label: 'Clean <%= building() ? building().name : "" %>',
+    label: 'Clean <%= girl.building() ? girl.building().name : "" %>',
     group: 'Chores',
-    description: 'She will spend time tidying up, repairing and cleaning the <%= building().name %>.',
+    description: 'She will spend time tidying up, repairing and cleaning the <%= girl.building().name %>.',
     results: [
       {
         image: 'cleaning',
-        message: '<%= girl.name %> spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <%= building().name %>. Even if it doesn\'t sparkle, it\'s at least in better shape than it was.',
+        message: '<%= girl.name %> spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <%= girl.building().name %>. Even if it doesn\'t sparkle, it\'s at least in better shape than it was.',
         delta: {
           clean: 10,
           money: -10,

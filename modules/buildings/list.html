@@ -19,7 +19,7 @@
       </div>
       <div class="column pct-40 right center">
         <div><strong>Residents</strong></div>
-        <% $.each(building.girls(), function(name, girl) { %>
+        <% building.rooms.accumulate('girl').forEach(function(name) { %>
           <div><%= name %></div>
         <% }) %>
       </div>

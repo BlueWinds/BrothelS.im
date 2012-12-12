@@ -104,7 +104,7 @@ define(['girls/schema', './schema', 'content/buildings', 'content/buildings/buil
   var originalPay = Girl.prototype.desiredPay;
   Girl.prototype.desiredPay = function() {
     var pay = originalPay.call(this);
-    return this.bedroom() ? pay : pay + config.noRoomDailyCost;
+    return this.building() ? pay : pay + config.noRoomDailyCost;
   };
 
   e.Autorender.push(function(element) {

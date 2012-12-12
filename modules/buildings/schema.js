@@ -163,11 +163,14 @@ define(['girls/schema', 'content/buildings/buildingList', 'content/buildings', '
   };
 
   Girl.prototype.building = function() {
-    Building.roomsByType('Owned').forEach(function(building) {
+    var name = this.name;
+    var final_building;
+    g.buildings.flt('status', 'Owned').forEach(function(building) {
       building.rooms.flt('type', 'bedroom').forEach(function(room) {
-        if (room.girl == this.name) { return building; }
+        if (room.girl == name) { final_building = building; }
       });
     });
+    return final_building;
   };
   Girl.prototype.bedroom = function() {
     var rooms = Building.roomsByType('bedroom', 'Owned');

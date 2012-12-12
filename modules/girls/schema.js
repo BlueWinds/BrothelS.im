@@ -115,11 +115,14 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
           }
         }
       }
-      new_action.label = ejs.render(action.label, girl);
+      var context = {
+        girl: girl
+      };
+      new_action.label = ejs.render(action.label, context);
       if (new_action.disabled) {
         new_action.description = new_action.disabled;
       } else {
-        new_action.description = ejs.render(action.description, girl);
+        new_action.description = ejs.render(action.description, context);
       }
       actions[_id] = new_action;
     });
