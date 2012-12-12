@@ -57,12 +57,14 @@
 }
 
 .vertical-tabs .ui-tabs-nav {
-  background: #000;
+  background: none repeat scroll 0 0 #000000;
   border-color: #666666 -moz-use-text-color #666666 #666666;
   border-image: none;
   border-style: solid none solid solid;
   border-width: 1px medium 1px 1px;
+  display: inline-block;
   float: left;
+  margin-right: -1px;
   padding: 0;
   position: relative;
   z-index: 1;
@@ -73,7 +75,7 @@
   border: none;
   float: none;
   margin: 0;
-  width: 6em;
+  min-width: 5em;
 }
 
 .vertical-tabs .ui-tabs-nav li.ui-state-hover {
@@ -91,7 +93,7 @@
 .vertical-tabs .ui-tabs-panel {
   background: #000;
   border: 1px solid #666;
-  margin-left: 6em;
+  float: left;
 }
 
 .tab-dialog {

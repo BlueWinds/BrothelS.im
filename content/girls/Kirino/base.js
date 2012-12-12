@@ -27,7 +27,7 @@ define({
     refuse: ["Refuse1.png", "Refuse2.jpg", "Refuse3.jpg"],
     tired: "Tired.jpg",
     soft: ["Soft1.png", "Soft2.png", "Soft3.png", "Soft4.png"],
-    hard: ["Hard1.png", "Hard2.png", "Hard3.png", "Hard4.png"],
+    hard: ["Hard1.jpg", "Hard2.png", "Hard3.png", "Hard4.png"],
     anal: ["Anal1.png", "Anal2.png", "Anal3.png", "Anal4.png"],
     fetish: ["Fet1.png", "Fet2.png", "Fet3.png", "Fet4.png", "Fet5.png"],
     cleaning: ["Cleaning1.jpg", "Cleaning2.jpg"],

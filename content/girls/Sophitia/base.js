@@ -1,11 +1,21 @@
+// Don't touch the first line. You break this, the game probably just won't load at all.
 define({
+  // Pretty self explanatory.
   name: "Sophitia",
+  // All strings have to be on one line. You can break up long bits of text by wrapping each section in <p></p> tags - other bits of HTML will also work, such as <em></em> for italics, or <strong></strong> for bold.
   description: "<p>The daughter of a baker, Sophitia worked at her family bakery. She always treasured her country's culture and prayed often to the city guardian. One day, as she bathed in a forest spring, the god of the forge revealed himself, and told her of the evil sword whose existence threatened to bring much pain to the world. He ordered her to seek to destroy this foul blade.</p><p>At first Sophitia was reluctant to take the holy mission, for she was only a baker's daughter, but the god insisted. She tracked down the wielder of this powerful sword - and was gravely wounded in the fight without even inconveniencing him.</p><p>Afraid to face the wrath of her god, she fled for distant lands... and ended up here.</p>",
+  // There are two options for status. First, a simple value, like:
+  // status: 'Hired',
+  // This would set her status to "Hired" (working for the player) immediately, as soon as the game starts. Alternately, you can supply multiple values, like below. The number after each is the chance she end up with this status on any given day. All the values should add up to one.
+  // In Sophitia's case, there's an 80% chance she'll be For Hire on any given day, and a 20% chance she'll be "Town" (which means unavailable.
+  // Hired, For Hire and Town are the only options currently.
   status: {
     Town: 0.2,
     'For Hire': 0.8
   },
+  // The happiness you set here will influence her hire price. When the player actually hires her, it will be reset to 75.
   happiness: 0,
+  // The other stats work exactly like you'd expect - set the starting values here. Remember that higher stats increase a girl's hire price and her pay.
   endurance: 100,
   obedience: 50,
   charisma: 40,
@@ -19,10 +29,22 @@ define({
   'hard libido': 40,
   'anal libido': 60,
   'fetish libido': 10,
-  specialRules: {},
+  // specialRules is where you can put in tweaks, so that the girl works a little differently than normal.
+  specialRules: {
+    // payRatio: 0.5,
+    // Currently, payRatio is the only special rule supported (ask me if you have one you'd like to add!). It's multiplied into her desired pay - setting it to .5 means she only wants half as much money, while 3 would mean three times the pay.
+  },
   images: {
+    // basePath is the path to the images folder you created. Don't forget to put your girl's name in here!
     basePath: "content/girls/Sophitia/images",
+    // base is the default portrait. It is the only image *required*.
     base: "Base.png",
+    // Now for the interesting bits. For each type of image, you have three options:
+    // 1) Remove the line. Any events that need an image of a missing type will use the base image.
+    // 2) A single image file.
+    // 3) A list of image files. Whenever an image of this type is needed, the game will select one at random.
+    // You can reuse images - Kirino, for example, doesn't have any real tentacle pictures, so her tentacles line looks something like this:
+    // tentacles: ["Fet1.png", "Fet3.png", "Fet4.png"]
     refuse: "Refuse.jpg",
     tired: "Tired.jpg",
     soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg", "Soft6.jpg"],

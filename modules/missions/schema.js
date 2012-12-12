@@ -1,4 +1,4 @@
-define(['messages/messages', './missionList', 'randomPerson/randomPerson', 'girls/schema', 'buildings/schema', 'content/strings'], function(Message, missions, randPerson, Girl, Building, strings) {
+define(['messages/messages', 'content/missions/missionList', 'randomPerson/randomPerson', 'girls/schema', 'buildings/schema', 'content/strings'], function(Message, missions, randPerson, Girl, Building, strings) {
   var Mission = function(obj) {
     $.extend(this, obj);
     this._ = missions[obj._id];
@@ -15,9 +15,9 @@ define(['messages/messages', './missionList', 'randomPerson/randomPerson', 'girl
     };
     if (base.people) {
       obj.people = [];
-      for (var i in base.people) {
-        obj.people.push(randPerson(base.people[i]));
-      }
+      base.people.forEach(function(person) {
+        obj.people.push(randPerson(person));
+      });
     }
 
     if (typeof(base.end) == 'function') { obj.end = base.end.call(obj); }
@@ -47,20 +47,12 @@ define(['messages/messages', './missionList', 'randomPerson/randomPerson', 'girl
     if (!cond || $.isEmptyObject(cond)) { return true; }
     if (cond.day && g.day != cond.day) { return false; }
     if (cond.money && g.money < cond.money) { return false; }
-    if (cond.girls && Girl.girls('Hired').length < cond.girls) { return false; }
-    if (cond.buildings && Building.buildings('Owned').length < cond.buildings) { return false; }
+    if (cond.girls && g.girls.flt('status', 'Hired').length < cond.girls) { return false; }
+    if (cond.buildings && g.buildings.flt('status', 'Owned').length < cond.buildings) { return false; }
 
     if (cond.action) {
-      var found = false;
-      for (var name in g.girls) {
-        var girl = g.girls[name];
-        if (girl.status != 'Hired') { continue; }
-        if (girl.actions.morning == cond.action || girl.actions.evening == cond.action) {
-          found = true;
-          break;
-        }
-      }
-      if (!found) { return false; }
+      var girls = g.girls.flt('status', 'Hired');
+      if (!girls.flt('actions', 'morning', cond.action).length && !girls.flt('actions', 'evening', cond.action).length) { return false; }
     }
 
     return true;

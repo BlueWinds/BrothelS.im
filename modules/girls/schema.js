@@ -24,9 +24,9 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
         eveningLabel: 'Rest'
       }
     };
-    for (var i in stats) {
-      obj[stats[i]] = base[stats[i]];
-    }
+    stats.forEach(function(stat) {
+      obj[stat] = base[stat];
+    });
     var girl = new Girl(obj);
     girl.status = girl.randomStatus();
     if (girl.status == 'Hired') { girl.actions.pay = girl.desiredPay(); }
@@ -64,7 +64,7 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
       return;
     }
     for (var key in stat) {
-      if (stats.indexOf(key) == -1 && key != 'money') { continue; }
+      if (stats.indexOf(key) == -1 && key != 'money') { return; }
       this.apply(key, stat[key]);
     }
   };
@@ -82,34 +82,47 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
     var prices = config.hirePrice;
     var cost = prices.base;
     cost += (this.obedience + this.charisma + this.intelligence + this.constitution) * prices.stats;
-    for (var i in sex) {
-      cost += (this[sex[i] + ' libido'] + this[sex[i] + ' experience']) * prices[sex[i]];
-    }
+    var girl = this;
+    sex.forEach(function(type) {
+      cost += (girl[type + ' libido'] + girl[type + ' experience']) * prices[type];
+    });
     cost *= 1 - happiness / 150;
     return Math.floor(cost);
   };
 
   Girl.actionFunctions = {};
 
-  Girl.prototype.potentialActions = function(time, ignoreMin) {
+  Girl.prototype.potentialActions = function(time) {
     var actions = {};
-    for (var _id in actionsList) {
-      var action = actionsList[_id];
-      if (!action.conditions || action.conditions.call(this, time)) {
-        var fail = false;
-        for (var stat in action.mins) {
-          if (this[stat] < action.mins[stat]) { fail = stat; break; }
+    var girl = this;
+    $.each(actionsList, function(_id, action) {
+      if (action.tags && action.tags.tentacles && !g.tentacles) { return; }
+      var new_action = $.extend(true, {}, action);
+      delete new_action.disabled;
+      if (action.disabled) {
+        var disabled = action.disabled.call(girl, time);
+        if (disabled === true) {
+          return;
+        } else if (disabled) {
+          new_action.disabled = disabled;
         }
-        if (fail && !ignoreMin) { continue; }
-        actions[_id] = $.extend(true, {}, action);
-        actions[_id].label = ejs.render(actions[_id].label, this);
-        if (ignoreMin && fail) {
-          actions[_id].label += ' - ' + fail + ' too low';
-          actions[_id].disabled = true;
-        }
-        actions[_id].description = ejs.render(actions[_id].description, this);
       }
-    }
+      if (!new_action.disabled && action.mins) {
+        for (var stat in action.mins) {
+          if (girl[stat] < action.mins[stat]) {
+            new_action.disabled = 'Not enough ' + stat;
+            break;
+          }
+        }
+      }
+      new_action.label = ejs.render(action.label, girl);
+      if (new_action.disabled) {
+        new_action.description = new_action.disabled;
+      } else {
+        new_action.description = ejs.render(action.description, girl);
+      }
+      actions[_id] = new_action;
+    });
     return actions;
   };
 
@@ -123,16 +136,13 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
     return img;
   };
 
-  Girl.prototype.doAction = function(time) {
-    var actions = this.potentialActions(time);
-    var type = this.actions[time];
-    var action = actions[type] || actions.Rest;
+  Girl.prototype.doAction = function(time, action) {
     if (time == 'morning' && action.allDay) { return; }
     if (action.extraData) {
       if (action.func) {
         action.func.call(this, action.extraData, time);
       } else {
-        Girl.actionFunctions[type].call(this, action.extraData, time);
+        Girl.actionFunctions[action._id].call(this, action.extraData, time);
       }
     }
     else {
@@ -155,7 +165,7 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
       this.apply(delta || {});
       text = typeof(text) == 'object' ? Math.choice(text) : text;
       var message = new Message({
-        type: type,
+        type: action.label,
         text: ejs.render(text, this),
         delta: endDelta(),
         image: this.image(image),
@@ -170,13 +180,16 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
       return;
     }
     var actions = this.potentialActions('morning');
-    var type = this.actions.morning;
-    var action = actions[type] || actions.Rest;
+
+    var action = actions[this.actions.morning] || actions.Rest;
+    if (action.disabled) { action = actions.Rest; }
     this.doAction('morning', action);
+
     actions = this.potentialActions('evening');
-    type = this.actions.evening;
-    action = actions[type] || actions.Rest;
+    action = actions[this.actions.evening] || actions.Rest;
+    if (action.disabled) { action = actions.Rest; }
     this.doAction('evening', action);
+
     this.apply('money', -this.actions.pay);
     var change = this.actions.pay - this.desiredPay();
     change = change > 0 ? change * config.pay.above : change * config.pay.below;
@@ -184,24 +197,24 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
   };
 
   Girl.prototype.startDelta = function(s) {
-    if (!s) { s = stats; }
+    s = s || stats;
     var girl = this;
     var delta = {
       money: g.money
     };
-    for (var i in s) {
-      delta[s[i]] = this[s[i]];
-    }
+    s.forEach(function(stat) {
+      delta[stat] = girl[stat];
+    });
     return function() {
       var change = {};
       if (g.money - delta.money) {
         change.money = g.money - delta.money;
       }
-      for (var i in s) {
-        if (girl[s[i]] - delta[s[i]]) {
-          change[s[i]] = girl[s[i]] - delta[s[i]];
+      s.forEach(function(stat) {
+        if (girl[stat] - delta[stat]) {
+          change[stat] = girl[stat] - delta[stat];
         }
-      }
+      });
       return change;
     };
   };
@@ -232,14 +245,6 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
       return Math.floor((this['soft libido'] + this['hard libido'] + this['anal libido'] + this['fetish libido']) / 4);
     }
     return this[stat];
-  };
-
-  Girl.girls = function(status) {
-    var girl_list = [];
-    for (var name in g.girls) {
-      if (g.girls[name].status == status) { girl_list.push(g.girls[name]); }
-    }
-    return girl_list;
   };
 
   return Girl;

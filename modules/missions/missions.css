@@ -1,17 +1,15 @@
-#mission-list .ui-tabs-nav li {
-  width: 10em;
-}
-
-#mission-list .ui-tabs-panel {
-  margin-left: 10em;
-}
-
 #mission-list .days {
   font-weight: 700;
 }
 
+.mission {
+  width: 40em;
+}
+
 .mission .top {
+  font-weight: 1.2em;
   margin-bottom: 1em;
+  text-align: center;
 }
 
 .mission img {

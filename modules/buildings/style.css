@@ -39,6 +39,10 @@
   width: 6em;
 }
 
+#buy-buildings .daily-delta {
+  width: 3em;
+}
+
 #rooms { clear: both; }
 #rooms .room {
   border: 1px solid #999999;

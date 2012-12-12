@@ -1,4 +1,4 @@
-define(['girls/schema', './schema', 'content/buildings', './buildingList', 'text!./list.html', 'text!./buy.html', 'text!./view.html'], function(Girl, Building, config, buildings, list_template, buy_template, view_template) {
+define(['girls/schema', './schema', 'content/buildings', 'content/buildings/buildingList', 'text!./list.html', 'text!./buy.html', 'text!./view.html', './rooms'], function(Girl, Building, config, buildings, list_template, buy_template, view_template) {
   $('head').append('<link type="text/css" rel="stylesheet" href="modules/buildings/style.css">');
 
   e.GameNew.push(function() {
@@ -29,7 +29,7 @@ define(['girls/schema', './schema', 'content/buildings', './buildingList', 'text
   e.GameRender.push(function() {
     var div = $(ejs.render(list_template, {
       g: g,
-      buildings: Building.buildings('Owned')
+      buildings: g.buildings.flt('status', 'Owned')
     })).appendTo('#content .second');
     $('.building', div).click(function() {
       var building = g.buildings[$(this).attr('name')];
@@ -39,16 +39,13 @@ define(['girls/schema', './schema', 'content/buildings', './buildingList', 'text
           building: building,
           availableRooms: {}
         };
-        for (var name in config.rooms) {
-          var room = config.rooms[name];
-          if (room.price > g.money) { continue; }
-          if (room.max) {
-            var count = 0;
-            for (var i in building.rooms) { count += building.rooms[i].type == room.type; }
-            if (count >= room.max) { continue; }
+        $.each(config.rooms, function(name, room) {
+          if (room.price > g.money) { return; }
+          if (room.max && room.max > building.rooms.flt('type', room.type).length) {
+            return;
           }
           context.availableRooms[name] = room;
-        }
+        });
         var view = $(ejs.render(view_template, context));
         $('#buy-room', view).click(function() {
           var room = $('#new-room', view).val();
@@ -78,7 +75,7 @@ define(['girls/schema', './schema', 'content/buildings', './buildingList', 'text
     $('#buy-building').click(function() {
       var lst = $(ejs.render(buy_template, {
         g: g,
-        buildings: Building.buildings('For Sale')
+        buildings: g.buildings.flt('status', 'For Sale')
       }));
       $('button.buy', lst).each(function() {
         var building = g.buildings[$(this).attr('name')];

@@ -23,7 +23,7 @@ define([], [
       money: 1000
     },
     success: {
-      money: 1000,
+      money: 300,
       image: ['content/missions/firstMoney.png', 'content/missions/firstMoney.png'],
       maxGirls: 5,
       mission: 'secondGirl',

@@ -2,19 +2,17 @@ define(['messages/messages'], function(Message) {
   return {
     _id: 'attendParty',
     label: 'Escort for <%= g.missions.specialParty.people[0].name %>',
+    group: 'Jobs',
     description: 'Once every month, the city throws a gala party for whatever rich and powerful visitors are present at the time. It is traditional for those who can afford it to have an escort accompany them in the evening - and lacking anyone to accompany him, <%= g.missions.specialParty.people[0].name %> has approached you to provide one.',
-    conditions: function(time) {
-      if (time != 'evening') { return false; }
+    disabled: function(time) {
+      if (time != 'evening') { return true; }
       var m = g.missions.specialParty;
-      if (!m || g.day != m.end.day) { return false; }
-      var attending = this.name;
-      for (var name in g.girls) {
-        if (g.girls[name].actions.evening == 'attendParty') {
-          attending = name;
-          break;
-        }
+      if (!m || g.day != m.end.day) { return true; }
+      var attending = g.girls.flt('actions', 'evening', 'attendParty')[0];
+      if (attending && attending !== this) {
+        return 'Only one girl can attend.';
       }
-      return attending == this.name;
+      return false;
     },
     mins: {
       obedience: 40,

@@ -15,12 +15,11 @@ define(['text!./messages.html', 'game/game'], function(message_template) {
 
   e.GameInit.push(function() {
     g.messages = g.messages || {};
-    var mess_func = function(i, message) {
-      g.messages[target][i] = new Message(message);
-    };
-    for (var target in g.messages) {
-      $.each(g.messages[target], mess_func);
-    }
+    $.each(g.messages, function(target, messages) {
+      $.each(messages, function(i, message) {
+        g.messages[target][i] = new Message(message);
+      });
+    });
   });
   e.GamePreDay.push(function() {
     g.messagesShown = false;

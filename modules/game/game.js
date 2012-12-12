@@ -1,6 +1,6 @@
 var g = {};
 
-define(['text!./intro.html', './schema', 'text!./new-form.html', 'text!./save-form.html', 'text!./load-form.html', 'content/game', 'core'], function(intro, Game, new_template, save_template, load_template, config) {
+define(['text!./intro.html', './schema', 'text!./new-form.html', 'text!./save-form.html', 'text!./load-form.html', 'content/game', 'autorender/autorender'], function(intro, Game, new_template, save_template, load_template, config) {
 
   $.extend(e, {
     GameRender: [],

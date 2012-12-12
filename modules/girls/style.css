@@ -95,3 +95,53 @@ h3 {
   display: block;
   margin: 1em auto;
 }
+
+#girl-view button {
+  margin: .5em;
+}
+#girl-view .ui-tabs-nav {
+  border: none;
+  border-radius: 0;
+}
+
+#girl-view .ui-tabs-nav a {
+  padding: 0.1em 0.5em;
+  font-weight: 300;
+}
+
+#girl-view h6 {
+  margin-bottom: .5em;
+}
+
+#girl-view .ui-tabs-panel {
+  padding: .5em;
+}
+
+#girl-view li.ui-tabs-active {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+#morning {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  margin-right: -1px;
+}
+
+#evening {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+#girl-view .action.disabled {
+  background: url("../../libraries/images/ui-bg_glass_20_555555_1x400.png") repeat-x scroll 50% 50% #555555;
+  cursor: default;
+  border: 1px solid #666666;
+  opacity: 0.5;
+}
+
+#girl-view .selected {
+  background: url("../../libraries/images/ui-bg_glass_40_0078a3_1x400.png") repeat-x scroll 50% 50% #0078A3;
+  border-color: #59B4D4;
+  color: #FFFFFF;
+}

@@ -5,6 +5,7 @@ define([], [
       endurance: 15
     },
     label: 'Exercise',
+    group: 'Training',
     description: 'She will spend time jogging around the city and otherwise exercising outdoors to increase her constitution.',
     chances: [
       0.4,

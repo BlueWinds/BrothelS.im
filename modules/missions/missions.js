@@ -1,16 +1,15 @@
-define(['./schema', './missionList', 'text!./list.html', 'content/strings', 'messages/messages', 'girls/girls', 'buildings/buildings'], function(Mission, missions, list_template, strings, Message) {
+define(['./schema', 'content/missions/missionList', 'text!./list.html', 'content/strings', 'messages/messages', 'girls/girls', 'buildings/buildings'], function(Mission, missions, list_template, strings, Message) {
 
   $('head').append('<link type="text/css" rel="stylesheet" href="modules/missions/missions.css">');
 
   e.GameNew.push(function() {
     g.missions = g.missions || {};
     g.day = -1;
-    for (var _id in missions) {
-      var mission = missions[_id];
+    $.each(missions, function(_id, mission) {
       if (mission.start && Mission.prototype.checkConditions.call(mission, mission.start)) {
         Mission.start(_id);
       }
-    }
+    });
     g.day = 0;
   });
   e.GameInit.push(function() {
@@ -59,8 +58,7 @@ define(['./schema', './missionList', 'text!./list.html', 'content/strings', 'mes
       }));
       view.dialog({
         title: 'Missions',
-        maxHeight: '100%',
-        width: '45em'
+        maxHeight: '100%'
       });
       view.closest('.ui-dialog').addClass('tab-dialog');
     });

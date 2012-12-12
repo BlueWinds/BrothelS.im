@@ -3,9 +3,8 @@ define(['girls/schema', 'content/events/eventList.js', 'messages/messages'], fun
   Girl.eventFunctions = {};
 
   e.GamePreDay.push(function() {
-    for (var _id in events) {
-      var event = events[_id];
-      if (!event.day || event.day != g.day) { continue; }
+    $.each(events, function(_id, event) {
+      if (!event.day || event.day != g.day) { return; }
       var text = event.message;
       var image = event.image;
       if (event.chances) {
@@ -25,20 +24,8 @@ define(['girls/schema', 'content/events/eventList.js', 'messages/messages'], fun
         text: text,
         image: image
       }).save('Events');
-    }
-  });
-
-  var oldPotentialActions = Girl.prototype.potentialActions;
-  Girl.prototype.potentialActions = function(time, ignoreMin) {
-    var actions = oldPotentialActions.call(this, time, ignoreMin);
-    $.each(actions, function(_id, action) {
-      if (action.tags && action.tags.tentacles && !game.tentacles) {
-        delete actions[_id];
-        return;
-      }
     });
-    return actions;
-  };
+  });
 
   var oldDoAction = Girl.prototype.doAction;
   Girl.prototype.doAction = function(time, action) {
@@ -107,15 +94,14 @@ define(['girls/schema', 'content/events/eventList.js', 'messages/messages'], fun
 
   function getEventsWithTags(time, tags) {
     var potentialEvents = {};
-    for (var _id in events) {
-      var event = events[_id];
-      if (event.day) { continue; }
-      if (event.tags.tentacles && !g.tentacles) { continue; }
-      if (event.time && event.time != time) { continue; }
+    $.each(events, function(_id, event) {
+      if (event.day) { return; }
+      if (event.tags.tentacles && !g.tentacles) { return; }
+      if (event.time && event.time != time) { return; }
       for (var tag in tags) {
         if (event.tags[tag]) { potentialEvents[_id] = event; }
       }
-    }
+    });
     return potentialEvents;
   }
 });

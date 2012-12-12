@@ -1,4 +1,4 @@
-define(['girls/schema', './buildingList', 'content/buildings', 'text!./bedroom.html', 'messages/messages'], function(Girl, buildings, config, bedroom_template, Message) {
+define(['girls/schema', 'content/buildings/buildingList', 'content/buildings', 'messages/messages'], function(Girl, buildings, config, Message) {
   var stats = [
     'clean'
   ];
@@ -20,21 +20,15 @@ define(['girls/schema', './buildingList', 'content/buildings', 'text!./bedroom.h
     var building = new Building(obj);
     return building;
   };
-  Building.buildings = function(status) {
-    var building_list = [];
-    for (var name in g.buildings) {
-      if (g.buildings[name].status == status) { building_list.push(g.buildings[name]); }
-    }
-    return building_list;
+  Building.roomsByType = function(type, status) {
+    status = status || 'Owned';
+    if (!g.buildings) { return []; }
+    var rooms = g.buildings.flt('status', status).accumulate('rooms');
+    return rooms.flatten().flt('type', type);
   };
+
   Building.prototype.girls = function() {
-    var girls = {};
-    for (var i in this.rooms) {
-      if (!this.rooms[i].girl) { continue; }
-      var girl = g.girls[this.rooms[i].girl];
-      girls[girl.name] = girl;
-    }
-    return girls;
+    return this.rooms.accumulate('girl');
   };
 
   var oldGirlApply = Girl.prototype.apply;
@@ -66,8 +60,7 @@ define(['girls/schema', './buildingList', 'content/buildings', 'text!./bedroom.h
   };
 
   Building.prototype.startDelta = function(trackGirl) {
-    var girls = this.girls();
-    var girl = girls[Object.keys(girls)[0]];
+    var girl = this.girls().first();
     var girlDelta;
     if (girl && trackGirl) {
       girlDelta = oldGirlDelta.call(girl);
@@ -92,24 +85,23 @@ define(['girls/schema', './buildingList', 'content/buildings', 'text!./bedroom.h
       this[stat] = Math.floor(Math.max(0, Math.min(100, this[stat])));
       return;
     }
-    for (var key in stat) {
-      if (stats.indexOf(key) == -1 && key != 'money') { continue; }
-      this.apply(key, stat[key]);
+    var building = this;
+    $.each(stat, function(key, value) {
+      if (stats.indexOf(key) == -1 && key != 'money') { return; }
+      building.apply(key, value);
       delete stat[key];
-    }
-    var girls = this.girls();
+    });
     if (stat == 'money') { return; }
-    for (var name in girls) {
-      girls[name].apply(stat, delta);
-    }
+    this.girls().forEach(function(name) {
+      g.girls[name].apply(stat, delta);
+    });
   };
 
   Building.prototype.price = function() {
     var cost = this._.baseCost;
-    for (var i in this.rooms) {
-      var type = this.rooms[i].type;
-      cost += (config.rooms[type].price);
-    }
+    this.rooms.accumulate('type').forEach(function(type) {
+      cost += config.rooms[type].price;
+    });
     return cost;
   };
 
@@ -125,12 +117,12 @@ define(['girls/schema', './buildingList', 'content/buildings', 'text!./bedroom.h
       text: ejs.render(text, this),
       delta: endDelta()
     }).save(this.name);
-    for (var i in this.rooms) {
-      var room = this.rooms[i];
+    var building = this;
+    this.rooms.forEach(function(room) {
       if (Building.rooms[room.type].daily) {
-        Building.rooms[room.type].daily.call(this, room);
+        Building.rooms[room.type].daily.call(building, room);
       }
-    }
+    });
   };
 
   Building.prototype.S = function(stat) {
@@ -150,12 +142,8 @@ define(['girls/schema', './buildingList', 'content/buildings', 'text!./bedroom.h
   Building.prototype.dailyDelta = function() {
     var breakpoint = this.clean - this._.cleanEffect.breakpoint;
     var delta = $.extend({}, breakpoint >= 0 ? this._.cleanEffect.above : this._.cleanEffect.below);
-    for (var key in delta) {
-      delta[key] *= breakpoint;
-    }
-    for (key in this._.daily) {
-      delta[key] = (delta[key] || 0) + this._.daily[key];
-    }
+    delta.multiply(breakpoint);
+    delta.add(this._.daily);
     return delta;
   };
 
@@ -164,64 +152,26 @@ define(['girls/schema', './buildingList', 'content/buildings', 'text!./bedroom.h
     g.money -= this.price();
   };
 
-  Building.rooms = {
-    bedroom: {
-      render: function(room, rerender) {
-        var girls = [];
-        $.each(Girl.girls('Hired'), function(name, girl) {
-          if (!girl.bedroom() || girl.bedroom() === room) {
-            girls.push(girl);
-          }
-        });
-        var context = {
-          building: this,
-          room: room,
-          girls: girls
-        };
-        var div = $(ejs.render(bedroom_template, context));
-        $('select', div).change(function() {
-          room.girl = $(this).val();
-          rerender();
-        });
-        return div;
-      }
-    },
-    dungeon: {
-      render: function(room, rerender) {
-        var div = $('<div>');
-        div.prepend('<h6>Dungeon</h6>');
-        $('<p>').html(config.rooms.dungeon.shortDesc).appendTo(div);
-        return div;
-      }
-    }
-  };
-
   Building.prototype.buyRoom = function(type) {
     var base = config.rooms[type];
     g.money -= base.price;
     var room = {
       type: type
     };
+    if (base.size) { room.size = base.size; }
     this.rooms.push(room);
   };
 
   Girl.prototype.building = function() {
-    for (var name in g.buildings) {
-      if (g.buildings[name].status != 'Owned') { continue; }
-      for (var i in g.buildings[name].rooms) {
-        var room = g.buildings[name].rooms[i];
-        if (room.type == 'bedroom' && room.girl == this.name) { return g.buildings[name]; }
-      }
-    }
+    Building.roomsByType('Owned').forEach(function(building) {
+      building.rooms.flt('type', 'bedroom').forEach(function(room) {
+        if (room.girl == this.name) { return building; }
+      });
+    });
   };
   Girl.prototype.bedroom = function() {
-    for (var name in g.buildings) {
-      if (g.buildings[name].status != 'Owned') { continue; }
-      for (var i in g.buildings[name].rooms) {
-        var room = g.buildings[name].rooms[i];
-        if (room.type == 'bedroom' && room.girl == this.name) { return room; }
-      }
-    }
+    var rooms = Building.roomsByType('bedroom', 'Owned');
+    return rooms.flt('girl', this.name)[0];
   };
 
   return Building;

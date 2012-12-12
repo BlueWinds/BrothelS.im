@@ -5,14 +5,16 @@ define(['content/girls', 'content/girls/girlList', './schema', 'text!./list.html
   e.GameNew.push(function() {
     g.maxGirls = config.startMaxGirls;
     g.girls = g.girls || {};
-    for (var name in girls) {
-      g.girls[name] = Girl.create(name);
-    }
   });
   e.GameInit.push(function() {
     $.each(g.girls, function(name, obj) {
       g.girls[name] = new Girl(obj);
     });
+    for (var name in girls) {
+      if (!g.girls[name]) {
+        g.girls[name] = Girl.create(name);
+      }
+    }
   });
   e.GamePreDay.push(function() {
     $.each(g.girls, function(name, girl) {
@@ -28,12 +30,12 @@ define(['content/girls', 'content/girls/girlList', './schema', 'text!./list.html
     $.each(g.girls, function(name, girl) {
       girl.turnDelta = girl.turnDelta();
       var action = girl.potentialActions('morning')[girl.actions.morning];
-      if (!action || (action.conditions && !action.conditions.call(girl, 'morning'))) {
+      if (!action || action.disabled) {
         this.actions.morning = 'Rest';
         this.actions.morningLabel = 'Rest';
       }
       action = girl.potentialActions('evening')[girl.actions.evening];
-      if (!action || (action.conditions && !action.conditions.call(girl, 'evening'))) {
+      if (!action || action.disabled) {
         this.actions.evening = 'Rest';
         this.actions.eveningLabel = 'Rest';
       }
@@ -43,14 +45,14 @@ define(['content/girls', 'content/girls/girlList', './schema', 'text!./list.html
   e.GameRender.push(function() {
     var div = $(ejs.render(list_template, {
       g: g,
-      girls: Girl.girls('Hired')
+      girls: g.girls.flt('status', 'Hired')
     })).prependTo('#content .second');
     $('.girl', div).click(function() {
       var girl = g.girls[$(this).attr('name')];
       var context = {
         girl: girl,
-        potentialMorning: girl.potentialActions('morning', true),
-        potentialEvening: girl.potentialActions('evening', true)
+        morningActions: girl.potentialActions('morning'),
+        eveningActions: girl.potentialActions('evening')
       };
       var view = $(ejs.render(view_template, context));
 
@@ -81,49 +83,75 @@ define(['content/girls', 'content/girls/girlList', './schema', 'text!./list.html
         girl.actions[sex] = Boolean(checked);
       });
 
-      $('#morning', view).change(function() {
+      $('#morning button', view).click(function() {
+        if ($(this).hasClass('disabled')) { return; }
         var val = $(this).val();
+        $('#morning button').removeClass('selected');
+        $('#morning li').removeClass('selected');
+        $(this).addClass('selected');
+        var li = $('a[href="#' + $(this).parent().attr('id') + '"]').parent();
+        li.addClass('selected');
         girl.actions.morning = val;
-        girl.actions.morningLabel = context.potentialMorning[val].label;
+        girl.actions.morningLabel = context.morningActions[val].label;
         var evening;
-        if (context.potentialMorning[val].allDay) {
-          evening = [val, context.potentialEvening[val].label];
-        } else if (context.potentialEvening[girl.actions.evening].allDay) {
+        if (context.morningActions[val].allDay) {
+          evening = [val, context.eveningActions[val].label];
+        } else if (context.eveningActions[girl.actions.evening].allDay) {
           evening = ['Rest', 'Rest'];
         }
         if (evening) {
           girl.actions.evening = evening[0];
           girl.actions.eveningLabel = evening[1];
-          $('#evening', view).val(evening[0]);
+          $('#evening button').removeClass('selected');
+          var new_button = $('#evening button[value="' + evening[0] + '"]', view);
+          new_button.addClass('selected');
+          li = $('a[href="#' + new_button.parent().attr('id') + '"]').parent();
+          li.addClass('selected');
         }
       });
-      $('#evening', view).change(function() {
+      $('#evening button', view).click(function() {
+        if ($(this).hasClass('disabled')) { return; }
         var val = $(this).val();
+        $('#evening button').removeClass('selected');
+        $('#evening li').removeClass('selected');
+        $(this).addClass('selected');
+        var li = $('a[href="#' + $(this).parent().attr('id') + '"]').parent();
+        li.addClass('selected');
         girl.actions.evening = val;
-        girl.actions.eveningLabel = context.potentialEvening[val].label;
+        girl.actions.eveningLabel = context.eveningActions[val].label;
         var morning;
-        if (context.potentialEvening[val].allDay) {
-          morning = [val, context.potentialMorning[val].label];
-        } else if (context.potentialMorning[girl.actions.morning].allDay) {
+        if (context.eveningActions[val].allDay) {
+          morning = [val, context.morningActions[val].label];
+        } else if (context.morningActions[girl.actions.morning].allDay) {
           morning = ['Rest', 'Rest'];
         }
         if (morning) {
           girl.actions.morning = morning[0];
           girl.actions.morningLabel = morning[1];
-          $('#morning', view).val(morning[0]);
+          $('#morning button').removeClass('selected');
+          var new_button = $('#morning button[value="' + morning[0] + '"]', view);
+          new_button.addClass('selected');
+          li = $('a[href="#' + new_button.parent().attr('id') + '"]').parent();
+          li.addClass('selected');
         }
       });
 
       view.dialog({
         title: girl.name,
-        width: '35em',
+        width: '40em',
         beforeClose: function() { g.render(); }
+      });
+
+      $('button.selected', view).each(function() {
+        var a = $('a[href="#' + $(this).parent().attr('id') + '"]');
+        a.parent().addClass('selected');
+        a.click();
       });
     });
 
     $('#hire-girl').click(function() {
       var lst = $(ejs.render(hire_template, {
-        girls: Girl.girls('For Hire'),
+        girls: g.girls.flt('status', 'For Hire'),
         hireHappiness: config.startHappiness
       }));
       $('button.hire', lst).each(function() {

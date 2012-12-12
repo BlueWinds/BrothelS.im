@@ -1,8 +1,8 @@
 define(function() {
   $('head').append('<link type="text/css" rel="stylesheet" href="modules/autorender/autorender.css">');
-
   Globalize.cultures.en.numberFormat.currency.decimals = 0;
-  return function(element) {
+
+  var autorender = function(element) {
     $('button, a.button', element).button();
     $('.sparkline', element).sparkline();
     $(element).tooltip({
@@ -108,5 +108,8 @@ define(function() {
         check_active();
       }
     }
+    $('.horizontal-tabs', view).tabs();
   };
+
+  e.Autorender = [autorender];
 });

@@ -2,6 +2,7 @@ define([], [
   {
     _id: 'Rest',
     label: 'Rest',
+    group: 'Chores',
     description: 'Giving a girl time off increases both endurance and happiness.',
     message: '<%= name %> took some time off to recover.',
     delta: {
@@ -13,12 +14,13 @@ define([], [
   },
   {
     _id: 'Clean',
-    conditions: function(time) { return Boolean(this.building()); },
+    disabled: function(time) { return !Boolean(this.building()); },
     mins: {
       happiness: 20,
       endurance: 15
     },
-    label: 'Clean <%= building().name %>',
+    label: 'Clean <%= building() ? building().name : "" %>',
+    group: 'Chores',
     description: 'She will spend time tidying up, repairing and cleaning the <%= building().name %>.',
     message: '<%= name %> spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <%= building().name %>. Even if it doesn\'t sparkle, it\'s at least in better shape than it was.',
     delta: {
@@ -31,6 +33,7 @@ define([], [
   {
     _id: 'Lockdown',
     label: 'Lockdown',
+    group: 'Training',
     allDay: true,
     mins: {
       endurance: 30,
@@ -38,21 +41,15 @@ define([], [
       constitution: 10
     },
     description: 'She will be bound and gagged in the dungeon for most of the day to increase her obedience. This action takes all day.',
-    conditions: function(time) {
-      // Only two girls in lockdown per building.
-      var count = 0;
-      for (var name in g.buildings) {
-        if (g.buildings[name].status == 'Owned') {
-          for (var i in g.buildings[name].rooms) {
-            count += g.buildings[name].rooms[i].type == 'dungeon';
-          }
-        }
+    disabled: function(time) {
+      var rooms = g.buildings.flt('status', 'Owned').accumulate('rooms');
+      var count = rooms.flatten().flt('type', 'dungeon').sum('size');
+      if (!count) { return true; }
+      var bound = g.girls.flt('action', time, 'Lockdown').length;
+      if (bound < count || bount == count && this.actions.morning == 'Lockdown') {
+        return false;
       }
-      var bound = 0;
-      for (name in g.girls) {
-        bound += g.girls[name].actions[time] == 'Lockdown';
-      }
-      return bound < count * 2 || (bound == count * 2 && this.actions[time] == 'Lockdown');
+      return 'You only have enough dungeons to lockdown ' + count + ' girls at a time.';
     },
     image: 'fetish',
     message: [

@@ -42,22 +42,52 @@
       <div><label>Libido:</label><span class="fetish libido"><%- girl.S("fetish libido") %></span></div>
       <div><label>Experience:</label><span class="fetish experience"><%- girl.S("fetish experience") %></span></div>
     </div>
-    <hr class="clear">
-    <div class="column pct-50">
-      <label for="morning">Morning</label>
-      <select id="morning">
-        <% $.each(potentialMorning, function (_id, action) { %>
-          <option value="<%= _id %>" title="<%= action.description %>" <%= (girl.actions.morning == _id) ? 'selected' : '' %> <%= action.disabled ? "disabled" : '' %>><%= action.label %></option>
-        <% }) %>
-      </select>
+  </div>
+  <hr class="clear">
+  <div class="column pct-50">
+    <h6 class="center">Morning</h6>
+    <div class="horizontal-tabs" id="morning">
+      <ul>
+        <% var i = 0; %>
+        <% for (var key in morningActions.sortToObject('group')) { %>
+          <li><a href="#action-tab-<%= i %>"><%= key %></a></li>
+          <% i++ %>
+        <% } %>
+      </ul>
+      <% i = 0; %>
+      <% $.each(morningActions.sortToObject('group'), function(key, actions) { %>
+        <div id="action-tab-<%= i %>">
+          <% actions.forEach(function(action) { %>
+            <button class="action <%= girl.actions.morning == action._id ? 'selected' : '' %> <%= action.disabled ? 'disabled' : '' %>" title="<%= action.description %>" value="<%= action._id %>">
+              <%= action.label %>
+            </button>
+          <% }) %>
+        </div>
+        <% i++ %>
+      <% }) %>
     </div>
-    <div class="column pct-50">
-      <label for="evening">Evening</label>
-      <select id="evening" value="<%= girl.actions.evening %>">
-        <% $.each(potentialEvening, function (_id, action) { %>
-          <option value="<%= _id %>" title="<%= action.description %>" <%= (girl.actions.evening == _id) ? 'selected' : '' %> <%= action.disabled ? "disabled" : '' %>><%= action.label %></option>
-        <% }) %>
-      </select>
+  </div>
+  <div class="column pct-50">
+    <h6 class="center">Evening</h6>
+    <div class="horizontal-tabs" id="evening">
+      <ul>
+        <% var i = 100; %>
+        <% for (var key in eveningActions.sortToObject('group')) { %>
+          <li><a href="#action-tab-<%= i %>"><%= key %></a></li>
+          <% i++ %>
+        <% } %>
+      </ul>
+      <% i = 100; %>
+      <% $.each(eveningActions.sortToObject('group'), function(key, actions) { %>
+        <div id="action-tab-<%= i %>">
+          <% actions.forEach(function(action) { %>
+            <button class="action <%= girl.actions.evening == action._id ? 'selected' : '' %>" title="<%= action.description %>" value="<%= action._id %>" <%= action.disabled ? 'disabled' : '' %>>
+              <%= action.label %>
+            </button>
+          <% }) %>
+        </div>
+        <% i++ %>
+      <% }) %>
     </div>
   </div>
 </div>

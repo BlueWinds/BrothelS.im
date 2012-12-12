@@ -1,5 +1,5 @@
 define(['content/randomPerson'], function(config) {
-  return function(class_) {
+  var randomPerson = function(class_) {
     var keys = Object.keys(config);
     if (!class_) {
       class_ = Math.choice(keys);
@@ -32,4 +32,6 @@ define(['content/randomPerson'], function(config) {
     }
     return obj;
   };
+
+  return randomPerson;
 });

@@ -13,7 +13,7 @@
     <% i++ %>
     <div id="mission-tab-<%= i %>" class="mission ui-helper-clearfix">
       <% if (mission.end.day) { %>
-        <div>Time Remaining: <strong><%= mission.end.day - g.day %> days</strong></div>
+        <div class="top">Time Remaining: <strong><%= mission.end.day - g.day %> days</strong></div>
       <% } %>
       <img src="<%= mission.image %>">
       <div>
