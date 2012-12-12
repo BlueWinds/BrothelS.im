@@ -15,6 +15,12 @@
   <script src="libraries/require.js"></script>
   <script src="modules/core.js"></script>
   <script>
+    window.onerror = function(errorMsg, url, lineNumber) {
+      if (lineNumber) {
+        alert(errorMsg + '\n\n' + url + '\n\n' + lineNumber);
+      }
+    }
+
     require.config({
       baseUrl: "modules",
       map: {
