@@ -70,7 +70,7 @@ define(['girls/schema', 'content/events/eventList.js', 'messages/messages'], fun
       doMessage(results.image, results.message, endDelta());
     }
 
-    if (!event.disruptive || action.uninteruptable) {
+    if (!event.disruptive) {
       oldDoAction.call(this, time, action);
     }
   };
@@ -81,6 +81,7 @@ define(['girls/schema', 'content/events/eventList.js', 'messages/messages'], fun
     for (var _id in potentialEvents) {
       var event = potentialEvents[_id];
       if (event.minDay && g.day < event.minDay) { continue; }
+      if (action.uninteruptable && event.disruptive) { continue; }
       var likelyhood = event.likelyhood;
       if (action.safety && event.dangerous) { likelyhood *= (1 - action.safety); }
       if (Math.random() < likelyhood) {
