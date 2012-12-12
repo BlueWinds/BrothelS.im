@@ -132,7 +132,7 @@ define(['text!./intro.html', './schema', 'text!./new-form.html', 'text!./save-fo
       event.preventDefault();
       return false;
     });
-    $('button', form).submit(function(event) {
+    $('#save-game', form).click(function(event) {
       event.preventDefault();
       module.save($('#game-name', form).val());
       form.dialog('close');
@@ -169,7 +169,7 @@ define(['text!./intro.html', './schema', 'text!./new-form.html', 'text!./save-fo
       form.dialog('close');
       return false;
     });
-    form.submit(function(event) {
+    $('#load', form).submit(function(event) {
       event.preventDefault();
       module.load($('#game-name').val());
       form.dialog('close');
@@ -179,6 +179,5 @@ define(['text!./intro.html', './schema', 'text!./new-form.html', 'text!./save-fo
       title: 'Load Game'
     });
   });
-  console.log('hi');
   return module;
 });
