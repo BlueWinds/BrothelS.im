@@ -39,7 +39,7 @@ Unlike buildings and girls, events don't need their own folder, just a single fi
 
 Open up your new something.js file, and read through the documentation. The tentacleAttack file is very well documented, and contains all options, even the ones it doesn't use.
 
-When you're done editing your events file, open up (you probably guessed it) eventList.js, and add your file to the list. Save it. Reload the page. Tada! If you didn't break anything, your new events are present.
+When you're done editing your events file, open up (you probably guessed it) eventList.js, and add your file to the list. Save it. Reload the page. Tada! If you didn't break anything, your new events are present in the game.
 
 License
 =============
