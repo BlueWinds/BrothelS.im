@@ -13,6 +13,11 @@ define(['girls/schema', './schema', 'content/buildings', 'content/buildings/buil
     $.each(g.buildings, function(name, obj) {
       g.buildings[name] = new Building(obj);
     });
+    for (var name in buildings) {
+      if (!g.buildings[name]) {
+        g.buildings[name] = Building.create(name);
+      }
+    }
   });
   e.GamePreDay.push(function() {
     $.each(g.buildings, function(name, building) {

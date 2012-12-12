@@ -22,8 +22,8 @@ define({
        clean: -0.1
     },
     below: {
-      happiness: 0.2,
-      endurance: 0.1
+      happiness: -0.2,
+      endurance: -0.1
     },
     clean: 'The Onsen is in good shape, and the girls are happy to take advantage of the hot spring to relax after work. A few customers come to soak in the baths even without your girls\' attention, paying a modest fee for the privilage.',
     dirty: 'The Onsen is in poor condition - algea covers some of the baths, while others remain empty. A can in one corner to catches drips when it rains from a leak in the roof.'

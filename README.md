@@ -18,6 +18,16 @@ Load up the game in your browser. Tada! Girls created after the start of the gam
 
 Please test your girl before submitting her to me or on the forum - try to trigger all of her images, and Streetwalk a whole bunch to make sure all the images are loading properly. Broken image links are no fun.
 
+== Creating Buildings
+
+This assumes you're familiar with creating girls. It's not hard, but I don't want to have to repeat myself. ^^;;
+
+Create a new folder inside content/buildings, named after the one you want to create, and add your building's image (unlike girls, they only have one right now).
+
+Copy the base.js file into that folder from the Theater. Open it up and start editing. It's very well commented, and explains all possible options.
+
+Just like creating a girl, open up buildingList.js in "content/buildings" and add your new folder name to the list at the top of the file. Tada! It will show up next time you load the game (including in games already in progress).
+
 == License
 
 The contents of the "content" folder are provided as is. No claim is made on the images contained within. All text is original, and released into the public domain. The contents of the "libraries" folder are not mine either.
