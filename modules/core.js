@@ -34,15 +34,13 @@ Object.defineProperty(Object.prototype, "multiply", {
   }
 });
 
-Object.defineProperty(Object.prototype, "add", {
+Object.defineProperty(Object.prototype, "combineWith", {
   enumerable: false,
   writable: false,
   configurable: true,
   value: function(delta) {
     var i;
     if (typeof(delta) == 'object') {
-      console.log(this);
-      console.log(delta);
       for (i in delta) {
         this[i] = (this[i] || 0) + delta[i];
       }

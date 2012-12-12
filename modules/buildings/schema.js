@@ -143,7 +143,7 @@ define(['girls/schema', 'content/buildings/buildingList', 'content/buildings', '
     var breakpoint = this.clean - this._.cleanEffect.breakpoint;
     var delta = $.extend({}, breakpoint >= 0 ? this._.cleanEffect.above : this._.cleanEffect.below);
     delta.multiply(Math.abs(breakpoint));
-    delta.add(this._.daily);
+    delta.combineWith(this._.daily);
     return delta;
   };
 
