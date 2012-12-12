@@ -46,7 +46,7 @@ define(['girls/schema', './schema', 'content/buildings', 'content/buildings/buil
         };
         $.each(config.rooms, function(name, room) {
           if (room.price > g.money) { return; }
-          if (room.max && room.max > building.rooms.flt('type', room.type).length) {
+          if (room.max && room.max <= building.rooms.flt('type', room.type).length) {
             return;
           }
           context.availableRooms[name] = room;

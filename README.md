@@ -11,6 +11,8 @@ Copy base.js from the Sophitia folder into Slut1. That particular file is design
 
 See all those lines starting in "//"? Those are comments, if you hadn't guessed. They explain things. When you create your own girl, **remove all the comments from base.js**. I will not upload girls that still contain them, and it's not my job to strip them out for you.
 
+Check your file's syntax! I recommend something like http://javascriptlint.com/online_lint.php - just copy-paste the whole contents of the file into that box, and it will point out any problems. Smokey the Bear: Only YOU can prevent swirly screens of death.
+
 When you're done editing base.js and adding all the images you want to the images folder, there's just one more step before you can test the girl. In "content/girls", open up girlList.js. I assume you can see the list of girls at the top. Add your *folder name* to the list.
 
 As a general rule of thumb, resize images so they're less than 150kb, and 600x600 or smaller. I want to keep the game size down! Hi-res pictures do no good when they're jammed into one corner of the screen. ;)
@@ -28,6 +30,8 @@ Create a new folder inside content/buildings, named after the one you want to cr
 
 Copy the base.js file into that folder from the Theater. Open it up and start editing. It's very well commented, and explains all possible options.
 
+Check your file's syntax! I recommend something like http://javascriptlint.com/online_lint.php - just copy-paste the whole contents of the file into that box, and it will point out any problems. Smokey the Bear: Only YOU can prevent swirly screens of death.
+
 Just like creating a girl, open up buildingList.js in "content/buildings" and add your new folder name to the list at the top of the file. Tada! It will show up next time you load the game (including in games already in progress).
 
 Creating Events
@@ -38,6 +42,8 @@ This guide assumes you're familiar with creating girls. It's not hard, but I don
 Unlike buildings and girls, events don't need their own folder, just a single file. In content/events, copy tentacleAttack.js and give the copy a new name - pick a descriptive name for the event(s) you want to add.
 
 Open up your new something.js file, and read through the documentation. The tentacleAttack file is very well documented, and contains all options, even the ones it doesn't use.
+
+Check your file's syntax! I recommend something like http://javascriptlint.com/online_lint.php - just copy-paste the whole contents of the file into that box, and it will point out any problems. Smokey the Bear: Only YOU can prevent swirly screens of death.
 
 When you're done editing your events file, open up (you probably guessed it) eventList.js, and add your file to the list. Save it. Reload the page. Tada! If you didn't break anything, your new events are present in the game.
 
