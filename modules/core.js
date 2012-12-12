@@ -42,7 +42,7 @@ Object.defineProperty(Object.prototype, "add", {
     var i;
     if (typeof(delta) == 'object') {
       for (i in delta) {
-        this[i] = this[i] || 0 + delta[i];
+        this[i] = (this[i] || 0) + delta[i];
       }
       return this;
     }
