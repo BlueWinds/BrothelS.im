@@ -41,6 +41,8 @@ Object.defineProperty(Object.prototype, "add", {
   value: function(delta) {
     var i;
     if (typeof(delta) == 'object') {
+      console.log(this);
+      console.log(delta);
       for (i in delta) {
         this[i] = (this[i] || 0) + delta[i];
       }
