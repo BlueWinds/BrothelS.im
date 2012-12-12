@@ -1,4 +1,5 @@
-== Creating new Girls
+Creating new Girls
+=============
 
 First, download and extract the game to your local drive. See that "zip" button at the top-left of this page (if you're reading this from GitHub)? Yeah, use that.
 
@@ -6,9 +7,9 @@ Now, the "content" folder is where you'll be doing all of your work. Open up con
 
 Create an "images" folder inside Slut1. That's where you'll put all your pictures.
 
-Copy base.js from the Sophitia folder into Slut1. That particular file is designed as a tutorial - Sophitia is a vanilla girl, but *all* available options are documented in her file. Open up base.js and start editing.
+Copy base.js from the Sophitia folder into Slut1. That particular file is designed as a tutorial - Sophitia is a vanilla girl, but **all** available options are documented in her file. Open up base.js and start editing.
 
-See all those lines starting in "//"? Those are comments, if you hadn't guessed. They explain things. When you create your own girl, *remove all the comments from base.js*. I will not upload girls that still contain them, and it's not my job to strip them out for you.
+See all those lines starting in "//"? Those are comments, if you hadn't guessed. They explain things. When you create your own girl, **remove all the comments from base.js**. I will not upload girls that still contain them, and it's not my job to strip them out for you.
 
 When you're done editing base.js and adding all the images you want to the images folder, there's just one more step before you can test the girl. In "content/girls", open up girlList.js. I assume you can see the list of girls at the top. Add your *folder name* to the list.
 
@@ -18,7 +19,8 @@ Load up the game in your browser. Tada! Girls created after the start of the gam
 
 Please test your girl before submitting her to me or on the forum - try to trigger all of her images, and Streetwalk a whole bunch to make sure all the images are loading properly. Broken image links are no fun.
 
-== Creating Buildings
+Creating Buildings
+=============
 
 This assumes you're familiar with creating girls. It's not hard, but I don't want to have to repeat myself. ^^;;
 
@@ -28,7 +30,8 @@ Copy the base.js file into that folder from the Theater. Open it up and start ed
 
 Just like creating a girl, open up buildingList.js in "content/buildings" and add your new folder name to the list at the top of the file. Tada! It will show up next time you load the game (including in games already in progress).
 
-== License
+License
+=============
 
 The contents of the "content" folder are provided as is. No claim is made on the images contained within. All text is original, and released into the public domain. The contents of the "libraries" folder are not mine either.
 
