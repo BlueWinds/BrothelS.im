@@ -13,7 +13,8 @@ See all those lines starting in "//"? Those are comments, if you hadn't guessed.
 
 Check your file's syntax! I recommend something like http://javascriptlint.com/online_lint.php - just copy-paste the whole contents of the file into that box, and it will point out any problems. Smokey the Bear: Only YOU can prevent swirly screens of death.
 
-When you're done editing base.js and adding all the images you want to the images folder, there's just one more step before you can test the girl. In "content/girls", open up girlList.js. I assume you can see the list of girls at the top. Add your *folder name* to the list.
+**THIS STEP HAS CHANGED**
+When you're done editing base.js and adding all the images you want to the images folder, there's just one more step before you can test the girl. Open up "index.html" in a text editor, and head to around line 30. See the list of girls? Copy one of those lines and add it to the bottom of the list, changing the src attribute so that it points to the base.js file you created earlier.
 
 As a general rule of thumb, resize images so they're less than 150kb, and 600x600 or smaller. I want to keep the game size down! Hi-res pictures do no good when they're jammed into one corner of the screen. ;)
 
@@ -32,7 +33,10 @@ Copy the base.js file into that folder from the Theater. Open it up and start ed
 
 Check your file's syntax! I recommend something like http://javascriptlint.com/online_lint.php - just copy-paste the whole contents of the file into that box, and it will point out any problems. Smokey the Bear: Only YOU can prevent swirly screens of death.
 
-Just like creating a girl, open up buildingList.js in "content/buildings" and add your new folder name to the list at the top of the file. Tada! It will show up next time you load the game (including in games already in progress).
+**THIS STEP HAS CHANGED**
+When you're done editing base.js and adding all the images you want to the images folder, there's just one more step before you can test the girl. Open up "index.html" in a text editor, and head to around line 30. See the list of girls? Copy one of those lines and add it to the bottom of the list, changing the src attribute so that it points to the base.js file you created earlier.
+
+Just like creating a girl, open up "index.html" and add your new base.js file list of buildings - this list starts at around line 42. Tada! It will show up next time you load the game (including in games already in progress).
 
 Creating Events
 =============
@@ -45,7 +49,8 @@ Open up your new something.js file, and read through the documentation. The tent
 
 Check your file's syntax! I recommend something like http://javascriptlint.com/online_lint.php - just copy-paste the whole contents of the file into that box, and it will point out any problems. Smokey the Bear: Only YOU can prevent swirly screens of death.
 
-When you're done editing your events file, open up (you probably guessed it) eventList.js, and add your file to the list. Save it. Reload the page. Tada! If you didn't break anything, your new events are present in the game.
+**This step has changed**
+When you're done editing your events file, open up (you probably guessed it) index.html, and add your file to the list (Events are around line 48). Save it. Reload the page. Tada! If you didn't break anything, your new events are present in the game.
 
 License
 =============
