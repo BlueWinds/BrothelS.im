@@ -22,10 +22,10 @@ Load up the game in your browser. Tada! Girls created after the start of the gam
 
 Please test your girl before submitting her to me or on the forum - try to trigger all of her images, and Streetwalk a whole bunch to make sure all the images are loading properly. Broken image links are no fun.
 
-Creating Buildings
+Creating Buildings and Rooms
 =============
 
-This assumes you're familiar with creating girls. It's not hard, but I don't want to have to repeat myself. ^^;;
+This assumes you're familiar with creating girls. It's not hard, but I don't want to have to repeat myself. ^^;; Adding new room types is relatively simple - open up content/buildings/buildings.js and take a look at the dungeon. Rooms don't do anything by themselves though (yet - they will eventually) - they rely on events or actions for their effects.
 
 Create a new folder inside content/buildings, named after the one you want to create, and add your building's image (unlike girls, they only have one right now).
 
@@ -37,6 +37,11 @@ Check your file's syntax! I recommend something like http://javascriptlint.com/o
 When you're done editing base.js and adding all the images you want to the images folder, there's just one more step before you can test the girl. Open up "index.html" in a text editor, and head to around line 30. See the list of girls? Copy one of those lines and add it to the bottom of the list, changing the src attribute so that it points to the base.js file you created earlier.
 
 Just like creating a girl, open up "index.html" and add your new base.js file list of buildings - this list starts at around line 42. Tada! It will show up next time you load the game (including in games already in progress).
+
+Creating Actions
+=============
+
+Open up content/actions/Simple.js - the Lockdown action is well commented, and should explain everything you need to know. You can either add your action to an existing file, by copying an existing action and using it as a base, or create a new file inside the actions folder. If you create a new file, you'll have to add it to index.html - this isn't hard, just copy and adjust one of the existing action <script> stags. They start around line 51 of index.html.
 
 Creating Events
 =============

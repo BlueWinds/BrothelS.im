@@ -108,7 +108,9 @@ Girl.prototype.potentialActions = function(time) {
     }
     if (!new_action.disabled && action.mins) {
       for (var stat in action.mins) {
-        if (girl[stat] < action.mins[stat]) {
+        if (stat == 'money' && g.money < action.mins.money) {
+          new_action.disabled = 'Not enough money';
+        } else if (girl[stat] < action.mins[stat]) {
           new_action.disabled = 'Not enough ' + stat;
           break;
         }

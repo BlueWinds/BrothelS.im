@@ -50,7 +50,7 @@ e.GameRender.push(function() {
       };
       $.each(Building.config.rooms, function(name, room) {
         if (room.price > g.money) { return; }
-        if (room.max && room.max <= building.rooms.Cfilter('type', name).length) {
+        if (room.maxPerBuilding && room.maxPerBuilding <= building.rooms.Cfilter('type', name).length) {
           return;
         }
         context.availableRooms[name] = room;

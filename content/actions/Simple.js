@@ -15,48 +15,43 @@ Actions.Rest = {
   mins: {}
 };
 
-Actions.Clean = {
-  disabled: function(time) { return !Boolean(this.building()); },
-  mins: {
-    happiness: 20,
-    endurance: 15
-  },
-  label: 'Clean <%= girl.building() ? girl.building().name : "" %>',
-  group: 'Chores',
-  description: 'She will spend time tidying up, repairing and cleaning the <%= girl.building().name %>.',
-  results: [
-    {
-      image: 'cleaning',
-      message: '<%= girl.name %> spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <%= girl.building().name %>. Even if it doesn\'t sparkle, it\'s at least in better shape than it was.',
-      delta: {
-        clean: 10,
-        money: -10,
-        endurance: -6
-      }
-    }
-  ]
-};
-
+// The action's _id is the machine-readable name of the action. It must be unique.
 Actions.Lockdown = {
+  // The label is what's displayed to the player. You can use replacement patterns here. 'girl' is the girl performing the action. 'g' holds all the game data - see specialParty for an example of how this is used.
   label: 'Lockdown',
+  // The tab the action is displayed under when viewing a girl.
   group: 'Training',
+  // Does... what you think it does. If the action doesn't take up both timeslots, remove this line.
   allDay: true,
+  // The minimum statistics a girl must have in order to take this action. You can also use 'money' here, to show the minimum $ the player must have.
   mins: {
     endurance: 30,
     happiness: 50,
     constitution: 10
   },
-  description: 'She will be bound and gagged in the dungeon for most of the day to increase her obedience. This action takes all day.',
-  disabled: function(time) {
-    var rooms = g.buildings.Cfilter('status', 'Owned').Caccumulate('rooms');
-    var count = rooms.Cflatten().Cfilter('type', 'dungeon').Csum('size');
-    if (!count) { return true; }
-    var bound = g.girls.Cfilter('action', time, 'Lockdown').length;
-    if (bound < count || bount == count && this.actions.morning == 'Lockdown') {
-      return false;
-    }
-    return 'You only have enough dungeons to lockdown ' + count + ' girls at a time.';
+  // An action can require that the player owns certain rooms. If that isn't the case, remove the requiresRoom key entirely.
+  requiresRoom: {
+    // The type of room needed.
+    type: 'dungeon',
+    // The key of those rooms to sum up to count how many girls can do the action.
+    key: 'size'
   },
+  // The description of the action, showed on hover. Replacement patterns can again be used (as they are in specialParty).
+  description: 'She will be bound and gagged in the dungeon for most of the day to increase her obedience. This action takes all day.',
+  // Disabled is an optional javascript function to disable this action based on information about the game. You probably don't want to try to use it unless you already know javascript. The function always gets a single argument, time, which is either 'morning' or 'evening' - the time this action is being considered for.
+  // disabled: function(time) {
+    // The disabled function can return one of three values: true, false, or a string.
+
+    // return true;
+    // If it returns 'true', then the *action doesn't show up* - do this to avoid cluttering up the action list with irrelevant actions.
+
+    // return false;
+    // Returning false means that *The action is not disabled* - it can be selected.
+
+    // return 'description for why the user can't select this action.';
+    // The final option for the disabled function is to return a string. The action will be disabled, but show up on the list.
+  // },
+  // Variants work exactly like event variants - since they're already described there, I'm not going to repeat it here.
   variants: [0.5, 0.5],
   results: [
     {
@@ -77,6 +72,28 @@ Actions.Lockdown = {
         happiness: -10,
         obedience: 4,
         constitution: -0.5
+      }
+    }
+  ]
+};
+
+Actions.Clean = {
+  disabled: function(time) { return !Boolean(this.building()); },
+  mins: {
+    happiness: 20,
+    endurance: 15
+  },
+  label: 'Clean <%= girl.building() ? girl.building().name : "" %>',
+  group: 'Chores',
+  description: 'She will spend time tidying up, repairing and cleaning the <%= girl.building().name %>.',
+  results: [
+    {
+      image: 'cleaning',
+      message: '<%= girl.name %> spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <%= girl.building().name %>. Even if it doesn\'t sparkle, it\'s at least in better shape than it was.',
+      delta: {
+        clean: 10,
+        money: -10,
+        endurance: -6
       }
     }
   ]

@@ -26,6 +26,11 @@ Building.roomsByType = function(type, status) {
   return rooms.Cflatten().Cfilter('type', type);
 };
 
+Building.roomKeySum = function(type, key, status) {
+  status = status || 'Owned';
+  return Building.roomsByType(type, status).Caccumulate(key).Csum();
+};
+
 Building.prototype.girls = function() {
   return this.rooms.Caccumulate('girl');
 };
@@ -76,6 +81,31 @@ Building.prototype.girls = function() {
       return end;
     };
   };
+
+  var oldGirlActions = Girl.prototype.potentialActions;
+  Girl.prototype.potentialActions = function(time) {
+    var actions = oldGirlActions.call(this, time);
+    var girl = this;
+    actions.forEach(function(action) {
+      if (!action.requiresRoom) {
+        return;
+      }
+      var max = Building.roomKeySum(action.requiresRoom.type, action.requiresRoom.key);
+      if (!max) {
+        action.disabled = true;
+        return;
+      }
+      var already = g.girls.Cfilter('action', time, action._id).length;
+      if (already > bound) {
+        return;
+      }
+      if (already == count && girl.actions[time] == action._id) {
+        return;
+      }
+      action.disabled = 'You only have enough ' + action.requiresRoom.type + ' to ' + action.label + ' ' + count + ' girls at a time.';
+    });
+    return actions;
+  };
 })();
 
 Building.prototype.apply = function(stat, delta) {
@@ -115,6 +145,12 @@ Building.prototype.runDay = function() {
   var endDelta = this.startDelta(true);
   var breakpoint = this.clean - this._.cleanEffect.breakpoint;
   this.apply(this.dailyDelta());
+  var building = this;
+  this.rooms.forEach(function(room) {
+    if (room._.daily) {
+      building.apply(room._.daily);
+    }
+  });
   var text = breakpoint >= 0 ? this._.cleanEffect.clean : this._.cleanEffect.dirty;
   new Message({
     type: breakpoint >= 0 ? 'Clean' : 'Dirty',
@@ -122,7 +158,6 @@ Building.prototype.runDay = function() {
     text: ejs.render(text, this),
     delta: endDelta()
   }).save(this.name);
-  var building = this;
   this.rooms.forEach(function(room) {
     if (Building.rooms[room.type].daily) {
       Building.rooms[room.type].daily.call(building, room);
