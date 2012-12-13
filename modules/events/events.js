@@ -63,7 +63,7 @@ define(['girls/schema', 'content/events/eventList.js', 'messages/messages'], fun
     var results = event.results[i];
     if (typeof(results.message) == 'object') {
       for (var j in results.message) {
-        var d = results.message.length == j + 1 ? endDelta() : {};
+        var d = results.message.length - 1 == j ? endDelta() : {};
         doMessage(results.image[j], results.message[j], d);
       }
     } else {
