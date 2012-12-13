@@ -38,11 +38,6 @@ When you're done editing base.js and adding all the images you want to the image
 
 Just like creating a girl, open up "index.html" and add your new base.js file list of buildings - this list starts at around line 42. Tada! It will show up next time you load the game (including in games already in progress).
 
-Creating Actions
-=============
-
-Open up content/actions/Simple.js - the Lockdown action is well commented, and should explain everything you need to know. You can either add your action to an existing file, by copying an existing action and using it as a base, or create a new file inside the actions folder. If you create a new file, you'll have to add it to index.html - this isn't hard, just copy and adjust one of the existing action <script> stags. They start around line 51 of index.html.
-
 Creating Events
 =============
 
@@ -56,6 +51,11 @@ Check your file's syntax! I recommend something like http://javascriptlint.com/o
 
 **This step has changed**
 When you're done editing your events file, open up (you probably guessed it) index.html, and add your file to the list (Events are around line 48). Save it. Reload the page. Tada! If you didn't break anything, your new events are present in the game.
+
+Creating Actions
+=============
+
+Open up content/actions/Simple.js - the Lockdown action is well commented, and should explain everything you need to know. You can either add your action to an existing file, by copying an existing action and using it as a base, or create a new file inside the actions folder. If you create a new file, you'll have to add it to index.html - this isn't hard, just copy and adjust one of the existing action <script> stags. They start around line 51 of index.html.
 
 License
 =============
