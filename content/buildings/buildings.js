@@ -1,4 +1,4 @@
-define({
+Building.config = {
   startMaxBuildings: 0,
   noRoomDailyCost: 60,
   rooms: {
@@ -21,4 +21,4 @@ define({
   },
   cleanDescription: "Cleanliness is how orderly and generally lacking in grime the building is. Higher cleaning ratings make customers more likely to enter and pay well when they do, and low cleanliness will reduce girls' endurance and happiness.",
   roomDescription: "Built / Total<br><br>Many buildings have extra rooms that could be renovated into extra bedrooms or other interesting places."
-});
+};

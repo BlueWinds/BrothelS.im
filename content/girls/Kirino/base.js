@@ -1,5 +1,4 @@
-define({
-  name: "Kirino",
+Girls.Kirino = {
   description: "<p>After an attempted affair with her older brother ended in rejection, Kirino ran away from home - and just kept running, until she ran out of land.</p><p>She's made her living for several years now flitting between one 'project' after another, as she calls them. Working for you is the latest - <em>this time</em>, she insists it will work out.</p>",
   status: {
     Hired: 1
@@ -34,4 +33,4 @@ define({
     exercise: ["Exercise1.png", "Exercise2.png", "Exercise3.png"],
     tentacles: ["Fet1.png", "Fet3.png", "Fet4.png"]
   }
-});
+};

@@ -1,4 +1,4 @@
-define({
+Actions.Streetwalk.config = {
   maxCustomers: 6,
   types: {
     soft: {
@@ -65,4 +65,4 @@ define({
     endurance: -10,
     happiness: -5
   }
-});
+};

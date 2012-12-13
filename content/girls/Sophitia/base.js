@@ -1,7 +1,6 @@
-// Don't touch the first line. You break this, the game probably just won't load at all.
-define({
-  // Pretty self explanatory.
-  name: "Sophitia",
+// Put the name of the girl here. If the name is multiple words, do this instead:
+// Girls['Lady McAwesome'] = {
+Girls.Sophitia = {
   // All strings have to be on one line. You can break up long bits of text by wrapping each section in <p></p> tags - other bits of HTML will also work, such as <em></em> for italics, or <strong></strong> for bold.
   description: "<p>The daughter of a baker, Sophitia worked at her family bakery. She always treasured her country's culture and prayed often to the city guardian. One day, as she bathed in a forest spring, the god of the forge revealed himself, and told her of the evil sword whose existence threatened to bring much pain to the world. He ordered her to seek to destroy this foul blade.</p><p>At first Sophitia was reluctant to take the holy mission, for she was only a baker's daughter, but the god insisted. She tracked down the wielder of this powerful sword - and was gravely wounded in the fight without even inconveniencing him.</p><p>Afraid to face the wrath of her god, she fled for distant lands... and ended up here.</p>",
   // There are two options for status. First, a simple value, like:
@@ -55,4 +54,4 @@ define({
     exercise: "Exercise.jpg",
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg", "Tentacles5.jpg"]
   }
-});
+};

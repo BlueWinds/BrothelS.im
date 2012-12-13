@@ -1,6 +1,6 @@
-define({
-  // The name is pretty self explanatory.
-  name: 'Theater',
+// Put the name of the building here. If the name is multiple words, do this instead:
+// Buildings['My Awesome Building'] = {
+Buildings.Theater = {
   // The path to the image should be from the base directory of the game.
   image: 'content/buildings/Theater/Base.jpg',
   // How clean the building is before the player buys it.
@@ -50,4 +50,4 @@ define({
   },
   // Remember that long blocks of text have to be on a single line. You can break them up when displayed to the player using <p></p> tags. Other HTML will also work.
   description: "<p>Perhaps less than ideal as a potential brothel, the Theater does have one advantage - an excellent location. The building itself is quite large, but there's not much room for additional construction - the main auditorium takes up a great deal of space.</p><p>It's easy and cheap to maintain, but doesn't provide as many benefits as other locations.</p>"
-});
+};

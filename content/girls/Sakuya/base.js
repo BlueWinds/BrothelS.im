@@ -1,5 +1,4 @@
-define({
-  name: "Sakuya",
+Girls.Sakuya = {
   description: "<p>While working as a maid in a foreign land, Sakuya defended her mistress against a tireless stream of invaders before finally deciding enough was enough. Using powerful magic, she froze time and attempted to \"cure\" the source of their problems.</p><p>The spell backfired, flinging her halfway across the world and nearly killing her. Since her magical powers are much frayed, and there isn't much call for maids, she's been considering switching careers...</p>",
   status: {
     Town: 0.2,
@@ -34,4 +33,4 @@ define({
     exercise: ["Exercise1.jpg", "Exercise2.jpg", "Exercise3.jpg"],
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg"]
   }
-});
+};

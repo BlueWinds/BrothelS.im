@@ -1,4 +1,4 @@
-define({
+Girl.config = {
   startMaxGirls: 1,
   pay: {
     above: 0.1,
@@ -23,4 +23,4 @@ define({
     libido: "Libido measures how much she enjoys a particular sex act. Higher values mean she's less likely to refuse and will provide a customer with a better experience.",
     experience: "Experience measures how often a girl has done a particular sex act, and how good she is at pleasuring customers. Higher values will make her less likely to refuse, and customers will pay more."
   }
-});
+};

@@ -6,7 +6,8 @@ var e = {
     e[hook].forEach(function(func) {
       func.apply($this, args);
     });
-  }
+  },
+  Ready: []
 };
 
 Storage.prototype.setObject = function(key, value) {

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html><head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Script-Type" content="text/javascript">
   <title>Brothel S.im</title>
   <link rel="shortcut icon" href="favicon.ico">
-  <link type="text/css" rel="stylesheet" href="libraries/ui-darkness.css">
-  <link type="text/css" rel="stylesheet" href="content/miscImages/style.css">
+  <link href="libraries/ui-darkness.css" type="text/css" rel="stylesheet">
   <script src="libraries/jquery.js"></script>
   <script src="libraries/jquery-ui.js"></script>
   <script src="libraries/cycle.js"></script>
@@ -12,33 +12,69 @@
   <script src="libraries/ejs.js"></script>
   <script src="libraries/namegen.js"></script>
   <script src="libraries/jquery.sparkline.js"></script>
-  <script src="libraries/require.js"></script>
+
+  <link href="modules/style.css" type="text/css" rel="stylesheet">
   <script src="modules/core.js"></script>
+  <link href="modules/autorender/autorender.css" type="text/css" rel="stylesheet">
+  <script src="modules/autorender/autorender.js"></script>
+  <script src="modules/game/schema.js"></script>
+  <script src="modules/game/game.js"></script>
+  <script src="content/game.js"></script>
+
+  <!-- Girls !-->
+  <link href="modules/girls/style.css" type="text/css" rel="stylesheet">
+  <script src="modules/girls/schema.js"></script>
+  <script src="modules/girls/girls.js"></script>
+  <script src="content/girls/girls.js"></script>
+
+  <script src="content/girls/Kirino/base.js"></script>
+  <script src="content/girls/Sophitia/base.js"></script>
+  <script src="content/girls/Sakuya/base.js"></script>
+  <script src="content/girls/Dark Magician Girl/base.js"></script>
+
+  <!-- Buildings !-->
+  <link href="modules/buildings/style.css" type="text/css" rel="stylesheet">
+  <script src="modules/buildings/schema.js"></script>
+  <script src="modules/buildings/buildings.js"></script>
+  <script src="modules/buildings/rooms.js"></script>
+  <script src="content/buildings/buildings.js"></script>
+
+  <script src="content/buildings/Onsen/base.js"></script>
+  <script src="content/buildings/Theater/base.js"></script>
+
+  <!-- Events !-->
+  <script src="modules/events/events.js"></script>
+
+  <script src="content/events/tentacleAttack.js"></script>
+
+  <!-- Actions !-->
+  <script src="content/actions/specialParty.js"></script>
+  <script src="content/actions/Prostitution.js"></script>
+  <script src="content/actions/Schools.js"></script>
+  <script src="content/actions/Simple.js"></script>
+
+  <!-- Missions !-->
+  <link href="modules/missions/style.css" type="text/css" rel="stylesheet">
+  <script src="modules/missions/schema.js"></script>
+  <script src="modules/missions/missions.js"></script>
+
+  <script src="content/missions/intro.js"></script>
+  <script src="content/missions/specialParty.js"></script>
+
+  <!-- Misc modules !-->
+  <script src="modules/randomPerson/randomPerson.js"></script>
+  <script src="content/randomPerson/randomPerson.js"></script>
+
+  <link href="modules/messages/messages.css" type="text/css" rel="stylesheet">
+  <script src="modules/messages/messages.js"></script>
+
+  <script src="modules/prostitution/prostitution.js"></script>
+  <script src="content/prostitution.js"></script>
+
   <script>
-    window.onerror = function(errorMsg, url, lineNumber) {
-      if (lineNumber) {
-        alert(errorMsg + '\n\n' + url + '\n\n' + lineNumber);
-      }
-    }
-
-    require.config({
-      baseUrl: "modules",
-      map: {
-        "*": {
-          "text": "libraries/text"
-        }
-      },
-      paths: {
-        "content": "../content",
-        "libraries": "../libraries"
-      },
-    });
-
-    // Wait until the DOM is ready, so various modules can bind events to the page when they initialize.
     $(function() {
-      require(["game/game", "missions/missions", "prostitution/prostitution", "events/events"], function(Game) {
-        Game.load();
-      });
+      e.invokeAll("Ready");
+      Game.load();
     });
   </script>
 </head>
@@ -59,4 +95,411 @@
       <img src="content/miscImages/loader.gif" style="display: block; margin: 10em auto 0px;">
     </div>
   </div>
+  <script id="messages_list_template" type="text/ejs-template">
+    <% function renderDelta(delta) { %>
+      <div class="message-delta">
+        <% $.each(delta, function(stat, value) {
+          var text;
+          if (stat == 'money') {
+            text = value < 0 ? '-$' + (-value) : '+$' + value;
+          } else {
+            text = value < 0 ? value : '+' + value;
+          } %>
+          <span class="delta <%= stat %>"><%= text %></span>
+        <% }) %>
+      </div>
+    <%} %>
+
+    <div class="vertical-tabs navigable">
+      <ul>
+        <% var i = 0 %>
+        <% for (var subject in messages) { %>
+          <% i++ %>
+          <li>
+            <a href="#message-tab-<%= i %>"><%= subject %></a>
+          </li>
+        <% } %>
+      </ul>
+      <% i = 0 %>
+      <% $.each(messages, function(subject, sub_messages) { %>
+        <% i++ %>
+        <% var time = '' %>
+        <div id="message-tab-<%= i %>" class="accordion"><% sub_messages.forEach(function(message) { %>
+          <% var text = message.type %>
+          <% if (message.time && message.time != time) {
+              time = message.time;
+              text += ' - ' + time;
+          } %>
+          <h3><%= text %></h3>
+          <div class="message ui-helper-clearfix <%= message.text.length > 300 ? 'long' : '' %>">
+            <img src="<%= message.image %>">
+            <% if (message.delta && !$.isEmptyObject(message.delta)) { renderDelta(message.delta); } %>
+            <div class="message-content">
+              <%- message.text %>
+            </div>
+          </div>
+        <% }) %></div>
+      <% }) %>
+    </div>
+  </script>
+  <script id="girls_hire_template" type="text/ejs-template">
+    <div id="hire-girls">
+      <% girls.forEach(function(girl) { %>
+        <div class="ui-helper-clearfix no-cursor girl" name="<%= girl.name %>">
+          <div class="column pct-20">
+            <img src="<%= girl.image("base") %>" title="<%= girl._.description %>">
+          </div>
+          <div class="column pct-40 center">
+            <h6><%= girl.name %></h6>
+            <div><%- girl.S("obedience") %> | <%- girl.S("charisma") %> | <%- girl.S("intelligence") %> | <%- girl.S("constitution") %></div>
+            <div><%- girl.S("soft libido") %> | <%- girl.S("hard libido") %> | <%- girl.S("anal libido") %> | <%- girl.S("fetish libido") %></div>
+            <div><%- girl.S("soft experience") %> | <%- girl.S("hard experience") %> | <%- girl.S("anal experience") %> | <%- girl.S("fetish experience") %></div>
+          </div>
+          <div class="column pct-40">
+            <div><label>Up Front:</label><strong class="money">$<%= girl.hirePrice() %></strong></div>
+            <div><label>Daily:</label><strong class="money">$<%= girl.desiredPay() %></strong></div>
+            <button class="hire" name="<%= girl.name %>">Hire</button>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </script>
+  <script id="girls_list_template" type="text/ejs-template">
+    <div class="column pct-50" id="girls">
+      <% if (girls.length < g.maxGirls) { %>
+        <h3 class="center">
+          <a id="hire-girl">Hire Girl</a>
+        </h3>
+      <% } %>
+      <% girls.forEach(function(girl) { %>
+        <div class="ui-helper-clearfix no-cursor girl" name="<%= girl.name %>">
+          <div class="column pct-20">
+            <img src="<%= girl.image('base') %>">
+          </div>
+          <div class="column pct-40 center">
+            <h6><%= girl.name %></h6>
+            <div><%- girl.S("endurance") %> | <%- girl.S("happiness") %></div>
+            <div>
+              <%- girl.S("obedience") %> | <%- girl.S("charisma") %> |
+              <%- girl.S("intelligence") %> | <%- girl.S("constitution") %>
+            </div>
+          </div>
+          <div class="column pct-40">
+            <div>Morning: <strong><%= girl.actions.morningLabel %></strong></div>
+            <div>Evening: <strong><%= girl.actions.eveningLabel %></strong></div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </script>
+  <script id="girls_view_template" type="text/ejs-template">
+    <div id="girl-view" name="<%= girl.name %>" class="ui-helper-clearfix">
+      <div class="column pct-30 left">
+        <img src="<%= girl.image("base") %>" title="<%= girl._.description %>">
+      </div>
+      <div class="column pct-70">
+        <div class="column pct-50 middle">
+          <div><label>Endurance</label><%- girl.S("endurance") %></div>
+          <div><label>Happiness</label><%- girl.S("happiness") %></div>
+          <div><label>Obedience</label><%- girl.S("obedience") %></div>
+          <div><label>Charisma</label><%- girl.S("charisma") %></div>
+          <div><label>Intelligence</label><%- girl.S("intelligence") %></div>
+          <div><label>Constitution</label><%- girl.S("constitution") %></div>
+          <div id="pay">
+            <label>Pay</label>
+            <input value="$<%= girl.actions.pay %>">
+            <span class="delta happiness"></span>
+          </div>
+        </div>
+        <div class="column pct-50 right">
+          <div class="checkbox">
+            <label for="soft" class="<%- girl.actions.soft ? 'checked' : '' %>">Softcore</label>
+            <input id="soft" type="checkbox" <%- girl.actions.soft ? 'checked="checked"' : '' %>>
+          </div>
+          <div><label>Libido:</label><span class="soft libido"><%- girl.S("soft libido") %></span></div>
+          <div><label>Experience:</label><span class="soft experience"><%- girl.S("soft experience") %></span></div>
+          <div class="checkbox">
+            <label for="hard" class="<%- girl.actions.hard ? 'checked' : '' %>">Hardcore</label>
+            <input id="hard" type="checkbox" <%- girl.actions.hard ? 'checked="checked"' : '' %>>
+          </div>
+          <div><label>Libido:</label><span class="hard libido"><%- girl.S("hard libido") %></span></div>
+          <div><label>Experience:</label><span class="hard experience"><%- girl.S("hard experience") %></span></div>
+          <div class="checkbox">
+            <label for="anal" class="<%- girl.actions.anal ? 'checked' : '' %>">Anal</label>
+            <input id="anal" type="checkbox" <%- girl.actions.anal ? 'checked="checked"' : '' %>>
+          </div>
+          <div><label>Libido:</label><span class="anal libido"><%- girl.S("anal libido") %></span></div>
+          <div><label>Experience:</label><span class="anal experience"><%- girl.S("anal experience") %></span></div>
+          <div class="checkbox">
+            <label for="fetish" class="<%- girl.actions.fetish ? 'checked' : '' %>">Fetish</label>
+            <input id="fetish" type="checkbox" <%- girl.actions.fetish ? 'checked="checked"' : '' %>>
+          </div>
+          <div><label>Libido:</label><span class="fetish libido"><%- girl.S("fetish libido") %></span></div>
+          <div><label>Experience:</label><span class="fetish experience"><%- girl.S("fetish experience") %></span></div>
+        </div>
+      </div>
+      <hr class="clear">
+      <div class="column pct-50">
+        <h6 class="center">Morning</h6>
+        <div class="horizontal-tabs" id="morning">
+          <ul>
+            <% var i = 0; %>
+            <% for (var key in morningActions.CsortToObject('group')) { %>
+              <li><a href="#action-tab-<%= i %>"><%= key %></a></li>
+              <% i++ %>
+            <% } %>
+          </ul>
+          <% i = 0; %>
+          <% $.each(morningActions.CsortToObject('group'), function(key, actions) { %>
+            <div id="action-tab-<%= i %>">
+              <% actions.forEach(function(action) { %>
+                <button class="action <%= girl.actions.morning == action._id ? 'selected' : '' %> <%= action.disabled ? 'disabled' : '' %>" title="<%= action.description %>" value="<%= action._id %>">
+                  <%= action.label %>
+                </button>
+              <% }) %>
+            </div>
+            <% i++ %>
+          <% }) %>
+        </div>
+      </div>
+      <div class="column pct-50">
+        <h6 class="center">Evening</h6>
+        <div class="horizontal-tabs" id="evening">
+          <ul>
+            <% var i = 100; %>
+            <% for (var key in eveningActions.CsortToObject('group')) { %>
+              <li><a href="#action-tab-<%= i %>"><%= key %></a></li>
+              <% i++ %>
+            <% } %>
+          </ul>
+          <% i = 100; %>
+          <% $.each(eveningActions.CsortToObject('group'), function(key, actions) { %>
+            <div id="action-tab-<%= i %>">
+              <% actions.forEach(function(action) { %>
+                <button class="action <%= girl.actions.evening == action._id ? 'selected' : '' %> <%= action.disabled ? 'disabled' : '' %>" title="<%= action.description %>" value="<%= action._id %>">
+                  <%= action.label %>
+                </button>
+              <% }) %>
+            </div>
+            <% i++ %>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </script>
+  <script id="game_view_template" type="text/ejs-template">
+    <div class="ui-helper-clearfix first">
+      <div id="top-left" class="column pct-50 center">
+        <h2>Day <%= g.day %></h2>
+        <div>
+          Cash on hand:
+          <strong class="money"><%= g.money < 0 ? "-$" + (-g.money) : "$" + g.money %></strong>
+        </div>
+        <div>
+          Payment of
+          <strong class="money">$<%= g.nextPayment().amount %></strong>
+          due on day
+          <span class="days"><%= g.nextPayment().day %></span>
+        </div>
+        <div>
+          <span class="days"><%= gameLength - g.day %> days</span>
+          to end of debt
+        </div>
+      </div>
+      <div id="top-right" class="column pct-50 center">
+        <button id="next" class="big">Next Turn</button>
+      </div>
+    </div>
+    <hr>
+    <div class="ui-helper-clearfix second"></div>
+  </script>
+  <script id="game_load_template" type="text/ejs-template">
+    <form id="load-game" class="center">
+      <div>
+        <select required="required" id="game-name">
+          <% games.forEach(function(name) { %>
+            <option value="<%= name %>"><%= name %></option>
+          <% }) %>
+        </select>
+      </div>
+      <button id="load">Load Game</button>
+      <button id="delete">Delete Game</button>
+      <textarea></textarea>
+      <button id="import">Import Game</button>
+    </form>
+  </script>
+  <script id="game_new_template" type="text/ejs-template">
+    <form id="new-game">
+      <div>
+        <input id="game-tentacles" type="checkbox" checked="checked">
+        <label for="game-tentacles" title="Should tentacled monsters roam the land, lusting after human women?<br><br>Note that no events actually use this toggle yet. :(">Tentacles</label>
+      </div>
+      <button>Start Game</button>
+    </form>
+  </script>
+  <script id="game_save_template" type="text/ejs-template">
+    <form id="save-game">
+      <div>
+        <label title="If you use the same name as another saved game, the other save will be overwritten." for="game-name">Title</label>
+        <input required="required" id="game-name">
+      </div>
+      <button id="save-game">Save Game</button><button id="export-game">Export Game</button
+    </form>
+  </script>
+  <script id="game_intro_template" type="text/ejs-template">
+    <div class="column pct-30">
+      <img width="100%" src="content/girls/Kirino/images/Base.png">
+    </div>
+    <div class="column pct-70">
+      <p>You wake up somewhat disoriented, to the gentle sound of surf and a cawing gull. It's hard to see too much more, with the bright sunlight and a buxom young chest covering most of your view. Not an unpleasant way to wake...</p>
+      <blockquote>
+        <p>Welcome to Valaia! Since it doesn't look like you came here intentionally, let me explain a bit about out fine country. This is an island nation, but isolated - oh not at all. We're rather central, in fact, easily accessible by sea from almost anywhere in the world. And visit us they do - diplomats, kings, nobles and peasants alike know our name. Why, you ask? Because we provide the <b>finest whores in the world!</b></p>
+        <p>But anyway, given that it looks like you washed ashore with nothing but the clothes on your back, I'm going to guess that you're not here to visit our world-famous whores.</p>
+        <p>What's that? You were tossed overboard because of a <b>massive debt</b>? Only <b>two years</b> to do it, or they'll come back and gut you like a fish? Well, this is a pretty good place for that too. Plenty of pretty girls just itching for employment, plenty of rich visitors itching in a slightly different fashion...</p>
+        <p>You're going to <b>start a brothel</b>? My last venture went under, and, to be honest, I'm in pretty dire need of work myself. Since you're new around here, <b>I'll be your first girl</b> and your guide.</p>
+        <p><b>Excellent!</b> Let's get started right away.</p>
+      </blockquote>
+    </div>
+  </script>
+  <script id="buildings_view_template" type="text/ejs-template">
+    <div id="building-view" name="<%= building.name %>" class="ui-helper-clearfix">
+      <div class="column pct-30 left">
+        <img src="<%= building._.image %>" title="<%= building._.description %>">
+      </div>
+      <div class="column pct-70">
+        <div class="column pct-50 middle">
+          <div><label>Clean:</label><%- building.S("clean") %></div>
+          <div><label>Rooms:</label><%- building.S("rooms") %></div>
+          <div>
+            <label>Daily:</label>
+            <div class="daily-delta"><% $.each(building.dailyDelta(), function(stat, value) {
+              var text;
+              if (stat == 'money') {
+                text = value < 0 ? '-$' + (-value) : '+$' + value;
+              } else {
+                text = value < 0 ? '' + value : '+' + value;
+              } %>
+              <span class="delta <%= stat %>"><%= text.substr(0, 5) %></span>
+            <% }) %></div>
+          </div>
+        </div>
+        <div class="column pct-50 right center">
+          <% if (building.rooms.length < building._.maxRooms && !$.isEmptyObject(availableRooms)) { %>
+            <select id='new-room'>
+              <% $.each(availableRooms, function(name, room) { %>
+                <option value="<%= name %>" title="<%= room.description %>">$<%= room.price %> - <%= name.capitalize() %></option>
+              <% }) %>
+            </select>
+            <button id="buy-room">Add Room</button>
+          <% } %>
+        </div>
+        <div id="rooms" class="ui-helper-clearfix">
+        </div>
+      </div>
+    </div>
+  </script>
+  <script id="buildings_list_template" type="text/ejs-template">
+    <div class="column pct-50" id="buildings">
+      <% if (buildings.length < g.maxBuildings) { %>
+        <h3 class="center">
+          <a id="buy-building">Buy Building</a>
+        </h3>
+      <% } %>
+      <% buildings.forEach(function(building) { %>
+        <div class="ui-helper-clearfix no-cursor building" name="<%= building.name %>">
+          <div class="column pct-20">
+            <img src="<%= building._.image %>">
+          </div>
+          <div class="column pct-40 middle">
+            <h6 class="center"><%= building.name %></h6>
+            <div><label>Clean:</label><%- building.S("clean") %></div>
+            <div><label>Rooms:</label><%- building.S("rooms") %></div>
+            <% building.rooms.forEach(function (room) { %>
+              <div class="room"><%= room.type.capitalize() %></div>
+            <% }) %>
+          </div>
+          <div class="column pct-40 right center">
+            <div><strong>Residents</strong></div>
+            <% building.rooms.Caccumulate('girl').forEach(function(name) { %>
+              <div><%= name %></div>
+            <% }) %>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </script>
+  <script id="buildings_buy_template" type="text/ejs-template">
+    <div id="buy-buildings">
+      <% buildings.forEach(function(building) { %>
+        <div class="ui-helper-clearfix no-cursor building" name="<%= building.name %>">
+          <div class="column pct-30">
+            <img src="<%= building._.image %>" title="<%= building._.description %>">
+          </div>
+          <div class="column pct-40 middle">
+            <h6 class="center"><%= building.name %></h6>
+            <div><label>Clean:</label><%- building.S("clean") %></div>
+            <div><label>Rooms:</label><%- building.S("rooms") %></div>
+            <% building.rooms.forEach(function (room) { %>
+              <div class="room <%= room.type %>"><%= room.type.capitalize() %></div>
+            <% }) %>
+          </div>
+          <div class="column pct-30 right">
+            <div><label>Price:</label><strong class="money">$<%= building.price() %></strong></div>
+            <div>
+              <label>Daily:</label>
+              <div class="daily-delta"><% $.each(building.dailyDelta(), function(stat, value) {
+                var text;
+                if (stat == 'money') {
+                  text = value < 0 ? '-$' + (-value) : '+$' + value;
+                } else {
+                  text = value < 0 ? '' + value : '+' + value;
+                } %>
+                <span class="delta <%= stat %>"><%= text.substr(0, 5) %></span>
+              <% }) %></div>
+            </div>
+            <button class="buy" name="<%= building.name %>">Buy</button>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </script>
+  <script id="buildings_bedroom_template" type="text/ejs-template">
+    <div>
+      <h6>Bedroom</h6>
+      <select name="girl" title="Select the girl living in this room. When a girl has a place to live, she demands a significantly lower wage.">
+        <option value="" <%= (room.girl) ? '' : 'selected' %>> - Empty - </option>
+        <% girls.forEach(function(girl) { %>
+          <option value="<%= girl.name %>" <%= (room.girl == girl.name) ? 'selected' : '' %>>
+            <%= girl.name %>
+          </option>
+        <% }) %>
+      </select>
+    </div>
+  </script>
+  <script id="missions_list_template" type="text/ejs-template">
+    <div class="vertical-tabs navigable" id="mission-list">
+      <ul>
+        <% var i = 0 %>
+        <% for (var _id in missions) { %>
+          <% i++ %>
+          <li>
+            <a href="#mission-tab-<%= i %>"><%= missions[_id].name %></a>
+          </li>
+        <% } %>
+      </ul>
+      <% i = 0 %>
+      <% $.each(missions, function(_id, mission) { %>
+        <% i++ %>
+        <div id="mission-tab-<%= i %>" class="mission ui-helper-clearfix">
+          <% if (mission.end.day) { %>
+            <div class="top">Time Remaining: <strong><%= mission.end.day - g.day %> days</strong></div>
+          <% } %>
+          <img src="<%= mission.image %>">
+          <div>
+            <%- mission.description %>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </script>
 </body></html>

@@ -13,7 +13,7 @@ body {
 }
 
 #header-wrapper {
-  background: url("header_sky.jpg") repeat scroll 50% 0 transparent;
+  background: url("../content/miscImages/header_sky.jpg") repeat scroll 50% 0 transparent;
   height: 100px;
   margin: 0;
   position: relative;
