@@ -8,7 +8,7 @@ define(['messages/messages'], function(Message) {
       if (time != 'evening') { return true; }
       var m = g.missions.specialParty;
       if (!m || g.day != m.end.day) { return true; }
-      var attending = g.girls.flt('actions', 'evening', 'attendParty')[0];
+      var attending = g.girls.Cfilter('actions', 'evening', 'attendParty')[0];
       if (attending && attending !== this) {
         return 'Only one girl can attend.';
       }

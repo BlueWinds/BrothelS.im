@@ -3,7 +3,7 @@ define([
   'Sakuya',
   'Sophitia',
   'Dark Magician Girl'
-].prefix('./').combineWith('/base'), function() {
+].Cprefix('./').Cadd('/base'), function() {
   var args = Array.prototype.slice.call(arguments, 0);
-  return args.toObject('name');
+  return args.CtoObject('name');
 });

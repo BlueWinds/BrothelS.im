@@ -51,7 +51,7 @@ define(['girls/schema', 'content/events/eventList.js', 'messages/messages'], fun
       action: action
     };
     function doMessage(image, text, delta) {
-      var image = ejs.render(image, context);
+      image = ejs.render(image, context);
       var message = new Message({
         type: ejs.render(event.label, context),
         text: ejs.render(text, context),

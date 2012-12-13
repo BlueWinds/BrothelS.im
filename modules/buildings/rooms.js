@@ -3,7 +3,7 @@ define(['./schema', 'text!./bedroom.html', 'content/buildings'], function(Buildi
     bedroom: {
       render: function(room, rerender) {
         var girls = [];
-        g.girls.flt('status', 'Hired').forEach(function(girl) {
+        g.girls.Cfilter('status', 'Hired').forEach(function(girl) {
           if (!girl.bedroom() || girl.bedroom() === room) {
             girls.push(girl);
           }

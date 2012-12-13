@@ -99,7 +99,6 @@ define(['text!./intro.html', './schema', 'text!./new-form.html', 'text!./save-fo
     }
     var form = $(new_template);
     $('button', form).click(function(event) {
-      console.log(event);
       event.preventDefault();
       module.start({
         tentacles: Boolean($('#game-tentacles', form).val())

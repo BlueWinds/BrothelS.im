@@ -47,12 +47,12 @@ define(['messages/messages', 'content/missions/missionList', 'randomPerson/rando
     if (!cond || $.isEmptyObject(cond)) { return true; }
     if (cond.day && g.day != cond.day) { return false; }
     if (cond.money && g.money < cond.money) { return false; }
-    if (cond.girls && g.girls.flt('status', 'Hired').length < cond.girls) { return false; }
-    if (cond.buildings && g.buildings.flt('status', 'Owned').length < cond.buildings) { return false; }
+    if (cond.girls && g.girls.Cfilter('status', 'Hired').length < cond.girls) { return false; }
+    if (cond.buildings && g.buildings.Cfilter('status', 'Owned').length < cond.buildings) { return false; }
 
     if (cond.action) {
-      var girls = g.girls.flt('status', 'Hired');
-      if (!girls.flt('actions', 'morning', cond.action).length && !girls.flt('actions', 'evening', cond.action).length) { return false; }
+      var girls = g.girls.Cfilter('status', 'Hired');
+      if (!girls.Cfilter('actions', 'morning', cond.action).length && !girls.Cfilter('actions', 'evening', cond.action).length) { return false; }
     }
 
     return true;

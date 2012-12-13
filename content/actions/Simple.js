@@ -50,10 +50,10 @@ define([], [
     },
     description: 'She will be bound and gagged in the dungeon for most of the day to increase her obedience. This action takes all day.',
     disabled: function(time) {
-      var rooms = g.buildings.flt('status', 'Owned').accumulate('rooms');
-      var count = rooms.flatten().flt('type', 'dungeon').sum('size');
+      var rooms = g.buildings.Cfilter('status', 'Owned').Caccumulate('rooms');
+      var count = rooms.Cflatten().Cfilter('type', 'dungeon').Csum('size');
       if (!count) { return true; }
-      var bound = g.girls.flt('action', time, 'Lockdown').length;
+      var bound = g.girls.Cfilter('action', time, 'Lockdown').length;
       if (bound < count || bount == count && this.actions.morning == 'Lockdown') {
         return false;
       }

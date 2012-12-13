@@ -23,12 +23,12 @@ define(['girls/schema', 'content/buildings/buildingList', 'content/buildings', '
   Building.roomsByType = function(type, status) {
     status = status || 'Owned';
     if (!g.buildings) { return []; }
-    var rooms = g.buildings.flt('status', status).accumulate('rooms');
-    return rooms.flatten().flt('type', type);
+    var rooms = g.buildings.Cfilter('status', status).Caccumulate('rooms');
+    return rooms.Cflatten().Cfilter('type', type);
   };
 
   Building.prototype.girls = function() {
-    return this.rooms.accumulate('girl');
+    return this.rooms.Caccumulate('girl');
   };
 
   var oldGirlApply = Girl.prototype.apply;
@@ -60,15 +60,18 @@ define(['girls/schema', 'content/buildings/buildingList', 'content/buildings', '
   };
 
   Building.prototype.startDelta = function(trackGirl) {
-    var girl = this.girls().first();
+    var girl = this.girls().Cfirst();
     var girlDelta;
     if (girl && trackGirl) {
-      girlDelta = oldGirlDelta.call(girl);
+      girlDelta = oldGirlDelta.call(g.girls[girl]);
     }
     var endDelta = oldGirlDelta.call(this, stats);
     return function() {
       var end = endDelta();
-      if (girlDelta) { $.extend(end, girlDelta()); }
+      if (girlDelta) {
+        end.Cadd(girlDelta());
+        end.money /= 2;
+      }
       return end;
     };
   };
@@ -80,26 +83,25 @@ define(['girls/schema', 'content/buildings/buildingList', 'content/buildings', '
       if (stat == 'money') {
         g.money += delta;
         return;
+      } else if (stats.indexOf(stat) != -1) {
+        this[stat] += delta;
+        this[stat] = Math.floor(Math.max(0, Math.min(100, this[stat])));
+      } else {
+        this.girls().forEach(function(name) {
+          g.girls[name].apply(stat, delta);
+        });
       }
-      this[stat] += delta;
-      this[stat] = Math.floor(Math.max(0, Math.min(100, this[stat])));
-      return;
+    } else {
+      var building = this;
+      $.each(stat, function(key, value) {
+        building.apply(key, value);
+      });
     }
-    var building = this;
-    $.each(stat, function(key, value) {
-      if (stats.indexOf(key) == -1 && key != 'money') { return; }
-      building.apply(key, value);
-      delete stat[key];
-    });
-    if (stat == 'money') { return; }
-    this.girls().forEach(function(name) {
-      g.girls[name].apply(stat, delta);
-    });
   };
 
   Building.prototype.price = function() {
     var cost = this._.baseCost;
-    this.rooms.accumulate('type').forEach(function(type) {
+    this.rooms.Caccumulate('type').forEach(function(type) {
       cost += config.rooms[type].price;
     });
     return cost;
@@ -142,8 +144,8 @@ define(['girls/schema', 'content/buildings/buildingList', 'content/buildings', '
   Building.prototype.dailyDelta = function() {
     var breakpoint = this.clean - this._.cleanEffect.breakpoint;
     var delta = $.extend({}, breakpoint >= 0 ? this._.cleanEffect.above : this._.cleanEffect.below);
-    delta.multiply(Math.abs(breakpoint));
-    delta.combineWith(this._.daily);
+    delta.Cmultiply(Math.abs(breakpoint));
+    delta.Cadd(this._.daily);
     return delta;
   };
 
@@ -165,8 +167,8 @@ define(['girls/schema', 'content/buildings/buildingList', 'content/buildings', '
   Girl.prototype.building = function() {
     var name = this.name;
     var final_building;
-    g.buildings.flt('status', 'Owned').forEach(function(building) {
-      building.rooms.flt('type', 'bedroom').forEach(function(room) {
+    g.buildings.Cfilter('status', 'Owned').forEach(function(building) {
+      building.rooms.Cfilter('type', 'bedroom').forEach(function(room) {
         if (room.girl == name) { final_building = building; }
       });
     });
@@ -174,7 +176,7 @@ define(['girls/schema', 'content/buildings/buildingList', 'content/buildings', '
   };
   Girl.prototype.bedroom = function() {
     var rooms = Building.roomsByType('bedroom', 'Owned');
-    return rooms.flt('girl', this.name)[0];
+    return rooms.Cfilter('girl', this.name)[0];
   };
 
   return Building;

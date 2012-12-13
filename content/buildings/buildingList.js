@@ -1,8 +1,8 @@
 define([
   'Onsen',
   'Theater'
-].prefix('./').combineWith('/base'), function() {
+].Cprefix('./').Cadd('/base'), function() {
   var args = Array.prototype.slice.call(arguments, 0);
-  var buildings = args.toObject('name');
+  var buildings = args.CtoObject('name');
   return buildings;
 });

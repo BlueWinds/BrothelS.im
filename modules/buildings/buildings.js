@@ -34,7 +34,7 @@ define(['girls/schema', './schema', 'content/buildings', 'content/buildings/buil
   e.GameRender.push(function() {
     var div = $(ejs.render(list_template, {
       g: g,
-      buildings: g.buildings.flt('status', 'Owned')
+      buildings: g.buildings.Cfilter('status', 'Owned')
     })).appendTo('#content .second');
     $('.building', div).click(function() {
       var building = g.buildings[$(this).attr('name')];
@@ -46,7 +46,7 @@ define(['girls/schema', './schema', 'content/buildings', 'content/buildings/buil
         };
         $.each(config.rooms, function(name, room) {
           if (room.price > g.money) { return; }
-          if (room.max && room.max <= building.rooms.flt('type', room.type).length) {
+          if (room.max && room.max <= building.rooms.Cfilter('type', room.type).length) {
             return;
           }
           context.availableRooms[name] = room;
@@ -80,7 +80,7 @@ define(['girls/schema', './schema', 'content/buildings', 'content/buildings/buil
     $('#buy-building').click(function() {
       var lst = $(ejs.render(buy_template, {
         g: g,
-        buildings: g.buildings.flt('status', 'For Sale')
+        buildings: g.buildings.Cfilter('status', 'For Sale')
       }));
       $('button.buy', lst).each(function() {
         var building = g.buildings[$(this).attr('name')];

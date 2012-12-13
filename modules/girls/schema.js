@@ -167,10 +167,15 @@ define(['content/girls/girlList', 'content/girls', 'messages/messages', 'content
         }).save(context.girl.name);
       };
       var results = action.results[i];
-      this.apply(results.delta || {});
+      if (typeof(results.delta) == 'function') {
+        var delta = results.delta.call(this, time);
+        this.apply(delta);
+      } else {
+        this.apply(results.delta || {});
+      }
       if (typeof(results.message) == 'object') {
         for (var j in results.message) {
-          var d = results.message.length == j + 1 ? endDelta() : {};
+          var d = results.message.length - 1 == j ? endDelta() : {};
           doMessage(results.image[j], results.message[j], d);
         }
       } else {

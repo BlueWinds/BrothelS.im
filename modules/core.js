@@ -13,7 +13,7 @@ Storage.prototype.setObject = function(key, value) {
   this.setItem(key, JSON.stringify(value));
 };
 
-Object.defineProperty(Object.prototype, "first", {
+Object.defineProperty(Object.prototype, "Cfirst", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -22,7 +22,7 @@ Object.defineProperty(Object.prototype, "first", {
   }
 });
 
-Object.defineProperty(Object.prototype, "multiply", {
+Object.defineProperty(Object.prototype, "Cmultiply", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -34,7 +34,7 @@ Object.defineProperty(Object.prototype, "multiply", {
   }
 });
 
-Object.defineProperty(Object.prototype, "combineWith", {
+Object.defineProperty(Object.prototype, "Cadd", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -53,7 +53,7 @@ Object.defineProperty(Object.prototype, "combineWith", {
   }
 });
 
-Object.defineProperty(Object.prototype, "prefix", {
+Object.defineProperty(Object.prototype, "Cprefix", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -65,7 +65,7 @@ Object.defineProperty(Object.prototype, "prefix", {
   }
 });
 
-Object.defineProperty(Object.prototype, "flt", {
+Object.defineProperty(Object.prototype, "Cfilter", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -84,11 +84,11 @@ Object.defineProperty(Object.prototype, "flt", {
   }
 });
 
-Object.defineProperty(Object.prototype, "flatten", {
+Object.defineProperty(Object.prototype, "Cflatten", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: flatten = function() {
+  value: function() {
     var flat = [];
     for (var key in this) {
       if (this[key][0]) {
@@ -101,21 +101,7 @@ Object.defineProperty(Object.prototype, "flatten", {
   }
 });
 
-Object.defineProperty(Object.prototype, "sum", {
-  enumerable: false,
-  writable: false,
-  configurable: true,
-  value: function(key) {
-    if (key) {
-      return this.accumulate(key).sum();
-    }
-    var sum = 0;
-    for (var i in this) { sum += this[i]; }
-    return sum;
-  }
-});
-
-Object.defineProperty(Object.prototype, "accumulate", {
+Object.defineProperty(Object.prototype, "Caccumulate", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -130,7 +116,21 @@ Object.defineProperty(Object.prototype, "accumulate", {
   }
 });
 
-Object.defineProperty(Object.prototype, "toObject", {
+Object.defineProperty(Object.prototype, "Csum", {
+  enumerable: false,
+  writable: false,
+  configurable: true,
+  value: function(key) {
+    if (key) {
+      return this.Caccumulate(key).Csum();
+    }
+    var sum = 0;
+    for (var i in this) { sum += this[i]; }
+    return sum;
+  }
+});
+
+Object.defineProperty(Object.prototype, "CtoObject", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -143,7 +143,7 @@ Object.defineProperty(Object.prototype, "toObject", {
   }
 });
 
-Object.defineProperty(Object.prototype, "sortToObject", {
+Object.defineProperty(Object.prototype, "CsortToObject", {
   enumerable: false,
   writable: false,
   configurable: true,

@@ -45,7 +45,7 @@ define(['content/girls', 'content/girls/girlList', './schema', 'text!./list.html
   e.GameRender.push(function() {
     var div = $(ejs.render(list_template, {
       g: g,
-      girls: g.girls.flt('status', 'Hired')
+      girls: g.girls.Cfilter('status', 'Hired')
     })).prependTo('#content .second');
     $('.girl', div).click(function() {
       var girl = g.girls[$(this).attr('name')];
@@ -151,7 +151,7 @@ define(['content/girls', 'content/girls/girlList', './schema', 'text!./list.html
 
     $('#hire-girl').click(function() {
       var lst = $(ejs.render(hire_template, {
-        girls: g.girls.flt('status', 'For Hire'),
+        girls: g.girls.Cfilter('status', 'For Hire'),
         hireHappiness: config.startHappiness
       }));
       $('button.hire', lst).each(function() {

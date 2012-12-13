@@ -49,13 +49,13 @@
     <div class="horizontal-tabs" id="morning">
       <ul>
         <% var i = 0; %>
-        <% for (var key in morningActions.sortToObject('group')) { %>
+        <% for (var key in morningActions.CsortToObject('group')) { %>
           <li><a href="#action-tab-<%= i %>"><%= key %></a></li>
           <% i++ %>
         <% } %>
       </ul>
       <% i = 0; %>
-      <% $.each(morningActions.sortToObject('group'), function(key, actions) { %>
+      <% $.each(morningActions.CsortToObject('group'), function(key, actions) { %>
         <div id="action-tab-<%= i %>">
           <% actions.forEach(function(action) { %>
             <button class="action <%= girl.actions.morning == action._id ? 'selected' : '' %> <%= action.disabled ? 'disabled' : '' %>" title="<%= action.description %>" value="<%= action._id %>">
@@ -72,16 +72,16 @@
     <div class="horizontal-tabs" id="evening">
       <ul>
         <% var i = 100; %>
-        <% for (var key in eveningActions.sortToObject('group')) { %>
+        <% for (var key in eveningActions.CsortToObject('group')) { %>
           <li><a href="#action-tab-<%= i %>"><%= key %></a></li>
           <% i++ %>
         <% } %>
       </ul>
       <% i = 100; %>
-      <% $.each(eveningActions.sortToObject('group'), function(key, actions) { %>
+      <% $.each(eveningActions.CsortToObject('group'), function(key, actions) { %>
         <div id="action-tab-<%= i %>">
           <% actions.forEach(function(action) { %>
-            <button class="action <%= girl.actions.evening == action._id ? 'selected' : '' %>" title="<%= action.description %>" value="<%= action._id %>" <%= action.disabled ? 'disabled' : '' %>>
+            <button class="action <%= girl.actions.evening == action._id ? 'selected' : '' %> <%= action.disabled ? 'disabled' : '' %>" title="<%= action.description %>" value="<%= action._id %>">
               <%= action.label %>
             </button>
           <% }) %>
