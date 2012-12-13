@@ -86,7 +86,7 @@ Building.prototype.girls = function() {
   Girl.prototype.potentialActions = function(time) {
     var actions = oldGirlActions.call(this, time);
     var girl = this;
-    actions.forEach(function(action) {
+    $.each(actions, function(_id, action) {
       if (!action.requiresRoom) {
         return;
       }
@@ -95,14 +95,15 @@ Building.prototype.girls = function() {
         action.disabled = true;
         return;
       }
-      var already = g.girls.Cfilter('action', time, action._id).length;
-      if (already > bound) {
+      var already = g.girls.Cfilter('actions', time, _id).length;
+      if (already < max) {
         return;
       }
-      if (already == count && girl.actions[time] == action._id) {
+      if (already == max && girl.actions[time] == _id) {
         return;
       }
-      action.disabled = 'You only have enough ' + action.requiresRoom.type + ' to ' + action.label + ' ' + count + ' girls at a time.';
+      action.disabled = 'You only have enough ' + action.requiresRoom.type + ' to ' + action.label + ' ' + max + ' girls at a time.';
+      action.description = action.disabled;
     });
     return actions;
   };
