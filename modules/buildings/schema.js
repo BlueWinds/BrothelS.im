@@ -92,7 +92,7 @@ Building.prototype.girls = function() {
       }
       var max = Building.roomKeySum(action.requiresRoom.type, action.requiresRoom.key);
       if (!max) {
-        action.disabled = true;
+        delete actions[_id];
         return;
       }
       var already = g.girls.Cfilter('actions', time, _id).length;
