@@ -55,7 +55,7 @@ Missions.specialParty = {
   // The function here describes the fact that the specialParty ends on either day 15, 45, 75, 105, etc.
   end: function() {
     if (g.day == 10) {
-      return { minDay: 15 };
+      return { minDay: 15, maxDay: 15 };
     }
     return { minDay: g.day + 30, maxDay: g.day + 30 };
   },
