@@ -10,8 +10,11 @@ e.GameNew.push(function() {
   g.missions = g.missions || {};
   g.day = -1;
   $.each(Missions, function(_id, mission) {
-    if (mission.start && Mission.prototype.checkConditions.call(mission, mission.start)) {
-      Mission.start(mission);
+    if (mission.start) {
+      var result = Mission.prototype.checkConditions.call(mission, mission.start);
+      if (result) {
+        Mission.start(mission, result);
+      }
     }
   });
   g.day = 0;
@@ -21,27 +24,31 @@ e.GameInit.push(function() {
   $.each(g.missions, function(_id, mission) {
     g.missions[_id] = new Mission(mission);
   });
+  g.missionsDone = g.missionsDone || {};
 });
 
 e.GameNextDay.push(function() {
   $.each(g.missions, function(_id, mission) {
     mission.checkDay();
     // Send a reminder message the day before a mission ends
-    if (mission.end.day == g.day + 1) {
+    if (mission.end.maxDay == g.day + 1) {
       new Message({
-        type: 'Last Day - ' + mission.name,
+        type: 'Last Day - ' + mission.label,
         text: mission.description,
         image: mission.image
-      }).save('Missions');
+      }).save(mission.group);
     }
   });
   for (var _id in Missions) {
-    if (g.missions[_id]) {
+    if (g.missions[_id] || g.missionsDone[_id]) {
       continue;
     }
     var mission = Missions[_id];
-    if (mission.start && Mission.prototype.checkConditions.call(mission, mission.start)) {
-      Mission.start(mission);
+    if (mission.start) {
+      var result = Mission.prototype.checkConditions.call(mission, mission.start);
+      if (result) {
+        Mission.start(mission, result);
+      }
     }
   }
 });

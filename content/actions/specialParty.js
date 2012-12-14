@@ -5,7 +5,7 @@ Actions.attendParty = {
   disabled: function(time) {
     if (time != 'evening') { return true; }
     var m = g.missions.specialParty;
-    if (!m || g.day != m.end.day) { return true; }
+    if (!m || g.day != m.end.maxDay) { return true; }
     var attending = g.girls.Cfilter('actions', 'evening', 'attendParty')[0];
     if (attending && attending !== this) {
       return 'Only one girl can attend.';

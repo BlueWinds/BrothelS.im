@@ -51,7 +51,7 @@ Girls['Dark Magician Girl'] = {
             var girls = g.girls.Cfilter('status', 'Hired').Csort('endurance');
             action.targetGirl = girls[0] == this ? girls[1] : girls[0];
             action.targetDelta = {
-              endurance: Math.floor(Math.random() * 11) + 10,
+              endurance: Math.floor(Math.random() * 21) + 10,
               happiness: 2
             };
             action.targetGirl.apply(action.targetDelta);

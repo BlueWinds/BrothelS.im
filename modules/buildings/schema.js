@@ -153,12 +153,13 @@ Building.prototype.runDay = function() {
     }
   });
   var text = breakpoint >= 0 ? this._.cleanEffect.clean : this._.cleanEffect.dirty;
-  new Message({
+  var message = new Message({
     type: breakpoint >= 0 ? 'Clean' : 'Dirty',
     image: this._.image,
     text: ejs.render(text, this),
     delta: endDelta()
-  }).save(this.name);
+  });
+  message.save(this.name);
   this.rooms.forEach(function(room) {
     if (Building.rooms[room.type].daily) {
       Building.rooms[room.type].daily.call(building, room);

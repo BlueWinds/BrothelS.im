@@ -95,7 +95,8 @@ Actions.Clean = {
       delta: {
         clean: 10,
         money: -10,
-        endurance: -6
+        endurance: -6,
+        happiness: -3
       }
     }
   ]

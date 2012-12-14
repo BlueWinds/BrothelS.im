@@ -20,6 +20,8 @@
   <script src="modules/game/schema.js"></script>
   <script src="modules/game/game.js"></script>
   <script src="content/game.js"></script>
+  <link href="modules/messages/messages.css" type="text/css" rel="stylesheet">
+  <script src="modules/messages/messages.js"></script>
 
   <!-- Girls !-->
   <link href="modules/girls/style.css" type="text/css" rel="stylesheet">
@@ -42,6 +44,15 @@
   <script src="content/buildings/Onsen/base.js"></script>
   <script src="content/buildings/Theater/base.js"></script>
 
+  <!-- Missions !-->
+  <link href="modules/missions/style.css" type="text/css" rel="stylesheet">
+  <script src="modules/missions/schema.js"></script>
+  <script src="modules/missions/missions.js"></script>
+
+  <script src="content/missions/intro.js"></script>
+  <script src="content/missions/specialParty.js"></script>
+  <script src="content/missions/tentacleAttacks.js"></script>
+
   <!-- Events !-->
   <script src="modules/events/events.js"></script>
 
@@ -53,20 +64,9 @@
   <script src="content/actions/Schools.js"></script>
   <script src="content/actions/Simple.js"></script>
 
-  <!-- Missions !-->
-  <link href="modules/missions/style.css" type="text/css" rel="stylesheet">
-  <script src="modules/missions/schema.js"></script>
-  <script src="modules/missions/missions.js"></script>
-
-  <script src="content/missions/intro.js"></script>
-  <script src="content/missions/specialParty.js"></script>
-
   <!-- Misc modules !-->
   <script src="modules/randomPerson/randomPerson.js"></script>
   <script src="content/randomPerson/randomPerson.js"></script>
-
-  <link href="modules/messages/messages.css" type="text/css" rel="stylesheet">
-  <script src="modules/messages/messages.js"></script>
 
   <script src="modules/prostitution/prostitution.js"></script>
   <script src="content/prostitution.js"></script>
@@ -483,7 +483,7 @@
         <% for (var _id in missions) { %>
           <% i++ %>
           <li>
-            <a href="#mission-tab-<%= i %>"><%= missions[_id].name %></a>
+            <a href="#mission-tab-<%= i %>"><%= missions[_id].label %></a>
           </li>
         <% } %>
       </ul>

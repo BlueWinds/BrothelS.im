@@ -3,7 +3,7 @@ var Mission = function(obj) {
   this._ = Missions[obj._id];
 };
 
-Mission.start = function(base) {
+Mission.start = function(base, girl) {
   if (base.fetishes) {
     for (var fet in base.fetishes) {
       if (base.fetishes[fet] && !g[fet]) {
@@ -11,69 +11,92 @@ Mission.start = function(base) {
       }
     }
   }
-  var obj = {
-    _id: base._id
-  };
+  var mission = $.extend(true, {}, base);
+  if (typeof(girl) == 'object') { mission.girl = girl; }
+
   var context = {
-    mission: obj
+    mission: mission,
+    girl: mission.girl
   };
-  if (base.people) {
-    obj.people = [];
-    base.people.forEach(function(person) {
-      obj.people.push(randomPerson(person));
+  if (mission.people) {
+    $.each(mission.people, function(i, person) {
+      mission.people[i] = randomPerson(person);
     });
   }
 
-  if (typeof(base.end) == 'function') { obj.end = base.end.call(obj); }
-  else { obj.end = base.end; }
-  if (typeof(base.success) == 'function') { obj.success = base.success(); }
-  else { obj.success = base.success; }
-  if (typeof(base.fail) == 'function') { obj.fail = base.fail(); }
-  else { obj.fail = base.fail; }
+  if (typeof(mission.end) == 'function') { mission.end = mission.end.call(mission); }
 
-  obj.name = ejs.render(base.name, context);
-  obj.description = ejs.render(base.description, context);
-  obj.image = ejs.render(base.image, context);
+  mission.label = ejs.render(mission.label, context);
+  mission.description = ejs.render(mission.description, context);
+  mission.image = ejs.render(mission.image, context);
+  if (mission.image[0] == '/' ) {
+    mission.image = mission.image.substr(1);
+  } else if (mission.girl) {
+    mission.image = mission.girl.image(mission.image);
+  }
+  if (mission.group) {
+    mission.group = ejs.render(mission.group, context);
+  } else {
+    mission.group = 'Missions';
+  }
 
-  var mission = new Mission(obj);
+  mission = new Mission(mission);
 
   new Message({
-    type: 'Started - ' + mission.name,
+    type: mission.label,
     text: mission.description,
     image: mission.image
-  }).save('Missions');
-  g.missions[mission._id] = mission;
+  }).save(mission.group);
+
+  if (mission.end) {
+    g.missions[mission._id] = mission;
+  } else {
+    mission.applyResults(mission.success);
+  }
 };
 
-Mission.prototype.checkConditions = function(cond) {
+Mission.prototype.checkConditions = function(cond, girl) {
   if (!cond || $.isEmptyObject(cond)) { return true; }
-  if (cond.day && g.day != cond.day) { return false; }
+  if (cond.minDay && g.day < cond.minDay) { return false; }
+  if (cond.maxDay && g.day > cond.maxDay) { return false; }
   if (cond.money && g.money < cond.money) { return false; }
   if (cond.girls && g.girls.Cfilter('status', 'Hired').length < cond.girls) { return false; }
   if (cond.buildings && g.buildings.Cfilter('status', 'Owned').length < cond.buildings) { return false; }
 
-  if (cond.action) {
-    var girls = g.girls.Cfilter('status', 'Hired');
-    if (!girls.Cfilter('actions', 'morning', cond.action).length && !girls.Cfilter('actions', 'evening', cond.action).length) { return false; }
+  if (cond.girlMin || cond.girlMax) {
+    var match = false;
+    var girls = girl ? [girl] : g.girls.Cfilter('status', 'Hired');
+    girls.forEach(function(girl) {
+      for (var stat in cond.girlMin) {
+        if (girl[stat] < cond.girlMin[stat]) { return; }
+      }
+      for (stat in cond.girlMax) {
+        if (girl[stat] > cond.girlMax[stat]) { return; }
+      }
+      match = girl;
+    });
+    return match;
   }
 
   return true;
 };
 
 Mission.prototype.checkDay = function() {
-  if (this.checkConditions(this.end)) {
+  var result = this.checkConditions(this.end, this.girl);
+  if (result) {
     delete g.missions[this._id];
-    if (this.checkConditions(this.conditions)) {
-      this.applyResults(this.success);
-    } else {
-      this.applyResults(this.fail);
-    }
+    this.applyResults(this.success);
+    g.missionsDone[this._id] = true;
+  } else if (this.end.maxDay <= g.day) {
+    delete g.missions[this._id];
+    this.applyResults(this.fail);
+    g.missionsDone[this._id] = true;
   }
 };
 
-Mission.prototype.applyResults = function(result) {
+Mission.prototype.applyResults = function(result, girl) {
   if (!result) { return; }
-  var delta = {};
+  var delta = girl && girl.startDelta() || {};
   if (result.money) {
     g.money += result.money;
     delta.money = result.money;
@@ -84,23 +107,32 @@ Mission.prototype.applyResults = function(result) {
   if (result.maxBuildings) {
     g.maxBuildings = result.maxBuildings;
   }
-  if (result.description) {
-    var desc = typeof(result.description) == 'object' ? result.description : [result.description];
-    var img = typeof(result.image) == 'object' ? result.image : [result.image];
+  if (girl && result.girl) {
+    girl.apply(result.girl);
+  }
+  if (result.message) {
     var context = {
-      mission: this
+      mission: this,
+      girl: girl
     };
-    console.log(context);
-    for (var i in desc) {
+    var text = typeof(result.message) == 'object' ? result.message : [result.message];
+    var img = typeof(result.image) == 'object' ? result.image : [result.image];
+    for (var i in text) {
+      var img_render = ejs.render(img[i], context);
+      if (img_render[0] == '/' ) {
+        img_render = img_render.substr(1);
+      } else if (girl) {
+        img_render = girl.image(img_render);
+      }
       new Message({
-        type: 'Finished - ' + this.name,
-        text: ejs.render(desc[i], context),
-        image: img[i],
-        delta: i == desc.length - 1 ? delta : {}
-      }).save('Missions');
+        type: this.label,
+        text: ejs.render(text[i], context),
+        image: img_render,
+        delta: i == text.length - 1 ? delta : {}
+      }).save(this.group);
     }
   }
   if (result.mission) {
-    Mission.start(Missions[result.mission]);
+    Mission.start(Missions[result.mission], girl);
   }
 };

@@ -107,9 +107,11 @@ Girl.actionFunctions = {};
     });
     if (this._.actions) {
       $.each(this._.actions, function(_id, action) {
-        var new_action = $.extend(true, {}, action);
+        var new_action;
         if (Actions[_id]) {
-          new_action = $.extend(true, Actions[_id], new_action);
+          new_action = $.extend(true, {}, Actions[_id], action);
+        } else {
+          new_action = $.extend(true, {}, action);
         }
         new_action = checkAction.call(girl, time, new_action);
         if (new_action) {
@@ -138,6 +140,7 @@ Girl.actionFunctions = {};
       for (var stat in action.mins) {
         if (stat == 'money' && g.money < action.mins.money) {
           action.disabled = 'Not enough money';
+          break;
         } else if (this[stat] < action.mins[stat]) {
           action.disabled = 'Not enough ' + stat;
           break;
