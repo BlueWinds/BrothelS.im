@@ -24,6 +24,7 @@ e.GameInit.push(function() {
   $.each(g.girls, function(name, obj) {
     var girl = new Girl(obj);
     g.girls[name] = girl;
+    // This only triggers when loading old save games. Set it to the current day, so that events/missions will all start triggering.
     if (girl.status == 'Hired' && girl.hireDay === undefined) {
       girl.hireDay = g.day;
     }
