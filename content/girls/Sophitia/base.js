@@ -58,5 +58,8 @@ Girls.Sophitia = {
   // actions: {
     // Action1: { ... },
     // Action2: { ... },
+
+    // One nifty feature is that you can override general actions with girl specific versions. All you have to do is use the same _id as the general one - and any missing keys will be filled in from the non girl specific version. See Sakuya for an example of this in action.
+    // Clean: {},
   // }
 };

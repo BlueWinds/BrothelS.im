@@ -62,7 +62,7 @@ Girls['Dark Magician Girl'] = {
           },
           message: 'Dark Magician Girl drew upon her power to revitalize <%= action.targetGirl.name %>, restoring her energy (<span class="endurance delta">+<%= action.targetDelta.endurance %></span>, <span class="happiness delta">+<%= action.targetDelta.happiness %></span>).'
         }
-      ]
-    }
-  }
+      ] // results
+    } //healing
+  } // actions
 };

@@ -32,5 +32,18 @@ Girls.Sakuya = {
     cleaning: ["Cleaning1.jpg", "Cleaning2.jpg"],
     exercise: ["Exercise1.jpg", "Exercise2.jpg", "Exercise3.jpg"],
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg"]
-  }
+  },
+  actions: {
+    Clean: {
+      results: [
+        {
+          message: 'Sakuya spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <%= girl.building().name %>. You can hardly believe how effective it was - one would swear it should take an hour to get the stains out of those sheets, but you turned your back for a moment and they were done, washwater splashed all over the walls.',
+          delta: {
+            endurance: -8,
+            clean: 15
+          } // delta
+        }
+      ] // results
+    } // Clean
+  } // actions
 };

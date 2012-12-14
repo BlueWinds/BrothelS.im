@@ -17,8 +17,7 @@ Girl.prototype.checkInterest = function(type) {
 (function() {
   Girl.actionFunctions.Streetwalk = function(time) {
     var context = {
-      girl: this,
-      Str: Game.strings
+      girl: this
     };
     var endDelta = this.startDelta();
     this.apply(Actions.Streetwalk.config.streetwalkDelta);
@@ -52,8 +51,7 @@ Girl.prototype.checkInterest = function(type) {
     var customer = randomPerson('Very Low Class');
     var context = {
       girl: this,
-      customer: customer,
-      Str: Game.strings
+      customer: customer
     };
     customer.satisfaction = 1;
     var endDelta = this.startDelta();

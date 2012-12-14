@@ -58,9 +58,7 @@ e.GameRender.push(function() {
   $('#top-right').prepend(button);
   button.click(function() {
     var view = $(ejs.render($('#missions_list_template').html(), {
-      g: g,
-      missions: g.missions,
-      Str: Game.strings
+      missions: g.missions
     }));
     view.dialog({
       title: 'Missions',

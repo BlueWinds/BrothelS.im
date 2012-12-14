@@ -4,12 +4,18 @@ var Mission = function(obj) {
 };
 
 Mission.start = function(base) {
+  if (base.fetishes) {
+    for (var fet in base.fetishes) {
+      if (base.fetishes[fet] && !g[fet]) {
+        return;
+      }
+    }
+  }
   var obj = {
     _id: base._id
   };
   var context = {
-    mission: obj,
-    Str: Game.strings
+    mission: obj
   };
   if (base.people) {
     obj.people = [];
@@ -27,9 +33,7 @@ Mission.start = function(base) {
 
   obj.name = ejs.render(base.name, context);
   obj.description = ejs.render(base.description, context);
-
-  if (typeof(base.image) == 'function') { obj.image = base.image.call(obj); }
-  else { obj.image = base.image; }
+  obj.image = ejs.render(base.image, context);
 
   var mission = new Mission(obj);
 
@@ -84,9 +88,7 @@ Mission.prototype.applyResults = function(result) {
     var desc = typeof(result.description) == 'object' ? result.description : [result.description];
     var img = typeof(result.image) == 'object' ? result.image : [result.image];
     var context = {
-      mission: this,
-      Str: Game.strings,
-      g: g
+      mission: this
     };
     console.log(context);
     for (var i in desc) {
