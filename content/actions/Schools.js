@@ -12,7 +12,7 @@ Actions.Exercise = {
   results: [
     {
       image: 'exercise',
-      message: '<%= girl.name %> jogged around the city. It was a fine day, and she enjoyed herself quite a bit. <% if (time == "morning") { %>She bought turned a few heads in her tight tank top, but kept running with a smile.<% } else { %>It got cold when the sun went down, but she kept warm by running faster.<% } %>',
+      message: '<%= girl.name %> jogged around the city. It was a fine day, and she enjoyed herself quite a bit. <% if (time == "morning") { %>She turned a few heads in her tight tank top, but kept running with a smile.<% } else { %>It got cold when the sun went down, but she kept warm by running faster.<% } %>',
       delta: {
         endurance: -10,
         constitution: 2.5,
