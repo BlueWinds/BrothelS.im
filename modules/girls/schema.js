@@ -111,7 +111,7 @@ Girl.actionFunctions = {};
         if (Actions[_id]) {
           new_action = $.extend(true, Actions[_id], new_action);
         }
-        var new_action = checkAction.call(girl, time, new_action);
+        new_action = checkAction.call(girl, time, new_action);
         if (new_action) {
           potentialActions[_id] = new_action;
         } else {
