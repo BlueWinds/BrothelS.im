@@ -91,44 +91,61 @@ Girl.prototype.hirePrice = function(happiness) {
 
 Girl.actionFunctions = {};
 
-Girl.prototype.potentialActions = function(time) {
-  var potentialActions = {};
-  var girl = this;
-  $.each(Actions, function(_id, action) {
-    if (action.tags && action.tags.tentacles && !g.tentacles) { return; }
-    var new_action = $.extend(true, {}, action);
-    delete new_action.disabled;
-    if (action.disabled) {
-      var disabled = action.disabled.call(girl, time);
-      if (disabled === true) {
-        return;
-      } else if (disabled) {
-        new_action.disabled = disabled;
+(function() {
+  Girl.prototype.potentialActions = function(time) {
+    var potentialActions = {};
+    var girl = this;
+    $.each(Actions, function(_id, action) {
+      var new_action = checkAction.call(girl, time, action);
+      if (new_action) {
+        potentialActions[_id] = new_action;
       }
+    });
+    if (this._.actions) {
+      $.each(this._.actions, function(_id, action) {
+        var new_action = checkAction.call(girl, time, action);
+        if (new_action) {
+          potentialActions[_id] = new_action;
+        }
+      });
     }
-    if (!new_action.disabled && action.mins) {
-      for (var stat in action.mins) {
-        if (stat == 'money' && g.money < action.mins.money) {
-          new_action.disabled = 'Not enough money';
-        } else if (girl[stat] < action.mins[stat]) {
-          new_action.disabled = 'Not enough ' + stat;
-          break;
+    return potentialActions;
+  };
+
+  function checkAction(time, action) {
+    if (action.tags && action.tags.tentacles && !g.tentacles) { return; }
+      var new_action = $.extend(true, {}, action);
+      delete new_action.disabled;
+      if (action.disabled) {
+        var disabled = action.disabled.call(this, time);
+        if (disabled === true) {
+          return;
+        } else if (disabled) {
+          new_action.disabled = disabled;
         }
       }
-    }
-    var context = {
-      girl: girl
-    };
-    new_action.label = ejs.render(action.label, context);
-    if (new_action.disabled) {
-      new_action.description = new_action.disabled;
-    } else {
-      new_action.description = ejs.render(action.description, context);
-    }
-    potentialActions[_id] = new_action;
-  });
-  return potentialActions;
-};
+      if (!new_action.disabled && action.mins) {
+        for (var stat in action.mins) {
+          if (stat == 'money' && g.money < action.mins.money) {
+            new_action.disabled = 'Not enough money';
+          } else if (this[stat] < action.mins[stat]) {
+            new_action.disabled = 'Not enough ' + stat;
+            break;
+          }
+        }
+      }
+      var context = {
+        girl: this
+      };
+      new_action.label = ejs.render(action.label, context);
+      if (new_action.disabled) {
+        new_action.description = new_action.disabled;
+      } else {
+        new_action.description = ejs.render(action.description, context);
+      }
+      return new_action;
+  }
+})();
 
 Girl.prototype.image = function(type) {
   var img = this._.images[type];
@@ -169,7 +186,7 @@ Girl.prototype.doAction = function(time, action) {
     };
     var results = action.results[i];
     if (typeof(results.delta) == 'function') {
-      var delta = results.delta.call(this, time);
+      var delta = results.delta.call(this, time, action);
       this.apply(delta);
     } else {
       this.apply(results.delta || {});

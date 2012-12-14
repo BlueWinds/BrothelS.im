@@ -148,8 +148,8 @@ Building.prototype.runDay = function() {
   this.apply(this.dailyDelta());
   var building = this;
   this.rooms.forEach(function(room) {
-    if (room._.daily) {
-      building.apply(room._.daily);
+    if (Building.rooms[room.type].daily) {
+      building.apply(Building.rooms[room.type].daily);
     }
   });
   var text = breakpoint >= 0 ? this._.cleanEffect.clean : this._.cleanEffect.dirty;

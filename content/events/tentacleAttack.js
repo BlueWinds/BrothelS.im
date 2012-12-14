@@ -51,17 +51,6 @@ Events.tentacleAttack = {
       // image: '/content/girls/Sophitia/images/Tentacles4.jpg',
       // Any image starting with a '/' will be considered absolute.
       image: 'tentacles',
-      // message can be as simple or complicated as you like. It's really simple if it's just text - but you can also use replacements from the girl or anywhere else in the game!
-
-      // <%= %> is a tag for printing whatever happens inside. There are a couple of examples in the message below.
-      // action is "whatever she was trying to do when this event struck". Mostly you'll probably just want action.label.
-      // event is the object you're editing in this file - self reference, yay!
-      // time is the time of day, either 'morning' or 'evening'.
-      // girl.name is her name. You can also access plenty of other properties - girl.obedience, for example, or girl['soft libido']. Wait, brackets instead of dots? Yep, for accessing properties with spaces, you need brackets and quotes around them.
-      // Accessing a girl's stats doesn't seem real useful until I mention the fact that you can use *arbitrary javascript* inside the <%= %> tags. Wow, powerful! If you know javascript, that is. Otherwise kind of confusing and useless.
-      // For more information on how you can customize the message, you could read the documentation at http://www.embeddedjs.com/ - or ask me if you have specific questions about how to accomplish something.
-      message: "<%= girl.name %> was heading into the city to <%= action.label %>, hurrying along a narrow street. The lamps seemed spaced oddly far apart - and a moment later she could tell she was right be worried.<br><br>Several tentacles quickly lashed out and wraped themselves around <%= girl.name %>. Quickly they dragged into a tiny alley. Abruptly, with no foreplay or ceremony at all, the ropelike vines thrust into her, ripping through her panties seemingly without resistance on their way to her intimate areas. She screamed out, expecting pain, but it was muffled twofold, first by another appendage in her mouth, and second by a burst of ecstasy that left stars in her eyes. The creature didn't wait for her to recover, intent on its own pleasure - its limbs were well lubricated, slipping in and out in an increasing crescendo.<br><br>Unable to call out for help or move in the slightest, <%= girl.name %>'s ass and pussy were used mercilessly for an hour and a half. Finally, at the sound of someone else approaching, the beast soundlessly withdrew down the sewer grate. The footsteps never reached her - whoever it was must have had better sense than to approach a dark ally at night. She lay in a senseless daze for several minutes before picking herself up and hurrying home.",
-      // I cheated and left something out before for simplicity's sake - an event's "label" (the second line of this file, way back at the top) has access to all the same replacements as this message does. You could use the girl's name, the time of day or whatever you wanted to build the label.
 
       // Delta is the stat changes the event applies to the girl. Shouldn't be too hard to figure out from the example below.
       delta: {
@@ -75,7 +64,25 @@ Events.tentacleAttack = {
         // There are two special "stats" you can include in a delta - clean and money.
         // money: 53, - this line would pay the player $53.
         // clean: 5, - this event would clean the building she's living in, if any, by 5. If she doesn't have a bedroom, it will just be ignored.
-      }
+      },
+      // As a more advanced option, delta could instead be a function, which accepts two arguments and returns an object.
+      //delta: function(time, event) {
+        // You can freely add keys to the event object - it will be available when the message is rendered, so you could, say, pass in extra information.
+        // event.storeForLater = 3;
+        // In the function's context, "this" is the girl the event is happening to.
+        // this.obedience;
+        // return { endurance: 10 };
+      // },
+
+      // <%= %> is a tag for printing whatever happens inside. There are a couple of examples in the message below.
+      // action is "whatever she was trying to do when this event struck". Mostly you'll probably just want action.label.
+      // event is the object you're editing in this file - self reference, yay!
+      // time is the time of day, either 'morning' or 'evening'.
+      // girl.name is her name. You can also access plenty of other properties - girl.obedience, for example, or girl['soft libido']. Wait, brackets instead of dots? Yep, for accessing properties with spaces, you need brackets and quotes around them.
+      // Accessing a girl's stats doesn't seem real useful until I mention the fact that you can use *arbitrary javascript* inside the <%= %> tags. Wow, powerful! If you know javascript, that is. Otherwise kind of confusing and useless.
+      // For more information on how you can customize the message, you could read the documentation at http://www.embeddedjs.com/ - or ask me if you have specific questions about how to accomplish something.
+      message: "<%= girl.name %> was heading into the city to <%= action.label %>, hurrying along a narrow street. The lamps seemed spaced oddly far apart - and a moment later she could tell she was right be worried.<br><br>Several tentacles quickly lashed out and wraped themselves around <%= girl.name %>. Quickly they dragged into a tiny alley. Abruptly, with no foreplay or ceremony at all, the ropelike vines thrust into her, ripping through her panties seemingly without resistance on their way to her intimate areas. She screamed out, expecting pain, but it was muffled twofold, first by another appendage in her mouth, and second by a burst of ecstasy that left stars in her eyes. The creature didn't wait for her to recover, intent on its own pleasure - its limbs were well lubricated, slipping in and out in an increasing crescendo.<br><br>Unable to call out for help or move in the slightest, <%= girl.name %>'s ass and pussy were used mercilessly for an hour and a half. Finally, at the sound of someone else approaching, the beast soundlessly withdrew down the sewer grate. The footsteps never reached her - whoever it was must have had better sense than to approach a dark ally at night. She lay in a senseless daze for several minutes before picking herself up and hurrying home."
+      // I cheated and left something out before for simplicity's sake - an event's "label" and "image" (the second line of this file, way back at the top) has access to all the same replacements as this message does. You could use the girl's name, the time of day or whatever you wanted to build the label.
     },
     {
       // This variant shows more more trick: splitting the event up over multiple messages!

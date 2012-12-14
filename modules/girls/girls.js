@@ -7,6 +7,11 @@ e.Ready.push(function() {
   });
   $.each(Girls, function(name, girl) {
     girl.name = name;
+    if (girl.actions) {
+      $.each(girl.actions, function(_id, action) {
+        action._id = _id;
+      });
+    }
   });
 });
 

@@ -160,6 +160,19 @@ Object.defineProperty(Object.prototype, "CsortToObject", {
   }
 });
 
+Object.defineProperty(Object.prototype, "Csort", {
+  enumerable: false,
+  writable: false,
+  configurable: true,
+  value: function(key) {
+    var ret = this.slice(0);
+    ret.sort(function(a, b) {
+      return a[key] - b[key];
+    });
+    return ret;
+  }
+});
+
 Storage.prototype.getObject = function(key) {
   var value = this.getItem(key);
   return value && JSON.parse(value);

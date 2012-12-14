@@ -49,8 +49,14 @@ e.GamePreDay.push(function() {
     } else {
       i = Math.weightedRandom(event.variants || [1]);
     }
+    var results = event.results[i];
     var endDelta = this.startDelta();
-    this.apply(event.results[i].delta || {});
+    if (typeof(results.delta) == 'function') {
+      var delta = results.delta.call(this, time, event);
+      this.apply(delta);
+    } else {
+      this.apply(results.delta || {});
+    }
     var context = {
       event: event,
       girl: this,
@@ -67,7 +73,6 @@ e.GamePreDay.push(function() {
         time: time
       }).save(context.girl.name);
     }
-    var results = event.results[i];
     if (typeof(results.message) == 'object') {
       for (var j in results.message) {
         var d = results.message.length - 1 == j ? endDelta() : {};
