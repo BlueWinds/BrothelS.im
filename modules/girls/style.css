@@ -147,7 +147,7 @@ h3 {
 }
 
 #girl-view .selected.ui-state-active {
-  background: url("images/ui-bg_inset-soft_30_f58400_1x100.png") repeat-x scroll 50% 50% #F58400;
+  background: url("../../libraries/images/ui-bg_inset-soft_30_f58400_1x100.png") repeat-x scroll 50% 50% #F58400;
   border-color: #FFAF0F;
   color: #FFFFFF;
 }
