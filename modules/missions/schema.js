@@ -94,7 +94,7 @@ Mission.prototype.checkDay = function() {
   }
 };
 
-Mission.prototype.applyResults = function(result, girl) {
+Mission.prototype.applyResults = function(result, girl, context) {
   if (!result) { return; }
   var delta = girl && girl.startDelta() || {};
   if (result.money) {
@@ -111,10 +111,10 @@ Mission.prototype.applyResults = function(result, girl) {
     girl.apply(result.girl);
   }
   if (result.message) {
-    var context = {
+    context = $.extend({
       mission: this,
       girl: girl
-    };
+    }, context);
     var text = typeof(result.message) == 'object' ? result.message : [result.message];
     var img = typeof(result.image) == 'object' ? result.image : [result.image];
     for (var i in text) {

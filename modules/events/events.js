@@ -51,36 +51,12 @@ e.GamePreDay.push(function() {
     }
     var results = event.results[i];
     var endDelta = this.startDelta();
-    if (typeof(results.delta) == 'function') {
-      var delta = results.delta.call(this, time, event);
-      this.apply(delta);
-    } else {
-      this.apply(results.delta || {});
-    }
     var context = {
       event: event,
-      girl: this,
-      time: time,
       action: action
     };
-    function doMessage(image, text, delta) {
-      image = ejs.render(image, context);
-      var message = new Message({
-        type: ejs.render(event.label, context),
-        text: ejs.render(text, context),
-        delta: delta,
-        image: image[0] == '/' ? image.substr(1) : context.girl.image(image),
-        time: time
-      }).save(context.girl.name);
-    }
-    if (typeof(results.message) == 'object') {
-      for (var j in results.message) {
-        var d = results.message.length - 1 == j ? endDelta() : {};
-        doMessage(results.image[j], results.message[j], d);
-      }
-    } else {
-      doMessage(results.image, results.message, endDelta());
-    }
+    event.group = this.name;
+    Mission.prototype.applyResults.call(event, results, this, context);
 
     if (!event.disruptive) {
       oldDoAction.call(this, time, action);
