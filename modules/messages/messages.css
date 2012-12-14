@@ -24,12 +24,12 @@
   vertical-align: middle;
 }
 
-.message .delta {
-  display: block;
-}
-
 .message-delta {
   text-align: center;
+}
+
+.message-delta .delta {
+  display: block;
 }
 
 .message.long img {

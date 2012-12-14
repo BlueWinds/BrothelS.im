@@ -28,7 +28,10 @@ Girl.create = function(base) {
   });
   var girl = new Girl(obj);
   girl.status = girl.randomStatus();
-  if (girl.status == 'Hired') { girl.actions.pay = girl.desiredPay(); }
+  if (girl.status == 'Hired') {
+    girl.actions.pay = girl.desiredPay();
+    girl.hireDay = g.day;
+  }
   return girl;
 };
 
@@ -253,6 +256,7 @@ Girl.prototype.hire = function() {
   this.endurance = 100;
   this.happiness = Girl.config.startHappiness;
   this.actions.pay = this.desiredPay();
+  this.hireDay = g.day;
 };
 
 Girl.prototype.S = function(stat) {

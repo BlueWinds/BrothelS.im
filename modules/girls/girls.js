@@ -22,7 +22,11 @@ e.GameNew.push(function() {
 
 e.GameInit.push(function() {
   $.each(g.girls, function(name, obj) {
-    g.girls[name] = new Girl(obj);
+    var girl = new Girl(obj);
+    g.girls[name] = girl;
+    if (girl.status == 'Hired' && girl.hireDay === undefined) {
+      girl.hireDay = g.day;
+    }
   });
   for (var name in Girls) {
     if (!g.girls[name]) {
