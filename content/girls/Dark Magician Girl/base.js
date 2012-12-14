@@ -31,7 +31,7 @@ Girls['Dark Magician Girl'] = {
     fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4.jpg"],
     cleaning: ["Cleaning1.jpg", "Cleaning2.jpg"],
     exercise: ["Exercise1.jpg", "Exercise2.jpg"],
-    tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg"],
+    tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg"]
   },
   actions: {
     healing: {
