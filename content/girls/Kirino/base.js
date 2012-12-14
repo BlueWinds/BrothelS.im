@@ -23,14 +23,15 @@ Girls.Kirino = {
   images: {
     basePath: "content/girls/Kirino/images",
     base: "Base.png",
-    refuse: ["Refuse1.png", "Refuse2.jpg", "Refuse3.jpg"],
+    refuse: ["Refuse1.jpg", "Refuse2.jpg", "Refuse3.jpg"],
     tired: "Tired.jpg",
-    soft: ["Soft1.png", "Soft2.png", "Soft3.png", "Soft4.png"],
-    hard: ["Hard1.jpg", "Hard2.png", "Hard3.png", "Hard4.png"],
-    anal: ["Anal1.png", "Anal2.png", "Anal3.png", "Anal4.png"],
-    fetish: ["Fet1.png", "Fet2.png", "Fet3.png", "Fet4.png", "Fet5.png"],
+    soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg"],
+    hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg"],
+    anal: ["Anal1.jpg", "Anal2.jpg", "Anal3.jpg", "Anal4.jpg"],
+    fetish: ["Fet1.jpg", "Fet2.jpg", "Fet3.jpg", "Fet4.jpg", "Fet5.jpg"],
     cleaning: ["Cleaning1.jpg", "Cleaning2.jpg"],
-    exercise: ["Exercise1.png", "Exercise2.png", "Exercise3.png"],
-    tentacles: ["Fet1.png", "Fet3.png", "Fet4.png"]
+    exercise: ["Exercise1.jpg", "Exercise2.jpg", "Exercise3.jpg"],
+    study: ["Study1.jpg", "Study2.jpg", "Study3.jpg"],
+    tentacles: ["Fet1.jpg", "Fet3.jpg", "Fet4.jpg"]
   }
 };

@@ -53,7 +53,8 @@ e.GamePreDay.push(function() {
     var endDelta = this.startDelta();
     var context = {
       event: event,
-      action: action
+      action: action,
+      time: time
     };
     event.group = this.name;
     Mission.prototype.applyResults.call(event, results, this, context);

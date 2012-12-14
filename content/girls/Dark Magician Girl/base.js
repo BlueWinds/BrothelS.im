@@ -22,7 +22,7 @@ Girls['Dark Magician Girl'] = {
   specialRules: {},
   images: {
     basePath: "content/girls/Dark Magician Girl/images",
-    base: "base.png",
+    base: "Base.png",
     refuse: "Refuse.jpg",
     tired: ["Tired1.jpg", "Tired2.jpg"],
     soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg"],
@@ -31,6 +31,7 @@ Girls['Dark Magician Girl'] = {
     fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4.jpg"],
     cleaning: ["Cleaning1.jpg", "Cleaning2.jpg"],
     exercise: ["Exercise1.jpg", "Exercise2.jpg"],
+    study: "Study.jpg",
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg"]
   },
   actions: {

@@ -52,6 +52,7 @@ Girls.Sophitia = {
     fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4.jpg", "Fetish5.jpg", "Fetish6.jpg"],
     cleaning: "Cleaning.jpg",
     exercise: "Exercise.jpg",
+    study: ["Study1.jpg", "Study2.jpg"],
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg", "Tentacles5.jpg"]
   }
   // A girl can also have actions specific to her. Her "actions" key can have any number of actions, each one defined exactly as actions available to all girls (See content/actions/Simple.js for a commented example of what an action looks like, or Dark Magician Girl for an example of a girl-specific action in... action.

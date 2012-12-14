@@ -73,7 +73,7 @@ Actions.Study = {
       image: 'study',
       message: '<%= girl.name %>  attended a course on <%= Math.choice(["history", "mathematics", "geography", "literature"]) %>. She wasn\'t particularly interested, and the professor didn\'t impress her. She felt asleep halfway through.',
       delta: {
-        endurance: 6,
+        endurance: 5,
         intelligence: 1,
         obedience: -1,
         money: -100
