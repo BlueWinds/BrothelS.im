@@ -55,7 +55,7 @@ Girl.prototype.checkInterest = function(type) {
   };
 
   function doCustomer(time) {
-    var customer = randomPerson('Very Low Class');
+    var customer = randomPerson(Math.Choice(['Very Low Class', 'Low Class']));
     var context = {
       girl: this,
       customer: customer
