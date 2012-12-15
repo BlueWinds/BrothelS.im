@@ -12,6 +12,8 @@ Game.strings = {
     hard: 'Vaginal',
     anal: 'Anal',
     fetish: 'Bondage',
+    happiness: 'Joyful',
+    endurance: 'Healthy',
     intelligence: 'Smart',
     charisma: 'Friendly',
     obedience: 'Submissive',

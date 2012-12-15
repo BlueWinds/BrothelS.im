@@ -1,18 +1,24 @@
 var Building = function(obj) {
   $.extend(this, obj);
   this._ = Buildings[this.name];
+  // Add missing stats from base
+  for (var i in Building.stats) {
+    var stat = Building.stats[i];
+    if (this[stat] === undefined) {
+      this[stat] = this._[stat] !== undefined ? this._[stat] : 30;
+    }
+  }
+
   return this;
 };
+
 Building.stats = [
-  'clean'
+  'clean', 'reputation'
 ];
 
 Building.create = function(base) {
   var obj = {
     name: base.name,
-    status: base.status,
-    _: base,
-    clean: base.clean,
     rooms: $.extend(true, [], base.rooms)
   };
   var building = new Building(obj);
@@ -39,12 +45,15 @@ Building.prototype.girls = function() {
   var oldGirlApply = Girl.prototype.apply;
   Girl.prototype.apply = function(stat, delta) {
     if (this.building()) {
-      if (stat == 'clean') {
+      if (typeof(stat) == 'object') {
+        for (var s in stat) {
+          if (Building.stats.indexOf(s) != -1) {
+            this.building().apply(s, stat[s]);
+            delete stat[s];
+          }
+        }
+      } else if (Building.stats.indexOf(stat) != -1) {
         this.building().apply(stat, delta);
-      }
-      if (typeof(stat) == 'object' && stat.clean) {
-        this.building().apply('clean', stat.clean);
-        delete stat.clean;
       }
     }
     oldGirlApply.call(this, stat, delta);

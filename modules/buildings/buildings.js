@@ -115,6 +115,7 @@ e.GameRender.push(function() {
 
 e.Autorender.push(function(element) {
   $('.clean', element).attr('title', Building.config.cleanDescription);
+  $('.reputation', element).attr('title', Building.config.reputationDescription);
   $('.rooms', element).attr('title', Building.config.roomDescription);
   $('.bedroom', element).attr('title', Building.config.rooms.bedroom.description);
 });
