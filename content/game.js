@@ -7,14 +7,39 @@ Game.config = {
 };
 
 Game.strings = {
-  soft: 'Softcore',
-  hard: 'Hardcore',
-  anal: 'Anal',
-  fetish: 'Fetish',
-  intelligence: 'Smart',
-  charisma: 'Friendly',
-  obedience: 'Obedient',
-  constitution: 'Tireless',
-  libido: 'Slutty',
-  experience: 'Sexy'
+  adj: {
+    soft: 'Oral',
+    hard: 'Vaginal',
+    anal: 'Anal',
+    fetish: 'Bondage',
+    intelligence: 'Smart',
+    charisma: 'Friendly',
+    obedience: 'Submissive',
+    modesty: 'Modest',
+    constitution: 'Tireless',
+    libido: 'Lusty',
+    experience: 'Sexy',
+    '-intelligence': 'Dumb',
+    '-charisma': 'Unfriendly',
+    '-obedience': 'Sprited',
+    '-modesty': 'Uninhibited',
+    '-constitution': 'Sickly',
+    '-libido': 'Indifferent',
+    '-experience': 'Inexperienced'
+  },
+  noun: {
+    endurance: 'Endurance',
+    happiness: 'Happiness',
+    soft: 'Oral',
+    hard: 'Vaginal',
+    anal: 'Anal',
+    fetish: 'Bondage',
+    intelligence: 'Intelligence',
+    charisma: 'Charisma',
+    obedience: 'Submission',
+    modesty: 'Modesty',
+    constitution: 'Constitution',
+    libido: 'Libido',
+    experience: 'Experience'
+  }
 };

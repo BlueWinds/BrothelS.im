@@ -1,13 +1,29 @@
 var Girl = function(obj) {
   $.extend(this, obj);
   this._ = Girls[this.name];
+
+  // Upgrade function to add missing stats
+  for (var i in Girl.stats) {
+    var stat = Girl.stats[i];
+    if (this[stat] === undefined) {
+      this[stat] = this._[stat] !== undefined ? this._[stat] : 30;
+    }
+  }
+  for (i in Girl.sex) {
+    var sex = Girl.sex[i];
+    var l = sex + ' libido', x = sex + ' experience';
+    if (this[l] === undefined) {
+      this[l] = (this._[l] !== undefined ? this._[l] : 30);
+    }
+    if (this[x] === undefined) {
+      this[x] = (this._[x] !== undefined ? this._[x] : 30);
+    }
+  }
   return this;
 };
 
 Girl.stats = [
-  'happiness', 'endurance', 'obedience', 'charisma', 'intelligence', 'constitution',
-  'soft libido', 'hard libido', 'anal libido', 'fetish libido',
-  'soft experience', 'hard experience', 'anal experience', 'fetish experience'
+  'happiness', 'endurance', 'obedience', 'modesty', 'charisma', 'constitution', 'intelligence'
 ];
 
 Girl.sex = ['soft', 'hard', 'anal', 'fetish'];
@@ -23,9 +39,6 @@ Girl.create = function(base) {
       eveningLabel: 'Rest'
     }
   };
-  Girl.stats.forEach(function(stat) {
-    obj[stat] = base[stat];
-  });
   var girl = new Girl(obj);
   girl.status = girl.randomStatus();
   if (girl.status == 'Hired') {
@@ -66,7 +79,12 @@ Girl.prototype.apply = function(stat, delta) {
     return;
   }
   for (var key in stat) {
-    if (Girl.stats.indexOf(key) == -1 && key != 'money') { return; }
+    if (Girl.stats.indexOf(key) == -1 && key != 'money') {
+      var split = key.split(' ');
+      if (Girl.sex.indexOf(split[0]) == -1 || (split[1] != 'experience' && split[1] != 'libido') || split[2]) {
+        return;
+      }
+    }
     this.apply(key, stat[key]);
   }
 };
@@ -83,7 +101,10 @@ Girl.prototype.hirePrice = function(happiness) {
   happiness = happiness === undefined ? this.happiness : happiness;
   var prices = Girl.config.hirePrice;
   var cost = prices.base;
-  cost += (this.obedience + this.charisma + this.intelligence + this.constitution) * prices.stats;
+  for (var i in Girl.stats) {
+    var stat = Girl.stats[i];
+    cost += this[stat] * prices[stat];
+  }
   var girl = this;
   Girl.sex.forEach(function(type) {
     cost += (girl[type + ' libido'] + girl[type + ' experience']) * prices[type];
@@ -91,8 +112,6 @@ Girl.prototype.hirePrice = function(happiness) {
   cost *= 1 - happiness / 150;
   return Math.floor(cost);
 };
-
-Girl.actionFunctions = {};
 
 (function() {
   Girl.prototype.potentialActions = function(time) {
@@ -142,7 +161,16 @@ Girl.actionFunctions = {};
           action.disabled = 'Not enough money';
           break;
         } else if (this[stat] < action.mins[stat]) {
-          action.disabled = 'Not enough ' + stat;
+          action.disabled = 'Not enough ' + Game.strings.noun[stat];
+          break;
+        }
+      }
+      for (stat in action.maxes) {
+        if (stat == 'money' && g.money > action.maxes.money) {
+          action.disabled = 'Too much money';
+          break;
+        } else if (this[stat] > action.maxes[stat]) {
+          action.disabled = 'Too much ' + Game.strings.noun[stat];
           break;
         }
       }
@@ -173,7 +201,7 @@ Girl.prototype.image = function(type) {
 Girl.prototype.doAction = function(time, action) {
   if (time == 'morning' && action.allDay) { return; }
   if (action.externalFunction) {
-    Girl.actionFunctions[action._id].call(this, time);
+    action.externalFunction.call(this, time, action);
   }
   else {
     var endDelta = this.startDelta();
@@ -280,11 +308,21 @@ Girl.prototype.S = function(stat) {
 };
 
 Girl.prototype.get = function(stat) {
+  if (stat.substr(0, 1) == '-') {
+    return 100 - this.get(stat.substr(1));
+  }
+  var sum = 0, sex;
   if (stat == 'experience') {
-    return Math.floor((this['soft experience'] + this['hard experience'] + this['anal experience'] + this['fetish experience']) / 4);
+    for (sex in Girl.sex) {
+      sum += this[sex + ' experience'];
+    }
+    return Math.floor(sum / Girl.sex.length);
   }
   if (stat == 'libido') {
-    return Math.floor((this['soft libido'] + this['hard libido'] + this['anal libido'] + this['fetish libido']) / 4);
+    for (sex in Girl.sex) {
+      sum += this[sex + ' libido'];
+    }
+    return Math.floor(sum / Girl.sex.length);
   }
   return this[stat];
 };

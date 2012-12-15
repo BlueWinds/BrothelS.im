@@ -4,7 +4,7 @@ Actions.Exercise = {
   },
   label: 'Exercise',
   group: 'Training',
-  description: '<%= girl.name %> will spend time jogging around the city and otherwise exercising outdoors to increase her constitution.',
+  description: '<%= girl.name %> will spend time jogging around the city and otherwise exercising outdoors to increase her <%= Game.strings.noun.constitution %>.',
   tags: {
     outdoors: true
   },
@@ -16,7 +16,8 @@ Actions.Exercise = {
       delta: {
         endurance: -10,
         constitution: 2.5,
-        happiness: 3
+        happiness: 3,
+        modesty: -0.5
       }
     },
     {
@@ -33,7 +34,8 @@ Actions.Exercise = {
       delta: {
         endurance: -20,
         constitution: 1,
-        happiness: -3
+        happiness: -3,
+        obedience: 0.1
       }
     }
   ]
@@ -45,7 +47,7 @@ Actions.Study = {
   },
   label: 'Study',
   group: 'Training',
-  description: '<%= girl.name %> will attend courses at the local university.',
+  description: '<%= girl.name %> will attend courses at the local university to increase her <%= Game.strings.noun.intelligence %>.',
   tags: {
   },
   variants: [0.3, 0.4, 0.2, 0.1],
@@ -57,7 +59,8 @@ Actions.Study = {
         endurance: -5,
         intelligence: 2.5,
         happiness: 3,
-        money: -100
+        money: -100,
+        obedience: -0.2
       }
     },
     {
@@ -90,7 +93,8 @@ Actions.Study = {
         intelligence: 1,
         'hard experience': 1,
         'hard libido': 1,
-        money: 50
+        money: 50,
+        modesty: -1.3
       }
     }
   ]

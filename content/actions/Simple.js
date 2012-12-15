@@ -1,7 +1,7 @@
 Actions.Rest = {
   label: 'Rest',
   group: 'Chores',
-  description: 'Giving a girl time off increases both endurance and happiness.',
+  description: 'Giving a girl time off increases both <%= Game.strings.noun.endurance %> and <%= Game.strings.noun.happiness %>.',
   results: [
     {
       image: 'tired',
@@ -29,6 +29,11 @@ Actions.Lockdown = {
     happiness: 50,
     constitution: 10
   },
+  // The maximum statistics the girl can have. Again, you can use money here.
+  //maxes: {
+    // modesty: 50
+  // },
+
   // An action can require that the player owns certain rooms. If that isn't the case, remove the requiresRoom key entirely.
   requiresRoom: {
     // The type of room needed.
@@ -36,8 +41,9 @@ Actions.Lockdown = {
     // The key of those rooms to sum up to count how many girls can do the action.
     key: 'size'
   },
-  // The description of the action, showed on hover. Replacement patterns can again be used (as they are in specialParty).
-  description: 'She will be bound and gagged in the dungeon for most of the day to increase her obedience. This action takes all day.',
+  // The description of the action, showed on hover. Replacement patterns can again be used. Notice that we're translating "obedience" through the Game.strings dictionary - there are lots of options available, such as nouns, adj (adjectives), and even adj like "-modesty", for low modesty - "Uninhibited", for that example.
+  // It's better to use the "translated" versions of these strings to keep up with any future changes.
+  description: 'She will be bound and gagged in the dungeon for most of the day to increase her <%= Game.strings.noun.obedience %>. This action takes all day.',
   // Disabled is an optional javascript function to disable this action based on information about the game. You probably don't want to try to use it unless you already know javascript. The function always gets a single argument, time, which is either 'morning' or 'evening' - the time this action is being considered for.
   // disabled: function(time) {
     // The disabled function can return one of three values: true, false, or a string.
@@ -96,7 +102,8 @@ Actions.Clean = {
         clean: 10,
         money: -10,
         endurance: -6,
-        happiness: -3
+        happiness: -3,
+        modesty: 0.5
       }
     }
   ]

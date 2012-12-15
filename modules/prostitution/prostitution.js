@@ -1,7 +1,5 @@
 Girl.prototype.maxCustomers = function() {
-  var libido = this['soft libido'] + this['hard libido'];
-  libido += this['anal libido'] + this['fetish libido'];
-  libido /= 4;
+  var libido = this.get('libido');
   libido += this.constitution * 3;
   return Math.floor(libido / 300 * Actions.Streetwalk.config.maxCustomers);
 };
@@ -15,13 +13,21 @@ Girl.prototype.checkInterest = function(type) {
 };
 
 (function() {
-  Girl.actionFunctions.Streetwalk = function(time) {
+  Actions.Streetwalk.externalFunction = function(time, action) {
     var context = {
-      girl: this
+      girl: this,
+      time: time,
+      action: action
     };
     var endDelta = this.startDelta();
     this.apply(Actions.Streetwalk.config.streetwalkDelta);
-    if (!this.actions.soft && !this.actions.hard && !this.actions.anal && !this.actions.fetish) {
+    var doSex = [];
+    for (var sex in Girl.sex) {
+      if (this.actions[sex]) {
+        doSex.push(sex);
+      }
+    }
+    if (!doSex.length) {
       new Message({
         type: 'Confused',
         time: time,
@@ -79,7 +85,7 @@ Girl.prototype.checkInterest = function(type) {
     }
     customer.satisfaction *= interest;
     customer.satisfaction += this.charisma / 200;
-    customer.satisfaction += this.get(customer.wants[0]) / 150;
+    customer.satisfaction += this.get(customer.wants[0]) / 100;
     customer.satisfaction += this.get(customer.wants[1]) / 300;
     if (this.happiness < 50) {
       customer.satisfaction *= this.happiness / 100 + 0.5;
@@ -90,18 +96,13 @@ Girl.prototype.checkInterest = function(type) {
     var endurance = sexInfo.endurance;
     endurance *= 1 - this.constitution / 200;
     this.apply('endurance', endurance);
-    var expChance = 1 - Game.config.expRate * (this.intelligence / 100);
-    expChance = Math.pow(Math.random(), expChance);
-    if (expChance > this[sex + ' experience'] / 100) {
-      this.apply(sex + ' experience', 1);
+    var expChance = this.intelligence / 100;
+    expChance += Math.random() + Game.config.expRate;
+    expChance -= this[sex + ' experience'] / 50;
+    if (expChance > 0) {
+      this.apply(sex + ' experience', expChance);
     }
-    if (this['hard experience'] + this['anal experience'] + this['fetish experience'] === 0) {
-      pays *= 5;
-      context.result = Actions.Streetwalk.config.virgin;
-    }
-    else {
-      context.result = Math.choice(Actions.Streetwalk.config.results[sex]);
-    }
+    context.result = Math.choice(Actions.Streetwalk.config.results[sex]);
     g.money += pays;
     new Message({
       type: 'Prostitution',

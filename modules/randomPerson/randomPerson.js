@@ -13,14 +13,14 @@ var randomPerson = function(class_) {
     class_: class_,
     profession: profession,
     wants: [],
-    sex: ['soft', 'hard', 'anal', 'fetish']
+    sex: $.extend({}, Girl.sex)
   };
   if (info.image) {
     obj.image = Math.choice(info.image);
   }
   var idx = 0;
   var chance = 0.5;
-  while (obj.wants.length < 4) {
+  while (obj.wants.length < 3) {
     if (Math.random() > chance) { idx = 0; }
     else if (Math.random() > chance) { idx = 1; }
     else if (Math.random() > chance) { idx = 2; }

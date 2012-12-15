@@ -8,7 +8,10 @@ Actions.Streetwalk =  {
     happiness: 20,
     endurance: 25
   },
-  externalFunction: true,
+  maxes: {
+    modesty: 50
+  },
+  // externalFunction key provided by prostitution module, since it's too complex to put here.
   tags: {
     outdoors: true,
     prostitution: true

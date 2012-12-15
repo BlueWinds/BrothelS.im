@@ -17,6 +17,7 @@ Girls.Sophitia = {
   // The other stats work exactly like you'd expect - set the starting values here. Remember that higher stats increase a girl's hire price and her pay.
   endurance: 100,
   obedience: 50,
+  modesty: 30,
   charisma: 40,
   intelligence: 20,
   constitution: 40,

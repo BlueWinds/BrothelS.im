@@ -12,12 +12,12 @@ Actions.Streetwalk.config = {
       pays: 150
     },
     anal: {
-      r: 0.8,
+      r: 0.7,
       endurance: -14,
       pays: 230
     },
     fetish: {
-      r: 1,
+      r: 0.85,
       endurance: -16,
       pays: 450
     }
@@ -45,9 +45,7 @@ Actions.Streetwalk.config = {
     fetish: [
       'He stripped her naked and tied her to a streetlamp on a busy corner, then left.',
       'They went to a deserted allyway and he tied her arms to a railing, then spanked her until she started crying.',
-      'He invited several friends and they bukkaked her.',
       'He produced a whole jar of semen he acquired from somehwere and made her drink it all.',
-      'More men arrived, and all five of them shared her ass and pussy.',
       'He tied her up tightly and had his way with every hole.',
       'He bound her arms and paraded her around town naked.'
     ]
@@ -58,9 +56,8 @@ Actions.Streetwalk.config = {
   },
   confused: 'You asked <%= girl.name %> to streetwalk, but also told her not to perform any type of sex. She wandered around for a while and fed the pidgins before going home (make sure at least one sex act is checked on her details page).',
   action: '<%= girl.name %> walked around the city picking up strangers.',
-  message: '<%= girl.name %> met a <%= customer.profession %> interested in <em><%= Game.strings[customer.sex[0]] %></em> or <em><%= Game.strings[customer.sex[1]] %></em>, and they agreed on <strong class="<%= sex %>"><%= Game.strings[sex] %></strong>.<br><br><%- result %>',
+  message: '<%= girl.name %> met a <%= customer.profession %> interested in <em><%= Game.strings.noun[customer.sex[0]] %></em> or <em><%= Game.strings.noun[customer.sex[1]] %></em>, and they agreed on <strong class="<%= sex %>"><%= Game.strings.noun[sex] %></strong>.<br><br><%- result %>',
   uncooperative: 'But she was uncooperative and <strong>refused</strong>. He left unsatisfied without paying anything.',
-  virgin: 'He was thrilled that <%= girl.name %> <strong>lost her virginity</strong> with him.',
   streetwalkDelta: {
     endurance: -10,
     happiness: -5

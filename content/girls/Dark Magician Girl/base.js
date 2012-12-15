@@ -8,6 +8,7 @@ Girls['Dark Magician Girl'] = {
   happiness: 0,
   endurance: 100,
   obedience: 60,
+  modesty: 20,
   charisma: 40,
   intelligence: 60,
   constitution: 50,

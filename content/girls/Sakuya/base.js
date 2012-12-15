@@ -9,6 +9,7 @@ Girls.Sakuya = {
   endurance: 100,
   obedience: 40,
   charisma: 20,
+  modesty: 60,
   intelligence: 50,
   constitution: 70,
   'soft libido': 10,
@@ -42,7 +43,8 @@ Girls.Sakuya = {
           delta: {
             endurance: -8,
             clean: 15,
-            happiness: 1
+            happiness: 1,
+            modesty: -0.3
           } // delta
         }
       ] // results

@@ -11,11 +11,11 @@ Building.config = {
       // The cost to buy this room.
       price: 1200,
       // The description shown before buying the room, and occasionally afterwards.
-      description: "An enlarged basement with cells, a stockade, a table with convenient ropes for tying down naughty girls, the dungeon can hold up to two women at a time, increasing their obedience at the expense of happiness and a little bit of constitution. Assign them the \"Lock Down\" action to take advantage of this room.",
+      description: "An enlarged basement with cells, a stockade, a table with convenient ropes for tying down naughty girls, the dungeon can hold up to two women at a time in Lockdown.",
       // maxPerBuilding does... exactly what it sounds like. Remove this line if there's no limit.
       maxPerBuilding: 1,
       // The short description is the one that goes on the building view page, inside each room of this type. It should be short enough that it doesn't overflow that box. You can use replacement patterns from this object - size or price, for example.
-      shortDesc: 'Assign up to <%= size %> girls to Lockown to increase their obedience at the expense of happiness and a little bit of constitution.',
+      shortDesc: 'Assign up to <%= size %> girls to Lockown to increase their Submission at the expense of Happiness and a little bit of Constitution.',
       // When buying one of these rooms, the default "size". The room's size doesn't do anything on its own, though actions may use it.
       size: 2
       // You can also add a "daily" option. 'clean' or 'money' will clean/dirty (negative numbers, yay) the building or give the player money. You can also use girl's stats, in which case they will apply to every girl living there.

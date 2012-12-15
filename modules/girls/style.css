@@ -15,9 +15,10 @@ h3 {
   font-weight: 700;
 }
 .obedience { color: #FF0; }
-.charisma { color: #AF0; }
-.intelligence { color: #4F0; }
-.constitution { color: #6F6; }
+.modesty { color: #C0FF00; }
+.charisma { color: #4F0; }
+.constitution { color: #0FC; }
+.intelligence { color: #0DF; }
 
 .soft { color: #FAA; }
 .hard { color: #F66; }
@@ -163,8 +164,16 @@ h3 {
   z-index: 100;
 }
 
+.action-list > ul {
+  left: 0;
+}
+
+.action-list > ul > li:first-child {
+  border-top-left-radius: 6px;
+}
+
 .action-list a.ui-state-hover + ul, .action-list ul.hover, .action-list li.hover > ul {
-  width: 13.5em;
+  width: 13.8em;
   transition-delay: 0s;
   transition-duration: .2s;
   -moz-transition-delay: 0s;
@@ -251,7 +260,7 @@ h3 {
 }
 
 .action-list > ul > li:hover {
-  padding-right: 1em;
+  padding-right: 1.3em;
   transition-delay: 0s;
   transition-duration: 0s;
   -moz-transition-delay: 0s;
@@ -263,7 +272,7 @@ h3 {
 }
 
 .action-list li > ul {
-  left: 6.9em;
+  left: 7.2em;
   top: -1px;
 }
 

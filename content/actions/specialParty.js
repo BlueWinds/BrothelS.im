@@ -13,8 +13,7 @@ Actions.attendParty = {
     return false;
   },
   mins: {
-    obedience: 40,
-    happiness: 40,
+    happiness: 30,
     endurance: 40
   },
   uninteruptable: true,
@@ -36,7 +35,8 @@ Actions.attendParty = {
         var reward = {
           happiness: 25,
           endurance: -40,
-          charisma: 5
+          charisma: 5,
+          modesty: -3
         };
         var money = this.get(client.wants[0]) * 10;
         money += this.get(client.wants[1]) * 5;

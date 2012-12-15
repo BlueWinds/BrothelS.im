@@ -151,9 +151,19 @@
           </div>
           <div class="column pct-40 center">
             <h6><%= girl.name %></h6>
-            <div><%- girl.S("obedience") %> | <%- girl.S("charisma") %> | <%- girl.S("intelligence") %> | <%- girl.S("constitution") %></div>
-            <div><%- girl.S("soft libido") %> | <%- girl.S("hard libido") %> | <%- girl.S("anal libido") %> | <%- girl.S("fetish libido") %></div>
-            <div><%- girl.S("soft experience") %> | <%- girl.S("hard experience") %> | <%- girl.S("anal experience") %> | <%- girl.S("fetish experience") %></div>
+            <%
+              var stats = [], experience = [], libido = [];
+              Girl.stats.forEach(function(stat) {
+                stats.push(girl.S(stat));
+              });
+              Girl.sex.forEach(function(sex) {
+                experience.push(girl.S(sex + " experience"));
+                libido.push(girl.S(sex + " libido"));
+              });
+            %>
+            <div><%- stats.join(" | ") %></div>
+            <div><%- libido.join(" | ") %></div>
+            <div><%- experience.join(" | ") %></div>
           </div>
           <div class="column pct-40">
             <div><label>Up Front:</label><strong class="money">$<%= girl.hirePrice() %></strong></div>
@@ -179,9 +189,16 @@
           <div class="column pct-40 center">
             <h6><%= girl.name %></h6>
             <div><%- girl.S("endurance") %> | <%- girl.S("happiness") %></div>
+            <%
+              var stats = [];
+              Girl.stats.forEach(function(stat) {
+                if (stat != "endurance" && stat != "happiness") {
+                  stats.push(girl.S(stat));
+                }
+              });
+            %>
             <div>
-              <%- girl.S("obedience") %> | <%- girl.S("charisma") %> |
-              <%- girl.S("intelligence") %> | <%- girl.S("constitution") %>
+              <%- stats.join(" | ") %>
             </div>
           </div>
           <div class="column pct-40">
@@ -199,12 +216,12 @@
       </div>
       <div class="column pct-70">
         <div class="column pct-50 middle">
-          <div><label>Endurance</label><%- girl.S("endurance") %></div>
-          <div><label>Happiness</label><%- girl.S("happiness") %></div>
-          <div><label>Obedience</label><%- girl.S("obedience") %></div>
-          <div><label>Charisma</label><%- girl.S("charisma") %></div>
-          <div><label>Intelligence</label><%- girl.S("intelligence") %></div>
-          <div><label>Constitution</label><%- girl.S("constitution") %></div>
+          <% Girl.stats.forEach(function(stat) { %>
+            <div>
+              <label><%= Game.strings.noun[stat] %></label>
+              <%- girl.S(stat) %>
+            </div>
+          <% }); %>
           <div id="pay">
             <label>Pay</label>
             <input value="$<%= girl.actions.pay %>">
@@ -212,30 +229,26 @@
           </div>
         </div>
         <div class="column pct-50 right">
-          <div class="checkbox">
-            <label for="soft" class="<%- girl.actions.soft ? 'checked' : '' %>">Softcore</label>
-            <input id="soft" type="checkbox" <%- girl.actions.soft ? 'checked="checked"' : '' %>>
-          </div>
-          <div><label>Libido:</label><span class="soft libido"><%- girl.S("soft libido") %></span></div>
-          <div><label>Experience:</label><span class="soft experience"><%- girl.S("soft experience") %></span></div>
-          <div class="checkbox">
-            <label for="hard" class="<%- girl.actions.hard ? 'checked' : '' %>">Hardcore</label>
-            <input id="hard" type="checkbox" <%- girl.actions.hard ? 'checked="checked"' : '' %>>
-          </div>
-          <div><label>Libido:</label><span class="hard libido"><%- girl.S("hard libido") %></span></div>
-          <div><label>Experience:</label><span class="hard experience"><%- girl.S("hard experience") %></span></div>
-          <div class="checkbox">
-            <label for="anal" class="<%- girl.actions.anal ? 'checked' : '' %>">Anal</label>
-            <input id="anal" type="checkbox" <%- girl.actions.anal ? 'checked="checked"' : '' %>>
-          </div>
-          <div><label>Libido:</label><span class="anal libido"><%- girl.S("anal libido") %></span></div>
-          <div><label>Experience:</label><span class="anal experience"><%- girl.S("anal experience") %></span></div>
-          <div class="checkbox">
-            <label for="fetish" class="<%- girl.actions.fetish ? 'checked' : '' %>">Fetish</label>
-            <input id="fetish" type="checkbox" <%- girl.actions.fetish ? 'checked="checked"' : '' %>>
-          </div>
-          <div><label>Libido:</label><span class="fetish libido"><%- girl.S("fetish libido") %></span></div>
-          <div><label>Experience:</label><span class="fetish experience"><%- girl.S("fetish experience") %></span></div>
+          <% Girl.sex.forEach(function(sex) { %>
+            <div class="checkbox">
+              <label for="<%= sex %>" class="<%- girl.actions[sex] ? 'checked' : '' %>">
+                <%= Game.strings.noun[sex] %>
+              </label>
+              <input id="<%= sex %>" type="checkbox" <%- girl.actions[sex] ? 'checked="checked"' : '' %>>
+            </div>
+            <div>
+              <label><%= Game.strings.noun.libido %>:</label>
+              <span class="<%= sex %> libido">
+                <%- girl.S(sex + " libido") %>
+              </span>
+            </div>
+            <div>
+              <label><%= Game.strings.noun.experience %>:</label>
+              <span class="<%= sex %> experience">
+                <%- girl.S(sex + " experience") %>
+              </span>
+            </div>
+          <% }) %>
         </div>
       </div>
       <hr class="clear">

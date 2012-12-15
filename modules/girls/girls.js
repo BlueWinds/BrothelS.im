@@ -109,7 +109,6 @@ e.GameRender.push(function() {
       $('.action-list li').removeClass('hover');
       $('.action-list li:hover').addClass('hover');
       $(this).closest('.action-list').children('a').addClass('ui-state-hover');
-      $(this).find('li').first().addClass('hover');
     }).mouseleave(function(event) {
       $(this).removeClass('hover');
     });
@@ -119,6 +118,8 @@ e.GameRender.push(function() {
 
     $('.action-list .action', view).click(function() {
       if ($(this).hasClass('disabled')) { return; }
+      $('.action-list li').removeClass('hover');
+      $('.action-list a').removeClass('ui-state-hover');
       var _id = $(this).attr('name');
       var time = $(this).closest('div').attr('id');
       var other_time = time == 'morning' ? 'evening' : 'morning';
@@ -134,11 +135,12 @@ e.GameRender.push(function() {
       girl.actions[time + 'Label'] = action.label;
       girl.actions[other_time] = other_id;
       girl.actions[other_time + 'Label'] = other_action.label;
-      $('.action-list li').removeClass('selected');
       $('#' + time + ' li[name="' + action.group + '"]').addClass('selected');
       $('#' + other_time + ' li[name="' + other_action.group + '"]').addClass('selected');
       $('#' + time + ' li.action[name="' + action._id + '"]').addClass('selected');
       $('#' + other_time + ' li.action[name="' + other_action._id + '"]').addClass('selected');
+      $('#' + time + ' a span').text(action.label);
+      $('#' + other_time + ' a span').text(other_action.label);
     });
 
     view.dialog({

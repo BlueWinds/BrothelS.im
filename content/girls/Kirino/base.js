@@ -6,6 +6,7 @@ Girls.Kirino = {
   happiness: 100,
   endurance: 100,
   obedience: 60,
+  modesty: 5,
   charisma: 50,
   intelligence: 30,
   constitution: 80,

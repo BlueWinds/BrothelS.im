@@ -1,9 +1,3 @@
-// There are currently two varieties of events: One-time and Interruptive.
-// One time events... happen once. Currently the only option is "on a specific day", but there will be more controls soon - like "three days after hiring a new girl" or "when the player has $10000.
-// Interruptive events occur randomly when girls take actions that match certain criteria defined by the event. Don't worry, that will get clearer as you read on.
-
-//This first event, 'tentacleAttack' is an interruptive event.
-
 // Defining an event involves adding to the the global Events object. The event ID must be unique. It's never displayed to the player.
 Events.tentacleAttack = {
   // The label, on the other hand, is what's displayed to the user. It could be anything, but should be pretty short (it's used as the title of the message).
@@ -11,8 +5,6 @@ Events.tentacleAttack = {
   // Interruptive events might be triggered when an action *matches one or more of its tags*.
   // For example, the "Rest" action has no tags - it can't trigger any interruptive events. Exercise, on the other hand, has the "outdoors" tag - it can trigger any events that also have the tag.
   // Tags are an "or" style list - any action that *shares at least one tag* with the event can trigger it.
-  // If oneTime were turned on, it would specify this event as occurring only once. Since it's not present (commented out), this is an interruptive event.
-  // oneTime: true,
   tags: {
     // Currently "outdoors" is one of only two tags - any actions that make the girl is run around the city have this tag.
     outdoors: true
@@ -57,10 +49,9 @@ Events.tentacleAttack = {
         endurance: -40,
         happiness: -5,
         intelligence: -4,
-        'hard libido': 3,
         'anal libido': 3,
-        'hard experience': 5,
-        'anal experience': 5
+        'anal experience': 5,
+        obedience: 5
         // There are two special "stats" you can include in a delta - clean and money.
         // money: 53, - this line would pay the player $53.
         // clean: 5, - this event would clean the building she's living in, if any, by 5. If she doesn't have a bedroom, it will just be ignored.
@@ -91,10 +82,10 @@ Events.tentacleAttack = {
         endurance: -40,
         happiness: +3,
         intelligence: -6,
-        'anal libido': 3,
         'fetish libido': 6,
-        'anal experience': 3,
-        'fetish experience': 5
+        'fetish experience': 5,
+        modesty: -8,
+        obedience: 3
       }
     },
     {
@@ -105,34 +96,9 @@ Events.tentacleAttack = {
         happiness: -3,
         intelligence: -2,
         'soft libido': 6,
-        'soft experience': 8
+        'soft experience': 8,
+        obedience: 3
       }
-    }
-  ]
-};
-
-  // Whew, that was a long one! Here's a nice, simple one-time event.
-Events.tentacleAttackIntro = {
-  label: 'Streets Unsafe',
-  // This event won't trigger randomly because of the oneTime option - thus, it doesn't need all of the keys dealing with where and hot girls can cause it.
-  oneTime: true,
-  // It does still need fetish information though!
-  fetishes: {
-    tentacles: true
-  },
-  // Time should be either 'morning' or 'evening' for one time events - don't leave it out.
-  time: 'morning',
-  // The day the event triggers on. More useful selectors will come later, but for now this is it.
-  day: 7,
-  // Only one variant for this event, so the "variants" option can be left out.
-  // variants: [1],
-  results: [
-    {
-      // Since one time events aren't associated with a particular girl, you must use an absolute path for the image.
-      image: '/content/girls/Sophitia/images/Tentacles4.jpg',
-      // Without a girl to pull data from or an action interrupted, the message can't have any replacement patterns in it. Told you one time events were simpler!
-      message: "The streets are not safe. Tentacled monstrosities have been seen in town. The authorities are hunting them, but there have been attacks as they seek to breed. These monsters are cunning and wise, almost intelligent, but full of lust and the desire for human women. Be wary of sending girls into the city in the evening.<br><br>Some actions are safer than others - Streetwalking is relatively safe, since she will be searching crowded areas, while Exercise is less so - a girl jogging alone at night is a prefect target for the beasts."
-      // One time events can't have deltas either. There's no girl to apply them to.
     }
   ]
 };
