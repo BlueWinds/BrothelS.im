@@ -33,6 +33,8 @@ Girls.Sakuya = {
     cleaning: ["Cleaning1.jpg", "Cleaning2.jpg"],
     exercise: ["Exercise1.jpg", "Exercise2.jpg", "Exercise3.jpg"],
     study: ["Study1.jpg", "Study2.jpg", "Study3.jpg", "Study4.jpg"],
+    naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg", "Naked4.jpg", "Naked5.jpg"],
+    prison: ["Prison1.jpg", "Prison2.jpg"],
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg"]
   },
   actions: {

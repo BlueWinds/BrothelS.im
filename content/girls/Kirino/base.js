@@ -33,6 +33,8 @@ Girls.Kirino = {
     cleaning: ["Cleaning1.jpg", "Cleaning2.jpg"],
     exercise: ["Exercise1.jpg", "Exercise2.jpg", "Exercise3.jpg"],
     study: ["Study1.jpg", "Study2.jpg", "Study3.jpg"],
+    naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg", "Naked4.jpg", "Naked5.jpg"],
+    prison: "Prison.jpg",
     tentacles: ["Fet1.jpg", "Fet3.jpg", "Fet4.jpg"]
   }
 };

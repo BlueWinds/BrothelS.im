@@ -202,7 +202,7 @@ Girl.prototype.doAction = function(time, action) {
   else {
     var endDelta = this.startDelta();
     if (typeof(action.variants) == 'function') {
-      i = action.variants.call(action, this);
+      i = action.variants.call(this, time, action);
     } else {
       i = Math.weightedRandom(action.variants || [1]);
     }

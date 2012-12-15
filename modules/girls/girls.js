@@ -149,6 +149,17 @@ e.GameRender.push(function() {
       beforeClose: function() { g.render(); }
     });
 
+    $('.action-list > ul', view).each(function() {
+      var height = 0, above = 0;
+      $(this).children().each(function() {
+        var temp_height = above;
+        $(this).find('li').each(function() { temp_height += $(this).outerHeight(); });
+        height = Math.max(height, temp_height);
+        above += $(this).outerHeight();
+      });
+      $(this).css('height', height);
+    });
+
     $('button.selected', view).each(function() {
       var a = $('a[href="#' + $(this).parent().attr('id') + '"]');
       a.parent().addClass('selected');
