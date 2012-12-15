@@ -244,6 +244,13 @@ button, a.button {
   margin: 1em 0;
 }
 
+.ui-button, .ui-button-text {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 li:focus {
   outline: none;
 }
