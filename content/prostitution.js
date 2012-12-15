@@ -63,3 +63,7 @@ Actions.Streetwalk.config = {
     happiness: -5
   }
 };
+
+Actions.Whore.config = {
+  minCustomers: 3
+};

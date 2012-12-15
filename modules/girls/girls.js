@@ -1,5 +1,7 @@
 var Actions = {};
 var Girls = {};
+e.GirlsPostMorning = [];
+e.GirlsPostEvening = [];
 
 e.Ready.push(function() {
   $.each(Actions, function(_id, action) {
@@ -44,8 +46,13 @@ e.GamePreDay.push(function() {
 
 e.GameNextDay.push(function() {
   $.each(g.girls, function(name, girl) {
-    girl.runDay();
+    girl.runDay('morning');
   });
+  e.invokeAll('GirlsPostMorning');
+  $.each(g.girls, function(name, girl) {
+    girl.runDay('evening');
+  });
+  e.invokeAll('GirlsPostEvening');
 });
 
 e.GamePostDay.push(function() {

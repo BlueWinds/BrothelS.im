@@ -2,7 +2,7 @@ var Girl = function(obj) {
   $.extend(this, obj);
   this._ = Girls[this.name];
 
-  // Upgrade function to add missing stats
+  // Add missing stats from base
   for (var i in Girl.stats) {
     var stat = Girl.stats[i];
     if (this[stat] === undefined) {
@@ -28,7 +28,6 @@ Girl.sexStats = ['soft libido', 'soft experience', 'hard libido', 'hard experien
 Girl.create = function(base) {
   var obj = {
     name: base.name,
-    _: base,
     actions: {
       morning: 'Rest',
       evening: 'Rest',
@@ -239,26 +238,23 @@ Girl.prototype.doAction = function(time, action) {
   }
 };
 
-Girl.prototype.runDay = function() {
+Girl.prototype.runDay = function(time) {
   if (this.status != 'Hired') {
     this.status = this.randomStatus();
     return;
   }
-  var acts= this.potentialActions('morning');
+  var acts= this.potentialActions(time);
 
-  var action = acts[this.actions.morning] || acts.Rest;
+  var action = acts[this.actions[time]] || acts.Rest;
   if (action.disabled) { action = acts.Rest; }
-  this.doAction('morning', action);
+  this.doAction(time, action);
 
-  acts = this.potentialActions('evening');
-  action = acts[this.actions.evening] || acts.Rest;
-  if (action.disabled) { action = acts.Rest; }
-  this.doAction('evening', action);
-
-  this.apply('money', -this.actions.pay);
-  var change = this.actions.pay - this.desiredPay();
-  change = change > 0 ? change * Girl.config.pay.above : change * Girl.config.pay.below;
-  this.apply('happiness', change);
+  if (time == 'evening') {
+    this.apply('money', -this.actions.pay);
+    var change = this.actions.pay - this.desiredPay();
+    change = change > 0 ? change * Girl.config.pay.above : change * Girl.config.pay.below;
+    this.apply('happiness', change);
+  }
 };
 
 Girl.prototype.startDelta = function(s) {

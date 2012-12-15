@@ -113,4 +113,35 @@ Girl.prototype.checkInterest = function(type) {
       delta: endDelta()
     }).save(this.name);
   }
+
+  var Whores;
+
+  e.GamePreDay.push(function() {
+    Whores = {};
+  });
+
+  e.GirlsPostMorning.push(function() {
+    for (var building in Whores) {
+      doWhores(Whores[building]);
+    }
+    Whores = {};
+  });
+  e.GirlsPostEvening.push(function() {
+    for (var building in Whores) {
+      doWhores(Whores[building]);
+    }
+  });
+
+  Actions.Whore.externalFunction = function(time, action) {
+    var building = this.building();
+    Whores[building] = Whores[building] || {};
+    Whores[building][this.name] = this;
+  };
+
+  function doWhores(girls) {
+    var buildingCustomers = [];
+    for (var i = 0; i < Actions.Whore.config.minCustomers; i++) {
+
+    }
+  }
 })();
