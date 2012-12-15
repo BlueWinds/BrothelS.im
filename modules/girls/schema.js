@@ -9,14 +9,10 @@ var Girl = function(obj) {
       this[stat] = this._[stat] !== undefined ? this._[stat] : 30;
     }
   }
-  for (i in Girl.sex) {
-    var sex = Girl.sex[i];
-    var l = sex + ' libido', x = sex + ' experience';
-    if (this[l] === undefined) {
-      this[l] = (this._[l] !== undefined ? this._[l] : 30);
-    }
-    if (this[x] === undefined) {
-      this[x] = (this._[x] !== undefined ? this._[x] : 30);
+  for (i in Girl.sexStats) {
+    var sex = Girl.sexStats[i];
+    if (this[sex] === undefined) {
+      this[sex] = (this._[sex] !== undefined ? this._[sex] : 30);
     }
   }
   return this;
@@ -27,6 +23,7 @@ Girl.stats = [
 ];
 
 Girl.sex = ['soft', 'hard', 'anal', 'fetish'];
+Girl.sexStats = ['soft libido', 'soft experience', 'hard libido', 'hard experience', 'anal libido', 'anal experience', 'fetish libido', 'fetish experience'];
 
 Girl.create = function(base) {
   var obj = {
@@ -80,8 +77,7 @@ Girl.prototype.apply = function(stat, delta) {
   }
   for (var key in stat) {
     if (Girl.stats.indexOf(key) == -1 && key != 'money') {
-      var split = key.split(' ');
-      if (Girl.sex.indexOf(split[0]) == -1 || (split[1] != 'experience' && split[1] != 'libido') || split[2]) {
+      if (Girl.sexStats.indexOf(key) == -1) {
         return;
       }
     }
@@ -274,16 +270,21 @@ Girl.prototype.startDelta = function(s) {
   s.forEach(function(stat) {
     delta[stat] = girl[stat];
   });
+  if (s === Girl.stats) {
+    Girl.sexStats.forEach(function(sex) {
+      delta[sex] = girl[sex];
+    });
+  }
   return function() {
     var change = {};
     if (g.money - delta.money) {
       change.money = g.money - delta.money;
     }
-    s.forEach(function(stat) {
+    for (var stat in delta) {
       if (girl[stat] - delta[stat]) {
         change[stat] = girl[stat] - delta[stat];
       }
-    });
+    }
     return change;
   };
 };
@@ -311,16 +312,16 @@ Girl.prototype.get = function(stat) {
   if (stat.substr(0, 1) == '-') {
     return 100 - this.get(stat.substr(1));
   }
-  var sum = 0, sex;
+  var sum = 0, i;
   if (stat == 'experience') {
-    for (sex in Girl.sex) {
-      sum += this[sex + ' experience'];
+    for (i in Girl.sex) {
+      sum += this[Girl.sex[i] + ' experience'];
     }
     return Math.floor(sum / Girl.sex.length);
   }
   if (stat == 'libido') {
-    for (sex in Girl.sex) {
-      sum += this[sex + ' libido'];
+    for (i in Girl.sex) {
+      sum += this[Girl.sex[i] + ' libido'];
     }
     return Math.floor(sum / Girl.sex.length);
   }

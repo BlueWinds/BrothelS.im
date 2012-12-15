@@ -154,6 +154,7 @@
             <%
               var stats = [], experience = [], libido = [];
               Girl.stats.forEach(function(stat) {
+                if (stat == "happiness" || stat == "endurance") { return; }
                 stats.push(girl.S(stat));
               });
               Girl.sex.forEach(function(sex) {

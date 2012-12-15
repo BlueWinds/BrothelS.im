@@ -56,7 +56,7 @@ Actions.Streetwalk.config = {
   },
   confused: 'You asked <%= girl.name %> to streetwalk, but also told her not to perform any type of sex. She wandered around for a while and fed the pidgins before going home (make sure at least one sex act is checked on her details page).',
   action: '<%= girl.name %> walked around the city picking up strangers.',
-  message: '<%= girl.name %> met a <%= customer.profession %> interested in <em><%= Game.strings.noun[customer.sex[0]] %></em> or <em><%= Game.strings.noun[customer.sex[1]] %></em>, and they agreed on <strong class="<%= sex %>"><%= Game.strings.noun[sex] %></strong>.<br><br><%- result %>',
+  message: '<%= girl.name %> met a <%= customer.profession %> interested in <em><%= Game.strings.noun[customer.sex[0]] %></em>, and they agreed on <strong class="<%= sex %>"><%= Game.strings.noun[sex] %></strong>. He wanted a <em><%= Game.strings.adj[customer.wants[0]] %></em><% if (customer.wants[0] != customer.wants[1]) { %> and <em><%= Game.strings.adj[customer.wants[1]] %></em><% } %> girl.<br><br><%- result %>',
   uncooperative: 'But she was uncooperative and <strong>refused</strong>. He left unsatisfied without paying anything.',
   streetwalkDelta: {
     endurance: -10,

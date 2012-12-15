@@ -35,8 +35,7 @@ Actions.attendParty = {
         var reward = {
           happiness: 25,
           endurance: -40,
-          charisma: 5,
-          modesty: -3
+          charisma: 5
         };
         var money = this.get(client.wants[0]) * 10;
         money += this.get(client.wants[1]) * 5;

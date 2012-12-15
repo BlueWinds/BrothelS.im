@@ -5,7 +5,7 @@ Girl.prototype.maxCustomers = function() {
 };
 
 Girl.prototype.checkInterest = function(type) {
-  var interest = this.obedience * 2 + this[type + ' libido'] * 2;
+  var interest = this.obedience * 1.5 + this[type + ' libido'] * 2;
   interest += this[type + ' experience'] + this.happiness / 2;
   interest = (interest / 500 + Math.random());
   interest -= Actions.Streetwalk.config.types[type].r;
@@ -21,13 +21,14 @@ Girl.prototype.checkInterest = function(type) {
     };
     var endDelta = this.startDelta();
     this.apply(Actions.Streetwalk.config.streetwalkDelta);
-    var doSex = [];
-    for (var sex in Girl.sex) {
-      if (this.actions[sex]) {
-        doSex.push(sex);
+    var doSex = false;
+    for (var i in Girl.sex) {
+      if (this.actions[Girl.sex[i]]) {
+        doSex = true;
+        break;
       }
     }
-    if (!doSex.length) {
+    if (!doSex) {
       new Message({
         type: 'Confused',
         time: time,
@@ -48,7 +49,7 @@ Girl.prototype.checkInterest = function(type) {
     found *= (Math.random() / 2 + 0.5);
     found = Math.ceil(found * this.maxCustomers());
 
-    for (var i = 0; i < found; i++) {
+    for (i = 0; i < found; i++) {
       doCustomer.call(this, time);
     }
   };
@@ -83,10 +84,10 @@ Girl.prototype.checkInterest = function(type) {
       }).save(this.name);
       return;
     }
-    customer.satisfaction *= interest;
     customer.satisfaction += this.charisma / 200;
     customer.satisfaction += this.get(customer.wants[0]) / 100;
     customer.satisfaction += this.get(customer.wants[1]) / 300;
+    customer.satisfaction *= interest;
     if (this.happiness < 50) {
       customer.satisfaction *= this.happiness / 100 + 0.5;
     }

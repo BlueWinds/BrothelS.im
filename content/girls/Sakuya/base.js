@@ -1,5 +1,5 @@
 Girls.Sakuya = {
-  description: "<p>While working as a maid in a foreign land, Sakuya defended her mistress against a tireless stream of invaders before finally deciding enough was enough. Using powerful magic, she froze time and attempted to \"cure\" the source of their problems.</p><p>The spell backfired, flinging her halfway across the world and nearly killing her. Since her magical powers are much frayed, and there isn't much call for maids, she's been considering switching careers...</p>",
+  description: "<p>While working as a maid in a foreign land, Sakuya defended her mistress against a tireless stream of invaders before finally deciding enough was enough. Using powerful magic, she froze time and attempted to \"cure\" the source of their problems.</p><p>The spell backfired, flinging her halfway across the world and nearly killing her. Since her magical powers are much frayed, and there isn't much call for maids, she's been considering switching careers... it would still take a bit of convincing to get her to lower herself to wandering the streets as a prostitute.</p>",
   status: {
     Town: 0.2,
     'For Hire': 0.8

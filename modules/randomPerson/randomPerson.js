@@ -13,7 +13,7 @@ var randomPerson = function(class_) {
     class_: class_,
     profession: profession,
     wants: [],
-    sex: $.extend({}, Girl.sex)
+    sex: Girl.sex.slice(0)
   };
   if (info.image) {
     obj.image = Math.choice(info.image);

@@ -118,7 +118,7 @@ e.GameRender.push(function() {
 
     $('.action-list .action', view).click(function() {
       if ($(this).hasClass('disabled')) { return; }
-      $('.action-list li').removeClass('hover');
+      $('.action-list li').removeClass('hover selected');
       $('.action-list a').removeClass('ui-state-hover');
       var _id = $(this).attr('name');
       var time = $(this).closest('div').attr('id');

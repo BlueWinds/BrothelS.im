@@ -277,8 +277,8 @@ h3 {
 }
 
 .action.disabled {
-  background: url("../../libraries/images/ui-bg_glass_20_555555_1x400.png") repeat-x scroll 50% 50% #555555 !important;
-  cursor: default;
-  border: 1px solid #666666 !important;
-  opacity: 0.5;
+  background: #444 !important;
+  color: #888;
+  cursor: default !important;
+  border: 1px solid #666 !important;
 }
