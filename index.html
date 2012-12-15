@@ -239,50 +239,38 @@
         </div>
       </div>
       <hr class="clear">
-      <div class="column pct-50">
-        <h6 class="center">Morning</h6>
-        <div class="horizontal-tabs" id="morning">
-          <ul>
-            <% var i = 0; %>
-            <% for (var key in morningActions.CsortToObject('group')) { %>
-              <li><a href="#action-tab-<%= i %>"><%= key %></a></li>
-              <% i++ %>
-            <% } %>
-          </ul>
-          <% i = 0; %>
-          <% $.each(morningActions.CsortToObject('group'), function(key, actions) { %>
-            <div id="action-tab-<%= i %>">
-              <% actions.forEach(function(action) { %>
-                <button class="action <%= girl.actions.morning == action._id ? 'selected' : '' %> <%= action.disabled ? 'disabled' : '' %>" title="<%= action.description %>" value="<%= action._id %>">
-                  <%= action.label %>
-                </button>
-              <% }) %>
-            </div>
-            <% i++ %>
+      <% function createActionsList(list, doing) { %>
+        <ul>
+          <% $.each(list.CsortToObject('group'), function(group, actions) { %>
+            <li name="<%= group %>" class="<%= actions.Cfilter('_id', doing).length ? 'selected' : ''%>">
+              <span>
+                <%= group %>
+              </span>
+              <ul>
+                <% actions.forEach(function(action) { %>
+                  <li class="action <%= action.disabled ? 'disabled' : '' %> <%= doing == action._id ? 'selected' : '' %>" name="<%= action._id %>">
+                    <span title="<%= action.description %>">
+                      <%= action.label %>
+                    </span>
+                  </li>
+                <% }) %>
+              </ul>
+            </li>
           <% }) %>
+        </ul>
+      <% } %>
+      <div class="column pct-50 center">
+        <h6>Morning</h6>
+        <div id="morning" class="action-list">
+          <a class="button"><%= girl.actions.morningLabel %></a>
+          <% createActionsList(morningActions, girl.actions.morning) %>
         </div>
       </div>
-      <div class="column pct-50">
-        <h6 class="center">Evening</h6>
-        <div class="horizontal-tabs" id="evening">
-          <ul>
-            <% var i = 100; %>
-            <% for (var key in eveningActions.CsortToObject('group')) { %>
-              <li><a href="#action-tab-<%= i %>"><%= key %></a></li>
-              <% i++ %>
-            <% } %>
-          </ul>
-          <% i = 100; %>
-          <% $.each(eveningActions.CsortToObject('group'), function(key, actions) { %>
-            <div id="action-tab-<%= i %>">
-              <% actions.forEach(function(action) { %>
-                <button class="action <%= girl.actions.evening == action._id ? 'selected' : '' %> <%= action.disabled ? 'disabled' : '' %>" title="<%= action.description %>" value="<%= action._id %>">
-                  <%= action.label %>
-                </button>
-              <% }) %>
-            </div>
-            <% i++ %>
-          <% }) %>
+      <div class="column pct-50 center">
+        <h6>Evening</h6>
+        <div id="evening" class="action-list">
+          <a class="button"><%= girl.actions.eveningLabel %></a>
+          <% createActionsList(eveningActions, girl.actions.evening) %>
         </div>
       </div>
     </div>

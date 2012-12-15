@@ -105,57 +105,40 @@ e.GameRender.push(function() {
       girl.actions[sex] = Boolean(checked);
     });
 
-    $('#morning button', view).click(function() {
-      if ($(this).hasClass('disabled')) { return; }
-      var val = $(this).val();
-      $('#morning button').removeClass('selected');
-      $('#morning li').removeClass('selected');
-      $(this).addClass('selected');
-      var li = $('a[href="#' + $(this).parent().attr('id') + '"]').parent();
-      li.addClass('selected');
-      girl.actions.morning = val;
-      girl.actions.morningLabel = context.morningActions[val].label;
-      var evening;
-      if (context.morningActions[val].allDay) {
-        evening = [val, context.eveningActions[val].label];
-      } else if (context.eveningActions[girl.actions.evening].allDay) {
-        evening = ['Rest', 'Rest'];
-      }
-      if (evening) {
-        girl.actions.evening = evening[0];
-        girl.actions.eveningLabel = evening[1];
-        $('#evening button').removeClass('selected');
-        var new_button = $('#evening button[value="' + evening[0] + '"]', view);
-        new_button.addClass('selected');
-        li = $('a[href="#' + new_button.parent().attr('id') + '"]').parent();
-        li.addClass('selected');
-      }
+    $('.action-list li, .action-list a', view).mouseenter(function(event) {
+      $('.action-list li').removeClass('hover');
+      $('.action-list li:hover').addClass('hover');
+      $(this).closest('.action-list').children('a').addClass('ui-state-hover');
+      $(this).find('li').first().addClass('hover');
+    }).mouseleave(function(event) {
+      $(this).removeClass('hover');
     });
-    $('#evening button', view).click(function() {
+    $('.action-list > ul', view).mouseleave(function() {
+      $('.action-list a').removeClass('ui-state-hover');
+    });
+
+    $('.action-list .action', view).click(function() {
       if ($(this).hasClass('disabled')) { return; }
-      var val = $(this).val();
-      $('#evening button').removeClass('selected');
-      $('#evening li').removeClass('selected');
-      $(this).addClass('selected');
-      var li = $('a[href="#' + $(this).parent().attr('id') + '"]').parent();
-      li.addClass('selected');
-      girl.actions.evening = val;
-      girl.actions.eveningLabel = context.eveningActions[val].label;
-      var morning;
-      if (context.eveningActions[val].allDay) {
-        morning = [val, context.morningActions[val].label];
-      } else if (context.morningActions[girl.actions.morning].allDay) {
-        morning = ['Rest', 'Rest'];
+      var _id = $(this).attr('name');
+      var time = $(this).closest('div').attr('id');
+      var other_time = time == 'morning' ? 'evening' : 'morning';
+      var other_id = girl.actions[other_time];
+      if (context[time + 'Actions'][_id].allDay) {
+        other_id = _id;
+      } else if (context[other_time + 'Actions'][other_id].allDay) {
+        other_id = 'Rest';
       }
-      if (morning) {
-        girl.actions.morning = morning[0];
-        girl.actions.morningLabel = morning[1];
-        $('#morning button').removeClass('selected');
-        var new_button = $('#morning button[value="' + morning[0] + '"]', view);
-        new_button.addClass('selected');
-        li = $('a[href="#' + new_button.parent().attr('id') + '"]').parent();
-        li.addClass('selected');
-      }
+      var action = context[time + 'Actions'][_id];
+      var other_action = context[other_time + 'Actions'][other_id];
+      girl.actions[time] = _id;
+      girl.actions[time + 'Label'] = action.label;
+      girl.actions[other_time] = other_id;
+      girl.actions[other_time + 'Label'] = other_action.label;
+      $('.action-list li').removeClass('selected');
+      $('#' + time + ' li[name="' + action.group + '"]').addClass('selected');
+      $('#' + other_time + ' li[name="' + other_action.group + '"]').addClass('selected');
+      $('#' + time + ' li.action[name="' + action._id + '"]').addClass('selected');
+      $('#' + other_time + ' li.action[name="' + other_action._id + '"]').addClass('selected');
     });
 
     view.dialog({
