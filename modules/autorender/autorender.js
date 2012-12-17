@@ -4,6 +4,12 @@ e.Autorender = e.Autorender || [];
 e.Autorender.push(function(element) {
   $('button, a.button', element).button();
   $('.sparkline', element).sparkline();
+  $("ul.sf-menu", element).superfish({
+    delay: 400,
+    speed: 'fast',
+    dropShadows: false,
+    autoArrows: false
+  });
   $(element).tooltip({
     show: {
       delay: 300

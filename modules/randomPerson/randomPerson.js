@@ -1,16 +1,16 @@
 RandomPeople = {};
 
-var randomPerson = function(class_) {
+var randomPerson = function(_class) {
   var keys = Object.keys(RandomPeople);
-  if (!class_) {
-    class_ = Math.choice(keys);
+  if (!_class) {
+    _class = Math.choice(keys);
   }
-  keys = Object.keys(RandomPeople[class_]);
+  keys = Object.keys(RandomPeople[_class]);
   var profession = Math.choice(keys);
-  var info = RandomPeople[class_][profession];
+  var info = RandomPeople[_class][profession];
   var obj = {
     name: nameGen.randomName(2).capitalize(),
-    class_: class_,
+    _class: _class,
     profession: profession,
     wants: [],
     sex: Girl.sex.slice(0)
@@ -31,5 +31,6 @@ var randomPerson = function(class_) {
   if (info.description) {
     obj.description = Math.choice(info.description);
   }
+  obj.class_rank = RandomPeople._classes.indexOf(obj._class);
   return obj;
 };

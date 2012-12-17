@@ -23,6 +23,15 @@ Object.defineProperty(Object.prototype, "Cfirst", {
   }
 });
 
+Object.defineProperty(Object.prototype, "Clast", {
+  enumerable: false,
+  writable: false,
+  configurable: true,
+  value: function() {
+    return this[Object.keys(this)[Object.keys(this).length - 1]];
+  }
+});
+
 Object.defineProperty(Object.prototype, "Cmultiply", {
   enumerable: false,
   writable: false,
@@ -164,12 +173,34 @@ Object.defineProperty(Object.prototype, "Csort", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function(key) {
+  value: function(key, reverse) {
     var ret = this.slice(0);
     ret.sort(function(a, b) {
-      return a[key] - b[key];
+      return reverse ? b[key] - a[key] : a[key] - b[key];
     });
     return ret;
+  }
+});
+
+Object.defineProperty(Object.prototype, "CtoString", {
+  enumerable: false,
+  writable: false,
+  configurable: true,
+  value: function(form) {
+    var items = [];
+    for (var key in this) {
+      // A bit of a circular dependency here - the T function is defined in modules/game/game.js, and relies on information provided in content/game.js to be actually useful. Cheating, I know, but nothing can render to the screen until game.js is loaded anyway, so it's not too bad.
+      var t = T(this[key], form);
+      if (items.indexOf(t) == -1) {
+        items.push(t);
+      }
+    }
+    console.log(items);
+    if (items.length == 1) { return items[0]; }
+
+    var str = items.slice(0, -1).join(', ');
+    console.log(str + ' and ' + items.Clast());
+    return str + ' and ' + items.Clast();
   }
 });
 
@@ -212,6 +243,9 @@ Math.weightedRandom = function(variants) {
   return i;
 };
 
+ejs.open = '<<';
+ejs.close = '>>';
+
 $(function() {
   $.ui.dialog.prototype.options.show = 'fade';
   $.ui.dialog.prototype.options.hide = 'fade';
@@ -221,6 +255,6 @@ $(function() {
   $(document).on("dialogcreate", function(event, ui) {
     e.invokeAll('Autorender', event.target);
   }).on('dialogclose', function(event) {
-    $(event.target).remove();
+    $(event.target).dialog('destroy').remove();
   });
 });

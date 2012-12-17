@@ -11,12 +11,6 @@ e.GamePreDay.push(function() {
     if (!event.oneTime) { return; }
 
     if (event.day != g.day) { return; }
-    var i;
-    if (typeof(event.variants) == 'function') {
-      i = event.variants.call(event, this);
-    } else {
-      i = Math.weightedRandom(event.variants || [1]);
-    }
     function doMessage(image, text) {
       var message = new Message({
         type: event.label,
@@ -24,7 +18,7 @@ e.GamePreDay.push(function() {
         image: image.substr(1)
       }).save('Events');
     }
-    var results = event.results[i];
+    var results = Game.getResults(this);
     if (typeof(results.message) == 'object') {
       for (var j in results.message) {
         doMessage(results.image[j], results.message[j]);
@@ -43,13 +37,7 @@ e.GamePreDay.push(function() {
       oldDoAction.call(this, time, action);
       return;
     }
-    var i;
-    if (typeof(event.variants) == 'function') {
-      i = event.variants.call(event, this);
-    } else {
-      i = Math.weightedRandom(event.variants || [1]);
-    }
-    var results = event.results[i];
+    var results = Game.getResults(event, this);
     var endDelta = this.startDelta();
     var context = {
       event: event,

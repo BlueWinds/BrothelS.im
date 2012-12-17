@@ -9,6 +9,8 @@ var Building = function(obj) {
     }
   }
 
+  this.status = obj.status || this._.status;
+
   return this;
 };
 
@@ -89,32 +91,6 @@ Building.prototype.girls = function() {
       }
       return end;
     };
-  };
-
-  var oldGirlActions = Girl.prototype.potentialActions;
-  Girl.prototype.potentialActions = function(time) {
-    var actions = oldGirlActions.call(this, time);
-    var girl = this;
-    $.each(actions, function(_id, action) {
-      if (!action.requiresRoom) {
-        return;
-      }
-      var max = Building.roomKeySum(action.requiresRoom.type, action.requiresRoom.key);
-      if (!max) {
-        delete actions[_id];
-        return;
-      }
-      var already = g.girls.Cfilter('actions', time, _id).length;
-      if (already < max) {
-        return;
-      }
-      if (already == max && girl.actions[time] == _id) {
-        return;
-      }
-      action.disabled = 'You only have enough ' + action.requiresRoom.type + ' to ' + action.label + ' ' + max + ' girls at a time.';
-      action.description = action.disabled;
-    });
-    return actions;
   };
 })();
 

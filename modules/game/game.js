@@ -9,6 +9,14 @@ $.extend(e, {
   GamePostDay: []
 });
 
+T = function(string, type) {
+  type = type || 'noun';
+  if (Game.strings[type] && Game.strings[type][string]) {
+    return '<span class="' + string + '">' + Game.strings[type][string] + '</span>';
+  }
+  return string;
+};
+
 Game.loadCurrent = function() {
     name = localStorage.getItem('current-game');
     Game.load(name);
@@ -104,7 +112,7 @@ e.Ready.push(function() {
     $('button', form).click(function(event) {
       event.preventDefault();
       Game.start({
-        tentacles: Boolean($('#game-tentacles', form).val())
+        tentacles: Boolean($('#game-tentacles', form).attr('checked'))
       });
       form.dialog('close');
       return false;

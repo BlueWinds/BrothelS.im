@@ -1,3 +1,68 @@
+Object.defineProperty(RandomPeople, '_classes', { value: [
+  'Very Low Class',
+  'Low Class',
+  'Middle Class',
+  'Upper Class',
+  'High Class'
+]});
+
+RandomPeople['Very Low Class'] = {
+  'Homeless Person': {
+    wants: ['libido', 'experience', 'charisma', 'constitution']
+  },
+  'Druggie': {
+    wants: ['constitution', 'libido', '-modesty', 'obedience']
+  },
+  'Refugee': {
+    wants: ['obedience', 'charisma', 'modesty', 'happiness']
+  }
+};
+
+RandomPeople['Low Class'] = {
+  'Barkeep': {
+    wants: ['-obedience', 'experience', 'endurance', 'libido']
+  },
+  'Brewer': {
+    wants: ['-intelligence', 'experience', '-modesty', 'constitution']
+  },
+  'Sailor': {
+    wants: ['-obedience', '-modesty', 'endurance', 'experience']
+  },
+  'Blacksmith': {
+    wants: ['-libido', 'constitution', 'modesty', '-intelligence']
+  }
+};
+
+RandomPeople['Middle Class'] = {
+  'Chef': {
+    wants: ['charisma', 'constitution', 'experience', 'endurance']
+  },
+  'Priest': {
+    wants: ['obedience', 'intelligence', 'modesty', '-experience']
+  },
+  'Astrologer': {
+    wants: ['-intelligence', 'obedience', 'libido', 'charisma']
+  },
+  'Artisian': {
+    wants: ['-libido', 'intelligence', 'happiness', 'experience']
+  }
+};
+
+RandomPeople['Upper Class'] = {
+  'Diplomat': {
+    wants: ['charisma', 'intelligence', '-experience', '-libido']
+  },
+  'Courtier': {
+    wants: ['experience', 'obedience', 'charisma', 'libido']
+  },
+  'Advocate': {
+    wants: ['intelligence', 'obedience', 'modesty', '-experience']
+  },
+  'Sargent': {
+    wants: ['constitution', '-obedience', 'happiness', 'endurance']
+  }
+};
+
 RandomPeople['High Class'] = {
   'Drug Lord': {
     wants: ['libido', '-intelligence', 'obedience', 'modesty'],
@@ -34,62 +99,5 @@ RandomPeople['High Class'] = {
       'Younger than she had expected, he seemed newly come into his position, the sword at his side an uncomfortable burden.'
     ],
     image: ['content/randomPerson/Knight1.jpg', 'content/randomPerson/Knight2.png']
-  }
-};
-
-RandomPeople['Upper Class'] = {
-  'Diplomat': {
-    wants: ['charisma', 'intelligence', '-experience', '-libido']
-  },
-  'Courtier': {
-    wants: ['experience', 'obedience', 'charisma', 'libido']
-  },
-  'Advocate': {
-    wants: ['intelligence', 'obedience', 'modesty', '-experience']
-  },
-  'Sargent': {
-    wants: ['constitution', '-obedience', 'happiness', 'endurance']
-  }
-};
-
-RandomPeople['Middle Class'] = {
-  'Chef': {
-    wants: ['charisma', 'constitution', 'experience', 'endurance']
-  },
-  'Priest': {
-    wants: ['obedience', 'intelligence', 'modesty', '-experience']
-  },
-  'Astrologer': {
-    wants: ['-intelligence', 'obedience', 'libido', 'charisma']
-  },
-  'Artisian': {
-    wants: ['-libido', 'intelligence', 'happiness', 'experience']
-  }
-};
-
-RandomPeople['Low Class'] = {
-  'Barkeep': {
-    wants: ['-obedience', 'experience', 'endurance', 'libido']
-  },
-  'Brewer': {
-    wants: ['-intelligence', 'experience', '-modesty', 'constitution']
-  },
-  'Sailor': {
-    wants: ['-obedience', '-modesty', 'endurance', 'experience']
-  },
-  'Blacksmith': {
-    wants: ['-libido', 'constitution', 'modesty', '-intelligence']
-  }
-};
-
-RandomPeople['Very Low Class'] = {
-  'Homeless Person': {
-    wants: ['libido', 'experience', 'charisma', 'constitution']
-  },
-  'Druggie': {
-    wants: ['constitution', 'libido', '-modesty', 'obedience']
-  },
-  'Refugee': {
-    wants: ['obedience', 'charisma', 'modesty', 'happiness']
   }
 };

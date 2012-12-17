@@ -22,7 +22,7 @@ Girls['Dark Magician Girl'] = {
   'fetish experience': 0,
   specialRules: {},
   images: {
-    basePath: "content/girls/Dark Magician Girl/images",
+    basePath: "content/girls/DarkMagicianGirl/images",
     base: "Base.png",
     refuse: "Refuse.jpg",
     tired: ["Tired1.jpg", "Tired2.jpg"],
@@ -64,7 +64,7 @@ Girls['Dark Magician Girl'] = {
               happiness: 0.5
             };
           },
-          message: 'Dark Magician Girl drew upon her power to revitalize <%= action.targetGirl.name %>, restoring her energy (<span class="endurance delta">+<%= action.targetDelta.endurance %></span>, <span class="happiness delta">+<%= action.targetDelta.happiness %></span>).'
+          message: 'Dark Magician Girl drew upon her power to revitalize <<= action.targetGirl.name >>, restoring her energy (<span class="endurance delta">+<<= action.targetDelta.endurance >></span>, <span class="happiness delta">+<<= action.targetDelta.happiness >></span>).'
         }
       ] // results
     } //healing

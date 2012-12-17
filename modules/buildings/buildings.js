@@ -71,7 +71,12 @@ e.GameRender.push(function() {
       var opt = {
         title: building.name,
         width: '35em',
-        beforeClose: function() { g.render(); }
+        beforeClose: function() {
+          $.each(g.girls, function(name, girl) {
+            girl.verifyActions();
+          });
+          g.render();
+        }
       };
       if (old_view) { opt.show = false; }
       view.dialog(opt);
@@ -110,6 +115,32 @@ e.GameRender.push(function() {
   Girl.prototype.desiredPay = function() {
     var pay = originalPay.call(this);
     return this.building() ? pay : pay + Building.config.noRoomDailyCost;
+  };
+
+  var oldGirlActions = Girl.prototype.potentialActions;
+  Girl.prototype.potentialActions = function(time) {
+    var actions = oldGirlActions.call(this, time);
+    var girl = this;
+    $.each(actions, function(_id, action) {
+      if (!action.requiresRoom) {
+        return;
+      }
+      var max = Building.roomKeySum(action.requiresRoom.type, action.requiresRoom.key);
+      if (!max) {
+        delete actions[_id];
+        return;
+      }
+      var already = g.girls.Cfilter('actions', time, _id).length;
+      if (already < max) {
+        return;
+      }
+      if (already == max && girl.actions[time] == _id) {
+        return;
+      }
+      action.disabled = 'You only have enough ' + action.requiresRoom.type + 's to ' + action.label + ' ' + max + ' girls at a time.';
+      action.description = action.disabled;
+    });
+    return actions;
   };
 })();
 

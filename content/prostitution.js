@@ -4,29 +4,39 @@ Actions.Streetwalk.config = {
     soft: {
       r: 0.4,
       endurance: -6,
-      pays: 100
+      money: 100,
+      'soft experience': 1
     },
     hard: {
       r: 0.6,
       endurance: -9,
-      pays: 150
+      money: 150,
+      'hard experience': 1,
+      'soft experience': 0.2
     },
     anal: {
       r: 0.7,
       endurance: -14,
-      pays: 230
+      money: 230,
+      'anal experience': 1,
+      'hard experience': 0.2,
+      'soft experience': 0.2
     },
     fetish: {
       r: 0.85,
       endurance: -16,
-      pays: 450
+      money: 450,
+      'fetish experience': 1,
+      'anal experience': 0.2,
+      'hard experience': 0.2,
+      'soft experience': 0.2
     }
   },
   results: {
     soft: [
       'They kissed passionatly for a while, then he blushed, mumbled about the time and left in a hurry.',
       'She sucked his dick in the middle of the street, though she didn\'t swallow.',
-      'He sucked her off in an alley way, then she gave him a blowjob.',
+      'He caressed her breasts and licked her pussy in an alley way, then they switched places and she gave him a blowjob.',
       'She crouched down behing a trash can and gave him a titjob.',
       'He jerked off all over her face and hair, then left in a hurry.'
     ],
@@ -54,10 +64,6 @@ Actions.Streetwalk.config = {
     obedience: -2,
     happiness: -3
   },
-  confused: 'You asked <%= girl.name %> to streetwalk, but also told her not to perform any type of sex. She wandered around for a while and fed the pidgins before going home (make sure at least one sex act is checked on her details page).',
-  action: '<%= girl.name %> walked around the city picking up strangers.',
-  message: '<%= girl.name %> met a <%= customer.profession %> interested in <em><%= Game.strings.noun[customer.sex[0]] %></em>, and they agreed on <strong class="<%= sex %>"><%= Game.strings.noun[sex] %></strong>. He wanted a <em><%= Game.strings.adj[customer.wants[0]] %></em><% if (customer.wants[0] != customer.wants[1]) { %> and <em><%= Game.strings.adj[customer.wants[1]] %></em><% } %> girl.<br><br><%- result %>',
-  uncooperative: 'But she was uncooperative and <strong>refused</strong>. He left unsatisfied without paying anything.',
   streetwalkDelta: {
     endurance: -10,
     happiness: -5
@@ -65,5 +71,49 @@ Actions.Streetwalk.config = {
 };
 
 Actions.Whore.config = {
-  minCustomers: 3
+  minCustomers: 1,
+  maxCustomers: 20,
+  uncooperative: Actions.Streetwalk.config.uncooperative,
+  customerClass: {
+    'Very Low Class': {
+      min: 0,
+      max: 25,
+      pays: 0.8,
+      minSatisfaction: 0.5,
+      bad: -0.2,
+      good: 0.2
+    },
+    'Low Class': {
+      minReputation: 10,
+      maxReputation: 60,
+      pays: 1.2,
+      minSatisfaction: 0.6,
+      bad: -0.5,
+      good: 0.5
+    },
+    'Middle Class': {
+      minReputation: 25,
+      maxReputation: 90,
+      pays: 1.5,
+      minSatisfaction: 0.7,
+      bad: -1,
+      good: 0.5
+    },
+    'Upper Class': {
+      minReputation: 60,
+      maxReputation: 100,
+      pays: 1.9,
+      minSatisfaction: 0.9,
+      bad: -2,
+      good: 1
+    },
+    'High Class': {
+      minReputation: 80,
+      maxReputation: 100,
+      pays: 2.3,
+      minSatisfaction: 1.1,
+      bad: -3,
+      good: 1.5
+    }
+  }
 };

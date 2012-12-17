@@ -154,3 +154,90 @@
 .ui-tooltip p:last-child {
   margin-bottom: 0;
 }
+
+.sf-menu {
+  height: 2em !important;
+  list-style: none;
+  margin: 1em 0;
+  padding: 0;
+}
+
+.sf-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: -999em;
+  width: 8em;
+}
+
+.sf-menu li {
+  background: url("../../libraries/images/ui-bg_glass_20_555555_1x400.png") repeat-x scroll 50% 50% #555555;
+  border: 1px solid #666666;
+  height: 2em;
+  position: relative;
+  width: 8em;
+}
+
+.sf-menu > li {
+  border-radius: 6px;
+}
+
+.sf-menu > li:first-child:hover {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.sf-menu li:first-child {
+  border-top-right-radius: 6px;
+}
+
+.sf-menu li:last-child {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.sf-menu li:hover, .sf-menu li.sfHover {
+  background: url("../../libraries/images/ui-bg_glass_40_0078a3_1x400.png") repeat-x scroll 50% 50% #0078A3;
+  border: 1px solid #59B4D4;
+}
+
+.sf-menu a {
+  border: none;
+  cursor: default;
+  color: #FFF;
+  display: block;
+  font-weight: 700;
+  height: 1em;
+  padding: 0.5em 0;
+}
+
+.sf-menu a.action {
+  cursor: pointer;
+}
+
+.sf-menu li:hover ul,
+.sf-menu li.sfHover ul {
+  left: 8em;
+  top: -1px;
+  z-index: 99;
+}
+
+ul.sf-menu li:hover li ul,
+ul.sf-menu li.sfHover li ul {
+  top: -999em;
+}
+ul.sf-menu li li:hover ul,
+ul.sf-menu li li.sfHover ul {
+  left: 8em; /* match ul width */
+  top: -1px;
+}
+ul.sf-menu li li:hover li ul,
+ul.sf-menu li li.sfHover li ul {
+  top: -999em;
+}
+ul.sf-menu li li li:hover ul,
+ul.sf-menu li li li.sfHover ul {
+  left: 8em;
+  top: -1px;
+}

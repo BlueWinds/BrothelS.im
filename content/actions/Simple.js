@@ -1,11 +1,11 @@
 Actions.Rest = {
   label: 'Rest',
   group: 'Chores',
-  description: 'Giving a girl time off increases both <%= Game.strings.noun.endurance %> and <%= Game.strings.noun.happiness %>.',
+  description: 'Giving a girl time off increases both <<- T("endurance") >> and <<- T("happiness") >>.',
   results: [
     {
       image: 'tired',
-      message: '<%= girl.name %> took some time off to recover.',
+      message: '<<= girl.name >> took some time off to recover.',
       delta: {
         endurance: 12,
         happiness: 5
@@ -34,6 +34,9 @@ Actions.Lockdown = {
     // modesty: 50
   // },
 
+  // You can set ownerParticipation to define this action as requiring the player's direct supervision - thus, only one girl can take this action at a time.
+  // ownerParticipation: true
+
   // An action can require that the player owns certain rooms. If that isn't the case, remove the requiresRoom key entirely.
   requiresRoom: {
     // The type of room needed.
@@ -41,9 +44,10 @@ Actions.Lockdown = {
     // The key of those rooms to sum up to count how many girls can do the action.
     key: 'size'
   },
-  // The description of the action, showed on hover. Replacement patterns can again be used. Notice that we're translating "obedience" through the Game.strings dictionary - there are lots of options available, such as nouns, adj (adjectives), and even adj like "-modesty", for low modesty - "Uninhibited", for that example.
-  // It's better to use the "translated" versions of these strings to keep up with any future changes.
-  description: 'She will be bound and gagged in the dungeon for most of the day to increase her <%= Game.strings.noun.obedience %>. This action takes all day.',
+  // The description of the action, showed on hover. Replacement patterns can again be used. Notice that we're translating "obedience" through the T() function - by default, it outputs a noun form, but "adj" is also available for adjectives. If you want the negation of an adjective, try something like T("-modesty", "adj") for low modesty - "Uninhibited", for that example.
+
+  // It's better to use the "translated" versions of these strings to keep up with any future changes, and to properly color and tool-tip the text. Also be sure to use <<- instead of <<= to open the block - otherwise you'll get html visible on the page, rather than properly rendered.
+  description: 'She will be bound and gagged in the dungeon for most of the day to increase her <<- T("obedience") >>. This action takes all day.',
   // Disabled is an optional javascript function to disable this action based on information about the game. You probably don't want to try to use it unless you already know javascript. The function always gets a single argument, time, which is either 'morning' or 'evening' - the time this action is being considered for.
   // disabled: function(time) {
     // The disabled function can return one of three values: true, false, or a string.
@@ -69,12 +73,12 @@ Actions.Lockdown = {
         obedience: 4,
         constitution: -0.5
       },
-      message: '<%= girl.name %> spent the day bound, gagged and naked in the dungeon, hands tied above her head and wishing something interesting would happen.'
+      message: '<<= girl.name >> spent the day bound, gagged and naked in the dungeon, hands tied above her head and wishing something interesting would happen.'
 
     },
     {
       image: 'fetish',
-      message: "<%= girl.name %> spent the day in the dungeon's stockade without clothes. You checked in occasionally to spank her or have her blow you.",
+      message: "<<= girl.name >> spent the day in the dungeon's stockade without clothes. You checked in occasionally to spank her or have her blow you.",
       delta: {
         endurance: -10,
         happiness: -10,
@@ -91,13 +95,13 @@ Actions.Clean = {
     happiness: 20,
     endurance: 15
   },
-  label: 'Clean <%= girl.building() ? girl.building().name : "" %>',
+  label: 'Clean <<= girl.building() ? girl.building().name : "" >>',
   group: 'Chores',
-  description: 'She will spend time tidying up, repairing and cleaning the <%= girl.building().name %>.',
+  description: 'She will spend time tidying up, repairing and cleaning the <<= girl.building().name >>.',
   results: [
     {
       image: 'cleaning',
-      message: '<%= girl.name %> spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <%= girl.building().name %>. Even if it doesn\'t sparkle, it\'s at least in better shape than it was.',
+      message: '<<= girl.name >> spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <<= girl.building().name >>. Even if it doesn\'t sparkle, it\'s at least in better shape than it was.',
       delta: {
         clean: 10,
         money: -10,

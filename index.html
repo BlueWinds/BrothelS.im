@@ -11,6 +11,9 @@
   <script src="libraries/globalize.js"></script>
   <script src="libraries/ejs.js"></script>
   <script src="libraries/namegen.js"></script>
+  <script src="libraries/superfish.js"></script>
+  <script src="libraries/hoverIntent.js"></script>
+  <script src="libraries/jquery.sparkline.js"></script>
   <script src="libraries/jquery.sparkline.js"></script>
 
   <link href="modules/style.css" type="text/css" rel="stylesheet">
@@ -32,7 +35,7 @@
   <script src="content/girls/Kirino/base.js"></script>
   <script src="content/girls/Sophitia/base.js"></script>
   <script src="content/girls/Sakuya/base.js"></script>
-  <script src="content/girls/Dark Magician Girl/base.js"></script>
+  <script src="content/girls/DarkMagicianGirl/base.js"></script>
 
   <!-- Buildings !-->
   <link href="modules/buildings/style.css" type="text/css" rel="stylesheet">
@@ -71,6 +74,8 @@
   <script src="modules/prostitution/prostitution.js"></script>
   <script src="content/prostitution.js"></script>
 
+  <script src="modules/owner/owner.js"></script>
+
   <script>
     $(function() {
       e.invokeAll("Ready");
@@ -96,62 +101,62 @@
     </div>
   </div>
   <script id="messages_list_template" type="text/ejs-template">
-    <% function renderDelta(delta) { %>
+    << function renderDelta(delta) { >>
       <div class="message-delta">
-        <% $.each(delta, function(stat, value) {
+        << $.each(delta, function(stat, value) {
           var text;
           if (stat == 'money') {
             text = value < 0 ? '-$' + (-value) : '+$' + value;
           } else {
             text = value < 0 ? value : '+' + value;
-          } %>
-          <span class="delta <%= stat %>"><%= text %></span>
-        <% }) %>
+          } >>
+          <span class="delta <<= stat >>"><<= text >></span>
+        << }) >>
       </div>
-    <%} %>
+    <<} >>
 
     <div class="vertical-tabs navigable">
       <ul>
-        <% var i = 0 %>
-        <% for (var subject in messages) { %>
-          <% i++ %>
+        << var i = 0 >>
+        << for (var subject in messages) { >>
+          << i++ >>
           <li>
-            <a href="#message-tab-<%= i %>"><%= subject %></a>
+            <a href="#message-tab-<<= i >>"><<= subject >></a>
           </li>
-        <% } %>
+        << } >>
       </ul>
-      <% i = 0 %>
-      <% $.each(messages, function(subject, sub_messages) { %>
-        <% i++ %>
-        <% var time = '' %>
-        <div id="message-tab-<%= i %>" class="accordion"><% sub_messages.forEach(function(message) { %>
-          <% var text = message.type %>
-          <% if (message.time && message.time != time) {
+      << i = 0 >>
+      << $.each(messages, function(subject, sub_messages) { >>
+        << i++ >>
+        << var time = '' >>
+        <div id="message-tab-<<= i >>" class="accordion"><< sub_messages.forEach(function(message) { >>
+          << var text = message.type >>
+          << if (message.time && message.time != time) {
               time = message.time;
               text += ' - ' + time;
-          } %>
-          <h3><%= text %></h3>
-          <div class="message ui-helper-clearfix <%= message.text.length > 300 ? 'long' : '' %>">
-            <img src="<%= message.image %>">
-            <% if (message.delta && !$.isEmptyObject(message.delta)) { renderDelta(message.delta); } %>
+          } >>
+          <h3><<= text >></h3>
+          <div class="message ui-helper-clearfix <<= message.text.length > 300 ? 'long' : '' >>">
+            <img src="<<= message.image >>">
+            << if (message.delta && !$.isEmptyObject(message.delta)) { renderDelta(message.delta); } >>
             <div class="message-content">
-              <%- message.text %>
+              <<- message.text >>
             </div>
           </div>
-        <% }) %></div>
-      <% }) %>
+        << }) >></div>
+      << }) >>
     </div>
   </script>
   <script id="girls_hire_template" type="text/ejs-template">
     <div id="hire-girls">
-      <% girls.forEach(function(girl) { %>
-        <div class="ui-helper-clearfix no-cursor girl" name="<%= girl.name %>">
+      << girls.forEach(function(girl) { >>
+        <div class="ui-helper-clearfix no-cursor girl" name="<<= girl.name >>">
           <div class="column pct-20">
-            <img src="<%= girl.image("base") %>" title="<%= girl._.description %>">
+            <img src="<<= girl.image("base") >>" title="<<= girl._.description >>">
           </div>
           <div class="column pct-40 center">
-            <h6><%= girl.name %></h6>
-            <%
+            <h6><<= girl.name >></h6>
+            <<
               var stats = [], experience = [], libido = [];
               Girl.stats.forEach(function(stat) {
                 if (stat == "happiness" || stat == "endurance") { return; }
@@ -161,130 +166,127 @@
                 experience.push(girl.S(sex + " experience"));
                 libido.push(girl.S(sex + " libido"));
               });
-            %>
-            <div><%- stats.join(" | ") %></div>
-            <div><%- libido.join(" | ") %></div>
-            <div><%- experience.join(" | ") %></div>
+            >>
+            <div><<- stats.join(" | ") >></div>
+            <div><<- libido.join(" | ") >></div>
+            <div><<- experience.join(" | ") >></div>
           </div>
           <div class="column pct-40">
-            <div><label>Up Front:</label><strong class="money">$<%= girl.hirePrice() %></strong></div>
-            <div><label>Daily:</label><strong class="money">$<%= girl.desiredPay() %></strong></div>
-            <button class="hire" name="<%= girl.name %>">Hire</button>
+            <div><label>Up Front:</label><strong class="money">$<<= girl.hirePrice() >></strong></div>
+            <div><label>Daily:</label><strong class="money">$<<= girl.desiredPay() >></strong></div>
+            <button class="hire" name="<<= girl.name >>">Hire</button>
           </div>
         </div>
-      <% }) %>
+      << }) >>
     </div>
   </script>
   <script id="girls_list_template" type="text/ejs-template">
     <div class="column pct-50" id="girls">
-      <% if (girls.length < g.maxGirls) { %>
+      << if (girls.length < g.maxGirls) { >>
         <h3 class="center">
           <a id="hire-girl">Hire Girl</a>
         </h3>
-      <% } %>
-      <% girls.forEach(function(girl) { %>
-        <div class="ui-helper-clearfix no-cursor girl" name="<%= girl.name %>">
+      << } >>
+      << girls.forEach(function(girl) { >>
+        <div class="ui-helper-clearfix no-cursor girl" name="<<= girl.name >>">
           <div class="column pct-20">
-            <img src="<%= girl.image('base') %>">
+            <img src="<<= girl.image('base') >>">
           </div>
           <div class="column pct-40 center">
-            <h6><%= girl.name %></h6>
-            <div><%- girl.S("endurance") %> | <%- girl.S("happiness") %></div>
-            <%
+            <h6><<= girl.name >></h6>
+            <div><<- girl.S("endurance") >> | <<- girl.S("happiness") >></div>
+            <<
               var stats = [];
               Girl.stats.forEach(function(stat) {
                 if (stat != "endurance" && stat != "happiness") {
                   stats.push(girl.S(stat));
                 }
               });
-            %>
+            >>
             <div>
-              <%- stats.join(" | ") %>
+              <<- stats.join(" | ") >>
             </div>
           </div>
           <div class="column pct-40">
-            <div>Morning: <strong><%= girl.actions.morningLabel %></strong></div>
-            <div>Evening: <strong><%= girl.actions.eveningLabel %></strong></div>
+            <div>Morning: <strong><<= girl.actions.morningLabel >></strong></div>
+            <div>Evening: <strong><<= girl.actions.eveningLabel >></strong></div>
           </div>
         </div>
-      <% }) %>
+      << }) >>
     </div>
   </script>
   <script id="girls_view_template" type="text/ejs-template">
-    <div id="girl-view" name="<%= girl.name %>" class="ui-helper-clearfix">
-      <div class="column pct-30 left">
-        <img src="<%= girl.image("base") %>" title="<%= girl._.description %>">
+    << function createActionsList(list, doing) { >>
+      <ul class="sf-menu">
+        <li>
+          <a><<= doing >></a>
+          <ul><< $.each(list.CsortToObject('group'), function(group, actions) { >>
+            <li name="<<= group >>">
+              <a><<= group >></a>
+              <ul>
+                << actions.forEach(function(action) { >>
+                  <li class="<<= action.disabled ? 'disabled' : '' >>" name="<<= action._id >>" title="<<= action.description >>">
+                    <a class="<<= action.options ? '' : 'action'>>"><<= action.label >></a>
+                    << if (action.options) { >>
+                      <ul>
+                        << $.each(action.options, function(key, value) { >>
+                          <li name="<<= action._id >>">
+                            <a class="action" name="<<=key >>"><<- value >></a></li>
+                        << }) >>
+                      </ul>
+                    << } >>
+                  </li>
+                << }) >>
+              </ul>
+            </li>
+          << }) >></ul>
+        </li>
+      <ul>
+    << } >>
+    <div id="girl-view" name="<<= girl.name >>" class="ui-helper-clearfix">
+      <div class="column pct-30 left center">
+        <img src="<<= girl.image("base") >>" title="<<= girl._.description >>">
+          <div id="morning" class="action-list">
+            << createActionsList(morningActions, girl.actions.morningLabel) >>
+          </div>
+          <div id="evening" class="action-list">
+            << createActionsList(eveningActions, girl.actions.eveningLabel) >>
+          </div>
       </div>
       <div class="column pct-70">
-        <div class="column pct-50 middle">
-          <% Girl.stats.forEach(function(stat) { %>
+        <div class="column pct-55 middle">
+          << Girl.stats.forEach(function(stat) { >>
             <div>
-              <label><%= Game.strings.noun[stat] %></label>
-              <%- girl.S(stat) %>
+              <label><<- T(stat) >></label>
+              <<- girl.S(stat) >>
             </div>
-          <% }); %>
+          << }); >>
           <div id="pay">
-            <label>Pay</label>
-            <input value="$<%= girl.actions.pay %>">
+            <label><strong>Pay</strong></label>
+            <input value="$<<= girl.actions.pay >>">
             <span class="delta happiness"></span>
           </div>
         </div>
-        <div class="column pct-50 right">
-          <% Girl.sex.forEach(function(sex) { %>
+        <div class="column pct-45 right">
+          << Girl.sex.forEach(function(sex) { >>
             <div class="checkbox">
-              <label for="<%= sex %>" class="<%- girl.actions[sex] ? 'checked' : '' %>">
-                <%= Game.strings.noun[sex] %>
+              <label id="<<= sex >>" class="<<- girl.actions[sex] ? 'checked' : '' >>">
+                <<- T(sex) >>
               </label>
-              <input id="<%= sex %>" type="checkbox" <%- girl.actions[sex] ? 'checked="checked"' : '' %>>
             </div>
             <div>
-              <label><%= Game.strings.noun.libido %>:</label>
-              <span class="<%= sex %> libido">
-                <%- girl.S(sex + " libido") %>
+              <label><<- T("libido") >>:</label>
+              <span class="<<= sex >> libido">
+                <<- girl.S(sex + " libido") >>
               </span>
             </div>
             <div>
-              <label><%= Game.strings.noun.experience %>:</label>
-              <span class="<%= sex %> experience">
-                <%- girl.S(sex + " experience") %>
+              <label><<- T("experience") >>:</label>
+              <span class="<<= sex >> experience">
+                <<- girl.S(sex + " experience") >>
               </span>
             </div>
-          <% }) %>
-        </div>
-      </div>
-      <hr class="clear">
-      <% function createActionsList(list, doing) { %>
-        <ul>
-          <% $.each(list.CsortToObject('group'), function(group, actions) { %>
-            <li name="<%= group %>" class="<%= actions.Cfilter('_id', doing).length ? 'selected' : ''%>">
-              <span>
-                <%= group %>
-              </span>
-              <ul>
-                <% actions.forEach(function(action) { %>
-                  <li class="action <%= action.disabled ? 'disabled' : '' %> <%= doing == action._id ? 'selected' : '' %>" name="<%= action._id %>">
-                    <span title="<%= action.description %>">
-                      <%= action.label %>
-                    </span>
-                  </li>
-                <% }) %>
-              </ul>
-            </li>
-          <% }) %>
-        </ul>
-      <% } %>
-      <div class="column pct-50 center">
-        <h6>Morning</h6>
-        <div id="morning" class="action-list">
-          <a class="button"><%= girl.actions.morningLabel %></a>
-          <% createActionsList(morningActions, girl.actions.morning) %>
-        </div>
-      </div>
-      <div class="column pct-50 center">
-        <h6>Evening</h6>
-        <div id="evening" class="action-list">
-          <a class="button"><%= girl.actions.eveningLabel %></a>
-          <% createActionsList(eveningActions, girl.actions.evening) %>
+          << }) >>
         </div>
       </div>
     </div>
@@ -292,19 +294,19 @@
   <script id="game_view_template" type="text/ejs-template">
     <div class="ui-helper-clearfix first">
       <div id="top-left" class="column pct-50 center">
-        <h2>Day <%= g.day %></h2>
+        <h2>Day <<= g.day >></h2>
         <div>
           Cash on hand:
-          <strong class="money"><%= g.money < 0 ? "-$" + (-g.money) : "$" + g.money %></strong>
+          <strong class="money"><<= g.money < 0 ? "-$" + (-g.money) : "$" + g.money >></strong>
         </div>
         <div>
           Payment of
-          <strong class="money">$<%= g.nextPayment().amount %></strong>
+          <strong class="money">$<<= g.nextPayment().amount >></strong>
           due on day
-          <span class="days"><%= g.nextPayment().day %></span>
+          <span class="days"><<= g.nextPayment().day >></span>
         </div>
         <div>
-          <span class="days"><%= gameLength - g.day %> days</span>
+          <span class="days"><<= gameLength - g.day >> days</span>
           to end of debt
         </div>
       </div>
@@ -319,9 +321,9 @@
     <form id="load-game" class="center">
       <div>
         <select required="required" id="game-name">
-          <% games.forEach(function(name) { %>
-            <option value="<%= name %>"><%= name %></option>
-          <% }) %>
+          << games.forEach(function(name) { >>
+            <option value="<<= name >>"><<= name >></option>
+          << }) >>
         </select>
       </div>
       <button id="load">Load Game</button>
@@ -364,36 +366,36 @@
     </div>
   </script>
   <script id="buildings_view_template" type="text/ejs-template">
-    <div id="building-view" name="<%= building.name %>" class="ui-helper-clearfix">
+    <div id="building-view" name="<<= building.name >>" class="ui-helper-clearfix">
       <div class="column pct-30 left">
-        <img src="<%= building._.image %>" title="<%= building._.description %>">
+        <img src="<<= building._.image >>" title="<<= building._.description >>">
       </div>
       <div class="column pct-70">
         <div class="column pct-50 middle">
-          <div><label>Clean:</label><%- building.S("clean") %></div>
-          <div><label>Rooms:</label><%- building.S("rooms") %></div>
+          <div><label>Clean:</label><<- building.S("clean") >></div>
+          <div><label>Rooms:</label><<- building.S("rooms") >></div>
           <div>
             <label>Daily:</label>
-            <div class="daily-delta"><% $.each(building.dailyDelta(), function(stat, value) {
+            <div class="daily-delta"><< $.each(building.dailyDelta(), function(stat, value) {
               var text;
               if (stat == 'money') {
                 text = value < 0 ? '-$' + (-value) : '+$' + value;
               } else {
                 text = value < 0 ? '' + value : '+' + value;
-              } %>
-              <span class="delta <%= stat %>"><%= text.substr(0, 5) %></span>
-            <% }) %></div>
+              } >>
+              <span class="delta <<= stat >>"><<= text.substr(0, 5) >></span>
+            << }) >></div>
           </div>
         </div>
         <div class="column pct-50 right center">
-          <% if (building.rooms.length < building._.maxRooms && !$.isEmptyObject(availableRooms)) { %>
+          << if (building.rooms.length < building._.maxRooms && !$.isEmptyObject(availableRooms)) { >>
             <select id='new-room'>
-              <% $.each(availableRooms, function(name, room) { %>
-                <option value="<%= name %>" title="<%= room.description %>">$<%= room.price %> - <%= name.capitalize() %></option>
-              <% }) %>
+              << $.each(availableRooms, function(name, room) { >>
+                <option value="<<= name >>" title="<<= room.description >>">$<<= room.price >> - <<= name.capitalize() >></option>
+              << }) >>
             </select>
             <button id="buy-room">Add Room</button>
-          <% } %>
+          << } >>
         </div>
         <div id="rooms" class="ui-helper-clearfix">
         </div>
@@ -402,106 +404,108 @@
   </script>
   <script id="buildings_list_template" type="text/ejs-template">
     <div class="column pct-50" id="buildings">
-      <% if (buildings.length < g.maxBuildings) { %>
+      << if (buildings.length < g.maxBuildings) { >>
         <h3 class="center">
           <a id="buy-building">Buy Building</a>
         </h3>
-      <% } %>
-      <% buildings.forEach(function(building) { %>
-        <div class="ui-helper-clearfix no-cursor building" name="<%= building.name %>">
+      << } >>
+      << buildings.forEach(function(building) { >>
+        <div class="ui-helper-clearfix no-cursor building" name="<<= building.name >>">
           <div class="column pct-20">
-            <img src="<%= building._.image %>">
+            <img src="<<= building._.image >>">
           </div>
           <div class="column pct-40 middle">
-            <h6 class="center"><%= building.name %></h6>
-            <div><label>Clean:</label><%- building.S("clean") %></div>
-            <div><label>Rooms:</label><%- building.S("rooms") %></div>
-            <% building.rooms.forEach(function (room) { %>
-              <div class="room"><%= room.type.capitalize() %></div>
-            <% }) %>
+            <h6 class="center"><<= building.name >></h6>
+            <div><label>Clean:</label><<- building.S("clean") >></div>
+            <div><label>Rooms:</label><<- building.S("rooms") >></div>
+            << building.rooms.forEach(function (room) { >>
+              <div class="room"><<= room.type.capitalize() >></div>
+            << }) >>
           </div>
           <div class="column pct-40 right center">
             <div><strong>Residents</strong></div>
-            <% building.rooms.Caccumulate('girl').forEach(function(name) { %>
-              <div><%= name %></div>
-            <% }) %>
+            << building.rooms.Caccumulate('girl').forEach(function(name) { >>
+              <div><<= name >></div>
+            << }) >>
           </div>
         </div>
-      <% }) %>
+      << }) >>
     </div>
   </script>
   <script id="buildings_buy_template" type="text/ejs-template">
     <div id="buy-buildings">
-      <% buildings.forEach(function(building) { %>
-        <div class="ui-helper-clearfix no-cursor building" name="<%= building.name %>">
+      << buildings.forEach(function(building) { >>
+        <div class="ui-helper-clearfix no-cursor building" name="<<= building.name >>">
           <div class="column pct-30">
-            <img src="<%= building._.image %>" title="<%= building._.description %>">
+            <img src="<<= building._.image >>" title="<<= building._.description >>">
           </div>
           <div class="column pct-40 middle">
-            <h6 class="center"><%= building.name %></h6>
-            <div><label>Clean:</label><%- building.S("clean") %></div>
-            <div><label>Rooms:</label><%- building.S("rooms") %></div>
-            <% building.rooms.forEach(function (room) { %>
-              <div class="room <%= room.type %>"><%= room.type.capitalize() %></div>
-            <% }) %>
+            <h6 class="center"><<= building.name >></h6>
+            <div><label>Clean:</label><<- building.S("clean") >></div>
+            <div><label>Rooms:</label><<- building.S("rooms") >></div>
+            << building.rooms.forEach(function (room) { >>
+              <div class="room <<= room.type >>"><<= room.type.capitalize() >></div>
+            << }) >>
           </div>
           <div class="column pct-30 right">
-            <div><label>Price:</label><strong class="money">$<%= building.price() %></strong></div>
+            <div><label>Price:</label><strong class="money">$<<= building.price() >></strong></div>
             <div>
               <label>Daily:</label>
-              <div class="daily-delta"><% $.each(building.dailyDelta(), function(stat, value) {
-                var text;
-                if (stat == 'money') {
-                  text = value < 0 ? '-$' + (-value) : '+$' + value;
-                } else {
-                  text = value < 0 ? '' + value : '+' + value;
-                } %>
-                <span class="delta <%= stat %>"><%= text.substr(0, 5) %></span>
-              <% }) %></div>
+              <div class="daily-delta">
+                << $.each(building.dailyDelta(), function(stat, value) {
+                  var text;
+                  if (stat == 'money') {
+                    text = value < 0 ? '-$' + (-value) : '+$' + value;
+                  } else {
+                    text = value < 0 ? '' + value : '+' + value;
+                  } >>
+                  <span class="delta <<= stat >>"><<= text.substr(0, 5) >></span>
+                << }) >>
+              </div>
             </div>
-            <button class="buy" name="<%= building.name %>">Buy</button>
+            <button class="buy" name="<<= building.name >>">Buy</button>
           </div>
         </div>
-      <% }) %>
+      << }) >>
     </div>
   </script>
   <script id="buildings_bedroom_template" type="text/ejs-template">
     <div>
       <h6>Bedroom</h6>
       <select name="girl" title="Select the girl living in this room. When a girl has a place to live, she demands a significantly lower wage.">
-        <option value="" <%= (room.girl) ? '' : 'selected' %>> - Empty - </option>
-        <% girls.forEach(function(girl) { %>
-          <option value="<%= girl.name %>" <%= (room.girl == girl.name) ? 'selected' : '' %>>
-            <%= girl.name %>
+        <option value="" <<= (room.girl) ? '' : 'selected' >>> - Empty - </option>
+        << girls.forEach(function(girl) { >>
+          <option value="<<= girl.name >>" <<= (room.girl == girl.name) ? 'selected' : '' >>>
+            <<= girl.name >>
           </option>
-        <% }) %>
+        << }) >>
       </select>
     </div>
   </script>
   <script id="missions_list_template" type="text/ejs-template">
     <div class="vertical-tabs navigable" id="mission-list">
       <ul>
-        <% var i = 0 %>
-        <% for (var _id in missions) { %>
-          <% i++ %>
+        << var i = 0 >>
+        << for (var _id in missions) { >>
+          << i++ >>
           <li>
-            <a href="#mission-tab-<%= i %>"><%= missions[_id].label %></a>
+            <a href="#mission-tab-<<= i >>"><<= missions[_id].label >></a>
           </li>
-        <% } %>
+        << } >>
       </ul>
-      <% i = 0 %>
-      <% $.each(missions, function(_id, mission) { %>
-        <% i++ %>
-        <div id="mission-tab-<%= i %>" class="mission ui-helper-clearfix">
-          <% if (mission.end.day) { %>
-            <div class="top">Time Remaining: <strong><%= mission.end.day - g.day %> days</strong></div>
-          <% } %>
-          <img src="<%= mission.image %>">
+      << i = 0 >>
+      << $.each(missions, function(_id, mission) { >>
+        << i++ >>
+        <div id="mission-tab-<<= i >>" class="mission ui-helper-clearfix">
+          << if (mission.end.day) { >>
+            <div class="top">Time Remaining: <strong><<= mission.end.day - g.day >> days</strong></div>
+          << } >>
+          <img src="<<= mission.image >>">
           <div>
-            <%- mission.description %>
+            <<- mission.description >>
           </div>
         </div>
-      <% }) %>
+      << }) >>
     </div>
   </script>
 </body></html>

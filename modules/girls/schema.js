@@ -63,6 +63,9 @@ Girl.prototype.randomStatus = function() {
 
 Girl.prototype.apply = function(stat, delta) {
   if (typeof(delta) == 'number') {
+    if (stat.indexOf(' experience') != -1) {
+      delta *= this.intelligence / 100;
+    }
     if (delta % 1) {
       delta = (Math.random() > delta % 1) ? Math.floor(delta) : Math.ceil(delta);
     }
@@ -77,7 +80,7 @@ Girl.prototype.apply = function(stat, delta) {
   for (var key in stat) {
     if (Girl.stats.indexOf(key) == -1 && key != 'money') {
       if (Girl.sexStats.indexOf(key) == -1) {
-        return;
+        continue;
       }
     }
     this.apply(key, stat[key]);
@@ -106,6 +109,47 @@ Girl.prototype.hirePrice = function(happiness) {
   });
   cost *= 1 - happiness / 150;
   return Math.floor(cost);
+};
+
+Girl.prototype.setAction = function(action, time, option) {
+  if (action == 'Rest') {
+    action = Actions.Rest;
+  }
+  this.actions[time] = action._id;
+  this.actions[time + 'Label'] = action.label;
+  if (option) {
+    this.actions[time + 'Option'] = option;
+  } else {
+    delete this.actions[time + 'Option'];
+  }
+  var other_time = time == 'morning' ? 'evening' : 'morning';
+  if (this.actions.allDay) {
+    this.actions[other_time] = 'Rest';
+    this.actions[other_time + 'Label'] = 'Rest';
+    delete this.actions[other_time + 'Option'];
+    delete this.actions.allDay;
+  }
+  if (action.allDay) {
+    this.actions[other_time] = action._id;
+    this.actions[other_time + 'Label'] = action.label;
+    this.actions.allDay = true;
+    if (option) {
+      this.actions[other_time + 'Option'] = option;
+    } else {
+      delete this.actions[other_time + 'Option'];
+    }
+  }
+};
+
+Girl.prototype.verifyActions = function() {
+  var morning = this.potentialActions('morning');
+  var evening = this.potentialActions('evening');
+  if (!morning[this.actions.morning] || morning[this.actions.morning].disabled) {
+    this.setAction('Rest', 'morning');
+  }
+  if (!evening[this.actions.evening] || evening[this.actions.evening].disabled) {
+    this.setAction('Rest', 'evening');
+  }
 };
 
 (function() {
@@ -156,7 +200,7 @@ Girl.prototype.hirePrice = function(happiness) {
           action.disabled = 'Not enough money';
           break;
         } else if (this[stat] < action.mins[stat]) {
-          action.disabled = 'Not enough ' + Game.strings.noun[stat];
+          action.disabled = 'Not enough ' + T(stat);
           break;
         }
       }
@@ -165,7 +209,7 @@ Girl.prototype.hirePrice = function(happiness) {
           action.disabled = 'Too much money';
           break;
         } else if (this[stat] > action.maxes[stat]) {
-          action.disabled = 'Too much ' + Game.strings.noun[stat];
+          action.disabled = 'Too much ' + T(stat);
           break;
         }
       }
@@ -200,11 +244,6 @@ Girl.prototype.doAction = function(time, action) {
   }
   else {
     var endDelta = this.startDelta();
-    if (typeof(action.variants) == 'function') {
-      i = action.variants.call(this, time, action);
-    } else {
-      i = Math.weightedRandom(action.variants || [1]);
-    }
     var context = {
       girl: this,
       action: action,
@@ -220,7 +259,7 @@ Girl.prototype.doAction = function(time, action) {
         time: time
       }).save(context.girl.name);
     };
-    var results = action.results[i];
+    var results = Game.getResults(action, this);
     if (typeof(results.delta) == 'function') {
       var delta = results.delta.call(this, time, action);
       this.apply(delta);
@@ -253,6 +292,9 @@ Girl.prototype.runDay = function(time) {
     this.apply('money', -this.actions.pay);
     var change = this.actions.pay - this.desiredPay();
     change = change > 0 ? change * Girl.config.pay.above : change * Girl.config.pay.below;
+    if (change > 0) {
+      change = Math.pow(change, .66);
+    }
     this.apply('happiness', change);
   }
 };
@@ -322,4 +364,14 @@ Girl.prototype.get = function(stat) {
     return Math.floor(sum / Girl.sex.length);
   }
   return this[stat];
+};
+
+Game.getResults = function(item, girl) {
+  var i;
+  if (typeof(item.variants) == 'function') {
+    i = item.variants.call(item, girl);
+  } else {
+    i = Math.weightedRandom(item.variants || [1]);
+  }
+  return item.results[i];
 };

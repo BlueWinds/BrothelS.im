@@ -158,8 +158,8 @@ function rethrow(err, str, filename, lineno){
 
 var parse = exports.parse = function(str, options){
   var options = options || {}
-    , open = options.open || exports.open || '<%'
-    , close = options.close || exports.close || '%>';
+    , open = options.open || exports.open || '<<'
+    , close = options.close || exports.close || '>>';
 
   var buf = [
       "var buf = [];"
@@ -273,8 +273,8 @@ var compile = exports.compile = function(str, options){
  *   - `filename`        Used by `cache` to key caches
  *   - `scope`           Function execution context
  *   - `debug`           Output generated function body
- *   - `open`            Open tag, defaulting to "<%"
- *   - `close`           Closing tag, defaulting to "%>"
+ *   - `open`            Open tag, defaulting to "<<"
+ *   - `close`           Closing tag, defaulting to ">>"
  *
  * @param {String} str
  * @param {Object} options

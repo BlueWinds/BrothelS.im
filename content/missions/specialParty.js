@@ -30,15 +30,15 @@ Missions.specialParty = {
   // You know what's nifty? The game has a random person generator! All you have to do is decide what category of person you want this mission to involve, and put them in a list here. Currently, only the groups 'High Class' and 'Very Low Class' are available. The people generated will then be available in replacement patterns for game text.
   people: ['High Class'],
 
-  // The name is what's displayed to the user. It can contain replacement patterns. For example, this mission customizes the title based on the randomly generated 'High Class' person above. If the mission is attached to a specific girl (start.girlMin or start.girlMax are defined above), then "girl" will also be available here - <%= girl.name %>, for example.
-  label: 'Escort for <%= mission.people[0].name %>',
+  // The name is what's displayed to the user. It can contain replacement patterns. For example, this mission customizes the title based on the randomly generated 'High Class' person above. If the mission is attached to a specific girl (start.girlMin or start.girlMax are defined above), then "girl" will also be available here - <<= girl.name >>, for example.
+  label: 'Escort for <<= mission.people[0].name >>',
   // You can optionally define the tab that all messages sent by this mission appear under - useful if it belongs to a specific girl. If you don't define a group, it will appear under "Missions".
   group: 'Monthly Festival',
 
-  // The description also allows replacement patterns. One trick you might notice here is the "Game.strings" variable - it contains user friendly translations of some mechanical terms, such as "intelligence" -> "Smart" and "libido" -> "Slutty". This trick is available in any rendered string.
-  description: "Once every month, the city throws a gala party for whatever rich and powerful visitors are present at the time. This party lasts a full 24 hours, complete with parade down the central avenue and fireworks at night. It is traditional for those who can afford it to have an escort accompany them in the evening - and lacking anyone to accompany him, <%= mission.people[0].name %> has approached you to provide one.<br><br>If you assign a girl to to escort <%= mission.people[0].name %> in the <strong>evening of day <%= mission.end.minDay %></strong>, she'll accompany him to the party. You'll receive this message again the day of the party.<br><br>He's promised to pay quite well for her attention. You poke around a bit and discover that <%= mission.people[0].name %> is a notable <%= mission.people[0].profession %> and would probably be pleased with (and therefore pay extra well for) a <strong><%= Game.strings.adj[mission.people[0].wants[0]] %></strong><% if (mission.people[0].wants[0] != mission.people[0].wants[1]) { %> and <strong><%= Game.strings.adj[mission.people[0].wants[1]] %></strong><% } %> girl.",
+  // The description also allows replacement patterns. One trick you might notice here is the T() function - it contains user friendly translations of some mechanical terms, such as "intelligence" -> "Smart" and "libido" -> "Slutty". This trick is available in any rendered string. You can also use T(string, "adj") to get the adjectival form of a term.
+  description: "Once every month, the city throws a gala party for whatever rich and powerful visitors are present at the time. This party lasts a full 24 hours, complete with parade down the central avenue and fireworks at night. It is traditional for those who can afford it to have an escort accompany them in the evening - and lacking anyone to accompany him, <<= mission.people[0].name >> has approached you to provide one.<br><br>If you assign a girl to to escort <<= mission.people[0].name >> in the <strong>evening of day <<= mission.end.minDay >></strong>, she'll accompany him to the party. You'll receive this message again the day of the party.<br><br>He's promised to pay quite well for her attention. You poke around a bit and discover that <<= mission.people[0].name >> is a notable <<= mission.people[0].profession >> and would probably be pleased with (and therefore pay extra well for) a <<- mission.people[0].wants.slice(0, 2).CtoString('adj') >> girl.",
   // As usual, the image allows replacement patterns.
-  image: '<%= mission.people[0].image %>',
+  image: '<<= mission.people[0].image >>',
   // end can be one of two things: an object describing the conditions under which the mission ends, or a function returning such an object.
   // If it's an object, all the same options are available as for "start" above.
 //   end: {
@@ -77,7 +77,7 @@ Missions.specialParty = {
     // },
 
     // You can optionally send the player a message when the mission ends. String replacements are available. If you want to split the text across multiple messages, provide a list instead.
-//     message: '<%= girl.name %> said to <%= mission.people[0].name %> "We\'ve succeeded!"',
+//     message: '<<= girl.name >> said to <<= mission.people[0].name >> "We\'ve succeeded!"',
 //     message: [
 //       'First message',
 //       'Second message'
@@ -86,7 +86,7 @@ Missions.specialParty = {
     // If the mission has a girl, you can use an image from one of her categories, or you can define an absolute path.
     // image: 'fetish',
     // image: '/content/missions/firstMoney.png',
-    // image: ['fetish', '<%= mission.people[0].image %>'],
+    // image: ['fetish', '<<= mission.people[0].image >>'],
   }
   // You can also define a "fail" dictionary. The only way to fail a mission is to *meet* the maxDay requirement, but *fail* at least one other. That is to say, run out of time. Fail accepts all the same options as success.
 //   fail: {

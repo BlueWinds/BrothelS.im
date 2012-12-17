@@ -43,13 +43,17 @@ h3 {
   width: 6em;
 }
 
+#girl-view .middle label span {
+  color: #FFF;
+}
+
 #pay label {
-  display: block;
   margin-top: 1em;
+  width: 2.5em;
 }
 
 #pay input {
-  width: 3em;
+  width: 2.5em;
 }
 
 #pay .delta {
@@ -131,154 +135,4 @@ h3 {
 #morning, #evening {
   display: inline-block;
   position: relative;
-}
-
-.action-list a {
-  margin: 0;
-  width: 6em;
-}
-
-.action-list a:hover, .action-list {}
-
-.action-list ul {
-  width: 0;
-  transition-property: width;
-  transition-delay: .4s;
-  transition-duration: .4s;
-  -moz-transition-property: width;
-  -moz-transition-delay: .4s;
-  -moz-transition-duration: .4s;
-  -webkit-transition-property: width;
-  -webkit-transition-delay: .4s;
-  -webkit-transition-duration: .4s;
-  -o-transition-property: width;
-  -o-transition-delay: .4s;
-  -o-transition-duration: .4s;
-  left: 5.9em;
-  list-style: none outside none;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  top: 0;
-  z-index: 100;
-}
-
-.action-list > ul {
-  left: 0;
-}
-
-.action-list > ul > li:first-child {
-  border-top-left-radius: 6px;
-}
-
-.action-list a.ui-state-hover + ul, .action-list ul.hover, .action-list li.hover > ul {
-  width: 13.8em;
-  transition-delay: 0s;
-  transition-duration: .2s;
-  -moz-transition-delay: 0s;
-  -moz-transition-duration: .2s;
-  -webkit-transition-delay: 0s;
-  -webkit-transition-duration: .2s;
-  -o-transition-delay: 0s;
-  -o-transition-duration: .2s;
-}
-
-.action-list ul.hover ul {
-  transition-delay: 0s;
-  transition-duration: .2s;
-  -moz-transition-delay: 0s;
-  -moz-transition-duration: .2s;
-  -webkit-transition-delay: 0s;
-  -webkit-transition-duration: .2s;
-  -o-transition-delay: 0s;
-  -o-transition-duration: .2s;
-  width: 6.5em;
-}
-
-.action-list li span {
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-}
-
-.action-list li {
-  background: url("../../libraries/images/ui-bg_glass_20_555555_1x400.png") repeat-x scroll 50% 50% #555555;
-  border: 1px solid #666666;
-  cursor: default;
-  padding: 0.2em;
-  transition-property: padding;
-  transition-delay: .8s;
-  transition-duration: .05s;
-  -moz-transition-property: padding;
-  -moz-transition-delay: .8s;
-  -moz-transition-duration: .05s;
-  -webkit-transition-property: padding;
-  -webkit-transition-delay: .8s;
-  -webkit-transition-duration: .05s;
-  -o-transition-property: padding;
-  -o-transition-delay: .8s;
-  -o-transition-duration: .05s;
-  position: relative;
-  text-align: center;
-  width: 6em;
-}
-
-.action-list li.action {
-  cursor: pointer;
-}
-
-.action-list li.selected {
-  background: url("../../libraries/images/ui-bg_inset-soft_30_f58400_1x100.png") repeat-x scroll 50% 50% #F58400;
-  border-color: #FFAF0F;
-}
-
-.action-list li.hover {
-  background: url("../../libraries/images/ui-bg_glass_40_0078a3_1x400.png") repeat-x scroll 50% 50% #0078A3;
-  border: 1px solid #59B4D4;
-}
-
-.action-list ul > li:first-child {
-  border-top-right-radius: 6px;
-}
-
-.action-list > ul > li:first-child:hover {
-  border-top-right-radius: 0;
-}
-
-.action-list ul > li:last-child {
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-}
-
-.action-list > ul > li:last-child:hover {
-  border-bottom-right-radius: 0;
-}
-
-.action-list ul > li:first-child:last-child {
-  border-bottom-left-radius: 0px;
-}
-
-.action-list > ul > li:hover {
-  padding-right: 1.3em;
-  transition-delay: 0s;
-  transition-duration: 0s;
-  -moz-transition-delay: 0s;
-  -moz-transition-duration: 0s;
-  -webkit-transition-delay: 0s;
-  -webkit-transition-duration: 0s;
-  -o-transition-delay: 0s;
-  -o-transition-duration: 0s;
-}
-
-.action-list li > ul {
-  left: 7.2em;
-  top: -1px;
-}
-
-.action.disabled {
-  background: #444 !important;
-  color: #888;
-  cursor: default !important;
-  border: 1px solid #666 !important;
 }
