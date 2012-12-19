@@ -89,7 +89,7 @@ Girl.prototype.apply = function(stat, delta) {
 
 Girl.prototype.desiredPay = function() {
   var pay = Math.floor(this.hirePrice(50) / 20);
-  if (this._.specialRules.payRatio !== undefined) {
+  if (this._.specialRules && this._.specialRules.payRatio !== undefined) {
     pay *= this._.specialRules.payRatio;
   }
   return pay;
