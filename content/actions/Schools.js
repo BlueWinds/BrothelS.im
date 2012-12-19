@@ -277,7 +277,7 @@ Actions.Acolyte = {
       delta: {
         endurance: -4,
         happiness: 3,
-        obedience: 3.5
+        modesty: 3.5
       }
     },
     {
@@ -304,9 +304,7 @@ Actions.Acolyte = {
     },
     {
       image: 'study',
-      message: [
-        'In light of her pious habits, <<= girl.name >> was asked the help clean parts of the temple seldom seen by visitors - a contingent of priests and priestesses live on the grounds, and there\'s a private garden reserved for their use. She worked in the garden, pulling weeds and cleaning out a fountain basin. It was a beautiful piece of art - a naked goddess, water flowing from her mouth. <<= girl.name >> noticed part of the stone was off-color - when she touched it, the plug came away in her hand. Who knew that the goddess was both lactating and leaking water from her pussy...'
-      ],
+      message: 'In light of her pious habits, <<= girl.name >> was asked the help clean parts of the temple seldom seen by visitors - a contingent of priests and priestesses live on the grounds, and there\'s a private garden reserved for their use. She worked in the garden, pulling weeds and cleaning out a fountain basin.<br><br>It was a beautiful piece of art - a naked goddess, water flowing from her mouth. <<= girl.name >> noticed part of the stone was a different color - as soon as she touched it, the plugs came away in her hands. Who knew that the goddess was originally lactating and dripping from her pussy...',
       delta: {
         endurance: -5,
         happiness: 4,
