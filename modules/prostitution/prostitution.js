@@ -112,7 +112,7 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
       }
     }
 
-    context.result = Math.choice(Actions.Streetwalk.config.results[sex]);
+    context.result = Math.choice(action.config.results[sex]);
     new Message({
       type: action.label,
       time: time,
@@ -192,7 +192,7 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
         canService[girl.name] -= 1;
         serviced++;
         if (!canService[girl.name]) { delete canService[girl.name]; }
-        satisfaction = doCustomer(girl, customer, time, Actions.Whore, customerConfig);
+        doCustomer(girl, customer, time, Actions.Whore, customerConfig);
       } else {
         building.apply('reputation', customerConfig.bad / 2);
       }

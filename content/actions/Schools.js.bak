@@ -139,7 +139,7 @@ Actions.Expose = {
     },
     {
       image: 'exercise',
-      message: '<<= girl.name >> wore a skimpy outfit, miniskirt and too-small t-shirt. << if (time == "morning") { >>She wandered through the busiest parts of the city, treating select passerby to a brief glimpse of her pantiles pussy as she bent over to "retrieve" a dropped object. The tiny top didn\'t leave much to the imagination.<< } else { >>She stopped by the park, and, feeling brave, left everything except her panties on the shore. Ignoring the "no swimming" signs, she was pretty sure a few people caught sight of her in the moonlight.<< } >>',
+      message: '<<= girl.name >> wore a skimpy outfit, miniskirt and too-small t-shirt. << if (time == "morning") { >>She wandered through the busiest parts of the city, treating select passerby to a brief glimpse of her pantieless pussy as she bent over to "retrieve" a dropped object. The tiny top didn\'t leave much to the imagination.<< } else { >>She stopped by the park, and, feeling brave, left everything except her panties on the shore. Ignoring the "no swimming" signs, she was pretty sure a few people caught sight of her in the moonlight.<< } >>',
       delta: {
         endurance: -5,
         modesty: -2.5,
@@ -282,7 +282,7 @@ Actions.Acolyte = {
     },
     {
       image: 'study',
-      message: '<<= girl.name >>, being quite a familiar face at the temple, was invited to help with planning the upcoming monthly festival. Though put on mostly by The Guild, the temples each contribute their own part, partially to counteract the lascivious nature of the event, and partially because the tourism it brings and the donations they receive on that night are an important source of money.<br><br>She worked diligently, helping to repair props and generally get everything ready for the important night.',
+      message: '<<= girl.name >>, being quite a familiar face at the temple, was invited to help with planning the upcoming monthly festival. Though put on mostly by The Guild, the temples each contribute their own part, partially to counteract the liscivious nature of the event, and partially because the tourism it brings and the donations they recieve on that night are an imporant source of money.<br><br>She worked diligantly, helping to repair props and generally get everything ready for the important night.',
       delta: {
         endurance: -6,
         happiness: 5,
@@ -293,7 +293,7 @@ Actions.Acolyte = {
       image: ['study', 'hard'],
       message: [
         'In light of her pious habits, <<= girl.name >> was asked the help clean parts of the temple seldom seen by visitors - a contingent of priests and priestesses live on the grounds, and there\'s a private garden reserved for their use. She cleaned the kitchen and hallways, until a noise from one of the bedrooms caught her attention. The door was ajar, and she couldn\'t help but peek in...',
-        'Four priestesses and three priests were in the middle of most unpropitious acts. Most of them looked ashamed when they noticed her face in the door, but one of the girls, dress hitched up around her waist and wearing nothing else, giggled and pulled <<= girl.name >> into the room. She didn\'t get any more cleaning done that <<= time >>.'
+        'Four priestesses and three priests were in the middle of most unproprious acts. Most of them looked ashamed when they noticed her face in the door, but one of the girls, dress hitched up around her waist and wearing nothing else, giggled and pulled <<= girl.name >> into the room. She didn\'t get any more cleaning done that <<= time >>.'
       ],
       delta: {
         endurance: -10,

@@ -69,7 +69,7 @@ Missions.statIncreases = {
   description: "<blockquote>You know, it's kind of frustrating, sometimes, feeling dumb. Just the other day a man called me a boorish harlot - the insult just confused me, and had to go look up the words later. Not my finest moment.<br><br>But you know what? You could send me back to school! It's kind of expensive, but it'd totally be worth it.</blockquote><br>Now that you have a stable base of operations, it's time to consider more sophisticated actions than just Streetwalk. Under the Training tab you'll see a lot of options for how to raise a girl's stats.",
   end: function() {
     return { minDay: g.day + 3, maxDay: g.day + 3 };
-  },
+  }
 };
 
 Missions.explainWhore = {
@@ -81,5 +81,5 @@ Missions.explainWhore = {
   description: "<blockquote>Walking around the city picking up strangers and fucking in alleyways is great and all, but I bet we'd make more money if we had customers come to us instead - that way, they could pick out whichever girl they liked best instead of whoever they happened to meet, and we wouldn't get so tired running around all the time. Ooh, and girls with a sense of modesty (that is, people who aren't me!) will be less likely to refuse, since they'd be having sex in private rather than public.</blockquote><br>Once you've assigned a girl a bedroom, the new <strong>Whore</strong> action becomes available. It's less tiring, she's less likely to refuse, and if more than one girls is working at a time, each customer will have better luck finding a girl he likes. The downside is one of numbers - the number of customers that shows up is dependent on the building's Reputation, and varies considerably day to day.<br><br>The higher a building's reputation, to more customers will arrive and the higher class they'll be. Reputation goes up when a customer is pleased with his service, or down when he's unhappy with it, or there were no girls available. Higher class patrons are harder to please - though they pay a great deal more.<br><br>Don't worry about trying to keep a high reputation - it will tend to sort itself out to a comfortable level.",
   end: function() {
     return { minDay: g.day + 3, maxDay: g.day + 3 };
-  },
+  }
 };

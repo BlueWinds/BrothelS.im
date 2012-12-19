@@ -296,7 +296,7 @@ Girl.prototype.runDay = function(time) {
     var change = this.actions.pay - this.desiredPay();
     change = change > 0 ? change * Girl.config.pay.above : change * Girl.config.pay.below;
     if (change > 0) {
-      change = Math.pow(change, .66);
+      change = Math.pow(change, 0.66);
     }
     this.apply('happiness', change);
   }

@@ -87,7 +87,7 @@ e.GameRender.push(function() {
         change = change > 0 ? change * Girl.config.pay.above : change * Girl.config.pay.below;
         change = Math.floor(change);
         if (change > -1) {
-          change = '+' + Math.floor(Math.pow(change, .66));
+          change = '+' + Math.floor(Math.pow(change, 0.66));
         }
         girl.actions.pay = ui.value;
         pay_delta.html(change);
