@@ -52,6 +52,7 @@ Mission.start = function(base, girl) {
     g.missions[mission._id] = mission;
   } else {
     mission.applyResults(mission.success);
+    g.missionsDone[mission._id] = true;
   }
 };
 

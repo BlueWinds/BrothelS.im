@@ -12,10 +12,13 @@ $.extend(e, {
 T = function(string, type) {
   type = type || 'noun';
   if (Game.strings[type] && Game.strings[type][string]) {
-    return '<span class="' + string + '">' + Game.strings[type][string] + '</span>';
+    var _class = string[0] == '-' ? string.substr(1) : string;
+    return '<span class="' + _class + ' ' + type + '">' + Game.strings[type][string] + '</span>';
   }
   return string;
 };
+
+Game.fetishes = ['tentacles'];
 
 Game.loadCurrent = function() {
     name = localStorage.getItem('current-game');
@@ -108,12 +111,21 @@ e.Ready.push(function() {
     if ($(this).hasClass('disabled')) {
       return;
     }
-    var form = $($('#game_new_template').html());
+    var form = $(ejs.render($('#game_new_template').html()));
+    $('#fetishes .checkbox').click(function() {
+      $(this).toggleClass('checked');
+    });
     $('button', form).click(function(event) {
       event.preventDefault();
-      Game.start({
-        tentacles: Boolean($('#game-tentacles', form).attr('checked'))
+      var game = {
+        fetishes: {}
+      };
+      $('#fetishes .checkbox').each(function() {
+        if ($(this).hasClass('checked')) {
+          game.fetishes[$(this).attr('name')] = true;
+        }
       });
+      Game.start(game);
       form.dialog('close');
       return false;
     });
@@ -161,7 +173,7 @@ e.Ready.push(function() {
     var form = $(ejs.render($('#game_load_template').html(), {
       games: Game.list()
     }));
-    $('#delete', form).click(function(event) {
+    $('#delete-game', form).click(function(event) {
       event.preventDefault();
       var name = $('#game-name').val();
       Game.remove(name);
@@ -169,17 +181,17 @@ e.Ready.push(function() {
       if (Game.list().length === 0) {
         $('#load').addClass('disabled');
       }
-      $('#load').click();
+      $('#load-game').click();
       return false;
     });
-    $('#import', form).click(function(event) {
+    $('#import-game', form).click(function(event) {
       event.preventDefault();
       var game = $('textarea', form).val();
       Game.loadFromText(game);
       form.dialog('close');
       return false;
     });
-    $('#load', form).submit(function(event) {
+    $(form).submit(function(event) {
       event.preventDefault();
       Game.load($('#game-name').val());
       form.dialog('close');

@@ -6,7 +6,7 @@ Buildings.Theater = {
   // How clean the building is before the player buys it.
   clean: 80,
   // The reputation of the building before the player buys.
-  reputation: 60,
+  reputation: 25,
   // Status currently has two options - "For Sale" and "Owned".
   // Unlike girls, it accepts only a single value.
   status: 'For Sale',

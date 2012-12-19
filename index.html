@@ -115,7 +115,7 @@
       </div>
     <<} >>
 
-    <div class="vertical-tabs navigable">
+    <div class="vertical-tabs navigable" id="messages">
       <ul>
         << var i = 0 >>
         << for (var subject in messages) { >>
@@ -133,9 +133,9 @@
           << var text = message.type >>
           << if (message.time && message.time != time) {
               time = message.time;
-              text += ' - ' + time;
+              text = time.capitalize() + ' - ' + text;
           } >>
-          <h3><<= text >></h3>
+          <h3><<- text >></h3>
           <div class="message ui-helper-clearfix <<= message.text.length > 300 ? 'long' : '' >>">
             <img src="<<= message.image >>">
             << if (message.delta && !$.isEmptyObject(message.delta)) { renderDelta(message.delta); } >>
@@ -230,7 +230,7 @@
                     << if (action.options) { >>
                       <ul>
                         << $.each(action.options, function(key, value) { >>
-                          <li name="<<= action._id >>">
+                          <li name="<<= action._id >>" class="<<= action.disabled ? 'disabled' : '' >>">
                             <a class="action" name="<<=key >>"><<- value >></a></li>
                         << }) >>
                       </ul>
@@ -269,8 +269,8 @@
         </div>
         <div class="column pct-45 right">
           << Girl.sex.forEach(function(sex) { >>
-            <div class="checkbox">
-              <label id="<<= sex >>" class="<<- girl.actions[sex] ? 'checked' : '' >>">
+            <div>
+              <label class="checkbox <<= girl.actions[sex] ? 'checked' : '' >>" id="<<= sex >>">
                 <<- T(sex) >>
               </label>
             </div>
@@ -299,6 +299,9 @@
           Cash on hand:
           <strong class="money"><<= g.money < 0 ? "-$" + (-g.money) : "$" + g.money >></strong>
         </div>
+        << if (g.moneyHistory.length > 5) { >>
+          <div class="bar-sparkline"><<= g.moneyHistory.join(",")>></div>
+        << } >>
         <div>
           Payment of
           <strong class="money">$<<= g.nextPayment().amount >></strong>
@@ -318,7 +321,7 @@
     <div class="ui-helper-clearfix second"></div>
   </script>
   <script id="game_load_template" type="text/ejs-template">
-    <form id="load-game" class="center">
+    <form id="load-game-form" class="center">
       <div>
         <select required="required" id="game-name">
           << games.forEach(function(name) { >>
@@ -326,23 +329,24 @@
           << }) >>
         </select>
       </div>
-      <button id="load">Load Game</button>
-      <button id="delete">Delete Game</button>
+      <button id="load-game">Load Game</button>
+      <button id="delete-game">Delete Game</button>
       <textarea></textarea>
-      <button id="import">Import Game</button>
+      <button id="import-game">Import Game</button>
     </form>
   </script>
   <script id="game_new_template" type="text/ejs-template">
-    <form id="new-game">
-      <div>
-        <input id="game-tentacles" type="checkbox" checked="checked">
-        <label for="game-tentacles" title="Should tentacled monsters roam the land, lusting after human women?<br><br>Note that no events actually use this toggle yet. :(">Tentacles</label>
+    <form id="new-game-form">
+      <div id="fetishes">
+        << Game.fetishes.forEach(function(fetish) { >>
+          <label class="checkbox" <<= g.fetishes && g.fetishes[fetish] ? 'checked="checked"' : '' >> name="<<= fetish >>" title="<<- Game.fetishDescriptions[fetish] >>"><<= fetish.capitalize() >></label>
+        << }) >>
       </div>
       <button>Start Game</button>
     </form>
   </script>
   <script id="game_save_template" type="text/ejs-template">
-    <form id="save-game">
+    <form id="save-game-form">
       <div>
         <label title="If you use the same name as another saved game, the other save will be overwritten." for="game-name">Title</label>
         <input required="required" id="game-name">
@@ -372,10 +376,11 @@
       </div>
       <div class="column pct-70">
         <div class="column pct-50 middle">
+          <div><label>Reputation:</label><<- building.S("reputation") >></div>
           <div><label>Clean:</label><<- building.S("clean") >></div>
           <div><label>Rooms:</label><<- building.S("rooms") >></div>
           <div>
-            <label>Daily:</label>
+            <label id="daily-label">Daily:</label>
             <div class="daily-delta"><< $.each(building.dailyDelta(), function(stat, value) {
               var text;
               if (stat == 'money') {
@@ -416,11 +421,9 @@
           </div>
           <div class="column pct-40 middle">
             <h6 class="center"><<= building.name >></h6>
+            <div><label>Reputation:</label><<- building.S("reputation") >></div>
             <div><label>Clean:</label><<- building.S("clean") >></div>
             <div><label>Rooms:</label><<- building.S("rooms") >></div>
-            << building.rooms.forEach(function (room) { >>
-              <div class="room"><<= room.type.capitalize() >></div>
-            << }) >>
           </div>
           <div class="column pct-40 right center">
             <div><strong>Residents</strong></div>
@@ -441,6 +444,7 @@
           </div>
           <div class="column pct-40 middle">
             <h6 class="center"><<= building.name >></h6>
+            <div><label>Reputation:</label><<- building.S("reputation") >></div>
             <div><label>Clean:</label><<- building.S("clean") >></div>
             <div><label>Rooms:</label><<- building.S("rooms") >></div>
             << building.rooms.forEach(function (room) { >>

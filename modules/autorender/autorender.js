@@ -3,7 +3,6 @@ Globalize.cultures.en.numberFormat.currency.decimals = 0;
 e.Autorender = e.Autorender || [];
 e.Autorender.push(function(element) {
   $('button, a.button', element).button();
-  $('.sparkline', element).sparkline();
   $("ul.sf-menu", element).superfish({
     delay: 400,
     speed: 'fast',
@@ -15,12 +14,19 @@ e.Autorender.push(function(element) {
       delay: 300
     }
   });
+  $('ul.sf-menu li', element).tooltip({
+    show: {
+      delay: 300
+    }
+  });
   $('.bar-sparkline', element).sparkline('html', {
     lineColor: '#E3AC00',
     tooltipPrefix: '$',
     type: 'line',
     spotRadius: 0,
-    fillColor: false
+    fillColor: false,
+    width: '120px',
+    height: '25px'
   });
   $('.accordion', element).accordion({
     heightStyle: 'content'
@@ -114,4 +120,7 @@ e.Autorender.push(function(element) {
     }
   }
   $('.horizontal-tabs', view).tabs();
+  $('label.checkbox', view).click(function() {
+    $(this).toggleClass('checked');
+  });
 });

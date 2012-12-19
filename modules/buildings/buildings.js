@@ -127,7 +127,12 @@ e.GameRender.push(function() {
       }
       var max = Building.roomKeySum(action.requiresRoom.type, action.requiresRoom.key);
       if (!max) {
-        delete actions[_id];
+        if (g.buildings.Cfilter('status', 'Owned').length) {
+          action.disabled = 'You must have a ' + action.requiresRoom.type + ' to ' + action.label + ' girls. Add one to your building.';
+          action.description = action.disabled;
+        } else {
+          delete actions[_id];
+        }
         return;
       }
       var already = g.girls.Cfilter('actions', time, _id).length;

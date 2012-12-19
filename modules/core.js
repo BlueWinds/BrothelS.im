@@ -195,11 +195,9 @@ Object.defineProperty(Object.prototype, "CtoString", {
         items.push(t);
       }
     }
-    console.log(items);
     if (items.length == 1) { return items[0]; }
 
     var str = items.slice(0, -1).join(', ');
-    console.log(str + ' and ' + items.Clast());
     return str + ' and ' + items.Clast();
   }
 });

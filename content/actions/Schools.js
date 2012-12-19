@@ -22,7 +22,7 @@ Actions.Exercise = {
     },
     {
       image: 'exercise',
-      message: '<<= girl.name >> jogged around the city. It was a cloudy day, no sun to warm up the miggy streets. By the time she returned, <<= girl.name >> was sweaty and tired.',
+      message: '<<= girl.name >> jogged around the city. It was a cloudy day, no sun to warm up the muggy streets. By the time she returned, <<= girl.name >> was sweaty and tired.',
       delta: {
         endurance: -15,
         constitution: 1.5
@@ -119,7 +119,7 @@ Actions.Expose = {
   results: [
     {
       image: 'base',
-      message: '<<= girl.name >> wore a skirt that didn\'t reach all the way down to the ground, and wore sandles - some passerby even caught sight of her toes as she took a walk. Scandalous!',
+      message: '<<= girl.name >> wore a skirt that didn\'t reach all the way down to the ground, and wore sandals - some passerby even caught sight of her toes as she took a walk. Scandalous!',
       delta: {
         endurance: -3,
         happiness: -7,
@@ -129,7 +129,7 @@ Actions.Expose = {
     },
     {
       image: 'exercise',
-      message: '<<= girl.name >> wore a short skirt, wandering through the city park. She stopped by the playground to watch the children for a while - and when a little boy hurt himself, she bent down to help him. Not an event worthy of remark, save that it bared her panties and part of her ass to the boy\'s father, who whistled in appreciation. She blushed furiously, and ran home in embarassement.',
+      message: '<<= girl.name >> wore a short skirt, wandering through the city park. She stopped by the playground to watch the children for a while - and when a little boy hurt himself, she bent down to help him. Not an event worthy of remark, save that it bared her panties and part of her ass to the boy\'s father, who whistled in appreciation. She blushed furiously, and ran home in embarrassment.',
       delta: {
         endurance: -4,
         happiness: -4,
@@ -139,7 +139,7 @@ Actions.Expose = {
     },
     {
       image: 'exercise',
-      message: '<<= girl.name >> wore a skimpy outfit, miniskirt and too-small t-shirt. << if (time == "morning") { >>She wandered through the busiest parts of the city, treating select passerby to a brief glimpse of her pantiless pussy as she bent over to "retrieve" a dropped object. The tiny top didn\'t leave much to the imagination.<< } else { >>She stopped by the park, and, feeling brave, left everything except her panties on the shore. Ignoring the "no swimming" signs, she was pretty sure a few people caught sight of her in the moonlight.<< } >>',
+      message: '<<= girl.name >> wore a skimpy outfit, miniskirt and too-small t-shirt. << if (time == "morning") { >>She wandered through the busiest parts of the city, treating select passerby to a brief glimpse of her pantieless pussy as she bent over to "retrieve" a dropped object. The tiny top didn\'t leave much to the imagination.<< } else { >>She stopped by the park, and, feeling brave, left everything except her panties on the shore. Ignoring the "no swimming" signs, she was pretty sure a few people caught sight of her in the moonlight.<< } >>',
       delta: {
         endurance: -5,
         modesty: -2.5,
@@ -149,7 +149,7 @@ Actions.Expose = {
     },
     {
       image: 'naked',
-      message: '<<= girl.name >> left her clothes in a pile on her bed and stepped out into the street. Though this city is famed for its prostitutes and brothels, still the sight of a fully naked woman shamelessly flaunting herself is an unusual one, and turned many heads. <<= Math.choice(["Almost immediately", "Ten minutes", "Half an hour", "An Hour"]) >> into her walk, she heard a whistle and some shouting - she spent the rest of the <<= time >> running from the guards - an exhillerating chase, breasts bouncing and wind whipping private bits.',
+      message: '<<= girl.name >> left her clothes in a pile on her bed and stepped out into the street. Though this city is famed for its prostitutes and brothels, still the sight of a fully naked woman shamelessly flaunting herself is an unusual one, and turned many heads. <<= Math.choice(["Almost immediately", "Ten minutes", "Half an hour", "An Hour"]) >> into her walk, she heard a whistle and some shouting - she spent the rest of the <<= time >> running from the guards - an exhilarating chase, breasts bouncing and wind whipping private bits.',
       delta: {
         endurance: -10,
         constitution: 1,
@@ -208,7 +208,7 @@ Actions.OD = {
     },
     {
       image: 'hard',
-      message: 'You pushed <<= girl.name >> up against the wall while rubbing her pussy with one hand through her underwear. As she got more worked up, you introduced a dildo, pushing it inside up to the hilt without removing her clothing. Nibbling on her ear and whispering in her ear, you continued to play mercelessly with her sex, never quite providing enough stimulation to bring her to orgasm.',
+      message: 'You pushed <<= girl.name >> up against the wall while rubbing her pussy with one hand through her underwear. As she got more worked up, you introduced a dildo, pushing it inside up to the hilt without removing her clothing. Nibbling on her ear and whispering in her ear, you continued to play mercilessly with her sex, never quite providing enough stimulation to bring her to orgasm.',
       delta: {
         endurance: -6,
         happiness: 4,
@@ -228,7 +228,7 @@ Actions.OD = {
     },
     {
       image: 'fetish',
-      message: 'Blindfolding <<= girl.name >> and taking away all of her clothes, you bound her libs to each corner of the bed, and began to lick and finger her pussy. Every time she moved so much as an inch, you leaft the room for five minutes - it took hours for her to finally stay still long enough to achieve an orgasm.',
+      message: 'Blindfolding <<= girl.name >> and taking away all of her clothes, you bound her libs to each corner of the bed, and began to lick and finger her pussy. Every time she moved so much as an inch, you left the room for five minutes - it took hours for her to finally stay still long enough to achieve an orgasm.',
       delta: {
         endurance: -8,
         happiness: 3,

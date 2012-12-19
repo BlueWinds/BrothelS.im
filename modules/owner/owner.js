@@ -7,11 +7,11 @@ e.GameInit.push(function() {
 
 (function() {
   var oldGirlSetAction = Girl.prototype.setAction;
-  Girl.prototype.setAction = function(action, time) {
+  Girl.prototype.setAction = function(action, time, option) {
     if (g.ownerAction[time] == this.actions[time + 'Label'] + ' with ' + this.name) {
       g.ownerAction[time] = '';
     }
-    oldGirlSetAction.call(this, action, time);
+    oldGirlSetAction.call(this, action, time, option);
     if (action.ownerParticipation) {
       g.ownerAction[time] = action.label + ' with ' + this.name;
     }

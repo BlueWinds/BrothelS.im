@@ -3,7 +3,7 @@
 }
 
 .building .middle label {
-  width: 4.5em;
+  width: 6em;
 }
 
 .building .middle .room {
@@ -27,10 +27,18 @@
 .clean {
   color: #44CCFF;
 }
+.reputation {
+  color: #CC00CC;
+  font-weight: 700;
+}
 
 #building-view .middle label {
   margin-left: 1em;
-  width: 4em;
+  width: 6em;
+}
+
+#building-view .middle #daily-label {
+  width: 3em;
 }
 
 .daily-delta {

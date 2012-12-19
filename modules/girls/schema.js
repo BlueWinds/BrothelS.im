@@ -259,7 +259,7 @@ Girl.prototype.doAction = function(time, action) {
         time: time
       }).save(context.girl.name);
     };
-    var results = Game.getResults(action, this);
+    var results = Game.getResults(time, action, this);
     if (typeof(results.delta) == 'function') {
       var delta = results.delta.call(this, time, action);
       this.apply(delta);
@@ -286,6 +286,9 @@ Girl.prototype.runDay = function(time) {
 
   var action = acts[this.actions[time]] || acts.Rest;
   if (action.disabled) { action = acts.Rest; }
+  if (this.actions[time + 'Option'] !== undefined) {
+    action.options = this.actions[time + 'Option'];
+  }
   this.doAction(time, action);
 
   if (time == 'evening') {
@@ -366,10 +369,11 @@ Girl.prototype.get = function(stat) {
   return this[stat];
 };
 
-Game.getResults = function(item, girl) {
+Game.getResults = function(time, item, girl) {
   var i;
   if (typeof(item.variants) == 'function') {
-    i = item.variants.call(item, girl);
+    i = item.variants.call(girl, time, item);
+    console.log(i);
   } else {
     i = Math.weightedRandom(item.variants || [1]);
   }

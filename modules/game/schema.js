@@ -1,5 +1,14 @@
 var Game = function(obj) {
-  jQuery.extend(this, obj);
+  // Update old fetish settings
+  if (obj.tentacles !== undefined) {
+    obj.fetishes = { tentacles: obj.tentacles };
+    delete obj.tentacles;
+  }
+  // Trim overly-long old histories
+  if (obj.moneyHistory.length > Game.config.moneyHistoryLength) {
+    obj.moneyHistory = obj.moneyHistory.slice(obj.moneyHistory.length - Game.config.moneyHistoryLength);
+  }
+  $.extend(this, obj);
 };
 
 Game.prototype.nextPayment = function() {
@@ -25,6 +34,9 @@ Game.prototype.render = function() {
 
 Game.prototype.nextTurn = function() {
   this.moneyHistory.push(this.money);
+  if (this.moneyHistory.length > Game.config.moneyHistoryLength) {
+    this.moneyHistory = this.moneyHistory.slice(this.moneyHistory.length - Game.config.moneyHistoryLength);
+  }
   e.invokeAll('GamePreDay');
   e.invokeAll('GameNextDay');
   var payment = this.nextPayment();

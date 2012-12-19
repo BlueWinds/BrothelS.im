@@ -67,7 +67,7 @@ RandomPeople['High Class'] = {
   'Drug Lord': {
     wants: ['libido', '-intelligence', 'obedience', 'modesty'],
     description: [
-      'He was a snearing man, with a hook nose and evil, beady little eyes. She didn\'t like him at all.',
+      'He was a sneering man, with a hook nose and evil, beady little eyes. She didn\'t like him at all.',
       'Despite his profession as a purveyor of drugs and other unsavories, he was a perfect gentleman, tall and slender and elegant.',
       'He wasn\'t what she was expecting from his reputation - one would hardly suspect such a small, inoffensive man of being a dangerous criminal.'
     ],

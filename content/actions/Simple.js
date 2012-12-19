@@ -21,7 +21,7 @@ Actions.Lockdown = {
   label: 'Lockdown',
   // The tab the action is displayed under when viewing a girl.
   group: 'Training',
-  // Does... what you think it does. If the action doesn't take up both timeslots, remove this line.
+  // Does... what you think it does. If the action doesn't take up both time slots, remove this line.
   allDay: true,
   // The minimum statistics a girl must have in order to take this action. You can also use 'money' here, to show the minimum $ the player must have.
   mins: {
@@ -46,8 +46,8 @@ Actions.Lockdown = {
   },
   // The description of the action, showed on hover. Replacement patterns can again be used. Notice that we're translating "obedience" through the T() function - by default, it outputs a noun form, but "adj" is also available for adjectives. If you want the negation of an adjective, try something like T("-modesty", "adj") for low modesty - "Uninhibited", for that example.
 
-  // It's better to use the "translated" versions of these strings to keep up with any future changes, and to properly color and tool-tip the text. Also be sure to use <<- instead of <<= to open the block - otherwise you'll get html visible on the page, rather than properly rendered.
-  description: 'She will be bound and gagged in the dungeon for most of the day to increase her <<- T("obedience") >>. This action takes all day.',
+  // It's better to use the "translated" versions of these strings to keep up with any future changes, and to properly color and tool-tip the text. Also be sure to use <<- instead of <<= to open the block - otherwise you'll get HTML visible on the page, rather than properly rendered.
+  description: 'She will be bound and gagged in the dungeon to increase her <<- T("obedience") >>. This action takes all day.',
   // Disabled is an optional javascript function to disable this action based on information about the game. You probably don't want to try to use it unless you already know javascript. The function always gets a single argument, time, which is either 'morning' or 'evening' - the time this action is being considered for.
   // disabled: function(time) {
     // The disabled function can return one of three values: true, false, or a string.
@@ -107,7 +107,7 @@ Actions.Clean = {
         money: -10,
         endurance: -6,
         happiness: -3,
-        modesty: 0.5
+        modesty: 0.4
       }
     }
   ]

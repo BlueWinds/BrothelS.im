@@ -6,29 +6,6 @@ e.Ready.push(function() {
   });
 });
 
-e.GamePreDay.push(function() {
-  $.each(Events, function(_id, event) {
-    if (!event.oneTime) { return; }
-
-    if (event.day != g.day) { return; }
-    function doMessage(image, text) {
-      var message = new Message({
-        type: event.label,
-        text: text,
-        image: image.substr(1)
-      }).save('Events');
-    }
-    var results = Game.getResults(this);
-    if (typeof(results.message) == 'object') {
-      for (var j in results.message) {
-        doMessage(results.image[j], results.message[j]);
-      }
-    } else {
-      doMessage(results.image, results.message);
-    }
-  });
-});
-
 (function() {
   var oldDoAction = Girl.prototype.doAction;
   Girl.prototype.doAction = function(time, action) {
@@ -37,7 +14,7 @@ e.GamePreDay.push(function() {
       oldDoAction.call(this, time, action);
       return;
     }
-    var results = Game.getResults(event, this);
+    var results = Game.getResults(time, event, this);
     var endDelta = this.startDelta();
     var context = {
       event: event,
@@ -58,7 +35,7 @@ e.GamePreDay.push(function() {
     for (var _id in potentialEvents) {
       var event = potentialEvents[_id];
       if (event.minDay && g.day < event.minDay) { continue; }
-      if (action.uninteruptable && event.disruptive) { continue; }
+      if (action.uninterupretable && event.disruptive) { continue; }
       var likelyhood = event.likelyhood;
       if (action.safety && event.dangerous) { likelyhood *= (1 - action.safety); }
       if (Math.random() < likelyhood) {

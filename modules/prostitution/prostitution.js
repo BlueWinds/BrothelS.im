@@ -12,24 +12,21 @@ Girl.prototype.customerSexType = function(customer) {
     if (this.actions[sex]) {
       break;
     }
-    satisfaction -= 0.25;
+    satisfaction -= 0.2;
   }
   return sex;
 };
 
-Girl.prototype.checkInterest = function(sex, effectiveModesty) {
-  if (effectiveModesty === undefined) {
-    effectiveModesty = this.modesty;
-  }
-  var interest = this.obedience * 1.5 + this[sex + ' libido'] * 2;
+Girl.prototype.checkInterest = function(sex) {
+  var interest = this.obedience + this[sex + ' libido'] * 2;
   interest += this[sex + ' experience'] + this.happiness / 2;
-  interest = (interest / 500 + Math.random());
-  interest -= Actions.Streetwalk.config.types[sex].r - effectiveModesty / 100;
-  return Math.max(interest, 0);
+  interest = (interest / 450 + Math.random());
+  interest -= Actions.Streetwalk.config.types[sex].r;
+  return interest;
 };
 
 Girl.prototype.checkSatisfaction = function(customer, sex) {
-  var satisfaction = 1;
+  var satisfaction = 0;
   for (var i in customer.sex) {
     if (sex == customer.sex[i]) {
       break;
@@ -72,26 +69,30 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
     }
   };
 
-  function doCustomer(girl, customer, time, action) {
+  function doCustomer(girl, customer, time, action, customerConfig) {
     var context = {
       girl: girl,
-      customer: customer
+      customer: customer,
+      action: action
     };
     var endDelta = girl.startDelta();
     var sex = girl.customerSexType(customer);
     context.sex = sex;
     var interest = girl.checkInterest(sex);
-    if (interest === 0) {
+    if (interest - girl.modesty / 100 <= 0) {
+      if (customerConfig) {
+        girl.apply('reputation', customerConfig.bad);
+      }
       context.result = ejs.render(action.uncooperative, context);
       girl.apply(action.config.refuseDelta);
       new Message({
-        type: 'Refused',
+        type: action.label + ' - Refused',
         time: time,
         image: girl.image('refuse', true),
         text: ejs.render(action.customerMessage, context),
         delta: endDelta()
       }).save(girl.name);
-      return;
+      return 0;
     }
     var satisfaction = girl.checkSatisfaction(customer, sex) + interest;
     var delta = $.extend({}, Actions.Streetwalk.config.types[sex]);
@@ -103,17 +104,24 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
       delta.Cadd(action.eachCustomer);
     }
     girl.apply(delta);
+    if (customerConfig) {
+      if (satisfaction >= customerConfig.minSatisfaction) {
+        girl.apply('reputation', customerConfig.good);
+      } else {
+        girl.apply('reputation', customerConfig.bad);
+      }
+    }
 
     context.result = Math.choice(Actions.Streetwalk.config.results[sex]);
     new Message({
-      type: 'Prostitution',
+      type: action.label,
       time: time,
       image: girl.image(sex, true),
       text: ejs.render(action.customerMessage, context),
       delta: endDelta()
     }).save(girl.name);
 
-    return customer.satisfaction;
+    return satisfaction;
   }
 
   var Whores;
@@ -149,7 +157,7 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
     count += config.minCustomers;
     var classes = [];
     $.each(config.customerClass, function(_class, info) {
-      if (info.minReputation < building.reputation && info.maxReputation) {
+      if (info.minReputation <= building.reputation && info.maxReputation >= building.reputation) {
         classes.push(_class);
       }
     });
@@ -168,10 +176,11 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
     var endDelta = building.startDelta();
     var serviced = 0;
     customers.Csort('class_number', true).forEach(function(customer) {
+      var customerConfig = Actions.Whore.config.customerClass[customer._class];
       var girl, max_satisfaction = 0;
       for (var name in canService) {
         var sex = g.girls[name].customerSexType(customer);
-        var satisfaction = g.girls[name].checkInterest(sex, 0);
+        var satisfaction = g.girls[name].checkInterest(sex);
         satisfaction += g.girls[name].checkSatisfaction(customer);
         if (satisfaction > max_satisfaction) {
           girl = g.girls[name];
@@ -183,7 +192,9 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
         canService[girl.name] -= 1;
         serviced++;
         if (!canService[girl.name]) { delete canService[girl.name]; }
-        doCustomer(girl, customer, time, Actions.Whore);
+        satisfaction = doCustomer(girl, customer, time, Actions.Whore, customerConfig);
+      } else {
+        building.apply('reputation', customerConfig.bad / 2);
       }
     });
 

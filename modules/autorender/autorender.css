@@ -212,6 +212,16 @@
   padding: 0.5em 0;
 }
 
+.sf-menu li.disabled, .sf-menu li.disabled:hover {
+  background-image: url("../../libraries/images/ui-bg_glass_20_555555_1x400.png");
+  border: 1px solid #666666;
+  cursor: default;
+}
+.sf-menu li.disabled a, .sf-menu li.disabled:hover a, .sf-menu li.disabled span, .sf-menu li.disabled:hover span {
+  color: #999;
+  cursor: default;
+}
+
 .sf-menu a.action {
   cursor: pointer;
 }
@@ -240,4 +250,21 @@ ul.sf-menu li li li:hover ul,
 ul.sf-menu li li li.sfHover ul {
   left: 8em;
   top: -1px;
+}
+
+label.checkbox {
+  font-weight: 700;
+}
+label.checkbox:before {
+  color: #FF0000;
+  content: "×";
+  display: inline-block;
+  font-size: 1.2em;
+  line-height: 1em;
+  vertical-align: middle;
+  width: 1em;
+}
+label.checkbox.checked:before {
+  color: #00FF00;
+  content: "✓";
 }

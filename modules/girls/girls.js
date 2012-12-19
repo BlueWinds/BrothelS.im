@@ -100,7 +100,7 @@ e.GameRender.push(function() {
       }).bind('spin', spin);
       spin(null, {value: girl.actions.pay || 0});
 
-      $('.checkbox label', view).click(function(event) {
+      $('.checkbox', view).click(function(event) {
         var check = !$(this).hasClass('checked');
         var sex = $(this).attr('id');
         if (check) {
@@ -112,7 +112,7 @@ e.GameRender.push(function() {
       });
 
       $('.action-list .action', view).click(function() {
-        if ($(this).hasClass('disabled')) { return; }
+        if ($(this).parent().hasClass('disabled')) { return; }
         var _id = $(this).parent().attr('name');
         var option = $(this).attr('name');
         var time = $(this).closest('div').attr('id');

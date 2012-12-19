@@ -27,6 +27,12 @@ h3 {
 
 .experience { font-style: italic; }
 
+span.adj {
+  color: #FFF;
+  font-style: italic;
+  font-weight: 300;
+}
+
 .delta {
   font-size: 0.7em;
 }
@@ -36,11 +42,12 @@ h3 {
 }
 
 #girl-view label {
-  margin-left: 2em;
+  margin-left: 1em;
+  width: 6em;
 }
 
-#girl-view label {
-  width: 6em;
+#girl-view label.checkbox {
+  margin-left: 0;
 }
 
 #girl-view .middle label span {
@@ -63,34 +70,6 @@ h3 {
 #girl-view {
   width: 35em;
   overflow: visible;
-}
-
-#girl-view .checkbox {
-  position: relative;
-}
-
-#girl-view .checkbox input {
-  display: none;
-}
-
-#girl-view .checkbox label.checked:before {
-  color: #00FF00;
-  content: "✓";
-  font-size: 1.1em;
-  left: 0;
-  position: absolute;
-}
-#girl-view .checkbox label:before {
-  color: #FF0000;
-  content: "×";
-  font-size: 1.1em;
-  left: 0;
-  position: absolute;
-}
-#girl-view .checkbox label {
-  margin-left: 1.1em;
-  font-weight: 700;
-  width: 5em;
 }
 
 #hire-girls label {

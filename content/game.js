@@ -2,7 +2,12 @@ Game.config = {
   startMoney: 0,
   gameLength: 720,
   paymentLength: 30,
-  loan: 400000
+  loan: 400000,
+  moneyHistoryLength: 30
+};
+
+Game.fetishDescriptions = {
+  tentacles: 'Tentacled monsters roam the land, searching for human women to satisfy their dark lusts.'
 };
 
 Game.strings = {
@@ -10,7 +15,7 @@ Game.strings = {
     happiness: 'Joyful',
     endurance: 'Healthy',
     obedience: 'Submissive',
-    '-obedience': 'Sprited',
+    '-obedience': 'Spirited',
     modesty: 'Modest',
     '-modesty': 'Uninhibited',
     constitution: 'Tireless',

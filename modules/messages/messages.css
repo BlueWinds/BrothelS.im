@@ -48,3 +48,7 @@
   float: left;
   margin: .8em;
 }
+
+#messages h3.ui-accordion-header span {
+  color: #FFF;
+}
