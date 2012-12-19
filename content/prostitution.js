@@ -81,30 +81,30 @@ Actions.Whore.config = {
   results: {
     soft: [
       'They kissed awkwardly for a minute until it became apparent he was completely inexperienced. She took the lead and guided him in how to pleasure a woman, before finishing him off with a blow-job.',
-      'He was incredibly hot, and they wasted no time in stripping and ravaging eachother\'s bodies.',
+      'He was incredibly hot, and they wasted no time in stripping and ravaging each other\'s bodies.',
       'He straddled her and pushed her tits together, fucking them roughly without much concern for her pleasure.',
       'She lay over him in 69 position, fondling his balls and slowly licking up and down his shaft while he nibbled on her pussy, both of them steadily growing more enthusiastic until she eagerly swallowed his cum.',
-      'He stood against the wall while she gave him a handjob, staring up into his eyes with irresistable cuteness.',
-      'He had trouble getting it up at first, but her persistant tongue and ceaseless hands eventually got him hard, and he ended up spraying a massive load across her hair.'
+      'He stood against the wall while she gave him a hand job, staring up into his eyes with irresistible cuteness.',
+      'He had trouble getting it up at first, but her persistent tongue and ceaseless hands eventually got him hard, and he ended up spraying a massive load across her hair.'
     ],
     hard: [
       'She couldn\'t much get into his pudgy features, and he didn\'t seem particularly interested in her as anything more than a wet (once lube was applied) hole.',
-      'After a brief warmup licking her out, he pounded her furiously doggy-style until the whole bed shook, leaving her gasping for air by the time he pulled out and covered her back in cum.',
+      'After a brief warm up licking her out, he pounded her furiously doggy-style until the whole bed shook, leaving her gasping for air by the time he pulled out and covered her back in cum.',
       'Missionary style, straight, no variation - only when she put her legs around his waist and rolled over on top using the element of surprise did things get more interesting.',
       'He lay back on the bed and she took the top, riding him for what seemed like pleasurable hours until finally, crushing her breasts into his face and moaning, he shot his load deep inside.',
-      'They moved together though a veritable karma-sutra of sex positions, some of which she\'d never heard of before, much less practiced. Her next lay is going to be in for a treat.'
+      'They moved together though a veritable Kama Sutra of sex positions, some of which she\'d never heard of before, much less practiced. Her next lay is going to be in for a treat.'
     ],
     anal: [
-      'Even with plenty of toy use and luberication, it still took quite some time to fit his massive dick into her tight ass hole. He was gentle though, and she enjoyed herself despite the pain.',
-      'Though he was in a hurry and wanted to get started right away, she inisted on taking it slowly, moving from kissing to oral before finally letting him take her ass doggy style.',
+      'Even with plenty of toy use and lubrication, it still took quite some time to fit his massive dick into her tight ass hole. He was gentle though, and she enjoyed herself despite the pain.',
+      'Though he was in a hurry and wanted to get started right away, she insisted on taking it slowly, moving from kissing to oral before finally letting him take her ass doggy style.',
       'He didn\'t actually want to fuck her ass, just plug it was a huge toy while they had sex the old fashioned way.',
-      'He had her sit on the edge of the bed and lay back while he teased her pussy with his tongue, slowly working first one finger then two into her ass. By the time he had three in, she wsa cooing with delight and welcomed the replacement of the fingers with his cock.'
+      'He had her sit on the edge of the bed and lay back while he teased her pussy with his tongue, slowly working first one finger then two into her ass. By the time he had three in, she was cooing with delight and welcomed the replacement of the fingers with his cock.'
     ],
     fetish: [
-      'He stripped her naked and suspended her from a conveniently placed ceiling hook - she was worried about suspension at first, but he seemed to know what he was doing. He fucked her mouth and spanked her, making her beg for more cum to drink (which he provided) before letting her down.',
-      '',
-      '',
-      ''
+      'He stripped her naked and suspended her from a conveniently placed ceiling hook - she was worried about suspension at first, but he seemed to know what he was doing. He fucked her mouth and spanked her, making her beg for more cum to swallow (which he provided) before he would her down.',
+      'Bound and helpless before him, he teased her clit, nipples and thighs with a feather for nearly half an hour, until she finally broke down and begged to be fucked. He satisfied himself with her ass, continuing to tease her pussy all the while.',
+      'Providing her a schoolgirl costume to wear, he spanked her, and tied her arms behind her back. She alternated between apologized for being so naughty and slurping messily on his cock.',
+      'He didn\'t want anything particularly extreme, just a bit of instruction on the proper way to tie up a girl without hurting her. She was happy to oblige in a bit of light rope-play.'
     ]
   },
   customerClass: {
