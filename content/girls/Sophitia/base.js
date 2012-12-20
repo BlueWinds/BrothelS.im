@@ -36,15 +36,18 @@ Girls.Sophitia = {
 //     dependentStats: {
     // The "dependentStats" special rule allows you to modify the way her stats change. There are three main ways to use this, described below:
 
-//       "soft experience": { happiness: 1 },
+      // "soft experience": { happiness: 1 },
       // In this case, whenever her "soft experience" stat is increased, her happiness also goes up an equal amount - +3 experience will also give her +3 happiness.
 
-//       intelligence: { intelligence: 0.5 },
+      // intelligence: { intelligence: 0.5 },
       // You can also modify the stat being added without breaking things. In this example, her intelligence increases at +50% rate - if she got +4 intelligence, she'd also get +2 at the same time.
       // Be careful not to create a dependency loop though - the game is smart enough to handle the above example (with intelligence gain causing more intelligence gain), but *also* adding the line happiness: { "soft experience": 1 } would cause a loop - adding experience adds happiness, adding happiness adds experience, ad infinitum.
 
-//       "-modesty": { "fetish libido": 0.2 }
+      // "-modesty": { "fetish libido": 0.2 }
       // You can use "-stat" to apply rules for when a stat *decreases*. In this case, whenever her modesty drops, her fetish libido rises a little bit.
+
+      // "hard experience": function() { return { happiness: (100 - this.modesty) / 20 }; }
+      // The very final option is to use an arbitrary javascript function, which returns an object containing the stat modifications you want. In this example, her happiness increases alongside her "hard experience", at a rate the depends on her modesty, between 0 and 5 points.
 //     },
   },
   images: {

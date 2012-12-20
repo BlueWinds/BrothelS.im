@@ -71,7 +71,11 @@ Girl.prototype.apply = function(stat, delta) {
         dependency = this._.specialRules.dependentStats['-' + stat];
       }
       if (dependency) {
-        dependency = $.extend({}, dependency);
+        if (typeof(dependency) == 'function') {
+          dependency = dependency.call(this);
+        } else {
+          dependency = $.extend({}, dependency);
+        }
         dependency.Cmultiply(delta);
         if (dependency[stat]) {
           delta += dependency[stat];
