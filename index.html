@@ -225,8 +225,8 @@
               <a><<= group >></a>
               <ul>
                 << actions.forEach(function(action) { >>
-                  <li class="<<= action.disabled ? 'disabled' : '' >>" name="<<= action._id >>" title="<<= action.description >>">
-                    <a class="<<= action.options ? '' : 'action'>>"><<= action.label >></a>
+                  <li class="<<= action.disabled ? 'disabled' : '' >>" name="<<= action._id >>">
+                    <a class="<<= action.options ? '' : 'action'>>" title="<<= action.description >>"><<= action.label >></a>
                     << if (action.options) { >>
                       <ul>
                         << $.each(action.options, function(key, value) { >>
