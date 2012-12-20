@@ -63,6 +63,23 @@ Girl.prototype.randomStatus = function() {
 
 Girl.prototype.apply = function(stat, delta) {
   if (typeof(delta) == 'number') {
+    if (this._.specialRules && this._.specialRules.dependentStats) {
+      var dependency;
+      if (delta > 0) {
+        dependency = this._.specialRules.dependentStats[stat];
+      } else {
+        dependency = this._.specialRules.dependentStats['-' + stat];
+      }
+      if (dependency) {
+        dependency = $.extend({}, dependency);
+        dependency.Cmultiply(delta);
+        if (dependency[stat]) {
+          delta += dependency[stat];
+          delete dependency[stat];
+        }
+        this.apply(dependency);
+      }
+    }
     if (stat.indexOf(' experience') != -1) {
       delta *= this.intelligence / 100;
     }

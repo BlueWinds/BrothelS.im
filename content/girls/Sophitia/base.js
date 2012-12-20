@@ -32,7 +32,20 @@ Girls.Sophitia = {
   // specialRules is where you can put in tweaks, so that the girl works a little differently than normal.
   specialRules: {
     // payRatio: 0.5,
-    // Currently, payRatio is the only special rule supported (ask me if you have one you'd like to add!). It's multiplied into her desired pay - setting it to .5 means she only wants half as much money, while 3 would mean three times the pay.
+    // payRatio is multiplied into her desired pay - setting it to .5 means she only wants half as much money, while 3 would mean three times the pay.
+//     dependentStats: {
+    // The "dependentStats" special rule allows you to modify the way her stats change. There are three main ways to use this, described below:
+
+//       "soft experience": { happiness: 1 },
+      // In this case, whenever her "soft experience" stat is increased, her happiness also goes up an equal amount - +3 experience will also give her +3 happiness.
+
+//       intelligence: { intelligence: 0.5 },
+      // You can also modify the stat being added without breaking things. In this example, her intelligence increases at +50% rate - if she got +4 intelligence, she'd also get +2 at the same time.
+      // Be careful not to create a dependency loop though - the game is smart enough to handle the above example (with intelligence gain causing more intelligence gain), but *also* adding the line happiness: { "soft experience": 1 } would cause a loop - adding experience adds happiness, adding happiness adds experience, ad infinitum.
+
+//       "-modesty": { "fetish libido": 0.2 }
+      // You can use "-stat" to apply rules for when a stat *decreases*. In this case, whenever her modesty drops, her fetish libido rises a little bit.
+//     },
   },
   images: {
     // basePath is the path to the images folder you created. Don't forget to put your girl's name in here!
