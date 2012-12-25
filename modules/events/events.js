@@ -49,7 +49,7 @@ e.Ready.push(function() {
     $.each(Events, function(_id, event) {
       if (event.oneTime) { return true; }
       for (var fet in event.fetishes) {
-        if (event.fetishes[fet] && !g[fet]) { return; }
+        if (event.fetishes[fet] && !g.fetishes[fet]) { return; }
       }
       if (event.time && event.time != time) { return; }
       for (var tag in tags) {
