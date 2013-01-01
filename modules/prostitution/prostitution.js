@@ -65,6 +65,7 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
 
     for (i = 0; i < found; i++) {
       var customer = randomPerson(Math.choice(['Very Low Class', 'Low Class']));
+      customer.modestyRate = 1;
       doCustomer(this, customer, time, action);
     }
   };
@@ -79,7 +80,7 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
     var sex = girl.customerSexType(customer);
     context.sex = sex;
     var interest = girl.checkInterest(sex);
-    if (interest - girl.modesty / 100 <= 0) {
+    if (interest - girl.modesty * customer.modestyRate / 100 <= 0) {
       if (customerConfig) {
         girl.apply('reputation', customerConfig.bad);
       }
@@ -176,8 +177,9 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
     var endDelta = building.startDelta();
     var serviced = 0;
     customers.Csort('class_number', true).forEach(function(customer) {
+      customer.modestyRate = 0;
       var customerConfig = Actions.Whore.config.customerClass[customer._class];
-      var girl, max_satisfaction = 0;
+      var girl, max_satisfaction = 0.3;
       for (var name in canService) {
         var sex = g.girls[name].customerSexType(customer);
         var satisfaction = g.girls[name].checkInterest(sex);
