@@ -41,7 +41,7 @@ Actions.Streetwalk.config = {
       'He jerked off all over her face and hair, then left in a hurry.'
     ],
     hard: [
-      'He fucked her silly in the plain view of passerby.',
+      'He fucked her silly in the plain view of passersby.',
       'They found an abandoned lot for privacy, and he came in her pussy.',
       'He fucked her in an ally, but pulled out to give her a facial.',
       'They kissed and fondled each other, than made slow love beneath a tree in the park.'
@@ -61,8 +61,8 @@ Actions.Streetwalk.config = {
     ]
   },
   refuseDelta: {
-    obedience: -2,
-    happiness: -3
+    obedience: -1,
+    happiness: -5
   },
   streetwalkDelta: {
     endurance: -10,
@@ -74,8 +74,8 @@ Actions.Whore.config = {
   minCustomers: 1,
   maxCustomers: 20,
   refuseDelta: {
-    obedience: -2,
-    happiness: -3
+    obedience: -1,
+    happiness: -5
   },
   uncooperative: Actions.Streetwalk.config.uncooperative,
   results: {
