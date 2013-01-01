@@ -58,7 +58,7 @@ e.GameNextDay.push(function() {
       Mission.start(mission, result);
     }
   });
-  g.girls.Cfilter('status', 'Hired').each(function(girl) {
+  g.girls.Cfilter('status', 'Hired').forEach(function(girl) {
     if (!girl._.missions) { return; }
     $.each(girl._.missions, function(_id, mission) {
       if (g.missions[_id] || g.missionsDone[_id] || !mission.start) {
