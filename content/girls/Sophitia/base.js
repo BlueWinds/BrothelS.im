@@ -81,5 +81,9 @@ Girls.Sophitia = {
 
     // One nifty feature is that you can override general actions with girl specific versions. All you have to do is use the same _id as the general one - and any missing keys will be filled in from the non girl specific version. See Sakuya for an example of this in action.
     // Clean: {},
-  // }
+  // },
+  // Like actions, events and missions can be girl-specific, modifying existing events as they apply to her or creating new ones.
+  // events: { ... },
+  // Missions that are specific to a girl are always bound to her (see the mission documentation for more details on what this means). *NOTE* Girl-specific missions CANNOT override generic missions - if it has the same _id as a general mission, it will never trigger.
+  // missions: { ... },
 };

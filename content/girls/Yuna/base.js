@@ -46,7 +46,7 @@ Girls.Yuna = {
       },
       tags: {},
       variants: function(time, action) {
-        if (g.fetishes.tentacles && Math.random() < .1) { return 5; }
+        if (g.fetishes.tentacles && Math.random() < 0.1) { return 5; }
         return Math.weightedRandom([0.4, 0.15, 0.15, 0.15, 0.15]);
       },
       results: [
