@@ -118,6 +118,7 @@ Mission.prototype.applyResults = function(result, girl, context) {
     }, context);
     var text = typeof(result.message) == 'object' ? result.message : [result.message];
     var img = typeof(result.image) == 'object' ? result.image : [result.image];
+    if (typeof(delta) == 'function') { delta = delta(); }
     for (var i in text) {
       var img_render = ejs.render(img[i], context);
       if (img_render[0] == '/' ) {
@@ -129,7 +130,7 @@ Mission.prototype.applyResults = function(result, girl, context) {
         type: this.label,
         text: ejs.render(text[i], context),
         image: img_render,
-        delta: i == text.length - 1 ? delta() : {}
+        delta: i == text.length - 1 ? delta : {}
       }).save(this.group);
     }
   }
