@@ -108,7 +108,6 @@ Mission.prototype.applyResults = function(result, girl, context) {
   if (result.maxBuildings) {
     g.maxBuildings = result.maxBuildings;
   }
-  console.log(result.girl);
   if (girl && result.girl) {
     girl.apply(result.girl);
   }
