@@ -281,7 +281,6 @@ Girl.prototype.doAction = function(time, action) {
       }).save(context.girl.name);
     };
     var results = Game.getResults(time, action, this);
-    console.log(results);
     if (typeof(results.delta) == 'function') {
       var delta = results.delta.call(this, time, action);
       this.apply(delta);

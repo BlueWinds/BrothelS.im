@@ -50,7 +50,7 @@ Girls['Dark Magician Girl'] = {
       disabled: function(time) { return g.girls.Cfilter('status', 'Hired').length == 1; },
       results: [
         {
-          image: '/content/girls/Dark Magician Girl/images/Exercise2.jpg',
+          image: '/content/girls/DarkMagicianGirl/images/Exercise2.jpg',
           delta: function(time, action) {
             var girls = g.girls.Cfilter('status', 'Hired').Csort('endurance');
             action.targetGirl = girls[0] == this ? girls[1] : girls[0];
