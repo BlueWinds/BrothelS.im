@@ -13,8 +13,9 @@ Events.tentacleAttack = {
   },
   // This object should include any and all fetishes this event contains - if it's "borderline", put it in.
   fetishes: {
-    // Tags also control the content filtering mechanism of the game, allowing players to turn on/off different fetishes. Currently, "tentacles" is the only fetish the game supports - if you want to add content that belongs to a different one, **let me know**. I will happily add support for it, as long as it isn't loli or bestiality.
+    // Fetishes control the content filtering mechanism of the game, allowing players to turn on/off different fetishes. Currently, "tentacles" and "rape" are the only fetishes the game supports - if you want to add content that belongs to a different one, **let me know**. I will happily add support for it, as long as it isn't loli or bestiality.
     tentacles: true
+    // rape: true
   },
   // The "dangerous" option means that the girl would avoid this event if she could. The event also becomes more or less likely depending on if she's in a good or bad part of town. If the event didn't have this tag, it would be equally likely to trigger on any action that meets its criteria.
   // If the event isn't "dangerous", either remove this line or set it to false.
@@ -25,9 +26,9 @@ Events.tentacleAttack = {
   disruptive: true,
   // minDay means that the event won't trigger before this game day. Remove it if your event can start on day 0.
   minDay: 7,
-  // Important number! When a girl's action matches all the above criteria (has a matching tag, the time of day is right, etc., this is the probability the event occurs. A tentacle attack has a 20% chance in the evening - though remember that this may be modified based on the specific action because this event is marked "dangerous".
+  // Important number! When a girl's action matches all the above criteria (has a matching tag, the time of day is right, etc., this is the probability the event occurs. A tentacle attack has a 10% chance in the evening - though remember that this may be modified based on the specific action because this event is marked "dangerous".
   // While I'm working on an event, I like to set this to 1, so it triggers all the time. Don't forget to reduce it again later.
-  likelyhood: 0.2,
+  likelyhood: 0.1,
   // Now we get to the interesting bits. ;)
 
   // There are two ways to control how an event plays out. The first, and simpler, one, is shown below.
@@ -75,10 +76,10 @@ Events.tentacleAttack = {
       // If image and message are both lists, then one message will be sent for each item, with the delta applied only on the last message. This isn't any different game wise, but it can be nice to break up long blocks of text into sections.
       image: ['tentacles', 'tentacles'],
       message: [
-        "<<= girl.name >> was minding her own business on a park bench, taking a short break when something briefly blotted out the <<= time == 'morning' ? 'sun' : 'moon' >>, and she was lifted off her feet without even time for a scream. Passerby pointed and yelled helplessly as she was lifted to the top of a nearby building, her clothing dropping to the ground as the creature roughly shredded it with a seemingly endless stream of whipcord appendages.<br><br>She was suspended there, naked, in plain sight of dozens as the birdlike creature perched on the roof of a building, seemingly not even noticing her weight or struggles. The instant it had removed the last article of her clothing, panties dropping several stories to the ground below, it slid a huge tentacle into her pussy - and an even larger one into her ass, causing her to moan in a combination of lust and pain. Her screams were finally silenced when another massive limb filled her throat.",
+        "<<= girl.name >> was minding her own business on a park bench, taking a short break when something briefly blotted out the <<= time == 'morning' ? 'sun' : 'moon' >>, and she was lifted off her feet without even time for a scream. Passersby pointed and yelled helplessly as she was lifted to the top of a nearby building, her clothing dropping to the ground as the creature roughly shredded it with a seemingly endless stream of whipcord appendages.<br><br>She was suspended there, naked, in plain sight of dozens as the birdlike creature perched on the roof of a building, seemingly not even noticing her weight or struggles. The instant it had removed the last article of her clothing, panties dropping several stories to the ground below, it slid a huge tentacle into her pussy - and an even larger one into her ass, causing her to moan in a combination of lust and pain. Her screams were finally silenced when another massive limb filled her throat.",
         "It wasn't long before a seemingly endless stream of cum flooded her womb, bowels and stomach. Delirious with lust, she moaned and licked her lips in an attempt to coax out more of the delicious, sticky white substance - successfully. Her belly began to swell obscenely.<br><br>Finally the city guard arrived to drive the creature off. <<= girl.name >> was no use - she just moaned and orgasmed repeatedly as arrows flew around her to pinion the thing's wings to the roof and finally kill it. She lay shuddering, still lost in lust and bliss, suspended in midair by the dead beast's impaling limbs. Finally the guards managed to reach the roof and free her."
       ],
-      delta: {
+      girl: {
         endurance: -40,
         happiness: +3,
         intelligence: -6,
@@ -90,8 +91,8 @@ Events.tentacleAttack = {
     },
     {
       image: 'tentacles',
-      message: "<<= girl.name >> was on her way to <<= action.label >> when she tripped, sprawling out across the cobblestones. Before she could react, she was bound by the wrists and ankles, gagged tightly across the mouth, and dragged over the edge into a nearby canal with an almost soundless splash. There, under a bridge and out of sight of passerby, a shape she couldn't quite see suspended her from the ceiling.<br><br>The creature was surprisingly gently, caressing her as it discarded her clothing slowly, almost sensuously, somehow removing even her bra without damaging it. It probed at her mouth, but she didn't open - her ass and pussy offered no such resistance. Despite the danger, its gentle touches aroused <<= girl.name >>, and she could hardly control herself from moaning out in pleasure when it finally began to penetrate and make love to her. It never let her orgasm, despite hours of teasing driving her mad with pleasure - and when it finally satisfied its desire for her juices and withdraw, she masturbated wildly under the bridge, leaving the stones slick with a mix of her own cum and the creature's slime.",
-      delta: {
+      message: "<<= girl.name >> was on her way to <<= action.label >> when she tripped, sprawling out across the cobblestones. Before she could react, she was bound by the wrists and ankles, gagged tightly across the mouth, and dragged over the edge into a nearby canal with an almost soundless splash. There, under a bridge and out of sight of passersby, a shape she couldn't quite see suspended her from the ceiling.<br><br>The creature was surprisingly gently, caressing her as it discarded her clothing slowly, almost sensuously, somehow removing even her bra without damaging it. It probed at her mouth, but she didn't open - her ass and pussy offered no such resistance. Despite the danger, its gentle touches aroused <<= girl.name >>, and she could hardly control herself from moaning out in pleasure when it finally began to penetrate and make love to her. It never let her orgasm, despite hours of teasing driving her mad with pleasure - and when it finally satisfied its desire for her juices and withdraw, she masturbated wildly under the bridge, leaving the stones slick with a mix of her own cum and the creature's slime.",
+      girl: {
         endurance: -20,
         happiness: -3,
         intelligence: -2,
