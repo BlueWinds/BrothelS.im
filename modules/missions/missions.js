@@ -17,6 +17,16 @@ e.GameNew.push(function() {
       }
     }
   });
+  $.each(Girls, function(name, girl) {
+    if (!girl.missions) { return; }
+    $.each(girl.missions, function(_id, mission) {
+      if (Missions[_id] || !mission.start) { return; }
+      var result = Mission.prototype.checkConditions.call(mission, mission.start, girl);
+      if (result) {
+        Mission.start(mission, result);
+      }
+    });
+  });
   g.day = 0;
 });
 
@@ -39,18 +49,27 @@ e.GameNextDay.push(function() {
       }).save(mission.group);
     }
   });
-  for (var _id in Missions) {
-    if (g.missions[_id] || g.missionsDone[_id]) {
-      continue;
+  $.each(Missions, function(_id, mission) {
+    if (g.missions[_id] || g.missionsDone[_id] || !mission.start) {
+      return;
     }
-    var mission = Missions[_id];
-    if (mission.start) {
-      var result = Mission.prototype.checkConditions.call(mission, mission.start);
+    var result = Mission.prototype.checkConditions.call(mission, mission.start);
+    if (result) {
+      Mission.start(mission, result);
+    }
+  });
+  g.girls.Cfilter('status', 'Hired').each(function(girl) {
+    if (!girl._.missions) { return; }
+    $.each(girl._.missions, function(_id, mission) {
+      if (g.missions[_id] || g.missionsDone[_id] || !mission.start) {
+        return;
+      }
+      var result = Mission.prototype.checkConditions.call(mission, mission.start, girl);
       if (result) {
         Mission.start(mission, result);
       }
-    }
-  }
+    });
+  });
 });
 
 e.GameRender.push(function() {

@@ -1,6 +1,6 @@
-var Mission = function(obj) {
+var Mission = function(obj, base) {
   $.extend(this, obj);
-  this._ = Missions[obj._id];
+  this._ = base;
 };
 
 Mission.start = function(base, girl) {
@@ -40,7 +40,7 @@ Mission.start = function(base, girl) {
     mission.group = 'Missions';
   }
 
-  mission = new Mission(mission);
+  mission = new Mission(mission, base);
 
   new Message({
     type: mission.label,
