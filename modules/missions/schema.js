@@ -108,6 +108,7 @@ Mission.prototype.applyResults = function(result, girl, context) {
   if (result.maxBuildings) {
     g.maxBuildings = result.maxBuildings;
   }
+  console.log(result.girl);
   if (girl && result.girl) {
     girl.apply(result.girl);
   }
@@ -129,7 +130,7 @@ Mission.prototype.applyResults = function(result, girl, context) {
         type: this.label,
         text: ejs.render(text[i], context),
         image: img_render,
-        delta: i == text.length - 1 ? delta : {}
+        delta: i == text.length - 1 ? delta() : {}
       }).save(this.group);
     }
   }

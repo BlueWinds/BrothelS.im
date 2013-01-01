@@ -18,7 +18,7 @@ T = function(string, type) {
   return string;
 };
 
-Game.fetishes = ['tentacles'];
+Game.fetishes = ['tentacles', 'rape'];
 
 Game.loadCurrent = function() {
     name = localStorage.getItem('current-game');

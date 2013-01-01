@@ -281,6 +281,7 @@ Girl.prototype.doAction = function(time, action) {
       }).save(context.girl.name);
     };
     var results = Game.getResults(time, action, this);
+    console.log(results);
     if (typeof(results.delta) == 'function') {
       var delta = results.delta.call(this, time, action);
       this.apply(delta);
@@ -394,7 +395,6 @@ Game.getResults = function(time, item, girl) {
   var i;
   if (typeof(item.variants) == 'function') {
     i = item.variants.call(girl, time, item);
-    console.log(i);
   } else {
     i = Math.weightedRandom(item.variants || [1]);
   }
