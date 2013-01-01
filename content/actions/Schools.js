@@ -112,14 +112,14 @@ Actions.Expose = {
     outdoors: true
   },
   variants: function(time, action) {
-    var i = 3 - Math.floor(this.modesty / 33 + Math.random());
-    if (i == 3 && Math.random() > this.endurance / 100) { i = 4; }
+    var i = 3 - Math.floor(this.modesty / 33 + Math.random() * 2);
+    if (i == 4 && Math.random() > this.endurance / 100) { i = 5; }
     return i;
   },
   results: [
     {
       image: 'base',
-      message: '<<= girl.name >> wore a skirt that didn\'t reach all the way down to the ground, and wore sandals - some passerby even caught sight of her toes as she took a walk. Scandalous!',
+      message: '<<= girl.name >> wore a skirt that didn\'t reach all the way down to the ground, and wore sandals - some passersby even caught sight of her toes as she took a walk. Scandalous!',
       delta: {
         endurance: -3,
         happiness: -7,
@@ -139,12 +139,21 @@ Actions.Expose = {
     },
     {
       image: 'exercise',
-      message: '<<= girl.name >> wore a skimpy outfit, miniskirt and too-small t-shirt. << if (time == "morning") { >>She wandered through the busiest parts of the city, treating select passerby to a brief glimpse of her pantiles pussy as she bent over to "retrieve" a dropped object. The tiny top didn\'t leave much to the imagination.<< } else { >>She stopped by the park, and, feeling brave, left everything except her panties on the shore. Ignoring the "no swimming" signs, she was pretty sure a few people caught sight of her in the moonlight.<< } >>',
+      message: '<<= girl.name >> wore a skimpy outfit, miniskirt and too-small t-shirt. << if (time == "morning") { >>She wandered through the busiest parts of the city, treating select passersby to a brief glimpse of her pantiles pussy as she bent over to "retrieve" a dropped object. The tiny top didn\'t leave much to the imagination.<< } else { >>She stopped by the park, and, feeling brave, left everything except her panties on the shore. Ignoring the "no swimming" signs, she was pretty sure a few people caught sight of her in the moonlight.<< } >>',
       delta: {
         endurance: -5,
         modesty: -2.5,
         'soft libido': 0.2,
         obedience: -0.5
+      }
+    },
+    {
+      image: 'exercise',
+      message: '<<= girl.name >> explored the city topless, wearing only a miniskirt that barely reached past her butt. She got plenty of catcalls, and one pair of young men was brave enough to proposition her. << if (girl.building()) { >>She declined for the moment, saying the they could visit her later at the <<= girl.building().name >> if they were still interested.<< } else { >>She declined since she wasn\'t working at the moment, but stroked their cocks through their pants as they talked, leaving them with raging hardons and a mischevious wink as the went on her way.<< } >>',
+      delta: {
+        endurance: -5,
+        modesty: -3,
+        reputation: 3.5
       }
     },
     {
@@ -246,7 +255,9 @@ Actions.Acolyte = {
   label: 'Acolyte',
   group: 'Training',
   description: '<<= girl.name >> will work in a temple, serving the poor, maintaining the property and generally engaging in holy work. This will raise her <<- T("modesty") >>.',
-  tags: {},
+  tags: {
+    outdoors: true
+  },
   variants: function() {
     if (this.modesty < 65) { return Math.choice([0, 1, 2]); }
     return Math.choice([0, 1, 2, 3, 4, 5]);
