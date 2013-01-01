@@ -1,0 +1,40 @@
+Girls.Jill = { 
+description: "A former member of S.T.A.R.S. who has since lost a job after the zombie outbreaks have stopped.", 
+    status: {'For Hire': 1},
+        happiness: 60,
+        endurance: 100,
+        obedience: 60,
+        modesty: 15, 
+        charisma: 30, 
+        intelligence: 40, 
+        constitution: 80, 
+        'soft experience': 20, 
+        'hard experience': 30, 
+        'anal experience': 15, 
+        'fetish experience': 45, 
+        'soft libido': 20, 
+        'hard libido': 15, 
+        'anal libido': 35, 
+        'fetish libido': 50, 
+        specialRules:{
+        "-endurance": {endurance: 0.5}
+        },
+         images: { 
+            basePath: "content/girls/Jill/images", 
+            base: "base.jpg", 
+            tired: "rest1.jpg", 
+            study: "study1.jpg",
+            refuse: "refuse1.jpg",
+            prison: "prison1.jpg",
+            cleaning: "clean1.jpg",
+            naked: ["naked1.jpg", "naked2.jpg", "naked3.jpg", "naked4.jpg"],
+            exercise: ["exercise1.jpg", "exercise2.jpg"],
+            anal: [ "anal1.jpg", "anal2.jpg", "anal3.jpg", "anal4.jpg", "anal5.jpg", "anal6.jpg", "anal7.jpg", "anal8.jpg"], 
+            fetish: ["fetish1.jpg", "fetish3.jpg", "fetish4.jpg", "fetish5.jpg", "fetish6.jpg", "fetish7.jpg", "fetish8.jpg", "fetish9.jpg", "fetish10.jpg", "fetish11.jpg", "fetish12.jpg", "fetish13.jpg", "fetish14.jpg"], 
+            hard: ["hard1.jpg", "hard2.jpg", "hard3.jpg", "hard4.jp", "hard5.jpg", "hard6.jpg", "hard7.jpg", "hard8.jpg", "hard9.jpg", "hard10.jpg"], 
+            soft: ["soft1.jpg", "soft2.jpg", "soft3.jpg", "soft4.jpg", "soft5.jpg", "soft6.jpg", "soft7.png", "soft8.jpg", "soft9.jpg", "soft10.jpg", "soft11.jpg"], 
+            tentacles: ["tentacles1.jpg", "tentacles2.jpg", "tentacles3.jpg", "tentacles4.jpg", "tentacles5.jpg", "tentacles6.jpg", "tentacles7.jpg", "tentacles8.jpg", "tentacles9.jpg", "tentacles10.jpg"],
+            dance: "dance1.jpg",
+            strip: ["strip1.jpg", "strip2.jpg", "strip3.jpg", "strip4.jpg"]
+            }
+         };
