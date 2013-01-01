@@ -18,6 +18,9 @@ Girls.Jill = {
   'hard libido': 15,
   'anal libido': 35,
   'fetish libido': 50,
+  specialRules:{
+    "-endurance": { endurance: 0.3 }
+  },
   images: {
     basePath: "content/girls/Jill/images",
     base: "Base.jpg",
