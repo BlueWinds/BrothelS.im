@@ -54,8 +54,8 @@ Events.guardRape = {
   likelyhood: 0.03,
   variants: function(time, event, done) {
     var options = {
-      Submit: 'Go along quitely',
-    }
+      Submit: 'Go along quitely'
+    };
     var text = this.name + ' is heading into the city when a member of the city guard calls her over. Without a word he clips on a pair of handcuffs, catching her completely by surprise. She protests loudly that she has no idea what she\'s done, but the fact that he hasn\'t responded and is is starting to move makes her worry. What does ' + this.name + ' do?';
     if (this.obedience < 90) { options.Run = 'Attempt to flee.'; }
     if (this.obedience < 60) { options.Fight = 'Headbut the guard and try to steal the keys.'; }

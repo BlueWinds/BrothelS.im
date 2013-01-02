@@ -43,7 +43,7 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
 };
 
 (function() {
-  Actions.Streetwalk.externalFunction = function(time, action) {
+  Actions.Streetwalk.externalFunction = function(time, action, done) {
     var context = {
       girl: this,
       time: time,
@@ -68,6 +68,7 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
       customer.modestyRate = 1;
       doCustomer(this, customer, time, action);
     }
+    done();
   };
 
   function doCustomer(girl, customer, time, action, customerConfig) {
@@ -146,10 +147,11 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
     done();
   });
 
-  Actions.Whore.externalFunction = function(time, action) {
+  Actions.Whore.externalFunction = function(time, action, done) {
     var building = this.building();
     Whores[building.name] = Whores[building.name] || [];
     Whores[building.name].push(this);
+    done();
   };
 
   function doWhores(girls, time) {

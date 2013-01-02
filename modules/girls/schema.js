@@ -261,7 +261,7 @@ Girl.prototype.image = function(type) {
 Girl.prototype.doAction = function(time, action, done) {
   if (time == 'morning' && action.allDay) { done(); return; }
   if (action.externalFunction) {
-    action.externalFunction.call(this, time, action);
+    action.externalFunction.call(this, time, action, done);
   }
   else {
     var endDelta = this.startDelta();
