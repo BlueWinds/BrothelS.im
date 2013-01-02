@@ -149,7 +149,11 @@ e.Ready.push(function(done) {
         }
         return val;
       });
-      $('<div>').text(game).dialog();
+      var textarea = $('<textarea>').text(game).css('width', '15em').css('height', '10em');
+      $('<div>').append(textarea).dialog({
+        title: 'Save the text below'
+      }).css('overflow', 'auto');
+      textarea.select();
       event.preventDefault();
       return false;
     });
