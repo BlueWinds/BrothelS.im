@@ -4,13 +4,15 @@ var Mission = function(obj, base) {
 };
 
 Mission.start = function(base, girl) {
+  console.log(base);
   if (base.fetishes) {
     for (var fet in base.fetishes) {
-      if (base.fetishes[fet] && !g[fet]) {
+      if (base.fetishes[fet] && !g.fetishes[fet]) {
         return;
       }
     }
   }
+  console.log(base);
   var mission = $.extend(true, {}, base);
   if (typeof(girl) == 'object') { mission.girl = girl; }
 
@@ -25,28 +27,29 @@ Mission.start = function(base, girl) {
   }
 
   if (typeof(mission.end) == 'function') { mission.end = mission.end.call(mission); }
-
   mission.label = ejs.render(mission.label, context);
-  mission.description = ejs.render(mission.description, context);
-  mission.image = ejs.render(mission.image, context);
-  if (mission.image[0] == '/' ) {
-    mission.image = mission.image.substr(1);
-  } else if (mission.girl) {
-    mission.image = mission.girl.image(mission.image);
-  }
-  if (mission.group) {
-    mission.group = ejs.render(mission.group, context);
-  } else {
-    mission.group = 'Missions';
-  }
 
   mission = new Mission(mission, base);
+  if (mission.description && mission.image) {
+    mission.description = ejs.render(mission.description, context);
+    mission.image = ejs.render(mission.image, context);
+    if (mission.image[0] == '/' ) {
+      mission.image = mission.image.substr(1);
+    } else if (mission.girl) {
+      mission.image = mission.girl.image(mission.image);
+    }
+    if (mission.group) {
+      mission.group = ejs.render(mission.group, context);
+    } else {
+      mission.group = 'Missions';
+    }
 
-  new Message({
-    type: mission.label,
-    text: mission.description,
-    image: mission.image
-  }).save(mission.group);
+    new Message({
+      type: mission.label,
+      text: mission.description,
+      image: mission.image
+    }).save(mission.group);
+  }
 
   if (mission.end) {
     g.missions[mission._id] = mission;

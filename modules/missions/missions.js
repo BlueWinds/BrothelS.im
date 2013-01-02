@@ -44,7 +44,7 @@ e.GameNextDay.push(function(done) {
   $.each(g.missions, function(_id, mission) {
     mission.checkDay();
     // Send a reminder message the day before a mission ends
-    if (mission.end.maxDay == g.day + 1) {
+    if (mission.end.maxDay == g.day + 1 && mission.description && mission.image) {
       new Message({
         type: 'Last Day - ' + mission.label,
         text: mission.description,
