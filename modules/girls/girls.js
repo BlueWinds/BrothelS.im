@@ -55,7 +55,7 @@ e.GameNextDay.push(function(done) {
     if (i == names.length) {
       if (time == 'morning') {
         time = 'evening';
-        i = 0;
+        i = -1;
         e.invokeAll('GirlsPostMorning', next);
         return;
       } else {
