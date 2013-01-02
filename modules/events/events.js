@@ -7,6 +7,16 @@ e.Ready.push(function(done) {
   done();
 });
 
+e.GameInit.push(function(done) {
+  // Add "events" key to each girl to track the last time each event happened to her.
+  $.each(g.girls, function(name, girl) {
+    if (!girl.events) {
+      girl.eventHistory = {};
+    }
+  });
+  done();
+});
+
 (function() {
   var oldDoAction = Girl.prototype.doAction;
   Girl.prototype.doAction = function(time, action, done) {
@@ -15,6 +25,7 @@ e.Ready.push(function(done) {
       oldDoAction.call(this, time, action, done);
       return;
     }
+    this.eventHistory[event._id] = g.day;
     var girl = this;
     Game.getResults(time, event, this, function(results) {
       var endDelta = girl.startDelta();
@@ -79,4 +90,11 @@ e.Ready.push(function(done) {
     }
     return potentialEvents;
   }
+
+  var oldGirlCreate = Girl.create;
+  Girl.create = function(base) {
+    var girl = oldGirlCreate(base);
+    girl.events = {};
+    return girl;
+  };
 })();

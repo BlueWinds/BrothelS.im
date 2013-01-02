@@ -15,6 +15,9 @@ var Girl = function(obj) {
       this[sex] = (this._[sex] !== undefined ? this._[sex] : 30);
     }
   }
+  if (!this.actions.history) {
+    this.actions.history = {};
+  }
   return this;
 };
 
@@ -260,6 +263,7 @@ Girl.prototype.image = function(type) {
 
 Girl.prototype.doAction = function(time, action, done) {
   if (time == 'morning' && action.allDay) { done(); return; }
+  this.actions.history[action._id] = g.day;
   if (action.externalFunction) {
     action.externalFunction.call(this, time, action, done);
   }
