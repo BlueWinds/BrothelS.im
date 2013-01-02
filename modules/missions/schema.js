@@ -86,8 +86,8 @@ Mission.prototype.checkDay = function() {
   var result = this.checkConditions(this.end, this.girl);
   if (result) {
     delete g.missions[this._id];
-    this.applyResults(this.success);
     g.missionsDone[this._id] = true;
+    this.applyResults(this.success);
   } else if (this.end.maxDay <= g.day) {
     delete g.missions[this._id];
     this.applyResults(this.fail);

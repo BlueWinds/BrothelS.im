@@ -7,6 +7,16 @@ var e = {
       func.apply($this, args);
     });
   },
+  invokeWaterfall: function(hook, done) {
+    if (!e[hook]) { return; }
+    var next = function() {
+      i++;
+      if (i == e[hook].length) { done(); }
+      e[hook][i](next);
+    }
+    var i = -1;
+    next();
+  },
   Ready: []
 };
 
