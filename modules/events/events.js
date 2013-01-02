@@ -43,7 +43,7 @@ e.Ready.push(function(done) {
       var likelyhood = event.likelyhood;
       if (action.safety && event.dangerous) { likelyhood *= (1 - action.safety); }
       if (Math.random() < likelyhood) {
-        return event;
+        return $.extend(true, {}, event);
       }
     }
   }

@@ -375,12 +375,8 @@
   <script id="game_user_input_template" type="text/ejs-template">
     <div class="ui-widget-overlay"></div>
     <div id="required-user-input" class="ui-helper-clearfix">
-      <div class="column pct-30 left">
-        <img src="<<= image >>">
-      </div>
-      <div class="column pct-70 right">
-        <<- text >>
-      </div>
+      <img src="<<= image >>">
+      <p><<- text >></p>
       <hr class="clear">
       <div class="center">
         << $.each(options, function(value, label) { >>

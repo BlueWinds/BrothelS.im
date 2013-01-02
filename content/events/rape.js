@@ -53,14 +53,33 @@ Events.guardRape = {
   minDay: 5,
   likelyhood: 0.03,
   variants: function(time, event, done) {
-    if ((this.intelligence - this.obedience) * Math.random() / 100 > 0.3) {
-      // Smart and spirited enough to bribe.
-      done(1);
+    var options = {
+      Submit: 'Go along quitely',
     }
-    done(Math.weightedRandom([1]));
+    var text = this.name + ' is heading into the city when a member of the city guard calls her over. Without a word he clips on a pair of handcuffs, catching her completely by surprise. She protests loudly that she has no idea what she\'s done, but the fact that he hasn\'t responded and is is starting to move makes her worry. What does ' + this.name + ' do?';
+    if (this.obedience < 90) { options.Run = 'Attempt to flee.'; }
+    if (this.obedience < 60) { options.Fight = 'Headbut the guard and try to steal the keys.'; }
+    if (this.intelligence > 40) { options.Bribe = 'Attempt the bribe the guard into letting her leave.'; }
+    Game.getUserInput(text, this.image('exercise'), options, function(answer) {
+      var i;
+      if (answer == 'Submit') {
+        i = 0;
+      } else if (answer == 'Run') {
+        i = this.constitution / 100 + Math.random() > 0.6 ? 0 : 1;
+        if (i) { event.label = 'Ran from City Guards'; }
+      } else if (answer == 'Fight') {
+        i = this.constitution - this.modesty + Math.random() > 0.3 ? 0 : 2;
+        if (i) { event.label = 'Fought with City Guards'; }
+      } else if (answer == 'Bribe') {
+        i = 3;
+        event.label = 'Bribed City Guards';
+      }
+      event.answer = answer;
+      done(i);
+    });
   },
   results: [
-    {
+    { // Go along quietly
       image: ['fetish', 'prison', 'tired'],
       girl: {
         endurance: -15,
@@ -71,9 +90,31 @@ Events.guardRape = {
         obedience: 5
       },
       message: [
-        "<<= girl.name >> was heading into the city to <<= action.label >> when a member of the city guard called her over. The cause became apparent almost immediately when, without a word he clipped on a pair of handcuffs, catching her completely by surprise. He ignored her protests that she had no idea what she'd done, and half led, half dragged her away. Four other men and two women looked up as he dragged <<= girl.name >> into the guardhouse, announcing that he'd caught a naughty little girl who needed to be punished. She looked to the other women pleadingly, but received the same evil leers as from the men.",
+        "<< if (event.answer == 'Submit') { >>Going along quietly, the guard led her away.<< } else if (event.answer == 'Run') { >><<= girl.name >> tried to wrench her arms free, but his grip was too strong - her attempt to flee failed before it had even properly begun. He half-led, half dragged her away.<< } else if (event.answer == 'Fight') { >>Knowing she was at a serious disadvantage with her hands already bound, she took the first opportunity to strike at the guard, going for the eyes. She was too slow though, and he stepped our of reach, kicking one of her legs out from under her. Producing a second pair of handcuffs for her ankles (not pleasant at all), he carried her away.<< } >> Four other men and two women looked up as he dragged <<= girl.name >> into the guardhouse, announcing that he'd caught a naughty little girl who needed to be punished. She looked to the other women pleadingly, but received the same evil leers as from the men.",
         "They fitted a ball-gag into her mouth, methodically stripped her of all her clothing, and strapped her arms and legs to the table. Most of them resumed playing cards, moving the game to the floor, but one stayed behind long enough to stick a dildo in both her pussy and ass before leaving her there, bound gagged and immobile. Whenever a player won a hand, they stood up and came over to rape her, removing the dildo from the hole of their choice only long enough to fuck her before returning it to place. The women were the worst - they'd play with the dildo until she was about to cum, then slap her and wait until she calmed down to continue, leaving her completely unsatisfied.",
         "When they finished their game, they stood and opened to door, ready to leave. <<= girl.name >> made the loudest moan she could around the ball-gag, but they just... left. She started to cry, fearing she'd be left here forever, but it wasn't long until the next shift of guards arrived. They untied her, helped her rub the stiffness from her limbs and gave her her clothes back, but offered no apologies as she left in a hurry."
+      ]
+    },
+    { // Successful run away
+      image: 'exercise',
+      girl: {
+        endurance: -10,
+        happiness: -5,
+        obedience: -2
+      },
+      message: [
+        "Seeing the look in his eye with unfortunate implications for her, <<= girl.name >> reacted instantly, pulling away before he could get hold of her. She was fast, and he wasn't - it hardly took half a mile before she lost him, after multiple twists and turns through the city. It did still take the rest of the <<= time >> to find a blacksmith who would remove the handcuffs without asking too many questions, though."
+      ]
+    },
+    { // Successful run away
+      image: 'refuse',
+      girl: {
+        endurance: -10,
+        happiness: 10,
+        obedience: -5
+      },
+      message: [
+        "Seeing the look in his eye with unfortunate implications for her, <<= girl.name >> reacted instantly, violently, and successfully. Knowing she was at a disadvantage with her hands bound, she opted for a swift kick to the balls, catching him totally flat-footed. He doubled over, and she followed it up by stomping on the bridge of his foot, and kneeing him in the face. It was over in an instant - half of the onlookers stared on in stunned disbelief, while the other half applauded, having seen the same evil intent as <<= girl.name >> had. She riffled through his pockets, found the key, and kicked him in the stomach a few times just to be sure."
       ]
     },
     {
@@ -83,7 +124,7 @@ Events.guardRape = {
         money: -100,
         endurance: -7,
         happiness: -7,
-        obedience: -5
+        obedience: -3
       }
     }
   ]

@@ -301,6 +301,8 @@ textarea {
   width: 40em;
 }
 
-#required-user-input .column.right {
-  padding-left: 2em;
+#required-user-input img {
+  float: left;
+  padding: 1em;
+  width: 10em;
 }

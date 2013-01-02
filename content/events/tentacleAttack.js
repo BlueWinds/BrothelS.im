@@ -28,7 +28,7 @@ Events.tentacleAttack = {
   minDay: 7,
   // Important number! When a girl's action matches all the above criteria (has a matching tag, the time of day is right, etc., this is the probability the event occurs. A tentacle attack has a 10% chance in the evening - though remember that this may be modified based on the specific action because this event is marked "dangerous".
   // While I'm working on an event, I like to set this to 1, so it triggers all the time. Don't forget to reduce it again later.
-  likelyhood: 0.1,
+  likelyhood: 0.08,
   // Now we get to the interesting bits. ;)
 
   // There are two ways to control how an event plays out. The first, and simpler, one, is shown below.
