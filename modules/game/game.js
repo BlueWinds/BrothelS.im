@@ -36,7 +36,7 @@ Game.load = function(name) {
     Game.loadFromText(value);
   } else {
     $('#content').html($('#game_intro_template').html());
-    e.invokeAall('Autorender', function() {}, $('#content'));
+    e.invokeAll('Autorender', function() {}, $('#content'));
     $('#save').addClass('disabled');
   }
 };
@@ -202,3 +202,29 @@ e.Ready.push(function(done) {
   });
   done();
 });
+
+Game.getUserInput = function(text, image, options, done) {
+  var context = {
+    text: text,
+    image: image,
+    options: options
+  };
+  var form = $(ejs.render($('#game_user_input_template').html(), context));
+  $('button', form).click(function(event) {
+    event.preventDefault();
+    var value = $(this).text();
+    form.remove();
+    $('body').removeClass('no-scroll');
+    done(value);
+    return false;
+  });
+  $('body').addClass('no-scroll');
+  form.appendTo('body');
+  $('#required-user-input').position({
+    my: 'center center',
+    at: 'center center',
+    of: window,
+    collision: 'none'
+  });
+  e.invokeAll('Autorender', function() {}, form);
+};

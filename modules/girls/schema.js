@@ -258,8 +258,8 @@ Girl.prototype.image = function(type) {
   return img;
 };
 
-Girl.prototype.doAction = function(time, action) {
-  if (time == 'morning' && action.allDay) { return; }
+Girl.prototype.doAction = function(time, action, done) {
+  if (time == 'morning' && action.allDay) { done(); return; }
   if (action.externalFunction) {
     action.externalFunction.call(this, time, action);
   }
@@ -280,21 +280,24 @@ Girl.prototype.doAction = function(time, action) {
         time: time
       }).save(context.girl.name);
     };
-    var results = Game.getResults(time, action, this);
-    if (typeof(results.delta) == 'function') {
-      var delta = results.delta.call(this, time, action);
-      this.apply(delta);
-    } else {
-      this.apply(results.delta || {});
-    }
-    if (typeof(results.message) == 'object') {
-      for (var j in results.message) {
-        var d = results.message.length - 1 == j ? endDelta() : {};
-        doMessage(results.image[j], results.message[j], d);
+    var girl = this;
+    Game.getResults(time, action, this, function(results) {
+      if (typeof(results.delta) == 'function') {
+        var delta = results.delta.call(girl, time, action);
+        girl.apply(delta);
+      } else {
+        girl.apply(results.delta || {});
       }
-    } else {
-      doMessage(results.image, results.message, endDelta());
-    }
+      if (typeof(results.message) == 'object') {
+        for (var j in results.message) {
+          var d = results.message.length - 1 == j ? endDelta() : {};
+          doMessage(results.image[j], results.message[j], d);
+        }
+      } else {
+        doMessage(results.image, results.message, endDelta());
+      }
+      done();
+    });
   }
 };
 
@@ -311,18 +314,19 @@ Girl.prototype.runDay = function(time, done) {
   if (this.actions[time + 'Option'] !== undefined) {
     action.options = this.actions[time + 'Option'];
   }
-  this.doAction(time, action);
-
-  if (time == 'evening') {
-    this.apply('money', -this.actions.pay);
-    var change = this.actions.pay - this.desiredPay();
-    change = change > 0 ? change * Girl.config.pay.above : change * Girl.config.pay.below;
-    if (change > 0) {
-      change = Math.pow(change, 0.66);
+  var girl = this;
+  this.doAction(time, action, function() {
+    if (time == 'evening') {
+      girl.apply('money', -girl.actions.pay);
+      var change = girl.actions.pay - girl.desiredPay();
+      change = change > 0 ? change * Girl.config.pay.above : change * Girl.config.pay.below;
+      if (change > 0) {
+        change = Math.pow(change, 0.66);
+      }
+      girl.apply('happiness', change);
     }
-    this.apply('happiness', change);
-  }
-  done();
+    done();
+  });
 };
 
 Girl.prototype.startDelta = function(s) {
@@ -392,12 +396,13 @@ Girl.prototype.get = function(stat) {
   return this[stat];
 };
 
-Game.getResults = function(time, item, girl) {
-  var i;
+Game.getResults = function(time, item, girl, done) {
   if (typeof(item.variants) == 'function') {
-    i = item.variants.call(girl, time, item);
+    item.variants.call(girl, time, item, function(i) {
+      done(item.results[i]);
+    });
   } else {
-    i = Math.weightedRandom(item.variants || [1]);
+    var i = Math.weightedRandom(item.variants || [1]);
+    done(item.results[i]);
   }
-  return item.results[i];
 };

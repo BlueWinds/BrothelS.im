@@ -111,10 +111,10 @@ Actions.Expose = {
   tags: {
     outdoors: true
   },
-  variants: function(time, action) {
+  variants: function(time, action, done) {
     var i = 3 - Math.floor(this.modesty / 33 + Math.random() * 2);
     if (i == 4 && Math.random() > this.endurance / 100) { i = 5; }
-    return i;
+    done(i);
   },
   results: [
     {
@@ -201,8 +201,8 @@ Actions.OD = {
     anal: T('anal'),
     fetish: T('fetish')
   },
-  variants: function(time, action) {
-    return Girl.sex.indexOf(action.options);
+  variants: function(time, action, done) {
+    done(Girl.sex.indexOf(action.options));
   },
   results: [
     {
@@ -258,9 +258,12 @@ Actions.Acolyte = {
   tags: {
     outdoors: true
   },
-  variants: function() {
-    if (this.modesty < 65) { return Math.choice([0, 1, 2]); }
-    return Math.choice([0, 1, 2, 3, 4, 5]);
+  variants: function(time, action, done) {
+    if (this.modesty < 65) {
+      done(Math.choice([0, 1, 2]));
+    } else {
+      done(Math.choice([0, 1, 2, 3, 4, 5]));
+    }
   },
   results: [
     {

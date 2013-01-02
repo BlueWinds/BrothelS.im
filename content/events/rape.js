@@ -10,9 +10,10 @@ Events.thugRape = {
   disruptive: true,
   minDay: 5,
   likelyhood: 0.05,
-  variants: function(time, event) {
+  variants: function(time, event, done) {
     // Fights back successfully or not.
-    return ((this.constitution + this.endurance) / 100 * Math.random() < 0.8) ? 0 : 1;
+    var i = ((this.constitution + this.endurance) / 100 * Math.random() < 0.8) ? 0 : 1;
+    done(i);
   },
   results: [
     {
@@ -51,12 +52,12 @@ Events.guardRape = {
   disruptive: true,
   minDay: 5,
   likelyhood: 0.03,
-  variants: function(time, event) {
+  variants: function(time, event, done) {
     if ((this.intelligence - this.obedience) * Math.random() / 100 > 0.3) {
       // Smart and spirited enough to bribe.
-      return 1;
+      done(1);
     }
-    return Math.weightedRandom([1]);
+    done(Math.weightedRandom([1]));
   },
   results: [
     {

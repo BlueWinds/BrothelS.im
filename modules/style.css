@@ -164,6 +164,10 @@ img { max-width: 100%; }
   background: #000;
 }
 
+.ui-dialog {
+  position: fixed;
+}
+
 .ui-dialog .ui-dialog-content {
   overflow: hidden;
 }
@@ -187,7 +191,7 @@ img { max-width: 100%; }
 .ui-widget-overlay {
   background: #000;
   opacity: .5;
-  width: 100% !important;
+  position: fixed;
 }
 
 input.hidden-input {
@@ -286,4 +290,21 @@ textarea {
   color: #DDDDDD;
   display: block;
   padding: 0.4em;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+#required-user-input {
+  background: #000;
+  border: 1px solid #999;
+  border-radius: 6px;
+  padding: 1em;
+  position: fixed;
+  width: 40em;
+}
+
+#required-user-input .column.right {
+  padding-left: 2em;
 }

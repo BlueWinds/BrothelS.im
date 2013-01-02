@@ -34,7 +34,7 @@ Events.tentacleAttack = {
   // There are two ways to control how an event plays out. The first, and simpler, one, is shown below.
   // "variants" can be a list of numbers adding up to one, which will give each variant (defined later) the corresponding chance of occurring. In tentacle attacks, there are three possibilities, each with an equal chance.
   // If there's only one variant, you can either leave this out, or explicitly set "variants: [1],"
-  // The second option is to supply a javascript function - this is more complicated but more powerful (allowing you to check the girl's statistics). An example of this will come soon.
+  // The second option is to supply a javascript function - this is more complicated but more powerful (allowing you to check the girl's statistics). An example of this will come soon - it also allows you to ask for user input before returning a variant.
   variants: [ 0.33, 0.34, 0.33 ],
   results: [
     // The number of items in results *must* be equal to the number of items in variants - they directly correspond.

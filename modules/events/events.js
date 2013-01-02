@@ -9,25 +9,28 @@ e.Ready.push(function(done) {
 
 (function() {
   var oldDoAction = Girl.prototype.doAction;
-  Girl.prototype.doAction = function(time, action) {
+  Girl.prototype.doAction = function(time, action, done) {
     var event = getEvent(time, action, this);
     if (!event) {
-      oldDoAction.call(this, time, action);
+      oldDoAction.call(this, time, action, done);
       return;
     }
-    var results = Game.getResults(time, event, this);
-    var endDelta = this.startDelta();
-    var context = {
-      event: event,
-      action: action,
-      time: time
-    };
-    event.group = this.name;
-    Mission.prototype.applyResults.call(event, results, this, context);
-
-    if (!event.disruptive) {
-      oldDoAction.call(this, time, action);
-    }
+    var girl = this;
+    Game.getResults(time, event, this, function(results) {
+      var endDelta = girl.startDelta();
+      var context = {
+        event: event,
+        action: action,
+        time: time
+      };
+      event.group = girl.name;
+      Mission.prototype.applyResults.call(event, results, girl, context);
+      if (!event.disruptive) {
+        oldDoAction.call(girl, time, action, done);
+      } else {
+        done();
+      }
+    });
   };
 
   function getEvent(time, action, girl) {
