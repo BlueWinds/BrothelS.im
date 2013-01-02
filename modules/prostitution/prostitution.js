@@ -127,24 +127,26 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
 
   var Whores;
 
-  e.GamePreDay.push(function() {
+  e.GamePreDay.push(function(done) {
     Whores = {};
+    done();
   });
 
-  e.GirlsPostMorning.push(function() {
+  e.GirlsPostMorning.push(function(done) {
     for (var building in Whores) {
       doWhores(Whores[building], 'morning');
     }
     Whores = {};
+    done();
   });
-  e.GirlsPostEvening.push(function() {
+  e.GirlsPostEvening.push(function(done) {
     for (var building in Whores) {
       doWhores(Whores[building], 'evening');
     }
+    done();
   });
 
   Actions.Whore.externalFunction = function(time, action) {
-
     var building = this.building();
     Whores[building.name] = Whores[building.name] || [];
     Whores[building.name].push(this);

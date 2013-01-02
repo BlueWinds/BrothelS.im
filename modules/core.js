@@ -1,19 +1,14 @@
 var e = {
-  invokeAll: function(hook) {
+  invokeAll: function(hook, done) {
     if (!e[hook]) { return; }
-    var args = Array.prototype.slice.call(arguments, 1);
+    var args = Array.prototype.slice.call(arguments, 2);
     var $this = this;
-    e[hook].forEach(function(func) {
-      func.apply($this, args);
-    });
-  },
-  invokeWaterfall: function(hook, done) {
-    if (!e[hook]) { return; }
     var next = function() {
       i++;
-      if (i == e[hook].length) { done(); }
-      e[hook][i](next);
-    }
+      if (i == e[hook].length) { done(); return; }
+      e[hook][i].apply($this, args);
+    };
+    args.push(next);
     var i = -1;
     next();
   },
@@ -260,9 +255,7 @@ $(function() {
   $.ui.dialog.prototype.options.modal = true;
   $.ui.dialog.prototype.options.width = 'auto';
   $.ui.dialog.prototype.options.resizable = false;
-  $(document).on("dialogcreate", function(event, ui) {
-    e.invokeAll('Autorender', event.target);
-  }).on('dialogclose', function(event) {
+  $(document).on('dialogclose', function(event) {
     $(event.target).dialog('destroy').remove();
   });
 });

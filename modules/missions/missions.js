@@ -1,12 +1,13 @@
 var Missions = {};
 
-e.Ready.push(function() {
+e.Ready.push(function(done) {
   $.each(Missions, function(_id, mission) {
     mission._id = _id;
   });
+  done();
 });
 
-e.GameNew.push(function() {
+e.GameNew.push(function(done) {
   g.missions = g.missions || {};
   g.day = -1;
   $.each(Missions, function(_id, mission) {
@@ -28,16 +29,18 @@ e.GameNew.push(function() {
     });
   });
   g.day = 0;
+  done();
 });
 
-e.GameInit.push(function() {
+e.GameInit.push(function(done) {
   $.each(g.missions, function(_id, mission) {
     g.missions[_id] = new Mission(mission);
   });
   g.missionsDone = g.missionsDone || {};
+  done();
 });
 
-e.GameNextDay.push(function() {
+e.GameNextDay.push(function(done) {
   $.each(g.missions, function(_id, mission) {
     mission.checkDay();
     // Send a reminder message the day before a mission ends
@@ -70,11 +73,13 @@ e.GameNextDay.push(function() {
       }
     });
   });
+  done();
 });
 
-e.GameRender.push(function() {
+e.GameRender.push(function(done) {
   var count = Object.keys(g.missions).length;
   if (!count) {
+    done();
     return;
   }
   var button = $('<button>').html('Missions').button();
@@ -92,4 +97,5 @@ e.GameRender.push(function() {
     });
     view.closest('.ui-dialog').addClass('tab-dialog');
   });
+  done();
 });

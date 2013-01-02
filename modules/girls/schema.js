@@ -298,9 +298,10 @@ Girl.prototype.doAction = function(time, action) {
   }
 };
 
-Girl.prototype.runDay = function(time) {
+Girl.prototype.runDay = function(time, done) {
   if (this.status != 'Hired') {
     this.status = this.randomStatus();
+    done();
     return;
   }
   var acts= this.potentialActions(time);
@@ -321,6 +322,7 @@ Girl.prototype.runDay = function(time) {
     }
     this.apply('happiness', change);
   }
+  done();
 };
 
 Girl.prototype.startDelta = function(s) {

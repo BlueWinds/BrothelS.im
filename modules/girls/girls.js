@@ -3,7 +3,7 @@ var Girls = {};
 e.GirlsPostMorning = [];
 e.GirlsPostEvening = [];
 
-e.Ready.push(function() {
+e.Ready.push(function(done) {
   $.each(Actions, function(_id, action) {
     action._id = _id;
   });
@@ -15,14 +15,16 @@ e.Ready.push(function() {
       });
     }
   });
+  done();
 });
 
-e.GameNew.push(function() {
+e.GameNew.push(function(done) {
   g.maxGirls = Girl.config.startMaxGirls;
   g.girls = g.girls || {};
+  done();
 });
 
-e.GameInit.push(function() {
+e.GameInit.push(function(done) {
   $.each(g.girls, function(name, obj) {
     var girl = new Girl(obj);
     g.girls[name] = girl;
@@ -36,33 +38,49 @@ e.GameInit.push(function() {
       g.girls[name] = Girl.create(Girls[name]);
     }
   }
+  done();
 });
 
-e.GamePreDay.push(function() {
+e.GamePreDay.push(function(done) {
   $.each(g.girls, function(name, girl) {
     girl.turnDelta = girl.startDelta();
   });
+  done();
 });
 
-e.GameNextDay.push(function() {
-  $.each(g.girls, function(name, girl) {
-    girl.runDay('morning');
-  });
-  e.invokeAll('GirlsPostMorning');
-  $.each(g.girls, function(name, girl) {
-    girl.runDay('evening');
-  });
-  e.invokeAll('GirlsPostEvening');
+e.GameNextDay.push(function(done) {
+  var names = Object.keys(g.girls);
+  var next = function() {
+    i++;
+    if (i == names.length) {
+      if (time == 'morning') {
+        time = 'evening';
+        i = 0;
+        e.invokeAll('GirlsPostMorning', next);
+        return;
+      } else {
+        e.invokeAll('GirlsPostEvening', done);
+        return;
+      }
+    } else {
+      g.girls[names[i]].runDay(time, next);
+      return;
+    }
+  };
+  var time = 'morning';
+  var i = -1;
+  next();
 });
 
-e.GamePostDay.push(function() {
+e.GamePostDay.push(function(done) {
   $.each(g.girls, function(name, girl) {
     girl.turnDelta = girl.turnDelta();
     girl.verifyActions();
   });
+  done();
 });
 
-e.GameRender.push(function() {
+e.GameRender.push(function(done) {
   var div = $(ejs.render($('#girls_list_template').html(), {
     g: g,
     girls: g.girls.Cfilter('status', 'Hired')
@@ -167,10 +185,12 @@ e.GameRender.push(function() {
       width: '25em'
     });
   });
+  done();
 });
 
-e.Autorender.push(function(element) {
+e.Autorender.push(function(element, done) {
   for (var stat in Girl.config.tooltips) {
     $('.' + stat, element).attr('title', Girl.config.tooltips[stat]);
   }
+  done();
 });

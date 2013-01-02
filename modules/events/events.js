@@ -1,9 +1,10 @@
 var Events = {};
 
-e.Ready.push(function() {
+e.Ready.push(function(done) {
   $.each(Events, function(_id, event) {
     event._id = _id;
   });
+  done();
 });
 
 (function() {

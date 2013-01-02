@@ -1,17 +1,19 @@
 var Buildings = {};
 
-e.Ready.push(function() {
+e.Ready.push(function(done) {
   $.each(Buildings, function(name, building) {
     building.name = name;
   });
+  done();
 });
 
-e.GameNew.push(function() {
+e.GameNew.push(function(done) {
   g.maxBuildings = Building.config.startMaxBuildings;
   g.buildings = g.buildings || {};
+  done();
 });
 
-e.GameInit.push(function() {
+e.GameInit.push(function(done) {
   $.each(g.buildings, function(name, obj) {
     g.buildings[name] = new Building(obj);
   });
@@ -20,22 +22,25 @@ e.GameInit.push(function() {
       g.buildings[name] = Building.create(Buildings[name]);
     }
   }
+  done();
 });
 
-e.GamePreDay.push(function() {
+e.GamePreDay.push(function(done) {
   $.each(g.buildings, function(name, building) {
     building.turnDelta = building.startDelta();
     building.runDay();
   });
+  done();
 });
 
-e.GamePostDay.push(function() {
+e.GamePostDay.push(function(done) {
   $.each(g.buildings, function(name, building) {
     building.turnDelta = building.turnDelta();
   });
+  done();
 });
 
-e.GameRender.push(function() {
+e.GameRender.push(function(done) {
   var div = $(ejs.render($('#buildings_list_template').html(), {
     g: g,
     buildings: g.buildings.Cfilter('status', 'Owned')
@@ -108,6 +113,7 @@ e.GameRender.push(function() {
       width: '30em'
     });
   });
+  done();
 });
 
 (function() {
@@ -149,9 +155,10 @@ e.GameRender.push(function() {
   };
 })();
 
-e.Autorender.push(function(element) {
+e.Autorender.push(function(element, done) {
   $('.clean', element).attr('title', Building.config.cleanDescription);
   $('.reputation', element).attr('title', Building.config.reputationDescription);
   $('.rooms', element).attr('title', Building.config.roomDescription);
   $('.bedroom', element).attr('title', Building.config.rooms.bedroom.description);
+  done();
 });

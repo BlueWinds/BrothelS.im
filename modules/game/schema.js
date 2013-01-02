@@ -28,8 +28,9 @@ Game.prototype.render = function() {
   $('#next').click(function() {
     g.nextTurn();
   });
-  e.invokeAll('GameRender');
-  e.invokeAll('Autorender', $('#content'));
+  e.invokeAll('GameRender', function() {
+    e.invokeAll('Autorender', function() {}, $('#content'));
+  });
 };
 
 Game.prototype.nextTurn = function() {
@@ -37,13 +38,18 @@ Game.prototype.nextTurn = function() {
   if (this.moneyHistory.length > Game.config.moneyHistoryLength) {
     this.moneyHistory = this.moneyHistory.slice(this.moneyHistory.length - Game.config.moneyHistoryLength);
   }
-  e.invokeAll('GamePreDay');
-  e.invokeAll('GameNextDay');
-  var payment = this.nextPayment();
-  this.day += 1;
-  e.invokeAll('GamePostDay');
-  if (this.day == payment.day) {
-    this.money -= payment.amount;
-  }
-  this.render();
+  var game = this;
+  e.invokeAll('GamePreDay', function() {
+    e.invokeAll('GameNextDay', function() {
+      var payment = game.nextPayment();
+      game.day += 1;
+      var done = function() {
+        if (game.day == payment.day) {
+          game.money -= payment.amount;
+        }
+        game.render();
+      };
+      e.invokeAll('GamePostDay', done);
+    });
+  });
 };

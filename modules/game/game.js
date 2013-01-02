@@ -31,22 +31,21 @@ Game.load = function(name) {
   }
   var list = localStorage.getObject('saved-games') || {};
   var value = localStorage.getItem(list[name]);
+  localStorage.setItem('current-game', name);
   if (value) {
     Game.loadFromText(value);
   } else {
     $('#content').html($('#game_intro_template').html());
-    e.invokeAll('Autorender', $('#content'));
+    e.invokeAall('Autorender', function() {}, $('#content'));
     $('#save').addClass('disabled');
   }
-  localStorage.setItem('current-game', name);
 };
 
 Game.loadFromText = function(value) {
   value = JSON.retrocycle(JSON.parse(value));
   g = new Game(value);
-  e.invokeAll('GameInit');
-  g.render();
   $('#save').removeClass('disabled');
+  e.invokeAll('GameInit', g.render);
 };
 
 Game.save = function(name) {
@@ -92,12 +91,12 @@ Game.start = function(opt) {
     moneyHistory: []
   }, opt);
   g = new Game(opt);
-  e.invokeAll('GameNew');
-  e.invokeAll('GameInit');
-  g.render();
+  e.invokeAll('GameNew', function() {
+    e.invokeAll('GameInit', g.render);
+  });
 };
 
-e.Ready.push(function() {
+e.Ready.push(function(done) {
   $('#header img').attr('title', 'Return to front page').click(function() {
     Game.load(false);
   });
@@ -201,4 +200,5 @@ e.Ready.push(function() {
       title: 'Load Game'
     });
   });
+  done();
 });

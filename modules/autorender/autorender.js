@@ -1,7 +1,7 @@
 Globalize.cultures.en.numberFormat.currency.decimals = 0;
 
 e.Autorender = e.Autorender || [];
-e.Autorender.push(function(element) {
+e.Autorender.push(function(element, done) {
   $('button, a.button', element).button();
   $("ul.sf-menu", element).superfish({
     delay: 400,
@@ -122,5 +122,12 @@ e.Autorender.push(function(element) {
   $('.horizontal-tabs', view).tabs();
   $('label.checkbox', view).click(function() {
     $(this).toggleClass('checked');
+  });
+  done();
+});
+
+$(function() {
+  $(document).on("dialogcreate", function(event, ui) {
+    e.invokeAll('Autorender', function() {}, event.target);
   });
 });

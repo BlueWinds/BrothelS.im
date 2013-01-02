@@ -1,8 +1,9 @@
-e.GameInit.push(function() {
+e.GameInit.push(function(done) {
   g.ownerAction = g.ownerAction || {
     morning: '',
     evening: ''
   };
+  done();
 });
 
 (function() {
