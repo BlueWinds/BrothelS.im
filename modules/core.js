@@ -248,14 +248,3 @@ Math.weightedRandom = function(variants) {
 
 ejs.open = '<<';
 ejs.close = '>>';
-
-$(function() {
-  $.ui.dialog.prototype.options.show = 'fade';
-  $.ui.dialog.prototype.options.hide = 'fade';
-  $.ui.dialog.prototype.options.modal = true;
-  $.ui.dialog.prototype.options.width = 'auto';
-  $.ui.dialog.prototype.options.resizable = false;
-  $(document).on('dialogclose', function(event) {
-    $(event.target).dialog('destroy').remove();
-  });
-});

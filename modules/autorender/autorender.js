@@ -127,7 +127,20 @@ e.Autorender.push(function(element, done) {
 });
 
 $(function() {
-  $(document).on("dialogcreate", function(event, ui) {
+  $.ui.dialog.prototype.options.show = 'fade';
+  $.ui.dialog.prototype.options.hide = 'fade';
+  $.ui.dialog.prototype.options.modal = true;
+  $.ui.dialog.prototype.options.width = 'auto';
+  $.ui.dialog.prototype.options.resizable = false;
+  $.ui.dialog.prototype.options.position = {
+    my: 'center center',
+    at: 'center center',
+    of: window,
+    collision: 'none'
+  };
+  $(document).on('dialogclose', function(event) {
+    $(event.target).dialog('destroy').remove();
+  }).on("dialogcreate", function(event, ui) {
     e.invokeAll('Autorender', function() {}, event.target);
   });
 });

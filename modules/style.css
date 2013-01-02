@@ -292,10 +292,6 @@ textarea {
   padding: 0.4em;
 }
 
-.no-scroll {
-  overflow: hidden;
-}
-
 #required-user-input {
   background: #000;
   border: 1px solid #999;

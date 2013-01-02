@@ -214,11 +214,9 @@ Game.getUserInput = function(text, image, options, done) {
     event.preventDefault();
     var value = $(this).text();
     form.remove();
-    $('body').removeClass('no-scroll');
     done(value);
     return false;
   });
-  $('body').addClass('no-scroll');
   form.appendTo('body');
   $('#required-user-input').position({
     my: 'center center',
