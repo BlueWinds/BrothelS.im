@@ -12,7 +12,7 @@ Events.thugRape = {
   likelyhood: 0.05,
   variants: function(time, event, done) {
     // Fights back successfully or not.
-    var i = ((this.constitution + this.endurance) / 100 * Math.random() < 0.8) ? 0 : 1;
+    var i = ((this.constitution + this.endurance) / 100 * Math.random() < 0.6) ? 0 : 1;
     done(i);
   },
   results: [
