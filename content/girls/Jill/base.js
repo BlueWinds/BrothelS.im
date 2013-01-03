@@ -24,15 +24,13 @@ Girls.Jill = {
   images: {
     basePath: "content/girls/Jill/images",
     base: "Base.jpg",
-    tired: "Rest1.jpg",
     study: "study1.jpg",
     refuse: "refuse1.jpg",
     prison: "prison1.jpg",
     cleaning: "clean1.jpg",
-    naked: ["naked1.jpg", "naked2.jpg", "naked3.jpg"],
-    exercise: ["exercise1.jpg", "exercise2.jpg"],
+    naked: ["naked1.jpg", "naked2.jpg"],
     soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg", "Soft6.jpg"],
-    hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jp"],
+    hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg"],
     anal: [ "Anal1.jpg", "Anal2.jpg", "Anal3.jpg", "Anal4.jpg"],
     fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4.jpg", "Fetish5.jpg"],
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg"]
