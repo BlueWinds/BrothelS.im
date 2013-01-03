@@ -80,38 +80,3 @@ span.adj {
   display: block;
   margin: 1em auto;
 }
-
-#girl-view button {
-  margin: .5em;
-}
-#girl-view .ui-tabs-nav {
-  border: none;
-  border-radius: 0;
-}
-
-#girl-view .ui-tabs-nav a {
-  padding: 0.1em 0.5em;
-  font-weight: 300;
-}
-
-#girl-view h6 {
-  margin-bottom: .5em;
-}
-
-#girl-view .ui-tabs-panel {
-  padding: .5em;
-}
-
-#girl-view li.ui-tabs-active {
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
-
-.ui-dialog {
-  overflow: visible;
-}
-
-#morning, #evening {
-  display: inline-block;
-  position: relative;
-}

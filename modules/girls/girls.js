@@ -1,19 +1,13 @@
-var Actions = {};
 var Girls = {};
+e.GirlNew = [];
 e.GirlsPostMorning = [];
 e.GirlsPostEvening = [];
+e.GirlRunTime = [];
+e.GirlRender = [];
 
 e.Ready.push(function(done) {
-  $.each(Actions, function(_id, action) {
-    action._id = _id;
-  });
   $.each(Girls, function(name, girl) {
     girl.name = name;
-    if (girl.actions) {
-      $.each(girl.actions, function(_id, action) {
-        action._id = _id;
-      });
-    }
   });
   done();
 });
@@ -63,7 +57,7 @@ e.GameNextDay.push(function(done) {
         return;
       }
     } else {
-      g.girls[names[i]].runDay(time, next);
+      e.invokeAll('GirlRunTime', next, g.girls[names[i]], time);
       return;
     }
   };
@@ -72,10 +66,16 @@ e.GameNextDay.push(function(done) {
   next();
 });
 
+e.GirlRunTime.push(function(girl, time, done) {
+  if (girl.status != 'Hired') {
+    girl.status = girl.randomStatus();
+  }
+  done();
+});
+
 e.GamePostDay.push(function(done) {
   $.each(g.girls, function(name, girl) {
     girl.turnDelta = girl.turnDelta();
-    girl.verifyActions();
   });
   done();
 });
@@ -85,15 +85,12 @@ e.GameRender.push(function(done) {
     g: g,
     girls: g.girls.Cfilter('status', 'Hired')
   })).prependTo('#content .second');
-  $('.girl', div).click(function() {
-    var girl = g.girls[$(this).attr('name')];
+  $('.girl .left, .girl .middle', div).click(function() {
+    var girl = g.girls[$(this).parent().attr('name')];
 
     var render = function() {
-      girl.verifyActions();
       var context = {
-        girl: girl,
-        morningActions: girl.potentialActions('morning'),
-        eveningActions: girl.potentialActions('evening')
+        girl: girl
       };
 
       var view = $(ejs.render($('#girls_view_template').html(), context));
@@ -129,35 +126,17 @@ e.GameRender.push(function(done) {
         render();
       });
 
-      $('.action-list .action', view).click(function() {
-        if ($(this).parent().hasClass('disabled')) { return; }
-        var _id = $(this).parent().attr('name');
-        var option = $(this).attr('name');
-        var time = $(this).closest('div').attr('id');
-        girl.setAction(context[time + 'Actions'][_id], time, option);
-        render();
-      });
-
-      var old_view = $('#girl-view');
-      old_view.remove();
-      var opt = {
-        title: girl.name,
-        width: '35em',
-        beforeClose: function() { g.render(); }
-      };
-      if (old_view.length) { opt.show = false; }
-      view.dialog(opt);
-
-      $('.action-list > ul', view).each(function() {
-        var height = 0, above = 0;
-        $(this).children().each(function() {
-          var temp_height = above;
-          $(this).find('li').each(function() { temp_height += $(this).outerHeight(); });
-          height = Math.max(height, temp_height);
-          above += $(this).outerHeight();
-        });
-        $(this).css('height', height);
-      });
+      e.invokeAll('GirlRender', function() {
+        var old_view = $('#girl-view');
+        old_view.remove();
+        var opt = {
+          title: girl.name,
+          width: '35em',
+          beforeClose: function() { g.render(); }
+        };
+        if (old_view.length) { opt.show = false; }
+        view.dialog(opt);
+      }, girl, view);
     };
 
     render();

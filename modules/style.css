@@ -150,7 +150,10 @@ input:focus {
   border-color: #FF5000;
 }
 
-img { max-width: 100%; }
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
 
 .ui-button-text-only .ui-button-text {
   padding: 0.1em 0.5em;
@@ -162,10 +165,6 @@ img { max-width: 100%; }
 
 .ui-widget-content {
   background: #000;
-}
-
-.ui-dialog {
-  position: fixed;
 }
 
 .ui-dialog .ui-dialog-content {
@@ -305,4 +304,32 @@ textarea {
   float: left;
   padding: 1em;
   width: 10em;
+}
+
+.dropdown {
+  display: none;
+  list-style: none outside none;
+  margin: 0;
+  padding: 7px;
+  position: relative;
+  top: -7px;
+}
+
+*:hover + .dropdown, .dropdown:hover {
+  display: block;
+}
+
+.dropdown li {
+  background: #000;
+  border-radius: 0;
+  padding: 2px;
+}
+
+.dropdown li.selected {
+  background: url("../libraries/images/ui-bg_glass_40_0078a3_1x400.png") repeat-x scroll 50% 50% #0078A3;
+  border-radius: 6px;
+}
+
+.disabled *:hover + .dropdown {
+  display: none;
 }

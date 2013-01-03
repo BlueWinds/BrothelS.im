@@ -3,18 +3,7 @@ Globalize.cultures.en.numberFormat.currency.decimals = 0;
 e.Autorender = e.Autorender || [];
 e.Autorender.push(function(element, done) {
   $('button, a.button', element).button();
-  $("ul.sf-menu", element).superfish({
-    delay: 400,
-    speed: 'fast',
-    dropShadows: false,
-    autoArrows: false
-  });
   $(element).tooltip({
-    show: {
-      delay: 300
-    }
-  });
-  $('ul.sf-menu li', element).tooltip({
     show: {
       delay: 300
     }
@@ -45,6 +34,10 @@ e.Autorender.push(function(element, done) {
         duration: 200
       }
     }).addClass("ui-tabs-vertical ui-helper-clearfix");
+    if (view.find('.ui-tabs-panel.active').length) {
+      var active = view.find('.ui-tabs-panel').index(view.find('.ui-tabs-panel.active'));
+      view.tabs('option', 'active', active);
+    }
     $('li', element).removeClass("ui-corner-top").addClass("ui-corner-left ui-helper-clearfix");
     $('.ui-tabs-nav', element).removeClass("ui-corner-all").addClass("ui-corner-left");
     $('.ui-tabs-panel', element).addClass("ui-corner-right");

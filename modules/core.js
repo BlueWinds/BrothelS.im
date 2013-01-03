@@ -1,6 +1,6 @@
 var e = {
   invokeAll: function(hook, done) {
-    if (!e[hook]) { return; }
+    if (!e[hook]) { done(); return; }
     var args = Array.prototype.slice.call(arguments, 2);
     var $this = this;
     var next = function() {
@@ -11,6 +11,13 @@ var e = {
     args.push(next);
     var i = -1;
     next();
+  },
+  invokeAllSync: function(hook) {
+    if (!e[hook]) { return; }
+    var args = Array.prototype.slice.call(arguments, 1);
+    for (var i in e[hook]) {
+      e[hook][i].apply(this, args);
+    }
   },
   Ready: []
 };

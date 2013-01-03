@@ -11,8 +11,6 @@
   <script src="libraries/globalize.js"></script>
   <script src="libraries/ejs.js"></script>
   <script src="libraries/namegen.js"></script>
-  <script src="libraries/superfish.js"></script>
-  <script src="libraries/hoverIntent.js"></script>
   <script src="libraries/jquery.sparkline.js"></script>
   <script src="libraries/jquery.sparkline.js"></script>
 
@@ -31,6 +29,9 @@
   <script src="modules/girls/schema.js"></script>
   <script src="modules/girls/girls.js"></script>
   <script src="content/girls/girls.js"></script>
+  <link href="modules/actions/style.css" type="text/css" rel="stylesheet">
+  <script src="modules/actions/schema.js"></script>
+  <script src="modules/actions/actions.js"></script>
 
   <script src="content/girls/Kirino/base.js"></script>
   <script src="content/girls/Sophitia/base.js"></script>
@@ -192,10 +193,10 @@
       << } >>
       << girls.forEach(function(girl) { >>
         <div class="ui-helper-clearfix no-cursor girl" name="<<= girl.name >>">
-          <div class="column pct-20">
+          <div class="column pct-20 left">
             <img src="<<= girl.image('base') >>">
           </div>
-          <div class="column pct-40 center">
+          <div class="column pct-40 center middle">
             <h6><<= girl.name >></h6>
             <div><<- girl.S("endurance") >> | <<- girl.S("happiness") >></div>
             <<
@@ -210,7 +211,7 @@
               <<- stats.join(" | ") >>
             </div>
           </div>
-          <div class="column pct-40">
+          <div class="column pct-40 right">
             <div>Morning: <strong><<= girl.actions.morningLabel >></strong></div>
             <div>Evening: <strong><<= girl.actions.eveningLabel >></strong></div>
           </div>
@@ -219,42 +220,9 @@
     </div>
   </script>
   <script id="girls_view_template" type="text/ejs-template">
-    << function createActionsList(list, doing) { >>
-      <ul class="sf-menu">
-        <li>
-          <a><<= doing >></a>
-          <ul><< $.each(list.CsortToObject('group'), function(group, actions) { >>
-            <li name="<<= group >>">
-              <a><<= group >></a>
-              <ul>
-                << actions.forEach(function(action) { >>
-                  <li class="<<= action.disabled ? 'disabled' : '' >>" name="<<= action._id >>">
-                    <a class="<<= action.options ? '' : 'action'>>" title="<<= action.description >>"><<= action.label >></a>
-                    << if (action.options) { >>
-                      <ul>
-                        << $.each(action.options, function(key, value) { >>
-                          <li name="<<= action._id >>" class="<<= action.disabled ? 'disabled' : '' >>">
-                            <a class="action" name="<<=key >>"><<- value >></a></li>
-                        << }) >>
-                      </ul>
-                    << } >>
-                  </li>
-                << }) >>
-              </ul>
-            </li>
-          << }) >></ul>
-        </li>
-      <ul>
-    << } >>
     <div id="girl-view" name="<<= girl.name >>" class="ui-helper-clearfix">
       <div class="column pct-30 left center">
         <img src="<<= girl.image("base") >>" title="<<= girl._.description >>">
-          <div id="morning" class="action-list">
-            << createActionsList(morningActions, girl.actions.morningLabel) >>
-          </div>
-          <div id="evening" class="action-list">
-            << createActionsList(eveningActions, girl.actions.eveningLabel) >>
-          </div>
       </div>
       <div class="column pct-70">
         <div class="column pct-55 middle">
@@ -506,18 +474,18 @@
     <div class="vertical-tabs navigable" id="mission-list">
       <ul>
         << var i = 0 >>
-        << for (var _id in missions) { >>
-          << if (!mission.description || !mission.image) { continue; } >>
-          << i++ >>
+        << for (var _id in missions) {
+          if (!missions[_id].description || !missions[_id].image) { continue; }
+          i++ >>
           <li>
             <a href="#mission-tab-<<= i >>"><<= missions[_id].label >></a>
           </li>
         << } >>
       </ul>
       << i = 0 >>
-      << $.each(missions, function(_id, mission) { >>
-        << if (!mission.description || !mission.image) { continue; } >>
-        << i++ >>
+      << $.each(missions, function(_id, mission) {
+        if (!mission.description || !mission.image) { return; }
+        i++ >>
         <div id="mission-tab-<<= i >>" class="mission ui-helper-clearfix">
           << if (mission.end.day) { >>
             <div class="top">Time Remaining: <strong><<= mission.end.day - g.day >> days</strong></div>
@@ -529,5 +497,67 @@
         </div>
       << }) >>
     </div>
+  </script>
+  <script id="actions_list_template" type="text/ejs-template">
+    <div class="vertical-tabs navigable" id="actions">
+      <ul>
+        << for (var i in girls) { >>
+          <li>
+            <a href="#action-tab-<<= i >>"><<= girls[i].name >></a>
+          </li>
+        << } >>
+      </ul>
+      << for (i in girls) { >>
+        <div id="action-tab-<<= i >>" class="accordion girl <<= girl.name == girls[i].name ? 'active' : '' >>" name="<<= girls[i].name >>">
+          <h3>Morning</h3>
+          <div class="ui-helper-clearfix morning"></div>
+          <h3>Evening</h3>
+          <div class="ui-helper-clearfix evening"></div>
+        </div>
+      << } >>
+    </div>
+  </script>
+  <script id="actions_girl_template" type="text/ejs-template">
+    <table class="action-list"><tbody>
+      << $.each(potentialActions.CsortToObject('group'), function(group, actions) { >>
+        <tr>
+          <td class="group">
+            <label><<= group >></label>
+          </td>
+          <td>
+            << actions.forEach(function(action) { >>
+              <<
+                var option = action.options ? Object.keys(action.options)[0] : false;
+                if (girl.actions.time == action._id && girl.actions[time + "Option"]) {
+                  option = girl.actions[time + "Option"];
+                }
+              >>
+              <div class="action <<= action.disabled ? 'disabled' : '' >>">
+                <label>
+                  <span title="<<= action.description >>" class="<<= option ? 'options' : '' >>"><<= action.label >></span>
+                  << if (action.options) { >>
+                    <ol class="dropdown">
+                      << $.each(action.options, function(option_id, label) { >>
+                        <li name="<<= option_id >>" class="<<= option_id == option ? 'selected' : '' >>"><<- label >></li>
+                      << }) >>
+                    </ol>
+                  << } >>
+                </label>
+                <ul name="<<= action._id >>" class="others-<<= (otherActionList[action._id] || []).length >>">
+                  << for (var i in otherActionList[action._id]) { >>
+                    <li class="other">
+                      <img src="<<= g.girls[otherActionList[action._id][i]].image() >>" title="<<= otherActionList[action._id][i] >>">
+                    </li>
+                  << } >>
+                  << if (girl.actions[time] == action._id) { >>
+                    <li class="this"><img src="<<= girl.image() >>"></li>
+                  << } >>
+                </ul>
+              </div>
+            << }) >>
+          </td>
+        </tr>
+      << }) >>
+    </tbody></table>
   </script>
 </body></html>
