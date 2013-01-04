@@ -42,7 +42,7 @@ Game.load = function(name) {
 };
 
 Game.loadFromText = function(value) {
-  value = JSON.retrocycle(JSON.parse(value));
+  value = JSON.parse(value);
   g = new Game(value);
   $('#save').removeClass('disabled');
   e.invokeAll('GameInit', g.render);
@@ -58,7 +58,7 @@ Game.save = function(name) {
     g.name = name;
     g._id = S4() + S4() + S4();
   }
-  var string = JSON.stringify(JSON.decycle(g), function(key, val) {
+  var string = JSON.stringify(g, function(key, val) {
     if (key == '_' || key.substr(0, 6) == 'jQuery') {
       return undefined;
     }
@@ -143,7 +143,7 @@ e.Ready.push(function(done) {
       $('#game-name', form).val(g.name);
     }
     $('#export-game', form).click(function(event) {
-      var game = JSON.stringify(JSON.decycle(g), function(key, val) {
+      var game = JSON.stringify(g, function(key, val) {
         if (key == '_' || key.substr(0, 6) == 'jQuery') {
           return undefined;
         }

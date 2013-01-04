@@ -1,10 +1,8 @@
-var Mission = function(obj, base) {
-  $.extend(this, obj);
-  this._ = base;
+var Mission = function(obj) {
+  $.extend(true, this, obj);
 };
 
 Mission.start = function(base, girl) {
-  console.log(base);
   if (base.fetishes) {
     for (var fet in base.fetishes) {
       if (base.fetishes[fet] && !g.fetishes[fet]) {
@@ -12,7 +10,7 @@ Mission.start = function(base, girl) {
       }
     }
   }
-  var mission = $.extend(true, {}, base);
+  mission = new Mission(base);
   if (typeof(girl) == 'object') { mission.girl = girl; }
 
   var context = {
@@ -28,7 +26,6 @@ Mission.start = function(base, girl) {
   if (typeof(mission.end) == 'function') { mission.end = mission.end.call(mission); }
   mission.label = ejs.render(mission.label, context);
 
-  mission = new Mission(mission, base);
   if (mission.description && mission.image) {
     mission.description = ejs.render(mission.description, context);
     mission.image = ejs.render(mission.image, context);
