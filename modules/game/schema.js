@@ -12,6 +12,7 @@ var Game = function(obj) {
 };
 
 Game.prototype.nextPayment = function() {
+  if (this.day >= Game.config.gameLength) { return false; }
   var pl = Game.config.paymentLength;
   var day = Math.floor(this.day / pl) * pl + pl;
   var increments = Game.config.gameLength / pl;
@@ -44,7 +45,7 @@ Game.prototype.nextTurn = function() {
       var payment = game.nextPayment();
       game.day += 1;
       var done = function() {
-        if (game.day == payment.day) {
+        if (payment && game.day == payment.day) {
           game.money -= payment.amount;
         }
         game.render();

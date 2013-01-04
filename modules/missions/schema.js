@@ -12,7 +12,6 @@ Mission.start = function(base, girl) {
       }
     }
   }
-  console.log(base);
   var mission = $.extend(true, {}, base);
   if (typeof(girl) == 'object') { mission.girl = girl; }
 
