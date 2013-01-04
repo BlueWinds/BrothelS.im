@@ -58,13 +58,7 @@ Game.save = function(name) {
     g.name = name;
     g._id = S4() + S4() + S4();
   }
-  var string = JSON.stringify(g, function(key, val) {
-    if (key == '_' || key.substr(0, 6) == 'jQuery') {
-      return undefined;
-    }
-    return val;
-  });
-  localStorage.setItem(g._id, string);
+  localStorage.setItem(g._id, g.toJSONString());
   var list = localStorage.getObject('saved-games') || {};
   list[name] = g._id;
   localStorage.setObject('saved-games', list);
@@ -143,13 +137,7 @@ e.Ready.push(function(done) {
       $('#game-name', form).val(g.name);
     }
     $('#export-game', form).click(function(event) {
-      var game = JSON.stringify(g, function(key, val) {
-        if (key == '_' || key.substr(0, 6) == 'jQuery') {
-          return undefined;
-        }
-        return val;
-      });
-      var textarea = $('<textarea>').text(game).css('width', '15em').css('height', '10em');
+      var textarea = $('<textarea>').text(g.toJSONString()).css('width', '15em').css('height', '10em');
       $('<div>').append(textarea).dialog({
         title: 'Save the text below'
       }).css('overflow', 'auto');

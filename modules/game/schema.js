@@ -54,3 +54,12 @@ Game.prototype.nextTurn = function() {
     });
   });
 };
+
+Game.prototype.toJSONString = function() {
+  return JSON.stringify(g, function(key, val) {
+    if (key == '_') {
+      return undefined;
+    }
+    return val;
+  });
+};
