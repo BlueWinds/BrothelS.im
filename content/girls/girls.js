@@ -22,7 +22,7 @@ Girl.config = {
   tooltips: {
     endurance: "Endurance is how tired the girl currently is. When this is low, she'll be unable to do some jobs.",
     happiness: "Happiness is how much she enjoys her job. This goes down any time she refuses to do a task, or when you're not paying her enough. Increase it by paying her more and giving her time off - she's more likely to refuse sex when unhappy, and her customers will be less satisfied.",
-    obedience: "Obedience is how likely she is to comply when you or a customer ask her to do tasks some might find distasteful. This decreases whenever she refuses. You can decrease it using the Lockdown action, available once you own a building and have purchased a Dungeon.",
+    obedience: "Obedience is how likely she is to comply when you or a customer ask her to do tasks some might find distasteful. This decreases whenever she refuses. You can increase it using the Lockdown action, available once you own a building and have purchased a Dungeon.",
     modesty: "Modesty measures how much the girl is willing to expose herself in public, degrade herself in front of a group, or is otherwise shy about her body and conservative in her morals. Lower values make her less likely to refuse sex in public. High modesty girls will only have sex with customers in private.",
     charisma: "Charisma is how outgoing, personable and generally attractive she is. Girls with higher charisma get paid more for prostitution.",
     intelligence: "Intelligence is how quickly she learns. Girls with higher intelligence will gain experience more quickly - but they'll want to be paid more as well. Increase this with the Study action.",

@@ -55,6 +55,17 @@ e.GameRender.push(function(done) {
           }
           girl.setAction(context.potentialActions[action], time, option);
         }
+      }).click(function() {
+        var $this = $(this);
+        var action = $this.attr('name');
+        var option;
+        if ($this.parent().find('ol li.selected')) {
+          option = $this.parent().find('ol li.selected').attr('name');
+        }
+        $('li.this', div).fadeOut('fast', function() {
+          $(this).fadeIn('fast').appendTo($this);
+        });
+        girl.setAction(context.potentialActions[action], time, option);
       });
       $('.action ol.dropdown li', div).click(function() {
         var action = $(this).closest('.action').children('ul').attr('name');

@@ -129,7 +129,7 @@ $(function() {
     my: 'center center',
     at: 'center center',
     of: window,
-    collision: 'none'
+    collision: 'fit'
   };
   $(document).on('dialogclose', function(event) {
     $(event.target).dialog('destroy').remove();
