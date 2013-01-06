@@ -10,7 +10,7 @@ e.Ready.push(function(done) {
 e.GameInit.push(function(done) {
   // Add "events" key to each girl to track the last time each event happened to her.
   $.each(g.girls, function(name, girl) {
-    if (!girl.events) {
+    if (!girl.eventHistory) {
       girl.eventHistory = {};
     }
   });
