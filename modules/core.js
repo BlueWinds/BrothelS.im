@@ -255,3 +255,12 @@ Math.weightedRandom = function(variants) {
 
 ejs.open = '<<';
 ejs.close = '>>';
+
+window.onerror = function(message, file, line) {
+  var error = $('<div>');
+  console.log(message);
+  $('<div class="text">').html(message).appendTo(error);
+  $('<div class="file">').html(file).appendTo(error);
+  $('<div class="line">').html('Line ' + line).appendTo(error);
+  $('#error').append(error);
+};

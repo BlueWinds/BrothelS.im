@@ -333,3 +333,16 @@ textarea {
 .disabled *:hover + .dropdown {
   display: none;
 }
+
+#error {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#error > div:before {
+  color: #F00;
+  content: 'Error';
+  font-weight: 700;
+  margin: 10px;
+}
