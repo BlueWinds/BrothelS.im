@@ -136,4 +136,11 @@ $(function() {
   }).on("dialogcreate", function(event, ui) {
     e.invokeAll('Autorender', function() {}, event.target);
   });
+  $(document).keypress(function(event) {
+    if (event.keyCode == 37) {
+      $('.navigable .previous.button').click();
+    } else if (event.keyCode == 39) {
+      $('.navigable .next.button').click();
+    }
+  });
 });
