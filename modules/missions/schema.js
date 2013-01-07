@@ -67,11 +67,26 @@ Mission.prototype.checkConditions = function(cond, girl) {
     var match = false;
     var girls = girl ? [girl] : g.girls.Cfilter('status', 'Hired');
     girls.forEach(function(girl) {
+      var specialRule;
       for (var stat in cond.girlMin) {
-        if (girl[stat] < cond.girlMin[stat]) { return; }
+        if (girl[stat] < cond.girlMin[stat] && stat != 'specialRules') { return; }
+        if (stat == 'specialRules') {
+          for (specialRule in cond.girlMin[stat]) {
+            if (girl.specialRules[stat] < cond.girlMin[stat][specialRule]) {
+              return;
+            }
+          }
+        }
       }
       for (stat in cond.girlMax) {
-        if (girl[stat] > cond.girlMax[stat]) { return; }
+        if (girl[stat] > cond.girlMax[stat] && stat != 'specialRules') { return; }
+        if (stat == 'specialRules') {
+          for (specialRule in cond.girlMax[stat]) {
+            if (girl.specialRules[stat] < cond.girlMax[stat][specialRule]) {
+              return;
+            }
+          }
+        }
       }
       match = girl;
     });

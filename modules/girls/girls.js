@@ -26,6 +26,10 @@ e.GameInit.push(function(done) {
     if (girl.status == 'Hired' && girl.hireDay === undefined) {
       girl.hireDay = g.day;
     }
+    // Update old savegames with per-instance specialRules.
+    if (!girl.specialRules) {
+      girl.specialRules = Girls[name].specialRules || {};
+    }
   });
   for (var name in Girls) {
     if (!g.girls[name]) {

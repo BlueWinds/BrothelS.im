@@ -71,7 +71,7 @@ Actions.Streetwalk.config = {
 };
 
 Actions.Whore.config = {
-  minCustomers: 1,
+  minCustomers: 3,
   maxCustomers: 20,
   refuseDelta: {
     obedience: -1,

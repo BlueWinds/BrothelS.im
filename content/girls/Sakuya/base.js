@@ -20,7 +20,6 @@ Girls.Sakuya = {
   'anal experience': 0,
   'fetish libido': 30,
   'fetish experience': 5,
-  specialRules: {},
   images: {
     basePath: "content/girls/Sakuya/images",
     base: "Base.jpg",

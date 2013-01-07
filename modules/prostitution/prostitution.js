@@ -158,7 +158,8 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
     var building = girls.Cfirst().building();
     var config = Actions.Whore.config;
     var count = config.maxCustomers - config.minCustomers;
-    count *= Math.pow(Math.random() * building.reputation / 100, 0.5);
+    var power = Math.random() * 2 + 2.7 - building.reputation / 20;
+    count /= (1 + Math.pow(Math.E, power));
     count += config.minCustomers;
     var classes = [];
     $.each(config.customerClass, function(_class, info) {

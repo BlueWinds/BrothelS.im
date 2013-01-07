@@ -29,7 +29,8 @@ Girl.sexStats = ['soft libido', 'soft experience', 'hard libido', 'hard experien
 Girl.create = function(base) {
   var obj = {
     name: base.name,
-    actions: {}
+    actions: {},
+    specialRules: base.specialRules || {}
   };
   var girl = new Girl(obj);
   girl.status = girl.randomStatus();
@@ -58,13 +59,24 @@ Girl.prototype.randomStatus = function() {
 };
 
 Girl.prototype.apply = function(stat, delta) {
+  if (stat == 'specialRules') {
+    var girl = this;
+    $.each(delta, function(key, value) {
+      if (key == 'function') {
+        value.call(girl);
+        return;
+      }
+      girl.specialRules[key] += value;
+    });
+    return;
+  }
   if (typeof(delta) == 'number') {
-    if (this._.specialRules && this._.specialRules.dependentStats) {
+    if (this.specialRules.dependentStats) {
       var dependency;
       if (delta > 0) {
-        dependency = this._.specialRules.dependentStats[stat];
+        dependency = this.specialRules.dependentStats[stat];
       } else {
-        dependency = this._.specialRules.dependentStats['-' + stat];
+        dependency = this.specialRules.dependentStats['-' + stat];
       }
       if (dependency) {
         if (typeof(dependency) == 'function') {
@@ -95,7 +107,7 @@ Girl.prototype.apply = function(stat, delta) {
     return;
   }
   for (var key in stat) {
-    if (Girl.stats.indexOf(key) == -1 && key != 'money') {
+    if (Girl.stats.indexOf(key) == -1 && key != 'money' && key != 'specialRules') {
       if (Girl.sexStats.indexOf(key) == -1) {
         continue;
       }
@@ -106,8 +118,11 @@ Girl.prototype.apply = function(stat, delta) {
 
 Girl.prototype.desiredPay = function() {
   var pay = Math.floor(this.hirePrice(50) / 20);
-  if (this._.specialRules && this._.specialRules.payRatio !== undefined) {
-    pay *= this._.specialRules.payRatio;
+  if (this.intelligence < 20 && this.get('libido') > 50 ) {
+    pay *= (this.intelligence / 40) + this.get('libido') / 100;
+  }
+  if (this.specialRules.payRatio !== undefined) {
+    pay *= this.specialRules.payRatio;
   }
   return pay;
 };

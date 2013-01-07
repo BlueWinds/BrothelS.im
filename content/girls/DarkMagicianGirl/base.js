@@ -20,7 +20,6 @@ Girls['Dark Magician Girl'] = {
   'anal experience': 0,
   'fetish libido': 10,
   'fetish experience': 0,
-  specialRules: {},
   images: {
     basePath: "content/girls/DarkMagicianGirl/images",
     base: "Base.png",
