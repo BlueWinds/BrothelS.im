@@ -43,6 +43,7 @@ Girl.create = function(base) {
 
 Girl.prototype.randomStatus = function() {
   if (this.status == 'Hired') { return 'Hired'; }
+  if (this.status == 'Gone') { return 'Gone'; }
   var status = this._.status;
   if (typeof(status) == 'String') { return status; }
   if (this.status && Math.random() < (this._.stayChance || 0.5)) {
@@ -66,7 +67,7 @@ Girl.prototype.apply = function(stat, delta) {
         value.call(girl);
         return;
       }
-      girl.specialRules[key] += value;
+      girl.specialRules[key] = (girl.specialRules[key] || 0) + value;
     });
     return;
   }

@@ -106,11 +106,20 @@ Girl.prototype.verifyActions = function() {
         delete action.disabled;
       }
     }
+    var specialRule;
     if (!action.disabled && action.mins) {
       for (var stat in action.mins) {
         if (stat == 'money' && g.money < action.mins.money) {
           action.disabled = 'Not enough money';
           break;
+        } else if (stat == 'specialRules') {
+          for (specialRule in action.mins.specialRules) {
+            if (this.specialRules[specialRule] < action.maxes.specialRules[specialRule]) {
+              this.disabled = true;
+              break;
+            }
+            if (this.disabled) { break; }
+          }
         } else if (this[stat] < action.mins[stat]) {
           action.disabled = 'Not enough ' + T(stat);
           break;
@@ -120,6 +129,14 @@ Girl.prototype.verifyActions = function() {
         if (stat == 'money' && g.money > action.maxes.money) {
           action.disabled = 'Too much money';
           break;
+        } else if (stat == 'specialRules') {
+          for (specialRule in action.maxes.specialRules) {
+            if (this.specialRules[specialRule] < action.maxes.specialRules[specialRule]) {
+              this.disabled = true;
+              break;
+            }
+            if (this.disabled) { break; }
+          }
         } else if (this[stat] > action.maxes[stat]) {
           action.disabled = 'Too much ' + T(stat);
           break;

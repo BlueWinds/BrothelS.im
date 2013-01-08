@@ -33,8 +33,9 @@ e.GirlRender.push(function(girl, view, done) {
 });
 
 e.GameRender.push(function(done) {
-  $('.girl .right').click(function() {
-    var girl = g.girls[$(this).parent().attr('name')];
+  $('.girl .right > div').click(function() {
+    var time = $(this).attr('name');
+    var girl = g.girls[$(this).parent().parent().attr('name')];
     function renderActions(girl, time) {
       var context = {
         girl: girl,
@@ -80,16 +81,17 @@ e.GameRender.push(function(done) {
     }
     var context = {
       girls: g.girls.Cfilter('status', 'Hired'),
-      girl: girl
+      girl: girl,
+      time: time
     };
     var view = $(ejs.render($('#actions_list_template').html(), context));
-    var tab = $('.girl[name="' + girl.name + '"] .morning', view);
-    tab.append(renderActions(girl, 'morning'));
+    var tab = $('.girl[name="' + girl.name + '"] .' + time, view);
+    tab.append(renderActions(girl, time));
     if (tab[0] !== $('.girl .morning', view)[0]) {
       var temp_tab = $('.girl .morning', view).first();
       var temp_girl = tab.parent().attr('name');
       temp_tab.append(renderActions(g.girls[temp_girl], 'morning'));
-    };
+    }
     var opt = {
       beforeClose: g.render
     };

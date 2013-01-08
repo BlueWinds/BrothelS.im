@@ -16,6 +16,9 @@ Missions.specialParty = {
     // You can also trigger a mission when the player has hired/bought a certain number of girls/buildings.
 //     girls: 3,
 //     buildings: 2,
+    // likelyhood lets you attach a probability that the mission begins on any given day which matches all other criteria. 0.5 would mean a 50% chance.
+//     likelyhood: 0.5,
+    //
     // girlMin allows you to *associate a mission with a specific girl*. Later, when the conditions for ending the mission are checked, it's her stats that will again be compared.
     // It's a list of the minimums she must have in each stat for the mission to trigger.
 //     girlMin: {
@@ -45,6 +48,8 @@ Missions.specialParty = {
   // If it's an object, all the same options are available as for "start" above.
 //   end: {
 //     minDay: 45,
+    // minDay and maxDay can also be strings, led by a +, in which case it means "the current game day + (value)" - so if this mission started on day 15, '+5' would mean "in five days" - on day 20.
+//     minDay: '+5',
 //     maxDay: 45,
 //     girls: 3,
 //     buildings: 2,
@@ -59,7 +64,7 @@ Missions.specialParty = {
     if (g.day == 10) {
       return { minDay: 15, maxDay: 15 };
     }
-    return { minDay: g.day + 30, maxDay: g.day + 30 };
+    return { minDay: '+30', maxDay: '+30' };
   },
   // success describes the results of the mission when all of the end conditions are met. For specialParty, since the only conditions is a minDay, the mission will end.
   success: {

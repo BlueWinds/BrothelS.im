@@ -28,7 +28,7 @@ Actions.Streetwalk =  {
   // The message if she refuses.
   uncooperative: 'But she was uncooperative and <strong>refused</strong>. He left unsatisfied without paying anything.',
   // Message for each customer she services.
-  customerMessage: '<<= girl.name >> met a <<= customer.profession >> looking for <<- T(customer.sex[0]) >> with a girl who was <<- customer.wants.slice(0, 2).CtoString("adj") >>. They agreed on <strong><<- T(sex) >></strong>.<br><br><<- result >>'
+  customerMessage: '<<= girl.name >> met <<= customer.name + " the " + customer.profession >>, looking for <<- T(customer.sex[0]) >> with a girl who was <<- customer.wants.slice(0, 2).CtoString("adj") >>. They agreed on <strong><<- T(sex) >></strong>.<br><br><<- result >>'
 };
 
 Actions.Whore = {
@@ -60,5 +60,5 @@ Actions.Whore = {
   // Reuse the uncooperative message from Streetwalking.
   uncooperative: Actions.Streetwalk.uncooperative,
   // Message for each customer serviced.
-  customerMessage: 'A <<= customer.profession >> wanted <<- T(customer.sex[0]) >> with a girl who was <<- customer.wants.slice(0, 2).CtoString("adj") >>. He chose <<= girl.name >>, and they agreed on <strong><<- T(sex) >></strong>.<br><br><<- result >>'
+  customerMessage: '<<= customer.name + " the " + customer.profession >> wanted <<- T(customer.sex[0]) >> with a girl who was <<- customer.wants.slice(0, 2).CtoString("adj") >>. He chose <<= girl.name >>, and they agreed on <strong><<- T(sex) >></strong>.<br><br><<- result >>'
 };

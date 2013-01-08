@@ -4,17 +4,26 @@ e.Ready.push(function(done) {
   $.each(Missions, function(_id, mission) {
     mission._id = _id;
   });
+  $.each(Girls, function(name, girl) {
+    if (!girl.missions) { return; }
+    $.each(girl.missions, function(_id, mission) {
+      mission._id = _id;
+    });
+  });
   done();
 });
 
 e.GameNew.push(function(done) {
   g.missions = g.missions || {};
   g.day = -1;
+  var series = [];
   $.each(Missions, function(_id, mission) {
     if (mission.start) {
       var result = Mission.prototype.checkConditions.call(mission, mission.start);
       if (result) {
-        Mission.start(mission, result);
+        series.push(function(next) {
+          Mission.start(mission, result, next);
+        });
       }
     }
   });
@@ -24,56 +33,73 @@ e.GameNew.push(function(done) {
       if (Missions[_id] || !mission.start) { return; }
       var result = Mission.prototype.checkConditions.call(mission, mission.start, girl);
       if (result) {
-        Mission.start(mission, result);
+        series.push(function(next) {
+          Mission.start(mission, result, next);
+        });
       }
     });
   });
   g.day = 0;
-  done();
+  e.runSeries(series, done);
 });
 
 e.GameInit.push(function(done) {
   $.each(g.missions, function(_id, mission) {
-    g.missions[_id] = new Mission(mission);
+    base = Missions[_id];
+    if (!base && mission.girl) {
+      base = Girls[mission.girl].missions[_id];
+    }
+    g.missions[_id] = new Mission(mission, base);
   });
   g.missionsDone = g.missionsDone || {};
   done();
 });
 
 e.GameNextDay.push(function(done) {
+  var series = [];
   $.each(g.missions, function(_id, mission) {
-    mission.checkDay();
-    // Send a reminder message the day before a mission ends
-    if (mission.end.maxDay == g.day + 1 && mission.description && mission.image) {
-      new Message({
-        type: 'Last Day - ' + mission.label,
-        text: mission.description,
-        image: mission.image
-      }).save(mission.group);
-    }
+    series.push(function(next) {
+      // Send a reminder message the day before a mission ends
+      if (mission.end.maxDay == g.day + 1 && mission.description && mission.image) {
+        new Message({
+          type: mission.label,
+          text: mission.description,
+          image: mission.image
+        }).save(mission.group);
+      }
+      mission.checkDay(next);
+    });
   });
   $.each(Missions, function(_id, mission) {
     if (g.missions[_id] || g.missionsDone[_id] || !mission.start) {
       return;
     }
-    var result = Mission.prototype.checkConditions.call(mission, mission.start);
-    if (result) {
-      Mission.start(mission, result);
-    }
+    series.push(function(next) {
+      var result = Mission.prototype.checkConditions.call(mission, mission.start);
+      if (result) {
+        Mission.start(mission, result, next);
+      } else {
+        next();
+      }
+    });
   });
-  g.girls.Cfilter('status', 'Hired').forEach(function(girl) {
+  $.each(g.girls, function(name, girl) {
     if (!girl._.missions) { return; }
     $.each(girl._.missions, function(_id, mission) {
       if (g.missions[_id] || g.missionsDone[_id] || !mission.start) {
         return;
       }
-      var result = Mission.prototype.checkConditions.call(mission, mission.start, girl);
-      if (result) {
-        Mission.start(mission, result);
-      }
+      series.push(function(next) {
+        var result = Mission.prototype.checkConditions.call(mission, mission.start, girl);
+        if (result) {
+          Mission.start(mission, result, next);
+        } else {
+          next();
+        }
+      });
     });
   });
-  done();
+  e.runSeries(series, done);
 });
 
 e.GameRender.push(function(done) {

@@ -20,14 +20,15 @@ Actions.Lockdown = {
   // The label is what's displayed to the player. You can use replacement patterns here. 'girl' is the girl performing the action. 'g' holds all the game data - see specialParty for an example of how this is used.
   label: 'Lockdown',
   // The tab the action is displayed under when viewing a girl.
-  group: 'Training',
+  group: 'Chores',
   // Does... what you think it does. If the action doesn't take up both time slots, remove this line.
   allDay: true,
   // The minimum statistics a girl must have in order to take this action. You can also use 'money' here, to show the minimum $ the player must have.
   mins: {
     endurance: 30,
     happiness: 50,
-    constitution: 10
+    constitution: 10,
+    obedience: 60
   },
   // The maximum statistics the girl can have. Again, you can use money here.
   //maxes: {
@@ -78,7 +79,7 @@ Actions.Lockdown = {
     },
     {
       image: 'fetish',
-      message: "<<= girl.name >> spent the day in the dungeon's stockade without clothes. You checked in occasionally to spank her or have her blow you.",
+      message: "<<= girl.name >> spent the day in the dungeon's stockade without clothes. You checked in occasionally to spank her.",
       delta: {
         endurance: -10,
         happiness: -10,

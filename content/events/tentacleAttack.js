@@ -24,11 +24,18 @@ Events.tentacleAttack = {
   time: 'evening',
   // Events can be "disruptive", which mean they prevent whatever event triggered them from occurring. A tentacle attack, for example, prevents the girl from carrying on with whatever else she was planning on doing. If this were false or not present, then the girl would take her normal action after this event finished resolving.
   disruptive: true,
-  // minDay means that the event won't trigger before this game day. Remove it if your event can start on day 0.
-  minDay: 7,
-  // Important number! When a girl's action matches all the above criteria (has a matching tag, the time of day is right, etc., this is the probability the event occurs. A tentacle attack has a 10% chance in the evening - though remember that this may be modified based on the specific action because this event is marked "dangerous".
-  // While I'm working on an event, I like to set this to 1, so it triggers all the time. Don't forget to reduce it again later.
-  likelyhood: 0.08,
+  // As with Missions, you can limit events using conditions.
+  conditions: {
+    // Important number! This is the probability the event occurs. A tentacle attack has an 8% chance in the evening - though remember that this may be modified based on the specific action because this event is marked "dangerous".
+    // While I'm working on an event, I like to set this to 1, so it triggers all the time. Don't forget to reduce it again later.
+    likelyhood: 0.08,
+    // minDay means that the event won't trigger before this game day.
+    minDay: 7
+//     maxDay: 7,
+//     girlMin: { obedience: 30 },
+//     girlMax: { obedience: 70 },
+    // For more details on each of these options (and more options), see /content/missions/specialParty.js, in the "start" section.
+  },
   // Now we get to the interesting bits. ;)
 
   // There are two ways to control how an event plays out. The first, and simpler, one, is shown below.

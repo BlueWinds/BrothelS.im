@@ -1,16 +1,8 @@
 var e = {
   invokeAll: function(hook, done) {
-    if (!e[hook]) { done(); return; }
-    var args = Array.prototype.slice.call(arguments, 2);
-    var $this = this;
-    var next = function() {
-      i++;
-      if (i == e[hook].length) { done(); return; }
-      e[hook][i].apply($this, args);
-    };
-    args.push(next);
-    var i = -1;
-    next();
+    var args = Array.prototype.slice.call(arguments, 0);
+    args[0] = e[hook];
+    e.runSeries.apply(this, args);
   },
   invokeAllSync: function(hook) {
     if (!e[hook]) { return; }
@@ -18,6 +10,19 @@ var e = {
     for (var i in e[hook]) {
       e[hook][i].apply(this, args);
     }
+  },
+  runSeries: function(items, done) {
+    if (!items || !items.length) { done(); return; }
+    var args = Array.prototype.slice.call(arguments, 2);
+    $this = this;
+    function next() {
+      i++;
+      if (i == items.length) { done(); return; }
+      items[i].apply($this, args);
+    }
+    args.push(next);
+    var i = -1;
+    next();
   },
   Ready: []
 };
@@ -258,7 +263,6 @@ ejs.close = '>>';
 
 window.onerror = function(message, file, line) {
   var error = $('<div>');
-  console.log(message);
   $('<div class="text">').html(message).appendTo(error);
   $('<div class="file">').html(file).appendTo(error);
   $('<div class="line">').html('Line ' + line).appendTo(error);

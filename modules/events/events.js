@@ -4,6 +4,12 @@ e.Ready.push(function(done) {
   $.each(Events, function(_id, event) {
     event._id = _id;
   });
+  $.each(Girls, function(name, girl) {
+    if (!girl.events) { return; }
+    $.each(girl.events, function(_id, event) {
+      event._id = _id;
+    });
+  });
   done();
 });
 
@@ -35,12 +41,13 @@ e.GameInit.push(function(done) {
         time: time
       };
       event.group = girl.name;
-      Mission.prototype.applyResults.call(event, results, girl, context);
-      if (!event.disruptive) {
-        oldDoAction.call(girl, time, action, done);
-      } else {
-        done();
-      }
+      Mission.prototype.applyResults.call(event, results, function() {
+        if (!event.disruptive) {
+          oldDoAction.call(girl, time, action, done);
+        } else {
+          done();
+        }
+      }, girl, context);
     });
   };
 
@@ -49,13 +56,14 @@ e.GameInit.push(function(done) {
     var potentialEvents = getEventsWithTags(time, action.tags, girl);
     for (var _id in potentialEvents) {
       var event = potentialEvents[_id];
-      if (event.minDay && g.day < event.minDay) { continue; }
       if (action.uninterupretable && event.disruptive) { continue; }
-      var likelyhood = event.likelyhood;
-      if (action.safety && event.dangerous) { likelyhood *= (1 - action.safety); }
-      if (Math.random() < likelyhood) {
-        return $.extend(true, {}, event);
+      if (action.safety && event.dangerous) {
+        event.conditions.likelyhood *= (1 - action.safety);
       }
+      if (!Mission.prototype.checkConditions(event.conditions, girl)) {
+        continue;
+      }
+      return $.extend(true, {}, event);
     }
   }
 

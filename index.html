@@ -212,8 +212,8 @@
             </div>
           </div>
           <div class="column pct-40 right">
-            <div>Morning: <strong><<= girl.actions.morningLabel >></strong></div>
-            <div>Evening: <strong><<= girl.actions.eveningLabel >></strong></div>
+            <div name="morning">Morning: <strong><<= girl.actions.morningLabel >></strong></div>
+            <div name="evening">Evening: <strong><<= girl.actions.eveningLabel >></strong></div>
           </div>
         </div>
       << }) >>
@@ -514,9 +514,9 @@
       << for (i in girls) { >>
         <div id="action-tab-<<= i >>" class="accordion girl <<= girl.name == girls[i].name ? 'active' : '' >>" name="<<= girls[i].name >>">
           <h3>Morning</h3>
-          <div class="ui-helper-clearfix morning"></div>
+          <div class="ui-helper-clearfix morning <<= time == 'morning' ? 'active' : '' >>"></div>
           <h3>Evening</h3>
-          <div class="ui-helper-clearfix evening"></div>
+          <div class="ui-helper-clearfix evening <<= time == 'evening' ? 'active' : '' >>"></div>
         </div>
       << } >>
     </div>

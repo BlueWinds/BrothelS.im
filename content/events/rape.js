@@ -8,8 +8,10 @@ Events.thugRape = {
   },
   dangerous: true,
   disruptive: true,
-  minDay: 5,
-  likelyhood: 0.05,
+  conditions: {
+    minDay: 5,
+    likelyhood: 0.05
+  },
   variants: function(time, event, done) {
     // Fights back successfully or not.
     var i = ((this.constitution + this.endurance) / 100 * Math.random() < 0.6) ? 0 : 1;
@@ -31,7 +33,7 @@ Events.thugRape = {
     },
     {
       image: 'exercise',
-      message: "<<= girl.name >> was heading into the city to <<= action.label >> when a pot-bellied man stepped in front of her, blocking her way. She tried to go around wordlessly, but it was only then that she noticed her predicament - a narrow alley, and three more of his friends blocking her retreat. She was hardly helpless though - with a shout, she stomped on his foot, causing him to double over in agony. One of the men behind grabbed for her wrist, but she twisted away, planted a fist in his nose, and took off running. They didn't pursue far - only to the end of the alley, the street being too public for a struggle. After such a close call, she was in no mood to <<= action.label >> and returned home, slamming the door with a fiery look in her eyes.",
+      message: "<<= girl.name >> was heading into the city to <<= action.label >> when a pot-bellied man stepped in front of her, blocking her way. She tried to go around wordlessly, but it was only then that she noticed her predicament - a narrow alley, and three more of his friends blocking her retreat.<br><br>She was hardly helpless though - with a shout, she stomped on his foot, causing him to double over in agony. One of the men behind grabbed for her wrist, but she twisted away, planted a fist in his nose, and took off running. They didn't pursue far - only to the end of the alley, the street being too public for a struggle. After such a close call, she was in no mood to <<= action.label >> and returned home, slamming the door with a fiery look in her eyes.",
       girl: {
         endurance: -10,
         obedience: -5
@@ -50,8 +52,10 @@ Events.guardRape = {
   },
   dangerous: true,
   disruptive: true,
-  minDay: 5,
-  likelyhood: 0.03,
+  conditions: {
+    minDay: 5,
+    likelyhood: 0.03
+  },
   variants: function(time, event, done) {
     var options = {
       Submit: 'Go along quitely'

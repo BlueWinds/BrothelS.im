@@ -19,6 +19,12 @@ e.Autorender.push(function(element, done) {
   });
   $('.accordion', element).accordion({
     heightStyle: 'content'
+  }).each(function() {
+    var accordion = $(this);
+    if (accordion.find('.ui-accordion-content.active').length) {
+      var active = accordion.find('.ui-accordion-content').index(accordion.find('.ui-accordion-content.active'));
+      accordion.accordion('option', 'active', active);
+    }
   });
   $('select:not([multiple])', element).wrap('<div class="styled-select">');
   var view = $(element);

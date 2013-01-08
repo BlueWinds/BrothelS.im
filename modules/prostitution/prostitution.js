@@ -51,13 +51,14 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
     };
     var endDelta = this.startDelta();
     this.apply(Actions.Streetwalk.config.streetwalkDelta);
-    new Message({
+    var main_message = new Message({
       type: 'Streetwalk',
       time: time,
       image: this.image('base', true),
       text: ejs.render(Actions.Streetwalk.message, context),
       delta: endDelta()
-    }).save(this.name);
+    });
+    main_message.save(this.name);
 
     var found = Math.pow(this.charisma / 100, 0.5);
     found *= (Math.random() / 2 + 0.5);
@@ -68,6 +69,7 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
       customer.modestyRate = 1;
       doCustomer(this, customer, time, action);
     }
+    main_message.delta.money = endDelta().money;
     done();
   };
 
@@ -184,7 +186,7 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
     customers.Csort('class_number', true).forEach(function(customer) {
       customer.modestyRate = 0;
       var customerConfig = Actions.Whore.config.customerClass[customer._class];
-      var girl, max_satisfaction = 0.3;
+      var girl, max_satisfaction = 0.2;
       for (var name in canService) {
         var sex = g.girls[name].customerSexType(customer);
         var satisfaction = g.girls[name].checkInterest(sex);
@@ -200,8 +202,6 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
         serviced++;
         if (!canService[girl.name]) { delete canService[girl.name]; }
         doCustomer(girl, customer, time, Actions.Whore, customerConfig);
-      } else {
-        building.apply('reputation', customerConfig.bad / 2);
       }
     });
 
