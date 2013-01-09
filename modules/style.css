@@ -118,13 +118,20 @@ blockquote {
   padding-left: 1em;
 }
 
+blockquote:after {
+  color: #666;
+  content: " " close-quote;
+  font-size: 3em;
+  line-height: 0.1em;
+  vertical-align: -0.4em;
+}
 blockquote:before {
   color: #666;
-  content:open-quote;
-  font-size:4em;
-  line-height:.1em;
-  margin-right:.25em;
-  vertical-align:-.4em;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.3em;
 }
 
 blockquote p:first-child {

@@ -69,6 +69,7 @@
   <script src="content/actions/Prostitution.js"></script>
   <script src="content/actions/Schools.js"></script>
   <script src="content/actions/Simple.js"></script>
+  <script src="content/actions/Shows.js"></script>
 
   <!-- Misc modules !-->
   <script src="modules/randomPerson/randomPerson.js"></script>
@@ -152,15 +153,24 @@
     </div>
   </script>
   <script id="girls_hire_template" type="text/ejs-template">
-    <div id="hire-girls">
+    <div id="hire-girls" class="vertical-tabs navigable">
+      <ul>
+        << for(var i in girls) { >>
+          <li>
+            <a href="#hire-tab-<<= i >>"><<= girls[i].name >></a>
+          </li>
+        << } >>
+      </ul>
+      << i = 0 >>
       << girls.forEach(function(girl) { >>
-        <div class="ui-helper-clearfix no-cursor girl" name="<<= girl.name >>">
-          <div class="column pct-20">
+        <div id="hire-tab-<<= i >>" class="no-cursor girl" name="<<= girl.name >>">
+          <div class="column pct-30">
             <img src="<<= girl.image("base") >>" title="<<= girl._.description >>">
           </div>
           <div class="column pct-40 center">
             <h6><<= girl.name >></h6>
             <<
+              i++;
               var stats = [], experience = [], libido = [];
               Girl.stats.forEach(function(stat) {
                 if (stat == "happiness" || stat == "endurance") { return; }
@@ -175,7 +185,7 @@
             <div><<- libido.join(" | ") >></div>
             <div><<- experience.join(" | ") >></div>
           </div>
-          <div class="column pct-40">
+          <div class="column pct-30">
             <div><label>Up Front:</label><strong class="money">$<<= girl.hirePrice() >></strong></div>
             <div><label>Daily:</label><strong class="money">$<<= girl.desiredPay() >></strong></div>
             <button class="hire" name="<<= girl.name >>">Hire</button>

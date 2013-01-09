@@ -1,10 +1,8 @@
 Girls.Yuna = {
   description: "A summoner with powerful allies, Yuna fled the devastation of her homeland by mysterious forces, arriving here some months ago. She initially sought to gather allies to return home and rescue her land, but with little money and everyone busy with their own problems, she's been getting desperate for a job. Any job.",
   status: {
-      Town: 0.2,
-      'For Hire': 0.8
-      },
-  stayChance: 0.8,
+      'For Hire': 1
+  },
   happiness: 25,
   endurance: 65,
   obedience: 45,

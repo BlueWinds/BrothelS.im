@@ -192,6 +192,11 @@ e.Ready.push(function(done) {
       title: 'Load Game'
     });
   });
+  $(document).keydown(function(event) {
+    if (event.keyCode == 13 && !$('.ui-dialog').length) {
+      $('#next').click();
+    }
+  });
   done();
 });
 

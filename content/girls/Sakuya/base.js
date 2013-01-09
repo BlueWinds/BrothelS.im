@@ -1,10 +1,8 @@
 Girls.Sakuya = {
   description: "<p>Sakuya is clearly not from around here. She speaks the language with little accent, but there's still something... otherworldly about her. She bills herself as a maid, and a brief demonstration suggests she is indeed quite good at is. It would take a bit of convincing to get her to work as a prostitute, but she doesn't seem unwilling...</p>",
   status: {
-    Town: 0.2,
-    'For Hire': 0.8
+    'For Hire': 1
   },
-  stayChance: 0.7,
   happiness: 0,
   endurance: 100,
   obedience: 40,
@@ -190,7 +188,7 @@ Girls.Sakuya = {
               result.image.push('/content/girls/Sakuya/missionImages/WinFight.jpg');
               result.image.push('/content/girls/Sakuya/images/Base.jpg');
               result.message.push("The battle doesn't take long. Sakuya finally manages to penetrate her foe's defenses, one of the blue bolts knocking the Devil from her feet with a startled expression. Sakuya flickers to her side instantly kneeling on her chest with a fierce expression and her face and a pair of knives in her hand. She stabs the knives into the ground on either side of the Devile's head with ferocious strength, leaving buried to the hilt in cracked cobblestones, half an inch from either side of her former mistress' head. The moon is pale again.");
-              result.message.push("She stands, the blue aura finally fading, and returns to where she deposited you at the start of the fight, offering a hand to help you to your feet - you take it, knees wobbly and hair sticky from blood that ran out of your ears. The area around the fight is completely trashed, two inch gouges in solid stone and anything softer completely destroyed. It'll be a hell of a cleanup job. An unexpected sound - a giggle - causes you and Sakuya to look over your shoulders.<blockquote>Teeheehee. You're so cute, Sakuya, all grown up...</blockquote> Sakuya blushes and throws a knife at the Devil, which she casually deflects with one hand.<blockquote>Don't worry about the damage - I brought my own maid. We'll have it patched up by morning. Oh, and do at least <em>pretend</em> to guard your left.</blockquote> And... she's gone. Just... gone. One moment present, the next vanished. Sakuya tells you she won't be back. You believe her.");
+              result.message.push("She stands, the blue aura finally fading, and returns to where she deposited you at the start of the fight, offering a hand to help you to your feet - you take it, knees wobbly and hair sticky from blood that ran out of your ears. The area around the fight is completely trashed, two inch gouges in solid stone and anything softer completely destroyed. It'll be a hell of a cleanup job. An unexpected sound - a giggle - causes you and Sakuya to look over your shoulders.<blockquote>Teeheehee. You're so cute, Sakuya, all grown up...</blockquote> Sakuya blushes and throws a knife at the Devil, which she casually deflects with one hand.<blockquote>Don't worry about the damage - I brought a new maid, just in case things didn't work out with you. We'll have it patched up by morning. Oh, and do at least <em>pretend</em> to guard your left.</blockquote> And... she's gone. Just... gone. One moment present, the next vanished. Sakuya tells you she won't be back. You believe her.");
               result.girl = {
                 obedience: -10,
                 constitution: 7
@@ -208,7 +206,6 @@ Girls.Sakuya = {
             }
           } // don't go
           else { // go home
-            console.log(girl);
             if (girl.modesty >= 75 && girl.obedience >= 90) {
               result.image = '/content/girls/Sakuya/missionImages/ScarletDevil3.jpg';
               result.message = "It's not right that she live so far from home among strangers, and the Scarlet Devil looks like she'd be upset (and possibly violent) over a refusal. You nod to Sakuya - obedient and submissive, she takes her mistress's outstretched hand and bows her head. Scarlet raises her up and nods kindly. Sakuya turns back to you for a moment.<blockquote>My mistress will have payment delivered by morning.</blockquote> The Devil grins, kisses her maid's cheek, and they're gone. Not walking together down the street, but there one moment, gone the next, the same way Sakuya used to do while cleaning. With a sigh you turn homeward.";

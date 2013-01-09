@@ -5,13 +5,8 @@ Girls.Sophitia = {
   description: "<p>The daughter of a baker, Sophitia worked at her family bakery. She always treasured her country's culture and prayed often to the city guardian. One day, as she bathed in a forest spring, the god of the forge revealed himself, and told her of the evil sword whose existence threatened to bring much pain to the world. He ordered her to seek to destroy this foul blade.</p><p>At first Sophitia was reluctant to take the holy mission, for she was only a baker's daughter, but the god insisted. She tracked down the wielder of this powerful sword - and was gravely wounded in the fight without even inconveniencing him.</p><p>Afraid to face the wrath of her god, she fled for distant lands... and ended up here.</p>",
   // There are two options for status. First, a simple value, like:
   // status: 'Hired',
-  // This would set her status to "Hired" (working for the player) immediately, as soon as the game starts. Alternately, you can supply multiple values, like below. The number after each is the chance she end up with this status on any given day. All the values should add up to one.
-  // In Sophitia's case, there's an 80% chance she'll be For Hire on any given day, and a 20% chance she'll be "Town" (which means unavailable.
-  // Hired, For Hire and Town are the only options currently.
-  status: {
-    Town: 0.2,
-    'For Hire': 0.8
-  },
+  // The second option isn't currently used, but will be explained in the future if it becomes useful.
+  status: 'For Hire',
   // The happiness you set here will influence her hire price. When the player actually hires her, it will be reset to 75.
   happiness: 0,
   // The other stats work exactly like you'd expect - set the starting values here. Remember that higher stats increase a girl's hire price and her pay.

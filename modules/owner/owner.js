@@ -9,8 +9,15 @@ e.GameInit.push(function(done) {
 (function() {
   var oldGirlSetAction = Girl.prototype.setAction;
   Girl.prototype.setAction = function(action, time, option) {
+    var other_time = time == 'morning' ? 'evening' : 'morning';
     if (g.ownerAction[time] == this.actions[time + 'Label'] + ' with ' + this.name) {
       g.ownerAction[time] = '';
+      if (action.allDay) {
+        g.ownerAction[other_time] = '';
+      }
+    }
+    if (action.allDay && g.ownerAction[other_time] == this.actions[other_time + 'Label'] + ' with ' + this.name) {
+      g.ownerAction[other_time] = '';
     }
     oldGirlSetAction.call(this, action, time, option);
     if (action.ownerParticipation) {

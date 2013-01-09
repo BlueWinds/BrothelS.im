@@ -25,7 +25,6 @@ Mission.start = function(base, girl, done) {
     });
   }
   mission.end = mission.end || {};
-  console.log(mission);
   if (typeof(mission.end) == 'function') { mission.end = mission.end.call(mission, girl); }
   if (typeof(mission.end.minDay) == 'string') {
     mission.end.minDay = g.day + parseInt(mission.end.minDay, 10);
@@ -45,11 +44,7 @@ Mission.start = function(base, girl, done) {
     } else if (girl) {
       mission.image = girl.image(mission.image);
     }
-    if (mission.group) {
-      mission.group = ejs.render(mission.group, context);
-    } else {
-      mission.group = 'Missions';
-    }
+    mission.group = ejs.render(mission.group || 'Missions', context);
 
     new Message({
       type: mission.label,
@@ -143,7 +138,7 @@ Mission.prototype.checkDay = function(done) {
   };
 
   function apply(result, girl, context, done) {
-    console.log(girl);
+    if (typeof(girl) != 'object') { girl = false; }
     var delta = girl && girl.startDelta() || {};
     if (result.money) {
       g.money += result.money;
@@ -163,8 +158,6 @@ Mission.prototype.checkDay = function(done) {
         mission: this,
         girl: girl
       }, context);
-      console.log(context);
-      console.log(this);
       var text = typeof(result.message) == 'object' ? result.message : [result.message];
       var img = typeof(result.image) == 'object' ? result.image : [result.image];
       if (typeof(delta) == 'function') { delta = delta(); }

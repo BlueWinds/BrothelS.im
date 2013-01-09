@@ -28,6 +28,12 @@ e.GameInit.push(function(done) {
 e.GamePreDay.push(function(done) {
   $.each(g.buildings, function(name, building) {
     building.turnDelta = building.startDelta();
+  });
+  done();
+});
+
+e.GameNextDay.push(function(done) {
+  $.each(g.buildings, function(name, building) {
     building.runDay();
   });
   done();

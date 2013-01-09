@@ -55,7 +55,7 @@ e.GameInit.push(function(done) {
   done();
 });
 
-e.GameNextDay.push(function(done) {
+e.GamePreDay.push(function(done) {
   var series = [];
   $.each(g.missions, function(_id, mission) {
     series.push(function(next) {

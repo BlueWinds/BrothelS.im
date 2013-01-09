@@ -30,7 +30,8 @@ Buildings.Theater = {
   // This is what the building costs / gives each day.
   daily: {
     clean: -3,
-    money: -40
+    money: -40,
+    reputation: -1
     // You can also use girl's stats here - the values will apply to all the girls living here.
   },
   cleanEffect: {

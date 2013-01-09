@@ -70,20 +70,19 @@ Actions.Lockdown = {
       // Remember that "delta" could also be a function, just like in events - in actions, it would get the arguments (time, action), with "this" being the girl taking the action.
       delta: {
         endurance: -10,
-        happiness: -10,
-        obedience: 4,
+        happiness: -7,
+        obedience: 5,
         constitution: -0.5
       },
       message: '<<= girl.name >> spent the day bound, gagged and naked in the dungeon, hands tied above her head and wishing something interesting would happen.'
-
     },
     {
       image: 'fetish',
       message: "<<= girl.name >> spent the day in the dungeon's stockade without clothes. You checked in occasionally to spank her.",
       delta: {
         endurance: -10,
-        happiness: -10,
-        obedience: 4,
+        happiness: -7,
+        obedience: 5,
         constitution: -0.5
       }
     }

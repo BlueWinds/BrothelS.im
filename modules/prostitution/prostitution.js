@@ -55,8 +55,7 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
       type: 'Streetwalk',
       time: time,
       image: this.image('base', true),
-      text: ejs.render(Actions.Streetwalk.message, context),
-      delta: endDelta()
+      text: ejs.render(Actions.Streetwalk.message, context)
     });
     main_message.save(this.name);
 
@@ -69,7 +68,7 @@ Girl.prototype.checkSatisfaction = function(customer, sex) {
       customer.modestyRate = 1;
       doCustomer(this, customer, time, action);
     }
-    main_message.delta.money = endDelta().money;
+    main_message.delta = endDelta();
     done();
   };
 

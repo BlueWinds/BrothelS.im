@@ -163,10 +163,8 @@ e.GameRender.push(function(done) {
         });
       }
     });
-    lst.dialog({
-      title: 'Hire Girl',
-      width: '25em'
-    });
+    lst.dialog({});
+    lst.closest('.ui-dialog').addClass('tab-dialog');
   });
   done();
 });

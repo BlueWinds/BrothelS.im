@@ -12,7 +12,8 @@ Buildings.Onsen = {
   baseCost: 4000,
   daily: {
     clean: -5,
-    money: -60
+    money: -60,
+    reputation: -1
   },
   cleanEffect: {
     breakpoint: 50,

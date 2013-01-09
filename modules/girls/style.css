@@ -73,10 +73,19 @@ span.adj {
 }
 
 #hire-girls label {
-  width: 4em;
+  width: 5em;
 }
 
 #hire-girls button {
   display: block;
   margin: 1em auto;
+}
+
+#hire-girls .girl {
+  width: 30em;
+}
+
+#hire-girls .ui-tabs-panel > div:first-child {
+  margin-top: -0.5em;
+  margin-bottom: 0.5em;
 }

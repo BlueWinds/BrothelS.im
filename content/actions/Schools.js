@@ -253,8 +253,8 @@ Actions.Acolyte = {
     endurance: 10
   },
   label: 'Acolyte',
-  group: 'Training',
-  description: '<<= girl.name >> will work in a temple, serving the poor, maintaining the property and generally engaging in holy work. This will raise her <<- T("modesty") >>.',
+  group: 'Jobs',
+  description: '<<= girl.name >> will work in a temple, serving the poor, maintaining the property and generally engaging in holy work. This will raise her <<- T("modesty") >>, though it doesn\'t pay.',
   tags: {
     outdoors: true
   },
@@ -340,6 +340,7 @@ Actions.TrustBuilding = {
   tags: {
     outdoors: true
   },
+  safety: 0.6,
   variants: function(time, action, done) {
     if (this.obedience <= 40) {
       done(Math.choice([0, 1]));
@@ -354,10 +355,10 @@ Actions.TrustBuilding = {
   results: [
     {
       image: 'rest',
-      message: 'The two of you spend some time hanging around the <<= girl.building() ? girl.building().name : "inn" >>, doing some chores together and chatting about various things. She\'s spirited, <<= girl.charisma >= 50 ? "friendly" : "mean" >>, and doesn\'t take orders well, though you try to get her used to listening to your suggestions.',
+      message: 'The two of you spend some time hanging around the <<= girl.building() ? girl.building().name : "inn" >>, doing some chores together and chatting about various things. She\'s spirited, <<= girl.charisma >= 50 ? "quite friendly" : "not very nice" >>, and doesn\'t take orders at all well, though you use the opportunity to encourage her to listen to your suggestions.',
       delta: {
         happiness: 2,
-        obedience: 2
+        obedience: 1.5
       }
     },
     {
@@ -365,16 +366,17 @@ Actions.TrustBuilding = {
       message: "The two of you take a brisk walk in the <<= time == 'morning' ? 'sun' : 'moonlight' >>, discussing life, the universe and everything. As you pass by a couple making out on a park bench, you comment on how enthusiastically the woman does whatever her partner asks. <<= girl.name >> snorts at your heavy-handed, but you can see the effort isn't entirely wasted.",
       delta: {
         obedience: 1.5,
-        endurance: -3
+        endurance: -5
       }
     },
     {
       image: 'exercise',
       message: "You walk through the city, <<= girl.name >> following one step behind you, eyes on the ground or on you. You look back every few minutes, and if you catch her looking anywhere that isn't the ground or your feet, you stop and watch her disapprovingly until she apologizes.",
       delta: {
-        obedience: 2.5,
+        obedience: 1.5,
         happiness: -7,
-        charisma: -0.5
+        charisma: -0.5,
+        endurance: -5
       }
     },
     {
@@ -384,19 +386,21 @@ Actions.TrustBuilding = {
         "Finally, as you near the end of the walk, you produce the final item - a ball-gag. Fitting it in, you lead her home, smiling at the stares and whispered comments pointed in your direction. The public around here knows a good whore when the see one."
       ],
       delta: {
-        obedience: 3.5,
+        obedience: 2,
         happiness: -4,
-        modesty: -1
+        modesty: -1,
+        endurance: -7,
       }
     },
     {
       image: 'fetish',
       message: "<<= girl.name >> is almost completely submissive, so when you order her to strip and stand in the corner, she doesn't debate. She shivers slightly when you hand her dildo panties to wear, with a string tied to the base, and watches curiously as you sit down in a chair nearby and pull out a book. You tell her to remain still, and start to read. Every attempt to pleasure herself with the dildo is met with a sharp tug on the string, every movement with a disapproving glance over the top of the book.",
       delta: {
-        obedience: 4,
+        obedience: 2,
         happiness: -5,
         intelligence: -0.3,
-        'soft libido': 1.4
+        'soft libido': 1.4,
+        endurance: -5,
       }
     }
   ]

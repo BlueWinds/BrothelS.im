@@ -79,8 +79,7 @@ e.Autorender.push(function(element, done) {
         var active_acc = accordion && tab.accordion('option', 'active');
         if ($('.ui-accordion-header', tab).length > active_acc + 1) {
           active_acc += 1;
-        }
-        else if (tab_count > active_tab) {
+        } else if (tab_count > active_tab) {
           active_tab += 1;
           tab = $('.ui-tabs-panel', view).eq(active_tab);
           active_acc = 0;
@@ -137,16 +136,17 @@ $(function() {
     of: window,
     collision: 'fit'
   };
+  $.ui.tabs.prototype._tabKeydown = function() {};
   $(document).on('dialogclose', function(event) {
     $(event.target).dialog('destroy').remove();
   }).on("dialogcreate", function(event, ui) {
     e.invokeAll('Autorender', function() {}, event.target);
   });
-  $(document).keypress(function(event) {
+  $(document).keydown(function(event) {
     if (event.keyCode == 37) {
-      $('.navigable .previous.button').click();
+      $('.nav > .previous.button').click();
     } else if (event.keyCode == 39) {
-      $('.navigable .next.button').click();
+      $('.nav > .next.button').click();
     }
   });
 });
