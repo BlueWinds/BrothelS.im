@@ -112,7 +112,7 @@ Actions.Expose = {
     outdoors: true
   },
   variants: function(time, action, done) {
-    var i = 3 - Math.floor(this.modesty / 33 + Math.random() * 2);
+    var i = Math.max(0, 4 - Math.floor(this.modesty / 33 + Math.random() * 2));
     if (i == 4 && Math.random() > this.endurance / 100) { i = 5; }
     done(i);
   },
