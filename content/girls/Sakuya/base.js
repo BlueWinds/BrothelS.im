@@ -102,7 +102,6 @@ Girls.Sakuya = {
       group: 'Sakuya Speaks',
       end: function(girl) {
         if (girl.obedience >= 60 && girl.modesty <= 50) {
-          console.log(this.girl);
           delete this.image;
           delete this.description;
         }
