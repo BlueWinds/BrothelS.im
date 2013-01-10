@@ -113,32 +113,32 @@ Actions.Whore.config = {
       maxReputation: 25,
       pays: 0.8,
       minSatisfaction: 0.5,
-      bad: -0.1,
-      good: 0.2
+      bad: -0.3,
+      good: 0.4
     },
     'Low Class': {
       minReputation: 10,
       maxReputation: 60,
       pays: 1.2,
       minSatisfaction: 0.6,
-      bad: -0.2,
-      good: 0.3
+      bad: -0.4,
+      good: 0.6
     },
     'Middle Class': {
       minReputation: 25,
       maxReputation: 90,
       pays: 1.5,
       minSatisfaction: 0.7,
-      bad: -0.2,
-      good: 0.5
+      bad: -0.4,
+      good: 0.7
     },
     'Upper Class': {
       minReputation: 60,
       maxReputation: 100,
       pays: 1.9,
       minSatisfaction: 1,
-      bad: -0.4,
-      good: 0.8
+      bad: -0.7,
+      good: 1
     },
     'High Class': {
       minReputation: 80,
