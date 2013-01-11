@@ -2,7 +2,7 @@ Buildings.Onsen = {
   name: 'Onsen',
   image: 'content/buildings/Onsen/Base.jpg',
   clean: 25,
-  reputation: 5,
+  reputation: 0,
   status: 'For Sale',
   rooms: [
     { type: 'bedroom' },

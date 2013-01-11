@@ -28,7 +28,11 @@ Game.strings = {
     libido: 'Lusty',
     '-libido': 'Indifferent',
     experience: 'Sexy',
-    '-experience': 'Inexperienced'
+    '-experience': 'Inexperienced',
+    clean: 'Clean',
+    '-clean': 'Dirty',
+    reputation: 'Famous',
+    '-reputation': 'Unknown'
   },
   noun: {
     happiness: 'Happiness',
@@ -43,6 +47,8 @@ Game.strings = {
     soft: 'Oral',
     hard: 'Vaginal',
     anal: 'Anal',
-    fetish: 'Bondage'
+    fetish: 'Bondage',
+    clean: 'Cleanliness',
+    reputation: 'Reputation'
   }
 };

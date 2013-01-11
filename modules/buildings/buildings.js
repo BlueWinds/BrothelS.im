@@ -60,7 +60,6 @@ e.GameRender.push(function(done) {
         availableRooms: {}
       };
       $.each(Building.config.rooms, function(name, room) {
-        if (room.price > g.money) { return; }
         if (room.maxPerBuilding && room.maxPerBuilding <= building.rooms.Cfilter('type', name).length) {
           return;
         }
@@ -98,11 +97,12 @@ e.GameRender.push(function(done) {
   });
 
   $('#buy-building').click(function() {
-    var lst = $(ejs.render($('#buildings_buy_template').html(), {
+    var lst = $(ejs.render($('#buildings_manage_template').html(), {
       g: g,
+      action: 'Buy',
       buildings: g.buildings.Cfilter('status', 'For Sale')
     }));
-    $('button.buy', lst).each(function() {
+    $('button.manage', lst).each(function() {
       var building = g.buildings[$(this).attr('name')];
       if (building.price() > g.money) {
         $(this).attr('disabled', true);
@@ -110,12 +110,31 @@ e.GameRender.push(function(done) {
         $(this).click(function() {
           building.buy();
           g.render();
-          $('#buy-buildings').dialog('close');
+          $('#manage-buildings').dialog('close');
         });
       }
     });
     lst.dialog({
       title: 'Buy Building',
+      width: '30em'
+    });
+  });
+  $('#sell-building').click(function() {
+    var lst = $(ejs.render($('#buildings_manage_template').html(), {
+      g: g,
+      buildings: g.buildings.Cfilter('status', 'Owned'),
+      action: 'Sell'
+    }));
+    $('button.manage', lst).each(function() {
+      var building = g.buildings[$(this).attr('name')];
+        $(this).click(function() {
+          building.sell();
+          g.render();
+          $('#manage-buildings').dialog('close');
+        });
+    });
+    lst.dialog({
+      title: 'Sell Building',
       width: '30em'
     });
   });
@@ -125,6 +144,7 @@ e.GameRender.push(function(done) {
 (function() {
   var originalPay = Girl.prototype.desiredPay;
   Girl.prototype.desiredPay = function() {
+    if (!g.missionsDone || !g.missionsDone.firstMoney) { return 0; }
     var pay = originalPay.call(this);
     return this.building() ? pay : pay + Building.config.noRoomDailyCost;
   };

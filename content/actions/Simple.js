@@ -91,6 +91,9 @@ Actions.Lockdown = {
 
 Actions.Clean = {
   disabled: function(time) { return !Boolean(this.building()); },
+  missionsDone: {
+    firstBuilding: true
+  },
   mins: {
     happiness: 20,
     endurance: 15

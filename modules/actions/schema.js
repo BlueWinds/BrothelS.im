@@ -199,4 +199,3 @@ Girl.prototype.doAction = function(time, action, done) {
     });
   }
 };
-

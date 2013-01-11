@@ -118,11 +118,14 @@ Building.prototype.apply = function(stat, delta) {
   }
 };
 
-Building.prototype.price = function() {
+Building.prototype.price = function(action) {
   var cost = this._.baseCost;
   this.rooms.Caccumulate('type').forEach(function(type) {
     cost += Building.config.rooms[type].price;
   });
+  if (action == 'Sell') {
+    cost *= Building.config.sellRatio;
+  }
   return cost;
 };
 
@@ -177,6 +180,11 @@ Building.prototype.dailyDelta = function() {
 Building.prototype.buy = function() {
   this.status = 'Owned';
   g.money -= this.price();
+};
+
+Building.prototype.sell = function() {
+  this.status = 'For Sale';
+  g.money += this.price('Sell');
 };
 
 Building.prototype.buyRoom = function(type) {

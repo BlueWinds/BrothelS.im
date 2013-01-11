@@ -1,6 +1,9 @@
 Actions.Advertise = {
   label: 'Advertise',
   group: 'Jobs',
+  missionsDone: {
+    obedienceAndModesty: true
+  },
   mins: {
     endurance: 20,
     happiness: 50
@@ -18,7 +21,7 @@ Actions.Advertise = {
           endurance: -10,
           charisma: 1.5,
           reputation: 2 * (this.charisma / 100 - 0.3)
-        }
+        };
         if (!this.building()) {
           delta.money = (this.charisma + 5);
           delta.money *= Math.random() * 0.5 + 0.5;
@@ -28,7 +31,7 @@ Actions.Advertise = {
       message: "<<= girl.name >> worked the street in front of the <<- girl.building() ? girl.building().name : 'inn' >>, chatting up everyone who passed by. While not terribly successful from a business standpoint, it was good for her."
     }
   ]
-}
+};
 
 // This action still under construction, commented out.
 // Actions.Show = {

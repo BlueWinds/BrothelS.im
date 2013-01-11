@@ -43,7 +43,11 @@ Actions.Exercise = {
 
 Actions.Study = {
   mins: {
-    endurance: 5
+    endurance: 5,
+    money: 100
+  },
+  missionsDone: {
+    obedienceAndModesty: true
   },
   label: 'Study',
   group: 'Training',
@@ -104,6 +108,9 @@ Actions.Expose = {
   mins: {
     endurance: 10,
     obedience: 25
+  },
+  missionsDone: {
+    introConstitution: true
   },
   label: 'Expose',
   group: 'Training',
@@ -190,6 +197,9 @@ Actions.OD = {
     endurance: 15,
     obedience: 60
   },
+  missionsDone: {
+    charismaAndIntelligence: true
+  },
   ownerParticipation: true,
   label: 'Orgasm Denial',
   group: 'Training',
@@ -251,6 +261,9 @@ Actions.OD = {
 Actions.Acolyte = {
   mins: {
     endurance: 10
+  },
+  missionsDone: {
+    charismaAndIntelligence: true
   },
   label: 'Acolyte',
   group: 'Jobs',
@@ -333,6 +346,9 @@ Actions.TrustBuilding = {
     endurance: 10,
     happiness: 50
   },
+  missionsDone: {
+    introConstitution: true
+  },
   ownerParticipation: true,
   label: 'Trust Building',
   group: 'Training',
@@ -389,7 +405,7 @@ Actions.TrustBuilding = {
         obedience: 2,
         happiness: -4,
         modesty: -1,
-        endurance: -7,
+        endurance: -7
       }
     },
     {
@@ -400,7 +416,7 @@ Actions.TrustBuilding = {
         happiness: -5,
         intelligence: -0.3,
         'soft libido': 1.4,
-        endurance: -5,
+        endurance: -5
       }
     }
   ]

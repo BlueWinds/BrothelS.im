@@ -52,6 +52,22 @@ e.GameInit.push(function(done) {
     g.missions[_id] = new Mission(mission, base);
   });
   g.missionsDone = g.missionsDone || {};
+  // If firstBuilding && !introConstitution, then this was a pre-new-tutorial game, and we should add
+  // the intro missions so that the actions they introduce aren't disabled.
+  if (g.missionsDone.firstBuilding && !g.missionsDone.introConstitution) {
+    $.extend(g.missionsDone, {
+      introConstitution: true,
+      obedienceAndModesty: true,
+      enduranceAndHappiness: true,
+      charismaAndIntelligence: true,
+      libidoAndExperience: true,
+      firstMoney: true,
+      firstThousand: true,
+      secondGirl: true,
+      firstBuilding: true,
+      cleanBuilding: true
+    });
+  }
   done();
 });
 

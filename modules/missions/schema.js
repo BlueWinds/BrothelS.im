@@ -183,4 +183,20 @@ Mission.prototype.checkDay = function(done) {
       done();
     }
   }
+
+  var oldPotentialActions = Girl.prototype.potentialActions;
+  Girl.prototype.potentialActions = function(time) {
+    var actions = oldPotentialActions.call(this, time);
+    for (var _id in actions) {
+      if (!actions[_id].missionsDone) { continue; }
+      for (var mission in actions[_id].missionsDone) {
+        if (actions[_id].missionsDone[mission] && (!g.missionsDone || !g.missionsDone[mission])) {
+          delete actions[_id];
+        } else if (!actions[_id].missionsDone[mission] && g.missionsDone && g.missionsDone[mission]) {
+          delete actions[_id];
+        }
+      }
+    }
+    return actions;
+  };
 }) ();

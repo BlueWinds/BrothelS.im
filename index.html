@@ -391,13 +391,15 @@
           </div>
         </div>
         <div class="column pct-50 right center">
+          << var enabledCount = 0; >>
           << if (building.rooms.length < building._.maxRooms && !$.isEmptyObject(availableRooms)) { >>
             <select id='new-room'>
               << $.each(availableRooms, function(name, room) { >>
-                <option value="<<= name >>" title="<<= room.description >>">$<<= room.price >> - <<= name.capitalize() >></option>
+                << if (room.price <= g.money) { enabledCount += 1; } >>
+                <option value="<<= name >>" title="<<= room.description >>" <<= room.price > g.money ? "disabled" : "">>>$<<= room.price >> - <<= name.capitalize() >></option>
               << }) >>
             </select>
-            <button id="buy-room">Add Room</button>
+            <button id="buy-room" <<= enabledCount ? "" : "disabled">>>Add Room</button>
           << } >>
         </div>
         <div id="rooms" class="ui-helper-clearfix">
@@ -411,6 +413,9 @@
         <h3 class="center">
           <a id="buy-building">Buy Building</a>
         </h3>
+      << } >>
+      << if (buildings.length) { >>
+        <h3 class="center"><a id="sell-building">Sell Building</a></h3>
       << } >>
       << buildings.forEach(function(building) { >>
         <div class="ui-helper-clearfix no-cursor building" name="<<= building.name >>">
@@ -433,8 +438,8 @@
       << }) >>
     </div>
   </script>
-  <script id="buildings_buy_template" type="text/ejs-template">
-    <div id="buy-buildings">
+  <script id="buildings_manage_template" type="text/ejs-template">
+    <div id="manage-buildings">
       << buildings.forEach(function(building) { >>
         <div class="ui-helper-clearfix no-cursor building" name="<<= building.name >>">
           <div class="column pct-30">
@@ -450,7 +455,7 @@
             << }) >>
           </div>
           <div class="column pct-30 right">
-            <div><label>Price:</label><strong class="money">$<<= building.price() >></strong></div>
+            <div><label>Price:</label><strong class="money">$<<= building.price(action) >></strong></div>
             <div>
               <label>Daily:</label>
               <div class="daily-delta">
@@ -465,7 +470,7 @@
                 << }) >>
               </div>
             </div>
-            <button class="buy" name="<<= building.name >>">Buy</button>
+            <button class="manage" name="<<= building.name >>"><<= action >></button>
           </div>
         </div>
       << }) >>
@@ -542,7 +547,7 @@
             << actions.forEach(function(action) { >>
               <<
                 var option = action.options ? Object.keys(action.options)[0] : false;
-                if (girl.actions.time == action._id && girl.actions[time + "Option"]) {
+                if (girl.actions[time] == action._id && girl.actions[time + "Option"]) {
                   option = girl.actions[time + "Option"];
                 }
               >>

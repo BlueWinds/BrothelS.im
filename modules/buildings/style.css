@@ -15,7 +15,7 @@
   width: 4em;
 }
 
-#buy-buildings button {
+#manage-buildings button {
   display: block;
   margin: 1em auto;
 }
@@ -47,7 +47,7 @@
   width: 6em;
 }
 
-#buy-buildings .daily-delta {
+#manage-buildings .daily-delta {
   width: 3em;
 }
 
