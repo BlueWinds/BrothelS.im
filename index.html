@@ -302,7 +302,7 @@
           <strong class="money"><<- g.money < 0 ? "-$" + (-g.money) : "$" + g.money >></strong>
         </div>
         << if (g.moneyHistory.length > 5) { >>
-          <div class="bar-sparkline"><<- g.moneyHistory.join(",")>></div>
+          <div class="bar-sparkline"><<- g.moneyHistory.join(",") + "," + g.money >></div>
         << } >>
         << if (g.nextPayment()) { >>
           <div>
