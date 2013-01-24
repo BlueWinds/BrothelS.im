@@ -16,7 +16,7 @@ Events.thugRape = {
     {
       message: {
         group: '<<- girl.name >>',
-        image: '<<- girl.image("hard") >>',
+        image: '<<- girl.image("group") >>',
         label: 'Attacked by Thugs',
         text: "<<= girl.name >> was heading into the city to <<= action.label >> when a pot-bellied man stepped in front of her, blocking her way. She tried to go around wordlessly, but it was only then that she noticed her predicament - a narrow alley, and three more of his friends blocking her retreat. She opened her mouth to scream, but he was too fast, clamping a hand over her mouth.<br><br>She kicked at his groin and bit at his hand, but one of the other men wrapped strong arms around her knees, immobilizing her while another produced rope and bound her. It was an efficient job - all she could make was muffled moans around the gag, and squirm slightly as they tore her clothes to shreds. Her eyes watered at the size of the cocks presented before her face and pressed at her ass, but she shuddered in relief as one of the men produced a tube of lubrication. No one came to help her as, one after another, they bent her over a pile of crates and satisfied their lust. It took hours. The last man took some pity on <<= girl.name >>\'s tear-streaked and grimy face, and fingered her to orgasm while he fucked her."
       },

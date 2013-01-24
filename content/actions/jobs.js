@@ -285,7 +285,6 @@ Actions.Advertise = {
     if (this.option == 'Inn') {
       delta.money = Math.floor(context.girl.charisma / 2 + Math.random() * 50);
     }
-    console.log(delta.building);
     done(delta);
   },
   results: [{

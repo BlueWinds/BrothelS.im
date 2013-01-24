@@ -72,7 +72,7 @@ Event.get = function(context) {
     if (!done) {
       oldDoAction.call(this, results);
       return;
-    };
+    }
     var context = this.context();
     var event = Event.get(context);
     if (!event) {

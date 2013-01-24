@@ -144,7 +144,6 @@ Building.prototype.apply = function(stat, delta) {
 
 Building.prototype.price = function(action) {
   var cost = this.base().basePrice;
-  console.log(cost);
   this.rooms._accumulate('type').forEach(function(type) {
     cost += Rooms[type].price;
   });

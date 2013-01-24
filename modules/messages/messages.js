@@ -1,7 +1,6 @@
 e.GameUpgrade03.push(function(game, next) {
   delete game.messagesShown;
   var messages = game.messages;
-  console.log(messages);
   game.messages = [];
   for (var group in messages) {
     for (var i in messages[group]) {

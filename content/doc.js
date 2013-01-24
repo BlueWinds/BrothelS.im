@@ -56,8 +56,10 @@ Girls['Girl Name'] = {
     hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg"],
     // Anal penetration, gaping, or other ass fingering / fisting. As with hard, her + partner is preferred, but can potentially include a third.
     anal: ["Anal1.jpg", "Anal2.jpg"],
-    // Bondage, BDSM, extremely rough sex, or anything of that sort. Note that this does *not* include orgies or gangbangs - some of the older girls do include such images, but they'll be moved to their own "group" section shortly.
+    // Bondage, BDSM, extremely rough sex, or anything of that sort. Note that this does *not* include orgies or gangbangs - some of the older girls do include such images, but they'll be moved to the "group" section shortly.
     fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4.jpg"],
+    // Orgies, gangbangs, bukkakes and other group sex activities fit here. No, it's not going to be further sub-divided.
+    group: "Group.jpg",
     // Cleaning up around the house, maid outfits, holding a broom, or similar.
     cleaning: ["Cleaning1.jpg", "Cleaning2.jpg"],
     // Jogging, lifting weights, stretching, playing sports, etc.

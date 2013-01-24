@@ -109,9 +109,7 @@ Girl.prototype._compare = function(delta) {
   var stat, rule, new_d = $.extend(true, {}, delta);
   if (new_d.min) {
     if (new_d.min.specialRules) {
-      console.log(new_d.min.specialRules);
       for (rule in new_d.min.specialRules) {
-        console.log([rule, this.specialRules[rule], new_d.min.specialRules[rule]]);
         if ((this.specialRules[rule] || 0) < new_d.min.specialRules[rule]) {
           return this.name + ' does not have ' + rule + ' ' + new_d.min.specialRules[rule] + '.';
         }
