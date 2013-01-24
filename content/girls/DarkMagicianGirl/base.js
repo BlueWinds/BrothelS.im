@@ -66,12 +66,16 @@ Girls['Dark Magician Girl'] = {
       },
       results: [
         {
-          image: '/content/girls/DarkMagicianGirl/images/Exercise2.jpg',
+          message: {
+            image: '/content/girls/DarkMagicianGirl/images/Exercise2.jpg',
+            group: 'Dark Magician Girl',
+            label: 'Healing',
+            text: 'Dark Magician Girl drew upon her power to revitalize <<= action.option >>, restoring her energy (<span class="endurance delta">+<<= action.results[0].endurance >></span>, <span class="happiness delta">+<<= action.results[0].happiness >></span>).'
+          },
           girl: {
             endurance: -8,
             happiness: 2
-          },
-          message: 'Dark Magician Girl drew upon her power to revitalize <<= action.option >>, restoring her energy (<span class="endurance delta">+<<= action.results[0].endurance >></span>, <span class="happiness delta">+<<= action.results[0].happiness >></span>).'
+          }
         }
       ] // results
     } //healing
