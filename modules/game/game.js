@@ -1,12 +1,24 @@
-var g = {};
+var g;
 
 $.extend(e, {
-  GameRender: [],
   GameInit: [],
   GameNew: [],
+  GamePreRender: [],
+  GameRender: [],
   GamePreDay: [],
   GameNextDay: [],
-  GamePostDay: []
+  GamePostDay: [],
+  GameUpgrade03: [function(g, next) {
+    g._class = 'Game';
+    var list = localStorage.getObject('saved-games')._toArray();
+    list.push('saved-games', 'current-game');
+    for (var _id in localStorage) {
+      if (list.indexOf(_id) == -1) {
+        delete localStorage[_id];
+      }
+    }
+    next();
+  }]
 });
 
 T = function(string, type) {
@@ -20,11 +32,6 @@ T = function(string, type) {
 
 Game.fetishes = ['tentacles', 'rape'];
 
-Game.loadCurrent = function() {
-    name = localStorage.getItem('current-game');
-    Game.load(name);
-  };
-
 Game.load = function(name) {
   if (!name && name !== false) {
     name = localStorage.getItem('current-game');
@@ -36,16 +43,30 @@ Game.load = function(name) {
     Game.loadFromText(value);
   } else {
     $('#content').html($('#game_intro_template').html());
-    e.invokeAll('Autorender', function() {}, $('#content'));
+    e.invokeAll('Autorender', $('#content'), function() {});
     $('#save').addClass('disabled');
   }
 };
 
 Game.loadFromText = function(value) {
-  value = JSON.parse(value);
-  g = new Game(value);
-  $('#save').removeClass('disabled');
-  e.invokeAll('GameInit', g.render);
+  g = JSON.parse(value, function(key, value) {
+    if (value === null) { return; }
+    if (value._class && window[value._class]) {
+      return new window[value._class](value);
+    }
+    return value;
+  });
+  e.invokeAll('GameInit', function() {
+    if (!g.girls.Kirino._class) {
+      e.invokeAll('GameUpgrade03', g, function() {
+        Game.loadFromText(JSON.stringify(g));
+      });
+      return;
+    } else {
+      g.render();
+    }
+    $('#save').removeClass('disabled');
+  });
 };
 
 Game.save = function(name) {
@@ -58,7 +79,7 @@ Game.save = function(name) {
     g.name = name;
     g._id = S4() + S4() + S4();
   }
-  localStorage.setItem(g._id, g.toJSONString());
+  localStorage.setItem(g._id, JSON.stringify(g));
   var list = localStorage.getObject('saved-games') || {};
   list[name] = g._id;
   localStorage.setObject('saved-games', list);
@@ -85,14 +106,15 @@ Game.start = function(opt) {
     moneyHistory: []
   }, opt);
   g = new Game(opt);
-  e.invokeAll('GameNew', function() {
-    e.invokeAll('GameInit', g.render);
-  });
+  e.runSeries([
+    function(next) { e.invokeAll('GameNew', next); },
+    function(next) { e.invokeAll('GameInit', next); }
+  ], g.render);
 };
 
 e.Ready.push(function(done) {
   $('#header img').attr('title', 'Return to front page').click(function() {
-    Game.load(false);
+    Game.load();
   });
 
   $('#save').addClass('disabled');
@@ -104,14 +126,16 @@ e.Ready.push(function(done) {
     if ($(this).hasClass('disabled')) {
       return;
     }
-    var form = $(ejs.render($('#game_new_template').html()));
+    var form = $(ejs.render($('#game_new_template').html()).trim());
     $('#fetishes .checkbox').click(function() {
       $(this).toggleClass('checked');
     });
     $('button', form).click(function(event) {
       event.preventDefault();
       var game = {
-        fetishes: {}
+        fetishes: {},
+        skipIntro: $('#skip-intro').hasClass('checked'),
+        autosave: $('#autosave').hasClass('checked')
       };
       $('#fetishes .checkbox').each(function() {
         if ($(this).hasClass('checked')) {
@@ -132,12 +156,26 @@ e.Ready.push(function(done) {
     if ($(this).hasClass('disabled')) {
       return;
     }
-    var form = $($('#game_save_template').html());
+    var form = $(ejs.render($('#game_save_template').html(), {}).trim());
+    $('#fetishes .checkbox', form).click(function(event) {
+      var check = !$(this).hasClass('checked');
+      var fetish = $(this).attr('name');
+      if (check) {
+        g.fetishes[fetish] = true;
+      } else {
+        delete g.fetishes[fetish];
+      }
+    });
+    $('#autosave', form).click(function(event) {
+      var check = !$(this).hasClass('checked');
+      if (check) { g.autosave = true; }
+      else { delete g.autosave; }
+    });
     if (g.name) {
       $('#game-name', form).val(g.name);
     }
     $('#export-game', form).click(function(event) {
-      var textarea = $('<textarea>').text(g.toJSONString()).css('width', '15em').css('height', '10em');
+      var textarea = $('<textarea>').text(JSON.stringify(g)).css('width', '15em').css('height', '10em');
       $('<div>').append(textarea).dialog({
         title: 'Save the text below'
       }).css('overflow', 'auto');
@@ -163,7 +201,7 @@ e.Ready.push(function(done) {
     }
     var form = $(ejs.render($('#game_load_template').html(), {
       games: Game.list()
-    }));
+    }).trim());
     $('#delete-game', form).click(function(event) {
       event.preventDefault();
       var name = $('#game-name').val();
@@ -178,11 +216,13 @@ e.Ready.push(function(done) {
     $('#import-game', form).click(function(event) {
       event.preventDefault();
       var game = $('textarea', form).val();
-      Game.loadFromText(game);
-      form.dialog('close');
+      if (game) {
+        Game.loadFromText(game);
+        form.dialog('close');
+      }
       return false;
     });
-    $(form).submit(function(event) {
+    $('#load-game', form).click(function(event) {
       event.preventDefault();
       Game.load($('#game-name').val());
       form.dialog('close');
@@ -206,7 +246,7 @@ Game.getUserInput = function(text, image, options, done) {
     image: image,
     options: options
   };
-  var form = $(ejs.render($('#game_user_input_template').html(), context));
+  var form = $(ejs.render($('#game_user_input_template').html(), context).trim());
   $('button', form).click(function(event) {
     event.preventDefault();
     var value = $(this).text();
@@ -221,5 +261,5 @@ Game.getUserInput = function(text, image, options, done) {
     of: window,
     collision: 'none'
   });
-  e.invokeAll('Autorender', function() {}, form);
+  e.invokeAll('Autorender', form, function() {});
 };

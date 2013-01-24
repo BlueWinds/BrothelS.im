@@ -1,8 +1,6 @@
 Girls['Dark Magician Girl'] = {
   description: "<p>An inhabitant of a different dimension, Dark Magician Girl ended up stranded in our this world when a space-time anomaly devoured her and every one in the vicinity. Lost in an unknown land and without anyone she knew and could rely on, she decided to start looking for a job. Any job, really.</p>",
-  status: {
-    'For Hire': 1
-  },
+  status: 'For Hire',
   happiness: 0,
   endurance: 100,
   obedience: 60,
@@ -34,34 +32,45 @@ Girls['Dark Magician Girl'] = {
     naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg", "Naked4.jpg", "Naked5.jpg"],
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg"]
   },
-  actions: {
-    healing: {
+  Actions: {
+    // TODO: Add Talk results
+    Talk: { },
+    Healing: {
       label: 'Healing',
       group: 'Chores',
-      mins: {
-        intelligence: 50,
-        endurance: 5
-      },
-      description: 'The Dark Magician Girl will use her magic to heal another girl working for you. The girl with the least endurance (except DMG herself) will gain quite a bit of endurance.',
+      description: 'The Dark Magician Girl will use her magic to heal another girl working for you. The girl will gain quite a bit of endurance.',
       // She can't heal if she's the only hired girl.
-      disabled: function(time) { return g.girls.Cfilter('status', 'Hired').length == 1; },
+      conditions: {
+        min: {
+          girls: 2
+        }
+      },
+      enableCondtions: {
+        girl: {
+          min: {
+            intelligence: 50,
+            endurance: 10
+          }
+        }
+      },
+      options: 'girls',
+      variants: function(context, done) {
+        var delta = {
+          happiness: 2,
+          endurance: 10
+        };
+        delta.endurance += Math.floor(Math.random() * 21);
+        g.girls[this.option].apply(delta);
+        done(this.results[0]);
+      },
       results: [
         {
           image: '/content/girls/DarkMagicianGirl/images/Exercise2.jpg',
-          delta: function(time, action) {
-            var girls = g.girls.Cfilter('status', 'Hired').Csort('endurance');
-            action.targetGirl = girls[0] == this ? girls[1] : girls[0];
-            action.targetDelta = {
-              endurance: Math.floor(Math.random() * 21) + 10,
-              happiness: 2
-            };
-            action.targetGirl.apply(action.targetDelta);
-            return {
-              endurance: -5,
-              happiness: 0.5
-            };
+          girl: {
+            endurance: -8,
+            happiness: 2
           },
-          message: 'Dark Magician Girl drew upon her power to revitalize <<= action.targetGirl.name >>, restoring her energy (<span class="endurance delta">+<<= action.targetDelta.endurance >></span>, <span class="happiness delta">+<<= action.targetDelta.happiness >></span>).'
+          message: 'Dark Magician Girl drew upon her power to revitalize <<= action.option >>, restoring her energy (<span class="endurance delta">+<<= action.results[0].endurance >></span>, <span class="happiness delta">+<<= action.results[0].happiness >></span>).'
         }
       ] // results
     } //healing

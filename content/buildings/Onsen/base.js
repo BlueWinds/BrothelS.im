@@ -1,5 +1,4 @@
 Buildings.Onsen = {
-  name: 'Onsen',
   image: 'content/buildings/Onsen/Base.jpg',
   clean: 25,
   reputation: 0,
@@ -9,24 +8,27 @@ Buildings.Onsen = {
     { type: 'bedroom' }
   ],
   maxRooms: 6,
-  baseCost: 4000,
+  basePrice: 4000,
   daily: {
-    clean: -5,
-    money: -60,
-    reputation: -1
-  },
-  cleanEffect: {
     breakpoint: 50,
     above: {
-      endurance: 0.1,
-      money: 5,
-      charisma: 0.01,
-      clean: -0.1,
-      modesty: -0.015
+      money: 150,
+      clean: -12,
+      reputation: -0.5,
+      girl: {
+        endurance: 5,
+        charisma: 0.3,
+        modesty: -0.7
+      }
     },
     below: {
-      happiness: -0.2,
-      endurance: -0.1
+      clean: -7,
+      money: -40,
+      reputation: -1.3,
+      girl: {
+        happiness: -6,
+        endurance: -5
+      }
     },
     clean: 'The Onsen is in good shape, and the girls are happy to take advantage of the hot spring to relax after work. A few customers come to soak in the baths even without your girls\' attention, paying a modest fee for the privilage.',
     dirty: 'The Onsen is in poor condition - algea covers some of the baths, while others remain empty. A can in one corner to catches drips when it rains from a leak in the roof.'

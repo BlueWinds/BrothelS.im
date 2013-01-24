@@ -16,7 +16,7 @@ body {
 #header-wrapper {
   background: url("../content/miscImages/header_sky.jpg") repeat scroll 50% 0 transparent;
   height: 100px;
-  margin: 0;
+  margin: -15px 0 -25px;
   position: relative;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -54,11 +54,13 @@ body {
 }
 
 #menu {
-  height: 40px;
+  height: 30px;
   background: #351510;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#1A1A1A');
   background: -webkit-gradient(linear, left top, left bottom, from(#666666), to(#1A1A1A));
   background: -moz-linear-gradient(center top , #666666, #1A1A1A);
+  position: absolute;
+  width: 100%;
 }
 
 .column {
@@ -268,12 +270,15 @@ li:focus {
   outline: none;
 }
 
-#new-game label {
-  width: 6em;
+#new-game-form label {
+  min-width: 6em;
 }
 
-#save-game label {
-  width: 3em;
+#fetishes > div {
+  margin-left: 0.5em;
+}
+#new-game-form label, #save-game-form label {
+  display: block;
 }
 
 #top-right {

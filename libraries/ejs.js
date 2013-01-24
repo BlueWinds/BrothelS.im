@@ -285,6 +285,7 @@ var compile = exports.compile = function(str, options){
 exports.render = function(str, options){
   var fn
     , options = options || {};
+//   console.log(str);
 
   if (options.cache) {
     if (options.filename) {

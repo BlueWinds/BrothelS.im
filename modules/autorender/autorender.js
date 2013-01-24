@@ -1,6 +1,4 @@
-Globalize.cultures.en.numberFormat.currency.decimals = 0;
-
-e.Autorender = e.Autorender || [];
+e.Autorender = [];
 e.Autorender.push(function(element, done) {
   $('button, a.button', element).button();
   $(element).tooltip({
@@ -125,14 +123,15 @@ e.Autorender.push(function(element, done) {
 });
 
 $(function() {
+  Globalize.cultures.en.numberFormat.currency.decimals = 0;
   $.ui.dialog.prototype.options.show = 'fade';
   $.ui.dialog.prototype.options.hide = 'fade';
   $.ui.dialog.prototype.options.modal = true;
   $.ui.dialog.prototype.options.width = 'auto';
   $.ui.dialog.prototype.options.resizable = false;
   $.ui.dialog.prototype.options.position = {
-    my: 'center center',
-    at: 'center center',
+    my: 'top center',
+    at: 'top center',
     of: window,
     collision: 'fit'
   };
@@ -140,7 +139,7 @@ $(function() {
   $(document).on('dialogclose', function(event) {
     $(event.target).dialog('destroy').remove();
   }).on("dialogcreate", function(event, ui) {
-    e.invokeAll('Autorender', function() {}, event.target);
+    e.invokeAll('Autorender', event.target);
   });
   $(document).keydown(function(event) {
     if (event.keyCode == 37) {

@@ -1,61 +1,18 @@
-Creating new Girls
+Adding new content
 =============
 
-First, download and extract the game to your local drive. See that "zip" button at the top-left of this page (if you're reading this from GitHub)? Yeah, use that.
+First, download and extract the game to your local drive. See that "zip" button at the top-left of this page (if you're reading this from GitHub)? Yeah, use that. If you're not reading this on Github, you've probably already finished this step. ;)
 
-Now, the "content" folder is where you'll be doing all of your work. Open up content/girls, and create a new folder, giving it the first name of the girl you want to create. Let's say, for example, you want to create Slut1.
+Now, what type of content are you creating? Girls go under content/girls, Missions under content/missions, Events... you get the picture. Girls and Buildings require a folder to themselves (content/girls/Kirino, for example), inside of which is base.js. Events, Missions and Actions can just go in the matching folder (content/missions, content/events, etc.).
 
-Create an "images" folder inside Slut1. That's where you'll put all your pictures.
+Next, open up a file of the same type as the item you want to create. **The best** way to create new things is to tweak old ones - makes it less likely that you'll forget an important line. Copy the text from your example file into the new javascript file you've just created and start editing.
 
-Copy base.js from the Sophitia folder into Slut1. That particular file is designed as a tutorial - Sophitia is a vanilla girl, but **all** available options are documented in her file. Open up base.js and start editing.
+Documentation is primarily found in content/doc.js - it includes information about all available options for every content type. Girls, Buildings, Events, Missions, etc. - it's all in there, though not organized all that well. This stuff really needs its own wiki or something. ^^;; The documentation is best referred to when you're confused, rather than read straight through, and it's used even better in conjunction with examining am already-functioning piece of content with functionality similar to what you're trying to create.
 
-See all those lines starting in "//"? Those are comments, if you hadn't guessed. They explain things. When you create your own girl, **remove all the comments from base.js**. I will not upload girls that still contain them, and it's not my job to strip them out for you.
+For girls and buildings, Kirino and the Theater are nice, vanilla examples. For an idea of a fully-functioning mission tree, take a look inside Sakuya's base.js. tentacleAttack.js is a good sample event file to look at, while training.js is a good place to start for actions.
 
-Check your file's syntax! I recommend something like http://javascriptlint.com/online_lint.php - just copy-paste the whole contents of the file into that box, and it will point out any problems. Smokey the Bear: Only YOU can prevent swirly screens of death.
-
-**THIS STEP HAS CHANGED**
-When you're done editing base.js and adding all the images you want to the images folder, there's just one more step before you can test the girl. Open up "index.html" in a text editor, and head to around line 30. See the list of girls? Copy one of those lines and add it to the bottom of the list, changing the src attribute so that it points to the base.js file you created earlier.
-
-As a general rule of thumb, resize images so they're less than 150kb, and 600x600 or smaller. I want to keep the game size down! Hi-res pictures do no good when they're jammed into one corner of the screen. ;)
-
-Load up the game in your browser. Tada! Girls created after the start of the game will show up immediately, with whatever status they're supposed to have.
-
-Please test your girl before submitting her to me or on the forum - try to trigger all of her images, and Streetwalk a whole bunch to make sure all the images are loading properly. Broken image links are no fun.
-
-Creating Buildings and Rooms
-=============
-
-This assumes you're familiar with creating girls. It's not hard, but I don't want to have to repeat myself. ^^;; Adding new room types is relatively simple - open up content/buildings/buildings.js and take a look at the dungeon. Rooms don't do anything by themselves though (yet - they will eventually) - they rely on events or actions for their effects.
-
-Create a new folder inside content/buildings, named after the one you want to create, and add your building's image (unlike girls, they only have one right now).
-
-Copy the base.js file into that folder from the Theater. Open it up and start editing. It's very well commented, and explains all possible options.
-
-Check your file's syntax! I recommend something like http://javascriptlint.com/online_lint.php - just copy-paste the whole contents of the file into that box, and it will point out any problems. Smokey the Bear: Only YOU can prevent swirly screens of death.
-
-**THIS STEP HAS CHANGED**
-When you're done editing base.js and adding all the images you want to the images folder, there's just one more step before you can test the girl. Open up "index.html" in a text editor, and head to around line 30. See the list of girls? Copy one of those lines and add it to the bottom of the list, changing the src attribute so that it points to the base.js file you created earlier.
-
-Just like creating a girl, open up "index.html" and add your new base.js file list of buildings - this list starts at around line 42. Tada! It will show up next time you load the game (including in games already in progress).
-
-Creating Events
-=============
-
-This guide assumes you're familiar with creating girls. It's not hard, but I don't want to have to repeat myself. ^^;;
-
-Unlike buildings and girls, events don't need their own folder, just a single file. In content/events, copy tentacleAttack.js and give the copy a new name - pick a descriptive name for the event(s) you want to add.
-
-Open up your new something.js file, and read through the documentation. The tentacleAttack file is very well documented, and contains all options, even the ones it doesn't use.
-
-Check your file's syntax! I recommend something like http://javascriptlint.com/online_lint.php - just copy-paste the whole contents of the file into that box, and it will point out any problems. Smokey the Bear: Only YOU can prevent swirly screens of death.
-
-**This step has changed**
-When you're done editing your events file, open up (you probably guessed it) index.html, and add your file to the list (Events are around line 48). Save it. Reload the page. Tada! If you didn't break anything, your new events are present in the game.
-
-Creating Actions
-=============
-
-Open up content/actions/Simple.js - the Lockdown action is well commented, and should explain everything you need to know. You can either add your action to an existing file, by copying an existing action and using it as a base, or create a new file inside the actions folder. If you create a new file, you'll have to add it to index.html - this isn't hard, just copy and adjust one of the existing action <script> stags. They start around line 51 of index.html.
+**IMPORTANT**
+When you're done editing your javascript file, open up "index.html". See around line 56, where it says Actions? You have to add your new file to the approriate place. Copy one of those lines and add it to the bottom of the list, changing the src attribute so that it points to the file you created. If you forget this step, then the game won't load your file. An easy mistake to make.
 
 License
 =============

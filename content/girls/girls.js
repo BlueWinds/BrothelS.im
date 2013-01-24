@@ -4,6 +4,7 @@ Girl.config = {
     above: 0.1,
     below: 0.2
   },
+  payRatio: 0.05,
   hirePrice: {
     base: 200,
     happiness: 0,

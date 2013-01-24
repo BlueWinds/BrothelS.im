@@ -1,23 +1,33 @@
-var Girl = function(obj) {
+function Girl(obj) {
+  var girl = this;
+  var base;
+  this._class = 'Girl';
+  if (typeof(obj) == 'string') {
+    base = Girls[obj];
+    obj = {
+      name: base.name,
+      status: base.status,
+      specialRules: $.extend(true, {}, base.specialRules),
+      actions: {}
+    };
+  }
   $.extend(this, obj);
-  this._ = Girls[this.name];
+  base = this.base();
 
   // Add missing stats from base
-  for (var i in Girl.stats) {
-    var stat = Girl.stats[i];
-    if (this[stat] === undefined) {
-      this[stat] = this._[stat] !== undefined ? this._[stat] : 30;
+  Girl.stats.forEach(function(stat) {
+    if (girl[stat] === undefined) {
+      girl[stat] = base[stat] !== undefined ? base[stat] : 30;
     }
-  }
-  for (i in Girl.sexStats) {
-    var sex = Girl.sexStats[i];
-    if (this[sex] === undefined) {
-      this[sex] = (this._[sex] !== undefined ? this._[sex] : 30);
+  });
+  Girl.sexStats.forEach(function(sex) {
+    if (girl[sex] === undefined) {
+      girl[sex] = (base[sex] !== undefined ? base[sex] : 30);
     }
-  }
+  });
+  if (this.actions.pay === undefined) { this.actions.pay = Math.round(this.desiredPay() / 10) * 10; }
   e.invokeAllSync('GirlNew', this);
-  return this;
-};
+}
 
 Girl.stats = [
   'happiness', 'endurance', 'obedience', 'modesty', 'charisma', 'constitution', 'intelligence'
@@ -26,40 +36,15 @@ Girl.stats = [
 Girl.sex = ['soft', 'hard', 'anal', 'fetish'];
 Girl.sexStats = ['soft libido', 'soft experience', 'hard libido', 'hard experience', 'anal libido', 'anal experience', 'fetish libido', 'fetish experience'];
 
-Girl.create = function(base) {
-  var obj = {
-    name: base.name,
-    actions: {},
-    specialRules: base.specialRules || {}
-  };
-  var girl = new Girl(obj);
-  girl.status = girl.randomStatus();
-  if (girl.status == 'Hired') {
-    girl.actions.pay = girl.desiredPay();
-    girl.hireDay = g.day;
-  }
-  return girl;
-};
-
-Girl.prototype.randomStatus = function() {
-  if (this.status == 'Hired') { return 'Hired'; }
-  if (this.status == 'Gone') { return 'Gone'; }
-  var status = this._.status;
-  if (typeof(status) == 'String') { return status; }
-  if (this.status && Math.random() < (this._.stayChance || 0.5)) {
-    return this.status;
-  }
-  var d = Math.random();
-  for (var i in status) {
-    if (d <= status[i]) {
-      return i;
-    }
-    d -= status[i];
-  }
-  return 'Town';
+Girl.prototype.base = function() {
+  return Girls[this.name];
 };
 
 Girl.prototype.apply = function(stat, delta) {
+  if (stat == 'money') {
+    g.money += Math.floor(delta);
+    return;
+  }
   if (stat == 'specialRules') {
     var girl = this;
     $.each(delta, function(key, value) {
@@ -67,7 +52,11 @@ Girl.prototype.apply = function(stat, delta) {
         value.call(girl);
         return;
       }
-      girl.specialRules[key] = (girl.specialRules[key] || 0) + value;
+      if (value === false) {
+        delete girl.specialRules[key];
+      } else {
+        girl.specialRules[key] = (girl.specialRules[key] || 0) + value;
+      }
     });
     return;
   }
@@ -85,12 +74,11 @@ Girl.prototype.apply = function(stat, delta) {
         } else {
           dependency = $.extend({}, dependency);
         }
-        dependency.Cmultiply(delta);
+        dependency._multiply(delta);
         if (dependency[stat]) {
           delta += dependency[stat];
           delete dependency[stat];
         }
-        this.apply(dependency);
       }
     }
     if (stat.indexOf(' experience') != -1) {
@@ -99,33 +87,70 @@ Girl.prototype.apply = function(stat, delta) {
     if (delta % 1) {
       delta = (Math.random() > delta % 1) ? Math.floor(delta) : Math.ceil(delta);
     }
-    if (stat == 'money') {
-      g.money += delta;
-      return;
-    }
     this[stat] += delta;
     this[stat] = Math.floor(Math.max(0, Math.min(100, this[stat])));
     return;
   }
   for (var key in stat) {
-    if (Girl.stats.indexOf(key) == -1 && key != 'money' && key != 'specialRules') {
-      if (Girl.sexStats.indexOf(key) == -1) {
-        continue;
-      }
-    }
     this.apply(key, stat[key]);
   }
 };
 
+Girl.prototype.compare = function(delta, explain) {
+  var result = this._compare(delta);
+  // If !explain, then we return a boolean - does it match?
+  // If explain, then we return a string saying *why* it doesn't match (or false if it does).
+  return explain ? result : !result;
+};
+
+Girl.prototype._compare = function(delta) {
+  if (delta.name && this.name != delta.name) { return this.name + ' is not ' + delta.name; }
+  if (delta.status && this.status != delta.status) { return this.name + ' is not ' + delta.status; }
+  var stat, rule, new_d = $.extend(true, {}, delta);
+  if (new_d.min) {
+    if (new_d.min.specialRules) {
+      console.log(new_d.min.specialRules);
+      for (rule in new_d.min.specialRules) {
+        console.log([rule, this.specialRules[rule], new_d.min.specialRules[rule]]);
+        if ((this.specialRules[rule] || 0) < new_d.min.specialRules[rule]) {
+          return this.name + ' does not have ' + rule + ' ' + new_d.min.specialRules[rule] + '.';
+        }
+      }
+      delete new_d.min.specialRules;
+    }
+    for (stat in new_d.min) {
+      if (this[stat] < new_d.min[stat]) {
+        return this.name + ' does not have ' + T(stat) + ' ' + new_d.min[stat];
+      }
+    }
+  }
+  if (new_d.max) {
+    if (new_d.max.specialRules) {
+      for (rule in new_d.max.specialRules) {
+        if ((this.specialRules[rule] || 0) > new_d.max.specialRules[rule]) {
+          return this.name + ' does not have ' + new_d.max.specialRules[rule] + ' ' + rule + ' or less.';
+        }
+      }
+    }
+    delete new_d.max.specialRules;
+    for (stat in new_d.max) {
+      if (this[stat] > new_d.max[stat]) {
+        return this.name + ' does not have ' + T(stat) + ' ' + new_d.max[stat] + ' or less.';
+      }
+    }
+  }
+  return false;
+};
+
 Girl.prototype.desiredPay = function() {
-  var pay = Math.floor(this.hirePrice(50) / 20);
+  var pay = this.hirePrice(50) * Girl.config.payRatio;
   if (this.intelligence < 20 && this.get('libido') > 50 ) {
     pay *= (this.intelligence / 40) + this.get('libido') / 100;
   }
   if (this.specialRules.payRatio !== undefined) {
     pay *= this.specialRules.payRatio;
   }
-  return pay;
+  return Math.floor(pay);
 };
 
 Girl.prototype.hirePrice = function(happiness) {
@@ -145,12 +170,12 @@ Girl.prototype.hirePrice = function(happiness) {
 };
 
 Girl.prototype.image = function(type) {
-  var img = this._.images[type];
-  if (!img) { img = this._.images.base; }
+  var img = this.base().images[type];
+  if (!img) { img = this.base().images.base; }
   if (typeof(img) == 'object') {
     img = Math.choice(img);
   }
-  img = this._.images.basePath + '/' + img;
+  img = this.base().images.basePath + '/' + img;
   return img;
 };
 
@@ -187,7 +212,7 @@ Girl.prototype.hire = function() {
   this.status = 'Hired';
   this.endurance = 100;
   this.happiness = Girl.config.startHappiness;
-  this.actions.pay = this.desiredPay();
+  this.actions.pay = Math.round(this.desiredPay() / 10) * 10;
   this.hireDay = g.day;
 };
 
@@ -221,13 +246,24 @@ Girl.prototype.get = function(stat) {
   return this[stat];
 };
 
-Game.getResults = function(time, item, girl, done) {
-  if (typeof(item.variants) == 'function') {
-    item.variants.call(girl, time, item, function(i) {
-      done(item.results[i]);
-    });
-  } else {
-    var i = Math.weightedRandom(item.variants || [1]);
-    done(item.results[i]);
+Girl.prototype.parseConditions = function(conditions) {
+  var old_int;
+  for (var cond in {min: 1, max: 1}) {
+    if (conditions[cond]) {
+      for (var stat in conditions[cond]) {
+        if (stat == 'specialRules') {
+          for (var rule in conditions[cond].specialRules) {
+            old_int = parseInt(conditions[cond].specialRules[rule], 10);
+            old_int += this.specialRules[rule] || 0;
+            conditions[cond].specialRules[rule] = old_int;
+          }
+        } else if (typeof(conditions[cond][stat]) == 'string') {
+          old_int = parseInt(conditions[cond][stat], 10);
+          conditions[cond][stat] = this[stat] + old_int;
+          conditions[cond][stat] = Math.min(100, Math.max(0, conditions[cond][stat]));
+        }
+      }
+    }
   }
+  return conditions;
 };

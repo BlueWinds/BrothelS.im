@@ -1,4 +1,6 @@
 var Game = function(obj) {
+  g = this;
+  this._class = 'Game';
   // Update old fetish settings
   if (obj.tentacles !== undefined) {
     obj.fetishes = { tentacles: obj.tentacles };
@@ -13,24 +15,23 @@ var Game = function(obj) {
 
 Game.prototype.nextPayment = function() {
   if (this.day >= Game.config.gameLength) { return false; }
-  var pl = Game.config.paymentLength;
+  var pl = Game.config.gameLength / Game.config.payments.length;
   var day = Math.floor(this.day / pl) * pl + pl;
-  var increments = Game.config.gameLength / pl;
-  var increment_size = Game.config.loan / (increments + 1) / increments * 2;
-  var amount = increment_size * day / pl;
-  return {day: day, amount: Math.round(amount)};
+  return {
+    day: day,
+    amount: Game.config.payments[day / pl]
+  };
 };
 
 Game.prototype.render = function() {
-  $('#content').html(ejs.render($('#game_view_template').html(), {
-    g: g,
-    gameLength: Game.config.gameLength
-  }));
-  $('#next').click(function() {
-    g.nextTurn();
-  });
-  e.invokeAll('GameRender', function() {
-    e.invokeAll('Autorender', function() {}, $('#content'));
+  e.invokeAll('GamePreRender', function() {
+    $('#content').html(ejs.render($('#game_view_template').html()));
+    $('#next').click(function() {
+      g.nextTurn();
+    });
+    e.invokeAll('GameRender', function() {
+      e.invokeAll('Autorender', $('#content'));
+    });
   });
 };
 
@@ -39,27 +40,23 @@ Game.prototype.nextTurn = function() {
   if (this.moneyHistory.length > Game.config.moneyHistoryLength) {
     this.moneyHistory = this.moneyHistory.slice(this.moneyHistory.length - Game.config.moneyHistoryLength);
   }
-  var game = this;
-  e.invokeAll('GamePreDay', function() {
-    e.invokeAll('GameNextDay', function() {
-      var payment = game.nextPayment();
-      game.day += 1;
-      var done = function() {
-        if (payment && game.day == payment.day) {
-          game.money -= payment.amount;
-        }
-        game.render();
-      };
-      e.invokeAll('GamePostDay', done);
-    });
-  });
-};
-
-Game.prototype.toJSONString = function() {
-  return JSON.stringify(g, function(key, val) {
-    if (key == '_') {
-      return undefined;
+  e.runSeries([
+    function(next) { e.invokeAll('GamePreDay', next); },
+    function(next) { e.invokeAll('GameNextDay', next); },
+    function(next) {
+      var payment = g.nextPayment();
+      g.day += 1;
+      if (payment && g.day == payment.day) {
+        g.money -= payment.amount;
+      }
+      next();
+    },
+    function(next) { e.invokeAll('GamePostDay', next); },
+    function(next) {
+      if (g.autosave && g.day % 3 === 0) {
+        Game.save('Autosave');
+      }
+      next();
     }
-    return val;
-  });
+  ], g.render);
 };

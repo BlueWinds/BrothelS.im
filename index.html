@@ -11,11 +11,10 @@
   <script src="libraries/ejs.js"></script>
   <script src="libraries/namegen.js"></script>
   <script src="libraries/jquery.sparkline.js"></script>
-  <script src="libraries/jquery.sparkline.js"></script>
 
   <link href="modules/style.css" type="text/css" rel="stylesheet">
-  <script src="modules/core.js"></script>
   <link href="modules/autorender/autorender.css" type="text/css" rel="stylesheet">
+  <script src="modules/core.js"></script>
   <script src="modules/autorender/autorender.js"></script>
   <script src="modules/game/schema.js"></script>
   <script src="modules/game/game.js"></script>
@@ -23,15 +22,44 @@
   <link href="modules/messages/messages.css" type="text/css" rel="stylesheet">
   <script src="modules/messages/messages.js"></script>
 
-  <!-- Girls !-->
+  <!-- Girl core files -->
   <link href="modules/girls/style.css" type="text/css" rel="stylesheet">
   <script src="modules/girls/schema.js"></script>
   <script src="modules/girls/girls.js"></script>
   <script src="content/girls/girls.js"></script>
+
+  <!-- Building core files -->
+  <link href="modules/buildings/style.css" type="text/css" rel="stylesheet">
+  <script src="modules/buildings/schema.js"></script>
+  <script src="modules/buildings/rooms.js"></script>
+  <script src="modules/buildings/buildings.js"></script>
+  <script src="content/buildings/buildings.js"></script>
+  <script src="content/buildings/rooms.js"></script>
+
+  <!-- Mission core files -->
+  <link href="modules/missions/style.css" type="text/css" rel="stylesheet">
+  <script src="modules/missions/resolvable.js"></script>
+  <script src="modules/missions/schema.js"></script>
+  <script src="modules/missions/missions.js"></script>
+
+  <!-- Action core files -->
   <link href="modules/actions/style.css" type="text/css" rel="stylesheet">
   <script src="modules/actions/schema.js"></script>
   <script src="modules/actions/actions.js"></script>
 
+  <!-- Misc modules -->
+  <script src="modules/events/events.js"></script>
+  <script src="modules/randomPerson/randomPerson.js"></script>
+  <script src="content/randomPerson/randomPerson.js"></script>
+  <script src="modules/owner/owner.js"></script>
+
+  <!-- Actions -->
+  <script src="content/actions/chores.js"></script>
+  <script src="content/actions/jobs.js"></script>
+  <script src="content/actions/training.js"></script>
+  <script src="content/actions/specialParty.js"></script>
+
+  <!-- Girls -->
   <script src="content/girls/Kirino/base.js"></script>
   <script src="content/girls/Sophitia/base.js"></script>
   <script src="content/girls/Sakuya/base.js"></script>
@@ -39,46 +67,24 @@
   <script src="content/girls/Yuna/base.js"></script>
   <script src="content/girls/Jill/base.js"></script>
 
-  <!-- Buildings !-->
-  <link href="modules/buildings/style.css" type="text/css" rel="stylesheet">
-  <script src="modules/buildings/schema.js"></script>
-  <script src="modules/buildings/buildings.js"></script>
-  <script src="modules/buildings/rooms.js"></script>
-  <script src="content/buildings/buildings.js"></script>
-
+  <!-- Buildings -->
   <script src="content/buildings/Onsen/base.js"></script>
   <script src="content/buildings/Theater/base.js"></script>
 
-  <!-- Missions !-->
-  <link href="modules/missions/style.css" type="text/css" rel="stylesheet">
-  <script src="modules/missions/schema.js"></script>
-  <script src="modules/missions/missions.js"></script>
-
+  <!-- Missions -->
   <script src="content/missions/intro.js"></script>
   <script src="content/missions/specialParty.js"></script>
   <script src="content/missions/tentacleAttacks.js"></script>
+  <script src="content/missions/avengeRape.js"></script>
 
-  <!-- Events !-->
-  <script src="modules/events/events.js"></script>
 
-  <script src="content/events/tentacleAttack.js"></script>
-  <script src="content/events/rape.js"></script>
-
-  <!-- Actions !-->
-  <script src="content/actions/specialParty.js"></script>
-  <script src="content/actions/Prostitution.js"></script>
-  <script src="content/actions/Schools.js"></script>
-  <script src="content/actions/Simple.js"></script>
-  <script src="content/actions/Shows.js"></script>
-
-  <!-- Misc modules !-->
-  <script src="modules/randomPerson/randomPerson.js"></script>
-  <script src="content/randomPerson/randomPerson.js"></script>
-
+  <!-- Misc files -->
   <script src="modules/prostitution/prostitution.js"></script>
   <script src="content/prostitution.js"></script>
 
-  <script src="modules/owner/owner.js"></script>
+  <!-- Events !-->
+  <script src="content/events/tentacleAttack.js"></script>
+  <script src="content/events/rape.js"></script>
 
   <script>
     $(function() {
@@ -105,51 +111,52 @@
     </div>
   </div>
   <div id="error"></div>
+  <script id="render_delta_template" type="text/ejs-template">
+    << $.each(delta, function(stat, value) {
+      var text;
+      if (typeof(value) == 'object') {
+        text = ejs.render($('#render_delta_template').html(), { delta: value });
+      } else if (stat == 'money') {
+        text = value < 0 ? '-$' + (-value) : '+$' + value;
+        stat += ' delta';
+      } else {
+        text = value < 0 ? value : '+' + value;
+        stat += ' delta';
+      } >>
+      <span class="<<- stat >>"><<- text >></span>
+    << }) >>
+  </script>
   <script id="messages_list_template" type="text/ejs-template">
-    << function renderDelta(delta) { >>
-      <div class="message-delta">
-        << $.each(delta, function(stat, value) {
-          var text;
-          if (stat == 'money') {
-            text = value < 0 ? '-$' + (-value) : '+$' + value;
-          } else {
-            text = value < 0 ? value : '+' + value;
-          } >>
-          <span class="delta <<= stat >>"><<= text >></span>
-        << }) >>
-      </div>
-    << } >>
-
     <div class="vertical-tabs navigable" id="messages">
       <ul>
-        << var i = 0 >>
-        << for (var subject in messages) { >>
-          << i++ >>
+        << for (var i in groups) { >>
           <li>
-            <a href="#message-tab-<<= i >>"><<= subject >></a>
+            <a href="#message-tab-<<- i >>"><<- groups[i] >></a>
           </li>
         << } >>
       </ul>
-      << i = 0 >>
-      << $.each(messages, function(subject, sub_messages) { >>
-        << i++ >>
+      << for (i in groups) { >>
         << var time = '' >>
-        <div id="message-tab-<<= i >>" class="accordion"><< sub_messages.forEach(function(message) { >>
-          << var text = message.type >>
+        <div id="message-tab-<<- i >>" class="accordion"><< messages[groups[i]]._sort("weight").forEach( function(message) { >>
+          << var text = message.label >>
           << if (message.time && message.time != time) {
               time = message.time;
               text = time.capitalize() + ' - ' + text;
           } >>
           <h3><<- text >></h3>
-          <div class="message ui-helper-clearfix <<= message.text.length > 300 ? 'long' : '' >>">
-            <img src="<<= message.image >>">
-            << if (message.delta && !$.isEmptyObject(message.delta)) { renderDelta(message.delta); } >>
+          <div class="message ui-helper-clearfix <<- message.text.length > 300 ? 'long' : '' >>">
+            <img src="<<- message.image >>">
+            << if (message.delta && !$.isEmptyObject(message.delta)) { >>
+              <div class="message-delta">
+                <<- ejs.render($('#render_delta_template').html(), { delta: message.delta }) >>
+              </div>
+            << } >>
             <div class="message-content">
               <<- message.text >>
             </div>
           </div>
         << }) >></div>
-      << }) >>
+      << } >>
     </div>
   </script>
   <script id="girls_hire_template" type="text/ejs-template">
@@ -157,18 +164,18 @@
       <ul>
         << for(var i in girls) { >>
           <li>
-            <a href="#hire-tab-<<= i >>"><<= girls[i].name >></a>
+            <a href="#hire-tab-<<- i >>"><<- girls[i].name >></a>
           </li>
         << } >>
       </ul>
       << i = 0 >>
       << girls.forEach(function(girl) { >>
-        <div id="hire-tab-<<= i >>" class="no-cursor girl" name="<<= girl.name >>">
+        <div id="hire-tab-<<- i >>" class="no-cursor girl" name="<<- girl.name >>">
           <div class="column pct-30">
-            <img src="<<= girl.image("base") >>" title="<<= girl._.description >>">
+            <img src="<<- girl.image("base") >>" title="<<= girl.base().description >>">
           </div>
           <div class="column pct-40 center">
-            <h6><<= girl.name >></h6>
+            <h6><<- girl.name >></h6>
             <<
               i++;
               var stats = [], experience = [], libido = [];
@@ -186,9 +193,9 @@
             <div><<- experience.join(" | ") >></div>
           </div>
           <div class="column pct-30">
-            <div><label>Up Front:</label><strong class="money">$<<= girl.hirePrice() >></strong></div>
-            <div><label>Daily:</label><strong class="money">$<<= girl.desiredPay() >></strong></div>
-            <button class="hire" name="<<= girl.name >>">Hire</button>
+            <div><label>Up Front:</label><strong class="money">$<<- girl.hirePrice() >></strong></div>
+            <div><label>Daily:</label><strong class="money">$<<- girl.desiredPay() >></strong></div>
+            <button class="hire" name="<<- girl.name >>">Hire</button>
           </div>
         </div>
       << }) >>
@@ -202,12 +209,12 @@
         </h3>
       << } >>
       << girls.forEach(function(girl) { >>
-        <div class="ui-helper-clearfix no-cursor girl" name="<<= girl.name >>">
+        <div class="ui-helper-clearfix no-cursor girl" name="<<- girl.name >>">
           <div class="column pct-20 left">
-            <img src="<<= girl.image('base') >>">
+            <img src="<<- girl.image('base') >>">
           </div>
           <div class="column pct-40 center middle">
-            <h6><<= girl.name >></h6>
+            <h6><<- girl.name >></h6>
             <div><<- girl.S("endurance") >> | <<- girl.S("happiness") >></div>
             <<
               var stats = [];
@@ -222,17 +229,31 @@
             </div>
           </div>
           <div class="column pct-40 right">
-            <div name="morning">Morning: <strong><<= girl.actions.morningLabel >></strong></div>
-            <div name="evening">Evening: <strong><<= girl.actions.eveningLabel >></strong></div>
+            <div name="morning">Morning: <strong><<- girl.actions.morning.label >></strong></div>
+            <div name="evening">Evening: <strong><<- girl.actions.evening.label >></strong></div>
           </div>
         </div>
       << }) >>
     </div>
   </script>
   <script id="girls_view_template" type="text/ejs-template">
-    <div id="girl-view" name="<<= girl.name >>" class="ui-helper-clearfix">
+    <div class="vertical-tabs navigable">
+      <ul>
+        << for (var i in girls) { >>
+          <li><a href="#girl-tab-<<- i >>"><<- girls[i].name >></a></li>
+        << } >>
+      </ul>
+      << for (i in girls) { >>
+        <div id="girl-tab-<<- i >>" class="<<- (girl.name == girls[i].name) ? 'active' : '' >>">
+          <<- ejs.render($('#girls_view_one_template').html(), { girl: girls[i] }) >>
+        </div>
+      << } >>
+    </div>
+  </script>
+  <script id="girls_view_one_template" type="text/ejs-template">
+    <div name="<<- girl.name >>" class="ui-helper-clearfix girl-view">
       <div class="column pct-30 left center">
-        <img src="<<= girl.image("base") >>" title="<<= girl._.description >>">
+        <img src="<<- girl.image('base') >>" title="<<= girl.base().description >>">
       </div>
       <div class="column pct-70">
         <div class="column pct-55 middle">
@@ -241,29 +262,29 @@
               <label><<- T(stat) >></label>
               <<- girl.S(stat) >>
             </div>
-          << }); >>
+          << }) >>
           <div id="pay">
             <label><strong>Pay</strong></label>
-            <input value="$<<= girl.actions.pay >>">
+            <input value="$<<- girl.actions.pay >>">
             <span class="delta happiness"></span>
           </div>
         </div>
         <div class="column pct-45 right">
           << Girl.sex.forEach(function(sex) { >>
             <div>
-              <label class="checkbox <<= girl.actions[sex] ? 'checked' : '' >>" id="<<= sex >>">
+              <label class="checkbox <<- girl.actions[sex] ? 'checked' : '' >>" id="<<- sex >>">
                 <<- T(sex) >>
               </label>
             </div>
             <div>
               <label><<- T("libido") >>:</label>
-              <span class="<<= sex >> libido">
+              <span class="<<- sex >> libido">
                 <<- girl.S(sex + " libido") >>
               </span>
             </div>
             <div>
               <label><<- T("experience") >>:</label>
-              <span class="<<= sex >> experience">
+              <span class="<<- sex >> experience">
                 <<- girl.S(sex + " experience") >>
               </span>
             </div>
@@ -275,23 +296,23 @@
   <script id="game_view_template" type="text/ejs-template">
     <div class="ui-helper-clearfix first">
       <div id="top-left" class="column pct-50 center">
-        <h2>Day <<= g.day >></h2>
+        <h2>Day <<- g.day >></h2>
         <div>
           Cash on hand:
-          <strong class="money"><<= g.money < 0 ? "-$" + (-g.money) : "$" + g.money >></strong>
+          <strong class="money"><<- g.money < 0 ? "-$" + (-g.money) : "$" + g.money >></strong>
         </div>
         << if (g.moneyHistory.length > 5) { >>
-          <div class="bar-sparkline"><<= g.moneyHistory.join(",")>></div>
+          <div class="bar-sparkline"><<- g.moneyHistory.join(",")>></div>
         << } >>
         << if (g.nextPayment()) { >>
           <div>
             Payment of
-            <strong class="money">$<<= g.nextPayment().amount >></strong>
+            <strong class="money">$<<- g.nextPayment().amount >></strong>
             due on day
-            <span class="days"><<= g.nextPayment().day >></span>
+            <span class="days"><<- g.nextPayment().day >></span>
           </div>
           <div>
-            <span class="days"><<= gameLength - g.day >> days</span>
+            <span class="days"><<- Game.config.gameLength - g.day >> days</span>
             to end of debt
           </div>
         << } else { >>
@@ -306,11 +327,11 @@
     <div class="ui-helper-clearfix second"></div>
   </script>
   <script id="game_load_template" type="text/ejs-template">
-    <form id="load-game-form" class="center">
+    <div id="load-game-form" class="center">
       <div>
         <select required="required" id="game-name">
           << games.forEach(function(name) { >>
-            <option value="<<= name >>"><<= name >></option>
+            <option value="<<- name >>"><<- name >></option>
           << }) >>
         </select>
       </div>
@@ -318,26 +339,40 @@
       <button id="delete-game">Delete Game</button>
       <textarea></textarea>
       <button id="import-game">Import Game</button>
-    </form>
+    </div>
   </script>
   <script id="game_new_template" type="text/ejs-template">
-    <form id="new-game-form">
+    <div id="new-game-form">
+      <label id="autosave" class="checkbox" title="The game will be saved after every third turn automatically.">Autosave</label>
+      <label id="skip-intro" class="checkbox <<- g && g.missionsDone.explainWhore ? 'checked' : '' >>" title="Skip the tutorial missions and enable all options immediately.">Skip Tutorial</label>
       <div id="fetishes">
+        <label title="Control what sorts of potentially objectionable content will show up in this game. You can modify them later from the Save Game dialog.">Fetishes</label>
         << Game.fetishes.forEach(function(fetish) { >>
-          <label class="checkbox" <<= g.fetishes && g.fetishes[fetish] ? 'checked="checked"' : '' >> name="<<= fetish >>" title="<<- Game.fetishDescriptions[fetish] >>"><<= fetish.capitalize() >></label>
+          <div>
+            <label class="checkbox <<- g && g.fetishes && g.fetishes[fetish] ? 'checked' : '' >>" name="<<- fetish >>" title="<<= Game.fetishDescriptions[fetish] >>"><<- fetish.capitalize() >></label>
+          </div>
         << }) >>
       </div>
       <button>Start Game</button>
-    </form>
+    </div>
   </script>
   <script id="game_save_template" type="text/ejs-template">
-    <form id="save-game-form">
+    <div id="save-game-form">
       <div>
         <label title="If you use the same name as another saved game, the other save will be overwritten." for="game-name">Title</label>
         <input required="required" id="game-name">
       </div>
+      <label id="autosave" class="checkbox <<- g.autosave ? 'checked' : '' >>" title="The game will be saved after every third turn automatically.">Autosave</label>
+      <div id="fetishes">
+        <label title="You can turn fetishes on and off for the current game here.">Fetishes</label>
+        << Game.fetishes.forEach(function(fetish) { >>
+          <div>
+            <label class="checkbox <<- g && g.fetishes && g.fetishes[fetish] ? 'checked' : '' >>" name="<<- fetish >>" title="<<= Game.fetishDescriptions[fetish] >>"><<- fetish.capitalize() >></label>
+          </div>
+        << }) >>
+      </div>
       <button id="save-game">Save Game</button><button id="export-game">Export Game</button
-    </form>
+    </div>
   </script>
   <script id="game_intro_template" type="text/ejs-template">
     <div class="column pct-30">
@@ -357,20 +392,20 @@
   <script id="game_user_input_template" type="text/ejs-template">
     <div class="ui-widget-overlay"></div>
     <div id="required-user-input" class="ui-helper-clearfix">
-      <img src="<<= image >>">
+      <img src="<<- image >>">
       <p><<- text >></p>
       <hr class="clear">
       <div class="center">
         << $.each(options, function(value, label) { >>
-          <button title="<<= label >>"><<= value >></button>
+          <button title="<<= label >>"><<- value >></button>
         << }) >>
       </div>
     </div>
   </script>
   <script id="buildings_view_template" type="text/ejs-template">
-    <div id="building-view" name="<<= building.name >>" class="ui-helper-clearfix">
+    <div id="building-view" name="<<- building.name >>" class="ui-helper-clearfix">
       <div class="column pct-30 left">
-        <img src="<<= building._.image >>" title="<<= building._.description >>">
+        <img src="<<- building.image() >>" title="<<= building.description() >>">
       </div>
       <div class="column pct-70">
         <div class="column pct-50 middle">
@@ -379,27 +414,22 @@
           <div><label>Rooms:</label><<- building.S("rooms") >></div>
           <div>
             <label id="daily-label">Daily:</label>
-            <div class="daily-delta"><< $.each(building.dailyDelta(), function(stat, value) {
-              var text;
-              if (stat == 'money') {
-                text = value < 0 ? '-$' + (-value) : '+$' + value;
-              } else {
-                text = value < 0 ? '' + value : '+' + value;
-              } >>
-              <span class="delta <<= stat >>"><<= text.substr(0, 5) >></span>
-            << }) >></div>
+            <div class="daily-delta">
+              <<- ejs.render($('#render_delta_template').html(), { delta: building.dailyDelta() }) >>
+            </div>
           </div>
         </div>
         <div class="column pct-50 right center">
           << var enabledCount = 0; >>
-          << if (building.rooms.length < building._.maxRooms && !$.isEmptyObject(availableRooms)) { >>
+          << if (building.rooms.length < building.base().maxRooms) { >>
             <select id='new-room'>
-              << $.each(availableRooms, function(name, room) { >>
+              << building.potentialRooms()._sort("price").forEach(function(room) { >>
+                << var context = { room: room, building: building } >>
                 << if (room.price <= g.money) { enabledCount += 1; } >>
-                <option value="<<= name >>" title="<<= room.description >>" <<= room.price > g.money ? "disabled" : "">>>$<<= room.price >> - <<= name.capitalize() >></option>
+                <option value="<<- room.type >>" title="<<= ejs.render(room.description, context) >>" <<- room.price > g.money ? "disabled" : "">>>$<<- room.price >> - <<- ejs.render(room.label, context) >></option>
               << }) >>
             </select>
-            <button id="buy-room" <<= enabledCount ? "" : "disabled">>>Add Room</button>
+            <button id="buy-room" <<- enabledCount ? "" : "disabled">>>Add Room</button>
           << } >>
         </div>
         <div id="rooms" class="ui-helper-clearfix">
@@ -418,20 +448,20 @@
         <h3 class="center"><a id="sell-building">Sell Building</a></h3>
       << } >>
       << buildings.forEach(function(building) { >>
-        <div class="ui-helper-clearfix no-cursor building" name="<<= building.name >>">
+        <div class="ui-helper-clearfix no-cursor building" name="<<- building.name >>">
           <div class="column pct-20">
-            <img src="<<= building._.image >>">
+            <img src="<<- building.image() >>">
           </div>
           <div class="column pct-40 middle">
-            <h6 class="center"><<= building.name >></h6>
+            <h6 class="center"><<- building.name >></h6>
             <div><label>Reputation:</label><<- building.S("reputation") >></div>
             <div><label>Clean:</label><<- building.S("clean") >></div>
             <div><label>Rooms:</label><<- building.S("rooms") >></div>
           </div>
           <div class="column pct-40 right center">
             <div><strong>Residents</strong></div>
-            << building.rooms.Caccumulate('girl').forEach(function(name) { >>
-              <div><<= name >></div>
+            << building.rooms._accumulate('girl').forEach(function(name) { >>
+              <div><<- name >></div>
             << }) >>
           </div>
         </div>
@@ -441,52 +471,31 @@
   <script id="buildings_manage_template" type="text/ejs-template">
     <div id="manage-buildings">
       << buildings.forEach(function(building) { >>
-        <div class="ui-helper-clearfix no-cursor building" name="<<= building.name >>">
+        <div class="ui-helper-clearfix no-cursor building" name="<<- building.name >>">
           <div class="column pct-30">
-            <img src="<<= building._.image >>" title="<<= building._.description >>">
+            <img src="<<- building.image() >>" title="<<= building.description() >>">
           </div>
           <div class="column pct-40 middle">
-            <h6 class="center"><<= building.name >></h6>
+            <h6 class="center"><<- building.name >></h6>
             <div><label>Reputation:</label><<- building.S("reputation") >></div>
             <div><label>Clean:</label><<- building.S("clean") >></div>
             <div><label>Rooms:</label><<- building.S("rooms") >></div>
             << building.rooms.forEach(function (room) { >>
-              <div class="room <<= room.type >>"><<= room.type.capitalize() >></div>
+              <div class="room <<- room.type >>"><<- room.type.capitalize() >></div>
             << }) >>
           </div>
           <div class="column pct-30 right">
-            <div><label>Price:</label><strong class="money">$<<= building.price(action) >></strong></div>
+            <div><label>Price:</label><strong class="money">$<<- building.price(action) >></strong></div>
             <div>
               <label>Daily:</label>
               <div class="daily-delta">
-                << $.each(building.dailyDelta(), function(stat, value) {
-                  var text;
-                  if (stat == 'money') {
-                    text = value < 0 ? '-$' + (-value) : '+$' + value;
-                  } else {
-                    text = value < 0 ? '' + value : '+' + value;
-                  } >>
-                  <span class="delta <<= stat >>"><<= text.substr(0, 5) >></span>
-                << }) >>
+                <<- ejs.render($('#render_delta_template').html(), { delta: building.dailyDelta() }) >>
               </div>
             </div>
-            <button class="manage" name="<<= building.name >>"><<= action >></button>
+            <button class="manage" name="<<- building.name >>"><<- action >></button>
           </div>
         </div>
       << }) >>
-    </div>
-  </script>
-  <script id="buildings_bedroom_template" type="text/ejs-template">
-    <div>
-      <h6>Bedroom</h6>
-      <select name="girl" title="Select the girl living in this room. When a girl has a place to live, she demands a significantly lower wage.">
-        <option value="" <<= (room.girl) ? '' : 'selected' >>> - Empty - </option>
-        << girls.forEach(function(girl) { >>
-          <option value="<<= girl.name >>" <<= (room.girl == girl.name) ? 'selected' : '' >>>
-            <<= girl.name >>
-          </option>
-        << }) >>
-      </select>
     </div>
   </script>
   <script id="missions_list_template" type="text/ejs-template">
@@ -494,24 +503,21 @@
       <ul>
         << var i = 0 >>
         << for (var _id in missions) {
-          if (!missions[_id].description || !missions[_id].image) { continue; }
+          if (!missions[_id].display) { continue; }
           i++ >>
           <li>
-            <a href="#mission-tab-<<= i >>"><<= missions[_id].label >></a>
+            <a href="#mission-tab-<<- i >>"><<- missions[_id].display.label >></a>
           </li>
         << } >>
       </ul>
       << i = 0 >>
       << $.each(missions, function(_id, mission) {
-        if (!mission.description || !mission.image) { return; }
+        if (!mission.display) { return; }
         i++ >>
-        <div id="mission-tab-<<= i >>" class="mission ui-helper-clearfix">
-          << if (mission.end.day) { >>
-            <div class="top">Time Remaining: <strong><<= mission.end.day - g.day >> days</strong></div>
-          << } >>
-          <img src="<<= mission.image >>">
+        <div id="mission-tab-<<- i >>" class="mission ui-helper-clearfix">
+          <img src="<<- mission.display.image >>">
           <div>
-            <<- mission.description >>
+            <<- mission.display.text >>
           </div>
         </div>
       << }) >>
@@ -522,54 +528,50 @@
       <ul>
         << for (var i in girls) { >>
           <li>
-            <a href="#action-tab-<<= i >>"><<= girls[i].name >></a>
+            <a href="#action-tab-<<- i >>"><<- girls[i].name >></a>
           </li>
         << } >>
       </ul>
       << for (i in girls) { >>
-        <div id="action-tab-<<= i >>" class="accordion girl <<= girl.name == girls[i].name ? 'active' : '' >>" name="<<= girls[i].name >>">
+        <div id="action-tab-<<- i >>" class="accordion girl <<- girl.name == girls[i].name ? 'active' : '' >>" name="<<- girls[i].name >>">
           <h3>Morning</h3>
-          <div class="ui-helper-clearfix morning <<= time == 'morning' ? 'active' : '' >>"></div>
+          <div class="ui-helper-clearfix morning <<- time == 'morning' ? 'active' : '' >>"></div>
           <h3>Evening</h3>
-          <div class="ui-helper-clearfix evening <<= time == 'evening' ? 'active' : '' >>"></div>
+          <div class="ui-helper-clearfix evening <<- time == 'evening' ? 'active' : '' >>"></div>
         </div>
       << } >>
     </div>
   </script>
   <script id="actions_girl_template" type="text/ejs-template">
     <table class="action-list"><tbody>
-      << $.each(potentialActions.CsortToObject('group'), function(group, actions) { >>
+      << $.each(actions._sortToObject('group'), function(group, action_group) { >>
         <tr>
           <td class="group">
-            <label><<= group >></label>
+            <label><<- group >></label>
           </td>
           <td>
-            << actions.forEach(function(action) { >>
-              <<
-                var option = action.options ? Object.keys(action.options)[0] : false;
-                if (girl.actions[time] == action._id && girl.actions[time + "Option"]) {
-                  option = girl.actions[time + "Option"];
-                }
-              >>
-              <div class="action <<= action.disabled ? 'disabled' : '' >>">
+            << action_group.forEach(function(action) { >>
+              <div class="action <<- action.disabled ? 'disabled' : '' >>">
                 <label>
-                  <span title="<<= action.description >>" class="<<= option ? 'options' : '' >>"><<= action.label >></span>
-                  << if (action.options) { >>
+                  <span title="<<= action.description >>" class="<<- action.option && action.options()._toArray().length > 1 ? 'options' : '' >>"><<- action.label >></span>
+                  << if (action.option && action.options()._toArray().length > 1) { >>
                     <ol class="dropdown">
-                      << $.each(action.options, function(option_id, label) { >>
-                        <li name="<<= option_id >>" class="<<= option_id == option ? 'selected' : '' >>"><<- label >></li>
+                      << $.each(action.options(), function(label, description) { >>
+                        <li name="<<- label >>" class="<<- label == action.option ? 'selected' : '' >>"><<- description >></li>
                       << }) >>
                     </ol>
                   << } >>
                 </label>
-                <ul name="<<= action._id >>" class="others-<<= (otherActionList[action._id] || []).length >>">
-                  << for (var i in otherActionList[action._id]) { >>
-                    <li class="other">
-                      <img src="<<= g.girls[otherActionList[action._id][i]].image() >>" title="<<= otherActionList[action._id][i] >>">
-                    </li>
+                <ul name="<<- action._id >>" class="others-<<- (otherActions[action._id] || []).length - (girl.actions[time] && girl.actions[time]._id == action._id) >>">
+                  << for (var i in otherActions[action._id]) { >>
+                    << if (otherActions[action._id][i] != girl.name) { >>
+                      <li class="other">
+                        <img src="<<- g.girls[otherActions[action._id][i]].image() >>" title="<<= otherActions[action._id][i] >>">
+                      </li>
+                    << } >>
                   << } >>
-                  << if (girl.actions[time] == action._id) { >>
-                    <li class="this"><img src="<<= girl.image() >>"></li>
+                  << if (girl.actions[time] && girl.actions[time]._id == action._id) { >>
+                    <li class="this"><img src="<<- girl.image() >>"></li>
                   << } >>
                 </ul>
               </div>

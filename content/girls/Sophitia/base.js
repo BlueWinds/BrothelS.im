@@ -1,19 +1,11 @@
-// Put the name of the girl here. If the name is multiple words, do this instead:
-// Girls['Lady McAwesome'] = {
 Girls.Sophitia = {
-  // All strings have to be on one line. You can break up long bits of text by wrapping each section in <p></p> tags - other bits of HTML will also work, such as <em></em> for italics, or <strong></strong> for bold.
   description: "<p>The daughter of a baker, Sophitia worked at her family bakery. She always treasured her country's culture and prayed often to the city guardian. One day, as she bathed in a forest spring, the god of the forge revealed himself, and told her of the evil sword whose existence threatened to bring much pain to the world. He ordered her to seek to destroy this foul blade.</p><p>At first Sophitia was reluctant to take the holy mission, for she was only a baker's daughter, but the god insisted. She tracked down the wielder of this powerful sword - and was gravely wounded in the fight without even inconveniencing him.</p><p>Afraid to face the wrath of her god, she fled for distant lands... and ended up here.</p>",
-  // There are two options for status. First, a simple value, like:
-  // status: 'Hired',
-  // The second option isn't currently used, but will be explained in the future if it becomes useful.
   status: 'For Hire',
-  // The happiness you set here will influence her hire price. When the player actually hires her, it will be reset to 75.
   happiness: 0,
-  // The other stats work exactly like you'd expect - set the starting values here. Remember that higher stats increase a girl's hire price and her pay.
   endurance: 100,
   obedience: 50,
-  modesty: 30,
-  charisma: 40,
+  modesty: 50,
+  charisma: 50,
   intelligence: 20,
   constitution: 40,
   'soft experience': 0,
@@ -24,38 +16,9 @@ Girls.Sophitia = {
   'hard libido': 40,
   'anal libido': 60,
   'fetish libido': 10,
-  // specialRules is where you can put in tweaks, so that the girl works a little differently than normal.
-  specialRules: {
-    // payRatio: 0.5,
-    // payRatio is multiplied into her desired pay - setting it to .5 means she only wants half as much money, while 3 would mean three times the pay.
-//     dependentStats: {
-    // The "dependentStats" special rule allows you to modify the way her stats change. There are three main ways to use this, described below:
-
-      // "soft experience": { happiness: 1 },
-      // In this case, whenever her "soft experience" stat is increased, her happiness also goes up an equal amount - +3 experience will also give her +3 happiness.
-
-      // intelligence: { intelligence: 0.5 },
-      // You can also modify the stat being added without breaking things. In this example, her intelligence increases at +50% rate - if she got +4 intelligence, she'd also get +2 at the same time.
-      // Be careful not to create a dependency loop though - the game is smart enough to handle the above example (with intelligence gain causing more intelligence gain), but *also* adding the line happiness: { "soft experience": 1 } would cause a loop - adding experience adds happiness, adding happiness adds experience, ad infinitum.
-
-      // "-modesty": { "fetish libido": 0.2 }
-      // You can use "-stat" to apply rules for when a stat *decreases*. In this case, whenever her modesty drops, her fetish libido rises a little bit.
-
-      // "hard experience": function() { return { happiness: (100 - this.modesty) / 20 }; }
-      // The very final option is to use an arbitrary javascript function, which returns an object containing the stat modifications you want. In this example, her happiness increases alongside her "hard experience", at a rate the depends on her modesty, between 0 and 5 points.
-//     },
-  },
   images: {
-    // basePath is the path to the images folder you created. Don't forget to put your girl's name in here!
     basePath: "content/girls/Sophitia/images",
-    // base is the default portrait. It is the only image *required*.
     base: "Base.png",
-    // Now for the interesting bits. For each type of image, you have three options:
-    // 1) Remove the line. Any events that need an image of a missing type will use the base image.
-    // 2) A single image file.
-    // 3) A list of image files. Whenever an image of this type is needed, the game will select one at random.
-    // You can reuse images - Kirino, for example, doesn't have any real tentacle pictures, so her tentacles line looks something like this:
-    // tentacles: ["Fet1.png", "Fet3.png", "Fet4.png"]
     refuse: "Refuse.jpg",
     tired: "Tired.jpg",
     soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg", "Soft6.jpg"],
@@ -68,17 +31,48 @@ Girls.Sophitia = {
     naked: ["Naked1.jpg", "Naked2.jpg"],
     prison: "Prison.jpg",
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg", "Tentacles5.jpg"]
+  },
+  Actions: {
+    Talk: {
+      results: [
+        {
+          message: {
+            group: 'Sophitia',
+            label: 'Talk',
+            image: 'content/girls/Sophitia/images/Tired.jpg',
+            text: "Talking with Sophitia is one of the nicer jobs you've had - she's pleasant to be around, curious without being intrusive, solid, honest and straightforward to a fault. You wonder how she ended up here, working for you - she'd seem more at home running a small shop or herding children in a schoolyard than raising her skirt for money."
+          },
+          girl: {
+            obedience: 1.5,
+            happiness: 5
+          }
+        },
+        {
+          message: {
+            group: 'Sophitia',
+            label: 'Talk',
+            image: 'content/girls/Sophitia/images/Study1.jpg',
+            text: "When you knock on her door, Sophitia is sitting on a couch reading. She smiles as you enter, inviting you to take the only chair in the room without rising. She rests the book over one knee - you can't read the cover, but it looks like a cheesy romance from here. You ask her about it, and learn that it is indeed a romance, the heroine of which is a distressed bakers daughter. Curious reading material for a whore, but she doesn't seem to think it odd at all."
+          },
+          girl: {
+            obedience: 1.5,
+            happiness: 2
+          }
+        },
+        {
+          message: {
+            group: 'Sophitia',
+            label: 'Talk',
+            image: 'content/girls/Sakuya/images/Study2.jpg',
+            text: "You and Sophitia spend several hours checking over the rules and regulations that govern the Guild, and therefor your brothel. She seems to have nearly infinite patience for such a boring task, taking notes even as the material threatens to send you napping."
+          },
+          girl: {
+            obedience: 1.5,
+            happiness: 2,
+            endurance: -5
+          }
+        }
+      ].concat(Actions.Talk.results)
+    }
   }
-  // A girl can also have actions specific to her. Her "actions" key can have any number of actions, each one defined exactly as actions available to all girls (See content/actions/Simple.js for a commented example of what an action looks like, or Dark Magician Girl for an example of a girl-specific action in... action.
-  // actions: {
-    // Action1: { ... },
-    // Action2: { ... },
-
-    // One nifty feature is that you can override general actions with girl specific versions. All you have to do is use the same _id as the general one - and any missing keys will be filled in from the non girl specific version. See Sakuya for an example of this in action.
-    // Clean: {},
-  // },
-  // Like actions, events and missions can be girl-specific, modifying existing events as they apply to her or creating new ones.
-  // events: { ... },
-  // Missions that are specific to a girl are always bound to her (see the mission documentation for more details on what this means). *NOTE* Girl-specific missions CANNOT override generic missions - if it has the same _id as a general mission, it will never trigger.
-  // missions: { ... },
 };

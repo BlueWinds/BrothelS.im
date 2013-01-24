@@ -1,51 +1,86 @@
-
-var Message = function(obj) {
-  $.extend(this, obj);
-};
-
-Message.prototype.save = function(target) {
-  if (!g.messages) {
-    g.messages = {};
+e.GameUpgrade03.push(function(game, next) {
+  delete game.messagesShown;
+  var messages = game.messages;
+  console.log(messages);
+  game.messages = [];
+  for (var group in messages) {
+    for (var i in messages[group]) {
+      var message = messages[group][i];
+      message._class = 'Message';
+      message.label = message.type;
+      delete message.type;
+      delete message.time;
+      message.group = group;
+      game.messages.push(message);
+    }
   }
-  g.messages[target] = g.messages[target] || [];
-  g.messages[target].push(this);
+  next();
+});
+
+var Message = function(obj, context) {
+  $.extend(this, obj);
+  if (context) {
+    this.group = ejs.render(this.group, context);
+    this.weight = this.weight || 0;
+    this.label = ejs.render(this.label, context);
+    this.image = ejs.render(this.image, context);
+    this.text = ejs.render(this.text, context);
+    this.delta = this.delta || {};
+  }
 };
 
-e.GameInit.push(function(done) {
-  g.messages = g.messages || {};
-  $.each(g.messages, function(target, messages) {
-    $.each(messages, function(i, message) {
-      g.messages[target][i] = new Message(message);
-    });
-  });
+e.GameNew.push(function(done) {
+  g.messages = [];
+  setTimeout(function() {
+    $('#show-messages').click();
+  }, 1);
   done();
 });
 
 e.GamePreDay.push(function(done) {
   g.messagesShown = false;
-  g.messages = {};
+  g.messages = [];
+  done();
+});
+
+e.GamePostDay.push(function(done) {
+  setTimeout(function() {
+    $('#show-messages').click();
+  }, 0);
   done();
 });
 
 e.GameRender.push(function(done) {
-  var button = $('<button>').html('Messages').button();
+  var button = $('<button id="show-messages">').html('Messages');
+  if (!g.messages.length) {
+    button.attr('disabled', 'disabled');
+  }
   $('#top-right').prepend(button);
   button.click(function() {
-    g.messagesShown = true;
+    if ($(this).attr('disabled')) { return; }
+    var messages = {};
+    var groups = {};
+    g.messages.forEach(function(message) {
+      var group = message.group;
+      messages[group] = messages[group] || [];
+      messages[group].push(message);
+      groups[group] = Math.min(groups[group] || 100, message.weight);
+    });
+    groups = Object.keys(groups).sort(function(a, b) {
+      return groups[a] - groups[b];
+    });
     var view = $(ejs.render($('#messages_list_template').html(), {
-      messages: g.messages
-    }));
+      groups: groups,
+      messages: messages
+    }).trim());
     view.appendTo('body');
-    e.invokeAll('Autorender', function() {
+    e.invokeAll('Autorender', view, function() {
       view.dialog({
         title: 'Messages',
         maxHeight: '100%'
       });
       view.closest('.ui-dialog').addClass('tab-dialog');
-    }, view);
+    });
   });
-  if (!g.messagesShown) {
-    button.click();
-  }
   done();
 });

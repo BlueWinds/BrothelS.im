@@ -1,9 +1,11 @@
 var e = {
-  invokeAll: function(hook, done) {
+  // (hook, [arg1, ...], done)
+  invokeAll: function(hook) {
     var args = Array.prototype.slice.call(arguments, 0);
     args[0] = e[hook];
     e.runSeries.apply(this, args);
   },
+  // (hook, [arg1, ...])
   invokeAllSync: function(hook) {
     if (!e[hook]) { return; }
     var args = Array.prototype.slice.call(arguments, 1);
@@ -11,13 +13,18 @@ var e = {
       e[hook][i].apply(this, args);
     }
   },
-  runSeries: function(items, done) {
+  // (items, [arg1, ...], done)
+  runSeries: function(items) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    var done = typeof(args._last()) == 'function' ? args.pop() : function() {};
     if (!items || !items.length) { done(); return; }
-    var args = Array.prototype.slice.call(arguments, 2);
-    $this = this;
+    var $this = this;
     function next() {
       i++;
-      if (i == items.length) { done(); return; }
+      if (i == items.length) {
+        if (typeof(done) == 'function') { done(); }
+        return;
+      }
       items[i].apply($this, args);
     }
     args.push(next);
@@ -31,7 +38,7 @@ Storage.prototype.setObject = function(key, value) {
   this.setItem(key, JSON.stringify(value));
 };
 
-Object.defineProperty(Object.prototype, "Cfirst", {
+Object.defineProperty(Object.prototype, "_first", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -40,7 +47,7 @@ Object.defineProperty(Object.prototype, "Cfirst", {
   }
 });
 
-Object.defineProperty(Object.prototype, "Clast", {
+Object.defineProperty(Object.prototype, "_last", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -49,7 +56,7 @@ Object.defineProperty(Object.prototype, "Clast", {
   }
 });
 
-Object.defineProperty(Object.prototype, "Cmultiply", {
+Object.defineProperty(Object.prototype, "_multiply", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -61,7 +68,7 @@ Object.defineProperty(Object.prototype, "Cmultiply", {
   }
 });
 
-Object.defineProperty(Object.prototype, "Cadd", {
+Object.defineProperty(Object.prototype, "_add", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -80,7 +87,7 @@ Object.defineProperty(Object.prototype, "Cadd", {
   }
 });
 
-Object.defineProperty(Object.prototype, "Cprefix", {
+Object.defineProperty(Object.prototype, "_prefix", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -92,11 +99,11 @@ Object.defineProperty(Object.prototype, "Cprefix", {
   }
 });
 
-Object.defineProperty(Object.prototype, "Cfilter", {
+Object.defineProperty(Object.prototype, "_filter", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: filter = function(key, value, value2) {
+  value: function(key, value, value2) {
     var result = [], i;
     if (value2) {
       for (i in this) {
@@ -111,7 +118,7 @@ Object.defineProperty(Object.prototype, "Cfilter", {
   }
 });
 
-Object.defineProperty(Object.prototype, "Cflatten", {
+Object.defineProperty(Object.prototype, "_flatten", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -128,7 +135,7 @@ Object.defineProperty(Object.prototype, "Cflatten", {
   }
 });
 
-Object.defineProperty(Object.prototype, "Caccumulate", {
+Object.defineProperty(Object.prototype, "_accumulate", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -143,13 +150,13 @@ Object.defineProperty(Object.prototype, "Caccumulate", {
   }
 });
 
-Object.defineProperty(Object.prototype, "Csum", {
+Object.defineProperty(Object.prototype, "_sum", {
   enumerable: false,
   writable: false,
   configurable: true,
   value: function(key) {
     if (key) {
-      return this.Caccumulate(key).Csum();
+      return this._accumulate(key)._sum();
     }
     var sum = 0;
     for (var i in this) { sum += this[i]; }
@@ -157,7 +164,7 @@ Object.defineProperty(Object.prototype, "Csum", {
   }
 });
 
-Object.defineProperty(Object.prototype, "CtoObject", {
+Object.defineProperty(Object.prototype, "_toObject", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -170,7 +177,20 @@ Object.defineProperty(Object.prototype, "CtoObject", {
   }
 });
 
-Object.defineProperty(Object.prototype, "CsortToObject", {
+Object.defineProperty(Object.prototype, "_toArray", {
+  enumerable: false,
+  writable: false,
+  configurable: true,
+  value: function(key) {
+    var arr = [];
+    for (var i in this) {
+      arr.push(this[i]);
+    }
+    return arr;
+  }
+});
+
+Object.defineProperty(Object.prototype, "_sortToObject", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -186,12 +206,12 @@ Object.defineProperty(Object.prototype, "CsortToObject", {
   }
 });
 
-Object.defineProperty(Object.prototype, "Csort", {
+Object.defineProperty(Object.prototype, "_sort", {
   enumerable: false,
   writable: false,
   configurable: true,
   value: function(key, reverse) {
-    var ret = this.slice(0);
+    var ret = this._toArray();
     ret.sort(function(a, b) {
       return reverse ? b[key] - a[key] : a[key] - b[key];
     });
@@ -199,7 +219,7 @@ Object.defineProperty(Object.prototype, "Csort", {
   }
 });
 
-Object.defineProperty(Object.prototype, "CtoString", {
+Object.defineProperty(Object.prototype, "_toString", {
   enumerable: false,
   writable: false,
   configurable: true,
@@ -215,7 +235,7 @@ Object.defineProperty(Object.prototype, "CtoString", {
     if (items.length == 1) { return items[0]; }
 
     var str = items.slice(0, -1).join(', ');
-    return str + ' and ' + items.Clast();
+    return str + ' and ' + items._last();
   }
 });
 

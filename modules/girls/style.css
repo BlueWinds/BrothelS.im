@@ -41,16 +41,16 @@ span.adj {
   font-weight: 300;
 }
 
-#girl-view label {
+.girl-view label {
   margin-left: 1em;
   width: 6em;
 }
 
-#girl-view label.checkbox {
+.girl-view label.checkbox {
   margin-left: 0;
 }
 
-#girl-view .middle label span {
+.girl-view .middle label span {
   color: #FFF;
 }
 
@@ -67,7 +67,7 @@ span.adj {
   margin-left: 1em;
 }
 
-#girl-view {
+.girl-view {
   width: 35em;
   overflow: visible;
 }

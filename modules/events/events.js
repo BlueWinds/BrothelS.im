@@ -1,5 +1,33 @@
 var Events = {};
 
+function Event(obj) {
+  Resolvable.call(this, obj);
+}
+
+Event.prototype = new Resolvable();
+
+Event.prototype.context = function() {
+  var context = Resolvable.prototype.context.call(this);
+  context.action = this.action;
+  return context;
+};
+
+Event.create = function(_id, context) {
+  var event = Resolvable.create(_id, 'Event', context);
+  if (!event) { return event; }
+  var chance = 0;
+  for (var tag in event.tags) {
+    if (context.action.tags[tag]) {
+      chance += event.tags[tag] * context.action.tags[tag];
+    }
+  }
+  if (Math.random() > chance) {
+    return false;
+  }
+  event.action = context.action;
+  return event;
+};
+
 e.Ready.push(function(done) {
   $.each(Events, function(_id, event) {
     event._id = _id;
@@ -14,7 +42,7 @@ e.Ready.push(function(done) {
 });
 
 e.GameInit.push(function(done) {
-  // Add "events" key to each girl to track the last time each event happened to her.
+  // Add eventHistory to each girl to track the last time each event happened to her.
   $.each(g.girls, function(name, girl) {
     if (!girl.eventHistory) {
       girl.eventHistory = {};
@@ -23,86 +51,35 @@ e.GameInit.push(function(done) {
   done();
 });
 
+Event.get = function(context) {
+  if (!context.action.tags) { return; }
+  var event;
+  for (var _id in Events) {
+    event = Event.create(_id, context);
+    if (event) { return event; }
+  }
+  var base = context.girl.base();
+  if (!base.Events) { return; }
+  for (_id in base.Events) {
+    event = Event.create(_id, context);
+    if (event) { return event; }
+  }
+};
+
 (function() {
-  var oldDoAction = Girl.prototype.doAction;
-  Girl.prototype.doAction = function(time, action, done) {
-    var event = getEvent(time, action, this);
+  var oldDoAction = Action.prototype.applyResults;
+  Action.prototype.applyResults = function(results, done) {
+    if (!done) {
+      oldDoAction.call(this, results);
+      return;
+    };
+    var context = this.context();
+    var event = Event.get(context);
     if (!event) {
-      oldDoAction.call(this, time, action, done);
+      oldDoAction.call(this, results, done);
       return;
     }
-    this.eventHistory[event._id] = g.day;
-    var girl = this;
-    Game.getResults(time, event, this, function(results) {
-      var endDelta = girl.startDelta();
-      var context = {
-        event: event,
-        action: action,
-        time: time
-      };
-      event.group = girl.name;
-      Mission.prototype.applyResults.call(event, results, function() {
-        if (!event.disruptive) {
-          oldDoAction.call(girl, time, action, done);
-        } else {
-          done();
-        }
-      }, girl, context);
-    });
-  };
-
-  function getEvent(time, action, girl) {
-    if (!action.tags) { return; }
-    var potentialEvents = getEventsWithTags(time, action.tags, girl);
-    for (var _id in potentialEvents) {
-      var event = potentialEvents[_id];
-      if (action.uninterupretable && event.disruptive) { continue; }
-      if (action.safety && event.dangerous) {
-        event.conditions.likelyhood *= (1 - action.safety);
-      }
-      if (!Mission.prototype.checkConditions(event.conditions, girl)) {
-        continue;
-      }
-      return $.extend(true, {}, event);
-    }
-  }
-
-  function getEventsWithTags(time, tags, girl) {
-    var potentialEvents = {};
-    $.each(Events, function(_id, event) {
-      for (var fet in event.fetishes) {
-        if (event.fetishes[fet] && !g.fetishes[fet]) { return; }
-      }
-      if (event.time && event.time != time) { return; }
-      for (var tag in tags) {
-        if (event.tags[tag]) { potentialEvents[_id] = event; break; }
-      }
-    });
-    if (girl._.events) {
-      $.each(girl._.events, function(_id, event) {
-        var new_event;
-        if (Events[_id]) {
-          new_event = $.extend(true, {}, Events[_id], event);
-          delete potentialEvents[_id];
-        } else {
-          new_event = $.extend(true, {}, event);
-        }
-        for (var fet in new_event.fetishes) {
-          if (new_event.fetishes[fet] && !g.fetishes[fet]) { return; }
-        }
-        if (new_event.time && new_event.time != time) { return; }
-        for (var tag in tags) {
-          if (new_event.tags[tag]) { potentialEvents[_id] = new_event; break; }
-        }
-      });
-    }
-    return potentialEvents;
-  }
-
-  var oldGirlCreate = Girl.create;
-  Girl.create = function(base) {
-    var girl = oldGirlCreate(base);
-    girl.events = {};
-    return girl;
+    context.girl.eventHistory[event._id] = g.day;
+    event.applyResults(done);
   };
 })();
