@@ -126,7 +126,9 @@ Building.prototype.apply = function(stat, delta) {
     if (delta % 1) {
       delta = (Math.random() > delta % 1) ? Math.floor(delta) : Math.ceil(delta);
     }
-    if (Building.stats.indexOf(stat) != -1) {
+    if (stat == 'money') {
+      g.money += delta;
+    } else if (Building.stats.indexOf(stat) != -1) {
       this[stat] += delta;
       this[stat] = Math.floor(Math.max(0, Math.min(100, this[stat])));
     }

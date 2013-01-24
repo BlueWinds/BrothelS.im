@@ -11,6 +11,7 @@ Buildings.Theater = {
   daily: {
     breakpoint: 30,
     above: {
+      money: -20,
       reputation: -0.6,
       clean: -3,
       girl: {
@@ -18,6 +19,7 @@ Buildings.Theater = {
       }
     },
     below: {
+      money: -20,
       reputation: -1.1,
       clean: -2,
       girl: {
