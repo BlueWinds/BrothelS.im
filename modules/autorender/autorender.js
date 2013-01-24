@@ -130,12 +130,6 @@ $(function() {
   $.ui.dialog.prototype.options.width = 'auto';
   $.ui.dialog.prototype.options.resizable = false;
   $.ui.dialog.prototype.options.draggable = false;
-  $.ui.dialog.prototype.options.position = {
-    my: 'top center',
-    at: 'top center',
-    of: window,
-    collision: 'fit'
-  };
   $.ui.tabs.prototype._tabKeydown = function() {};
   $(document).on('dialogclose', function(event) {
     $(event.target).dialog('destroy').remove();
