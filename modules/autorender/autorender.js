@@ -129,6 +129,7 @@ $(function() {
   $.ui.dialog.prototype.options.modal = true;
   $.ui.dialog.prototype.options.width = 'auto';
   $.ui.dialog.prototype.options.resizable = false;
+  $.ui.dialog.prototype.options.draggable = false;
   $.ui.dialog.prototype.options.position = {
     my: 'top center',
     at: 'top center',

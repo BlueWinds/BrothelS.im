@@ -101,6 +101,7 @@
   border: none;
   height: 100px;
   overflow: hidden;
+  top: 50px !important;
 }
 
 .tab-dialog .ui-dialog-titlebar {
