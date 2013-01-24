@@ -40,7 +40,7 @@ Girl.prototype.interest = function(sex) {
     var interest = context.girl.interest(sex);
     if (interest - context.girl.modesty * context.customer.modestyRate / 100 <= 0) {
       if (customerConfig) {
-        girl.apply(customerConfig.bad);
+        context.girl.apply(customerConfig.bad);
       }
       context.result = this.uncooperative;
       context.girl.apply(Person.prostitution.refuseDelta);
