@@ -67,7 +67,7 @@ Girls.Yuna = {
             group: 'Yuna',
             label: 'Talk',
             image: 'content/girls/Yuna/images/base.jpg',
-            text: "You and Yuna sit out on the front steps of the <<- girl.building() ? girl.building.name() : 'inn' >>, watching traffic pass and listening to the sounds of the busy city. You ask her if she's enjoying her work here - she agrees that it's fun sometimes. You ask about the customers she's serviced lately - she sighs and rolls her eyes. Not the best behavior. You confiscate her top and pull her bra down around her waist as punishment, right there in public. She gets red, but you refuse to let her fix it for half an hour."
+            text: "You and Yuna sit out on the front steps of the <<- girl.building() ? girl.building().name : 'inn' >>, watching traffic pass and listening to the sounds of the busy city. You ask her if she's enjoying her work here - she agrees that it's fun sometimes. You ask about the customers she's serviced lately - she sighs and rolls her eyes. Not the best behavior. You confiscate her top and pull her bra down around her waist as punishment, right there in public. She gets red, but you refuse to let her fix it for half an hour."
           },
           girl: {
             obedience: 2,
