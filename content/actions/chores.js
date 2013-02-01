@@ -26,7 +26,7 @@ Actions.Clean = {
   tags: { indoors: 1 },
   conditions: {
     min: {
-      building: 1
+      buildings: 1
     },
     missions: {
       cleanBuilding: 3

@@ -123,7 +123,7 @@ Actions.investigateGuards = {
   initialize: function(context) {
     if (g.missions.avengeGuardRape.girl != context.girl.name) { return false; }
   },
-  ownerParticipation: 1,
+  ownerParticipation: true,
   tags: {
     garrison: 1
   },
@@ -201,7 +201,7 @@ Actions.investigateGuards = {
       girl: {
         endurance: -7,
         charisma: 1,
-        'soft libido': 2,
+        softLibido: 2,
         specialRules: { investigateGuards: 1 }
       }
     },
@@ -231,10 +231,10 @@ Actions.investigateGuards = {
       ],
       girl: {
         endurance: -25,
-        'hard libido': 4,
-        'hard experience': 8,
-        'anal libido': 2,
-        'anal experience': 6,
+        hardLibido: 4,
+        hardExperience: 8,
+        analLibido: 2,
+        analExperience: 6,
         specialRules: { investigateGuards: 1 }
       }
     },
@@ -297,7 +297,7 @@ Missions.avengeGuardRapeFinal = {
       ],
       money: -300,
       girl: {
-        'fetish libido': 4,
+        fetishLibido: 4,
         obedience: -6,
         happiness: 10
       }

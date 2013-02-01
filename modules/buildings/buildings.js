@@ -73,8 +73,7 @@ e.GameRender.push(function(done) {
         context.room = room;
         var div = $('<div>').addClass('room');
         var base = Rooms[room.type];
-        var label = ejs.render(base.label, context);
-        div.append('<h6>').html(label);
+        div.append('<h6>').html(base.label);
         if (base.render) {
           div.append(base.render.call(room, building, render));
         } else {
@@ -157,6 +156,6 @@ e.Autorender.push(function(element, done) {
   $('.clean', element).attr('title', Building.config.cleanDescription);
   $('.reputation', element).attr('title', Building.config.reputationDescription);
   $('.rooms', element).attr('title', Building.config.roomDescription);
-  $('.bedroom', element).attr('title', Rooms.bedroom.description);
+  $('.bedroom', element).attr('title', Rooms.Bedroom.description);
   done();
 });

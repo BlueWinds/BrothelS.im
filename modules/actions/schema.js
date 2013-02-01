@@ -1,161 +1,106 @@
-function Action(obj) {
-  Resolvable.call(this, obj);
-  delete this.enableConditions;
-  delete this.options;
-  delete this.disable;
-}
+Schemas.Context.properties.action = { $ref: 'liveAction' };
 
-Action.prototype = new Resolvable();
-
-Action.create = function(_id, context) {
-  var action = Resolvable.create(_id, 'Action', context);
-  if (!action) { return action; }
-  var option = context.option || Object.keys(action.options())[0];
-  if (option) { action.setOption(option); }
-  action.disabled = action.checkDisabled();
-  if (action.disabled) { action.description = action.disabled; }
-  action.label = ejs.render(action.label, context);
-  action.description = ejs.render(action.description, context);
-  action.tags = action.tags || {};
-  return action;
+Schemas.Tags = {
+  type: 'object',
+  additionalProperties: {
+    type: 'number',
+    minimum: 0,
+    maximum: 1,
+    'default': 0
+  },
+  description: 'garrison: City guard and military.\n' +
+  'university: Students, classes, temples, etc.\n' +
+  'slums: The bad part of town.\n' +
+  'docks: Ships, foreigners, traders.\n' +
+  'park: Clean, nice, families during the day / erotic, trysts, lovers during the night.\n' +
+  'market: Bustling, crowded, exotic during the day / drinking, partying, entertainment during the night.\n' +
+  'redlight: Quiet, resting, dirty during the day, the evening... well...\n' +
+  'uptown: Rich, respectable, power, elegance.\n' +
+  'indoors: Whatever building(s) the player owns, or staying inside at an inn.'
 };
 
-Action.prototype.options = function() {
-  var name, options = this.base().options;
-  if (typeof(options) == 'function') {
-    options = options.call(this, this.context());
-  } else if (options == 'girls') {
-    options = {};
-    g.girls._filter('status', 'Hired').forEach(function(girl) {
-      options[girl.name] = girl.name;
-    });
-    delete options[this.girl];
-  } else if (options == 'buildings') {
-    options = {};
-    g.buildings._filter('status', 'Owned').forEach(function(building) {
-      options[building.name] = building.name;
-    });
-  }
-  return options || {};
-};
-
-Action.prototype.setOption = function(option) {
-  var options = this.options();
-  this.option = option;
-  if (this.optionsKey) {
-    this[this.optionsKey] = option;
-  }
-};
-
-Action.prototype.checkDisabled = function() {
-  var context = this.context();
-  var cond = this.base().enableConditions;
-  if (!cond) { return; }
-  var disabled;
-  if (cond.min) {
-    if (cond.min.day > g.day) {
-      return 'Not yet day ' + cond.min.day + '.';
-    }
-    if (cond.min.girls > g.girls._filter('status', 'Hired').length) {
-      return 'Need to hire at least ' + cond.min.girls + ' girls.';
-    }
-    if (cond.min.buildings > g.buildings._filter('status', 'Owned').length) {
-      return 'Need to own at least ' + cond.min.buildings + ' buildings.';
-    }
-    if (cond.min.money > g.money) {
-      return 'Need at least $' + cond.min.money + '.';
-    }
-  }
-  if (cond.max) {
-    if (cond.max.day <  g.day) {
-      return 'Past day ' + g.day;
-    }
-    if (cond.max.girls < g.girls._filter('status', 'Hired').length) {
-      return 'Have ' + cond.girls.max + ' or fewer girls hired.';
-    }
-    if (cond.max.buildings < g.buildings._filter('status', 'Owned').length) {
-      return 'Own ' + cond.max.buildings + ' or fewer buildings.';
-    }
-    if (cond.max.money < g.money) {
-      return 'Have $' + g.money + ' or less.';
-    }
-  }
-  if (cond.girl && context.girl) {
-    disabled = context.girl.compare(cond.girl, true);
-    if (disabled) { return disabled; }
-  }
-  if (cond.building && context.building) {
-    disabled = context.building.compare(cond.building, true);
-    if (disabled) { return disabled; }
-  }
-  if (this.base().disable) {
-    return this.base().disable.call(this, context);
-  }
-};
-
-Girl.actions = function(time) {
-  var list = {};
-  g.girls._filter('status', 'Hired').forEach(function(girl) {
-    list[girl.actions[time]._id] = list[girl.actions[time]._id] || [];
-    list[girl.actions[time]._id].push(girl.name);
-  });
-  return list;
-};
-
-Girl.prototype.action = function(_id, context) {
-  context.girl = this;
-  return Action.create(_id, context);
-};
-
-Girl.prototype.setAction = function(action) {
-  if (action.allDay) {
-    this.actions.morning = action;
-    this.actions.evening = action;
-    return;
-  }
-  if (this.actions.evening && this.actions.evening.allDay) {
-    this.actions.morning = this.action('Rest', { time: 'morning' });
-    this.actions.evening = this.action('Rest', { time: 'evening' });
-  }
-  this.actions[action.time] = action;
-};
-
-Girl.prototype.verifyActions = function(time) {
-  if (!time || time == 'morning') {
-    var m = this.actions.morning;
-    m = m && m.label && m.checkConditions() && !m.checkDisabled();
-    if (!m) {
-      this.setAction(this.action('Rest', { time: 'morning' }));
-    }
-  }
-  if (!time || time == 'evening') {
-    var e = this.actions.evening;
-    e = e && e.label && e.checkConditions() && !e.checkDisabled();
-    if (!e) {
-      this.setAction(this.action('Rest', { time: 'evening' }));
+Schemas.Action = {
+  'extends': { $ref: 'Resolvable' },
+  properties: {
+    _id: {},
+    initialize: {},
+    variants: {},
+    results: {},
+    conditions: {
+      'extends': { $ref: 'Conditions' },
+      description: 'The action will show up in the GUI when its conditions match (it may still be disabled by enableConditions below).'
+    },
+    enableConditions: {
+      'extends': { $ref: 'Conditions' },
+      description: 'If these conditions fail to match, this action will be disabled in the GUI, with an appropriate description.'
+    },
+    disable: {
+      type: 'function',
+      'arguments': ['contenxt'],
+      description: 'disable is an optional function that can return a string explaining the reason the action is disabled. If no value is returned, then the action is enabled (provided it passes enableConditions as well, that is).'
+    },
+    group: {
+      'enum': ['Jobs', 'Chores', 'Training'],
+      required: true,
+      description: 'The row to display this message on.'
+    },
+    label: {
+      type: 'string',
+      required: true,
+      description: 'The label for this action. Text replacement patterns are available.'
+    },
+    description: {
+      type: 'string',
+      required: true,
+      description: 'The hover-text for this action. Text replacement is of course available.'
+    },
+    tags: {
+      'extends': { $ref: 'Tags' },
+      description: 'Tags represent where this action occurs, though they can also be more intangible properties, such as "using magic" or "alone". The location-based tags should generally add up to 1 (though this is not a hard requirement). If tags is ommited entirely, the action cannot trigger any events. Use this if the action is one-time, important, or otherwise really shouldn\'t be interrupted by random interference.',
+      'default': {}
+    },
+    ownerParticipation: {
+      'enum': [true],
+      description: 'This action requires the player character to accompany the girl - something they can do only once per time-slot each day.'
+    },
+    allDay: {
+      'enum': [true],
+      description: 'This action takes both the morning and evening slots.'
+    },
+    options: {
+      description: 'options is either an object, with each key being the label and the value being the hovertext (replacement patterns are available for both), or a function that returns such an object.',
+      type: [
+        {
+          'enum': ['girls', 'buildings'],
+          description: 'If options is one of these special strings, then it will be replaced with a list of Hired girls or Owned buildings.'
+        },
+        {
+          type: 'object',
+          additionalProperties: { type: 'string' },
+          description: 'If an object, each key is the label and the value being the hovertext (replacement patterns are available for both).'
+        },
+        {
+          type: 'function',
+          'arguments': ['context'],
+          description: 'If options is a function, it must return an object of options (label: hovertext).'
+        }
+      ],
+      'default': {}
+    },
+    optionsKey: {
+      type: 'string',
+      description: 'The key to store the option selected by the user under. options: "buildings", optionsKey: "building" is useful in order to have the user select a building, then add it to the current context.',
+      'default': 'option'
+    },
+    option: {
+      type: 'string',
+      description: 'The default option selected before the user chooses one. Defaults to the first option in the list.'
     }
   }
 };
 
-Girl.prototype.potentialActions = function(time) {
-  var actions = {};
-  var context = {
-    time: time
-  };
-  for (var _id in Actions) {
-    actions[_id] = this.action(_id, context);
-  }
-  if (this.base().Actions) {
-    for (_id in this.base().Actions) {
-      if (actions[_id] === undefined) {
-        actions[_id] = this.action(_id, context);
-      }
-    }
-  }
-  for (_id in actions) {
-    if (!actions[_id]) {
-      delete actions[_id];
-    }
-  }
-  return actions;
+Schemas.Girl.properties.Actions = {
+  type: 'object',
+  additionalProperties: { $ref: 'Action' },
+  description: 'Actions unqiue to this girl, or overriding global ones (if they have the same _id).'
 };

@@ -5,8 +5,8 @@ Girl.prototype.maxCustomers = function() {
 };
 
 Girl.prototype.interest = function(sex) {
-  var interest = this.obedience + this[sex + ' libido'] * 2;
-  interest += this[sex + ' experience'] + this.happiness / 2;
+  var interest = this.obedience + this[sex + 'Libido'] * 2;
+  interest += this[sex + 'Experience'] + this.happiness / 2;
   interest = (interest / 450 + Math.random());
   interest -= Person.prostitution.types[sex].r;
   return interest;

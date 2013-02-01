@@ -2,20 +2,19 @@ Girls.Kirino = {
   description: "<p>After an attempted affair with her older brother ended in rejection, Kirino ran away from home - and just kept running, until she ran out of land.</p><p>She's made her living for several years now flitting between one 'project' after another, as she calls them. Working for you is the latest - <em>this time</em>, she insists it will work out.</p>",
   status: 'Hired',
   happiness: 100,
-  endurance: 100,
   obedience: 60,
   modesty: 10,
   charisma: 50,
   intelligence: 30,
   constitution: 80,
-  'soft libido': 30,
-  'soft experience': 30,
-  'hard libido': 60,
-  'hard experience': 10,
-  'anal libido': 30,
-  'anal experience': 5,
-  'fetish libido': 0,
-  'fetish experience': 0,
+  softLibido: 30,
+  softExperience: 30,
+  hardLibido: 60,
+  hardExperience: 10,
+  analLibido: 30,
+  analExperience: 5,
+  fetishLibido: 0,
+  fetishExperience: 0,
   specialRules: {
     payRatio: 0
   },
@@ -37,7 +36,7 @@ Girls.Kirino = {
     tentacles: ["Fet1.jpg", "Fet3.jpg", "Fet4.jpg"]
   },
   Actions: {
-    Talk: {
+    Talk: $.extend(true, Actions.Talk, {
       results: [
         {
           message: {
@@ -88,6 +87,6 @@ Girls.Kirino = {
           }
         }
       ].concat(Actions.Talk.results)
-    }
+    })
   }
 };

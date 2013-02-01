@@ -137,8 +137,8 @@ Actions.Study = {
       girl: {
         endurance: -10,
         intelligence: 1,
-        'hard experience': 1,
-        'hard libido': 1,
+        hardExperience: 1,
+        hardLibido: 1,
         modesty: -1.3
       }
     }
@@ -197,7 +197,7 @@ Actions.Expose = {
         endurance: -4,
         happiness: -4,
         modesty: -2,
-        'soft libido': 0.1
+        softLibido: 0.1
       }
     },
     {
@@ -210,7 +210,7 @@ Actions.Expose = {
       girl: {
         endurance: -5,
         modesty: -2.5,
-        'soft libido': 0.2,
+        softLibido: 0.2,
         obedience: -0.5
       }
     },
@@ -309,7 +309,7 @@ Actions.OD = {
       girl: {
         endurance: -5,
         obedience: 0.3,
-        'soft libido': 2.5,
+        softLibido: 2.5,
         happiness: 3
       }
     },
@@ -323,7 +323,7 @@ Actions.OD = {
       girl: {
         endurance: -6,
         obedience: 0.3,
-        'hard libido': 2.5,
+        hardLibido: 2.5,
         happiness: 4
       }
     },
@@ -337,7 +337,7 @@ Actions.OD = {
       girl: {
         endurance: -7,
         obedience: 0.3,
-        'anal libido': 2.5,
+        analLibido: 2.5,
         happiness: 5
       }
     },
@@ -351,7 +351,7 @@ Actions.OD = {
       girl: {
         endurance: -8,
         obedience: 1,
-        'fetish libido': 2.5,
+        fetishLibido: 2.5,
         happiness: 3
       }
     }
@@ -361,6 +361,7 @@ Actions.OD = {
 Actions.Lockdown = {
   label: 'Lockdown',
   group: 'Chores',
+  description: 'She will be bound and gagged in the dungeon to increase her <<- T("obedience") >>. This action takes all day.',
   allDay: true,
   conditions: {
     min: { buildings: 1 }
@@ -377,7 +378,6 @@ Actions.Lockdown = {
     }
   },
   tags: { indoors: 1 },
-  description: 'She will be bound and gagged in the dungeon to increase her <<- T("obedience") >>. This action takes all day.',
   variants: [0.5, 0.5],
   results: [
     {

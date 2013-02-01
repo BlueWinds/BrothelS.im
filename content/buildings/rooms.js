@@ -1,12 +1,10 @@
-Rooms.dungeon = {
-  label: 'Dungeon',
+Rooms.Dungeon = {
   price: 1200,
   description: 'Assign up to <<= room.size >> girls to Lockown to increase their Submission at the expense of Happiness and a little bit of Constitution.',
   maxInBuilding: 1
 };
 
-Rooms.bedroom = {
-  label: 'Bedroom',
+Rooms.Bedroom = {
   price: 500,
   description: "Each bedroom can house one girl, allowing her to work in this building and saving a great deal of money since she doesn't need to rent a room at an inn every night.",
   render: function(building, rerender) {

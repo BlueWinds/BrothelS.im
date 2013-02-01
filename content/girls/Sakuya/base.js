@@ -2,20 +2,19 @@ Girls.Sakuya = {
   description: "<p>Sakuya is clearly not from around here. She speaks the language with little accent, but there's still something... otherworldly about her. She bills herself as a maid, and a brief demonstration suggests she is indeed quite good at is. It would take a bit of convincing to get her to work as a prostitute, but she doesn't seem unwilling...</p>",
   status: 'For Hire',
   happiness: 0,
-  endurance: 100,
   obedience: 40,
   charisma: 20,
   modesty: 60,
   intelligence: 50,
   constitution: 70,
-  'soft libido': 10,
-  'soft experience': 0,
-  'hard libido': 20,
-  'hard experience': 10,
-  'anal libido': 10,
-  'anal experience': 0,
-  'fetish libido': 30,
-  'fetish experience': 5,
+  softLibido: 10,
+  softExperience: 0,
+  hardLibido: 20,
+  hardExperience: 10,
+  analLibido: 10,
+  analExperience: 0,
+  fetishLibido: 30,
+  fetishExperience: 5,
   images: {
     basePath: "content/girls/Sakuya/images",
     base: "Base.jpg",
@@ -40,7 +39,7 @@ Girls.Sakuya = {
     }
   },
   Actions: {
-    Talk: {
+    Talk: $.extend(true, Actions.Talk, {
       results: [
         {
           message: {
@@ -65,7 +64,7 @@ Girls.Sakuya = {
           girl: {
             obedience: 1.5,
             endurance: -4,
-            'fetish libido': 1
+            fetishLibido: 1
           }
         },
         {
@@ -82,8 +81,8 @@ Girls.Sakuya = {
           }
         }
       ].concat(Actions.Talk.results)
-    },
-    Lockdown: {
+    }),
+    Lockdown: $.extend(true, Actions.Lockdown, {
       results: [
         {
           girl: { happiness: 0 }
@@ -92,8 +91,8 @@ Girls.Sakuya = {
           girl: { happiness: 0 }
         }
       ]
-    },
-    Clean: {
+    }),
+    Clean: $.extend(true, Actions.Clean, {
       variants: function(context, done) {
         var delta = this.results[0];
         delta.building.clean += context.girl.specialRules.magic / 10;
@@ -116,7 +115,7 @@ Girls.Sakuya = {
           building: { clean: 12 }
         }
       ] // results
-    } // Clean
+    }) // Clean
   }, // actions
   Missions: {
     ScarletDevilDream: {
@@ -163,9 +162,9 @@ Girls.Sakuya = {
       end: {
         min: { day: '+5' }
       },
-      success: {
+      results: [{
         mission: 'SakuyaSomethingToSay'
-      }
+      }]
     },
     SakuyaSomethingToSay: {
       display: {
@@ -261,31 +260,31 @@ Girls.Sakuya = {
         Game.getUserInput(text, 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg', options, function(answer) {
           var delta = { message: [] };
           if (answer == '"Don\'t go!"') {
-            delta.message.push(mission.results.dontGo1);
-            delta.message.push(mission.results.dontGo2);
+            delta.message.push(mission.results.dontGo1.message);
+            delta.message.push(mission.results.dontGo2.message);
             if (context.girl.specialRules.magic >= 50) {
               delta.girl = {
                 obedience: -10,
                 constitution: 7
               };
-              delta.message.push(mission.results.dontGoWin1);
-              delta.message.push(mission.results.dontGoWin2);
+              delta.message.push(mission.results.dontGoWin1.message);
+              delta.message.push(mission.results.dontGoWin2.message);
             } else {
               delta.girl = {
                 constitution: -10,
                 obedience: -10,
                 money: -5000
               };
-              delta.message.push(mission.results.dontGoLoose1);
-              delta.message.push(mission.results.dontGoLoose2);
+              delta.message.push(mission.results.dontGoLoose1.message);
+              delta.message.push(mission.results.dontGoLoose2.message);
             }
           } else {
             context.girl.status = 'Gone';
             if (context.girl.modesty >= 75 && context.girl.obedience >= 90) {
-              delta.message = mission.results.staySilentGood;
+              delta.message = mission.results.staySilentGood.message;
               delta.money = 10000;
             } else {
-              delta.message = mission.results.staySilentBad;
+              delta.message = mission.results.staySilentBad.message;
               delta.money = 2000;
             }
           }
@@ -294,59 +293,75 @@ Girls.Sakuya = {
       },
       results: {
         dontGo1: {
-          group: 'Enter the Devil',
-          label: 'Confrontation',
-          image: 'content/girls/Sakuya/missionImages/Nightmare1.jpg',
-          text: 'As you call out to Sakuya to stay here and make a new life, the Scarlet Devil frowns, pouts out her lips, and then screams. The shriek seems to go on and on, painful and growing loud enough to double you over in pain. Through a red haze, you see the Scarlet Devil\'s bat wings have grown larger, and her eyes have started to glow. The shriek finally comes to a stop, and you wipe away the blood in your eyes (where did that come from?). The haze remains, turning the sky blood-red.',
-          weight: -1,
-          delta: false
+          message: {
+            group: 'Enter the Devil',
+            label: 'Confrontation',
+            image: 'content/girls/Sakuya/missionImages/Nightmare1.jpg',
+            text: 'As you call out to Sakuya to stay here and make a new life, the Scarlet Devil frowns, pouts out her lips, and then screams. The shriek seems to go on and on, painful and growing loud enough to double you over in pain. Through a red haze, you see the Scarlet Devil\'s bat wings have grown larger, and her eyes have started to glow. The shriek finally comes to a stop, and you wipe away the blood in your eyes (where did that come from?). The haze remains, turning the sky blood-red.',
+            weight: -1,
+            delta: false
+          }
         },
         dontGo2: {
-          group: 'Enter the Devil',
-          label: 'Confrontation',
-          image: 'content/girls/Sakuya/missionImages/Magic.jpg',
-          text: "Sakuya is not so easily taken down. The blue glow surrounding her seems pitifully insufficient against the red power drowning the sky itself, but she stands steady. Glancing down at you to reinforce her conviction - the Scarlet Devil nods, and Sakuya pauses to carry you safely out of the way. With a dramatic pause, she launches herself at the Devil. The sky fills with sparks - you can hardly keep track of Sakuya, as she flickers around the empty battlefield, appearing only for an instant at each location with no transition between, at each place throwing a knife of blue energy. The Devil merely stands still and glares, red waves of energy exploding into a thousand jagged shards to meet with each blue counterpart.",
-          delta: false
+          message: {
+            group: 'Enter the Devil',
+            label: 'Confrontation',
+            image: 'content/girls/Sakuya/missionImages/Magic.jpg',
+            text: "Sakuya is not so easily taken down. The blue glow surrounding her seems pitifully insufficient against the red power drowning the sky itself, but she stands steady. Glancing down at you to reinforce her conviction - the Scarlet Devil nods, and Sakuya pauses to carry you safely out of the way. With a dramatic pause, she launches herself at the Devil. The sky fills with sparks - you can hardly keep track of Sakuya, as she flickers around the empty battlefield, appearing only for an instant at each location with no transition between, at each place throwing a knife of blue energy. The Devil merely stands still and glares, red waves of energy exploding into a thousand jagged shards to meet with each blue counterpart.",
+            delta: false
+          }
         },
         dontGoWin1: {
-          group: 'Enter the Devil',
-          label: 'Confrontation',
-          image: 'content/girls/Sakuya/missionImages/WinFight.jpg',
-          text: "The battle doesn't take long. Sakuya finally manages to penetrate her foe's defenses, one of the blue bolts knocking the Devil from her feet with a startled expression. Sakuya flickers to her side instantly kneeling on her chest with a fierce expression and her face and a pair of knives in her hand. She stabs the knives into the ground on either side of the Devile's head with ferocious strength, leaving buried to the hilt in cracked cobblestones, half an inch from either side of her former mistress' head. The moon is pale again.",
-          delta: false
+          message: {
+            group: 'Enter the Devil',
+            label: 'Confrontation',
+            image: 'content/girls/Sakuya/missionImages/WinFight.jpg',
+            text: "The battle doesn't take long. Sakuya finally manages to penetrate her foe's defenses, one of the blue bolts knocking the Devil from her feet with a startled expression. Sakuya flickers to her side instantly kneeling on her chest with a fierce expression and her face and a pair of knives in her hand. She stabs the knives into the ground on either side of the Devile's head with ferocious strength, leaving buried to the hilt in cracked cobblestones, half an inch from either side of her former mistress' head. The moon is pale again.",
+            delta: false
+          }
         },
         dontGoWin2: {
-          group: 'Enter the Devil',
-          label: 'Confrontation',
-          image: 'content/girls/Sakuya/images/Base.jpg',
-          text: "She stands, the blue aura finally fading, and returns to where she deposited you at the start of the fight, offering a hand to help you to your feet - you take it, knees wobbly and hair sticky from blood that ran out of your ears. The area around the fight is completely trashed, two inch gouges in solid stone and anything softer completely destroyed. It'll be a hell of a cleanup job. An unexpected sound - a giggle - causes you and Sakuya to look over your shoulders.<blockquote>Teeheehee. You're so cute, Sakuya, all grown up...</blockquote> Sakuya blushes and throws a knife at the Devil, which she casually deflects with one hand.<blockquote>Don't worry about the damage - I brought a new maid, just in case things didn't work out with you. We'll have it patched up by morning. Oh, and do at least <em>pretend</em> to guard your left.</blockquote> And... she's gone. Just... gone. One moment present, the next vanished. Sakuya tells you she won't be back. You believe her."
+          message: {
+            group: 'Enter the Devil',
+            label: 'Confrontation',
+            image: 'content/girls/Sakuya/images/Base.jpg',
+            text: "She stands, the blue aura finally fading, and returns to where she deposited you at the start of the fight, offering a hand to help you to your feet - you take it, knees wobbly and hair sticky from blood that ran out of your ears. The area around the fight is completely trashed, two inch gouges in solid stone and anything softer completely destroyed. It'll be a hell of a cleanup job. An unexpected sound - a giggle - causes you and Sakuya to look over your shoulders.<blockquote>Teeheehee. You're so cute, Sakuya, all grown up...</blockquote> Sakuya blushes and throws a knife at the Devil, which she casually deflects with one hand.<blockquote>Don't worry about the damage - I brought a new maid, just in case things didn't work out with you. We'll have it patched up by morning. Oh, and do at least <em>pretend</em> to guard your left.</blockquote> And... she's gone. Just... gone. One moment present, the next vanished. Sakuya tells you she won't be back. You believe her."
+          }
         },
         dontGoLoose1: {
-          group: 'Enter the Devil',
-          label: 'Confrontation',
-          image: 'content/girls/Sakuya/images/Prison1.jpg',
-          text: "As you estimated, the Scarlet Devil's power is immense, and it takes only moments for her to land a hit which sends Sakuya sprawling. She gets up though, and resumes her attack, only to be beaten down again. She stands twice more, each time her blue aura weaker, the red seeming more all pervasive, until finally she doesn't move. The Devil paralizes you with another glance, walks over, and puts a leash around Sakuya's neck. She rolls Sakuya over with one foot in order to secure further bondage equipment, and pulls her to her feet.",
-          delta: false
+          message: {
+            group: 'Enter the Devil',
+            label: 'Confrontation',
+            image: 'content/girls/Sakuya/images/Prison1.jpg',
+            text: "As you estimated, the Scarlet Devil's power is immense, and it takes only moments for her to land a hit which sends Sakuya sprawling. She gets up though, and resumes her attack, only to be beaten down again. She stands twice more, each time her blue aura weaker, the red seeming more all pervasive, until finally she doesn't move. The Devil paralizes you with another glance, walks over, and puts a leash around Sakuya's neck. She rolls Sakuya over with one foot in order to secure further bondage equipment, and pulls her to her feet.",
+            delta: false
+          }
         },
         dontGoLoose2: {
-          group: 'Enter the Devil',
-          label: 'Confrontation',
-          image: 'content/girls/Sakuya/images/Fetish3.jpg',
-          text: "Rather than leading her away as you'd expect, she lets out an entirely unexpected giggle, and leads her over to you. Adding an overly-dramatic sigh, she speaks.<blockquote>I guess if she really wants to stay...</blockquote>She places the leash in your completely-paralized hand, and closes your fingers over it. Leaning over to whisper something in Sakuya's ear, she giggles again and vanishes. Free to move again, you remove Sakuya's blindfold and ask what the Devil said to her.<blockquote>She's not paying for all this.</blockquote> The area around the fight is completely trashed, two inch gouges in solid stone and anything softer completely destroyed. It'll be a hell of a cleanup job, and with the Devil nowhere to be seen, it looks like you'll be footing the bill..."
+          message: {
+            group: 'Enter the Devil',
+            label: 'Confrontation',
+            image: 'content/girls/Sakuya/images/Fetish3.jpg',
+            text: "Rather than leading her away as you'd expect, she lets out an entirely unexpected giggle, and leads her over to you. Adding an overly-dramatic sigh, she speaks.<blockquote>I guess if she really wants to stay...</blockquote>She places the leash in your completely-paralized hand, and closes your fingers over it. Leaning over to whisper something in Sakuya's ear, she giggles again and vanishes. Free to move again, you remove Sakuya's blindfold and ask what the Devil said to her.<blockquote>She's not paying for all this.</blockquote> The area around the fight is completely trashed, two inch gouges in solid stone and anything softer completely destroyed. It'll be a hell of a cleanup job, and with the Devil nowhere to be seen, it looks like you'll be footing the bill..."
+          }
         },
         staySilentGood: {
-          group: 'Enter the Devil',
-          label: 'Confrontation',
-          image: 'content/girls/Sakuya/missionImages/ScarletDevil3.jpg',
-          text: "It's not right that she live so far from home among strangers, and the Scarlet Devil looks like she'd be upset (and possibly violent) over a refusal. You nod to Sakuya - obedient and submissive, she takes her mistress's outstretched hand and bows her head. Scarlet raises her up and nods kindly. Sakuya turns back to you for a moment.<blockquote>My mistress will have payment delivered by morning.</blockquote> The Devil grins, kisses her maid's cheek, and they're gone. Not walking together down the street, but there one moment, gone the next, the same way Sakuya used to do while cleaning. With a sigh you turn homeward.",
-          weight: -1
+          message: {
+            group: 'Enter the Devil',
+            label: 'Confrontation',
+            image: 'content/girls/Sakuya/missionImages/ScarletDevil3.jpg',
+            text: "It's not right that she live so far from home among strangers, and the Scarlet Devil looks like she'd be upset (and possibly violent) over a refusal. You nod to Sakuya - obedient and submissive, she takes her mistress's outstretched hand and bows her head. Scarlet raises her up and nods kindly. Sakuya turns back to you for a moment.<blockquote>My mistress will have payment delivered by morning.</blockquote> The Devil grins, kisses her maid's cheek, and they're gone. Not walking together down the street, but there one moment, gone the next, the same way Sakuya used to do while cleaning. With a sigh you turn homeward.",
+            weight: -1
+          }
         },
         staySilentBad: {
-          group: 'Enter the Devil',
-          label: 'Confrontation',
-          image: 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg',
-          text: "It's not right that she live so far from home among strangers, and the Scarlet Devil looks like she'd be upset (and possibly violent) over a refusal. You nod to Sakuya - she takes her mistress's outstretched hand and turns to face you to say goodbye. A flicker of disapproval crosses Scarlet's face, but she doesn't interrupt. <blockquote>I will have have payment delivered by morning.</blockquote> The Devil frowns at you, clearly not as pleased with you as you had expected, but happy to have Sakuya back none the less. She kisses her maid's cheek, and they're gone. Not walking together down the street, but there one moment, gone the next, the same way Sakuya used to do while cleaning. With a sigh you turn homeward.",
-          weight: -1
+          message: {
+            group: 'Enter the Devil',
+            label: 'Confrontation',
+            image: 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg',
+            text: "It's not right that she live so far from home among strangers, and the Scarlet Devil looks like she'd be upset (and possibly violent) over a refusal. You nod to Sakuya - she takes her mistress's outstretched hand and turns to face you to say goodbye. A flicker of disapproval crosses Scarlet's face, but she doesn't interrupt. <blockquote>I will have have payment delivered by morning.</blockquote> The Devil frowns at you, clearly not as pleased with you as you had expected, but happy to have Sakuya back none the less. She kisses her maid's cheek, and they're gone. Not walking together down the street, but there one moment, gone the next, the same way Sakuya used to do while cleaning. With a sigh you turn homeward.",
+            weight: -1
+          }
         }
       } // results
     } // ScarletDevilTraining

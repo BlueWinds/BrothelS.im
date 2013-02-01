@@ -99,6 +99,7 @@ Actions.Whore = {
     }
   },
   disable: Actions.Streetwalk.disable,
+  results: {},
   eachCustomer: {
     building: {
       clean: -1
@@ -195,7 +196,7 @@ Actions.Acolyte = {
         endurance: -5,
         modesty: 3,
         happiness: 4,
-        'soft libido': 0.7
+        softLibido: 0.7
       }
     },
     {
@@ -231,7 +232,7 @@ Actions.Acolyte = {
         endurance: -10,
         modesty: 1.4,
         happiness: 3,
-        'hard experience': 1.5
+        hardExperience: 1.5
       }
     },
     {

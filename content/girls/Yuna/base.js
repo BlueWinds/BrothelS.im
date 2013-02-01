@@ -2,20 +2,19 @@ Girls.Yuna = {
   description: "A summoner with powerful allies, Yuna fled the devastation of her homeland by mysterious forces, arriving here some months ago. She initially sought to gather allies to return home and rescue her land, but with little money and everyone busy with their own problems, she's been getting desperate for a job. Any job.",
   status: 'For Hire',
   happiness: 25,
-  endurance: 65,
   obedience: 45,
   modesty: 60,
   charisma: 60,
-  intelligance: 70,
+  intelligence: 70,
   constitution: 20,
-  'soft libido': 10,
-  'soft experience': 15,
-  'hard libido': 5,
-  'hard experience': 0,
-  'anal libido': 0,
-  'anal experience': 0,
-  'fetish libido': 15,
-  'fetish experience': 5,
+  softLibido: 10,
+  softExperience: 15,
+  hardLibido: 5,
+  hardExperience: 0,
+  analLibido: 0,
+  analExperience: 0,
+  fetishLibido: 15,
+  fetishExperience: 5,
   images: {
     basePath: "content/girls/Yuna/images",
     base: "base.jpg",
@@ -34,7 +33,7 @@ Girls.Yuna = {
     refuse: ["refuse1.jpg", "refuse2.jpg"]
   },
   Actions: {
-    Talk: {
+    Talk: $.extend(true, Actions.Talk, {
       results: [
         {
           message: {
@@ -77,7 +76,7 @@ Girls.Yuna = {
           }
         }
       ].concat(Actions.Talk.results)
-    },
+    }),
     Summon: {
       label: 'Summon',
       group: 'Chores',
@@ -111,10 +110,10 @@ Girls.Yuna = {
           girl: {
             happiness: -10,
             endurance: -30,
-            'anal experience': 10,
-            'anal libido': -3,
-            'fetish experience': 10,
-            'fetish libido': -5
+            analExperience: 10,
+            analLibido: -3,
+            fetishExperience: 10,
+            fetishLibido: -5
           }
         },
         {
@@ -181,12 +180,12 @@ Girls.Yuna = {
             happiness: 10,
             endurance: -40,
             constitution: -7,
-            'hard experience': 6,
-            'hard libido': 5,
-            'anal experience': 3,
-            'anal libido': 5,
-            'fetish experience': 3,
-            'fetish libido': 5
+            hardExperience: 6,
+            hardLibido: 5,
+            analExperience: 3,
+            analLibido: 5,
+            fetishExperience: 3,
+            fetishLibido: 5
           }
         }
       ] // results

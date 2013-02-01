@@ -12,5 +12,6 @@ Missions.tentacleAttackIntro = {
       tentacleAttackIntro: -3
     },
     fetishes: { tentacles: true }
-  }
+  },
+  results: [{}]
 };

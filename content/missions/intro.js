@@ -77,7 +77,8 @@ Missions.enduranceAndHappiness = {
         happiness: 80
       }
     }
-  }
+  },
+  results: [{}]
 };
 
 Missions.charismaAndIntelligence = {
@@ -111,7 +112,7 @@ Missions.libidoAndExperience = {
   },
   end: {
     girl: {
-      min: { 'hard libido': 61 }
+      min: { hardLibido: 61 }
     }
   },
   results: [{
@@ -268,5 +269,6 @@ Missions.buyRooms = {
   },
   end: {
     min: { day: '+3' }
-  }
+  },
+  results: [{}]
 };

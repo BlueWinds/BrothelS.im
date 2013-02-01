@@ -24,9 +24,9 @@ Events.thugRape = {
         endurance: -25,
         happiness: -15,
         constitution: -1,
-        'hard experience': 4,
-        'hard libido': -4,
-        'fetish libido': 2,
+        hardExperience: 4,
+        hardLibido: -4,
+        fetishLibido: 2,
         obedience: 3
       }
     },
@@ -110,9 +110,9 @@ Events.guardRape = {
         endurance: -25,
         happiness: -15,
         constitution: -1,
-        'hard experience': 4,
-        'hard libido': -4,
-        'fetish libido': 2,
+        hardExperience: 4,
+        hardLibido: -4,
+        fetishLibido: 2,
         obedience: 3
       },
       mission: 'avengeGuardWait'

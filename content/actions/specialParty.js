@@ -14,8 +14,10 @@ Actions.attendParty = {
   },
   enableConditions: {
     girl: {
-      happiness: 30,
-      endurance: 40
+      min: {
+        happiness: 30,
+        endurance: 40
+      }
     }
   },
   disable: function(context) {
@@ -32,10 +34,10 @@ Actions.attendParty = {
     delta.money += context.girl.get(client.wants[0]) * 10;
     delta.money += context.girl.get(client.wants[1]) * 5;
     delta.money += context.girl.get(client.wants[2]) * 1;
-    delta.girl[client.sex[0] + ' libido'] = 8;
-    delta.girl[client.sex[0] + ' experience'] = 10;
-    delta.girl[client.sex[1] + ' libido'] = 5;
-    delta.girl[client.sex[1] + ' experience'] = 4;
+    delta.girl[client.sex[0] + 'Libido'] = 8;
+    delta.girl[client.sex[0] + 'Experience'] = 10;
+    delta.girl[client.sex[1] + 'Libido'] = 5;
+    delta.girl[client.sex[1] + 'Experience'] = 4;
     done(delta);
   },
   results: [
