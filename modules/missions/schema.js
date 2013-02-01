@@ -157,7 +157,6 @@ Schemas.Result = {
       description: 'A Mission to start. If there is a girl in the context, if can be a mission specific to her. The mission will inherit the current context, and its Conditions will *not* be checked.'
     }
   },
-  minProperties: 1,
   additionalProperties: false
 };
 

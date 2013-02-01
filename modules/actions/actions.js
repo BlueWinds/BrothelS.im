@@ -117,21 +117,8 @@ e.GameRender.push(function(done) {
 });
 
 e.GirlRunTime.push(function(girl, time, done) {
-  if (girl.status != 'Hired') { done(); return; }
-
-  if (girl.actions[time]) {
-    girl.actions[time].applyResults(function() {
-      if (time == 'evening') {
-        girl.apply('money', -girl.actions.pay);
-        var change = girl.actions.pay - girl.desiredPay();
-        change = change > 0 ? change * Girl.config.pay.above : change * Girl.config.pay.below;
-        if (change > 0) {
-          change = Math.pow(change, 0.66);
-        }
-        girl.apply('happiness', change);
-      }
-      done();
-    });
+  if (girl.status == 'Hired' && girl.actions[time]) {
+    girl.actions[time].applyResults(done);
     return;
   }
   done();

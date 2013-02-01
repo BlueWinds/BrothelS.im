@@ -5,12 +5,12 @@
   <title>Brothel S.im</title>
   <link rel="shortcut icon" href="favicon.ico">
   <link href="libraries/ui-darkness.css" type="text/css" rel="stylesheet">
-  <script src="libraries/jquery.js"></script>
-  <script src="libraries/jquery-ui.js"></script>
+  <script src="libraries/jquery-1.9.js"></script>
+  <script src="libraries/jquery-ui-1.10.js"></script>
   <script src="libraries/globalize.js"></script>
   <script src="libraries/ejs.js"></script>
   <script src="libraries/namegen.js"></script>
-  <script src="libraries/jquery.sparkline.js"></script>
+  <script src="libraries/jquery.sparkline.min.js"></script>
   <script type="text/javascript" src="libraries/tv4.js"></script>
 
   <link href="modules/style.css" type="text/css" rel="stylesheet">
@@ -274,11 +274,21 @@
               <<- girl.S(stat) >>
             </div>
           << }) >>
-          <div id="pay">
-            <label><strong>Pay</strong></label>
-            <input value="$<<- girl.actions.pay >>">
-            <span class="delta happiness"></span>
-          </div>
+          << if (g.missionsDone.firstMoney) { >>
+            <div id="pay">
+              << var pay = girl.desiredPay() >>
+              <label><strong>Pay</strong></label>
+              <select>
+                << for (var mult in Girl.config.pay) { >>
+                  <option value="<<- mult >>" <<- girl.actions.pay == mult ? "selected" : "" >>>
+                    $<<- Math.floor(pay * mult) >>
+                  </option>
+                << } >>
+              </select>
+              <span class="delta money">$<<- Math.floor(pay * girl.actions.pay) >></span>
+              <span class="delta happiness"><<- girl.payHappiness() >></span>
+            </div>
+          << } >>
         </div>
         <div class="column pct-45 right">
           << Girl.sex.forEach(function(sex) { >>

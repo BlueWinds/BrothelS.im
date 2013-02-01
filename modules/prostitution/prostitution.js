@@ -75,7 +75,7 @@ Girl.prototype.interest = function(sex) {
     g.messages.push(new Message({
       label: this.label,
       image: context.girl.image(sex),
-      text: this.customerMessage,
+      text: this.special.customerMessage,
       group: context.girl.name,
       delta: endDelta()
     }, context));

@@ -1,8 +1,12 @@
 Girl.config = {
   startMaxGirls: 1,
   pay: {
-    above: 0.1,
-    below: 0.2
+    0: -12,
+    0.33: -6,
+    0.66: -3,
+    1: 0,
+    1.5: 3,
+    2.5: 6
   },
   payRatio: 0.05,
   hirePrice: {

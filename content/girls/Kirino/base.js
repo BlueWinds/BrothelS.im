@@ -17,7 +17,7 @@ Girls.Kirino = {
   fetishLibido: 0,
   fetishExperience: 0,
   specialRules: {
-    payRatio: 0
+    payRatio: 0.33
   },
   images: {
     basePath: "content/girls/Kirino/images",

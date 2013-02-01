@@ -216,7 +216,7 @@ Girl.prototype.building = function() {
   var name = this.name;
   var final_building;
   g.buildings._filter('status', 'Owned').forEach(function(building) {
-    building.rooms._filter('type', 'bedroom').forEach(function(room) {
+    building.rooms._filter('type', 'Bedroom').forEach(function(room) {
       if (room.girl == name) { final_building = building; }
     });
   });

@@ -20,6 +20,7 @@ e.GameUpgrade04.push(function(game, next) {
     'fetish libido': 'fetishLibido',
     'fetish experience': 'fetishExperience'
   };
+  game.girls.Kirino.specialRules.payRatio = Girls.Kirino.specialRules.payRatio;
   for (var name in game.girls) {
     if (!game.girls[name].hireDay) {
       game.girls[name].hireDay = 0;
@@ -97,6 +98,8 @@ e.GameNextDay.push(function(done) {
 
 e.GamePostDay.push(function(done) {
   $.each(g.girls, function(name, girl) {
+    g.money -= Math.floor(girl.actions.pay * girl.desiredPay());
+    girl.apply('happiness', girl.payHappiness());
     girl.turnDelta = girl.turnDelta();
   });
   done();
@@ -116,24 +119,12 @@ e.GameRender.push(function(done) {
     var view = $(ejs.render($('#girls_view_template').html(), context).trim());
 
     var desired = girl.desiredPay();
-    var pay_delta = $('#pay .delta.happiness', view);
-    function spin(event, ui) {
-      var change = ui.value - desired;
-      change = change > 0 ? change * Girl.config.pay.above : change * Girl.config.pay.below;
-      change = Math.floor(change);
-      if (change > -1) {
-        change = '+' + Math.floor(Math.pow(change, 0.66));
-      }
-      girl.actions.pay = ui.value;
-      pay_delta.html(change);
-    }
-    $('#pay input', view).spinner({
-      step: 10,
-      min: 0,
-      max: 500,
-      numberFormat: 'C'
-    }).bind('spin', spin);
-    spin(null, {value: girl.actions.pay || 0});
+    $('#pay select', view).change(function() {
+      girl.actions.pay = $(this).val();
+      var happiness = girl.payHappiness();
+      $('#pay .delta.happiness', view).html(happiness < 0 ? happiness : '+' + happiness);
+      $('#pay .delta.money', view).html('$' + Math.floor(desired * girl.actions.pay));
+    });
 
     $('.checkbox', view).click(function(event) {
       var check = !$(this).hasClass('checked');

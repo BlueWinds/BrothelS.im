@@ -25,7 +25,9 @@ function Girl(obj) {
       girl[sex] = (base[sex] !== undefined ? base[sex] : 30);
     }
   });
-  if (this.actions.pay === undefined) { this.actions.pay = Math.round(this.desiredPay() / 10) * 10; }
+  if (Girl.config.pay[this.actions.pay] === undefined) {
+    this.actions.pay = 1;
+  }
   e.invokeAllSync('GirlNew', this);
 }
 
@@ -137,6 +139,7 @@ Girl.prototype._compare = function(delta) {
 };
 
 Girl.prototype.desiredPay = function() {
+  if (!g.missionsDone.firstMoney) { return 0; }
   var pay = this.hirePrice(50) * Girl.config.payRatio;
   if (this.intelligence < 20 && this.get('libido') > 50 ) {
     pay *= (this.intelligence / 40) + this.get('libido') / 100;
@@ -145,6 +148,10 @@ Girl.prototype.desiredPay = function() {
     pay *= this.specialRules.payRatio;
   }
   return Math.floor(pay);
+};
+
+Girl.prototype.payHappiness = function() {
+  return Girl.config.pay[this.actions.pay];
 };
 
 Girl.prototype.hirePrice = function(happiness) {
@@ -205,7 +212,6 @@ Girl.prototype.hire = function() {
   g.money -= this.hirePrice();
   this.status = 'Hired';
   this.happiness = Girl.config.startHappiness;
-  this.actions.pay = Math.round(this.desiredPay() / 10) * 10;
   this.hireDay = g.day;
 };
 

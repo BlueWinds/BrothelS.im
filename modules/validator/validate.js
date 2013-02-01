@@ -32,7 +32,8 @@ e.Autorender.push(function(element, done) {
       var success = tv4.validate(results, tv4.getSchema('Result'));
       if (!success) {
         console.log(tv4.error);
-        console.log(result);
+        console.log(this);
+        console.log(results);
       }
     }
     return oldApply.call(this, results, done);

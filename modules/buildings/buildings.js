@@ -6,7 +6,7 @@ e.GameUpgrade03.push(function(game, next) {
   next();
 });
 e.GameUpgrade04.push(function(game, next) {
-  $.each(game.buildings, function(building) {
+  $.each(game.buildings, function(name, building) {
     building.rooms.forEach(function(room) {
       room.type = room.type.charAt(0).toUpperCase() + room.type.slice(1);
     });
@@ -154,7 +154,7 @@ e.GameRender.push(function(done) {
 (function() {
   var originalPay = Girl.prototype.desiredPay;
   Girl.prototype.desiredPay = function() {
-    if (!g.missionsDone || !g.missionsDone.firstMoney) { return 0; }
+    if (!g.missionsDone.firstMoney) { return 0; }
     var pay = originalPay.call(this);
     return this.building() ? pay : pay + Building.config.noRoomDailyCost;
   };
