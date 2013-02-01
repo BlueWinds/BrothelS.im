@@ -2,17 +2,15 @@ function Resolvable(obj) {
   $.extend(true, this, obj);
   delete this.initialize;
   delete this.variants;
+  delete this.conditions;
+  this.constructor = window[this._class];
 }
 
-Resolvable.create = function(_id, _class, context, disallow_null_conditions) {
+Resolvable.create = function(_id, _class, context) {
   var base = Resolvable.base(_id, _class, context);
-  if (!base.conditions && disallow_null_conditions) {
-    return false;
-  }
   var res = new window[_class](base);
-  res.constructor = window[_class];
   res._class = _class;
-  context = res.checkConditions(res.conditions, context);
+  context = res.checkConditions(base.conditions, context);
   if (!context) { return false; }
   if (base.initialize) {
     var ret = base.initialize.call(res, context);
@@ -63,8 +61,9 @@ Resolvable.prototype.base = function() {
 };
 
 Resolvable.prototype.checkConditions = function(cond, context) {
-  cond = cond || this.conditions || {};
+  cond = cond || this.base().conditions;
   context = context || this.context(context);
+  if (!cond) { return context; }
   if (cond.fetishes) {
     for (var fet in cond.fetishes) {
       if (cond.fetishes[fet] && !g.fetishes[fet]) {
@@ -141,7 +140,9 @@ Resolvable.prototype.getResults = function(done) {
   var base = this.base();
   if (typeof(base.variants) == 'function') {
     base.variants.call(this, this.context(), done);
-  } else if (this.results && base.variants) {
+    return;
+  }
+  if (this.results && base.variants) {
     var rand = Math.random();
     for (var i in base.variants) {
       if (typeof(base.variants[i]) == 'number') {
@@ -154,9 +155,9 @@ Resolvable.prototype.getResults = function(done) {
       }
     }
     done(this.results[i]);
-  } else {
-    done(base.results && base.results[0] || {});
+    return;
   }
+  done(Math.choice(base.results));
 };
 
 Resolvable.prototype.applyResults = function(results, done) {

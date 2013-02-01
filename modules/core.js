@@ -221,6 +221,15 @@ Object.defineProperty(Object.prototype, "_sort", {
   }
 });
 
+Object.defineProperty(Array.prototype, "_append", {
+  enumerable: false,
+  writable: false,
+  configurable: true,
+  value: function(items) {
+    this.push.apply(this, items);
+  }
+});
+
 Object.defineProperty(Object.prototype, "_toString", {
   enumerable: false,
   writable: false,

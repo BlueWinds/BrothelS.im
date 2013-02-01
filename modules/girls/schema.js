@@ -59,7 +59,8 @@ Schemas.girlConditions = {
     },
     status: {
       type: 'string',
-      'enum': ['Hired', 'For Hire', 'Town', 'Gone']
+      'enum': ['Hired', 'For Hire', 'Town', 'Gone'],
+      'default': 'Hired'
     }
   },
   patternProperties: {
@@ -142,7 +143,7 @@ Schemas.Girl = {
   type: 'object',
   required: [
     'name', 'description', 'status', 'images',
-    'happiness', 'obedience', 'modesty',
+    'happiness', 'endurance', 'obedience', 'modesty',
     'charisma', 'intelligence', 'constitution',
     'softLibido', 'softExperience', 'hardLibido',
     'hardExperience', 'analLibido', 'analExperience',
@@ -162,6 +163,7 @@ Schemas.Girl = {
       anyOne: [ { $ref: 'Stat' } ],
       description: "Here, happiness only acts as a multiplier to the girl's hire price - it's always set to 75 when she's hired. Higher values will make her cheaper."
     },
+    endurance: { $ref: 'Stat' },
     obedience: { $ref: 'Stat' },
     modesty: { $ref: 'Stat' },
     charisma: { $ref: 'Stat' },
@@ -237,7 +239,7 @@ Schemas.liveGirl = {
     'softLibido', 'softExperience', 'hardLibido',
     'hardExperience', 'analLibido', 'analExperience',
     'fetishLibido', 'fetishExperience',
-    'actions', 'hireDay'
+    'actions'
   ],
   properties: {
     name: {

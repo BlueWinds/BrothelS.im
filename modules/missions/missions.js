@@ -13,6 +13,11 @@ e.Ready.push(function(done) {
   done();
 });
 
+e.GameUpgrade04.push(function(game, next) {
+  delete game.missions.setFirstAction;
+  next();
+});
+
 Mission.checkStart = function(day, done) {
   var context = {
     day: day

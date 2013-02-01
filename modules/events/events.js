@@ -1,7 +1,7 @@
 var Events = {};
 e.GameUpgrade04.push(function(game, next) {
   for (var name in game.girls) {
-    delete game.girls[name].events;;
+    delete game.girls[name].events;
   }
   next();
 });

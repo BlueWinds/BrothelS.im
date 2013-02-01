@@ -80,9 +80,6 @@ Actions.Talk = {
     }
   },
   ownerParticipation: true,
-  variants: function(context, done) {
-    done(Math.choice(this.results));
-  },
   results: [
     {
       message: {

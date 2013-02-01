@@ -2,6 +2,7 @@ Girls.Jill = {
   description: "A former member of a secret organization dedicated to preventing the spread of zombies, she lost her job when she began to question the group's methodology, and why they kept having so many fatalities and failures despite the resources at their disposal. Her bosses didn't particularly like the questions, and she was fired, her career ruined. No one would hire her for anything important - and so, here she is...",
   status: 'For Hire',
   happiness: 0,
+  endurance: 100,
   obedience: 35,
   modesty: 20,
   charisma: 30,

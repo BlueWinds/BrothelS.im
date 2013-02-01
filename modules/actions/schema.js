@@ -111,7 +111,6 @@ Schemas.liveAction = {
     variants: {},
     results: {},
     special: {},
-    girl: {},
     building: {},
     time: {},
     _id: {},
@@ -124,8 +123,15 @@ Schemas.liveAction = {
     label: { type: 'string' },
     tags: { $ref: 'Tags'},
     option: { type: 'string' },
+    optionsKey: { type: 'string' },
     disabled: {
       type: ['null', 'string']
+    },
+    ownerParticipation: {
+      'enum': [true]
+    },
+    allDay: {
+      'enum': [true]
     }
   },
   additionalProperties: false

@@ -176,7 +176,7 @@ Schemas.Resolvable = {
     },
     variants: {
       type: ['function', 'array'],
-      description: "If it's a function, it must call done(delta), where delta is a Result. If variants is an array, its items are checked in turn until one matches, and the result matching its index is applied (the easiest way to understand this is by example - see content/girls/Yuna/base.js, in Girls.Yuna.Actions.Summon).",
+      description: "If not present, a random choice will be selected from results. If it's a function, it must call done(delta), where delta is a Result. If variants is an array, its items are checked in turn until one matches, and the result matching its index is applied (the easiest way to understand this is by example - see content/girls/Yuna/base.js, in Girls.Yuna.Actions.Summon).",
       'arguments': ['context', 'done'],
       additionalItems: {
         anyOne: [
@@ -189,8 +189,7 @@ Schemas.Resolvable = {
           }
         ]
       },
-      minItems: 1,
-      'default': [1]
+      minItems: 1
     },
     results: {
       description: "A set of results for this Resolvable. Which one is applied is determined by 'variants' above. If variants is an array, then this must also be an array of the same length. If variants is a function, then it can use whatever method it pleases to look up items from results.",
@@ -277,6 +276,7 @@ Schemas.liveMission = {
     special: {},
     girl: {},
     building: {},
+    time: {},
     _id: {},
     _class: {
       'enum': [ 'Mission' ]

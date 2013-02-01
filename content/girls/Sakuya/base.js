@@ -2,6 +2,7 @@ Girls.Sakuya = {
   description: "<p>Sakuya is clearly not from around here. She speaks the language with little accent, but there's still something... otherworldly about her. She bills herself as a maid, and a brief demonstration suggests she is indeed quite good at is. It would take a bit of convincing to get her to work as a prostitute, but she doesn't seem unwilling...</p>",
   status: 'For Hire',
   happiness: 0,
+  endurance: 100,
   obedience: 40,
   charisma: 20,
   modesty: 60,
@@ -39,50 +40,8 @@ Girls.Sakuya = {
     }
   },
   Actions: {
-    Talk: $.extend(true, Actions.Talk, {
-      results: [
-        {
-          message: {
-            group: 'Sakuya',
-            label: 'Talk',
-            image: 'content/girls/Sakuya/images/Naked1.jpg',
-            text: "In the early <<- time >> you knock on Sakyua's door, expecting to find her resting. Instead when she opens the door you see her almost completely naked, an unusual change from her modest habits. It looks as though she's been stretching. Surprisingly unselfconscious, she pats the bed, inviting you to sit down while she gets dressed.<br><br>The two of you spend some time discussing business - she's <<- girl.happiness > 60 ? 'quite pleased with' : 'not enjoying' >> her work here. She seems somewhat restless as you talk - perhaps she hadn't finished her exercises when you came in."
-          },
-          girl: {
-            obedience: 1.5,
-            happiness: 2,
-            modesty: -1
-          }
-        },
-        {
-          message: {
-            group: 'Sakuya',
-            label: 'Talk',
-            image: 'content/girls/Sakuya/images/Exercise2.jpg',
-            text: "Sakuya is flushed when she arrives at your office - at first you think she may have had to run in order to be on time, but the fact that she doesn't entirely calm down even as you attempt to start a discussion makes you suspect something else is the cause.<br><br>You finally realize the cause when, shifting uncomfortably in her seat, you catch a glimpse of a rope circling her breast. She must have bound herself under her clothes - and you'd guess one of the ropes is rubbing her crotch as well. She notices where your gaze has led and blushes - you just smile and change the subject."
-          },
-          girl: {
-            obedience: 1.5,
-            endurance: -4,
-            fetishLibido: 1
-          }
-        },
-        {
-          message: {
-            group: 'Sakuya',
-            label: 'Talk',
-            image: 'content/girls/Sakuya/images/Exercise2.jpg',
-            text: "You and Sakuya head out for a short walk. It's a nice <<- time >>, and the two of you discuss pleasant nothings such as the upcoming festival, Sakuya's ongoing love for the special spiced bread they make at a certain stall in the markets, and what she misses about home. Not very much, it seems - except her mistress, occasionally. She finds her relationship with you odd - working for you, but... it takes a while to get her to finish the sentence. But not dominated or controlled by you, it finally comes out. You suspect she might enjoy a stronger hand on the leash, as it were. Perhaps a literal leash, even."
-          },
-          girl: {
-            obedience: 1.5,
-            happiness: 2,
-            endurance: -5
-          }
-        }
-      ].concat(Actions.Talk.results)
-    }),
-    Lockdown: $.extend(true, Actions.Lockdown, {
+    Talk: $.extend(true, {}, Actions.Talk),
+    Lockdown: $.extend(true, {
       results: [
         {
           girl: { happiness: 0 }
@@ -91,8 +50,8 @@ Girls.Sakuya = {
           girl: { happiness: 0 }
         }
       ]
-    }),
-    Clean: $.extend(true, Actions.Clean, {
+    }, Actions.Lockdown),
+    Clean: $.extend(true, {
       variants: function(context, done) {
         var delta = this.results[0];
         delta.building.clean += context.girl.specialRules.magic / 10;
@@ -115,7 +74,7 @@ Girls.Sakuya = {
           building: { clean: 12 }
         }
       ] // results
-    }) // Clean
+    }, Actions.Clean)
   }, // actions
   Missions: {
     ScarletDevilDream: {
@@ -367,3 +326,45 @@ Girls.Sakuya = {
     } // ScarletDevilTraining
   } // missions
 };
+
+Girls.Sakuya.Actions.Talk.results._append([
+  {
+    message: {
+      group: 'Sakuya',
+      label: 'Talk',
+      image: 'content/girls/Sakuya/images/Naked1.jpg',
+      text: "In the early <<- time >> you knock on Sakyua's door, expecting to find her resting. Instead when she opens the door you see her almost completely naked, an unusual change from her modest habits. It looks as though she's been stretching. Surprisingly unselfconscious, she pats the bed, inviting you to sit down while she gets dressed.<br><br>The two of you spend some time discussing business - she's <<- girl.happiness > 60 ? 'quite pleased with' : 'not enjoying' >> her work here. She seems somewhat restless as you talk - perhaps she hadn't finished her exercises when you came in."
+    },
+    girl: {
+      obedience: 1.5,
+      happiness: 2,
+      modesty: -1
+    }
+  },
+  {
+    message: {
+      group: 'Sakuya',
+      label: 'Talk',
+      image: 'content/girls/Sakuya/images/Exercise2.jpg',
+      text: "Sakuya is flushed when she arrives at your office - at first you think she may have had to run in order to be on time, but the fact that she doesn't entirely calm down even as you attempt to start a discussion makes you suspect something else is the cause.<br><br>You finally realize the cause when, shifting uncomfortably in her seat, you catch a glimpse of a rope circling her breast. She must have bound herself under her clothes - and you'd guess one of the ropes is rubbing her crotch as well. She notices where your gaze has led and blushes - you just smile and change the subject."
+    },
+    girl: {
+      obedience: 1.5,
+      endurance: -4,
+      fetishLibido: 1
+    }
+  },
+  {
+    message: {
+      group: 'Sakuya',
+      label: 'Talk',
+      image: 'content/girls/Sakuya/images/Exercise2.jpg',
+      text: "You and Sakuya head out for a short walk. It's a nice <<- time >>, and the two of you discuss pleasant nothings such as the upcoming festival, Sakuya's ongoing love for the special spiced bread they make at a certain stall in the markets, and what she misses about home. Not very much, it seems - except her mistress, occasionally. She finds her relationship with you odd - working for you, but... it takes a while to get her to finish the sentence. But not dominated or controlled by you, it finally comes out. You suspect she might enjoy a stronger hand on the leash, as it were. Perhaps a literal leash, even."
+    },
+    girl: {
+      obedience: 1.5,
+      happiness: 2,
+      endurance: -5
+    }
+  }
+]);

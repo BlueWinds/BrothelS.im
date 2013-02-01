@@ -204,7 +204,6 @@ Girl.prototype.startDelta = function(s) {
 Girl.prototype.hire = function() {
   g.money -= this.hirePrice();
   this.status = 'Hired';
-  this.endurance = 100;
   this.happiness = Girl.config.startHappiness;
   this.actions.pay = Math.round(this.desiredPay() / 10) * 10;
   this.hireDay = g.day;

@@ -6,11 +6,11 @@ e.GameUpgrade03.push(function(game, next) {
   next();
 });
 e.GameUpgrade04.push(function(game, next) {
-  for (var name in game.buildings) {
-    game.buildings[name].rooms.forEach(function(room) {
+  $.each(game.buildings, function(building) {
+    building.rooms.forEach(function(room) {
       room.type = room.type.charAt(0).toUpperCase() + room.type.slice(1);
     });
-  }
+  });
   next();
 });
 

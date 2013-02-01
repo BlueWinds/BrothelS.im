@@ -83,6 +83,7 @@ e.GameRender.push(function(done) {
         $(this).parent().children('li').removeClass('selected');
         $(this).addClass('selected');
         action.setOption($(this).attr('name'));
+        $(this).closest('.action').children('ul').click();
       });
       return div;
     }

@@ -4,11 +4,7 @@ Schemas.Game = {
     '_class', 'day', 'fetishes', 'money', 'moneyHistory'
   ],
   properties: {
-    _id: {
-      type: 'string',
-      minLength: 12,
-      maxLength: 12
-    },
+    _id: { type: 'string' },
     _class: {
       'enum': [ 'Game' ]
     },

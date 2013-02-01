@@ -34,7 +34,7 @@ e.Autorender.push(function(element, done) {
         console.log(tv4.error);
         console.log(result);
       }
-    };
+    }
     return oldApply.call(this, results, done);
   };
 })();

@@ -24,10 +24,10 @@ e.GameUpgrade04.push(function(game, next) {
     if (!game.girls[name].hireDay) {
       game.girls[name].hireDay = 0;
     }
-    $.each(stats, function(old, new_name) {
-      game.girls[name][new_name] = game.girls[name][old];
+    for (var old in stats) {
+      game.girls[name][stats[old]] = game.girls[name][old];
       delete game.girls[name][old];
-    });
+    }
   }
   next();
 });

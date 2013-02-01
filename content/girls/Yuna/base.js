@@ -2,6 +2,7 @@ Girls.Yuna = {
   description: "A summoner with powerful allies, Yuna fled the devastation of her homeland by mysterious forces, arriving here some months ago. She initially sought to gather allies to return home and rescue her land, but with little money and everyone busy with their own problems, she's been getting desperate for a job. Any job.",
   status: 'For Hire',
   happiness: 25,
+  endurance: 100,
   obedience: 45,
   modesty: 60,
   charisma: 60,
@@ -33,50 +34,7 @@ Girls.Yuna = {
     refuse: ["refuse1.jpg", "refuse2.jpg"]
   },
   Actions: {
-    Talk: $.extend(true, Actions.Talk, {
-      results: [
-        {
-          message: {
-            group: 'Yuna',
-            label: 'Talk',
-            image: 'content/girls/Yuna/images/Exercise2.jpg',
-            text: "As you and Yuna sit down to spend some time together, she instead suggests that you take a walk through the city instead. A \"walk\" doesn't seem to be exactly what she had in mind though, as you end up, somehow, in the marketplace, looking at clothing. It's hard to object when she decides to start trying on outfits - especially when they involve as little cloth as the ones she's picking out. Finally, you end up buying something for her, a pair of pants that seem like they might fall off at any moment. You hope that they do."
-          },
-          girl: {
-            obedience: 1,
-            happiness: 4,
-            modesty: -2,
-            money: -60
-          }
-        },
-        {
-          message: {
-            group: 'Yuna',
-            label: 'Talk',
-            image: 'content/girls/Yuna/images/Study1.jpg',
-            text: "<blockquote>What do you think of my new dress?</blockquote> Yuna twirls in front of you, showing off. It's very... much like every other dress you've seen her wearing, as a matter of fact. She does seem very fond of this particular style. You avoid mentioning the fact, and instead comment on how its colors differ subtly from her usual costume."
-          },
-          girl: {
-            obedience: 1.5,
-            happiness: 1
-          }
-        },
-        {
-          message: {
-            group: 'Yuna',
-            label: 'Talk',
-            image: 'content/girls/Yuna/images/base.jpg',
-            text: "You and Yuna sit out on the front steps of the <<- girl.building() ? girl.building.name() : 'inn' >>, watching traffic pass and listening to the sounds of the busy city. You ask her if she's enjoying her work here - she agrees that it's fun sometimes. You ask about the customers she's serviced lately - she sighs and rolls her eyes. Not the best behavior. You confiscate her top and pull her bra down around her waist as punishment, right there in public. She gets red, but you refuse to let her fix it for half an hour."
-          },
-          girl: {
-            obedience: 2,
-            modesty: -1,
-            happiness: -3,
-            endurance: -5
-          }
-        }
-      ].concat(Actions.Talk.results)
-    }),
+    Talk: $.extend(true, {}, Actions.Talk),
     Summon: {
       label: 'Summon',
       group: 'Chores',
@@ -192,3 +150,46 @@ Girls.Yuna = {
     } // Summon
   } // actions
 };
+
+Girls.Yuna.Actions.Talk.results._append([
+  {
+    message: {
+      group: 'Yuna',
+      label: 'Talk',
+      image: 'content/girls/Yuna/images/Exercise2.jpg',
+      text: "As you and Yuna sit down to spend some time together, she instead suggests that you take a walk through the city instead. A \"walk\" doesn't seem to be exactly what she had in mind though, as you end up, somehow, in the marketplace, looking at clothing. It's hard to object when she decides to start trying on outfits - especially when they involve as little cloth as the ones she's picking out. Finally, you end up buying something for her, a pair of pants that seem like they might fall off at any moment. You hope that they do."
+    },
+    girl: {
+      obedience: 1,
+      happiness: 4,
+      modesty: -2,
+      money: -60
+    }
+  },
+  {
+    message: {
+      group: 'Yuna',
+      label: 'Talk',
+      image: 'content/girls/Yuna/images/Study1.jpg',
+      text: "<blockquote>What do you think of my new dress?</blockquote> Yuna twirls in front of you, showing off. It's very... much like every other dress you've seen her wearing, as a matter of fact. She does seem very fond of this particular style. You avoid mentioning the fact, and instead comment on how its colors differ subtly from her usual costume."
+    },
+    girl: {
+      obedience: 1.5,
+      happiness: 1
+    }
+  },
+  {
+    message: {
+      group: 'Yuna',
+      label: 'Talk',
+      image: 'content/girls/Yuna/images/base.jpg',
+      text: "You and Yuna sit out on the front steps of the <<- girl.building() ? girl.building.name() : 'inn' >>, watching traffic pass and listening to the sounds of the busy city. You ask her if she's enjoying her work here - she agrees that it's fun sometimes. You ask about the customers she's serviced lately - she sighs and rolls her eyes. Not the best behavior. You confiscate her top and pull her bra down around her waist as punishment, right there in public. She gets red, but you refuse to let her fix it for half an hour."
+    },
+    girl: {
+      obedience: 2,
+      modesty: -1,
+      happiness: -3,
+      endurance: -5
+    }
+  }
+]);

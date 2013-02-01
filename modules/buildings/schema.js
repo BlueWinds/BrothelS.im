@@ -60,7 +60,7 @@ Schemas.parsableBuildingConditions = {
     room: {
       type: 'string',
       description: 'This condition will only match if the building has one or more rooms of the given type.'
-    },
+    }
   },
   patternProperties: {
     'min|max': {
@@ -195,7 +195,7 @@ Schemas.liveBuilding = {
   ],
   properties: {
     _class: {
-      'enum': ['Building'],
+      'enum': ['Building']
     },
     name: { type: 'string' },
     status: {

@@ -104,7 +104,13 @@ Girl.actions = function(time) {
 
 Girl.prototype.action = function(_id, context) {
   context.girl = this;
-  return Action.create(_id, context);
+  var action = Action.create(_id, context);
+  if (this.actions[context.time] && _id == this.actions[context.time]._id) {
+    if (this.actions[context.time].option) {
+      action.setOption(this.actions[context.time].option);
+    }
+  }
+  return action;
 };
 
 Girl.prototype.setAction = function(action) {

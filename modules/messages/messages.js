@@ -38,7 +38,6 @@ e.GameNew.push(function(done) {
 });
 
 e.GamePreDay.push(function(done) {
-  g.messagesShown = false;
   g.messages = [];
   done();
 });

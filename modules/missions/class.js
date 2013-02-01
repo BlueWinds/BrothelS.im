@@ -4,23 +4,21 @@ function Mission(obj) {
 
 Mission.prototype = new Resolvable();
 
-(function() {
-  Mission.create = function(_id, context, disallow_null_conditions) {
-    var mission = Resolvable.create(_id, 'Mission', context, disallow_null_conditions);
-    if (!mission) { return mission; }
-    var base = mission.base();
-    if (typeof(mission.end) == 'function') {
-      delete mission.end;
-    } else if (mission.end) {
-      mission.end = mission.parseConditions(mission.end, context);
-    }
-    if (mission.display) {
-      mission.display = new Message(mission.display, mission.context());
-      g.messages.push(mission.display);
-    }
-    return mission;
-  };
-})();
+Mission.create = function(_id, context) {
+  var mission = Resolvable.create(_id, 'Mission', context);
+  if (!mission) { return mission; }
+  var base = mission.base();
+  if (typeof(mission.end) == 'function') {
+    delete mission.end;
+  } else if (mission.end) {
+    mission.end = mission.parseConditions(mission.end, context);
+  }
+  if (mission.display) {
+    mission.display = new Message(mission.display, mission.context());
+    g.messages.push(mission.display);
+  }
+  return mission;
+};
 
 Mission.prototype.getEnd = function(done) {
   if (this.end) {

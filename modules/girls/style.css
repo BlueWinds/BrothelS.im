@@ -20,12 +20,12 @@ h3 {
 .constitution { color: #0FC; }
 .intelligence { color: #0DF; }
 
-.soft { color: #FAA; }
-.hard { color: #F66; }
-.anal { color: #D33; }
-.fetish { color: #C04; }
+.softLibido, .softExperience { color: #FAA; }
+.hardLibido, .hardExperience { color: #F66; }
+.analLibido, .analExperience { color: #D33; }
+.fetishLibido, .fetishExperience { color: #C04; }
 
-.experience { font-style: italic; }
+.softExperience, .hardExperience, .analExperience, .fetishExperience { font-style: italic; }
 
 span.adj {
   color: #FFF;
