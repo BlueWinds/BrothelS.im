@@ -3,22 +3,17 @@ Schemas.buildingDelta = {
   properties: {
     money: { type: 'number' },
     girl: {
-      type: [ { $ref: 'girlDelta' } ],
+      anyOne: [ { $ref: 'girlDelta' } ],
       description: 'This delta will be applied to each girl living in the building.'
-    }
-  },
-  patternProperties: {
-    '(clean|reputation)': {
-      type: 'number',
-      minimum: -100,
-      maximum: 100
-    }
+    },
+    clean: { $ref: 'statDelta' },
+    reputation: { $ref: 'statDelta' }
   },
   additionalProperties: false
 };
 
 Schemas.girlDelta.properties.building = {
-  type: [ { $ref: 'buildingDelta' } ],
+  anyOne: [ { $ref: 'buildingDelta' } ],
   description: 'This delta will be applied to the building the girl is living in, if any.'
 };
 
@@ -31,7 +26,7 @@ Schemas.buildingConditions = {
     },
     status: {
       type: 'string',
-      'enum': ['Owned', 'For Sale', 'In Town', 'Gone']
+      'enum': ['Owned', 'For Sale', 'Town', 'Gone']
     },
     room: {
       type: 'string',
@@ -41,10 +36,9 @@ Schemas.buildingConditions = {
   patternProperties: {
     'min|max': {
       type: 'object',
-      patternProperties: {
-        '(clean|reputation)': {
-          $ref: 'Stat'
-        }
+      properties: {
+        clean: { $ref: 'Stat' },
+        reputation: { $ref: 'Stat' }
       },
       additionalProperties: false
     }
@@ -61,18 +55,19 @@ Schemas.parsableBuildingConditions = {
     },
     status: {
       type: 'string',
-      'enum': ['Owned', 'For Sale', 'In Town', 'Gone']
+      'enum': ['Owned', 'For Sale', 'Town', 'Gone']
     },
     room: {
       type: 'string',
       description: 'This condition will only match if the building has one or more rooms of the given type.'
-    }
+    },
   },
   patternProperties: {
     'min|max': {
       type: 'object',
-      patternProperties: {
-        '(clean|reputation)': { $ref: 'parsableStat' }
+      properties: {
+        clean: { $ref: 'Stat' },
+        reputation: { $ref: 'Stat' }
       },
       additionalProperties: false
     }
@@ -81,25 +76,23 @@ Schemas.parsableBuildingConditions = {
 };
 
 Schemas.girlConditions.properties.building = {
-  type: [ { $ref: 'buildingConditions' } ],
+  anyOne: [ { $ref: 'buildingConditions' } ],
   description: 'Matched against the building the girl is living in. If present and she\'s not living anywhere, then it fails.'
 };
 
 Schemas.Room = {
   type: 'object',
+  required: [
+    'type', 'description', 'price'
+  ],
   properties: {
-    type: {
-      type: 'string',
-      required: true
-    },
+    type: { type: 'string' },
     description: {
       type: 'string',
-      required: true,
       description: 'Text replacement is available with both "room" and "building" keys.'
     },
     price: {
       type: 'integer',
-      required: true,
       description: 'The price to add this room. Also added to the price of the building when buying or selling.'
     },
     render: {
@@ -122,40 +115,42 @@ Schemas.Room = {
   additionalProperties: false
 };
 
+Schemas.liveRoom = {
+  required: ['type'],
+  properties: {
+    type: { type: 'string' }
+  }
+};
+
 Schemas.Building = {
   type: 'object',
+  required: [
+    'name', 'status', 'description',
+    'image', 'clean', 'reputation',
+    'maxRooms', 'rooms', 'basePrice', 'daily'
+  ],
   properties: {
-    name: {
-      type: 'string',
-      required: true
-    },
-    description: {
-      type: 'string',
-      required: true
-    },
+    name: { type: 'string' },
+    description: { type: 'string' },
     image: {
       type: 'string',
-      required: true,
       description: 'Buildings only have one image. Use a full path here, from the root directory of the game.',
       pattern: "^.+\\.(png|jpg|gif)$"
     },
     status: {
-      'description': "Owned means it'll start the game owned the player. For Sale means exactly what it sounds like. In Town means it's around, but can't be bought - there should be a mission or event that gives access to it. Gone means it was owned, but has been sold / destroyed / is otherwise no longer available.",
-      'enum': ['Owned', 'For Sale', 'In Town', 'Gone'],
-      required: true
+      'description': "Owned means it'll start the game owned the player. For Sale means exactly what it sounds like. Town means it's around, but can't be bought - there should be a mission or event that gives access to it. Gone means it was owned, but has been sold / destroyed / is otherwise no longer available.",
+      'enum': ['Owned', 'For Sale', 'Town', 'Gone']
     },
     clean: { $ref: 'Stat' },
     reputation: { $ref: 'Stat' },
     maxRooms: {
       type: 'integer',
-      required: true,
       description: 'The maximum number of rooms that this building can have at one time.',
       minimum: 1,
       maximum: 10
     },
     rooms: {
       type: 'array',
-      required: true,
       description: 'A list of rooms present when the building is first purchased.',
       additionalItems: { $ref: 'liveRoom' },
       maxLength: 10
@@ -163,36 +158,26 @@ Schemas.Building = {
     basePrice: {
       type: 'integer',
       description: 'The base price of this building, before the cost of any rooms is added.',
-      minimum: 0,
-      required: true
+      minimum: 0
     },
     daily: {
       type: 'object',
-      required: true,
+      required: [ 'breakpoint', 'above', 'below', 'clean', 'dirty'],
       properties: {
         breakpoint: {
           type: 'integer',
-          required: true,
           description: 'The minimum level of cleanliness required to get the above results and clean message.',
           minimum: 0,
           maximum: 100
         },
-        above: {
-          type: [ { $ref: 'buildingDelta' } ],
-          required: true
-        },
-        below: {
-          type: [ { $ref: 'buildingDelta' } ],
-          required: true
-        },
+        above: { $ref: 'buildingDelta' },
+        below: { $ref: 'buildingDelta' },
         clean: {
           type: 'string',
-          required: true,
           description: 'The message sent to the player each day when this building is clean.'
         },
         dirty: {
           type: 'string',
-          required: true,
           description: 'The message sent to the player each day when this building is dirty.'
         }
       }
@@ -201,11 +186,52 @@ Schemas.Building = {
   additionalProperties: false
 };
 
-Schemas.liveRoom = {
+Schemas.liveBuilding = {
+  type: 'object',
+  required: [
+    '_class', 'name', 'status',
+    'clean', 'reputation',
+    'maxRooms', 'rooms'
+  ],
   properties: {
-    type: {
-      type: 'string',
-      required: true
+    _class: {
+      'enum': ['Building'],
+    },
+    name: { type: 'string' },
+    status: {
+      'enum': ['Owned', 'For Sale', 'Town', 'Gone']
+    },
+    clean: { $ref: 'Stat' },
+    reputation: { $ref: 'Stat' },
+    maxRooms: {
+      type: 'integer',
+      minimum: 1,
+      maximum: 10
+    },
+    rooms: {
+      type: 'array',
+      additionalItems: { $ref: 'liveRoom' },
+      maxLength: 10
+    },
+    turnDelta: {
+      type: ['function', 'object'],
+      description: 'This is only a function while the turn is being generated - between turns, it\'s an object.',
+      additionalProperties: {
+        type: 'integer',
+        description: 'How much each stat has changed since yesterday for this building.'
+      }
     }
-  }
+  },
+  additionalProperties: false
+};
+
+Schemas.Game.required.push('buildings', 'maxBuildings');
+Schemas.Game.properties.buildings = {
+  type: 'object',
+  additionalProperties: { $ref: 'liveBuilding' }
+};
+Schemas.Game.properties.maxBuildings = {
+  type: 'integer',
+  min: 0,
+  max: 2
 };

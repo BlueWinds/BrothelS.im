@@ -10,7 +10,7 @@ Missions.specialPartyStart = {
 
 Missions.specialParty = {
   initialize: function(context) {
-    this.client = new Person('High Class');
+    this.special.client = new Person('High Class');
   },
   display: {
     label: 'Escort for <<= mission.client.name >>',
@@ -25,7 +25,8 @@ Missions.specialParty = {
   },
   results: [{
     mission: 'specialPartyDelay'
-  }]
+  }],
+  special: {}
 };
 
 Missions.specialPartyDelay = {

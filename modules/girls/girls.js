@@ -4,8 +4,30 @@ e.GirlsPostMorning = [];
 e.GirlsPostEvening = [];
 e.GirlRunTime = [];
 e.GameUpgrade03.push(function(game, next) {
-  for (var name in g.girls) {
-    g.girls[name]._class = 'Girl';
+  for (var name in game.girls) {
+    game.girls[name]._class = 'Girl';
+  }
+  next();
+});
+e.GameUpgrade04.push(function(game, next) {
+  var stats = {
+    'soft libido': 'softLibido',
+    'soft experience': 'softExperience',
+    'hard libido': 'hardLibido',
+    'hard experience': 'hardExperience',
+    'anal libido': 'analLibido',
+    'anal experience': 'analExperience',
+    'fetish libido': 'fetishLibido',
+    'fetish experience': 'fetishExperience'
+  };
+  for (var name in game.girls) {
+    if (!game.girls[name].hireDay) {
+      game.girls[name].hireDay = 0;
+    }
+    $.each(stats, function(old, new_name) {
+      game.girls[name][new_name] = game.girls[name][old];
+      delete game.girls[name][old];
+    });
   }
   next();
 });

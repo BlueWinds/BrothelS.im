@@ -1,25 +1,24 @@
 Schemas.Message = {
   type: 'object',
   description: 'Replacement patterns are available on all strings inside a message.',
+  required: [
+    'group', 'label', 'image', 'text'
+  ],
   properties: {
     group: {
       type: 'string',
-      required: true,
       description: 'The tab that this message will appear under.'
     },
     label: {
       type: 'string',
-      required: true,
       description: 'The title of the accordion pane this message shows up in.'
     },
     image: {
       type: 'string',
-      required: true,
       description: 'The image associated with this message.'
     },
     text: {
       type: 'string',
-      required: true,
       description: 'The full body of text.'
     },
     weight: {
@@ -33,4 +32,33 @@ Schemas.Message = {
     }
   },
   additionalProperties: false
+};
+
+Schemas.liveMessage = {
+  type: 'object',
+  required: [
+  '_class', 'weight',
+    'group', 'label', 'image', 'text'
+  ],
+  properties: {
+    _class: {
+      'enum': ['Message']
+    },
+    group: { type: 'string' },
+    label: { type: 'string' },
+    image: { type: 'string' },
+    text: { type: 'string' },
+    weight: { type: 'number' },
+    delta: {
+      type: 'object',
+      additionalProperties: { type: 'integer' }
+    }
+  },
+  additionalProperties: false
+};
+
+Schemas.Game.required.push('messages');
+Schemas.Game.properties.messages = {
+  type: 'array',
+  additionalItems: { $ref: 'liveMessage' }
 };

@@ -1,8 +1,13 @@
 Schemas.Stat = {
   type: 'integer',
   minimum: 0,
-  maximum: 100,
-  required: true
+  maximum: 100
+};
+
+Schemas.statDelta = {
+  type: 'number',
+  minimum: -100,
+  maximum: 100
 };
 
 Schemas.parsableStat = {
@@ -20,19 +25,27 @@ Schemas.girlDelta = {
       type: 'object',
       description: "In a girlDelta, each special rule can be a number, adding or subtracting to it as with any other stat. If the girl doesn't have this specialRule, it will be treated as 0 before the modification is applied. Unlike normal stats, specialRules are not limited to the 0-100 range, and they are not rounded to the nearest integer. A special rule can also be 'false', in which case that special rule will be removed from the girl, regardless of value.",
       additionalProperties: {
-        type: [
+        anyOne: [
           { type: 'boolean', 'enum': [false] },
           { type: 'number' }
         ]
       }
-    }
-  },
-  patternProperties: {
-    'happiness|endurance|obedience|modesty|charisma|intelligence|constitution|softLibido|hardLibido|analLibido|fetishLibido|softExperience|hardExperience|analExperience|fetishExperience': {
-      type: 'number',
-      minimum: -100,
-      maximum: 100
-    }
+    },
+    happiness: { $ref: 'statDelta' },
+    endurance: { $ref: 'statDelta' },
+    obedience: { $ref: 'statDelta' },
+    modesty: { $ref: 'statDelta' },
+    charisma: { $ref: 'statDelta' },
+    intelligence: { $ref: 'statDelta' },
+    constitution: { $ref: 'statDelta' },
+    softLibido: { $ref: 'statDelta' },
+    softExperience: { $ref: 'statDelta' },
+    hardLibido: { $ref: 'statDelta' },
+    hardExperience: { $ref: 'statDelta' },
+    analLibido: { $ref: 'statDelta' },
+    analExperience: { $ref: 'statDelta' },
+    fetishLibido: { $ref: 'statDelta' },
+    fetishExperience: { $ref: 'statDelta' }
   },
   additionalProperties: false
 };
@@ -46,7 +59,7 @@ Schemas.girlConditions = {
     },
     status: {
       type: 'string',
-      'enum': ['Hired', 'For Hire', 'In Town', 'Gone']
+      'enum': ['Hired', 'For Hire', 'Town', 'Gone']
     }
   },
   patternProperties: {
@@ -56,10 +69,22 @@ Schemas.girlConditions = {
         specialRules: {
           type: 'object',
           additionalProperties: { type: 'number' }
-        }
-      },
-      patternProperties: {
-        '(happiness|endurance|obedience|modesty|charisma|intelligence|constitution|softLibido|hardLibido|analLibido|fetishLibido|softExperience|hardExperience|analExperience|fetishExperience)': { $ref: 'Stat' }
+        },
+        happiness: { $ref: 'Stat' },
+        endurance: { $ref: 'Stat' },
+        obedience: { $ref: 'Stat' },
+        modesty: { $ref: 'Stat' },
+        charisma: { $ref: 'Stat' },
+        intelligence: { $ref: 'Stat' },
+        constitution: { $ref: 'Stat' },
+        softLibido: { $ref: 'Stat' },
+        softExperience: { $ref: 'Stat' },
+        hardLibido: { $ref: 'Stat' },
+        hardExperience: { $ref: 'Stat' },
+        analLibido: { $ref: 'Stat' },
+        analExperience: { $ref: 'Stat' },
+        fetishLibido: { $ref: 'Stat' },
+        fetishExperience: { $ref: 'Stat' }
       },
       additionalProperties: false
     }
@@ -76,7 +101,7 @@ Schemas.parsableGirlConditions = {
     },
     status: {
       type: 'string',
-      'enum': ['Hired', 'For Hire', 'In Town', 'Gone']
+      'enum': ['Hired', 'For Hire', 'Town', 'Gone']
     }
   },
   patternProperties: {
@@ -89,10 +114,22 @@ Schemas.parsableGirlConditions = {
             type: ['number', 'string'],
             pattern: '\\+|-[0-9]+'
           }
-        }
-      },
-      patternProperties: {
-        '(happiness|endurance|obedience|modesty|charisma|intelligence|constitution|softLibido|hardLibido|analLibido|fetishLibido|softExperience|hardExperience|analExperience|fetishExperience)': { $ref: 'parsableStat' }
+        },
+        happiness: { $ref: 'parsableStat' },
+        endurance: { $ref: 'parsableStat' },
+        obedience: { $ref: 'parsableStat' },
+        modesty: { $ref: 'parsableStat' },
+        charisma: { $ref: 'parsableStat' },
+        intelligence: { $ref: 'parsableStat' },
+        constitution: { $ref: 'parsableStat' },
+        softLibido: { $ref: 'parsableStat' },
+        softExperience: { $ref: 'parsableStat' },
+        hardLibido: { $ref: 'parsableStat' },
+        hardExperience: { $ref: 'parsableStat' },
+        analLibido: { $ref: 'parsableStat' },
+        analExperience: { $ref: 'parsableStat' },
+        fetishLibido: { $ref: 'parsableStat' },
+        fetishExperience: { $ref: 'parsableStat' }
       },
       additionalProperties: false
     }
@@ -101,29 +138,43 @@ Schemas.parsableGirlConditions = {
 };
 
 Schemas.Girl = {
-  title: 'Girl',
   description: "A girl's definition, from which an individual instance of her is created for a game.",
   type: 'object',
+  required: [
+    'name', 'description', 'status', 'images',
+    'happiness', 'obedience', 'modesty',
+    'charisma', 'intelligence', 'constitution',
+    'softLibido', 'softExperience', 'hardLibido',
+    'hardExperience', 'analLibido', 'analExperience',
+    'fetishLibido', 'fetishExperience'
+  ],
   properties: {
     name: {
       type: 'string',
-      minLength: 4,
-      required: true
+      minLength: 4
     },
-    description: {
-      type: 'string',
-      required: true
-    },
+    description: { type: 'string' },
     status: {
-      'description': "Hired means she'll start the game working for the player. For Hire means exactly what it sounds like. In Town means she's around, but can't be hired - there should be a mission or event that gives access to her. Gone means she was hired, but has been sold / left town / is otherwise no longer available.",
-      'enum': ['Hired', 'For Hire', 'In Town', 'Gone'],
-      required: true
+      'description': "Hired means she'll start the game working for the player. For Hire means exactly what it sounds like. Town means she's around, but can't be hired - there should be a mission or event that gives access to her. Gone means she was hired, but has been sold / left town / is otherwise no longer available.",
+      'enum': ['Hired', 'For Hire', 'Town', 'Gone']
     },
     happiness: {
-      type: [ { $ref: 'Stat' } ],
-      description: "Here, happiness only acts as a multiplier to the girl's hire price - it's always set to 75 when she's hired. Higher values will make her cheaper.",
-      'default': 0
+      anyOne: [ { $ref: 'Stat' } ],
+      description: "Here, happiness only acts as a multiplier to the girl's hire price - it's always set to 75 when she's hired. Higher values will make her cheaper."
     },
+    obedience: { $ref: 'Stat' },
+    modesty: { $ref: 'Stat' },
+    charisma: { $ref: 'Stat' },
+    intelligence: { $ref: 'Stat' },
+    constitution: { $ref: 'Stat' },
+    softLibido: { $ref: 'Stat' },
+    softExperience: { $ref: 'Stat' },
+    hardLibido: { $ref: 'Stat' },
+    hardExperience: { $ref: 'Stat' },
+    analLibido: { $ref: 'Stat' },
+    analExperience: { $ref: 'Stat' },
+    fetishLibido: { $ref: 'Stat' },
+    fetishExperience: { $ref: 'Stat' },
     specialRules: {
       type: 'object',
       description: 'specialRules is an optional object which can be used to hold girl-specific data (for custom missions, for example), or have various effects on the way she plays.',
@@ -149,16 +200,15 @@ Schemas.Girl = {
     },
     images: {
       type: 'object',
+      required: [ 'basePath', 'base' ],
       properties: {
         basePath: {
           type: 'string',
-          description: 'basePath is from the root of the game to where all of the images are stored. This is not auto-detected to leave open the possibility using other sources of images later.',
-          required: true
+          description: 'basePath is from the root of the game to where all of the images are stored. This is not auto-detected to leave open the possibility using other sources of images later.'
         },
         base: {
           type: 'string',
-          pattern: "^.+\\.(png|jpg|gif)$",
-          required: true
+          pattern: "^.+\\.(png|jpg|gif)$"
         }
       },
       patternProperties: {
@@ -172,12 +222,104 @@ Schemas.Girl = {
           }
         }
       },
-      additionalProperties: false,
-      required: true
+      additionalProperties: false
     }
   },
-  patternProperties: {
-    'happiness|endurance|obedience|modesty|charisma|intelligence|constitution|softLibido|hardLibido|analLibido|fetishLibido|softExperience|hardExperience|analExperience|fetishExperience': { $ref: 'Stat' }
+  additionalProperties: false
+};
+
+Schemas.liveGirl = {
+  type: 'object',
+  required: [
+    'name', '_class', 'status',
+    'happiness', 'endurance', 'obedience', 'modesty',
+    'charisma', 'intelligence', 'constitution',
+    'softLibido', 'softExperience', 'hardLibido',
+    'hardExperience', 'analLibido', 'analExperience',
+    'fetishLibido', 'fetishExperience',
+    'actions', 'hireDay'
+  ],
+  properties: {
+    name: {
+      type: 'string',
+      minLength: 4
+    },
+    _class: {
+      'enum': ['Girl']
+    },
+    status: {
+      'enum': ['Hired', 'For Hire', 'Town', 'Gone']
+    },
+    specialRules: {
+      type: 'object',
+      description: 'specialRules is an optional object which can be used to hold girl-specific data (for custom missions, for example), or have various effects on the way she plays.',
+      properties: {
+        dependentStats: {
+          type: 'object',
+          description: "The dependentStats special rule allows you to modify the way her stats change. Each key is either a stat,  or a stat preceded buy a '-' sign - '-intelligence'.",
+          patternProperties: {
+            '-?(happiness|endurance|obedience|modesty|charisma|intelligence|constitution|softLibido|hardLibido|analLibido|fetishLibido|softExperience|hardExperience|analExperience|fetishExperience)': {
+              '$ref': 'girlDelta',
+              description: "This delta is applied to the girl whenever the associated stat is changed. For example, endurance: { happiness: 0.5 } would mean her happiness rises by 0.5 every time her endurance increases by 1. '-endurance': { happiness: -0.5 } would mean the her happiness decreases as her endurance goes down."
+            }
+          },
+          additionalProperties: false
+        },
+        payRatio: {
+          type: 'number',
+          minimum: 0,
+          description: "payRatio modifies the amount that the girl wants to get paid. The default is 1 - so this girl here only wants 80% of the pay of someone else with her stats."
+        }
+      },
+      additionalProperties: true
+    },
+    happiness: { $ref: 'Stat' },
+    endurance: { $ref: 'Stat' },
+    obedience: { $ref: 'Stat' },
+    modesty: { $ref: 'Stat' },
+    charisma: { $ref: 'Stat' },
+    intelligence: { $ref: 'Stat' },
+    constitution: { $ref: 'Stat' },
+    softLibido: { $ref: 'Stat' },
+    softExperience: { $ref: 'Stat' },
+    hardLibido: { $ref: 'Stat' },
+    hardExperience: { $ref: 'Stat' },
+    analLibido: { $ref: 'Stat' },
+    analExperience: { $ref: 'Stat' },
+    fetishLibido: { $ref: 'Stat' },
+    fetishExperience: { $ref: 'Stat' },
+    actions: {
+      type: 'object',
+      required: [ 'pay' ],
+      properties: {
+        pay: { type: 'integer', minimum: 0 },
+        soft: { type: 'boolean' },
+        hard: { type: 'boolean' },
+        anal: { type: 'boolean' },
+        fetish: { type: 'boolean' }
+      },
+      additionalProperties: false
+    },
+    hireDay: { type: 'integer', minimum: 0 },
+    turnDelta: {
+      type: ['function', 'object'],
+      description: 'This is only a function while the turn is being generated - between turns, it\'s an object.',
+      additionalProperties: {
+        type: 'integer',
+        description: 'How much each stat has changed since yesterday for this girl.'
+      }
+    }
   },
   additionalProperties: false
+};
+
+Schemas.Game.required.push('girls', 'maxGirls');
+Schemas.Game.properties.girls = {
+  type: 'object',
+  additionalProperties: { $ref: 'liveGirl' }
+};
+Schemas.Game.properties.maxGirls = {
+  type: 'integer',
+  min: 1,
+  max: 5
 };

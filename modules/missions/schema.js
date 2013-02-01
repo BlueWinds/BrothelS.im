@@ -164,22 +164,22 @@ Schemas.Result = {
 Schemas.Resolvable = {
   type: 'object',
   description: 'Resolvable is a very abstract concept - it includes Actions, Events and Missions - anything that checks a set of Conditions, builds a Context and then applies a Result using it.',
+  required: [
+    '_id', 'results'
+  ],
   properties: {
-    _id: {
-      type: 'string',
-      required: true
-    },
+    _id: { type: 'string' },
     initialize: {
       type: 'function',
       'arguments': ['context'],
-      description: 'An optional function called when this Resolvable is created. If it returns "false" (the boolean, not just anything that == false), it is the same as if the action\'s Conditions did not match (the action won\'t be available, the event won\'t trigger, etc). It should not modify anything outside of "this" - the Resolvable itself - since, for example, Actions are created many times (and thus this function called repeatedly).'
+      description: 'An optional function called when this Resolvable is created. If it returns "false" (the boolean, not just anything that == false), it is the same as if the action\'s Conditions did not match (the action won\'t be available, the event won\'t trigger, etc). It should not modify anything outside of "this.special" - the Resolvable itself - since, for example, Actions are created many times (and thus this function called repeatedly).'
     },
     variants: {
       type: ['function', 'array'],
       description: "If it's a function, it must call done(delta), where delta is a Result. If variants is an array, its items are checked in turn until one matches, and the result matching its index is applied (the easiest way to understand this is by example - see content/girls/Yuna/base.js, in Girls.Yuna.Actions.Summon).",
       'arguments': ['context', 'done'],
       additionalItems: {
-        type: [
+        anyOne: [
           { type: 'number', maximum: 1, minimum: 0,
             description: 'The numerical elements should sum up to exactly 1 - each number is the likelyhood that that result will be chosen.'
           },
@@ -197,10 +197,44 @@ Schemas.Resolvable = {
       type: ['array', 'object'],
       additionalItems: { $ref: 'Result' },
       additionalProperties: { $ref: 'Result' },
-      required: true,
       minItems: 1,
       minProperties: 1
+    },
+    special: {
+      type: 'object',
+      description: 'Any special values that the action needs to store go in here.'
     }
+  }
+};
+
+Schemas.liveResolvable = {
+  'type': 'object',
+  required: [
+    '_class', '_id', 'results'
+  ],
+  properties: {
+    _id: { type: 'string' },
+    time: { 'enum': ['morning', 'evening'] },
+    girl: { type: ['null', 'string'] },
+    building: { type: ['null', 'string'] },
+    variants: {
+      type: ['function', 'array'],
+      additionalItems: {
+        anyOne: [
+          { type: 'number', maximum: 1, minimum: 0 },
+          { 'extends': { $ref: 'Conditions' } }
+        ]
+      },
+      minItems: 1
+    },
+    results: {
+      type: ['array', 'object'],
+      additionalItems: { $ref: 'Result' },
+      additionalProperties: { $ref: 'Result' },
+      minItems: 1,
+      minProperties: 1
+    },
+    special: { type: 'object' }
   }
 };
 
@@ -211,6 +245,7 @@ Schemas.Mission = {
     initialize: {},
     variants: {},
     results: {},
+    special: {},
     conditions: {
       'extends': { $ref: 'Conditions' },
       description: 'The mission will begin as soon as all of these conditions match, as long as a mission with the same name is not already running (since only one mission of each _id can run at a time, it would overwrite the existing one). If conditions is not present, then this mission will never start on its own - it can only be triggered from a Result.'
@@ -221,7 +256,7 @@ Schemas.Mission = {
     },
     end: {
       description: 'If end is not present, then the mission doesn\'t persist - its results trigger immediately. If present, end must be either a function or a set of conditions that triggers the mission to end. If mission.end.max.day and mission.display, then that message will be sent again the day before the mission ends as a reminder for the player that they\'re almost out of time.',
-      type: [
+      anyOne: [
         { $ref: 'parsableConditions' },
         {
           type: 'function',
@@ -234,8 +269,40 @@ Schemas.Mission = {
   additionalProperties: false
 };
 
+Schemas.liveMission = {
+  'extends': { $ref: 'liveResolvable' },
+  properties: {
+    variants: {},
+    results: {},
+    special: {},
+    girl: {},
+    building: {},
+    _id: {},
+    _class: {
+      'enum': [ 'Mission' ]
+    },
+    display: {
+      'extends': { $ref: 'Message' }
+    },
+    end: {
+      'extends': { $ref: 'Conditions' }
+    }
+  },
+  additionalProperties: false
+};
+
 Schemas.Girl.properties.Missions = {
   type: 'object',
   additionalProperties: { $ref: 'Mission' },
   description: 'Missions unqiue to this girl - she will always be in context for them. The _id must still be globally unique.'
+};
+
+Schemas.Game.required.push('missions', 'missionsDone');
+Schemas.Game.properties.missions = {
+  type: 'object',
+  additionalProperties: { $ref: 'liveMission' }
+};
+Schemas.Game.properties.missionsDone =  {
+  type: 'object',
+  additionalProperties: { 'enum': [true] }
 };

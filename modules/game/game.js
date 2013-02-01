@@ -18,7 +18,8 @@ $.extend(e, {
       }
     }
     next();
-  }]
+  }],
+  GameUpgrade04: []
 });
 
 T = function(string, type) {
@@ -59,6 +60,11 @@ Game.loadFromText = function(value) {
   e.invokeAll('GameInit', function() {
     if (!g.girls.Kirino._class) {
       e.invokeAll('GameUpgrade03', g, function() {
+        Game.loadFromText(JSON.stringify(g));
+      });
+      return;
+    } else if (g.girls.Kirino['soft libido']) {
+      e.invokeAll('GameUpgrade04', g, function() {
         Game.loadFromText(JSON.stringify(g));
       });
       return;

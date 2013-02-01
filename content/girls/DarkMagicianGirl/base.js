@@ -44,7 +44,7 @@ Girls['Dark Magician Girl'] = {
           girls: 2
         }
       },
-      enableCondtions: {
+      enableConditions: {
         girl: {
           min: {
             intelligence: 50,
@@ -53,15 +53,6 @@ Girls['Dark Magician Girl'] = {
         }
       },
       options: 'girls',
-      variants: function(context, done) {
-        var delta = {
-          happiness: 2,
-          endurance: 10
-        };
-        delta.endurance += Math.floor(Math.random() * 21);
-        g.girls[this.option].apply(delta);
-        done(this.results[0]);
-      },
       results: [
         {
           message: {

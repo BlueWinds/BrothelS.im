@@ -18,6 +18,7 @@ e.GameUpgrade03.push(function(game, next) {
 
 var Message = function(obj, context) {
   $.extend(this, obj);
+  this._class = 'Message';
   if (context) {
     this.group = ejs.render(this.group, context);
     this.weight = this.weight || 0;

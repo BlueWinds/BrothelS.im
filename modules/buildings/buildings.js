@@ -1,7 +1,15 @@
 e.GameUpgrade03.push(function(game, next) {
   for (var name in g.buildings) {
-    g.buildings[name]._class = 'Building';
-    g.buildings[name].maxRooms = Buildings[name].maxRooms;
+    game.buildings[name]._class = 'Building';
+    game.buildings[name].maxRooms = Buildings[name].maxRooms;
+  }
+  next();
+});
+e.GameUpgrade04.push(function(game, next) {
+  for (var name in game.buildings) {
+    game.buildings[name].rooms.forEach(function(room) {
+      room.type = room.type.charAt(0).toUpperCase() + room.type.slice(1);
+    });
   }
   next();
 });
