@@ -258,8 +258,8 @@ Schemas.Mission = {
         { $ref: 'parsableConditions' },
         {
           type: 'function',
-          'arguments': ['context', 'done'],
-          description: 'If end is a function, then it must call done(results) with a set of Conditions, which will then be evaluated. This function should not modify anything - it\'s only here for when you need something more complex than just a set of Conditions'
+          'arguments': ['context'],
+          description: 'If end is a function, then it must return a set of Conditions, which will then be evaluated. This function should not modify anything - it\'s only here for when you need something more complex than just a set of Conditions'
         }
       ]
     }

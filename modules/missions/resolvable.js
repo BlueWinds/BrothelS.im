@@ -187,8 +187,9 @@ Resolvable.prototype.applyResults = function(results, done) {
     changes.forEach(function(d) { delta._add(d()); });
     var messages = results.message.length ? results.message : [results.message];
     messages.forEach(function(message) {
-      if (message.delta !== false) { message.delta = delta; }
-      g.messages.push(new Message(message, context));
+      var live = new Message(message, context);
+      live.delta = message.delta === false ? {} : delta;
+      g.messages.push(live);
     });
   }
   if (results.mission) {

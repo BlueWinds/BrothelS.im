@@ -13,53 +13,6 @@ e.Ready.push(function(done) {
   done();
 });
 
-e.GameUpgrade04.push(function(game, next) {
-  delete game.missions.setFirstAction;
-  next();
-});
-
-Mission.checkStart = function(day, done) {
-  var context = {
-    day: day
-  };
-  var series = [];
-  for (var _id in Missions) {
-    if (Missions[_id].conditions && !g.missions[_id]) {
-      var mission = Mission.create(_id, { day: day });
-      if (mission && mission.base().end) {
-        g.missions[_id] = mission;
-      } else if (mission) {
-        g.missionsDone[_id] = true;
-      }
-    }
-  }
-  $.each(Girls, function(name, girl) {
-    if (!girl.Missions) { return; }
-    $.each(girl.Missions, function(_id, mission) {
-      context = { day: day, girl: g.girls[girl.name] };
-      if (!mission.conditions || g.missions[_id]) { return; }
-      mission = Mission.create(_id, context, true);
-      if (mission && mission.base().end) {
-        g.missions[_id] = mission;
-      }
-    });
-  });
-  done();
-};
-
-e.GameNew.push(function(done) {
-  g.missions = {};
-  g.missionsDone = {};
-  if (g.skipIntro) {
-    $.extend(g.missionsDone, Mission.introMissions);
-    g.money = 1000;
-    g.maxGirls = 5;
-    g.maxBuildings = 1;
-  }
-  delete g.skipIntro;
-  Mission.checkStart(-1, done);
-});
-
 e.GameUpgrade03.push(function(game, done) {
   // If firstBuilding && !introConstitution, then this was a pre-new-tutorial game, and we should add
   // the intro missions so that the actions they introduce aren't disabled.
@@ -84,6 +37,56 @@ e.GameUpgrade03.push(function(game, done) {
     }
   }
   done();
+});
+
+e.GameUpgrade04.push(function(game, next) {
+  delete game.missions.setFirstAction;
+  next();
+});
+
+Mission.checkStart = function(day, done) {
+  var context = {
+    day: day
+  };
+  var series = [];
+  $.each(Missions, function(_id, mission) {
+    if (!mission.conditions || g.missions[_id]) { return; }
+    mission = Mission.create(_id, { day: day });
+    if (mission) {
+      g.missions[_id] = mission;
+      if (!mission.getEnd()) {
+        series.push(function(next) { mission.checkDay(next); });
+      }
+    }
+  });
+  $.each(Girls, function(name, girl) {
+    if (!girl.Missions) { return; }
+    $.each(girl.Missions, function(_id, mission) {
+      context = { day: day, girl: g.girls[girl.name] };
+      if (!mission.conditions || g.missions[_id]) { return; }
+      mission = Mission.create(_id, context, true);
+      if (mission) {
+        g.missions[_id] = mission;
+        if (!mission.getEnd()) {
+          series.push(function(next) { mission.checkDay(next); });
+        }
+      }
+    });
+  });
+  e.runSeries(series, done);
+};
+
+e.GameNew.push(function(done) {
+  g.missions = {};
+  g.missionsDone = {};
+  if (g.skipIntro) {
+    $.extend(g.missionsDone, Mission.introMissions);
+    g.money = 1000;
+    g.maxGirls = 5;
+    g.maxBuildings = 1;
+  }
+  delete g.skipIntro;
+  Mission.checkStart(-1, done);
 });
 
 e.GameNextDay.push(function(done) {

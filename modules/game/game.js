@@ -271,15 +271,13 @@ Game.getUserInput = function(text, image, options, done) {
 };
 
 e.Autorender.push(function(element, done) {
-  for (var item in Game.tooltips) {
-    $('.' + item, element).attr('title', Game.tooltips[item]).each(function() {
+  $.each(Game.tooltips, function(item, tip) {
+    $('.' + item, element).attr('title', tip).each(function() {
       $(this).tooltip({
-        show: {
-          delay: 300
-        },
-        content: Game.tooltips[item]
+        show: { delay: 300 },
+        content: tip
       });
     });
-  }
+  });
   done();
 });

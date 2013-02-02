@@ -17,25 +17,21 @@
   <link href="modules/autorender/autorender.css" type="text/css" rel="stylesheet">
   <script src="modules/core.js"></script>
   <script src="modules/autorender/autorender.js"></script>
-  <script src="modules/game/schema.js"></script>
   <script src="modules/game/class.js"></script>
   <script src="modules/game/game.js"></script>
   <script src="content/game.js"></script>
   <link href="modules/messages/messages.css" type="text/css" rel="stylesheet">
   <script src="modules/messages/messages.js"></script>
-  <script src="modules/messages/schema.js"></script>
 
   <!-- Girl core files -->
   <link href="modules/girls/style.css" type="text/css" rel="stylesheet">
   <script src="modules/girls/class.js"></script>
   <script src="content/girls/girls.js"></script>
-  <script src="modules/girls/schema.js"></script>
   <script src="modules/girls/girls.js"></script>
 
   <!-- Building core files -->
   <link href="modules/buildings/style.css" type="text/css" rel="stylesheet">
   <script src="modules/buildings/class.js"></script>
-  <script src="modules/buildings/schema.js"></script>
   <script src="modules/buildings/rooms.js"></script>
   <script src="modules/buildings/buildings.js"></script>
   <script src="content/buildings/buildings.js"></script>
@@ -43,27 +39,31 @@
 
   <!-- Mission core files -->
   <link href="modules/missions/style.css" type="text/css" rel="stylesheet">
-  <script src="modules/missions/schema.js"></script>
   <script src="modules/missions/resolvable.js"></script>
   <script src="modules/missions/class.js"></script>
   <script src="modules/missions/missions.js"></script>
 
   <!-- Action core files -->
   <link href="modules/actions/style.css" type="text/css" rel="stylesheet">
-  <script src="modules/actions/schema.js"></script>
   <script src="modules/actions/class.js"></script>
   <script src="modules/actions/actions.js"></script>
 
   <!-- Misc modules -->
-  <script src="modules/events/schema.js"></script>
   <script src="modules/events/events.js"></script>
   <script src="modules/randomPerson/randomPerson.js"></script>
   <script src="content/randomPerson/randomPerson.js"></script>
   <script src="modules/owner/owner.js"></script>
 
-  <!--   Uncomment the following line in order to enable schema validation. -->
-  <!--   This will massively slow down game loading and play, *especially* if you're not using Chrome. -->
-   <script src="modules/validator/validate.js"></script>
+  <!--   Uncomment the following section in order to enable schema validation. -->
+  <!--   This will massively slow down game loading and play. -->
+  <script src="modules/game/schema.js"></script>
+  <script src="modules/girls/schema.js"></script>
+  <script src="modules/messages/schema.js"></script>
+  <script src="modules/buildings/schema.js"></script>
+  <script src="modules/missions/schema.js"></script>
+  <script src="modules/actions/schema.js"></script>
+  <script src="modules/events/schema.js"></script>
+  <script src="modules/validator/validate.js"></script>
 
   <!-- Actions -->
   <script src="content/actions/chores.js"></script>
@@ -359,7 +359,7 @@
   </script>
   <script id="game_new_template" type="text/ejs-template">
     <div id="new-game-form">
-      <label id="autosave" class="checkbox" title="The game will be saved after every third turn automatically.">Autosave</label>
+      <label id="autosave" class="checkbox" title="The game will be saved automatically before each turn.">Autosave</label>
       <label id="skip-intro" class="checkbox <<- g && g.missionsDone.explainWhore ? 'checked' : '' >>" title="Skip the tutorial missions and enable all options immediately.">Skip Tutorial</label>
       <div id="fetishes">
         <label title="Control what sorts of potentially objectionable content will show up in this game. You can modify them later from the Save Game dialog.">Fetishes</label>

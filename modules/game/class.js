@@ -41,6 +41,10 @@ Game.prototype.nextTurn = function() {
     this.moneyHistory = this.moneyHistory.slice(this.moneyHistory.length - Game.config.moneyHistoryLength);
   }
   e.runSeries([
+    function(next) {
+      if (g.autosave) { Game.save('Autosave'); }
+      next();
+    },
     function(next) { e.invokeAll('GamePreDay', next); },
     function(next) { e.invokeAll('GameNextDay', next); },
     function(next) {
@@ -51,12 +55,6 @@ Game.prototype.nextTurn = function() {
       }
       next();
     },
-    function(next) { e.invokeAll('GamePostDay', next); },
-    function(next) {
-      if (g.autosave && g.day % 3 === 0) {
-        Game.save('Autosave');
-      }
-      next();
-    }
+    function(next) { e.invokeAll('GamePostDay', next); }
   ], g.render);
 };

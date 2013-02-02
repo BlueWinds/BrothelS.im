@@ -20,30 +20,27 @@ Mission.create = function(_id, context) {
   return mission;
 };
 
-Mission.prototype.getEnd = function(done) {
+Mission.prototype.getEnd = function() {
   if (this.end) {
-    done(this.end);
+    return this.end;
   } else if (typeof(this.base().end) == 'function') {
-    this.base().end.call(this, this.context(), done);
-  } else {
-    done({});
+    return this.base().end.call(this, this.context());
   }
 };
 
 Mission.prototype.checkDay = function(done) {
   var mission = this;
-  this.getEnd(function(conditions) {
-    var result = mission.checkConditions(conditions);
-    if (result) {
-      mission.setContext(result);
-      delete g.missions[mission._id];
-      g.missionsDone[mission._id] = true;
-      mission.applyResults(done);
-      return;
-    }
-    if (mission.display && conditions.max && conditions.max.day && conditions.max.day - 1 == g.day) {
-      g.messages.push(mission.display);
-    }
-    done();
-  });
+  var conditions = this.getEnd() || {};
+  var result = this.checkConditions(conditions);
+  if (result) {
+    mission.setContext(result);
+    delete g.missions[mission._id];
+    g.missionsDone[mission._id] = true;
+    mission.applyResults(done);
+    return;
+  }
+  if (mission.display && conditions.max && conditions.max.day && conditions.max.day - 1 == g.day) {
+    g.messages.push(mission.display);
+  }
+  done();
 };

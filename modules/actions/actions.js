@@ -85,6 +85,7 @@ e.GameRender.push(function(done) {
         action.setOption($(this).attr('name'));
         $(this).closest('.action').children('ul').click();
       });
+      e.invokeAll('Autorender', div);
       return div;
     }
     var context = {

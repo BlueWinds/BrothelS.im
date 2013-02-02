@@ -21,7 +21,7 @@ e.GameUpgrade04.push(function(game, next) {
 });
 
 var Message = function(obj, context) {
-  $.extend(this, obj);
+  $.extend(true, this, obj);
   this._class = 'Message';
   if (context) {
     this.group = ejs.render(this.group, context);
