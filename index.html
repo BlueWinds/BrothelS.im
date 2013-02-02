@@ -28,9 +28,9 @@
   <!-- Girl core files -->
   <link href="modules/girls/style.css" type="text/css" rel="stylesheet">
   <script src="modules/girls/class.js"></script>
+  <script src="content/girls/girls.js"></script>
   <script src="modules/girls/schema.js"></script>
   <script src="modules/girls/girls.js"></script>
-  <script src="content/girls/girls.js"></script>
 
   <!-- Building core files -->
   <link href="modules/buildings/style.css" type="text/css" rel="stylesheet">
@@ -276,17 +276,12 @@
           << }) >>
           << if (g.missionsDone.firstMoney) { >>
             <div id="pay">
-              << var pay = girl.desiredPay() >>
               <label><strong>Pay</strong></label>
-              <select>
-                << for (var mult in Girl.config.pay) { >>
-                  <option value="<<- mult >>" <<- girl.actions.pay == mult ? "selected" : "" >>>
-                    $<<- Math.floor(pay * mult) >>
-                  </option>
-                << } >>
-              </select>
-              <span class="delta money">$<<- Math.floor(pay * girl.actions.pay) >></span>
-              <span class="delta happiness"><<- girl.payHappiness() >></span>
+              <div class="slider"></div>
+              <div id="pay-results">
+                <span class="delta money">-$<<- Math.floor(girl.actions.pay * girl.desiredPay()) >></span>
+                <span class="delta happiness"><<- girl.payHappiness() < 0 ? girl.payHappiness() : "+" + girl.payHappiness() >></span>
+              </div>
             </div>
           << } >>
         </div>

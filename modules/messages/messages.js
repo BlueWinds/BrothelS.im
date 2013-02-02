@@ -1,5 +1,4 @@
 e.GameUpgrade03.push(function(game, next) {
-  delete game.messagesShown;
   var messages = game.messages;
   game.messages = [];
   for (var group in messages) {
@@ -13,6 +12,11 @@ e.GameUpgrade03.push(function(game, next) {
       game.messages.push(message);
     }
   }
+  next();
+});
+
+e.GameUpgrade04.push(function(game, next) {
+  delete game.messagesShown;
   next();
 });
 

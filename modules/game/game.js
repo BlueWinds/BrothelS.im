@@ -269,3 +269,17 @@ Game.getUserInput = function(text, image, options, done) {
   });
   e.invokeAll('Autorender', form, function() {});
 };
+
+e.Autorender.push(function(element, done) {
+  for (var item in Game.tooltips) {
+    $('.' + item, element).attr('title', Game.tooltips[item]).each(function() {
+      $(this).tooltip({
+        show: {
+          delay: 300
+        },
+        content: Game.tooltips[item]
+      });
+    });
+  }
+  done();
+});

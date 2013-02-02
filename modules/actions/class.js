@@ -129,7 +129,6 @@ Girl.prototype.setAction = function(action) {
 Girl.prototype.verifyActions = function(time) {
   if (!time || time == 'morning') {
     var m = this.actions.morning;
-      console.log(m);
     m = m && m.label && m.checkConditions() && !m.checkDisabled();
     if (!m) {
       this.setAction(this.action('Rest', { time: 'morning' }));
@@ -137,7 +136,6 @@ Girl.prototype.verifyActions = function(time) {
   }
   if (!time || time == 'evening') {
     var e = this.actions.evening;
-      console.log(e);
     e = e && e.label && e.checkConditions() && !e.checkDisabled();
     if (!e) {
       this.setAction(this.action('Rest', { time: 'evening' }));

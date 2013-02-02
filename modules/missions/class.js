@@ -37,8 +37,8 @@ Mission.prototype.checkDay = function(done) {
     if (result) {
       mission.setContext(result);
       delete g.missions[mission._id];
-      mission.applyResults(done);
       g.missionsDone[mission._id] = true;
+      mission.applyResults(done);
       return;
     }
     if (mission.display && conditions.max && conditions.max.day && conditions.max.day - 1 == g.day) {

@@ -294,7 +294,9 @@ Schemas.liveGirl = {
       type: 'object',
       required: [ 'pay' ],
       properties: {
-        pay: { type: 'integer', minimum: 0 },
+        pay: {
+          'enum': Object.keys(Girl.config.pay).map(parseFloat)
+        },
         soft: { type: 'boolean' },
         hard: { type: 'boolean' },
         anal: { type: 'boolean' },

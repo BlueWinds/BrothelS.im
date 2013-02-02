@@ -66,7 +66,7 @@ e.GameInit.push(function(done) {
 });
 
 e.GamePreDay.push(function(done) {
-  $.each(g.girls, function(name, girl) {
+  g.girls._filter('status', 'Hired').forEach(function(girl) {
     girl.turnDelta = girl.startDelta();
   });
   done();
@@ -97,7 +97,7 @@ e.GameNextDay.push(function(done) {
 });
 
 e.GamePostDay.push(function(done) {
-  $.each(g.girls, function(name, girl) {
+  g.girls._filter('status', 'Hired').forEach(function(girl) {
     g.money -= Math.floor(girl.actions.pay * girl.desiredPay());
     girl.apply('happiness', girl.payHappiness());
     girl.turnDelta = girl.turnDelta();
@@ -119,12 +119,27 @@ e.GameRender.push(function(done) {
     var view = $(ejs.render($('#girls_view_template').html(), context).trim());
 
     var desired = girl.desiredPay();
-    $('#pay select', view).change(function() {
-      girl.actions.pay = $(this).val();
-      var happiness = girl.payHappiness();
-      $('#pay .delta.happiness', view).html(happiness < 0 ? happiness : '+' + happiness);
-      $('#pay .delta.money', view).html('$' + Math.floor(desired * girl.actions.pay));
-    });
+    var happinessDelta = $('#pay .delta.happiness', view);
+    var moneyDelta = $('#pay .delta.money', view);
+    var slider = $('#pay .slider', view).slider({
+      step: 0.01,
+      min: Math.min.apply(undefined, Object.keys(Girl.config.pay)),
+      max: Math.max.apply(undefined, Object.keys(Girl.config.pay)),
+      slide: function(event, ui) {
+        var closest = 100;
+        for (var mult in Girl.config.pay) {
+          closest = Math.abs(ui.value - mult) < Math.abs(ui.value - closest) ? mult : closest;
+        }
+        if (girl.actions.pay != closest) {
+          girl.actions.pay = parseFloat(closest);
+          var happiness = girl.payHappiness();
+          happinessDelta.html(happiness < 0 ? happiness : '+' + happiness);
+          moneyDelta.html('$' + Math.floor(desired * girl.actions.pay));
+          slider.slider('value', closest);
+        }
+        event.preventDefault();
+      }
+    }).slider('value', girl.actions.pay);
 
     $('.checkbox', view).click(function(event) {
       var check = !$(this).hasClass('checked');
@@ -165,12 +180,5 @@ e.GameRender.push(function(done) {
     lst.dialog({});
     lst.closest('.ui-dialog').addClass('tab-dialog');
   });
-  done();
-});
-
-e.Autorender.push(function(element, done) {
-  for (var stat in Girl.config.tooltips) {
-    $('.' + stat, element).attr('title', Girl.config.tooltips[stat]);
-  }
   done();
 });

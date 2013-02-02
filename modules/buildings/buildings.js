@@ -159,11 +159,3 @@ e.GameRender.push(function(done) {
     return this.building() ? pay : pay + Building.config.noRoomDailyCost;
   };
 })();
-
-e.Autorender.push(function(element, done) {
-  $('.clean', element).attr('title', Building.config.cleanDescription);
-  $('.reputation', element).attr('title', Building.config.reputationDescription);
-  $('.rooms', element).attr('title', Building.config.roomDescription);
-  $('.bedroom', element).attr('title', Rooms.Bedroom.description);
-  done();
-});
