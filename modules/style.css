@@ -66,6 +66,7 @@ body {
 .column {
   float: left;
   margin: 1em 0;
+  padding: 0;
 }
 
 .pct-10 { width: 10%; }
@@ -79,6 +80,7 @@ body {
 .pct-55 { width: 55%; }
 .pct-60 { width: 60%; }
 .pct-70 { width: 70%; }
+.pct-75 { width: 75%; }
 .pct-80 { width: 80%; }
 
 .em-2 { width: 2em; }

@@ -17,6 +17,10 @@
   position: relative;
   text-align: center;
   width: 6em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .action.disabled {

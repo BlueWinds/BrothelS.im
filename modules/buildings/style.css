@@ -32,15 +32,6 @@
   font-weight: 700;
 }
 
-#building-view .middle label {
-  margin-left: 1em;
-  width: 6em;
-}
-
-#building-view .middle #daily-label {
-  width: 3em;
-}
-
 .daily-delta {
   display: inline-block;
   vertical-align: middle;
@@ -51,18 +42,97 @@
   width: 3em;
 }
 
-#rooms { clear: both; }
-#rooms .room {
-  border: 1px solid #999999;
-  border-radius: 6px 6px 6px 6px;
+#building-view .info {
   float: left;
-  height: 8em;
-  margin: 0.5em;
-  padding: 0.5em;
   text-align: center;
-  width: 9em;
+  width: 8em;
 }
 
-.room p {
-  font-size: .8em;
+#building-view ul {
+  height: 8em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+#building-view .room {
+  background: #000;
+  border: 1px solid #999;
+  border-radius: 6px;
+  float: left;
+  height: 7.5em;
+  margin: 0.4em;
+  position: relative;
+  text-align: center;
+  width: 6em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#building-view .room.disabled {
+  border-color: #666;
+  color: #999;
+}
+
+#building-view .room label {
+  margin: 0;
+}
+
+.room > p {
+  font-size: 0.7em;
+  margin-top: 0.5em;
+}
+
+#building-view .girl {
+  border-radius: 6px;
+  height: 5.5em;
+  width: 6em;
+}
+
+#building-view .room ul {
+  position: relative;
+}
+
+#building-view .room .girl {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+#building-view .column {
+  position: relative;
+}
+
+#building-view .column:nth-child(2) > label {
+  position: absolute;
+  top: -1em;
+}
+
+#inn .ui-sortable-placeholder, #building-view .room .ui-sortable-placeholder {
+  border: 1px solid #666;
+  border-radius: 6px;
+  margin: -1px;
+  visibility: visible !important;
+}
+
+#building-view .available-rooms .room {
+  position: absolute;
+}
+
+#building-view .available-rooms li.room:nth-of-type(1) { top: 0; left: 0; }
+#building-view .available-rooms li.room:nth-of-type(2) { top: 1em; left: 1.5em; }
+#building-view .available-rooms li.room:nth-of-type(3) { top: 2em; left: 3em; }
+#building-view .available-rooms li.room:nth-of-type(4) { top: 3em; left: 4.5em; }
+#building-view .available-rooms li.room:nth-of-type(5) { top: 4em; left: 6em; }
+
+#building-view .available-rooms label {
+  font-size: 0.8em;
+}
+
+#inn li {
+  float: left;
 }

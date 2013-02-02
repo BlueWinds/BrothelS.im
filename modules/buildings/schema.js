@@ -87,10 +87,7 @@ Schemas.Room = {
   ],
   properties: {
     type: { type: 'string' },
-    description: {
-      type: 'string',
-      description: 'Text replacement is available with both "room" and "building" keys.'
-    },
+    description: { type: 'string' },
     price: {
       type: 'integer',
       description: 'The price to add this room. Also added to the price of the building when buying or selling.'
