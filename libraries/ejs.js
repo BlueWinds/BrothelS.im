@@ -170,6 +170,7 @@ var parse = exports.parse = function(str, options){
   var lineno = 1;
 
   var consumeEOL = false;
+  if (!str) { console.log(options); }
   for (var i = 0, len = str.length; i < len; ++i) {
     if (str.slice(i, open.length + i) == open) {
       i += open.length

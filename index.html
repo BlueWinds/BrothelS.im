@@ -5,18 +5,19 @@
   <title>Brothel S.im</title>
   <link rel="shortcut icon" href="favicon.ico">
   <link href="libraries/ui-darkness.css" type="text/css" rel="stylesheet">
-  <script src="libraries/jquery.js"></script>
-  <script src="libraries/jquery-ui.js"></script>
+  <script src="libraries/jquery-1.9.js"></script>
+  <script src="libraries/jquery-ui-1.10.js"></script>
   <script src="libraries/globalize.js"></script>
   <script src="libraries/ejs.js"></script>
   <script src="libraries/namegen.js"></script>
-  <script src="libraries/jquery.sparkline.js"></script>
+  <script src="libraries/jquery.sparkline.min.js"></script>
+  <script type="text/javascript" src="libraries/tv4.js"></script>
 
   <link href="modules/style.css" type="text/css" rel="stylesheet">
   <link href="modules/autorender/autorender.css" type="text/css" rel="stylesheet">
   <script src="modules/core.js"></script>
   <script src="modules/autorender/autorender.js"></script>
-  <script src="modules/game/schema.js"></script>
+  <script src="modules/game/class.js"></script>
   <script src="modules/game/game.js"></script>
   <script src="content/game.js"></script>
   <link href="modules/messages/messages.css" type="text/css" rel="stylesheet">
@@ -24,13 +25,13 @@
 
   <!-- Girl core files -->
   <link href="modules/girls/style.css" type="text/css" rel="stylesheet">
-  <script src="modules/girls/schema.js"></script>
-  <script src="modules/girls/girls.js"></script>
+  <script src="modules/girls/class.js"></script>
   <script src="content/girls/girls.js"></script>
+  <script src="modules/girls/girls.js"></script>
 
   <!-- Building core files -->
   <link href="modules/buildings/style.css" type="text/css" rel="stylesheet">
-  <script src="modules/buildings/schema.js"></script>
+  <script src="modules/buildings/class.js"></script>
   <script src="modules/buildings/rooms.js"></script>
   <script src="modules/buildings/buildings.js"></script>
   <script src="content/buildings/rooms.js"></script>
@@ -39,12 +40,12 @@
   <!-- Mission core files -->
   <link href="modules/missions/style.css" type="text/css" rel="stylesheet">
   <script src="modules/missions/resolvable.js"></script>
-  <script src="modules/missions/schema.js"></script>
+  <script src="modules/missions/class.js"></script>
   <script src="modules/missions/missions.js"></script>
 
   <!-- Action core files -->
   <link href="modules/actions/style.css" type="text/css" rel="stylesheet">
-  <script src="modules/actions/schema.js"></script>
+  <script src="modules/actions/class.js"></script>
   <script src="modules/actions/actions.js"></script>
 
   <!-- Misc modules -->
@@ -52,6 +53,17 @@
   <script src="modules/randomPerson/randomPerson.js"></script>
   <script src="content/randomPerson/randomPerson.js"></script>
   <script src="modules/owner/owner.js"></script>
+
+  <!--   Uncomment the following section in order to enable schema validation. -->
+  <!--   This will massively slow down game loading and play. -->
+  <script src="modules/game/schema.js"></script>
+  <script src="modules/girls/schema.js"></script>
+  <script src="modules/messages/schema.js"></script>
+  <script src="modules/buildings/schema.js"></script>
+  <script src="modules/missions/schema.js"></script>
+  <script src="modules/actions/schema.js"></script>
+  <script src="modules/events/schema.js"></script>
+  <script src="modules/validator/validate.js"></script>
 
   <!-- Actions -->
   <script src="content/actions/chores.js"></script>
@@ -77,14 +89,13 @@
   <script src="content/missions/tentacleAttacks.js"></script>
   <script src="content/missions/avengeRape.js"></script>
 
+  <!-- Events !-->
+  <script src="content/events/tentacleAttack.js"></script>
+  <script src="content/events/rape.js"></script>
 
   <!-- Misc files -->
   <script src="modules/prostitution/prostitution.js"></script>
   <script src="content/prostitution.js"></script>
-
-  <!-- Events !-->
-  <script src="content/events/tentacleAttack.js"></script>
-  <script src="content/events/rape.js"></script>
 
   <script>
     $(function() {
@@ -184,8 +195,8 @@
                 stats.push(girl.S(stat));
               });
               Girl.sex.forEach(function(sex) {
-                experience.push(girl.S(sex + " experience"));
-                libido.push(girl.S(sex + " libido"));
+                experience.push(girl.S(sex + "Experience"));
+                libido.push(girl.S(sex + "Libido"));
               });
             >>
             <div><<- stats.join(" | ") >></div>
@@ -263,11 +274,16 @@
               <<- girl.S(stat) >>
             </div>
           << }) >>
-          <div id="pay">
-            <label><strong>Pay</strong></label>
-            <input value="$<<- girl.actions.pay >>">
-            <span class="delta happiness"></span>
-          </div>
+          << if (g.missionsDone.firstMoney) { >>
+            <div id="pay">
+              <label><strong>Pay</strong></label>
+              <div class="slider"></div>
+              <div id="pay-results">
+                <span class="delta money">-$<<- Math.floor(girl.actions.pay * girl.desiredPay()) >></span>
+                <span class="delta happiness"><<- girl.payHappiness() < 0 ? girl.payHappiness() : "+" + girl.payHappiness() >></span>
+              </div>
+            </div>
+          << } >>
         </div>
         <div class="column pct-45 right">
           << Girl.sex.forEach(function(sex) { >>
@@ -279,13 +295,13 @@
             <div>
               <label><<- T("libido") >>:</label>
               <span class="<<- sex >> libido">
-                <<- girl.S(sex + " libido") >>
+                <<- girl.S(sex + "Libido") >>
               </span>
             </div>
             <div>
               <label><<- T("experience") >>:</label>
               <span class="<<- sex >> experience">
-                <<- girl.S(sex + " experience") >>
+                <<- girl.S(sex + "Experience") >>
               </span>
             </div>
           << }) >>
@@ -343,7 +359,7 @@
   </script>
   <script id="game_new_template" type="text/ejs-template">
     <div id="new-game-form">
-      <label id="autosave" class="checkbox" title="The game will be saved after every third turn automatically.">Autosave</label>
+      <label id="autosave" class="checkbox" title="The game will be saved automatically before each turn.">Autosave</label>
       <label id="skip-intro" class="checkbox <<- g && g.missionsDone.explainWhore ? 'checked' : '' >>" title="Skip the tutorial missions and enable all options immediately.">Skip Tutorial</label>
       <div id="fetishes">
         <label title="Control what sorts of potentially objectionable content will show up in this game. You can modify them later from the Save Game dialog.">Fetishes</label>
@@ -426,7 +442,7 @@
               << building.potentialRooms()._sort("price").forEach(function(room) { >>
                 << var context = { room: room, building: building } >>
                 << if (room.price <= g.money) { enabledCount += 1; } >>
-                <option value="<<- room.type >>" title="<<= ejs.render(room.description, context) >>" <<- room.price > g.money ? "disabled" : "">>>$<<- room.price >> - <<- ejs.render(room.label, context) >></option>
+                <option value="<<- room.type >>" title="<<= ejs.render(room.description, context) >>" <<- room.price > g.money ? "disabled" : "">>>$<<- room.price + ' - ' + room.label >></option>
               << }) >>
             </select>
             <button id="buy-room" <<- enabledCount ? "" : "disabled">>>Add Room</button>

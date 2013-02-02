@@ -1,4 +1,10 @@
 var Events = {};
+e.GameUpgrade04.push(function(game, next) {
+  for (var name in game.girls) {
+    delete game.girls[name].events;
+  }
+  next();
+});
 
 function Event(obj) {
   Resolvable.call(this, obj);
@@ -67,19 +73,14 @@ Event.get = function(context) {
 };
 
 (function() {
-  var oldDoAction = Action.prototype.applyResults;
-  Action.prototype.applyResults = function(results, done) {
-    if (!done) {
-      oldDoAction.call(this, results);
-      return;
-    }
+  var oldGetResults = Action.prototype.getResults;
+  Action.prototype.getResults = function(done) {
     var context = this.context();
     var event = Event.get(context);
-    if (!event) {
-      oldDoAction.call(this, results, done);
-      return;
+    if (event) {
+      event.getResults(done);
+    } else {
+      oldGetResults.call(this, done);
     }
-    context.girl.eventHistory[event._id] = g.day;
-    event.applyResults(done);
   };
 })();

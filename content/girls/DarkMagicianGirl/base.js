@@ -8,14 +8,14 @@ Girls['Dark Magician Girl'] = {
   charisma: 40,
   intelligence: 60,
   constitution: 50,
-  'soft libido': 50,
-  'soft experience': 20,
-  'hard libido': 30,
-  'hard experience': 10,
-  'anal libido': 10,
-  'anal experience': 0,
-  'fetish libido': 10,
-  'fetish experience': 0,
+  softLibido: 50,
+  softExperience: 20,
+  hardLibido: 30,
+  hardExperience: 10,
+  analLibido: 10,
+  analExperience: 0,
+  fetishLibido: 10,
+  fetishExperience: 0,
   images: {
     basePath: "content/girls/DarkMagicianGirl/images",
     base: "Base.png",
@@ -35,7 +35,6 @@ Girls['Dark Magician Girl'] = {
   },
   Actions: {
     // TODO: Add Talk results
-    Talk: { },
     Healing: {
       label: 'Healing',
       group: 'Chores',
@@ -46,7 +45,7 @@ Girls['Dark Magician Girl'] = {
           girls: 2
         }
       },
-      enableCondtions: {
+      enableConditions: {
         girl: {
           min: {
             intelligence: 50,
@@ -55,15 +54,6 @@ Girls['Dark Magician Girl'] = {
         }
       },
       options: 'girls',
-      variants: function(context, done) {
-        var delta = {
-          happiness: 2,
-          endurance: 10
-        };
-        delta.endurance += Math.floor(Math.random() * 21);
-        g.girls[this.option].apply(delta);
-        done(this.results[0]);
-      },
       results: [
         {
           message: {

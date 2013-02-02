@@ -77,7 +77,8 @@ Missions.enduranceAndHappiness = {
         happiness: 80
       }
     }
-  }
+  },
+  results: [{}]
 };
 
 Missions.charismaAndIntelligence = {
@@ -111,7 +112,7 @@ Missions.libidoAndExperience = {
   },
   end: {
     girl: {
-      min: { 'hard libido': 61 }
+      min: { hardLibido: 61 }
     }
   },
   results: [{
@@ -141,7 +142,7 @@ Missions.firstThousand = {
     group: 'Introduction',
     image: 'content/missions/firstMoneyStart.png',
     weight: -1,
-    text: "<blockquote>Earn $1000 as fast as you can. Something good will happen!<br><br>My arms are getting tired!</blockquote><br>One important thing to keep in mind is that customers have certain preferences - they\'ll pay significantly better for their first or second choices of sex types. Girls willing to do only one thing will make much less money. But it\'s far worse to have a girl refuse a customer than it is to leave him unsatisfied. For now, just leave Kirino on <<- ['soft', 'hard']._toString('noun') >>, and worry about raising her <<- T('libido') >> for the other sex types once you're more established.<br><br>Now that she's out on the streets doing actual work for you, it's time to start paying Kirino - continuing to pay her nothing would make her unhappy pretty fast. Click on her image or stats, and notice the Pay dial - the number next to it is the daily change in happiness this level will cause. Try setting it to $60/day. Kirino in particular is happy with almost no money - other girls will want much more, and their desired wage will increase along with their stats."
+    text: "<blockquote>Earn $1000 as fast as you can. Something good will happen!<br><br>My arms are getting tired!</blockquote><br>One important thing to keep in mind is that customers have certain preferences - they\'ll pay significantly better for their first or second choices of sex types. Girls willing to do only one thing will make much less money. But it\'s far worse to have a girl refuse a customer than it is to leave him unsatisfied. For now, just leave Kirino on <<- ['soft', 'hard']._toString('noun') >>, and worry about raising her <<- T('libido') >> for the other sex types once you're more established.<br><br>Now that she's out on the streets doing actual work for you, it's time to <strong>start paying Kirino</strong> - continuing to pay her nothing would make her unhappy pretty fast. Click on her image or stats, and you'll notice the Pay dropdown has appeared. Kirino is happy with a little money - other girls will want much more, and their desired wage will increase along with their stats."
   },
   end: {
     min: {
@@ -268,5 +269,6 @@ Missions.buyRooms = {
   },
   end: {
     min: { day: '+3' }
-  }
+  },
+  results: [{}]
 };

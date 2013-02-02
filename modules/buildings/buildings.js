@@ -1,8 +1,16 @@
 e.GameUpgrade03.push(function(game, next) {
   for (var name in g.buildings) {
-    g.buildings[name]._class = 'Building';
-    g.buildings[name].maxRooms = Buildings[name].maxRooms;
+    game.buildings[name]._class = 'Building';
+    game.buildings[name].maxRooms = Buildings[name].maxRooms;
   }
+  next();
+});
+e.GameUpgrade04.push(function(game, next) {
+  $.each(game.buildings, function(name, building) {
+    building.rooms.forEach(function(room) {
+      room.type = room.type.charAt(0).toUpperCase() + room.type.slice(1);
+    });
+  });
   next();
 });
 
@@ -73,8 +81,7 @@ e.GameRender.push(function(done) {
         context.room = room;
         var div = $('<div>').addClass('room');
         var base = Rooms[room.type];
-        var label = ejs.render(base.label, context);
-        div.append('<h6>').html(label);
+        div.append('<h6>').html(base.label);
         if (base.render) {
           div.append(base.render.call(room, building, render));
         } else {
@@ -147,16 +154,8 @@ e.GameRender.push(function(done) {
 (function() {
   var originalPay = Girl.prototype.desiredPay;
   Girl.prototype.desiredPay = function() {
-    if (!g.missionsDone || !g.missionsDone.firstMoney) { return 0; }
+    if (!g.missionsDone.firstMoney) { return 0; }
     var pay = originalPay.call(this);
     return this.building() ? pay : pay + Building.config.noRoomDailyCost;
   };
 })();
-
-e.Autorender.push(function(element, done) {
-  $('.clean', element).attr('title', Building.config.cleanDescription);
-  $('.reputation', element).attr('title', Building.config.reputationDescription);
-  $('.rooms', element).attr('title', Building.config.roomDescription);
-  $('.bedroom', element).attr('title', Rooms.bedroom.description);
-  done();
-});

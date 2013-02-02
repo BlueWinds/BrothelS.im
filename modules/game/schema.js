@@ -1,62 +1,36 @@
-var Game = function(obj) {
-  g = this;
-  this._class = 'Game';
-  // Update old fetish settings
-  if (obj.tentacles !== undefined) {
-    obj.fetishes = { tentacles: obj.tentacles };
-    delete obj.tentacles;
-  }
-  // Trim overly-long old histories
-  if (obj.moneyHistory.length > Game.config.moneyHistoryLength) {
-    obj.moneyHistory = obj.moneyHistory.slice(obj.moneyHistory.length - Game.config.moneyHistoryLength);
-  }
-  $.extend(this, obj);
-};
-
-Game.prototype.nextPayment = function() {
-  if (this.day >= Game.config.gameLength) { return false; }
-  var pl = Game.config.gameLength / Game.config.payments.length;
-  var day = Math.floor(this.day / pl) * pl + pl;
-  return {
-    day: day,
-    amount: Game.config.payments[day / pl]
-  };
-};
-
-Game.prototype.render = function() {
-  e.invokeAll('GamePreRender', function() {
-    $('#content').html(ejs.render($('#game_view_template').html()));
-    $('#next').click(function() {
-      g.nextTurn();
-    });
-    e.invokeAll('GameRender', function() {
-      e.invokeAll('Autorender', $('#content'));
-    });
-  });
-};
-
-Game.prototype.nextTurn = function() {
-  this.moneyHistory.push(this.money);
-  if (this.moneyHistory.length > Game.config.moneyHistoryLength) {
-    this.moneyHistory = this.moneyHistory.slice(this.moneyHistory.length - Game.config.moneyHistoryLength);
-  }
-  e.runSeries([
-    function(next) { e.invokeAll('GamePreDay', next); },
-    function(next) { e.invokeAll('GameNextDay', next); },
-    function(next) {
-      var payment = g.nextPayment();
-      g.day += 1;
-      if (payment && g.day == payment.day) {
-        g.money -= payment.amount;
-      }
-      next();
+Schemas.Game = {
+  type: 'object',
+  required: [
+    '_class', 'day', 'fetishes', 'money', 'moneyHistory'
+  ],
+  properties: {
+    _id: { type: 'string' },
+    _class: {
+      'enum': [ 'Game' ]
     },
-    function(next) { e.invokeAll('GamePostDay', next); },
-    function(next) {
-      if (g.autosave && g.day % 3 === 0) {
-        Game.save('Autosave');
-      }
-      next();
+    autosave: {
+      type: 'boolean',
+      'default': false
+    },
+    day: {
+      type: 'integer',
+      minimum: 0
+    },
+    fetishes: {
+      type: 'object',
+      patternProperties: {
+        'tentacles|rape': { 'enum': [ true ] }
+      },
+      additionalProperties: false
+    },
+    money: { type: 'integer' },
+    moneyHistory: {
+      type: 'array',
+      additionalItems: { type: 'integer' }
+    },
+    name: {
+      type: 'string'
     }
-  ], g.render);
+  },
+  additionalProperties: false
 };

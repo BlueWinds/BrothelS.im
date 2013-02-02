@@ -1,5 +1,4 @@
 e.GameUpgrade03.push(function(game, next) {
-  delete game.messagesShown;
   var messages = game.messages;
   game.messages = [];
   for (var group in messages) {
@@ -16,8 +15,14 @@ e.GameUpgrade03.push(function(game, next) {
   next();
 });
 
+e.GameUpgrade04.push(function(game, next) {
+  delete game.messagesShown;
+  next();
+});
+
 var Message = function(obj, context) {
-  $.extend(this, obj);
+  $.extend(true, this, obj);
+  this._class = 'Message';
   if (context) {
     this.group = ejs.render(this.group, context);
     this.weight = this.weight || 0;
@@ -37,7 +42,6 @@ e.GameNew.push(function(done) {
 });
 
 e.GamePreDay.push(function(done) {
-  g.messagesShown = false;
   g.messages = [];
   done();
 });

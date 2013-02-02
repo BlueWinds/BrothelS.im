@@ -4,7 +4,7 @@ Buildings.Theater = {
   reputation: 0,
   status: 'For Sale',
   rooms: [
-    { type: 'bedroom' }
+    { type: 'Bedroom' }
   ],
   maxRooms: 4,
   basePrice: 3000,

@@ -1,267 +1,329 @@
-function Girl(obj) {
-  var girl = this;
-  var base;
-  this._class = 'Girl';
-  if (typeof(obj) == 'string') {
-    base = Girls[obj];
-    obj = {
-      name: base.name,
-      status: base.status,
-      specialRules: $.extend(true, {}, base.specialRules),
-      actions: {}
-    };
-  }
-  $.extend(this, obj);
-  base = this.base();
-
-  // Add missing stats from base
-  Girl.stats.forEach(function(stat) {
-    if (girl[stat] === undefined) {
-      girl[stat] = base[stat] !== undefined ? base[stat] : 30;
-    }
-  });
-  Girl.sexStats.forEach(function(sex) {
-    if (girl[sex] === undefined) {
-      girl[sex] = (base[sex] !== undefined ? base[sex] : 30);
-    }
-  });
-  if (this.actions.pay === undefined) { this.actions.pay = Math.round(this.desiredPay() / 10) * 10; }
-  e.invokeAllSync('GirlNew', this);
-}
-
-Girl.stats = [
-  'happiness', 'endurance', 'obedience', 'modesty', 'charisma', 'constitution', 'intelligence'
-];
-
-Girl.sex = ['soft', 'hard', 'anal', 'fetish'];
-Girl.sexStats = ['soft libido', 'soft experience', 'hard libido', 'hard experience', 'anal libido', 'anal experience', 'fetish libido', 'fetish experience'];
-
-Girl.prototype.base = function() {
-  return Girls[this.name];
+Schemas.Stat = {
+  type: 'integer',
+  minimum: 0,
+  maximum: 100
 };
 
-Girl.prototype.apply = function(stat, delta) {
-  if (stat == 'money') {
-    g.money += Math.floor(delta);
-    return;
-  }
-  if (stat == 'specialRules') {
-    var girl = this;
-    $.each(delta, function(key, value) {
-      if (key == 'function') {
-        value.call(girl);
-        return;
+Schemas.statDelta = {
+  type: 'number',
+  minimum: -100,
+  maximum: 100
+};
+
+Schemas.parsableStat = {
+  type: ['integer', 'string'],
+  pattern: '\\+|-[0-9]+',
+  minimum: 0,
+  maximum: 100
+};
+
+Schemas.girlDelta = {
+  type: 'object',
+  properties: {
+    money: { type: 'number' },
+    specialRules: {
+      type: 'object',
+      description: "In a girlDelta, each special rule can be a number, adding or subtracting to it as with any other stat. If the girl doesn't have this specialRule, it will be treated as 0 before the modification is applied. Unlike normal stats, specialRules are not limited to the 0-100 range, and they are not rounded to the nearest integer. A special rule can also be 'false', in which case that special rule will be removed from the girl, regardless of value.",
+      additionalProperties: {
+        anyOne: [
+          { type: 'boolean', 'enum': [false] },
+          { type: 'number' }
+        ]
       }
-      if (value === false) {
-        delete girl.specialRules[key];
-      } else {
-        girl.specialRules[key] = (girl.specialRules[key] || 0) + value;
-      }
-    });
-    return;
-  }
-  if (typeof(delta) == 'number') {
-    if (this.specialRules.dependentStats) {
-      var dependency;
-      if (delta > 0) {
-        dependency = this.specialRules.dependentStats[stat];
-      } else {
-        dependency = this.specialRules.dependentStats['-' + stat];
-      }
-      if (dependency) {
-        if (typeof(dependency) == 'function') {
-          dependency = dependency.call(this);
-        } else {
-          dependency = $.extend({}, dependency);
-        }
-        dependency._multiply(delta);
-        if (dependency[stat]) {
-          delta += dependency[stat];
-          delete dependency[stat];
-        }
-      }
-    }
-    if (stat.indexOf(' experience') != -1) {
-      delta *= this.intelligence / 100;
-    }
-    if (delta % 1) {
-      delta = (Math.random() > delta % 1) ? Math.floor(delta) : Math.ceil(delta);
-    }
-    this[stat] += delta;
-    this[stat] = Math.floor(Math.max(0, Math.min(100, this[stat])));
-    return;
-  }
-  for (var key in stat) {
-    this.apply(key, stat[key]);
-  }
+    },
+    happiness: { $ref: 'statDelta' },
+    endurance: { $ref: 'statDelta' },
+    obedience: { $ref: 'statDelta' },
+    modesty: { $ref: 'statDelta' },
+    charisma: { $ref: 'statDelta' },
+    intelligence: { $ref: 'statDelta' },
+    constitution: { $ref: 'statDelta' },
+    softLibido: { $ref: 'statDelta' },
+    softExperience: { $ref: 'statDelta' },
+    hardLibido: { $ref: 'statDelta' },
+    hardExperience: { $ref: 'statDelta' },
+    analLibido: { $ref: 'statDelta' },
+    analExperience: { $ref: 'statDelta' },
+    fetishLibido: { $ref: 'statDelta' },
+    fetishExperience: { $ref: 'statDelta' }
+  },
+  additionalProperties: false
 };
 
-Girl.prototype.compare = function(delta, explain) {
-  var result = this._compare(delta);
-  // If !explain, then we return a boolean - does it match?
-  // If explain, then we return a string saying *why* it doesn't match (or false if it does).
-  return explain ? result : !result;
-};
-
-Girl.prototype._compare = function(delta) {
-  if (delta.name && this.name != delta.name) { return this.name + ' is not ' + delta.name; }
-  if (delta.status && this.status != delta.status) { return this.name + ' is not ' + delta.status; }
-  var stat, rule, new_d = $.extend(true, {}, delta);
-  if (new_d.min) {
-    if (new_d.min.specialRules) {
-      for (rule in new_d.min.specialRules) {
-        if ((this.specialRules[rule] || 0) < new_d.min.specialRules[rule]) {
-          return this.name + ' does not have ' + rule + ' ' + new_d.min.specialRules[rule] + '.';
-        }
-      }
-      delete new_d.min.specialRules;
+Schemas.girlConditions = {
+  type: 'object',
+  description: 'A set of conditions to match against a girl.',
+  properties: {
+    name: {
+      type: 'string'
+    },
+    status: {
+      type: 'string',
+      'enum': ['Hired', 'For Hire', 'Town', 'Gone'],
+      'default': 'Hired'
     }
-    for (stat in new_d.min) {
-      if (this[stat] < new_d.min[stat]) {
-        return this.name + ' does not have ' + T(stat) + ' ' + new_d.min[stat];
-      }
+  },
+  patternProperties: {
+    'min|max': {
+      type: 'object',
+      properties: {
+        specialRules: {
+          type: 'object',
+          additionalProperties: { type: 'number' }
+        },
+        happiness: { $ref: 'Stat' },
+        endurance: { $ref: 'Stat' },
+        obedience: { $ref: 'Stat' },
+        modesty: { $ref: 'Stat' },
+        charisma: { $ref: 'Stat' },
+        intelligence: { $ref: 'Stat' },
+        constitution: { $ref: 'Stat' },
+        softLibido: { $ref: 'Stat' },
+        softExperience: { $ref: 'Stat' },
+        hardLibido: { $ref: 'Stat' },
+        hardExperience: { $ref: 'Stat' },
+        analLibido: { $ref: 'Stat' },
+        analExperience: { $ref: 'Stat' },
+        fetishLibido: { $ref: 'Stat' },
+        fetishExperience: { $ref: 'Stat' }
+      },
+      additionalProperties: false
     }
-  }
-  if (new_d.max) {
-    if (new_d.max.specialRules) {
-      for (rule in new_d.max.specialRules) {
-        if ((this.specialRules[rule] || 0) > new_d.max.specialRules[rule]) {
-          return this.name + ' does not have ' + new_d.max.specialRules[rule] + ' ' + rule + ' or less.';
-        }
-      }
+  },
+  additionalProperties: false
+};
+
+Schemas.parsableGirlConditions = {
+  type: 'object',
+  description: 'As usual girlConditions, except "+3" or "-3" are acceptable values.',
+  properties: {
+    name: {
+      type: 'string'
+    },
+    status: {
+      type: 'string',
+      'enum': ['Hired', 'For Hire', 'Town', 'Gone']
     }
-    delete new_d.max.specialRules;
-    for (stat in new_d.max) {
-      if (this[stat] > new_d.max[stat]) {
-        return this.name + ' does not have ' + T(stat) + ' ' + new_d.max[stat] + ' or less.';
-      }
-    }
-  }
-  return false;
-};
-
-Girl.prototype.desiredPay = function() {
-  var pay = this.hirePrice(50) * Girl.config.payRatio;
-  if (this.intelligence < 20 && this.get('libido') > 50 ) {
-    pay *= (this.intelligence / 40) + this.get('libido') / 100;
-  }
-  if (this.specialRules.payRatio !== undefined) {
-    pay *= this.specialRules.payRatio;
-  }
-  return Math.floor(pay);
-};
-
-Girl.prototype.hirePrice = function(happiness) {
-  happiness = happiness === undefined ? this.happiness : happiness;
-  var prices = Girl.config.hirePrice;
-  var cost = prices.base;
-  for (var i in Girl.stats) {
-    var stat = Girl.stats[i];
-    cost += this[stat] * prices[stat];
-  }
-  var girl = this;
-  Girl.sex.forEach(function(type) {
-    cost += (girl[type + ' libido'] + girl[type + ' experience']) * prices[type];
-  });
-  cost *= 1 - happiness / 150;
-  return Math.floor(cost);
-};
-
-Girl.prototype.image = function(type) {
-  var img = this.base().images[type];
-  if (!img) { img = this.base().images.base; }
-  if (typeof(img) == 'object') {
-    img = Math.choice(img);
-  }
-  img = this.base().images.basePath + '/' + img;
-  return img;
-};
-
-Girl.prototype.startDelta = function(s) {
-  s = s || Girl.stats;
-  var girl = this;
-  var delta = {
-    money: g.money
-  };
-  s.forEach(function(stat) {
-    delta[stat] = girl[stat];
-  });
-  if (s === Girl.stats) {
-    Girl.sexStats.forEach(function(sex) {
-      delta[sex] = girl[sex];
-    });
-  }
-  return function() {
-    var change = {};
-    if (g.money - delta.money) {
-      change.money = g.money - delta.money;
-    }
-    for (var stat in delta) {
-      if (girl[stat] - delta[stat]) {
-        change[stat] = girl[stat] - delta[stat];
-      }
-    }
-    return change;
-  };
-};
-
-Girl.prototype.hire = function() {
-  g.money -= this.hirePrice();
-  this.status = 'Hired';
-  this.endurance = 100;
-  this.happiness = Girl.config.startHappiness;
-  this.actions.pay = Math.round(this.desiredPay() / 10) * 10;
-  this.hireDay = g.day;
-};
-
-Girl.prototype.S = function(stat) {
-  var str = '<span class="' + stat + '">' + this[stat];
-  if (this.turnDelta && this.turnDelta[stat]) {
-    var delta = this.turnDelta[stat];
-    delta = delta < 0 ? delta : '+' + delta;
-    str += ' <span class="delta">(' + delta + ')</span>';
-  }
-  return str + '</span>';
-};
-
-Girl.prototype.get = function(stat) {
-  if (stat.substr(0, 1) == '-') {
-    return 100 - this.get(stat.substr(1));
-  }
-  var sum = 0, i;
-  if (stat == 'experience') {
-    for (i in Girl.sex) {
-      sum += this[Girl.sex[i] + ' experience'];
-    }
-    return Math.floor(sum / Girl.sex.length);
-  }
-  if (stat == 'libido') {
-    for (i in Girl.sex) {
-      sum += this[Girl.sex[i] + ' libido'];
-    }
-    return Math.floor(sum / Girl.sex.length);
-  }
-  return this[stat];
-};
-
-Girl.prototype.parseConditions = function(conditions) {
-  var old_int;
-  for (var cond in {min: 1, max: 1}) {
-    if (conditions[cond]) {
-      for (var stat in conditions[cond]) {
-        if (stat == 'specialRules') {
-          for (var rule in conditions[cond].specialRules) {
-            old_int = parseInt(conditions[cond].specialRules[rule], 10);
-            old_int += this.specialRules[rule] || 0;
-            conditions[cond].specialRules[rule] = old_int;
+  },
+  patternProperties: {
+    'min|max': {
+      type: 'object',
+      properties: {
+        specialRules: {
+          type: 'object',
+          additionalProperties: {
+            type: ['number', 'string'],
+            pattern: '\\+|-[0-9]+'
           }
-        } else if (typeof(conditions[cond][stat]) == 'string') {
-          old_int = parseInt(conditions[cond][stat], 10);
-          conditions[cond][stat] = this[stat] + old_int;
-          conditions[cond][stat] = Math.min(100, Math.max(0, conditions[cond][stat]));
+        },
+        happiness: { $ref: 'parsableStat' },
+        endurance: { $ref: 'parsableStat' },
+        obedience: { $ref: 'parsableStat' },
+        modesty: { $ref: 'parsableStat' },
+        charisma: { $ref: 'parsableStat' },
+        intelligence: { $ref: 'parsableStat' },
+        constitution: { $ref: 'parsableStat' },
+        softLibido: { $ref: 'parsableStat' },
+        softExperience: { $ref: 'parsableStat' },
+        hardLibido: { $ref: 'parsableStat' },
+        hardExperience: { $ref: 'parsableStat' },
+        analLibido: { $ref: 'parsableStat' },
+        analExperience: { $ref: 'parsableStat' },
+        fetishLibido: { $ref: 'parsableStat' },
+        fetishExperience: { $ref: 'parsableStat' }
+      },
+      additionalProperties: false
+    }
+  },
+  additionalProperties: false
+};
+
+Schemas.Girl = {
+  description: "A girl's definition, from which an individual instance of her is created for a game.",
+  type: 'object',
+  required: [
+    'name', 'description', 'status', 'images',
+    'happiness', 'endurance', 'obedience', 'modesty',
+    'charisma', 'intelligence', 'constitution',
+    'softLibido', 'softExperience', 'hardLibido',
+    'hardExperience', 'analLibido', 'analExperience',
+    'fetishLibido', 'fetishExperience'
+  ],
+  properties: {
+    name: {
+      type: 'string',
+      minLength: 4
+    },
+    description: { type: 'string' },
+    status: {
+      'description': "Hired means she'll start the game working for the player. For Hire means exactly what it sounds like. Town means she's around, but can't be hired - there should be a mission or event that gives access to her. Gone means she was hired, but has been sold / left town / is otherwise no longer available.",
+      'enum': ['Hired', 'For Hire', 'Town', 'Gone']
+    },
+    happiness: {
+      anyOne: [ { $ref: 'Stat' } ],
+      description: "Here, happiness only acts as a multiplier to the girl's hire price - it's always set to 75 when she's hired. Higher values will make her cheaper."
+    },
+    endurance: { $ref: 'Stat' },
+    obedience: { $ref: 'Stat' },
+    modesty: { $ref: 'Stat' },
+    charisma: { $ref: 'Stat' },
+    intelligence: { $ref: 'Stat' },
+    constitution: { $ref: 'Stat' },
+    softLibido: { $ref: 'Stat' },
+    softExperience: { $ref: 'Stat' },
+    hardLibido: { $ref: 'Stat' },
+    hardExperience: { $ref: 'Stat' },
+    analLibido: { $ref: 'Stat' },
+    analExperience: { $ref: 'Stat' },
+    fetishLibido: { $ref: 'Stat' },
+    fetishExperience: { $ref: 'Stat' },
+    specialRules: {
+      type: 'object',
+      description: 'specialRules is an optional object which can be used to hold girl-specific data (for custom missions, for example), or have various effects on the way she plays.',
+      properties: {
+        dependentStats: {
+          type: 'object',
+          description: "The dependentStats special rule allows you to modify the way her stats change. Each key is either a stat,  or a stat preceded buy a '-' sign - '-intelligence'.",
+          patternProperties: {
+            '-?(happiness|endurance|obedience|modesty|charisma|intelligence|constitution|softLibido|hardLibido|analLibido|fetishLibido|softExperience|hardExperience|analExperience|fetishExperience)': {
+              '$ref': 'girlDelta',
+              description: "This delta is applied to the girl whenever the associated stat is changed. For example, endurance: { happiness: 0.5 } would mean her happiness rises by 0.5 every time her endurance increases by 1. '-endurance': { happiness: -0.5 } would mean the her happiness decreases as her endurance goes down."
+            }
+          },
+          additionalProperties: false
+        },
+        payRatio: {
+          type: 'number',
+          minimum: 0,
+          description: "payRatio modifies the amount that the girl wants to get paid. The default is 1 - so this girl here only wants 80% of the pay of someone else with her stats."
         }
+      },
+      additionalProperties: true
+    },
+    images: {
+      type: 'object',
+      required: [ 'basePath', 'base' ],
+      properties: {
+        basePath: {
+          type: 'string',
+          description: 'basePath is from the root of the game to where all of the images are stored. This is not auto-detected to leave open the possibility using other sources of images later.'
+        },
+        base: {
+          type: 'string',
+          pattern: "^.+\\.(png|jpg|gif)$"
+        }
+      },
+      patternProperties: {
+        'refuse|tired|soft|hard|anal|fetish|group|cleaning|exercise|study|prison|naked|tentacles': {
+          type: ['string', 'array'],
+          description: 'Each value in images must be either a filename or an array of filenames.',
+          pattern: "^.+\\.(png|jpg|gif)$",
+          additionalItems: {
+            type: 'string',
+            pattern: '^.+\\.(png|jpg|gif)$'
+          }
+        }
+      },
+      additionalProperties: false
+    }
+  },
+  additionalProperties: false
+};
+
+Schemas.liveGirl = {
+  type: 'object',
+  required: [
+    'name', '_class', 'status',
+    'happiness', 'endurance', 'obedience', 'modesty',
+    'charisma', 'intelligence', 'constitution',
+    'softLibido', 'softExperience', 'hardLibido',
+    'hardExperience', 'analLibido', 'analExperience',
+    'fetishLibido', 'fetishExperience',
+    'actions'
+  ],
+  properties: {
+    name: {
+      type: 'string',
+      minLength: 4
+    },
+    _class: {
+      'enum': ['Girl']
+    },
+    status: {
+      'enum': ['Hired', 'For Hire', 'Town', 'Gone']
+    },
+    specialRules: {
+      type: 'object',
+      description: 'specialRules is an optional object which can be used to hold girl-specific data (for custom missions, for example), or have various effects on the way she plays.',
+      properties: {
+        dependentStats: {
+          type: 'object',
+          description: "The dependentStats special rule allows you to modify the way her stats change. Each key is either a stat,  or a stat preceded buy a '-' sign - '-intelligence'.",
+          patternProperties: {
+            '-?(happiness|endurance|obedience|modesty|charisma|intelligence|constitution|softLibido|hardLibido|analLibido|fetishLibido|softExperience|hardExperience|analExperience|fetishExperience)': {
+              '$ref': 'girlDelta',
+              description: "This delta is applied to the girl whenever the associated stat is changed. For example, endurance: { happiness: 0.5 } would mean her happiness rises by 0.5 every time her endurance increases by 1. '-endurance': { happiness: -0.5 } would mean the her happiness decreases as her endurance goes down."
+            }
+          },
+          additionalProperties: false
+        },
+        payRatio: {
+          type: 'number',
+          minimum: 0,
+          description: "payRatio modifies the amount that the girl wants to get paid. The default is 1 - so this girl here only wants 80% of the pay of someone else with her stats."
+        }
+      },
+      additionalProperties: true
+    },
+    happiness: { $ref: 'Stat' },
+    endurance: { $ref: 'Stat' },
+    obedience: { $ref: 'Stat' },
+    modesty: { $ref: 'Stat' },
+    charisma: { $ref: 'Stat' },
+    intelligence: { $ref: 'Stat' },
+    constitution: { $ref: 'Stat' },
+    softLibido: { $ref: 'Stat' },
+    softExperience: { $ref: 'Stat' },
+    hardLibido: { $ref: 'Stat' },
+    hardExperience: { $ref: 'Stat' },
+    analLibido: { $ref: 'Stat' },
+    analExperience: { $ref: 'Stat' },
+    fetishLibido: { $ref: 'Stat' },
+    fetishExperience: { $ref: 'Stat' },
+    actions: {
+      type: 'object',
+      required: [ 'pay' ],
+      properties: {
+        pay: {
+          'enum': Object.keys(Girl.config.pay).map(parseFloat)
+        },
+        soft: { type: 'boolean' },
+        hard: { type: 'boolean' },
+        anal: { type: 'boolean' },
+        fetish: { type: 'boolean' }
+      },
+      additionalProperties: false
+    },
+    hireDay: { type: 'integer', minimum: 0 },
+    turnDelta: {
+      type: ['function', 'object'],
+      description: 'This is only a function while the turn is being generated - between turns, it\'s an object.',
+      additionalProperties: {
+        type: 'integer',
+        description: 'How much each stat has changed since yesterday for this girl.'
       }
     }
-  }
-  return conditions;
+  },
+  additionalProperties: false
+};
+
+Schemas.Game.required.push('girls', 'maxGirls');
+Schemas.Game.properties.girls = {
+  type: 'object',
+  additionalProperties: { $ref: 'liveGirl' }
+};
+Schemas.Game.properties.maxGirls = {
+  type: 'integer',
+  min: 1,
+  max: 5
 };

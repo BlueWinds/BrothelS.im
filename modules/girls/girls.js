@@ -4,8 +4,31 @@ e.GirlsPostMorning = [];
 e.GirlsPostEvening = [];
 e.GirlRunTime = [];
 e.GameUpgrade03.push(function(game, next) {
-  for (var name in g.girls) {
-    g.girls[name]._class = 'Girl';
+  for (var name in game.girls) {
+    game.girls[name]._class = 'Girl';
+  }
+  next();
+});
+e.GameUpgrade04.push(function(game, next) {
+  var stats = {
+    'soft libido': 'softLibido',
+    'soft experience': 'softExperience',
+    'hard libido': 'hardLibido',
+    'hard experience': 'hardExperience',
+    'anal libido': 'analLibido',
+    'anal experience': 'analExperience',
+    'fetish libido': 'fetishLibido',
+    'fetish experience': 'fetishExperience'
+  };
+  game.girls.Kirino.specialRules.payRatio = Girls.Kirino.specialRules.payRatio;
+  for (var name in game.girls) {
+    if (!game.girls[name].hireDay) {
+      game.girls[name].hireDay = 0;
+    }
+    for (var old in stats) {
+      game.girls[name][stats[old]] = game.girls[name][old];
+      delete game.girls[name][old];
+    }
   }
   next();
 });
@@ -43,7 +66,7 @@ e.GameInit.push(function(done) {
 });
 
 e.GamePreDay.push(function(done) {
-  $.each(g.girls, function(name, girl) {
+  g.girls._filter('status', 'Hired').forEach(function(girl) {
     girl.turnDelta = girl.startDelta();
   });
   done();
@@ -74,7 +97,9 @@ e.GameNextDay.push(function(done) {
 });
 
 e.GamePostDay.push(function(done) {
-  $.each(g.girls, function(name, girl) {
+  g.girls._filter('status', 'Hired').forEach(function(girl) {
+    g.money -= Math.floor(girl.actions.pay * girl.desiredPay());
+    girl.apply('happiness', girl.payHappiness());
     girl.turnDelta = girl.turnDelta();
   });
   done();
@@ -94,24 +119,27 @@ e.GameRender.push(function(done) {
     var view = $(ejs.render($('#girls_view_template').html(), context).trim());
 
     var desired = girl.desiredPay();
-    var pay_delta = $('#pay .delta.happiness', view);
-    function spin(event, ui) {
-      var change = ui.value - desired;
-      change = change > 0 ? change * Girl.config.pay.above : change * Girl.config.pay.below;
-      change = Math.floor(change);
-      if (change > -1) {
-        change = '+' + Math.floor(Math.pow(change, 0.66));
+    var happinessDelta = $('#pay .delta.happiness', view);
+    var moneyDelta = $('#pay .delta.money', view);
+    var slider = $('#pay .slider', view).slider({
+      step: 0.01,
+      min: Math.min.apply(undefined, Object.keys(Girl.config.pay)),
+      max: Math.max.apply(undefined, Object.keys(Girl.config.pay)),
+      slide: function(event, ui) {
+        var closest = 100;
+        for (var mult in Girl.config.pay) {
+          closest = Math.abs(ui.value - mult) < Math.abs(ui.value - closest) ? mult : closest;
+        }
+        if (girl.actions.pay != closest) {
+          girl.actions.pay = parseFloat(closest);
+          var happiness = girl.payHappiness();
+          happinessDelta.html(happiness < 0 ? happiness : '+' + happiness);
+          moneyDelta.html('$' + Math.floor(desired * girl.actions.pay));
+          slider.slider('value', closest);
+        }
+        event.preventDefault();
       }
-      girl.actions.pay = ui.value;
-      pay_delta.html(change);
-    }
-    $('#pay input', view).spinner({
-      step: 10,
-      min: 0,
-      max: 500,
-      numberFormat: 'C'
-    }).bind('spin', spin);
-    spin(null, {value: girl.actions.pay || 0});
+    }).slider('value', girl.actions.pay);
 
     $('.checkbox', view).click(function(event) {
       var check = !$(this).hasClass('checked');
@@ -152,12 +180,5 @@ e.GameRender.push(function(done) {
     lst.dialog({});
     lst.closest('.ui-dialog').addClass('tab-dialog');
   });
-  done();
-});
-
-e.Autorender.push(function(element, done) {
-  for (var stat in Girl.config.tooltips) {
-    $('.' + stat, element).attr('title', Girl.config.tooltips[stat]);
-  }
   done();
 });

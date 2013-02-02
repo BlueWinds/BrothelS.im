@@ -24,8 +24,8 @@ Events.tentacleAttack = {
         endurance: -40,
         happiness: -5,
         intelligence: -4,
-        'anal libido': 3,
-        'anal experience': 5,
+        analLibido: 3,
+        analExperience: 5,
         obedience: 5
       }
     },
@@ -49,8 +49,8 @@ Events.tentacleAttack = {
         endurance: -40,
         happiness: 3,
         intelligence: -6,
-        'fetish libido': 6,
-        'fetish experience': 5,
+        fetishLibido: 6,
+        fetishExperience: 5,
         modesty: -8,
         obedience: 3
       }
@@ -66,8 +66,8 @@ Events.tentacleAttack = {
         endurance: -20,
         happiness: -3,
         intelligence: -2,
-        'soft libido': 6,
-        'soft experience': 8,
+        softLibido: 6,
+        softExperience: 8,
         obedience: 3
       }
     }

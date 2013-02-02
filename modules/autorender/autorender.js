@@ -1,10 +1,13 @@
 e.Autorender = [];
 e.Autorender.push(function(element, done) {
   $('button, a.button', element).button();
-  $(element).tooltip({
-    show: {
-      delay: 300
-    }
+  $('*[title]', element).each(function() {
+    $(this).tooltip({
+      show: {
+        delay: 300
+      },
+      content: $(this).attr('title')
+    });
   });
   $('.bar-sparkline', element).sparkline('html', {
     lineColor: '#E3AC00',

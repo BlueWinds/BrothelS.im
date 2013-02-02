@@ -26,7 +26,7 @@ Actions.Clean = {
   tags: { indoors: 1 },
   conditions: {
     min: {
-      building: 1
+      buildings: 1
     },
     missions: {
       cleanBuilding: 3
@@ -80,9 +80,6 @@ Actions.Talk = {
     }
   },
   ownerParticipation: true,
-  variants: function(context, done) {
-    done(Math.choice(this.results));
-  },
   results: [
     {
       message: {

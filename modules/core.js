@@ -34,6 +34,8 @@ var e = {
   Ready: []
 };
 
+Schemas = {};
+
 Storage.prototype.setObject = function(key, value) {
   this.setItem(key, JSON.stringify(value));
 };
@@ -216,6 +218,15 @@ Object.defineProperty(Object.prototype, "_sort", {
       return reverse ? b[key] - a[key] : a[key] - b[key];
     });
     return ret;
+  }
+});
+
+Object.defineProperty(Array.prototype, "_append", {
+  enumerable: false,
+  writable: false,
+  configurable: true,
+  value: function(items) {
+    this.push.apply(this, items);
   }
 });
 

@@ -8,14 +8,14 @@ Girls.Jill = {
   charisma: 30,
   intelligence: 40,
   constitution: 80,
-  'soft experience': 10,
-  'hard experience': 20,
-  'anal experience': 15,
-  'fetish experience': 25,
-  'soft libido': 10,
-  'hard libido': 15,
-  'anal libido': 35,
-  'fetish libido': 50,
+  softExperience: 10,
+  hardExperience: 20,
+  analExperience: 15,
+  fetishExperience: 25,
+  softLibido: 10,
+  hardLibido: 15,
+  analLibido: 35,
+  fetishLibido: 50,
   specialRules:{
     dependentStats: {
       "-endurance": { endurance: 0.3 }

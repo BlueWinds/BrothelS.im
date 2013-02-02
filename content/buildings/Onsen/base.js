@@ -4,8 +4,8 @@ Buildings.Onsen = {
   reputation: 0,
   status: 'For Sale',
   rooms: [
-    { type: 'bedroom' },
-    { type: 'bedroom' }
+    { type: 'Bedroom' },
+    { type: 'Bedroom' }
   ],
   maxRooms: 6,
   basePrice: 4000,

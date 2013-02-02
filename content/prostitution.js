@@ -12,7 +12,7 @@ Person.prostitution = {
       money: 100,
       girl: {
         endurance: -6,
-        'soft experience': 1
+        softExperience: 1
       }
     },
     hard: {
@@ -20,8 +20,8 @@ Person.prostitution = {
       money: 150,
       girl: {
         endurance: -9,
-        'hard experience': 1,
-        'soft experience': 0.2
+        hardExperience: 1,
+        softExperience: 0.2
       }
     },
     anal: {
@@ -29,9 +29,9 @@ Person.prostitution = {
       money: 200,
       girl: {
         endurance: -14,
-        'anal experience': 1,
-        'hard experience': 0.2,
-        'soft experience': 0.2
+        analExperience: 1,
+        hardExperience: 0.2,
+        softExperience: 0.2
       }
     },
     fetish: {
@@ -39,10 +39,10 @@ Person.prostitution = {
       money: 450,
       girl: {
         endurance: -16,
-        'fetish experience': 1,
-        'anal experience': 0.2,
-        'hard experience': 0.2,
-        'soft experience': 0.2
+        fetishExperience: 1,
+        analExperience: 0.2,
+        hardExperience: 0.2,
+        softExperience: 0.2
       }
     }
   },

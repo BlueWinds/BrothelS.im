@@ -5,8 +5,8 @@ Girl.prototype.maxCustomers = function() {
 };
 
 Girl.prototype.interest = function(sex) {
-  var interest = this.obedience + this[sex + ' libido'] * 2;
-  interest += this[sex + ' experience'] + this.happiness / 2;
+  var interest = this.obedience + this[sex + 'Libido'] * 2;
+  interest += this[sex + 'Experience'] + this.happiness / 2;
   interest = (interest / 450 + Math.random());
   interest -= Person.prostitution.types[sex].r;
   return interest;
@@ -42,12 +42,12 @@ Girl.prototype.interest = function(sex) {
       if (customerConfig) {
         context.girl.apply(customerConfig.bad);
       }
-      context.result = this.uncooperative;
+      context.result = this.special.uncooperative;
       context.girl.apply(Person.prostitution.refuseDelta);
       g.messages.push(new Message({
         label: this.label + ' - Refused',
         image: context.girl.image('refuse'),
-        text: this.customerMessage,
+        text: this.special.customerMessage,
         group: context.girl.name,
         delta: endDelta()
       }, context));
@@ -60,8 +60,8 @@ Girl.prototype.interest = function(sex) {
     delta.money *= Person.prostitution.customerClass[context.customer.type].pays;
     context.girl.apply(delta.girl);
     g.money += Math.floor(delta.money);
-    if (this.eachCustomer) {
-      context.girl.apply(this.eachCustomer);
+    if (this.special.eachCustomer) {
+      context.girl.apply(this.special.eachCustomer);
     }
     if (customerConfig) {
       if (satisfaction >= customerConfig.minSatisfaction) {
@@ -71,11 +71,11 @@ Girl.prototype.interest = function(sex) {
       }
     }
 
-    context.result = Math.choice(this.sexResults[sex]);
+    context.result = Math.choice(this.special.sexResults[sex]);
     g.messages.push(new Message({
       label: this.label,
       image: context.girl.image(sex),
-      text: this.customerMessage,
+      text: this.special.customerMessage,
       group: context.girl.name,
       delta: endDelta()
     }, context));
@@ -172,7 +172,7 @@ Girl.prototype.interest = function(sex) {
       group: context.building.name,
       label: 'Customers arrived',
       image: context.building.image(),
-      text: Actions.Whore.message,
+      text: Actions.Whore.special.message,
       delta: endDelta(),
       weight: 1
     }, context));

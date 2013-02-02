@@ -20,12 +20,12 @@ h3 {
 .constitution { color: #0FC; }
 .intelligence { color: #0DF; }
 
-.soft { color: #FAA; }
-.hard { color: #F66; }
-.anal { color: #D33; }
-.fetish { color: #C04; }
+.softLibido, .softExperience { color: #FAA; }
+.hardLibido, .hardExperience { color: #F66; }
+.analLibido, .analExperience { color: #D33; }
+.fetishLibido, .fetishExperience { color: #C04; }
 
-.experience { font-style: italic; }
+.softExperience, .hardExperience, .analExperience, .fetishExperience { font-style: italic; }
 
 span.adj {
   color: #FFF;
@@ -56,11 +56,23 @@ span.adj {
 
 #pay label {
   margin-top: 1em;
-  width: 2.5em;
+  width: 3em;
 }
 
-#pay input {
-  width: 2.5em;
+#pay .slider {
+  display: inline-block;
+  height: 0.3em;
+  margin-bottom: 0.3em;
+  width: 7em;
+}
+
+#pay .slider .ui-slider-handle {
+  top: -0.5em;
+  width: 0.7em;
+}
+
+#pay-results {
+  margin-lefT: 3.5em;
 }
 
 #pay .delta {
