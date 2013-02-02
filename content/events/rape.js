@@ -66,9 +66,10 @@ Events.guardRape = {
     };
     var text = context.girl.name + ' is heading into the city when a member of the city guard calls her over. Without a word he clips on a pair of handcuffs, catching her completely by surprise. She protests loudly that she has no idea what she\'s done, but the fact that he hasn\'t responded and is is starting to move makes her worry. What does ' + context.girl.name + ' do?';
     if (context.girl.obedience < 90) { options.Run = 'Attempt to flee.'; }
-      if (context.girl.obedience < 60) { options.Fight = 'Headbut the guard and try to steal the keys.'; }
+    if (context.girl.obedience < 60) { options.Fight = 'Headbut the guard and try to steal the keys.'; }
     if (context.girl.intelligence > 40) { options.Bribe = 'Attempt the bribe the guard into letting her leave.'; }
-      Game.getUserInput(text, context.girl.image('exercise'), options, function(answer) {
+    Game.getUserInput(text, context.girl.image('exercise'), options, function(answer) {
+      this.special.answer = answer;
       var i;
       if (answer == 'Submit') {
         i = 0;
@@ -89,7 +90,7 @@ Events.guardRape = {
           group: '<<- girl.name >>',
           image: '<<- girl.image("fetish") >>',
           label: 'Raped by gity guards',
-          text: "<< if (event.answer == 'Submit') { >>Going along quietly, the guard led her away.<< } else if (event.answer == 'Run') { >><<= girl.name >> tried to wrench her arms free, but his grip was too strong - her attempt to flee failed before it had even properly begun. He half-led, half dragged her away.<< } else if (event.answer == 'Fight') { >>Knowing she was at a serious disadvantage with her hands already bound, she took the first opportunity to strike at the guard, going for the eyes. She was too slow though, and he stepped our of reach, kicking one of her legs out from under her. Producing a second pair of handcuffs for her ankles (not pleasant at all), he carried her away.<< } >> Four other men and two women looked up as he dragged <<= girl.name >> into the guardhouse, announcing that he'd caught a naughty little girl who needed to be punished. She looked to the other women pleadingly, but received the same evil leers as from the men.",
+          text: "<< if (event.special.answer == 'Submit') { >>Going along quietly, the guard led her away.<< } else if (event.special.answer == 'Run') { >><<= girl.name >> tried to wrench her arms free, but his grip was too strong - her attempt to flee failed before it had even properly begun. He half-led, half dragged her away.<< } else if (event.special.answer == 'Fight') { >>Knowing she was at a serious disadvantage with her hands already bound, she took the first opportunity to strike at the guard, going for the eyes. She was too slow though, and he stepped our of reach, kicking one of her legs out from under her. Producing a second pair of handcuffs for her ankles (not pleasant at all), he carried her away.<< } >> Four other men and two women looked up as he dragged <<= girl.name >> into the guardhouse, announcing that he'd caught a naughty little girl who needed to be punished. She looked to the other women pleadingly, but received the same evil leers as from the men.",
           delta: false
         },
         {
