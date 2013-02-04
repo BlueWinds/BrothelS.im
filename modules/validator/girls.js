@@ -238,7 +238,7 @@ Schemas.liveGirl = {
     'softLibido', 'softExperience', 'hardLibido',
     'hardExperience', 'analLibido', 'analExperience',
     'fetishLibido', 'fetishExperience',
-    'actions'
+    'actions', 'specialRules'
   ],
   properties: {
     name: {

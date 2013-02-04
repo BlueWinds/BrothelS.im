@@ -28,6 +28,7 @@ function Girl(obj) {
   if (Girl.config.pay[this.actions.pay] === undefined) {
     this.actions.pay = 1;
   }
+  if (!this.specialRules) { this.specialRules = {}; }
   e.invokeAllSync('GirlNew', this);
 }
 

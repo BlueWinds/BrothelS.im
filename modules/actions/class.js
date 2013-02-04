@@ -13,7 +13,6 @@ Action.create = function(_id, context) {
   if (!action) { return action; }
   var option = context.option || Object.keys(action.options())[0];
   if (option) { action.setOption(option); }
-  console.log(context);
   action.disabled = action.checkDisabled(undefined, context);
   if (action.disabled) { action.description = action.disabled; }
   action.label = ejs.render(action.label, context);
@@ -96,7 +95,7 @@ Action.prototype.checkDisabled = function(cond, context) {
   }
   real_action = g.ownerAction(this.time);
   if (real_action && this.girl !== real_action.girl) {
-    return 'You are already ' + real_action.gerund + ' with ' + action.girl + ' in the ' + this.time;
+    return 'You are already ' + real_action.gerund + ' with ' + this.girl + ' in the ' + this.time;
   }
   if (this.base().disable) {
     return this.base().disable.call(this, context);
