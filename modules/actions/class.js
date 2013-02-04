@@ -13,7 +13,8 @@ Action.create = function(_id, context) {
   if (!action) { return action; }
   var option = context.option || Object.keys(action.options())[0];
   if (option) { action.setOption(option); }
-  action.disabled = action.checkDisabled();
+  console.log(context);
+  action.disabled = action.checkDisabled(undefined, context);
   if (action.disabled) { action.description = action.disabled; }
   action.label = ejs.render(action.label, context);
   action.description = ejs.render(action.description, context);
@@ -48,10 +49,10 @@ Action.prototype.setOption = function(option) {
   }
 };
 
-Action.prototype.checkDisabled = function(cond) {
-  var context = this.context();
+Action.prototype.checkDisabled = function(cond, context) {
+  context = context || this.context();
   var real_action = context.girl.actions[this.time];
-  if (real_action.locked) {
+  if (real_action && real_action.locked) {
     return context.girl.name + ' cannot ' + this.label + ' until she\'s done ' + real_action.gerund + '.';
   }
   cond = cond || this.base().enableConditions;
