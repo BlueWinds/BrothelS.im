@@ -350,7 +350,7 @@ textarea {
 
 #error {
   position: absolute;
-  right: 0;
+  left: 10px;
   top: 0;
 }
 
