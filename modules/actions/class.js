@@ -107,12 +107,12 @@ Action.prototype.applyResults = function(results, done, context) {
   if (results.lock === true) {
     this.locked = true;
     if (this.allDay) {
-      context.girl.actions['morning'].locked = true;
+      context.girl.actions.morning.locked = true;
     }
   } else if (results.lock === false) {
     delete this.locked;
     if (this.allDay) {
-      delete context.girl.actions['morning'].locked;
+      delete context.girl.actions.morning.locked;
     }
   }
   Resolvable.prototype.applyResults.call(this, results, done, context);
