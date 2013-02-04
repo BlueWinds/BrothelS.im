@@ -283,7 +283,7 @@ Actions.OD = {
     girl: {
       min: {
         endurance: 15,
-        obedience: 60
+        obedience: 40
       }
     }
   },
