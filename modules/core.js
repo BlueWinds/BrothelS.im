@@ -297,5 +297,6 @@ window.onerror = function(message, file, line) {
   $('<div class="text">').html(message).appendTo(error);
   $('<div class="file">').html(file).appendTo(error);
   $('<div class="line">').html('Line ' + line).appendTo(error);
+  $('<div class="request">').html('Attach an export of your current game when reporting bugs.').appendTo(error);
   $('#error').append(error);
 };
