@@ -57,7 +57,7 @@ Events.guardRape = {
   },
   tags: {
     garrison: 0.05,
-    slums: 10.03,
+    slums: 0.03,
     docks: 0.03
   },
   variants: function(context, done) {

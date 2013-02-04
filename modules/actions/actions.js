@@ -122,8 +122,8 @@ e.GameRender.push(function(done) {
 
 e.GirlRunTime.push(function(girl, time, done) {
   if (girl.status == 'Hired' && (time == 'evening' || !girl.actions[time].allDay)) {
-    girl.actions[time].getResults(function(results) {
-      girl.actions[time].applyResults(results, done);
+    girl.actions[time].getResults(function(results, context) {
+      girl.actions[time].applyResults(results, done, context);
     });
     return;
   }
