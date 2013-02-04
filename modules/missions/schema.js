@@ -26,7 +26,6 @@ Schemas.Conditions = {
       additionalProperties: false
     },
     time: {
-      type: 'string',
       'enum': ['morning', 'evening'],
       description: "The time condition only matches during the morning or the evening. If the current context doesn't include a time, then this condition always passes."
     },
@@ -39,11 +38,11 @@ Schemas.Conditions = {
       description: "likelyhood is a probability that these conditions will match - 0.2 means that these conditions will only match 20% of the time, even if all the other checks pass."
     },
     girl: {
-      'extends': { $ref: 'girlConditions' },
+      anyOf: [{ $ref: 'girlConditions' }],
       description: 'Must match the girl in the current context - if none is already there, it will add the first Hired girl who matches.'
     },
     building: {
-      'extends': { $ref: 'buildingConditions' },
+      anyOf: [{ $ref: 'buildingConditions' }],
       description: 'Must match the building in the current context - if none is already there, it will add the first Owned building which matches.'
     },
     missions: {
@@ -183,7 +182,7 @@ Schemas.Resolvable = {
             description: 'The numerical elements should sum up to exactly 1 - each number is the likelyhood that that result will be chosen.'
           },
           {
-            'extends': { $ref: 'Conditions' },
+            anyOf: [{ $ref: 'Conditions' }],
             description: 'If the conditions match, the result corresponding to this element will be applied.'
           }
         ]
@@ -212,15 +211,21 @@ Schemas.liveResolvable = {
   ],
   properties: {
     _id: { type: 'string' },
-    time: { 'enum': ['morning', 'evening'] },
-    girl: { type: ['null', 'string'] },
-    building: { type: ['null', 'string'] },
+    time: {
+      'enum': ['morning', 'evening']
+    },
+    girl: {
+      'enum': Object.keys(Girls)
+    },
+    building: {
+      'enum': Object.keys(Buildings)
+    },
     variants: {
       type: ['function', 'array'],
       additionalItems: {
         anyOne: [
           { type: 'number', maximum: 1, minimum: 0 },
-          { 'extends': { $ref: 'Conditions' } }
+          { $ref: 'Conditions' }
         ]
       },
       minItems: 1
@@ -237,7 +242,7 @@ Schemas.liveResolvable = {
 };
 
 Schemas.Mission = {
-  'extends': { $ref: 'Resolvable' },
+  anyOf: [{ $ref: 'Resolvable' }],
   properties: {
     _id: {},
     initialize: {},
@@ -245,11 +250,11 @@ Schemas.Mission = {
     results: {},
     special: {},
     conditions: {
-      'extends': { $ref: 'Conditions' },
+      anyOf: [{ $ref: 'Conditions' }],
       description: 'The mission will begin as soon as all of these conditions match, as long as a mission with the same name is not already running (since only one mission of each _id can run at a time, it would overwrite the existing one). If conditions is not present, then this mission will never start on its own - it can only be triggered from a Result.'
     },
     display: {
-      'extends': { $ref: 'Message' },
+      anyOf: [{ $ref: 'Message' }],
       description: "If display is present, then this mission will A) send this message when it starts B) appear in the Missions list for the player and C) If mission.end.max.day, send this message again the day before the mission ends, as a reminder."
     },
     end: {
@@ -268,7 +273,7 @@ Schemas.Mission = {
 };
 
 Schemas.liveMission = {
-  'extends': { $ref: 'liveResolvable' },
+  anyOf: [{ $ref: 'liveResolvable' }],
   properties: {
     variants: {},
     results: {},
@@ -280,12 +285,8 @@ Schemas.liveMission = {
     _class: {
       'enum': [ 'Mission' ]
     },
-    display: {
-      'extends': { $ref: 'Message' }
-    },
-    end: {
-      'extends': { $ref: 'Conditions' }
-    }
+    display: { $ref: 'Message' },
+    end: { $ref: 'Conditions' }
   },
   additionalProperties: false
 };

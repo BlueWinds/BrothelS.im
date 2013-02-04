@@ -14,8 +14,14 @@ Mission.create = function(_id, context) {
     mission.end = mission.parseConditions(mission.end, context);
   }
   if (mission.display) {
-    mission.display = new Message(mission.display, mission.context());
-    g.messages.push(mission.display);
+    message = new Message(mission.display, mission.context());
+    // We save the rendered strings, since they probably contain context-sensitive data, but not the full Message object.
+    mission.display.label = message.label;
+    mission.display.image = message.image;
+    mission.display.group = message.group;
+    mission.display.text = message.text;
+    delete mission.display._class;
+    g.messages.push(message);
   }
   return mission;
 };
@@ -40,7 +46,7 @@ Mission.prototype.checkDay = function(done) {
     return;
   }
   if (mission.display && conditions.max && conditions.max.day && conditions.max.day - 1 == g.day) {
-    g.messages.push(mission.display);
+    g.messages.push(new Message(mission.display));
   }
   done();
 };

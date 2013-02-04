@@ -19,7 +19,14 @@ $.extend(e, {
     }
     next();
   }],
-  GameUpgrade04: []
+  GameUpgrade04: [function(game, next) {
+    for (var fetish in game.fetishes) {
+      if (!game.fetishes[fetish]) {
+        delete game.fetishes[fetish];
+      }
+    }
+    next();
+  }]
 });
 
 T = function(string, type) {

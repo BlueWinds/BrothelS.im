@@ -3,6 +3,7 @@ function Action(obj) {
   delete this.enableConditions;
   delete this.options;
   delete this.disable;
+  if (!this.gerund) { this.gerund = this.label + 'ing'; }
 }
 
 Action.prototype = new Resolvable();
@@ -17,6 +18,7 @@ Action.create = function(_id, context) {
   action.label = ejs.render(action.label, context);
   action.description = ejs.render(action.description, context);
   action.tags = action.tags || {};
+  action.gerund = ejs.render(action.gerund, context);
   return action;
 };
 
@@ -40,7 +42,6 @@ Action.prototype.options = function() {
 };
 
 Action.prototype.setOption = function(option) {
-  var options = this.options();
   this.option = option;
   if (this.optionsKey) {
     this[this.optionsKey] = option;
@@ -126,20 +127,29 @@ Girl.prototype.setAction = function(action) {
   this.actions[action.time] = action;
 };
 
-Girl.prototype.verifyActions = function(time) {
+Girl.prototype.verifyActions = function(time, rebuild) {
+  var m, e;
   if (!time || time == 'morning') {
-    var m = this.actions.morning;
+    m = this.actions.morning;
     m = m && m.label && m.checkConditions() && !m.checkDisabled();
     if (!m) {
       this.setAction(this.action('Rest', { time: 'morning' }));
     }
   }
   if (!time || time == 'evening') {
-    var e = this.actions.evening;
+    e = this.actions.evening;
     e = e && e.label && e.checkConditions() && !e.checkDisabled();
     if (!e) {
       this.setAction(this.action('Rest', { time: 'evening' }));
     }
+  }
+  if (rebuild) {
+    m = this.actions.morning;
+    e = this.actions.evening;
+    this.actions.morning = this.action(m._id, {time: 'morning'});
+    this.actions.evening = this.action(e._id, {time: 'evening'});
+    if (m.option) { this.actions.morning.setOption(m.option); }
+    if (e.option) { this.actions.evening.setOption(e.option); }
   }
 };
 

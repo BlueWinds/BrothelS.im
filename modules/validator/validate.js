@@ -5,7 +5,7 @@ e.Ready.push(function(done) {
   }
   classes.forEach(function(type) {
     for (var item in window[type + 's']) {
-      var success = tv4.validate(window[type + 's'][item], tv4.getSchema(type));
+      var success = tv4.validate(window[type + 's'][item], type);
       if (!success) {
         console.log(tv4.error);
         console.log(window[type + 's'][item]);
@@ -17,7 +17,7 @@ e.Ready.push(function(done) {
 });
 
 e.Autorender.push(function(element, done) {
-  var success = tv4.validate(g, tv4.getSchema('Game'));
+  var success = tv4.validate(g, 'Game');
   if (!success) {
     console.log(tv4.error);
     console.log(g);
@@ -27,15 +27,23 @@ e.Autorender.push(function(element, done) {
 
 (function() {
   var oldApply = Resolvable.prototype.applyResults;
-  Resolvable.prototype.applyResults = function(results, done) {
+  Resolvable.prototype.applyResults = function(results, done, context) {
     if (done) {
-      var success = tv4.validate(results, tv4.getSchema('Result'));
+      var success = tv4.validate(results, 'Result');
       if (!success) {
         console.log(tv4.error);
         console.log(this);
         console.log(results);
       }
     }
-    return oldApply.call(this, results, done);
+    if (context) {
+      var success = tv4.validate(context, 'Context');
+      if (!success) {
+        console.log(tv4.error);
+        console.log(this);
+        console.log(context);
+      }
+    }
+    return oldApply.call(this, results, done, context);
   };
 })();

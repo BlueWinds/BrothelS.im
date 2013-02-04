@@ -374,7 +374,7 @@ Actions.Lockdown = {
         constitution: 10,
         obedience: 60
       },
-      building: { room: 'dungeon' }
+      building: { room: 'Dungeon' }
     }
   },
   tags: { indoors: 1 },

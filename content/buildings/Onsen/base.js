@@ -10,19 +10,19 @@ Buildings.Onsen = {
   maxRooms: 6,
   basePrice: 4000,
   daily: {
-    breakpoint: 50,
+    breakpoint: 60,
     above: {
       money: 150,
-      clean: -12,
+      clean: -10,
       reputation: -0.5,
       girl: {
         endurance: 5,
         charisma: 0.3,
-        modesty: -0.7
+        modesty: -0.3
       }
     },
     below: {
-      clean: -7,
+      clean: -6,
       money: -40,
       reputation: -1.3,
       girl: {

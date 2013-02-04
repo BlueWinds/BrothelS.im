@@ -22,7 +22,7 @@ Game.prototype.ownerAction = function(time) {
     if (reason || !this.ownerParticipation) { return reason; }
     var action = g.ownerAction(this.time);
     if (action && this.girl !== action.girl) {
-      return 'You are already ' + action.label + 'ing with ' + action.girl + ' in the ' + action.time;
+      return 'You are already ' + action.gerund + ' with ' + action.girl + ' in the ' + action.time;
     }
   };
 })();

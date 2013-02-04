@@ -42,10 +42,6 @@ e.GamePreDay.push(function(done) {
   g.buildings._filter('status', 'Owned').forEach(function(building) {
     building.turnDelta = building.startDelta();
   });
-  done();
-});
-
-e.GameNextDay.push(function(done) {
   $.each(g.buildings, function(name, building) {
     building.runDay();
   });

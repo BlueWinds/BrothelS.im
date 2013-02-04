@@ -101,7 +101,7 @@ Building.prototype._compare = function(delta) {
         break;
       }
     }
-    if (!found) { return this.name + ' does not have a ' + delta.room; }
+    if (!found) { return 'The ' + this.name + ' does not have a ' + delta.room; }
   }
   var stat;
   if (delta.min) {

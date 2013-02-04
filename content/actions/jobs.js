@@ -101,7 +101,7 @@ Actions.Whore = {
     }
   },
   disable: Actions.Streetwalk.disable,
-  results: {},
+  results: [{}],
   // variants key provided by prostitution module, since it's too complex to put here.
 
   // These are non-standard keys - the variants function uses them.

@@ -6,8 +6,9 @@ Schemas.Stat = {
 
 Schemas.statDelta = {
   type: 'number',
+  default: 0,
   minimum: -100,
-  maximum: 100
+  maximum: 100,
 };
 
 Schemas.parsableStat = {
@@ -55,10 +56,9 @@ Schemas.girlConditions = {
   description: 'A set of conditions to match against a girl.',
   properties: {
     name: {
-      type: 'string'
+      'enum': Object.keys(Girls)
     },
     status: {
-      type: 'string',
       'enum': ['Hired', 'For Hire', 'Town', 'Gone'],
       'default': 'Hired'
     }
@@ -98,10 +98,9 @@ Schemas.parsableGirlConditions = {
   description: 'As usual girlConditions, except "+3" or "-3" are acceptable values.',
   properties: {
     name: {
-      type: 'string'
+      'enum': Object.keys(Girls)
     },
     status: {
-      type: 'string',
       'enum': ['Hired', 'For Hire', 'Town', 'Gone']
     }
   },
@@ -243,8 +242,7 @@ Schemas.liveGirl = {
   ],
   properties: {
     name: {
-      type: 'string',
-      minLength: 4
+      'enum': Object.keys(Girls)
     },
     _class: {
       'enum': ['Girl']
@@ -320,6 +318,7 @@ Schemas.liveGirl = {
 Schemas.Game.required.push('girls', 'maxGirls');
 Schemas.Game.properties.girls = {
   type: 'object',
+  required: Object.keys(Girls),
   additionalProperties: { $ref: 'liveGirl' }
 };
 Schemas.Game.properties.maxGirls = {

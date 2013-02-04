@@ -41,7 +41,7 @@ Girls.Sakuya = {
   },
   Actions: {
     Talk: $.extend(true, {}, Actions.Talk),
-    Lockdown: $.extend(true, {
+    Lockdown: $.extend(true, {}, Actions.Lockdown, {
       results: [
         {
           girl: { happiness: 0 }
@@ -50,8 +50,8 @@ Girls.Sakuya = {
           girl: { happiness: 0 }
         }
       ]
-    }, Actions.Lockdown),
-    Clean: $.extend(true, {
+    }),
+    Clean: $.extend(true, {}, Actions.Clean, {
       variants: function(context, done) {
         var delta = this.results[0];
         delta.building.clean += context.girl.specialRules.magic / 10;
@@ -71,10 +71,10 @@ Girls.Sakuya = {
             modesty: 0.3,
             specialRules: { magic: 1 }
           },
-          building: { clean: 12 }
+          building: { clean: 15 }
         }
       ] // results
-    }, Actions.Clean)
+    })
   }, // actions
   Missions: {
     ScarletDevilDream: {
@@ -129,8 +129,9 @@ Girls.Sakuya = {
       display: {
         label: 'Something to Say',
         image: 'content/girls/Sakuya/images/Study3.jpg',
-        text: '<blockquote>...</blockquote> Sakuya is on the verge of saying something when she thinks better of it and turns away, pretending that it was nothing. Perhaps if you earned her trust a bit more, she\'d share what was on her mind...<br><br><em>(She needs obedience 60 and Modesty < 50 before she\'ll speak up)</em>',
-        group: 'Sakuya Speaks'
+        text: '<blockquote>...</blockquote> Sakuya is on the verge of saying something when she thinks better of it and turns away, pretending that it was nothing. Perhaps if you earned her trust a bit more, she\'d share what was on her mind...<br><br><em>(She needs <<- T("obedience") >> 60 and <<- T("modesty") >> 50 or less before she\'ll speak up)</em>',
+        group: 'Sakuya Speaks',
+        weight: -1
       },
       initialize: function(context) {
         if (context.girl.obedience >= 60 && context.girl.modesty <= 50) {
@@ -201,7 +202,7 @@ Girls.Sakuya = {
         label: 'Train Sakuya',
         group: 'Enter the Devil',
         image: 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg',
-        text: "<blockquote>Sakuya has put me through a lot of trouble. I want you to make sure she never does it again - much more <<- T('obedience', 'adj') >> than she used to be, but still <<- T('modesty', 'adj') >>. I'll be back on day <strong></strong> to collect her. I will pay very well if you succeed. Failure will be punished.</blockquote> You rub your wrist where she held it, remembering the painfully strong grip that you're sure could have crushed bone if she'd chosen.<br><br>When you tell the story to Sakuya, she simply repeats that if you want her to keep working for you, you should give her plenty of time to practice magic. She's conflicted - returning home does have a certain appeal, but the Mistress didn't always treat her well.<br><br><em>Raise Sakuya's <<- T('obedience') >> to 90 and <<- T('modesty') >> to 75 if you want to please the Scarlet Devil, or raise her Magic (by having her Clean) if you plan to refuse to hand Sakuya over. She will return at the end of <strong>day <<= mission.end.min.day >></strong>.</em>",
+        text: "<blockquote>Sakuya has put me through a lot of trouble. I want you to make sure she never does it again - much more <<- T('obedience', 'adj') >> than she used to be, but still <<- T('modesty', 'adj') >>. I'll be back on day <strong></strong> to collect her. I will pay very well if you succeed. Failure will be punished.</blockquote> You rub your wrist where she held it, remembering the painfully strong grip that you're sure could have crushed bone if she'd chosen.<br><br>When you tell the story to Sakuya, she simply repeats that if you want her to keep working for you, you should give her plenty of time to practice magic. She's conflicted - returning home does have a certain appeal, but the Mistress didn't always treat her well.<br><br><em>Raise Sakuya's <<- T('obedience') >> to 90 and <<- T('modesty') >> to 75 if you want to please the Scarlet Devil, or raise her Magic to at least 50 (by having her Clean) if you plan to refuse to hand Sakuya over. She will return at the end of <strong>day <<= mission.end.min.day >></strong>.</em>",
         weight: -1
       },
       end: {
@@ -213,7 +214,7 @@ Girls.Sakuya = {
         var building = context.girl.building() ? context.girl.building().name : 'inn';
         var text = "Knowing that this is the day the Scarlet Devil will be coming to collect Sakuya, the two of you wait out in front of the " + building + ", waiting for her. It's almost midnight when she finally arrives. You hadn't noticed her bat wings before.<blockquote>Sakuya! It's great to see you. I was angry at first, but, well, the mansion has been so lonely without you, and what happened wasn't really your fault. Come home, won't you dear?</blockquote> She holds out her hand. Out of long habit, Sakuya stands and steps forward to take it, but then hesitates, glancing back at you. She's uncertain what to do - should she go with the Scarlet Devil, or stay with you?";
         var options = {
-          '"Don\'t go!"': "It's likely you and Sakuya will have to fight the Scarlet Devil <em>(you'll be able to keep her even if you loose the fight)</em>.",
+          '"Don\'t go!"': "It's likely you and Sakuya will have to fight the Scarlet Devil.",
           'Stay silent': "The Scarlet Devil will return with Sakuya to their homeland, and you'll receive a great deal of money if you've trained her well."
         };
         Game.getUserInput(text, 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg', options, function(answer) {
