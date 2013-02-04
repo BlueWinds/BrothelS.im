@@ -44,7 +44,7 @@ e.GirlNew.push(function(girl) {
 
 e.GamePostDay.push(function(done) {
   g.girls._filter('status', 'Hired').forEach(function(girl) {
-    girl.verifyActions();
+    girl.verifyActions(undefined, true);
   });
   done();
 });
@@ -118,7 +118,7 @@ e.GameRender.push(function(done) {
 });
 
 e.GirlRunTime.push(function(girl, time, done) {
-  if (girl.status == 'Hired' && girl.actions[time]) {
+  if (girl.status == 'Hired' && (time == 'evening' || !girl.actions[time].allDay)) {
     girl.actions[time].applyResults(done);
     return;
   }

@@ -15,6 +15,12 @@ Building.prototype.buyRoom = function(type) {
   this.rooms.push(room);
 };
 
+Building.prototype.sellRoom = function(index) {
+  var room = Rooms[this.rooms[index].type];
+  g.money += Math.floor(room.price * Building.config.sellRatio);
+  this.rooms.splice(index, 1);
+};
+
 Building.roomsByType = function(type, status) {
   status = status || 'Owned';
   if (!g.buildings) { return []; }
@@ -29,8 +35,9 @@ Building.roomKeySum = function(type, key, status) {
 
 Building.prototype.potentialRooms = function() {
   var rooms = {};
+  var building = this;
   $.each(Rooms, function(type, room) {
-    if (room.buildingMax && room.buildingMax <= building.rooms._filter('type', type).length) {
+    if (room.maxInBuilding <= building.rooms._filter('type', type).length) {
       return;
     }
     rooms[type] = room;
@@ -39,6 +46,6 @@ Building.prototype.potentialRooms = function() {
 };
 
 Girl.prototype.bedroom = function() {
-  var rooms = Building.roomsByType('bedroom', 'Owned');
+  var rooms = Building.roomsByType('Bedroom', 'Owned');
   return rooms._filter('girl', this.name)[0];
 };

@@ -42,10 +42,6 @@ e.GamePreDay.push(function(done) {
   g.buildings._filter('status', 'Owned').forEach(function(building) {
     building.turnDelta = building.startDelta();
   });
-  done();
-});
-
-e.GameNextDay.push(function(done) {
   $.each(g.buildings, function(name, building) {
     building.runDay();
   });
@@ -63,51 +59,110 @@ e.GameRender.push(function(done) {
   var div = $(ejs.render($('#buildings_list_template').html(), {
     buildings: g.buildings._filter('status', 'Owned')
   }).trim()).appendTo('#content .second');
-  $('.building', div).click(function() {
-    var building = g.buildings[$(this).attr('name')];
-
-    function render() {
+  $('.building .right', div).click(function() {
+    var dialog = $('<div>');
+    function render(element) {
       var context = {
-        building: building
+        buildings: g.buildings._filter('status', 'Owned'),
+        inn_girls: []
       };
+      g.girls._filter('status', 'Hired').forEach(function(girl) {
+        if (!girl.building()) {
+          context.inn_girls.push(girl);
+        }
+      });
 
       var view = $(ejs.render($('#buildings_view_template').html(), context).trim());
-      $('#buy-room', view).click(function() {
-        var room = $('#new-room', view).val();
-        building.buyRoom(room);
-        render();
-      });
-      building.rooms.forEach(function(room) {
-        context.room = room;
-        var div = $('<div>').addClass('room');
-        var base = Rooms[room.type];
-        div.append('<h6>').html(base.label);
-        if (base.render) {
-          div.append(base.render.call(room, building, render));
-        } else {
-          div.append(ejs.render(base.description, context));
-        }
-        div.change(function(event) {
-          var target = $(event.target);
-          room[target.attr('name')] = target.val();
+      element.html(view);
+      $('.building', view).each(function() {
+        var name = $(this).attr('name');
+        var selector = '.building[name="' + name +'"]';
+        $('.built-rooms', this).sortable({
+          connectWith: selector + ' .available-rooms',
+          handle: 'label',
+          receive: function(event, ui) {
+            var type = ui.item.attr('name');
+            g.buildings[name].buyRoom(type);
+            render(dialog);
+          },
+          update: function(event, ui) {
+            if (ui.item.attr('index') !== undefined && ui.item.closest(this).length) {
+              var i = ui.item.parent().children().index(ui.item);
+              var old_i = ui.item.attr('index');
+              var rooms = g.buildings[name].rooms;
+              var room = rooms[old_i];
+              rooms[old_i] = rooms[i];
+              rooms[i] = room;
+              render(dialog);
+            }
+          }
         });
-        $('#rooms', view).append(div);
+        $('.available-rooms', this).sortable({
+          connectWith: selector + ' .built-rooms',
+          handle: 'label',
+          helper: 'clone',
+          items: 'li:not(.disabled)',
+          start: function(event, ui) {
+            ui.item.css('display', 'list-item');
+            $(this).children('.ui-sortable-placeholder').appendTo(this);
+          },
+          receive: function(event, ui) {
+            var index = ui.item.attr('index');
+            g.buildings[name].sellRoom(index);
+            render(dialog);
+          }
+        });
       });
-      var old_view = $('#building-view');
-      old_view.remove();
-      var opt = {
-        title: building.name,
-        width: '35em',
-        beforeClose: g.render
-      };
-      if (old_view) { opt.show = false; }
-      view.dialog(opt);
-      $('select').blur();
+      $('#inn, .room[name="Bedroom"] ul', view).sortable({
+        connectWith: '#inn, .room[name="Bedroom"] ul',
+        opacity: 0.7,
+        receive: function(event, ui) {
+          var list = $(this);
+          var sender_i = ui.sender.parent().attr('index');
+          if (sender_i !== undefined) {
+            var sender = ui.sender.closest('.building').attr('name');
+            delete g.buildings[sender].rooms[sender_i].girl;
+          }
+          var receiver_i = list.parent().attr('index');
+          if (receiver_i !== undefined) {
+            var receiver = list.closest('.building').attr('name');
+            g.buildings[receiver].rooms[receiver_i].girl = ui.item.attr('name');
+          }
+          // Now we send any previously occupying girl to the inn.
+          if (list.attr('id') != 'inn' && list.children().length > 1) {
+            $('#inn').append($('li', list).not(ui.item));
+          } else if (list.attr('id') == 'inn') {
+            ui.item.css('position', '');
+          }
+        }
+      });
     }
 
-    render();
+    var opt = {
+      beforeClose: g.render,
+      width: '45em'
+    };
+    render(dialog);
+    render(dialog.dialog(opt));
   });
-
+  $('.building .left, .building .middle').click(function() {
+    var lst = $(ejs.render($('#buildings_manage_template').html(), {
+      buildings: g.buildings._filter('status', 'Owned'),
+      action: 'Sell'
+    }).trim());
+    $('button.manage', lst).each(function() {
+      var building = g.buildings[$(this).attr('name')];
+        $(this).click(function() {
+          building.sell();
+          g.render();
+          $('#manage-buildings').dialog('close');
+        });
+    });
+    lst.dialog({
+      title: 'Sell Building',
+      width: '30em'
+    });
+  });
   $('#buy-building').click(function() {
     var lst = $(ejs.render($('#buildings_manage_template').html(), {
       action: 'Buy',
@@ -130,24 +185,7 @@ e.GameRender.push(function(done) {
       width: '30em'
     });
   });
-  $('#sell-building').click(function() {
-    var lst = $(ejs.render($('#buildings_manage_template').html(), {
-      buildings: g.buildings._filter('status', 'Owned'),
-      action: 'Sell'
-    }).trim());
-    $('button.manage', lst).each(function() {
-      var building = g.buildings[$(this).attr('name')];
-        $(this).click(function() {
-          building.sell();
-          g.render();
-          $('#manage-buildings').dialog('close');
-        });
-    });
-    lst.dialog({
-      title: 'Sell Building',
-      width: '30em'
-    });
-  });
+
   done();
 });
 

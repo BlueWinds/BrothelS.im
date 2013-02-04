@@ -20,6 +20,9 @@ e.GameUpgrade04.push(function(game, next) {
     'fetish libido': 'fetishLibido',
     'fetish experience': 'fetishExperience'
   };
+  if (!game.girls.Kirino.specialRules) {
+    game.girls.Kirino.specialRules = {};
+  }
   game.girls.Kirino.specialRules.payRatio = Girls.Kirino.specialRules.payRatio;
   for (var name in game.girls) {
     if (!game.girls[name].hireDay) {

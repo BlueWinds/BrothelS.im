@@ -9,6 +9,7 @@ function Resolvable(obj) {
 Resolvable.create = function(_id, _class, context) {
   var base = Resolvable.base(_id, _class, context);
   var res = new window[_class](base);
+  res.constructor = window[_class];
   res._class = _class;
   context = res.checkConditions(base.conditions, context);
   if (!context) { return false; }
@@ -30,9 +31,21 @@ Resolvable.prototype.context = function() {
 };
 
 Resolvable.prototype.setContext = function(context) {
-  this.girl = context.girl && context.girl.name;
-  this.building = context.building && context.building.name;
-  this.time = context.time;
+  if (context.girl) {
+    this.girl = context.girl && context.girl.name;
+  } else {
+    delete this.girl;
+  }
+  if (context.building) {
+    this.building = context.building && context.building.name;
+  } else {
+    delete this.building;
+  }
+  if (context.time) {
+    this.time = context.time;
+  } else {
+    delete this.time;
+  }
 };
 
 Resolvable.base = function(_id, _class, context) {
@@ -136,10 +149,11 @@ Resolvable.prototype.checkConditions = function(cond, context) {
   return context;
 };
 
-Resolvable.prototype.getResults = function(done) {
+Resolvable.prototype.getResults = function(done, context) {
   var base = this.base();
   if (typeof(base.variants) == 'function') {
-    base.variants.call(this, this.context(), done);
+    context = context || this.context();
+    base.variants.call(this, context, done);
     return;
   }
   if (this.results && base.variants) {
@@ -160,17 +174,20 @@ Resolvable.prototype.getResults = function(done) {
   done(Math.choice(base.results));
 };
 
-Resolvable.prototype.applyResults = function(results, done) {
+Resolvable.prototype.applyResults = function(results, done, context) {
   var res = this;
+  var series = [function(next) {
+    e.invokeAll('ApplyResults', results, context, next);
+  }];
   if (!done) {
     done = results;
-    this.getResults(function(results) {
-      res.applyResults(results, done);
+    this.getResults(function(results, context) {
+      res.applyResults(results, done, context);
     });
     return;
   }
   var changes = [];
-  var context = this.context();
+  context = context || this.context();
   if (context.girl) {
     changes.push(context.girl.startDelta());
   }
@@ -195,10 +212,14 @@ Resolvable.prototype.applyResults = function(results, done) {
   if (results.mission) {
     var mission = Mission.create(results.mission, context);
     if (mission) {
-      g.missions[results.mission] = mission;
+      if (mission.getEnd()) {
+        g.missions[results.mission] = mission;
+      } else {
+        series.push(function(next) { mission.checkDay(next); });
+      }
     }
   }
-  e.invokeAll('ApplyResults', results, context, done);
+  e.runSeries(series, done);
 };
 
 Resolvable.prototype.parseConditions = function(conditions, context) {

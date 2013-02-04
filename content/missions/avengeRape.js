@@ -20,7 +20,7 @@ Missions.avengeGuardWait = {
   results: {
     repeat: {
       girl: {
-        happiness: -7,
+        happiness: -10,
         specialRules: { guardRapeWait: 1 }
       },
       mission: 'avengeGuardWait'
@@ -54,7 +54,7 @@ Missions.avengeGuardWait = {
       },
       message: {
         label: 'Angry at <<- girl.name >>\'s attackers',
-        group: '<<- girl.name >>',
+        group: 'Investigate City Guard',
         weight: -2,
         image: '<<- girl.image("refuse") >>',
         text: "Though you'd at first hoped it was a passing incident, the more you think about what was done to <<- girl.name >>, the angrier you get. It's time to fix the problem at the source. You follow her to her room, where you find her sitting at the window, legs pulled up against her chest and staring blankly outside. When you announce your intention to make her attackers pay, she looks up, and you can see the shimmering resentment she'd tried to hide. She's angry too. Time to go break some heads."
@@ -63,10 +63,10 @@ Missions.avengeGuardWait = {
     "She'll get over it": {
       message: {
         label: 'Ignore her outburst',
-        group: '<<- girl.name >>',
+        group: 'Investigate City Guard',
         weight: -2,
         image: '<<- girl.image("tired") >>',
-        text: "It's a sad thing that the city guard here is so corrupt - if you were back home, you might tear the place apart getting justice for her, but here in a foreign nation, you don't want to make waves. <<- girl.name >> is a strong woman - hopefully she'll bounce back soon."
+        text: "It's a sad thing that the city guard here is so corrupt - if you were back home, you might tear the place apart getting justice for her, but here in a foreign nation, you don't want to make waves. <<- girl.name >> isn't a fragile little flower, to shatter at a single blow - she'll be back to her normal self soon."
       },
       girl: {
         happiness: -20,
@@ -106,6 +106,7 @@ Missions.avengeGuardRape = {
 
 Actions.investigateGuards = {
   label: 'Investigate Guards',
+  gerund: 'Investigating Guards',
   group: 'Chores',
   description: "You and <<- girl.name >> will spend some time looking investigating, learning more about her attackers.",
   conditions: {
@@ -113,6 +114,7 @@ Actions.investigateGuards = {
     missions: { avengeGuardRape: 1 },
     girl: {
       min: {
+        endurance: 15,
         specialRules: { investigateGuards: 1 }
       },
       max: {
@@ -162,14 +164,14 @@ Actions.investigateGuards = {
         {
           label: 'Investigate Guards',
           group: '<<- girl.name >>',
-          image: '<<- girl.image() >>',
+          image: 'content/missions/barracksGate.jpg',
           text: "You and <<- girl.name >> arrive at the gates of the garrison, a small fortress walled off from the rest of the city and sitting on the far side of a bridge. Originally the castle from which the lord ruled, the nobility moved to the far end of the city into Uptown, nearly 150 years ago, when it became apparent that invasion was no longer a danger (everyone who might want to invade having decided they'd rather just visit and take back memories or concubines).",
           delta: false
         },
         {
           label: 'Investigate Guards',
           group: '<<- girl.name >>',
-          image: '<<- girl.image() >>',
+          image: 'content/missions/barracksGate.jpg',
           text: "The gate is open all hours of the day, but you're stopped before entering by a bored looking woman. She asks about your business, and you respond with a half truth - the two of you are searching for a group of guards you met a few days ago, in order to \"thank\" them for their assistance. You'll want to speak to the captain for that, she responds, not caring to listen to <<- girl.name >>'s descriptions. The captain is out at the moment, but if you'd care to return later..."
         }
       ],
@@ -183,7 +185,7 @@ Actions.investigateGuards = {
         label: 'Investigate Guards',
         group: '<<- girl.name >>',
         image: '<<- girl.image("tired") >>',
-        text: "The captain of the guard is a man named Kim Xun. You've heard rumors of him - lightning fast, deadly with a bow to 100 yards, and backing it all up with a hefty dose of magical power. He's just as intimidating in person as you might expect - steely grey eyes and whipcord muscles, not tall or bulky but his presence feels... <em>dangerous</em>. You also get the distinct impression, from the courteous way he bows to <<- girl.name >> and treats the both of you as equals that he might be sympathetic to your cause and quite angry about the lapse of discipline among his troops.<br><br>Much to <<- girl.name >>'s surprise, you explain exactly what happened without evasion - Kim nods sharply, asks her to repeat her descriptions of her attackers, announces that he'll look into it, and dismisses you. Not exactly the reaction you were expecting, but... if he finds the men and women responsible before <<- girl.name >>, they might wish <strong>you</strong> had acted faster."
+        text: "The captain of the guard is a man named Kim Xun. You've heard rumors of him - lightning fast, deadly with a bow to 100 yards, and backing it all up with a hefty dose of magical power. He's just as intimidating in person as you might expect - steely grey eyes and whipcord muscles, not tall or bulky but his presence feels... <em>dangerous</em>. You also get the distinct impression, from the courteous way he bows to <<- girl.name >> and treats the both of you as equals that he might be sympathetic to your cause and quite angry about the lapse of discipline among his troops.<br><br>Much to <<- girl.name >>'s surprise, you explain exactly what happened without evasion - Kim nods sharply, asks her to repeat her descriptions of her attackers, announces that he'll look into it, and dismisses you. Not exactly the reaction you were expecting, but... if he finds the men and women responsible before <<- girl.name >>, they just might wish <em>you</em> had gotten to them first."
       },
       girl: {
         endurance: -5,
@@ -210,7 +212,7 @@ Actions.investigateGuards = {
         {
           label: 'Investigate Guards',
           group: '<<- girl.name >>',
-          image: '<<- girl.image() >>',
+          image: 'content/missions/barracksGate.jpg',
           text: "The two of you have become almost a common sight at the garrison - though not entirely sure why you keep showing up, no one has complained yet, and the guard at the gate passes you through without comment. Today is the day to put the plan you made with one of the guards into action. As before, <<- girl.name >> announces a show in the barracks, while you and your contact take a step outside.",
           delta: false,
           weight: -1
@@ -242,7 +244,7 @@ Actions.investigateGuards = {
       message: {
         label: 'Investigate Guards',
         group: '<<- girl.name >>',
-        image: '<<- girl.image("tired") >>',
+        image: 'content/missions/barracksGate.jpg',
         text: "Traffic seems quite heavy as you make your way to the garrison, only to stand in a further line as you wait for entrance. Finally, tired and irritable as you arrive at the gate, your visit seems insufficiently important for the man asking everyone's business at the gates to allow you in. Perhaps he's in on the circle that hurt <<- girl.name >> - that might explain why you two alone, out of all the visitors, are turned away. A wasted day."
       },
       girl: {
@@ -308,8 +310,9 @@ Missions.avengeGuardRapeFinal = {
         group: 'Investigate City Guard',
         weight: -2,
         image: '<<- girl.image("study") >>',
-        text: "With their names, testimony from both <<- girl.name >> and your contact in the city guard, you finally have enough information that they'll have to take your threat of revealing what they've been doing to Kim Xun. Leave a note explaining the exact situation at one of their home addresses, along with your demand - their resignation from the guard, and a written apology.<br><br>You honestly didn't expect it to work, but early the next morning one of the guards, the ringleader, knocks on your door and hands you the letter, signed by all seven of them, exactly as you'd asked for. He's clearly quite scared, and asks for repeated reassurance that you won't turn them in before he'll hand it over. The courts here are rather soft, not nearly enough to cause such a reaction until you realize it's not the law they're afraid of, but the captain. You promise one final time that you're content to let the incident lie, and he hands you the apology.<br><br><<- girl.name >> has been watching quietly from further inside. As you hand her the apology, she starts to cry, kisses you on the cheek, and runs into her room holding the letter. She's going to be alright."
+        text: "With their names, testimony from both <<- girl.name >> and your contact in the city guard, you finally have enough information that they'll have to take your threat of revealing what they've been doing to Kim Xun. Leave a note explaining the exact situation at one of their home addresses, along with your demand - their resignation from the guard, a written apology, and $1000.<br><br>You honestly didn't expect it to work, but early the next morning one of the guards, the ringleader, knocks on your door and hands you the letter, signed by all seven of them, exactly as you'd asked for. He's clearly quite scared, and asks for repeated reassurance that you won't turn them in before he'll hand it over. The courts here are rather soft, not nearly enough to cause such a reaction until you realize it's not the law they're afraid of, but the captain. You promise one final time that you're content to let the incident lie, and he hands you the apology.<br><br><<- girl.name >> has been watching quietly from further inside. As you hand her the apology, she starts to cry, kisses you on the cheek, and runs into her room holding the letter. She's going to be alright."
       },
+      money: 1000,
       girl: {
         happiness: 25
       }

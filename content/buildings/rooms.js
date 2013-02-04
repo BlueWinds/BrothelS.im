@@ -1,12 +1,12 @@
 Rooms.Dungeon = {
   price: 1200,
-  description: 'Assign girls to Lockown to increase their Submission at the expense of Happiness and a little bit of Constitution.',
+  description: 'Assign girls to Lockown to increase their Obedience.',
   maxInBuilding: 1
 };
 
 Rooms.Bedroom = {
   price: 500,
-  description: "Each bedroom can house one girl, allowing her to work in this building and saving a great deal of money since she doesn't need to rent a room at an inn every night.",
+  description: "Each bedroom can house one girl for living and working.",
   render: function(building, rerender) {
     var room = this;
     var select = $('<select name="girl">').attr('title', Rooms.Bedroom.description);

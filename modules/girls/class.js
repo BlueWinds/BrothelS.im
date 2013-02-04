@@ -252,9 +252,11 @@ Girl.prototype.parseConditions = function(conditions) {
       for (var stat in conditions[cond]) {
         if (stat == 'specialRules') {
           for (var rule in conditions[cond].specialRules) {
-            old_int = parseInt(conditions[cond].specialRules[rule], 10);
-            old_int += this.specialRules[rule] || 0;
-            conditions[cond].specialRules[rule] = old_int;
+            if (typeof(conditions[cond].specialRules[rule]) == 'string') {
+              old_int = parseFloat(conditions[cond].specialRules[rule], 10);
+              old_int += this.specialRules[rule] || 0;
+              conditions[cond].specialRules[rule] = old_int;
+            }
           }
         } else if (typeof(conditions[cond][stat]) == 'string') {
           old_int = parseInt(conditions[cond][stat], 10);

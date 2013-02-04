@@ -20,7 +20,7 @@ Schemas.Tags = {
 };
 
 Schemas.Action = {
-  'extends': { $ref: 'Resolvable' },
+  anyOf: [{ $ref: 'Resolvable' }],
   required: [ 'group', 'label', 'description' ],
   properties: {
     _id: {},
@@ -29,12 +29,12 @@ Schemas.Action = {
     results: {},
     special: {},
     conditions: {
-      'extends': { $ref: 'Conditions' },
+      anyOf: [{ $ref: 'Conditions' }],
       description: 'The action will show up in the GUI when its conditions match (it may still be disabled by enableConditions below).',
       'default': {}
     },
     enableConditions: {
-      'extends': { $ref: 'Conditions' },
+      anyOf: [{ $ref: 'Conditions' }],
       description: 'If these conditions fail to match, this action will be disabled in the GUI, with an appropriate description.',
       'default': {}
     },
@@ -51,12 +51,16 @@ Schemas.Action = {
       type: 'string',
       description: 'The label for this action. Text replacement patterns are available.'
     },
+    gerund: {
+      type: 'string',
+      description: 'The label of this action, as a noun (eg. Exercise -> Exercising, Investigate Guards -> Investigating the Guard). If not present, the game will just add an "ing" to the end of the label.'
+    },
     description: {
       type: 'string',
       description: 'The hover-text for this action. Text replacement is of course available.'
     },
     tags: {
-      'extends': { $ref: 'Tags' },
+      anyOf: [{ $ref: 'Tags' }],
       description: 'Tags represent where this action occurs, though they can also be more intangible properties, such as "using magic" or "alone". The location-based tags should generally add up to 1 (though this is not a hard requirement). If tags is ommited entirely, the action cannot trigger any events. Use this if the action is one-time, important, or otherwise really shouldn\'t be interrupted by random interference.',
       'default': {}
     },
@@ -105,7 +109,7 @@ Schemas.liveAction = {
   anyOne: [{ $ref: 'liveResolvable' }],
   required: [
     'description', 'girl', 'group', 'label',
-    'tags', 'time'
+    'tags', 'time', 'gerund'
   ],
   properties: {
     variants: {},
@@ -118,10 +122,13 @@ Schemas.liveAction = {
       'enum': [ 'Action' ]
     },
     description: { type: 'string' },
-    girl: { type: 'string' },
+    girl: {
+      'enum': Object.keys(Girls)
+    },
     group: { type: 'string' },
     label: { type: 'string' },
-    tags: { $ref: 'Tags'},
+    gerund: { type: 'string' },
+    tags: { $ref: 'Tags' },
     option: { type: 'string' },
     optionsKey: { type: 'string' },
     disabled: {
@@ -147,6 +154,6 @@ Schemas.liveGirl.properties.actions.properties.morning = { $ref: 'liveAction' };
 Schemas.liveGirl.properties.actions.properties.evening = { $ref: 'liveAction' };
 Schemas.liveGirl.properties.actions.required.push('evening', 'history');
 Schemas.liveGirl.properties.actions.properties.history = {
-  'type': 'object',
+  type: 'object',
   additionalProperties: { type: 'integer' }
 };

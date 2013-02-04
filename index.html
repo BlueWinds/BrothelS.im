@@ -54,17 +54,6 @@
   <script src="content/randomPerson/randomPerson.js"></script>
   <script src="modules/owner/owner.js"></script>
 
-  <!--   Uncomment the following section in order to enable schema validation. -->
-  <!--   This will massively slow down game loading and play. -->
-  <!--<script src="modules/game/schema.js"></script>
-  <script src="modules/girls/schema.js"></script>
-  <script src="modules/messages/schema.js"></script>
-  <script src="modules/buildings/schema.js"></script>
-  <script src="modules/missions/schema.js"></script>
-  <script src="modules/actions/schema.js"></script>
-  <script src="modules/events/schema.js"></script>
-  <script src="modules/validator/validate.js"></script>-->
-
   <!-- Actions -->
   <script src="content/actions/chores.js"></script>
   <script src="content/actions/jobs.js"></script>
@@ -96,6 +85,17 @@
   <!-- Misc files -->
   <script src="modules/prostitution/prostitution.js"></script>
   <script src="content/prostitution.js"></script>
+
+  <!--   Uncomment the following section in order to enable schema validation. -->
+  <!--   This will massively slow down game loading and play. -->
+  <!--<script src="modules/game/schema.js"></script>
+  <script src="modules/girls/schema.js"></script>
+  <script src="modules/messages/schema.js"></script>
+  <script src="modules/buildings/schema.js"></script>
+  <script src="modules/missions/schema.js"></script>
+  <script src="modules/actions/schema.js"></script>
+  <script src="modules/events/schema.js"></script>
+  <script src="modules/validator/validate.js"></script>-->
 
   <script>
     $(function() {
@@ -279,7 +279,7 @@
               <label><strong>Pay</strong></label>
               <div class="slider"></div>
               <div id="pay-results">
-                <span class="delta money">-$<<- Math.floor(girl.actions.pay * girl.desiredPay()) >></span>
+                <span class="delta money">$<<- Math.floor(girl.actions.pay * girl.desiredPay()) >></span>
                 <span class="delta happiness"><<- girl.payHappiness() < 0 ? girl.payHappiness() : "+" + girl.payHappiness() >></span>
               </div>
             </div>
@@ -419,37 +419,50 @@
     </div>
   </script>
   <script id="buildings_view_template" type="text/ejs-template">
-    <div id="building-view" name="<<- building.name >>" class="ui-helper-clearfix">
-      <div class="column pct-30 left">
-        <img src="<<- building.image() >>" title="<<= building.description() >>">
-      </div>
-      <div class="column pct-70">
-        <div class="column pct-50 middle">
-          <div><label>Reputation:</label><<- building.S("reputation") >></div>
-          <div><label>Clean:</label><<- building.S("clean") >></div>
-          <div><label>Rooms:</label><<- building.S("rooms") >></div>
-          <div>
-            <label id="daily-label">Daily:</label>
+    <div id="building-view">
+      << buildings.forEach(function(building) { >><div class="building ui-helper-clearfix" name="<<- building.name >>">
+        <div class="column pct-75 left">
+          <div class="info">
+            <h6><<- building.name >></h6>
+            <img src="<<- building.image() >>" title="<<= building.description() >>">
             <div class="daily-delta">
               <<- ejs.render($('#render_delta_template').html(), { delta: building.dailyDelta() }) >>
             </div>
           </div>
+          <ul class="built-rooms"><< $.each(building.rooms, function(index, room) { >>
+            <li class="room" name="<<- room.type >>" index="<<- index >>">
+              <label><<- room.type >></label>
+              << if (room.type == "Bedroom") { >><ul>
+                << if (room.girl) { >>
+                  <li class="girl" name="<<- room.girl >>">
+                    <img src="<<- g.girls[room.girl].image() >>">
+                  </li>
+                << } >>
+              </ul><< } >>
+            </li>
+          << }) >></ul>
         </div>
-        <div class="column pct-50 right center">
-          << var enabledCount = 0; >>
-          << if (building.rooms.length < building.base().maxRooms) { >>
-            <select id='new-room'>
-              << building.potentialRooms()._sort("price").forEach(function(room) { >>
-                << var context = { room: room, building: building } >>
-                << if (room.price <= g.money) { enabledCount += 1; } >>
-                <option value="<<- room.type >>" title="<<= ejs.render(room.description, context) >>" <<- room.price > g.money ? "disabled" : "">>>$<<- room.price + ' - ' + room.label >></option>
-              << }) >>
-            </select>
-            <button id="buy-room" <<- enabledCount ? "" : "disabled">>>Add Room</button>
-          << } >>
+        <div class="column pct-25">
+          <label>Available Rooms</label>
+          <ul class="available-rooms">
+            << building.potentialRooms()._sort("price").forEach(function(room) { >>
+              <li class="room<<- room.price > g.money ? ' disabled' : ''>>" name="<<- room.type >>">
+                <label>
+                  <<- room.type >> - $<<- room.price >>
+                </label>
+                <p><<- room.description >></p>
+              </li>
+            << }) >>
+          </ul>
         </div>
-        <div id="rooms" class="ui-helper-clearfix">
-        </div>
+      </div><< }) >>
+      <div>
+        <h6>Inn</h6>
+        <ul id="inn"><< inn_girls.forEach(function(girl) { >>
+          <li class="girl" name="<<- girl.name >>">
+            <img src="<<- girl.image() >>">
+          </li>
+        << }) >></ul>
       </div>
     </div>
   </script>
@@ -460,12 +473,9 @@
           <a id="buy-building">Buy Building</a>
         </h3>
       << } >>
-      << if (buildings.length) { >>
-        <h3 class="center"><a id="sell-building">Sell Building</a></h3>
-      << } >>
       << buildings.forEach(function(building) { >>
         <div class="ui-helper-clearfix no-cursor building" name="<<- building.name >>">
-          <div class="column pct-20">
+          <div class="column pct-20 left">
             <img src="<<- building.image() >>">
           </div>
           <div class="column pct-40 middle">

@@ -22,14 +22,13 @@ Schemas.buildingConditions = {
   description: 'A set of conditions to match against a building.',
   properties: {
     name: {
-      type: 'string'
+      'enum': Object.keys(Buildings)
     },
     status: {
-      type: 'string',
       'enum': ['Owned', 'For Sale', 'Town', 'Gone']
     },
     room: {
-      type: 'string',
+      'enum': Object.keys(Rooms),
       description: 'This condition will only match if the building has one or more rooms of the given type.'
     }
   },
@@ -51,15 +50,13 @@ Schemas.parsableBuildingConditions = {
   description: 'Like normal building conditions, except "+3" or "-3" are acceptable values.',
   properties: {
     name: {
-      type: 'string'
+      'enum': Object.keys(Buildings)
     },
     status: {
-      type: 'string',
       'enum': ['Owned', 'For Sale', 'Town', 'Gone']
     },
     room: {
-      type: 'string',
-      description: 'This condition will only match if the building has one or more rooms of the given type.'
+      'enum': Object.keys(Rooms)
     }
   },
   patternProperties: {
@@ -76,7 +73,7 @@ Schemas.parsableBuildingConditions = {
 };
 
 Schemas.girlConditions.properties.building = {
-  anyOne: [ { $ref: 'buildingConditions' } ],
+  anyOf: [ { $ref: 'buildingConditions' } ],
   description: 'Matched against the building the girl is living in. If present and she\'s not living anywhere, then it fails.'
 };
 
@@ -87,10 +84,7 @@ Schemas.Room = {
   ],
   properties: {
     type: { type: 'string' },
-    description: {
-      type: 'string',
-      description: 'Text replacement is available with both "room" and "building" keys.'
-    },
+    description: { type: 'string' },
     price: {
       type: 'integer',
       description: 'The price to add this room. Also added to the price of the building when buying or selling.'
@@ -118,7 +112,9 @@ Schemas.Room = {
 Schemas.liveRoom = {
   required: ['type'],
   properties: {
-    type: { type: 'string' }
+    type: {
+      'enum': Object.keys(Rooms)
+    }
   }
 };
 
@@ -197,7 +193,9 @@ Schemas.liveBuilding = {
     _class: {
       'enum': ['Building']
     },
-    name: { type: 'string' },
+    name: {
+      'enum': Object.keys(Buildings)
+    },
     status: {
       'enum': ['Owned', 'For Sale', 'Town', 'Gone']
     },
@@ -228,6 +226,7 @@ Schemas.liveBuilding = {
 Schemas.Game.required.push('buildings', 'maxBuildings');
 Schemas.Game.properties.buildings = {
   type: 'object',
+  required: Object.keys(Buildings),
   additionalProperties: { $ref: 'liveBuilding' }
 };
 Schemas.Game.properties.maxBuildings = {
