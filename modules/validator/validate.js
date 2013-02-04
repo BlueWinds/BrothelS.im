@@ -5,10 +5,16 @@ e.Ready.push(function(done) {
   }
   classes.forEach(function(type) {
     for (var item in window[type + 's']) {
-      var success = tv4.validate(window[type + 's'][item], type);
+      var obj = window[type + 's'][item];
+      var success = tv4.validate(obj, type);
       if (!success) {
+        var error = $('<div>');
+        $('<div>').html(type + ' - ' + (obj.name || obj._id)).appendTo(error);
+        $('<div>').html(tv4.error.message + ':').appendTo(error);
+        $('<div>').html((obj.name || obj._id) + tv4.error.dataPath).appendTo(error);
+        $('#error').append(error);
         console.log(tv4.error);
-        console.log(window[type + 's'][item]);
+        console.log(obj);
         return;
       }
     }
@@ -18,6 +24,12 @@ e.Ready.push(function(done) {
 
 e.Autorender.push(function(element, done) {
   if (!tv4.validate(g, 'Game')) {
+    var error = $('<div>');
+    $('<div>').html('Live Game');
+    $('<div>').html(tv4.error.message).appendTo(error);
+    $('<div>').html('g' + tv4.error.dataPath).appendTo(error);
+    $('<div>').html(tv4.error.schemaPath).appendTo(error);
+    $('#error').append(error);
     console.log(tv4.error);
     console.log(g);
   }
