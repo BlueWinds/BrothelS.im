@@ -6,9 +6,9 @@ Schemas.Stat = {
 
 Schemas.statDelta = {
   type: 'number',
-  default: 0,
+  'default': 0,
   minimum: -100,
-  maximum: 100,
+  maximum: 100
 };
 
 Schemas.parsableStat = {

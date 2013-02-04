@@ -188,12 +188,3 @@ e.GameRender.push(function(done) {
 
   done();
 });
-
-(function() {
-  var originalPay = Girl.prototype.desiredPay;
-  Girl.prototype.desiredPay = function() {
-    if (!g.missionsDone.firstMoney) { return 0; }
-    var pay = originalPay.call(this);
-    return this.building() ? pay : pay + Building.config.noRoomDailyCost;
-  };
-})();

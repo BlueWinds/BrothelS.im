@@ -17,8 +17,7 @@ e.Ready.push(function(done) {
 });
 
 e.Autorender.push(function(element, done) {
-  var success = tv4.validate(g, 'Game');
-  if (!success) {
+  if (!tv4.validate(g, 'Game')) {
     console.log(tv4.error);
     console.log(g);
   }
@@ -28,17 +27,13 @@ e.Autorender.push(function(element, done) {
 (function() {
   var oldApply = Resolvable.prototype.applyResults;
   Resolvable.prototype.applyResults = function(results, done, context) {
-    if (done) {
-      var success = tv4.validate(results, 'Result');
-      if (!success) {
-        console.log(tv4.error);
-        console.log(this);
-        console.log(results);
-      }
+    if (!tv4.validate(results, 'Result')) {
+      console.log(tv4.error);
+      console.log(this);
+      console.log(results);
     }
     if (context) {
-      var success = tv4.validate(context, 'Context');
-      if (!success) {
+      if (!tv4.validate(context, 'Context')) {
         console.log(tv4.error);
         console.log(this);
         console.log(context);

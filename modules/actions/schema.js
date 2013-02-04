@@ -64,10 +64,6 @@ Schemas.Action = {
       description: 'Tags represent where this action occurs, though they can also be more intangible properties, such as "using magic" or "alone". The location-based tags should generally add up to 1 (though this is not a hard requirement). If tags is ommited entirely, the action cannot trigger any events. Use this if the action is one-time, important, or otherwise really shouldn\'t be interrupted by random interference.',
       'default': {}
     },
-    ownerParticipation: {
-      'enum': [true],
-      description: 'This action requires the player character to accompany the girl - something they can do only once per time-slot each day.'
-    },
     allDay: {
       'enum': [true],
       description: 'This action takes both the morning and evening slots.'
@@ -100,6 +96,14 @@ Schemas.Action = {
     option: {
       type: 'string',
       description: 'The default option selected before the user chooses one. Defaults to the first option in the list.'
+    },
+    ownerParticipation: {
+      'enum': [true],
+      description: 'This action requires the player character to accompany the girl - something they can do only once per time-slot each day.'
+    },
+    awayFromHome: {
+      'enum': [true],
+      description: "This action takes the girl away from home overnight (you'll generally only apply this to an allDay or evening-only action) - any deltas from the building she's in won't apply (such as the daily clean/dirty  one), and she won't have to pay for a room at the inn if she's living there."
     }
   },
   additionalProperties: false
@@ -134,10 +138,16 @@ Schemas.liveAction = {
     disabled: {
       type: ['null', 'string']
     },
-    ownerParticipation: {
+    allDay: {
       'enum': [true]
     },
-    allDay: {
+    awayFromHome: {
+      'enum': [true]
+    },
+    locked: {
+      'enum': [true]
+    },
+    ownerParticipation: {
       'enum': [true]
     }
   },
@@ -156,4 +166,9 @@ Schemas.liveGirl.properties.actions.required.push('evening', 'history');
 Schemas.liveGirl.properties.actions.properties.history = {
   type: 'object',
   additionalProperties: { type: 'integer' }
+};
+
+Schemas.Result.properties.lock = {
+  type: 'boolean',
+  description: 'A locked action disables all others until its Results include the "unlock" key, usually used for scripting multi-day actions. Set this to true or false to unlock the current action. Lock should ONLY be found in results returned from actions, though this is not currently machine-validated.'
 };

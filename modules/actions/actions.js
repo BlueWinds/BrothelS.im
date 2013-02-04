@@ -6,6 +6,7 @@ e.GameUpgrade03.push(function(game, next) {
     delete girl.actions.morningOption;
     delete girl.actions.eveningOption;
   }
+  delete g.ownerAction;
   next();
 });
 
@@ -26,7 +27,7 @@ e.Ready.push(function(done) {
 
 e.GirlsPostMorning.push(function(done) {
   g.girls._filter('status', 'Hired').forEach(function(girl) {
-    girl.verifyActions('evening');
+    girl.verifyAction('evening');
   });
   done();
 });
@@ -44,14 +45,16 @@ e.GirlNew.push(function(girl) {
 
 e.GamePostDay.push(function(done) {
   g.girls._filter('status', 'Hired').forEach(function(girl) {
-    girl.verifyActions(undefined, true);
+    girl.verifyAction('morning', true);
+    girl.verifyAction('evening', true);
   });
   done();
 });
 
 e.GamePreRender.push(function(done) {
   g.girls._filter('status', 'Hired').forEach(function(girl) {
-    girl.verifyActions();
+    girl.verifyAction('morning');
+    girl.verifyAction('evening');
   });
   done();
 });
@@ -119,7 +122,9 @@ e.GameRender.push(function(done) {
 
 e.GirlRunTime.push(function(girl, time, done) {
   if (girl.status == 'Hired' && (time == 'evening' || !girl.actions[time].allDay)) {
-    girl.actions[time].applyResults(done);
+    girl.actions[time].getResults(function(results) {
+      girl.actions[time].applyResults(results, done);
+    });
     return;
   }
   done();

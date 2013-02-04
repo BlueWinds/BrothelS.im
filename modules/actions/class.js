@@ -48,9 +48,13 @@ Action.prototype.setOption = function(option) {
   }
 };
 
-Action.prototype.checkDisabled = function() {
+Action.prototype.checkDisabled = function(cond) {
   var context = this.context();
-  var cond = this.base().enableConditions;
+  var real_action = context.girl.actions[this.time];
+  if (real_action.locked) {
+    return context.girl.name + ' cannot ' + this.label + ' until she\'s done ' + real_action.gerund + '.';
+  }
+  cond = cond || this.base().enableConditions;
   if (!cond) { return; }
   var disabled;
   if (cond.min) {
@@ -89,10 +93,40 @@ Action.prototype.checkDisabled = function() {
     disabled = context.building.compare(cond.building, true);
     if (disabled) { return disabled; }
   }
+  real_action = g.ownerAction(this.time);
+  if (real_action && this.girl !== real_action.girl) {
+    return 'You are already ' + real_action.gerund + ' with ' + action.girl + ' in the ' + this.time;
+  }
   if (this.base().disable) {
     return this.base().disable.call(this, context);
   }
 };
+
+Action.prototype.applyResults = function(results, done, context) {
+  context = context || this.context();
+  if (results.lock === true) {
+    this.locked = true;
+    if (this.allDay) {
+      context.girl.actions['morning'].locked = true;
+    }
+  } else if (results.lock === false) {
+    delete this.locked;
+    if (this.allDay) {
+      delete context.girl.actions['morning'].locked;
+    }
+  }
+  Resolvable.prototype.applyResults.call(this, results, done, context);
+};
+
+(function() {
+  // This goes here instead of in Buildings, because otherwise we'd just be writing one function, then undoing the changes under some circumstances with a second, more advanced copy of the exact same one.
+  var originalPay = Girl.prototype.desiredPay;
+  Girl.prototype.desiredPay = function() {
+    if (!g.missionsDone.firstMoney) { return 0; }
+    var pay = originalPay.call(this);
+    return this.building() || this.awayFromHome() ? pay : pay + Building.config.noRoomDailyCost;
+  };
+})();
 
 Girl.actions = function(time) {
   var list = {};
@@ -127,29 +161,17 @@ Girl.prototype.setAction = function(action) {
   this.actions[action.time] = action;
 };
 
-Girl.prototype.verifyActions = function(time, rebuild) {
-  var m, e;
-  if (!time || time == 'morning') {
-    m = this.actions.morning;
-    m = m && m.label && m.checkConditions() && !m.checkDisabled();
-    if (!m) {
-      this.setAction(this.action('Rest', { time: 'morning' }));
-    }
-  }
-  if (!time || time == 'evening') {
-    e = this.actions.evening;
-    e = e && e.label && e.checkConditions() && !e.checkDisabled();
-    if (!e) {
-      this.setAction(this.action('Rest', { time: 'evening' }));
-    }
+Girl.prototype.verifyAction = function(time, rebuild) {
+  var a = this.actions[time];
+  if (a.locked) { return; }
+  a = a && a.label && a.checkConditions() && !a.checkDisabled();
+  if (!a) {
+    this.setAction(this.action('Rest', { time: time }));
   }
   if (rebuild) {
-    m = this.actions.morning;
-    e = this.actions.evening;
-    this.actions.morning = this.action(m._id, {time: 'morning'});
-    this.actions.evening = this.action(e._id, {time: 'evening'});
-    if (m.option) { this.actions.morning.setOption(m.option); }
-    if (e.option) { this.actions.evening.setOption(e.option); }
+    a = this.actions[time];
+    this.setAction(this.action(a._id, {time: time}));
+    if (a.option) { this.actions[time].setOption(a.option); }
   }
 };
 
@@ -174,4 +196,29 @@ Girl.prototype.potentialActions = function(time) {
     }
   }
   return actions;
+};
+
+Girl.prototype.awayFromHome = function() {
+  return this.actions.morning.awayFromHome || this.actions.evening.awayFromHome;
+};
+
+Game.prototype.ownerAction = function(time) {
+  var action;
+  g.girls._filter('status', 'Hired').forEach(function(girl) {
+    if (girl.actions[time] && girl.actions[time].ownerParticipation) {
+      action = girl.actions[time];
+    }
+  });
+  return action;
+};
+
+// Yep, completely overwriting the original function with this slightly more advanced one.
+Building.prototype.girls = function() {
+  var girls = {};
+  this.rooms._accumulate('girl').forEach(function(name) {
+    if (!g.girls[name].awayFromHome()) {
+      girls[name] = g.girls[name];
+    }
+  });
+  return girls;
 };

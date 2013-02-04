@@ -42,7 +42,9 @@ Mission.prototype.checkDay = function(done) {
     mission.setContext(result);
     delete g.missions[mission._id];
     g.missionsDone[mission._id] = true;
-    mission.applyResults(done);
+    mission.getResults(function(results) {
+      mission.applyResults(results, done);
+    });
     return;
   }
   if (mission.display && conditions.max && conditions.max.day && conditions.max.day - 1 == g.day) {

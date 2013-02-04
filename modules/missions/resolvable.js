@@ -179,13 +179,6 @@ Resolvable.prototype.applyResults = function(results, done, context) {
   var series = [function(next) {
     e.invokeAll('ApplyResults', results, context, next);
   }];
-  if (!done) {
-    done = results;
-    this.getResults(function(results, context) {
-      res.applyResults(results, done, context);
-    });
-    return;
-  }
   var changes = [];
   context = context || this.context();
   if (context.girl) {
