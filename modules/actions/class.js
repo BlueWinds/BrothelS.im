@@ -94,7 +94,7 @@ Action.prototype.checkDisabled = function(cond, context) {
     if (disabled) { return disabled; }
   }
   real_action = g.ownerAction(this.time);
-  if (real_action && this.girl !== real_action.girl) {
+  if (real_action && this.girl !== real_action.girl && this.ownerParticipation) {
     return 'You are already ' + real_action.gerund + ' with ' + this.girl + ' in the ' + this.time;
   }
   if (this.base().disable) {
