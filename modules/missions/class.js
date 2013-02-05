@@ -15,7 +15,7 @@ Mission.create = function(_id, context) {
     mission.end = mission.parseConditions(mission.end, context);
   }
   if (mission.display) {
-    message = new Message(mission.display, mission.context());
+    var message = new Message(mission.display, mission.context());
     // We save the rendered strings, since they probably contain context-sensitive data, but not the full Message object.
     mission.display.label = message.label;
     mission.display.image = message.image;

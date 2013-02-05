@@ -130,7 +130,7 @@ Girls.Sakuya = {
       display: {
         label: 'Something to Say',
         image: 'content/girls/Sakuya/images/Study3.jpg',
-        text: '<blockquote>...</blockquote> Sakuya is on the verge of saying something when she thinks better of it and turns away, pretending that it was nothing. Perhaps if you earned her trust a bit more, she\'d share what was on her mind...<br><br><em>(She needs <<- T("obedience") >> 60 and <<- T("modesty") >> 50 or less before she\'ll speak up)</em>',
+        text: '<blockquote>...</blockquote> Sakuya is on the verge of saying something when she thinks better of it and turns away, pretending that it was nothing. Perhaps if you earned her trust a bit more, she\'d share what was on her mind...<br><br><em>(She needs <<- __("obedience") >> 60 and <<- __("modesty") >> 50 or less before she\'ll speak up)</em>',
         group: 'Sakuya Speaks',
         weight: -1
       },
@@ -203,7 +203,7 @@ Girls.Sakuya = {
         label: 'Train Sakuya',
         group: 'Enter the Devil',
         image: 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg',
-        text: "<blockquote>Sakuya has put me through a lot of trouble. I want you to make sure she never does it again - much more <<- T('obedience', 'adj') >> than she used to be, but still <<- T('modesty', 'adj') >>. I'll be back on day <strong></strong> to collect her. I will pay very well if you succeed. Failure will be punished.</blockquote> You rub your wrist where she held it, remembering the painfully strong grip that you're sure could have crushed bone if she'd chosen.<br><br>When you tell the story to Sakuya, she simply repeats that if you want her to keep working for you, you should give her plenty of time to practice magic. She's conflicted - returning home does have a certain appeal, but the Mistress didn't always treat her well.<br><br><em>Raise Sakuya's <<- T('obedience') >> to 90 and <<- T('modesty') >> to 75 if you want to please the Scarlet Devil, or raise her Magic to at least 50 (by having her Clean) if you plan to refuse to hand Sakuya over. She will return at the end of <strong>day <<= mission.end.min.day >></strong>.</em>",
+        text: "<blockquote>Sakuya has put me through a lot of trouble. I want you to make sure she never does it again - much more <<- __('obedience', 'adj') >> than she used to be, but still <<- __('modesty', 'adj') >>. I'll be back on day <strong></strong> to collect her. I will pay very well if you succeed. Failure will be punished.</blockquote> You rub your wrist where she held it, remembering the painfully strong grip that you're sure could have crushed bone if she'd chosen.<br><br>When you tell the story to Sakuya, she simply repeats that if you want her to keep working for you, you should give her plenty of time to practice magic. She's conflicted - returning home does have a certain appeal, but the Mistress didn't always treat her well.<br><br><em>Raise Sakuya's <<- __('obedience') >> to 90 and <<- __('modesty') >> to 75 if you want to please the Scarlet Devil, or raise her Magic to at least 50 (by having her Clean) if you plan to refuse to hand Sakuya over. She will return at the end of <strong>day <<= mission.end.min.day >></strong>.</em>",
         weight: -1
       },
       end: {

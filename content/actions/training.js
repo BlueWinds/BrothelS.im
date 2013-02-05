@@ -2,7 +2,7 @@
 Actions.Exercise = {
   label: 'Exercise',
   group: 'Training',
-  description: '<<= girl.name >> will spend time jogging around the city and otherwise exercising outdoors to increase her <<- T("constitution") >>.',
+  description: '<<= girl.name >> will spend time jogging around the city and otherwise exercising outdoors to increase her <<- __("constitution") >>.',
   enableConditions: {
     girl: {
       min: { endurance: 15 }
@@ -61,7 +61,7 @@ Actions.Exercise = {
 Actions.Study = {
   label: 'Study',
   group: 'Training',
-  description: '<<= girl.name >> will attend courses at the local university to increase her <<- T("intelligence") >>.',
+  description: '<<= girl.name >> will attend courses at the local university to increase her <<- __("intelligence") >>.',
   conditions: {
     missions: { charismaAndIntelligence: 3 }
   },
@@ -149,7 +149,7 @@ Actions.Study = {
 Actions.Expose = {
   label: 'Expose',
   group: 'Training',
-  description: '<<= girl.name >> will wander the streets, pushing her comfort level in clothing, flirting with strangers, and all around acting <<- T("-modesty", "adj") >>.',
+  description: '<<= girl.name >> will wander the streets, pushing her comfort level in clothing, flirting with strangers, and all around acting <<- __("-modesty", "adj") >>.',
   conditions: {
     missions: { obedienceAndModesty: 3 }
   },
@@ -291,10 +291,10 @@ Actions.OD = {
   tags: { indoors: 1 },
   ownerParticipation: true,
   options: {
-    soft: T('soft'),
-    hard: T('hard'),
-    anal: T('anal'),
-    fetish: T('fetish')
+    soft: __('soft'),
+    hard: __('hard'),
+    anal: __('anal'),
+    fetish: __('fetish')
   },
   variants: function(context, done) {
     done(this.results[this.option]);
@@ -362,7 +362,7 @@ Actions.OD = {
 Actions.Lockdown = {
   label: 'Lockdown',
   group: 'Chores',
-  description: 'She will be bound and gagged in the dungeon to increase her <<- T("obedience") >>. This action takes all day.',
+  description: 'She will be bound and gagged in the dungeon to increase her <<- __("obedience") >>. This action takes all day.',
   allDay: true,
   conditions: {
     min: { buildings: 1 }

@@ -273,7 +273,7 @@
         <div class="column pct-55 middle">
           << Girl.stats.forEach(function(stat) { >>
             <div>
-              <label><<- T(stat) >></label>
+              <label><<- __(stat) >></label>
               <<- girl.S(stat) >>
             </div>
           << }) >>
@@ -292,17 +292,17 @@
           << Girl.sex.forEach(function(sex) { >>
             <div>
               <label class="checkbox <<- girl.actions[sex] ? 'checked' : '' >>" id="<<- sex >>">
-                <<- T(sex) >>
+                <<- __(sex) >>
               </label>
             </div>
             <div>
-              <label><<- T("libido") >>:</label>
+              <label><<- __("libido") >>:</label>
               <span class="<<- sex >> libido">
                 <<- girl.S(sex + "Libido") >>
               </span>
             </div>
             <div>
-              <label><<- T("experience") >>:</label>
+              <label><<- __("experience") >>:</label>
               <span class="<<- sex >> experience">
                 <<- girl.S(sex + "Experience") >>
               </span>

@@ -87,7 +87,7 @@ Missions.avengeGuardRape = {
     group: 'Investigate City Guard',
     weight: -1,
     image: 'content/missions/evilGuard.jpg',
-    text: "Before you can go any further, you first need some information. Who were <<- girl.name >>'s attackers? She has a rough description of them, but you need names. The city is too large to try and find them using only a description of their cocks, their hair color and the fact that they work as city guards. It would also be best to get a better idea of the exact laws pertaining to the situation - you'll probably end up breaking a few, but better to know what you're getting into.<br><br><em><<- girl.name >> will need to <strong>Study</strong> until her <<- T('intelligence') >> is at least <<- mission.end.girl.min.intelligence >>, as well as spending some time <strong>Investigating the Guards</strong>.</em>"
+    text: "Before you can go any further, you first need some information. Who were <<- girl.name >>'s attackers? She has a rough description of them, but you need names. The city is too large to try and find them using only a description of their cocks, their hair color and the fact that they work as city guards. It would also be best to get a better idea of the exact laws pertaining to the situation - you'll probably end up breaking a few, but better to know what you're getting into.<br><br><em><<- girl.name >> will need to <strong>Study</strong> until her <<- __('intelligence') >> is at least <<- mission.end.girl.min.intelligence >>, as well as spending some time <strong>Investigating the Guards</strong>.</em>"
   },
   end: {
     girl: {

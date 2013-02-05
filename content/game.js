@@ -1,4 +1,4 @@
-"use strict";
+/*global Game */
 Game.config = {
   startMoney: 0,
   gameLength: 720,

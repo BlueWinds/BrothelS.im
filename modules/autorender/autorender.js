@@ -127,7 +127,6 @@ e.Autorender.push(function(element, done) {
 });
 
 $(function() {
-  Globalize.cultures.en.numberFormat.currency.decimals = 0;
   $.ui.dialog.prototype.options.show = 'fade';
   $.ui.dialog.prototype.options.hide = 'fade';
   $.ui.dialog.prototype.options.modal = true;

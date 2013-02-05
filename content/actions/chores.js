@@ -2,7 +2,7 @@
 Actions.Rest = {
   label: 'Rest',
   group: 'Chores',
-  description: 'Giving a girl time off increases both <<- T("endurance") >> and <<- T("happiness") >>.',
+  description: 'Giving a girl time off increases both <<- __("endurance") >> and <<- __("happiness") >>.',
   tags: { indoors: 1 },
   results: [
     {
@@ -65,7 +65,7 @@ Actions.Clean = {
 Actions.Talk = {
   label: 'Talk',
   group: 'Chores',
-  description: 'You and <<= girl.name >> will talk, do small chores together, and otherwise spend some time together - good not only for a morale boost for you both, but it will also give you a chance to increase her <<= T("obedience") >>',
+  description: 'You and <<= girl.name >> will talk, do small chores together, and otherwise spend some time together - good not only for a morale boost for you both, but it will also give you a chance to increase her <<= __("obedience") >>',
   tags: { indoors: 1 },
   conditions: {
     missions: {

@@ -1,3 +1,4 @@
+/*global console */
 "use strict";
 e.Ready.push(function(done) {
   var classes = ['Girl', 'Room', 'Building', 'Mission', 'Action', 'Event'];

@@ -118,7 +118,7 @@ Girl.prototype._compare = function(delta) {
     }
     for (stat in new_d.min) {
       if (this[stat] < new_d.min[stat]) {
-        return this.name + ' does not have ' + T(stat) + ' ' + new_d.min[stat];
+        return this.name + ' does not have ' + __(stat) + ' ' + new_d.min[stat];
       }
     }
   }
@@ -133,7 +133,7 @@ Girl.prototype._compare = function(delta) {
     delete new_d.max.specialRules;
     for (stat in new_d.max) {
       if (this[stat] > new_d.max[stat]) {
-        return this.name + ' does not have ' + T(stat) + ' ' + new_d.max[stat] + ' or less.';
+        return this.name + ' does not have ' + __(stat) + ' ' + new_d.max[stat] + ' or less.';
       }
     }
   }

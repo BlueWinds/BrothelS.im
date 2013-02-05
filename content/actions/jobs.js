@@ -50,7 +50,7 @@ Actions.Streetwalk =  {
     // The message if she refuses.
     uncooperative: 'But she was uncooperative and <strong>refused</strong>. He left unsatisfied without paying anything.',
     // Message for each customer she services.
-    customerMessage: '<<= girl.name >> met <<= customer.name + " the " + customer.profession >>, looking for <<- T(customer.sex[0]) >> with a girl who was <<- customer.wants.slice(0, 2)._toString("adj") >>. They agreed on <strong><<- T(sex) >></strong>.<br><br><<- result >>',
+    customerMessage: '<<= girl.name >> met <<= customer.name + " the " + customer.profession >>, looking for <<- __(customer.sex[0]) >> with a girl who was <<- customer.wants.slice(0, 2)._toString("adj") >>. They agreed on <strong><<- __(sex) >></strong>.<br><br><<- result >>',
     sexResults: {
       soft: [
         'They kissed passionately for a while, then he blushed, mumbled about the time and left in a hurry.',
@@ -118,7 +118,7 @@ Actions.Whore = {
     // Reuse the uncooperative message from Streetwalking.
     uncooperative: Actions.Streetwalk.uncooperative,
     // Message for each customer serviced.
-    customerMessage: '<<= customer.name + " the " + customer.profession >> wanted <<- T(customer.sex[0]) >> with a girl who was <<- customer.wants.slice(0, 2)._toString("adj") >>. He chose <<= girl.name >>, and they agreed on <strong><<- T(sex) >></strong>.<br><br><<- result >>',
+    customerMessage: '<<= customer.name + " the " + customer.profession >> wanted <<- __(customer.sex[0]) >> with a girl who was <<- customer.wants.slice(0, 2)._toString("adj") >>. He chose <<= girl.name >>, and they agreed on <strong><<- __(sex) >></strong>.<br><br><<- result >>',
     sexResults: {
       soft: [
         'They kissed awkwardly for a minute until it became apparent he was completely inexperienced. She took the lead and guided him in how to pleasure a woman, before finishing him off with a blow-job.',
@@ -154,7 +154,7 @@ Actions.Whore = {
 Actions.Acolyte = {
   label: 'Acolyte',
   group: 'Jobs',
-  description: '<<= girl.name >> will work in a temple, serving the poor, maintaining the property and generally engaging in holy work. This will raise her <<- T("modesty") >>, though it doesn\'t pay.',
+  description: '<<= girl.name >> will work in a temple, serving the poor, maintaining the property and generally engaging in holy work. This will raise her <<- __("modesty") >>, though it doesn\'t pay.',
   conditions: {
     missions: { obedienceAndModesty: 3 }
   },
@@ -265,7 +265,7 @@ Actions.Acolyte = {
 Actions.Advertise = {
   label: 'Advertise',
   group: 'Jobs',
-  description: "<<= girl.name >> will stand in front of a building, talking to strangers and trying to get them to come inside for a visit. This will increase her <<- T('charisma') >><< if (g.buildings._filter('status', 'Owned').length) { >> and the building's <<- T('reputation') >><< } else { >> and the inn's owner will pay you a small amount.<< } >>.",
+  description: "<<= girl.name >> will stand in front of a building, talking to strangers and trying to get them to come inside for a visit. This will increase her <<- __('charisma') >><< if (g.buildings._filter('status', 'Owned').length) { >> and the building's <<- __('reputation') >><< } else { >> and the inn's owner will pay you a small amount.<< } >>.",
   conditions: {
     missions: { charismaAndIntelligence: 3 }
   },

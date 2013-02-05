@@ -108,14 +108,14 @@ Building.prototype._compare = function(delta) {
   if (delta.min) {
     for (stat in delta.min) {
       if (this[stat] < delta.min[stat]) {
-        return this.name + ' does not have ' + T(stat) + ' ' + delta.min[stat];
+        return this.name + ' does not have ' + __(stat) + ' ' + delta.min[stat];
       }
     }
   }
   if (delta.max) {
     for (stat in delta.min) {
       if (this[stat] > delta.max[stat]) {
-        return this.name + ' does not have ' + T(stat) + ' ' + delta.min[stat] + ' or less.';
+        return this.name + ' does not have ' + __(stat) + ' ' + delta.min[stat] + ' or less.';
       }
     }
   }

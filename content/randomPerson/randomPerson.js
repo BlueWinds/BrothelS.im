@@ -1,4 +1,4 @@
-"use strict";
+/*global RandomPeople */
 Object.defineProperty(RandomPeople, '_classes', { value: [
   'Very Low Class',
   'Low Class',

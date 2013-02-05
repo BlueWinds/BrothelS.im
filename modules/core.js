@@ -239,7 +239,7 @@ Object.defineProperty(Object.prototype, "_toString", {
     var items = [];
     for (var key in this) {
       // A bit of a circular dependency here - the T function is defined in modules/game/game.js, and relies on information provided in content/game.js to be actually useful. Cheating, I know, but nothing can render to the screen until game.js is loaded anyway, so it's not too bad.
-      var t = T(this[key], form);
+      var t = __(this[key], form);
       if (items.indexOf(t) == -1) {
         items.push(t);
       }
