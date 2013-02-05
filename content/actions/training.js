@@ -392,7 +392,8 @@ Actions.Lockdown = {
         endurance: -12,
         obedience: 5,
         constitution: -0.5,
-        happiness: -8
+        happiness: -8,
+        intelligence: -4
       }
     },
     {
@@ -406,7 +407,8 @@ Actions.Lockdown = {
         endurance: -12,
         obedience: 5,
         constitution: -0.5,
-        happiness: -8
+        happiness: -8,
+        intelligence: -4
       }
     }
   ]

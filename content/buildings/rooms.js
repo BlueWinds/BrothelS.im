@@ -1,7 +1,7 @@
 "use strict";
 Rooms.Dungeon = {
   price: 1200,
-  description: 'Assign girls to Lockown to increase their Obedience.',
+  description: 'Assign girls to Lockown to increase their Obedience and decrease Intelligence.',
   maxInBuilding: 1
 };
 
