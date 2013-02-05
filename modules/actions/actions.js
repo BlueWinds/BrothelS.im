@@ -1,3 +1,4 @@
+"use strict";
 e.GameUpgrade03.push(function(game, next) {
   for (var name in g.girls) {
     var girl = g.girls[name];

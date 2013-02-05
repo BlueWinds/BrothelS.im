@@ -1,3 +1,4 @@
+"use strict";
 e.Autorender = [];
 e.Autorender.push(function(element, done) {
   $('button, a.button', element).button();

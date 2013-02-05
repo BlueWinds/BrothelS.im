@@ -1,3 +1,4 @@
+"use strict";
 Schemas.Context = {
   type: 'object',
   properties: {

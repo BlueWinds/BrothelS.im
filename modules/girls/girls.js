@@ -1,3 +1,4 @@
+"use strict";
 var Girls = {};
 e.GirlNew = [];
 e.GirlsPostMorning = [];

@@ -1,3 +1,4 @@
+"use strict";
 function Mission(obj) {
   Resolvable.call(this, obj);
 }

@@ -1,3 +1,4 @@
+"use strict";
 function Action(obj) {
   Resolvable.call(this, obj);
   delete this.enableConditions;
@@ -103,9 +104,6 @@ Action.prototype.checkDisabled = function(cond, context) {
 };
 
 Action.prototype.applyResults = function(results, done, context) {
-  if (!results) {
-    console.log(this);
-  }
   context = context || this.context();
   if (results.lock === true) {
     this.locked = true;

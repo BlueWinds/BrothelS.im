@@ -1,4 +1,5 @@
-RandomPeople = {};
+"use strict";
+var RandomPeople = {};
 
 e.GameUpgrade03.push(function(game, next) {
   if (g.missions.specialParty) {

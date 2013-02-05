@@ -1,3 +1,4 @@
+"use strict";
 Schemas.Context.properties.action = { $ref: 'liveAction' };
 
 Schemas.Tags = {

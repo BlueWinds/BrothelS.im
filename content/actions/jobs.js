@@ -1,3 +1,4 @@
+"use strict";
 Actions.Streetwalk =  {
   label: 'Streetwalk',
   group: 'Jobs',

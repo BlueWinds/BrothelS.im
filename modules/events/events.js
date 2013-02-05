@@ -1,3 +1,4 @@
+"use strict";
 var Events = {};
 e.GameUpgrade04.push(function(game, next) {
   for (var name in game.girls) {

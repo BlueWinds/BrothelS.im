@@ -1,3 +1,4 @@
+"use strict";
 Buildings.Theater = {
   image: 'content/buildings/Theater/Base.jpg',
   clean: 80,

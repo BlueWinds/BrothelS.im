@@ -1,3 +1,4 @@
+"use strict";
 var Game = function(obj) {
   g = this;
   this._class = 'Game';

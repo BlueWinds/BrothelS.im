@@ -1,3 +1,4 @@
+"use strict";
 Actions.attendParty = {
   label: 'Escort for <<= g.missions.specialParty.special.client.name >>',
   group: 'Jobs',

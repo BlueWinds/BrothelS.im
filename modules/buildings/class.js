@@ -1,3 +1,4 @@
+"use strict";
 function Building(obj) {
   $.extend(this, obj);
   // Add missing stats from base

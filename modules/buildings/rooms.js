@@ -1,4 +1,5 @@
-Rooms = {};
+"use strict";
+var Rooms = {};
 
 e.Ready.push(function(done) {
   $.each(Rooms, function(type, room) {

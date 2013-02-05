@@ -1,3 +1,4 @@
+"use strict";
 Girls['Dark Magician Girl'] = {
   description: "<p>An inhabitant of a different dimension, Dark Magician Girl ended up stranded in our this world when a space-time anomaly devoured her and every one in the vicinity. Lost in an unknown land and without anyone she knew and could rely on, she decided to start looking for a job. Any job, really.</p>",
   status: 'For Hire',

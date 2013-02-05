@@ -1,3 +1,4 @@
+"use strict";
 Schemas.Game = {
   type: 'object',
   required: [

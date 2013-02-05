@@ -1,3 +1,4 @@
+"use strict";
 e.Ready.push(function(done) {
   var classes = ['Girl', 'Room', 'Building', 'Mission', 'Action', 'Event'];
   for (var schema in Schemas) {

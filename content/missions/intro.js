@@ -1,3 +1,4 @@
+"use strict";
 Mission.introMissions = {
   introConstitution: true,
   obedienceAndModesty: true,

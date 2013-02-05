@@ -1,3 +1,4 @@
+"use strict";
 function Resolvable(obj) {
   $.extend(true, this, obj);
   delete this.initialize;

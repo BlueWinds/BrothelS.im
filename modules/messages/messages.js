@@ -1,3 +1,4 @@
+"use strict";
 e.GameUpgrade03.push(function(game, next) {
   var messages = game.messages;
   game.messages = [];

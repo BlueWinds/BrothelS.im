@@ -1,3 +1,4 @@
+"use strict";
 Buildings.Onsen = {
   image: 'content/buildings/Onsen/Base.jpg',
   clean: 25,

@@ -1,3 +1,4 @@
+"use strict";
 Person.prostitution = {
   girlMaxCustomers: 6,
   minWhoreCustomers: 3,

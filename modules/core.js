@@ -1,3 +1,4 @@
+"use strict";
 var e = {
   // (hook, [arg1, ...], done)
   invokeAll: function(hook) {
@@ -34,7 +35,7 @@ var e = {
   Ready: []
 };
 
-Schemas = {};
+var Schemas = {};
 
 Storage.prototype.setObject = function(key, value) {
   this.setItem(key, JSON.stringify(value));

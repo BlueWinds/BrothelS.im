@@ -1,3 +1,4 @@
+"use strict";
 Girl.config = {
   startMaxGirls: 1,
   pay: {

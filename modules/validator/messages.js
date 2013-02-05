@@ -1,3 +1,4 @@
+"use strict";
 Schemas.Message = {
   type: 'object',
   description: 'Replacement patterns are available on all strings inside a message.',

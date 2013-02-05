@@ -1,3 +1,4 @@
+"use strict";
 Events.tentacleAttack = {
   conditions: {
     fetishes: { tentacles: true },

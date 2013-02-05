@@ -1,3 +1,4 @@
+"use strict";
 Actions.Rest = {
   label: 'Rest',
   group: 'Chores',

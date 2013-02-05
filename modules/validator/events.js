@@ -1,3 +1,4 @@
+"use strict";
 Schemas.Context.properties.event = { $ref: 'liveEvent' };
 
 Schemas.Event = {

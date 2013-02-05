@@ -1,3 +1,4 @@
+"use strict";
 var g;
 
 $.extend(e, {
@@ -29,7 +30,7 @@ $.extend(e, {
   }]
 });
 
-T = function(string, type) {
+var T = function(string, type) {
   type = type || 'noun';
   if (Game.strings[type] && Game.strings[type][string]) {
     var _class = string[0] == '-' ? string.substr(1) : string;

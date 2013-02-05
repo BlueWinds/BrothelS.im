@@ -1,3 +1,4 @@
+"use strict";
 Missions.tentacleAttackIntro = {
   display: {
     label: 'Streets Unsafe',

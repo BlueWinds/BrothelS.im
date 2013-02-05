@@ -1,3 +1,4 @@
+"use strict";
 function Girl(obj) {
   var girl = this;
   var base;

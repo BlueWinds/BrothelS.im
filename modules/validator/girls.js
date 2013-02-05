@@ -1,3 +1,4 @@
+"use strict";
 Schemas.Stat = {
   type: 'integer',
   minimum: 0,

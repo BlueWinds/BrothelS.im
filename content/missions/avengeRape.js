@@ -1,3 +1,4 @@
+"use strict";
 Missions.avengeGuardWait = {
   end: {
     min: { day: '+1' }
