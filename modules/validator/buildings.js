@@ -3,7 +3,7 @@ Schemas.buildingDelta = {
   properties: {
     money: { type: 'number' },
     girl: {
-      anyOne: [ { $ref: 'girlDelta' } ],
+      anyOf: [ { $ref: 'girlDelta' } ],
       description: 'This delta will be applied to each girl living in the building.'
     },
     clean: { $ref: 'statDelta' },
@@ -13,7 +13,7 @@ Schemas.buildingDelta = {
 };
 
 Schemas.girlDelta.properties.building = {
-  anyOne: [ { $ref: 'buildingDelta' } ],
+  anyOf: [ { $ref: 'buildingDelta' } ],
   description: 'This delta will be applied to the building the girl is living in, if any.'
 };
 
@@ -148,7 +148,7 @@ Schemas.Building = {
     rooms: {
       type: 'array',
       description: 'A list of rooms present when the building is first purchased.',
-      additionalItems: { $ref: 'liveRoom' },
+      items: { $ref: 'liveRoom' },
       maxLength: 10
     },
     basePrice: {
@@ -208,7 +208,7 @@ Schemas.liveBuilding = {
     },
     rooms: {
       type: 'array',
-      additionalItems: { $ref: 'liveRoom' },
+      items: { $ref: 'liveRoom' },
       maxLength: 10
     },
     turnDelta: {

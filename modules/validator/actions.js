@@ -70,7 +70,7 @@ Schemas.Action = {
     },
     options: {
       description: 'options is either an object, with each key being the label and the value being the hovertext (replacement patterns are available for both), or a function that returns such an object.',
-      anyOne: [
+      anyOf: [
         {
           'enum': ['girls', 'buildings'],
           description: 'If options is one of these special strings, then it will be replaced with a list of Hired girls or Owned buildings.'
@@ -110,7 +110,7 @@ Schemas.Action = {
 };
 
 Schemas.liveAction = {
-  anyOne: [{ $ref: 'liveResolvable' }],
+  anyOf: [{ $ref: 'liveResolvable' }],
   required: [
     'description', 'girl', 'group', 'label',
     'tags', 'time', 'gerund'

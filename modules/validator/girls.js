@@ -26,7 +26,7 @@ Schemas.girlDelta = {
       type: 'object',
       description: "In a girlDelta, each special rule can be a number, adding or subtracting to it as with any other stat. If the girl doesn't have this specialRule, it will be treated as 0 before the modification is applied. Unlike normal stats, specialRules are not limited to the 0-100 range, and they are not rounded to the nearest integer. A special rule can also be 'false', in which case that special rule will be removed from the girl, regardless of value.",
       additionalProperties: {
-        anyOne: [
+        anyOf: [
           { type: 'boolean', 'enum': [false] },
           { type: 'number' }
         ]
@@ -159,7 +159,7 @@ Schemas.Girl = {
       'enum': ['Hired', 'For Hire', 'Town', 'Gone']
     },
     happiness: {
-      anyOne: [ { $ref: 'Stat' } ],
+      anyOf: [ { $ref: 'Stat' } ],
       description: "Here, happiness only acts as a multiplier to the girl's hire price - it's always set to 75 when she's hired. Higher values will make her cheaper."
     },
     endurance: { $ref: 'Stat' },
@@ -217,7 +217,7 @@ Schemas.Girl = {
           type: ['string', 'array'],
           description: 'Each value in images must be either a filename or an array of filenames.',
           pattern: "^.+\\.(png|jpg|gif)$",
-          additionalItems: {
+          items: {
             type: 'string',
             pattern: '^.+\\.(png|jpg|gif)$'
           }

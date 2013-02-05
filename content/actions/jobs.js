@@ -168,14 +168,56 @@ Actions.Acolyte = {
     university: 0.8,
     slums: 0.2
   },
-  variants: function(context, done) {
-    if (context.girl.modesty < 65) {
-      done(this.results[Math.choice([0, 1, 2])]);
-    } else {
-      done(this.results[Math.choice([0, 1, 2, 3, 4, 5])]);
-    }
-  },
+  variants: [
+    {
+      girl: { min: { modesty: 65} },
+      likelyhood: 0.2
+    },
+    {
+      girl: { min: { modesty: 65} },
+      likelyhood: 0.25
+    },
+    0.33,
+    0.33,
+    0.34
+  ],
   results: [
+    {
+      message: [
+        {
+          group: '<<- girl.name >>',
+          label: 'Acolyte',
+          image: '<<- girl.image("study") >>',
+          text: 'In light of her pious habits, <<= girl.name >> was asked the help clean parts of the temple seldom seen by visitors - a contingent of priests and priestesses live on the grounds, and there\'s a private garden reserved for their use. She cleaned the kitchen and hallways, until a noise from one of the bedrooms caught her attention. The door was ajar, and she couldn\'t help but peek in...',
+          delta:  false
+        },
+        {
+          group: '<<- girl.name >>',
+          label: 'Acolyte',
+          image: '<<- girl.image("study") >>',
+          text: 'Four priestesses and three priests were in the middle of most unpropitious acts. Most of them looked ashamed when they noticed her face in the door, but one of the girls, dress hitched up around her waist and wearing nothing else, giggled and pulled <<= girl.name >> into the room. She didn\'t get any more cleaning done that <<= time >>.'
+        }
+      ],
+      girl: {
+        endurance: -10,
+        modesty: 1.4,
+        happiness: 3,
+        hardExperience: 1.5
+      }
+    },
+    {
+      message: {
+        group: '<<- girl.name >>',
+        label: 'Acolyte',
+        image: '<<- girl.image("study") >>',
+        text: 'In light of her pious habits, <<= girl.name >> was asked the help clean parts of the temple seldom seen by visitors - a contingent of priests and priestesses live on the grounds, and there\'s a private garden reserved for their use. She worked in the garden, pulling weeds and cleaning out a fountain basin.<br><br>It was a beautiful piece of art - a naked goddess, water flowing from her mouth. <<= girl.name >> noticed part of the stone was a different color - as soon as she touched it, the plugs came away in her hands. Who knew that the goddess was originally lactating and dripping from her pussy...'
+      },
+      girl: {
+        endurance: -5,
+        modesty: 3.5,
+        happiness: 4
+      }
+    },
     {
       message: {
         group: '<<- girl.name >>',
@@ -214,42 +256,6 @@ Actions.Acolyte = {
         endurance: -6,
         modesty: 3.5,
         happiness: 5
-      }
-    },
-    {
-      message: [
-        {
-          group: '<<- girl.name >>',
-          label: 'Acolyte',
-          image: '<<- girl.image("study") >>',
-          text: 'In light of her pious habits, <<= girl.name >> was asked the help clean parts of the temple seldom seen by visitors - a contingent of priests and priestesses live on the grounds, and there\'s a private garden reserved for their use. She cleaned the kitchen and hallways, until a noise from one of the bedrooms caught her attention. The door was ajar, and she couldn\'t help but peek in...',
-          delta:  false
-        },
-        {
-          group: '<<- girl.name >>',
-          label: 'Acolyte',
-          image: '<<- girl.image("study") >>',
-          text: 'Four priestesses and three priests were in the middle of most unpropitious acts. Most of them looked ashamed when they noticed her face in the door, but one of the girls, dress hitched up around her waist and wearing nothing else, giggled and pulled <<= girl.name >> into the room. She didn\'t get any more cleaning done that <<= time >>.'
-        }
-      ],
-      girl: {
-        endurance: -10,
-        modesty: 1.4,
-        happiness: 3,
-        hardExperience: 1.5
-      }
-    },
-    {
-      message: {
-        group: '<<- girl.name >>',
-        label: 'Acolyte',
-        image: '<<- girl.image("study") >>',
-        text: 'In light of her pious habits, <<= girl.name >> was asked the help clean parts of the temple seldom seen by visitors - a contingent of priests and priestesses live on the grounds, and there\'s a private garden reserved for their use. She worked in the garden, pulling weeds and cleaning out a fountain basin.<br><br>It was a beautiful piece of art - a naked goddess, water flowing from her mouth. <<= girl.name >> noticed part of the stone was a different color - as soon as she touched it, the plugs came away in her hands. Who knew that the goddess was originally lactating and dripping from her pussy...'
-      },
-      girl: {
-        endurance: -5,
-        modesty: 3.5,
-        happiness: 4
       }
     }
   ]

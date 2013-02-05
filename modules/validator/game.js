@@ -26,7 +26,7 @@ Schemas.Game = {
     money: { type: 'integer' },
     moneyHistory: {
       type: 'array',
-      additionalItems: { type: 'integer' }
+      items: { type: 'integer' }
     },
     name: {
       type: 'string'

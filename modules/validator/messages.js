@@ -60,5 +60,5 @@ Schemas.liveMessage = {
 Schemas.Game.required.push('messages');
 Schemas.Game.properties.messages = {
   type: 'array',
-  additionalItems: { $ref: 'liveMessage' }
+  items: { $ref: 'liveMessage' }
 };

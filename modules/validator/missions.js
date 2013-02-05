@@ -16,7 +16,7 @@ Schemas.Mission = {
     },
     end: {
       description: 'If end is not present, then the mission doesn\'t persist - its results trigger immediately. If present, end must be either a function or a set of conditions that triggers the mission to end. If mission.end.max.day and mission.display, then that message will be sent again the day before the mission ends as a reminder for the player that they\'re almost out of time.',
-      anyOne: [
+      anyOf: [
         { $ref: 'parsableConditions' },
         {
           type: 'function',
