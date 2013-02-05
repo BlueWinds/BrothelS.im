@@ -55,13 +55,22 @@ Girls['Dark Magician Girl'] = {
         }
       },
       options: 'girls',
+      variants: function(context, done) {
+        this.special = g.girls[this.option].startDelta();
+        g.girls[this.option].apply({
+          happiness: 3,
+          endurance: 30
+        });
+        this.special = this.special();
+        done(this.results[0]);
+      },
       results: [
         {
           message: {
-            image: '/content/girls/DarkMagicianGirl/images/Exercise2.jpg',
+            image: 'content/girls/DarkMagicianGirl/images/Exercise2.jpg',
             group: 'Dark Magician Girl',
             label: 'Healing',
-            text: 'Dark Magician Girl drew upon her power to revitalize <<= action.option >>, restoring her energy (<span class="endurance delta">+<<= action.results[0].endurance >></span>, <span class="happiness delta">+<<= action.results[0].happiness >></span>).'
+            text: 'Dark Magician Girl drew upon her power to revitalize <<= action.option >>, restoring her energy (<span class="endurance delta">+<<= action.special.endurance >></span>, <span class="happiness delta">+<<= action.special.happiness || 0 >></span>).'
           },
           girl: {
             endurance: -8,
