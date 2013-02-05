@@ -296,10 +296,10 @@ Actions.OD = {
     fetish: T('fetish')
   },
   variants: function(context, done) {
-    done(this.results[Girl.sex.indexOf(this.option)]);
+    done(this.results[this.option]);
   },
-  results: [
-    {
+  results: {
+    soft: {
       message: {
         group: '<<- girl.name >>',
         label: 'Orgasm Denial',
@@ -313,7 +313,7 @@ Actions.OD = {
         happiness: 3
       }
     },
-    {
+    hard: {
       message: {
         group: '<<- girl.name >>',
         label: 'Orgasm Denial',
@@ -327,7 +327,7 @@ Actions.OD = {
         happiness: 4
       }
     },
-    {
+    anal: {
       message: {
         group: '<<- girl.name >>',
         label: 'Orgasm Denial',
@@ -341,7 +341,7 @@ Actions.OD = {
         happiness: 5
       }
     },
-    {
+    fetish: {
       message: {
         group: '<<- girl.name >>',
         label: 'Orgasm Denial',
@@ -355,7 +355,7 @@ Actions.OD = {
         happiness: 3
       }
     }
-  ]
+  }
 };
 
 Actions.Lockdown = {

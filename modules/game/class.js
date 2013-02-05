@@ -15,7 +15,7 @@ var Game = function(obj) {
 
 Game.prototype.nextPayment = function() {
   if (this.day >= Game.config.gameLength) { return false; }
-  var pl = Game.config.gameLength / Game.config.payments.length;
+  var pl = Game.config.gameLength / (Game.config.payments.length - 1);
   var day = Math.floor(this.day / pl) * pl + pl;
   return {
     day: day,
