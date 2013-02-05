@@ -30,7 +30,7 @@ $.extend(e, {
   }]
 });
 
-__ = function(string, type) {
+var __ = function(string, type) {
   type = type || 'noun';
   if (Game.strings[type] && Game.strings[type][string]) {
     var _class = string[0] == '-' ? string.substr(1) : string;
