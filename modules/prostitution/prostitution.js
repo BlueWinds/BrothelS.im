@@ -25,7 +25,7 @@ Girl.prototype.interest = function(sex) {
     found *= (Math.random() / 2 + 0.5);
     found = Math.ceil(found * context.girl.maxCustomers());
 
-    for (i = 0; i < found; i++) {
+    for (var i = 0; i < found; i++) {
       context.customer = new Person(Math.choice(['Very Low Class', 'Low Class']));
       doCustomer.call(this, context);
     }
