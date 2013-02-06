@@ -112,7 +112,7 @@ e.GameRender.push(function(done) {
       $('.girl .morning', view).first().append(actionDiv);
     }
     var opt = {
-      beforeClose: g.render,
+      beforeClose: g.render
     };
     view.dialog(opt);
     view.closest('.ui-dialog').addClass('tab-dialog').on( "accordionbeforeactivate", function(event, ui) {

@@ -105,7 +105,8 @@ Schemas.Room = {
       type: 'object',
       description: 'base is an optional object that will be used as the base for any rooms the user purchases of this type. If not present, it will default to {}. Keys in here require custom code to have any meaning - currently there are no keys that do anything automatically.',
       'default': {}
-    }
+    },
+    daily: { $ref: 'buildingDelta' }
   },
   additionalProperties: false
 };

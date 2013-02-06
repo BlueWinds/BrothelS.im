@@ -84,10 +84,10 @@
 
 .room > p {
   font-size: 0.7em;
-  margin-top: 0.5em;
+  margin: 0.2em 0;
 }
 
-#building-view .girl {
+#building-view li.girl {
   border-radius: 6px;
   height: 5.5em;
   width: 6em;
@@ -97,7 +97,7 @@
   position: relative;
 }
 
-#building-view .room .girl {
+#building-view .room li.girl {
   left: 0;
   position: absolute;
   top: 0;
@@ -117,6 +117,10 @@
   border-radius: 6px;
   margin: -1px;
   visibility: visible !important;
+}
+
+.built-rooms > .ui-sortable-placeholder {
+  display: none;
 }
 
 #building-view .available-rooms .room {

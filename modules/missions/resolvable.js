@@ -82,6 +82,8 @@ Resolvable.prototype.checkConditions = function(cond, context) {
     for (var fet in cond.fetishes) {
       if (cond.fetishes[fet] && !g.fetishes[fet]) {
         return false;
+      } else if (g.fetishes[fet]) {
+        return false;
       }
     }
   }

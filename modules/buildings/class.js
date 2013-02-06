@@ -1,4 +1,5 @@
 "use strict";
+e.BuildingDailyDelta = [];
 function Building(obj) {
   $.extend(this, obj);
   // Add missing stats from base
@@ -166,6 +167,7 @@ Building.prototype.dailyDelta = function() {
   if (this.daily) {
     delta._add(this.daily);
   }
+  e.invokeAllSync('BuildingDailyDelta', this, delta);
   return delta;
 };
 

@@ -62,7 +62,7 @@ e.GameRender.push(function(done) {
   }).trim()).appendTo('#content .second');
   $('.building .right', div).click(function() {
     var dialog = $('<div>');
-    function render(element) {
+    function render(element, autorender) {
       var context = {
         buildings: g.buildings._filter('status', 'Owned'),
         innGirls: []
@@ -137,13 +137,16 @@ e.GameRender.push(function(done) {
           }
         }
       });
+      if (autorender === undefined || autorender) {
+        e.invokeAll('Autorender', element);
+      }
     }
 
     var opt = {
       beforeClose: g.render,
       width: '45em'
     };
-    render(dialog);
+    render(dialog, false);
     render(dialog.dialog(opt));
   });
   $('.building .left, .building .middle').click(function() {

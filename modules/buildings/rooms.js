@@ -50,3 +50,11 @@ Girl.prototype.bedroom = function() {
   var rooms = Building.roomsByType('Bedroom', 'Owned');
   return rooms._filter('girl', this.name)[0];
 };
+
+e.BuildingDailyDelta.push(function(building, delta) {
+  building.rooms.forEach(function(room) {
+    if (Rooms[room.type].daily) {
+      delta._add(Rooms[room.type].daily);
+    }
+  });
+});

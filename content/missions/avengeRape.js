@@ -279,7 +279,8 @@ Missions.avengeGuardRapeFinal = {
       },
       girl: {
         happiness: 20
-      }
+      },
+      mission: 'luxuryHouseDelay'
     },
     "Public Humiliation": {
       message: [
@@ -303,7 +304,8 @@ Missions.avengeGuardRapeFinal = {
         fetishLibido: 4,
         obedience: -6,
         happiness: 10
-      }
+      },
+      mission: 'luxuryHouseDelay'
     },
     Blackmail: {
       message: {
@@ -316,7 +318,8 @@ Missions.avengeGuardRapeFinal = {
       money: 1000,
       girl: {
         happiness: 25
-      }
+      },
+      mission: 'luxuryHouseDelay'
     }
   }
 };

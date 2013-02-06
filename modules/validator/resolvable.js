@@ -21,7 +21,7 @@ Schemas.Conditions = {
       'default': false,
       description: 'fetishes specifies which checkboxes must be checked in order for this event/mission/action to appear in the game.',
       patternProperties: {
-        'tentacles|rape': { 'enum': [true] }
+        'tentacles|rape': { type: 'boolean' }
       },
       additionalProperties: false
     },

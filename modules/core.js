@@ -14,7 +14,7 @@ var e = {
       e[hook][i].apply(this, args);
     }
   },
-  // (items, [arg1, ...], done)
+  // (items, [arg1, ...])
   runSeries: function(items) {
     var args = Array.prototype.slice.call(arguments, 1);
     var done = typeof(args._last()) == 'function' ? args.pop() : function() {};
@@ -77,7 +77,12 @@ Object.defineProperty(Object.prototype, "_add", {
     var i;
     if (typeof(delta) == 'object') {
       for (i in delta) {
-        this[i] = (this[i] || 0) + delta[i];
+        if (typeof(delta[i]) == 'object') {
+          this[i] = this[i] || {};
+          this[i]._add(delta[i]);
+        } else {
+          this[i] = (this[i] || 0) + delta[i];
+        }
       }
       return this;
     }
@@ -236,7 +241,7 @@ Object.defineProperty(Object.prototype, "_toString", {
   value: function(form) {
     var items = [];
     for (var key in this) {
-      // A bit of a circular dependency here - the T function is defined in modules/game/game.js, and relies on information provided in content/game.js to be actually useful. Cheating, I know, but nothing can render to the screen until game.js is loaded anyway, so it's not too bad.
+      // A bit of a circular dependency here - the __ function is defined in modules/game/game.js, and relies on information provided in content/game.js to be actually useful. Cheating, I know, but nothing can render to the screen until game.js is loaded anyway, so it's not too bad.
       var t = __(this[key], form);
       if (items.indexOf(t) == -1) {
         items.push(t);

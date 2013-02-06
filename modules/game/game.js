@@ -130,7 +130,7 @@ Game.start = function(opt) {
 
 e.Ready.push(function(done) {
   $('#header img').attr('title', 'Return to front page').click(function() {
-    Game.load();
+    Game.load(false);
   });
 
   $('#save').addClass('disabled');

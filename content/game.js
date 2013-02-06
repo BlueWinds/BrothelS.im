@@ -61,20 +61,40 @@ Game.strings = {
 };
 
 Game.hotkeys = {
+  76: {
+    selector: '#load',
+    label: 'L',
+    description: 'Load Game dialog'
+  },
+  78: {
+    selector: '#new',
+    label: 'N',
+    description: 'New Game dialog'
+  },
+  83: {
+    selector: '#save',
+    label: 'S',
+    description: 'Save Game dialog'
+  },
   13: {
     selector: '#next',
     label: 'Enter',
     description: 'Pass the turn'
   },
+  77: {
+    selector: '#show-messages',
+    label: 'M',
+    description: 'Messages dialog'
+  },
   71: {
     selector: '#girls .middle:first',
-    label: 'g',
-    description: 'Open pay & sex type dialog'
+    label: 'G',
+    description: 'Pay & sex type dialog'
   },
   49: {
     selector: '#girls div[name="morning"]:eq(0)',
     label: '1-5',
-    description: 'Open 1st-5th girl\'s Action dialog'
+    description: '1st-5th girl\'s Action dialog'
   },
   50: { selector: '#girls div[name="morning"]:eq(1)' },
   51: { selector: '#girls div[name="morning"]:eq(2)' },
@@ -82,12 +102,12 @@ Game.hotkeys = {
   53: { selector: '#girls div[name="morning"]:eq(4)' },
   66: {
     selector: '#buildings .middle:first',
-    label: 'b',
-    description: 'Open the building management dialog'
+    label: 'B',
+    description: 'Building Management dialog'
   },
   82: {
     selector: '#buildings .right:first',
-    label: 'r',
-    description: 'Open room management dialog'
+    label: 'R',
+    description: 'Room Management dialog'
   }
 };
