@@ -21,7 +21,7 @@ e.GameUpgrade04.push(function(game, next) {
   next();
 });
 
-Message = function(obj, context) {
+var Message = function(obj, context) {
   $.extend(true, this, obj);
   this._class = 'Message';
   if (context) {

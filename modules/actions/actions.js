@@ -23,6 +23,13 @@ e.Ready.push(function(done) {
       action._id = _id;
     });
   });
+  $(document).keydown(function(event) {
+    if (!$('.ui-dialog').length && event.keyCode <= 53 && event.keyCode >= 49) {
+      $('#girls div[name="morning"]').eq(event.keyCode - 49).click();
+      event.preventDefault();
+      return false;
+    }
+  });
   done();
 });
 
@@ -72,12 +79,12 @@ e.GameRender.push(function(done) {
         actions: girl.potentialActions(time)
       };
       var div = $(ejs.render($('#actions_girl_template').html(), context).trim());
-      $('.action:not(.disabled) ul', div).click(function() {
+      $('.action:not(.disabled)', div).click(function() {
         var $this = $(this);
-        var action = $this.attr('name');
+        var action = $this.children('ul').attr('name');
         action = context.actions[action];
         $('li.this', div).fadeOut('fast', function() {
-          $(this).fadeIn('fast').appendTo($this);
+          $(this).fadeIn('fast').appendTo($this.children('ul'));
         });
         girl.setAction(action);
       });
@@ -87,7 +94,6 @@ e.GameRender.push(function(done) {
         $(this).parent().children('li').removeClass('selected');
         $(this).addClass('selected');
         action.setOption($(this).attr('name'));
-        $(this).closest('.action').children('ul').click();
       });
       e.invokeAll('Autorender', div);
       return div;
@@ -106,7 +112,7 @@ e.GameRender.push(function(done) {
       $('.girl .morning', view).first().append(actionDiv);
     }
     var opt = {
-      beforeClose: g.render
+      beforeClose: g.render,
     };
     view.dialog(opt);
     view.closest('.ui-dialog').addClass('tab-dialog').on( "accordionbeforeactivate", function(event, ui) {

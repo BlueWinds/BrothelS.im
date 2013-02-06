@@ -1,6 +1,6 @@
 "use strict";
 Person.prostitution = {
-  girlMaxCustomers: 6,
+  girlMaxCustomers: 5,
   minWhoreCustomers: 3,
   maxWhoreCustomers: 20,
   refuseDelta: {
@@ -12,7 +12,7 @@ Person.prostitution = {
       r: 0.3,
       money: 100,
       girl: {
-        endurance: -6,
+        endurance: -5,
         softExperience: 1
       }
     },
@@ -20,7 +20,7 @@ Person.prostitution = {
       r: 0.4,
       money: 150,
       girl: {
-        endurance: -9,
+        endurance: -7,
         hardExperience: 1,
         softExperience: 0.2
       }
@@ -29,7 +29,7 @@ Person.prostitution = {
       r: 0.5,
       money: 200,
       girl: {
-        endurance: -14,
+        endurance: -9,
         analExperience: 1,
         hardExperience: 0.2,
         softExperience: 0.2
@@ -39,7 +39,7 @@ Person.prostitution = {
       r: 0.7,
       money: 450,
       girl: {
-        endurance: -16,
+        endurance: -10,
         fetishExperience: 1,
         analExperience: 0.2,
         hardExperience: 0.2,

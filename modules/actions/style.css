@@ -1,3 +1,7 @@
+.action-list {
+  width: 35em;
+}
+
 .action-list td {
   border: none;
 }
@@ -12,11 +16,11 @@
   border: 1px solid #999;
   border-radius: 6px;
   float: left;
-  height: 7.5em;
-  margin: 0.4em;
+  height: 6em;
+  margin: 0.4em 0.2em;
   position: relative;
   text-align: center;
-  width: 6em;
+  width: 5em;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -27,66 +31,58 @@
   opacity: 0.6;
 }
 
-.action label {
-  left: 0;
-  margin: 0;
-  position: absolute;
-  width: 6em;
-  z-index: 10;
-}
-
 .action label span {
-  font-size: 0.7em;
+  font-size: 0.65em;
 }
 
 .action ul {
   list-style: none;
-  height: 100%;
-  margin: 1.5em 0 0;
+  height: 4.8em;
+  margin: 0;
   padding: 0;
   width: 100%;
   position: relative;
 }
 
 .action li.this {
-  height: 5.5em;
+  height: 4em;
   position: relative;
-  width: 6em;
+  width: 5em;
   z-index: 1;
 }
 
 .action li.other {
   opacity: .6;
   position: absolute;
-  width: 3em;
-  height: 3em;
+  width: 2.5em;
+  height: 2.5em;
 }
 
 .others-1 .other:nth-child(1) {
-  left: 1.5em;
-  top: 1.5em;
+  left: 1.25em;
+  top: 1.25em;
 }
 
 .others-2 .other:nth-child(1) {
   left: 0;
-  top: 1.5em;
+  top: 1.25em;
 }
 .others-2 .other:nth-child(2) {
-  left: 3em;
-  top: 1.5em;
+  left: 2.5em;
+  top: 1.25em;
 }
 
 .others-3 .other:nth-child(1) {
-  left: 1.5em;
+  left: 1.25em;
   top: 0;
 }
 .others-3 .other:nth-child(2) {
   left: 0;
-  top: 3em;
+  top: 2.5em;
 }
 .others-3 .other:nth-child(3) {
-  left: 3em;
-  top: 3em;
+  left: 2.5em;
+  top: 2.5em;
 }
 
 .others-4 .other:nth-child(1) {
@@ -94,16 +90,16 @@
   top: 0;
 }
 .others-4 .other:nth-child(2) {
-  left: 3em;
+  left: 2.5em;
   top: 0em;
 }
 .others-4 .other:nth-child(3) {
   left: 0em;
-  top: 3em;
+  top: 2.5em;
 }
 .others-4 .other:nth-child(4) {
-  left: 3em;
-  top: 3em;
+  left: 2.5em;
+  top: 2.5em;
 }
 
 .action span.options:after {

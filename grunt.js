@@ -21,7 +21,8 @@ module.exports = function(grunt) {
         newcap: true,
         undef: true,
         unused: true,
-        strict: true
+        strict: true,
+        trailing: true
       },
       globals: {
         ejs: true,

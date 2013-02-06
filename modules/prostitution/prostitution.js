@@ -2,7 +2,7 @@
 Girl.prototype.maxCustomers = function() {
   var libido = this.get('libido');
   libido += this.constitution * 3;
-  return Math.floor(libido / 300 * Person.prostitution.girlMaxCustomers);
+  return Math.floor(libido / 400 * Person.prostitution.girlMaxCustomers);
 };
 
 Girl.prototype.interest = function(sex) {

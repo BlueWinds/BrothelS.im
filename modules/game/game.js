@@ -39,7 +39,7 @@ var __ = function(string, type) {
   return string;
 };
 // TODO: Remove in next version
-T = __;
+var T = __;
 
 Game.fetishes = ['tentacles', 'rape'];
 
@@ -249,9 +249,17 @@ e.Ready.push(function(done) {
     });
   });
   $(document).keydown(function(event) {
-    if (event.keyCode == 13 && !$('.ui-dialog').length) {
-      $('#next').click();
+    if (!$('.ui-dialog').length && Game.hotkeys[event.keyCode]) {
+      $(Game.hotkeys[event.keyCode].selector).click();
+      event.preventDefault();
+      return false;
     }
+  });
+  $('#hotkeys').click(function() {
+    var dialog = $(ejs.render($('#game_hotkeys_template').html(), {}).trim());
+    dialog.dialog({
+      title: 'Hotkeys'
+    });
   });
   done();
 });
