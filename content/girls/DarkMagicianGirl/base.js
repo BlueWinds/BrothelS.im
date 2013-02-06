@@ -35,7 +35,6 @@ Girls['Dark Magician Girl'] = {
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg"]
   },
   Actions: {
-    // TODO: Add Talk results
     Healing: {
       label: 'Healing',
       group: 'Chores',
