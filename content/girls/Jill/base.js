@@ -36,8 +36,5 @@ Girls.Jill = {
     fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4.jpg"],
     group: ["Group1.jpg", "Group2.jpg"],
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg"]
-  },
-  Actions: {
-    // TODO: add Talk
   }
 };

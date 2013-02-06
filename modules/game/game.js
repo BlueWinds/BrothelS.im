@@ -38,6 +38,7 @@ var __ = function(string, type) {
   }
   return string;
 };
+var T = __;
 
 Game.fetishes = ['tentacles', 'rape'];
 
