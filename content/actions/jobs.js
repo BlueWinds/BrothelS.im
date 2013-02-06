@@ -282,7 +282,7 @@ Actions.Advertise = {
     uptown: 0.2,
     market: 0.2
   },
-  options: function(context) {
+  options: function() {
     var options = {};
     g.buildings._filter('status', 'Owned').forEach(function(building) {
       options[building.name] = building.name;

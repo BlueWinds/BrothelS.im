@@ -10,7 +10,7 @@ Missions.specialPartyStart = {
 };
 
 Missions.specialParty = {
-  initialize: function(context) {
+  initialize: function() {
     this.special.client = new Person('High Class');
   },
   display: {

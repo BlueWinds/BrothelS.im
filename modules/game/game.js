@@ -38,7 +38,8 @@ var __ = function(string, type) {
   }
   return string;
 };
-var T = __;
+// TODO: Remove in next version
+T = __;
 
 Game.fetishes = ['tentacles', 'rape'];
 
@@ -172,7 +173,7 @@ e.Ready.push(function(done) {
       return;
     }
     var form = $(ejs.render($('#game_save_template').html(), {}).trim());
-    $('#fetishes .checkbox', form).click(function(event) {
+    $('#fetishes .checkbox', form).click(function() {
       var check = !$(this).hasClass('checked');
       var fetish = $(this).attr('name');
       if (check) {
@@ -181,7 +182,7 @@ e.Ready.push(function(done) {
         delete g.fetishes[fetish];
       }
     });
-    $('#autosave', form).click(function(event) {
+    $('#autosave', form).click(function() {
       var check = !$(this).hasClass('checked');
       if (check) { g.autosave = true; }
       else { delete g.autosave; }

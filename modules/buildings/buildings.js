@@ -65,11 +65,11 @@ e.GameRender.push(function(done) {
     function render(element) {
       var context = {
         buildings: g.buildings._filter('status', 'Owned'),
-        inn_girls: []
+        innGirls: []
       };
       g.girls._filter('status', 'Hired').forEach(function(girl) {
         if (!girl.building()) {
-          context.inn_girls.push(girl);
+          context.innGirls.push(girl);
         }
       });
 
@@ -89,10 +89,10 @@ e.GameRender.push(function(done) {
           update: function(event, ui) {
             if (ui.item.attr('index') !== undefined && ui.item.closest(this).length) {
               var i = ui.item.parent().children().index(ui.item);
-              var old_i = ui.item.attr('index');
+              var old = ui.item.attr('index');
               var rooms = g.buildings[name].rooms;
-              var room = rooms[old_i];
-              rooms[old_i] = rooms[i];
+              var room = rooms[old];
+              rooms[old] = rooms[i];
               rooms[i] = room;
               render(dialog);
             }
@@ -119,15 +119,15 @@ e.GameRender.push(function(done) {
         opacity: 0.7,
         receive: function(event, ui) {
           var list = $(this);
-          var sender_i = ui.sender.parent().attr('index');
-          if (sender_i !== undefined) {
+          var senderIndex = ui.sender.parent().attr('index');
+          if (senderIndex !== undefined) {
             var sender = ui.sender.closest('.building').attr('name');
-            delete g.buildings[sender].rooms[sender_i].girl;
+            delete g.buildings[sender].rooms[senderIndex].girl;
           }
-          var receiver_i = list.parent().attr('index');
-          if (receiver_i !== undefined) {
+          var receiverIndex = list.parent().attr('index');
+          if (receiverIndex !== undefined) {
             var receiver = list.closest('.building').attr('name');
-            g.buildings[receiver].rooms[receiver_i].girl = ui.item.attr('name');
+            g.buildings[receiver].rooms[receiverIndex].girl = ui.item.attr('name');
           }
           // Now we send any previously occupying girl to the inn.
           if (list.attr('id') != 'inn' && list.children().length > 1) {

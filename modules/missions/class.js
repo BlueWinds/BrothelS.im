@@ -8,7 +8,6 @@ Mission.prototype = new Resolvable();
 Mission.create = function(_id, context) {
   var mission = Resolvable.create(_id, 'Mission', context);
   if (!mission) { return mission; }
-  var base = mission.base();
   if (typeof(mission.end) == 'function') {
     delete mission.end;
   } else if (mission.end) {

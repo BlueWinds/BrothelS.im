@@ -1,3 +1,4 @@
+var module;
 module.exports = function(grunt) {
   "use strict";
 
@@ -11,7 +12,16 @@ module.exports = function(grunt) {
         globalstrict: true,
         browser: true,
         jquery: true,
-        validthis: true
+        validthis: true,
+        bitwise: true,
+        camelcase: true,
+        curly: true,
+        immed: true,
+        latedef: true,
+        newcap: true,
+        undef: true,
+        unused: true,
+        strict: true
       },
       globals: {
         ejs: true,

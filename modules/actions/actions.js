@@ -101,9 +101,9 @@ e.GameRender.push(function(done) {
     var tab = $('.girl[name="' + girl.name + '"] .' + time, view);
     tab.append(renderActions(girl, time));
     if (tab[0] !== $('.girl .morning', view)[0]) {
-      var temp_tab = $('.girl .morning', view).first();
-      var temp_girl = tab.parent().attr('name');
-      temp_tab.append(renderActions(g.girls[temp_girl], 'morning'));
+      var tempGirl = g.girls[tab.parent().attr('name')];
+      var actionDiv = renderActions(tempGirl, 'morning');
+      $('.girl .morning', view).first().append(actionDiv);
     }
     var opt = {
       beforeClose: g.render

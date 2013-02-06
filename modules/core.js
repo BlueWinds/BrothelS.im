@@ -35,8 +35,6 @@ var e = {
   Ready: []
 };
 
-var Schemas = {};
-
 Storage.prototype.setObject = function(key, value) {
   this.setItem(key, JSON.stringify(value));
 };
@@ -184,7 +182,7 @@ Object.defineProperty(Object.prototype, "_toArray", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function(key) {
+  value: function() {
     var arr = [];
     for (var i in this) {
       arr.push(this[i]);

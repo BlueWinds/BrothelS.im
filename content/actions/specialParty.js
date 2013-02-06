@@ -9,7 +9,7 @@ Actions.attendParty = {
       specialParty: 1
     }
   },
-  initialize: function(context) {
+  initialize: function() {
     var m = g.missions.specialParty;
     if (g.day != m.end.min.day) { return false; }
   },

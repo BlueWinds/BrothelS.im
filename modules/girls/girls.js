@@ -145,7 +145,7 @@ e.GameRender.push(function(done) {
       }
     }).slider('value', girl.actions.pay);
 
-    $('.checkbox', view).click(function(event) {
+    $('.checkbox', view).click(function() {
       var check = !$(this).hasClass('checked');
       var sex = $(this).attr('id');
       if (check) {

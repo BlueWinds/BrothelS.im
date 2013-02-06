@@ -24,7 +24,7 @@ Action.create = function(_id, context) {
 };
 
 Action.prototype.options = function() {
-  var name, options = this.base().options;
+  var options = this.base().options;
   if (typeof(options) == 'function') {
     options = options.call(this, this.context());
   } else if (options == 'girls') {
@@ -51,9 +51,9 @@ Action.prototype.setOption = function(option) {
 
 Action.prototype.checkDisabled = function(cond, context) {
   context = context || this.context();
-  var real_action = context.girl.actions[this.time];
-  if (real_action && real_action.locked) {
-    return context.girl.name + ' cannot ' + this.label + ' until she\'s done ' + real_action.gerund + '.';
+  var realAction = context.girl.actions[this.time];
+  if (realAction && realAction.locked) {
+    return context.girl.name + ' cannot ' + this.label + ' until she\'s done ' + realAction.gerund + '.';
   }
   cond = cond || this.base().enableConditions;
   if (!cond) { return; }
@@ -94,9 +94,9 @@ Action.prototype.checkDisabled = function(cond, context) {
     disabled = context.building.compare(cond.building, true);
     if (disabled) { return disabled; }
   }
-  real_action = g.ownerAction(this.time);
-  if (real_action && this.girl !== real_action.girl && this.ownerParticipation) {
-    return 'You are already ' + real_action.gerund + ' with ' + this.girl + ' in the ' + this.time;
+  realAction = g.ownerAction(this.time);
+  if (realAction && this.girl !== realAction.girl && this.ownerParticipation) {
+    return 'You are already ' + realAction.gerund + ' with ' + this.girl + ' in the ' + this.time;
   }
   if (this.base().disable) {
     return this.base().disable.call(this, context);

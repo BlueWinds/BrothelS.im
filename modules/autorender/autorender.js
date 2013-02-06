@@ -57,66 +57,66 @@ e.Autorender.push(function(element, done) {
       var next = $('<a class="next button">Next</button>').appendTo(nav).button();
       var close = $('<a class="close button">x</button>').appendTo(nav).button();
 
-      var tab_count = $('.ui-tabs-panel', view).length;
-      prev.click(function(event) {
-        var active_tab = view.tabs('option', 'active');
-        var tab = $('.ui-tabs-panel', view).eq(active_tab);
-        var active_acc = accordion && tab.accordion('option', 'active');
-        if (active_acc > 0) {
-          active_acc -= 1;
+      var tabCount = $('.ui-tabs-panel', view).length;
+      prev.click(function() {
+        var activeTab = view.tabs('option', 'active');
+        var tab = $('.ui-tabs-panel', view).eq(activeTab);
+        var activeAccord = accordion && tab.accordion('option', 'active');
+        if (activeAccord > 0) {
+          activeAccord -= 1;
         }
-        else if (active_tab > 0) {
-          active_tab -= 1;
-          tab = $('.ui-tabs-panel', view).eq(active_tab);
-          active_acc = $('.ui-accordion-header', tab).length - 1;
+        else if (activeTab > 0) {
+          activeTab -= 1;
+          tab = $('.ui-tabs-panel', view).eq(activeTab);
+          activeAccord = $('.ui-accordion-header', tab).length - 1;
         }
-        view.tabs('option', 'active', active_tab);
+        view.tabs('option', 'active', activeTab);
         if (accordion) {
-          tab.accordion('option', 'active', active_acc);
+          tab.accordion('option', 'active', activeAccord);
         }
       });
-      next.click(function(event) {
-        var active_tab = view.tabs('option', 'active');
-        var tab = $('.ui-tabs-panel', view).eq(active_tab);
-        var active_acc = accordion && tab.accordion('option', 'active');
-        if ($('.ui-accordion-header', tab).length > active_acc + 1) {
-          active_acc += 1;
-        } else if (tab_count > active_tab) {
-          active_tab += 1;
-          tab = $('.ui-tabs-panel', view).eq(active_tab);
-          active_acc = 0;
+      next.click(function() {
+        var activeTab = view.tabs('option', 'active');
+        var tab = $('.ui-tabs-panel', view).eq(activeTab);
+        var activeAccord = accordion && tab.accordion('option', 'active');
+        if ($('.ui-accordion-header', tab).length > activeAccord + 1) {
+          activeAccord += 1;
+        } else if (tabCount > activeTab) {
+          activeTab += 1;
+          tab = $('.ui-tabs-panel', view).eq(activeTab);
+          activeAccord = 0;
         }
-        view.tabs('option', 'active', active_tab);
+        view.tabs('option', 'active', activeTab);
         if (accordion) {
-          tab.accordion('option', 'active', active_acc);
+          tab.accordion('option', 'active', activeAccord);
         }
       });
 
-      close.click(function(event) {
+      close.click(function() {
         view.dialog('close');
       });
 
-      var check_active = function(event, ui) {
+      var checkActive = function() {
         prev.button('option', 'disabled', false);
         next.button('option', 'disabled', false);
-        var active_tab = view.tabs('option', 'active');
-        var tab = $('.ui-tabs-panel', view).eq(active_tab);
-        var active_acc = accordion && tab.accordion('option', 'active');
-        if (active_tab + 1 == tab_count) {
-          if (!accordion || active_acc + 1 == $('.ui-accordion-header', tab).length) {
+        var activeTab = view.tabs('option', 'active');
+        var tab = $('.ui-tabs-panel', view).eq(activeTab);
+        var activeAccord = accordion && tab.accordion('option', 'active');
+        if (activeTab + 1 == tabCount) {
+          if (!accordion || activeAccord + 1 == $('.ui-accordion-header', tab).length) {
             next.button('option', 'disabled', true).removeClass('ui-state-hover');
           }
         }
-        if (!active_tab && !active_acc) {
+        if (!activeTab && !activeAccord) {
           prev.button('option', 'disabled', true).removeClass('ui-state-hover');
         }
       };
 
       if (accordion) {
-        $('.ui-tabs-panel', view).bind('accordionactivate', check_active);
+        $('.ui-tabs-panel', view).bind('accordionactivate', checkActive);
       }
-      view.bind('tabsactivate', check_active);
-      check_active();
+      view.bind('tabsactivate', checkActive);
+      checkActive();
     }
   }
   $('.horizontal-tabs', view).tabs();
@@ -137,7 +137,7 @@ $(function() {
   $.ui.sortable.prototype.options.distance = 20;
   $(document).on('dialogclose', function(event) {
     $(event.target).dialog('destroy').remove();
-  }).on("dialogcreate", function(event, ui) {
+  }).on("dialogcreate", function(event) {
     e.invokeAll('Autorender', event.target);
   });
   $(document).keydown(function(event) {

@@ -215,13 +215,13 @@ Building.prototype.sell = function() {
 
 Girl.prototype.building = function() {
   var name = this.name;
-  var final_building;
+  var finalBuilding;
   g.buildings._filter('status', 'Owned').forEach(function(building) {
     building.rooms._filter('type', 'Bedroom').forEach(function(room) {
-      if (room.girl == name) { final_building = building; }
+      if (room.girl == name) { finalBuilding = building; }
     });
   });
-  return final_building;
+  return finalBuilding;
 };
 
 Building.prototype.description = function() {

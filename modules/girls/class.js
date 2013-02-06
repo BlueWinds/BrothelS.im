@@ -106,34 +106,34 @@ Girl.prototype.compare = function(delta, explain) {
 Girl.prototype._compare = function(delta) {
   if (delta.name && this.name != delta.name) { return this.name + ' is not ' + delta.name; }
   if (delta.status && this.status != delta.status) { return this.name + ' is not ' + delta.status; }
-  var stat, rule, new_d = $.extend(true, {}, delta);
-  if (new_d.min) {
-    if (new_d.min.specialRules) {
-      for (rule in new_d.min.specialRules) {
-        if ((this.specialRules[rule] || 0) < new_d.min.specialRules[rule]) {
-          return this.name + ' does not have ' + rule + ' ' + new_d.min.specialRules[rule] + '.';
+  var stat, rule, newDelta = $.extend(true, {}, delta);
+  if (newDelta.min) {
+    if (newDelta.min.specialRules) {
+      for (rule in newDelta.min.specialRules) {
+        if ((this.specialRules[rule] || 0) < newDelta.min.specialRules[rule]) {
+          return this.name + ' does not have ' + rule + ' ' + newDelta.min.specialRules[rule] + '.';
         }
       }
-      delete new_d.min.specialRules;
+      delete newDelta.min.specialRules;
     }
-    for (stat in new_d.min) {
-      if (this[stat] < new_d.min[stat]) {
-        return this.name + ' does not have ' + __(stat) + ' ' + new_d.min[stat];
+    for (stat in newDelta.min) {
+      if (this[stat] < newDelta.min[stat]) {
+        return this.name + ' does not have ' + __(stat) + ' ' + newDelta.min[stat];
       }
     }
   }
-  if (new_d.max) {
-    if (new_d.max.specialRules) {
-      for (rule in new_d.max.specialRules) {
-        if ((this.specialRules[rule] || 0) > new_d.max.specialRules[rule]) {
-          return this.name + ' does not have ' + new_d.max.specialRules[rule] + ' ' + rule + ' or less.';
+  if (newDelta.max) {
+    if (newDelta.max.specialRules) {
+      for (rule in newDelta.max.specialRules) {
+        if ((this.specialRules[rule] || 0) > newDelta.max.specialRules[rule]) {
+          return this.name + ' does not have ' + newDelta.max.specialRules[rule] + ' ' + rule + ' or less.';
         }
       }
     }
-    delete new_d.max.specialRules;
-    for (stat in new_d.max) {
-      if (this[stat] > new_d.max[stat]) {
-        return this.name + ' does not have ' + __(stat) + ' ' + new_d.max[stat] + ' or less.';
+    delete newDelta.max.specialRules;
+    for (stat in newDelta.max) {
+      if (this[stat] > newDelta.max[stat]) {
+        return this.name + ' does not have ' + __(stat) + ' ' + newDelta.max[stat] + ' or less.';
       }
     }
   }
@@ -248,23 +248,24 @@ Girl.prototype.get = function(stat) {
 };
 
 Girl.prototype.parseConditions = function(conditions) {
-  var old_int;
+  var oldInt;
   for (var cond in {min: 1, max: 1}) {
-    if (conditions[cond]) {
-      for (var stat in conditions[cond]) {
-        if (stat == 'specialRules') {
-          for (var rule in conditions[cond].specialRules) {
-            if (typeof(conditions[cond].specialRules[rule]) == 'string') {
-              old_int = parseFloat(conditions[cond].specialRules[rule], 10);
-              old_int += this.specialRules[rule] || 0;
-              conditions[cond].specialRules[rule] = old_int;
-            }
+    if (!conditions[cond]) {
+      continue;
+    }
+    for (var stat in conditions[cond]) {
+      if (stat == 'specialRules') {
+        for (var rule in conditions[cond].specialRules) {
+          if (typeof(conditions[cond].specialRules[rule]) == 'string') {
+            oldInt = parseFloat(conditions[cond].specialRules[rule], 10);
+            oldInt += this.specialRules[rule] || 0;
+            conditions[cond].specialRules[rule] = oldInt;
           }
-        } else if (typeof(conditions[cond][stat]) == 'string') {
-          old_int = parseInt(conditions[cond][stat], 10);
-          conditions[cond][stat] = this[stat] + old_int;
-          conditions[cond][stat] = Math.min(100, Math.max(0, conditions[cond][stat]));
         }
+      } else if (typeof(conditions[cond][stat]) == 'string') {
+        oldInt = parseInt(conditions[cond][stat], 10);
+        conditions[cond][stat] = this[stat] + oldInt;
+        conditions[cond][stat] = Math.min(100, Math.max(0, conditions[cond][stat]));
       }
     }
   }

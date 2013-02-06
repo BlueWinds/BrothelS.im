@@ -17,9 +17,9 @@ Girl.prototype.interest = function(sex) {
   Actions.Streetwalk.variants = function(context, done) {
     var endDelta = context.girl.startDelta();
     var delta = this.base().results[0];
-    var main_message = new Message(delta.message, context);
+    var mainMessage = new Message(delta.message, context);
     context.girl.apply(delta.girl);
-    g.messages.push(main_message);
+    g.messages.push(mainMessage);
 
     var found = Math.pow(context.girl.charisma / 100, 0.5);
     found *= (Math.random() / 2 + 0.5);
@@ -29,7 +29,7 @@ Girl.prototype.interest = function(sex) {
       context.customer = new Person(Math.choice(['Very Low Class', 'Low Class']));
       doCustomer.call(this, context);
     }
-    main_message.delta = endDelta();
+    mainMessage.delta = endDelta();
     done({});
   };
 
@@ -148,14 +148,14 @@ Girl.prototype.interest = function(sex) {
     context.customers._sort('typeRank', true).forEach(function(customer) {
       customer.modestyRate = 0;
       var customerConfig = Person.prostitution.customerClass[customer.type];
-      var girl, max_satisfaction = 0.2;
+      var girl, maxSatisfaction = 0.2;
       for (var name in canService) {
         var sex = customer.sexType(g.girls[name]);
         var satisfaction = g.girls[name].interest(sex);
         satisfaction += customer.satisfaction(g.girls[name]);
-        if (satisfaction > max_satisfaction) {
+        if (satisfaction > maxSatisfaction) {
           girl = g.girls[name];
-          max_satisfaction = satisfaction;
+          maxSatisfaction = satisfaction;
         }
       }
       if (girl) {

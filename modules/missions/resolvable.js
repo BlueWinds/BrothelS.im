@@ -176,7 +176,6 @@ Resolvable.prototype.getResults = function(done, context) {
 };
 
 Resolvable.prototype.applyResults = function(results, done, context) {
-  var res = this;
   var series = [function(next) {
     e.invokeAll('ApplyResults', results, context, next);
   }];
@@ -218,24 +217,24 @@ Resolvable.prototype.applyResults = function(results, done, context) {
 
 Resolvable.prototype.parseConditions = function(conditions, context) {
   conditions = $.extend(true, {}, conditions);
-  var old_int;
+  var oldInt;
   for (var cond in {min: 1, max: 1}) {
     if (conditions[cond]) {
       if (typeof(conditions[cond].money) == 'string') {
-        old_int = parseInt(conditions[cond].money, 10);
-        conditions[cond].money = g.money + old_int;
+        oldInt = parseInt(conditions[cond].money, 10);
+        conditions[cond].money = g.money + oldInt;
       }
       if (typeof(conditions[cond].day) == 'string') {
-        old_int = parseInt(conditions[cond].day, 10);
-        conditions[cond].day = (context.day || g.day) + old_int;
+        oldInt = parseInt(conditions[cond].day, 10);
+        conditions[cond].day = (context.day || g.day) + oldInt;
       }
       if (typeof(conditions[cond].girls) == 'string') {
-        old_int = parseInt(conditions[cond].girls, 10);
-        conditions[cond].girls = g.girls._filter('status', 'Hired').length + old_int;
+        oldInt = parseInt(conditions[cond].girls, 10);
+        conditions[cond].girls = g.girls._filter('status', 'Hired').length + oldInt;
       }
       if (typeof(conditions[cond].buildings) == 'string') {
-        old_int = parseInt(conditions[cond].buildings, 10);
-        conditions[cond].girls = g.buildings._filter('status', 'Owned').length + old_int;
+        oldInt = parseInt(conditions[cond].buildings, 10);
+        conditions[cond].girls = g.buildings._filter('status', 'Owned').length + oldInt;
       }
     }
   }
