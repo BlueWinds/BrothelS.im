@@ -11,6 +11,19 @@ e.GameUpgrade03.push(function(game, next) {
   next();
 });
 
+e.GameUpgrade05.push(function(game, done) {
+  $.each(game.girls, function(name, girl) {
+    if (girl.status == 'Hired') {
+      girl.setAction(girl.action('Rest', { time: 'morning' }));
+      girl.setAction(girl.action('Rest', { time: 'evening' }));
+    } else {
+      delete girl.actions.morning;
+      delete girl.actions.evening;
+    }
+  });
+  done();
+});
+
 var Actions = {};
 
 e.Ready.push(function(done) {
@@ -44,10 +57,6 @@ e.GirlNew.push(function(girl) {
   // Add action history, if it doesn't exist yet.
   if (!girl.actions.history) {
     girl.actions.history = {};
-  }
-  if (!girl.actions.morning && !girl.actions.evening) {
-    girl.setAction(girl.action('Rest', { time: 'morning' }));
-    girl.setAction(girl.action('Rest', { time: 'evening' }));
   }
 });
 
@@ -135,4 +144,14 @@ e.GirlRunTime.push(function(girl, time, done) {
     return;
   }
   done();
+});
+
+e.GirlSetStatus.push(function(girl) {
+  if (girl.status == 'Hired') {
+    girl.setAction(girl.action('Rest', { time: 'morning' }));
+    girl.setAction(girl.action('Rest', { time: 'evening' }));
+  } else {
+    delete girl.actions.morning;
+    delete girl.actions.evening;
+  }
 });

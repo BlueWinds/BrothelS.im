@@ -5,7 +5,6 @@ e.GameUpgrade03.push(function(game, next) {
   for (var group in messages) {
     for (var i in messages[group]) {
       var message = messages[group][i];
-      message._class = 'Message';
       message.label = message.type;
       delete message.type;
       delete message.time;
@@ -18,11 +17,15 @@ e.GameUpgrade03.push(function(game, next) {
 
 e.GameUpgrade04.push(function(game, next) {
   delete game.messagesShown;
+  g.messages.forEach(function(message) {
+    message._class = 'Message';
+  });
   next();
 });
 
 var Message = function(obj) {
   $.extend(true, this, obj);
+  this.weight = this.weight || 0;
   this._class = 'Message';
 };
 

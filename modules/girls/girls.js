@@ -4,6 +4,7 @@ e.GirlNew = [];
 e.GirlsPostMorning = [];
 e.GirlsPostEvening = [];
 e.GirlRunTime = [];
+e.GirlSetStatus = [];
 e.GameUpgrade03.push(function(game, next) {
   for (var name in game.girls) {
     game.girls[name]._class = 'Girl';

@@ -45,6 +45,19 @@ e.GameUpgrade04.push(function(game, next) {
   next();
 });
 
+e.GameUpgrade05.push(function(game, next) {
+  $.each(g.missions, function(_id, mission) {
+    if (mission.display) {
+      delete mission.display.delta;
+    }
+    mission.results = mission.base().results;
+  });
+  if (game.day > 150 && game.fetishes.rape && game.missionsDone.avengeGuardRapeFinal) {
+    game.missions.luxuryHouseDelay = Mission.create('luxuryHouseDelay');
+  }
+  next();
+});
+
 Mission.checkStart = function(day, done) {
   var context = {
     day: day
@@ -124,4 +137,20 @@ e.GameRender.push(function(done) {
     view.closest('.ui-dialog').addClass('tab-dialog');
   });
   done();
+});
+
+e.GirlSetStatus.push(function(girl) {
+  g.missions._filter('girl', girl.name).forEach(function(mission) {
+    if (!mission.conditions || !mission.conditions.girl || !girl.compare(mission.conditions.girl)) {
+      delete g.missions[mission._id];
+    }
+  });
+});
+
+e.BuildingSetStatus.push(function(building) {
+  g.missions._filter('building', building.name).forEach(function(mission) {
+    if (!mission.conditions || !mission.conditions.building || !building.compare(mission.conditions.building)) {
+      delete g.missions[mission._id];
+    }
+  });
 });

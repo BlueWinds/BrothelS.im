@@ -65,9 +65,9 @@ Missions.luxuryHouseSale = {
     text: "There has been some sort of scandal involving the city guard, in which nearly a dozen members were forced to resign in disgrace - apparently, one of them has even had to flee the country. The captain of the guard, Kim Xun, has been tasked with dealing with his property - among which is a Luxurious House in excellent condition.",
     weight: -1
   },
-  variants: function(context, done) {
-    context.building.status = 'For Sale';
-    done(this.results[0]);
-  },
-  results: [{}]
+  results: [{
+    building: {
+      status: 'For Sale'
+    }
+  }]
 };

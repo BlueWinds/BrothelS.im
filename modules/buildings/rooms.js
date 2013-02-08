@@ -23,15 +23,12 @@ Building.prototype.sellRoom = function(index) {
 };
 
 Building.roomsByType = function(type, status) {
-  status = status || 'Owned';
-  if (!g.buildings) { return []; }
-  var rooms = g.buildings._filter('status', status)._accumulate('rooms');
+  var rooms = g.buildings._filter('status', status || 'Owned')._accumulate('rooms');
   return rooms._flatten()._filter('type', type);
 };
 
 Building.roomKeySum = function(type, key, status) {
-  status = status || 'Owned';
-  return Building.roomsByType(type, status)._accumulate(key)._sum();
+  return Building.roomsByType(type, status || 'Owned')._accumulate(key)._sum();
 };
 
 Building.prototype.potentialRooms = function() {
@@ -57,4 +54,12 @@ e.BuildingDailyDelta.push(function(building, delta) {
       delta._add(Rooms[room.type].daily);
     }
   });
+});
+
+e.BuildingSetStatus.push(function(building) {
+  if (building.status != 'Owned') {
+    building.rooms.forEach(function(room) {
+      delete room.girl;
+    });
+  }
 });

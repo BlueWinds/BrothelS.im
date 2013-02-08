@@ -95,7 +95,7 @@ Girl.prototype.apply = function(stat, delta) {
     return;
   }
   if (stat == 'status') {
-    this.status = delta;
+    this.setStatus(delta);
     return;
   }
   for (var key in stat) {
@@ -219,7 +219,7 @@ Girl.prototype.startDelta = function(s) {
 
 Girl.prototype.hire = function() {
   g.money -= this.hirePrice();
-  this.status = 'Hired';
+  this.apply('status', 'Hired');
   this.happiness = Girl.config.startHappiness;
   this.hireDay = g.day;
 };
@@ -277,4 +277,9 @@ Girl.prototype.parseConditions = function(conditions) {
     }
   }
   return conditions;
+};
+
+Girl.prototype.setStatus = function(status) {
+  this.status = status;
+  e.invokeAllSync('GirlSetStatus', this);
 };

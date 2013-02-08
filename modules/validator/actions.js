@@ -163,7 +163,7 @@ Schemas.Girl.properties.Actions = {
 
 Schemas.liveGirl.properties.actions.properties.morning = { $ref: 'liveAction' };
 Schemas.liveGirl.properties.actions.properties.evening = { $ref: 'liveAction' };
-Schemas.liveGirl.properties.actions.required.push('evening', 'history');
+Schemas.liveGirl.properties.actions.required.push('history');
 Schemas.liveGirl.properties.actions.properties.history = {
   type: 'object',
   additionalProperties: { type: 'integer' }

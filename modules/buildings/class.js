@@ -139,7 +139,7 @@ Building.prototype.apply = function(stat, delta) {
       girl.apply(delta);
     });
   } else if (stat == 'status') {
-    this.status = delta;
+    this.setStatus(delta);
   } else {
     var building = this;
     $.each(stat, function(key, value) {
@@ -208,12 +208,12 @@ Building.prototype.S = function(stat) {
 };
 
 Building.prototype.buy = function() {
-  this.status = 'Owned';
+  this.setStatus('Owned');
   g.money -= this.price();
 };
 
 Building.prototype.sell = function() {
-  this.status = 'For Sale';
+  this.setStatus('For Sale');
   g.money += this.price('Sell');
 };
 
@@ -237,3 +237,8 @@ Building.prototype.image = function() {
 };
 
 Building.prototype.parseConditions = Girl.prototype.parseConditions;
+
+Building.prototype.setStatus = function(status) {
+  this.status = status;
+  g.invokeAllSync('BuildingSetStatus', this);
+};
