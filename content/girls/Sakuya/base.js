@@ -64,7 +64,7 @@ Girls.Sakuya = {
       results: [
         {
           message: {
-            text: 'Sakuya spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <<= girl.building().name >>. You can hardly believe how effective it was - one would swear it should take an hour to get the stains out of those sheets, but you turned your back for a moment and they were done, wash water splashed all over the walls.<< if (girl.specialRules.ScarletDevilTalk == 1 && girl.specialRules.magic < 100) { >><br><br><em>Magic <<= girl.specialRules.magic >> <span class="delta">(+1)</span></em><< } >>'
+            text: 'Sakuya spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <<= girl.building().name >>. You can hardly believe how effective it was - one would swear it should take an hour to get the stains out of those sheets, but you turned your back for a moment and they were done, wash water splashed all over the walls.<< if (girl.specialRules.ScarletDevilTalk == 1) { >><br><br><em>Magic <<= girl.specialRules.magic >> <<- girl.specialRules.magic < 100 ? \'<span class="delta">(+1)</span>\' : "" >></em><< } >>'
           },
           girl: {
             endurance: -8,
