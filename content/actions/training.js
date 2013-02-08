@@ -87,8 +87,7 @@ Actions.Study = {
       girl: {
         endurance: -5,
         intelligence: 2.5,
-        happiness: 3,
-        obedience: -0.2
+        happiness: 3
       },
       money: -100
     },
