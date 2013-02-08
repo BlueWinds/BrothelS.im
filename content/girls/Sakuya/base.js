@@ -243,7 +243,7 @@ Girls.Sakuya = {
             context.girl.status = 'Gone';
             if (context.girl.modesty >= 75 && context.girl.obedience >= 90) {
               delta.message = mission.results.staySilentGood.message;
-              delta.money = 10000;
+              delta.money = 24000;
             } else {
               delta.message = mission.results.staySilentBad.message;
               delta.money = 2000;

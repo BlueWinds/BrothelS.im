@@ -39,11 +39,11 @@ Schemas.Conditions = {
     },
     girl: {
       anyOf: [{ $ref: 'girlConditions' }],
-      description: 'Must match the girl in the current context - if none is already there, it will add the first Hired girl who matches.'
+      description: 'Must match the girl in the current context - if none is already there, it will add a random girl who matches.'
     },
     building: {
       anyOf: [{ $ref: 'buildingConditions' }],
-      description: 'Must match the building in the current context - if none is already there, it will add the first Owned building which matches.'
+      description: 'Must match the building in the current context - if none is already there, it will add the a random building which matches.'
     }
   },
   patternProperties: {

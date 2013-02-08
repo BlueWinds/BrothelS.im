@@ -94,6 +94,10 @@ Girl.prototype.apply = function(stat, delta) {
     this[stat] = Math.floor(Math.max(0, Math.min(100, this[stat])));
     return;
   }
+  if (stat == 'status') {
+    this.status = delta;
+    return;
+  }
   for (var key in stat) {
     this.apply(key, stat[key]);
   }

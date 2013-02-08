@@ -138,6 +138,8 @@ Building.prototype.apply = function(stat, delta) {
     $.each(this.girls(), function(name, girl) {
       girl.apply(delta);
     });
+  } else if (stat == 'status') {
+    this.status = delta;
   } else {
     var building = this;
     $.each(stat, function(key, value) {
@@ -181,14 +183,14 @@ Building.prototype.runDay = function() {
     text = base.daily.dirty;
   }
   this.apply(this.dailyDelta());
-  g.messages.push(new Message({
+  Message.send({
     label: this.clean > base.daily.breakpoint ? 'Clean' : 'Dirty',
     image: base.image,
     text: text,
     delta: endDelta(),
     weight: 10,
     group: this.name
-  }));
+  }, { building: this });
 };
 
 Building.prototype.S = function(stat) {

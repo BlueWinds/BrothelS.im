@@ -9,10 +9,16 @@ e.Ready.push(function(done) {
     tv4.addSchema(schema, Schemas[schema]);
   }
   classes.forEach(function(type) {
-    for (var item in window[type + 's']) {
-      var obj = window[type + 's'][item];
+    $.each(window[type + 's'], function(key, obj) {
       var success = tv4.validate(obj, type);
       if (!success) {
+        tv4.error.subErrors.forEach(function(error) {
+          var subError = $('<div>');
+          $('<div>').html(type + ' - ' + (obj.name || obj._id)).appendTo(subError);
+          $('<div>').html(error.message + ':').appendTo(subError);
+          $('<div>').html((obj.name || obj._id) + error.dataPath).appendTo(subError);
+          $('#error').append(subError);
+        });
         var error = $('<div>');
         $('<div>').html(type + ' - ' + (obj.name || obj._id)).appendTo(error);
         $('<div>').html(tv4.error.message + ':').appendTo(error);
@@ -20,9 +26,8 @@ e.Ready.push(function(done) {
         $('#error').append(error);
         console.log(tv4.error);
         console.log(obj);
-        return;
       }
-    }
+    });
   });
   done();
 });

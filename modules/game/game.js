@@ -27,7 +27,8 @@ $.extend(e, {
       }
     }
     next();
-  }]
+  }],
+  GameUpgrade05: []
 });
 
 var __ = function(string, type) {
@@ -38,8 +39,24 @@ var __ = function(string, type) {
   }
   return string;
 };
-// TODO: Remove in next version
-var T = __;
+
+Object.defineProperty(Object.prototype, "_toString", {
+  enumerable: false,
+  writable: false,
+  configurable: true,
+  value: function(form) {
+    var items = [];
+    for (var key in this) {
+      var t = __(this[key], form);
+      if (items.indexOf(t) == -1) {
+        items.push(t);
+      }
+    }
+    if (items.length == 1) { return items[0]; }
+    var str = items.slice(0, -1).join(', ');
+    return str + ' and ' + items._last();
+  }
+});
 
 Game.fetishes = ['tentacles', 'rape'];
 
@@ -78,6 +95,13 @@ Game.loadFromText = function(value) {
         Game.loadFromText(JSON.stringify(g));
       });
       return;
+    } else if (!g.version) {
+      g.version = 0.5;
+      e.invokeAll('GameUpgrade05', g, function() {
+        var string = JSON.stringify(g);
+        string.replace(/T\(/g, '__(');
+        Game.loadFromText(string);
+      });
     } else {
       g.render();
     }
@@ -118,6 +142,7 @@ Game.list = function() {
 Game.start = function(opt) {
   opt = $.extend({
     day: 0,
+    version: Game.config.version,
     money: Game.config.startMoney,
     moneyHistory: []
   }, opt);
@@ -299,3 +324,7 @@ e.Autorender.push(function(element, done) {
   });
   done();
 });
+
+Game.renderDelta = function(delta) {
+  return ejs.render($('#render_delta_template').html(), { delta: delta });
+};

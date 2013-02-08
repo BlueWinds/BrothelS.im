@@ -17,9 +17,8 @@ Girl.prototype.interest = function(sex) {
   Actions.Streetwalk.variants = function(context, done) {
     var endDelta = context.girl.startDelta();
     var delta = this.base().results[0];
-    var mainMessage = new Message(delta.message, context);
+    var mainMessage = Message.send(delta.message, context);
     context.girl.apply(delta.girl);
-    g.messages.push(mainMessage);
 
     var found = Math.pow(context.girl.charisma / 100, 0.5);
     found *= (Math.random() / 2 + 0.5);
@@ -45,13 +44,13 @@ Girl.prototype.interest = function(sex) {
       }
       context.result = this.special.uncooperative;
       context.girl.apply(Person.prostitution.refuseDelta);
-      g.messages.push(new Message({
+      Message.send({
         label: this.label + ' - Refused',
         image: context.girl.image('refuse'),
         text: this.special.customerMessage,
         group: context.girl.name,
         delta: endDelta()
-      }, context));
+      }, context);
       return 0;
     }
     var satisfaction = context.customer.satisfaction(context.girl) + interest;
@@ -73,13 +72,13 @@ Girl.prototype.interest = function(sex) {
     }
 
     context.result = Math.choice(this.special.sexResults[sex]);
-    g.messages.push(new Message({
+    Message.send({
       label: this.label,
       image: context.girl.image(sex),
       text: this.special.customerMessage,
       group: context.girl.name,
       delta: endDelta()
-    }, context));
+    }, context);
 
     return satisfaction;
   }
@@ -169,13 +168,13 @@ Girl.prototype.interest = function(sex) {
       }
     });
 
-    g.messages.push(new Message({
+    Message.send({
       group: context.building.name,
       label: 'Customers arrived',
       image: context.building.image(),
       text: Actions.Whore.special.message,
       delta: endDelta(),
       weight: 1
-    }, context));
+    }, context);
   }
 })();

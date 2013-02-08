@@ -82,7 +82,7 @@ Resolvable.prototype.checkConditions = function(cond, context) {
     for (var fet in cond.fetishes) {
       if (cond.fetishes[fet] && !g.fetishes[fet]) {
         return false;
-      } else if (g.fetishes[fet]) {
+      } else if (!cond.fetishes[fet] && g.fetishes[fet]) {
         return false;
       }
     }
@@ -104,26 +104,28 @@ Resolvable.prototype.checkConditions = function(cond, context) {
   var i;
   if (cond.girl) {
     var girls = context.girl ? [context.girl] : g.girls;
+    var matchingGirls = [];
     if (!cond.girl.status) { girls = girls._filter('status', 'Hired'); }
     delete context.girl;
     for (i in girls) {
       if (girls[i].compare(cond.girl)) {
-        context.girl = girls[i];
-        break;
+        matchingGirls.push(girls[i]);
       }
     }
-    if (!context.girl) { return false; }
+    if (!matchingGirls.length) { return false; }
+    context.girl = Math.choice(matchingGirls);
   }
   if (cond.building) {
     var buildings = context.building ? [context.building] : g.buildings;
     delete context.building;
+    var matchingBuildings = [];
     for (i in buildings) {
       if (buildings[i].compare(cond.building)) {
-        context.building = buildings[i];
-        break;
+        matchingBuildings.push(buildings[i]);
       }
     }
-    if (!context.building) { return false; }
+    if (!matchingBuildings.length) { return false; }
+    context.building = Math.choice(matchingBuildings);
   }
   if (cond.missions) {
     for (var _id in cond.missions) {
@@ -166,9 +168,7 @@ Resolvable.prototype.getResults = function(done, context) {
         rand -= base.variants[i];
         if (rand <= 0) { break; }
       } else {
-        if (this.checkConditions(base.variants[i])) {
-          break;
-        }
+        if (this.checkConditions(base.variants[i])) { break; }
       }
     }
     done(this.results[i]);
@@ -199,9 +199,8 @@ Resolvable.prototype.applyResults = function(results, done, context) {
     changes.forEach(function(d) { delta._add(d()); });
     var messages = results.message.length ? results.message : [results.message];
     messages.forEach(function(message) {
-      var live = new Message(message, context);
+      var live = Message.send(message, context);
       live.delta = message.delta === false ? {} : delta;
-      g.messages.push(live);
     });
   }
   if (results.mission) {
@@ -212,6 +211,13 @@ Resolvable.prototype.applyResults = function(results, done, context) {
       } else {
         series.push(function(next) { mission.checkDay(next); });
       }
+    }
+  }
+  if (results.missionsDone) {
+    for (var _id in results.missionsDone) {
+      if (results.missionsDone[_id]) {
+        g.missionsDone[_id] = true;
+      } else { delete g.missionsDone[_id]; }
     }
   }
   e.runSeries(series, done);

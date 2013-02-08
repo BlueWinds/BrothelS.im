@@ -2,7 +2,8 @@
 Schemas.Game = {
   type: 'object',
   required: [
-    '_class', 'day', 'fetishes', 'money', 'moneyHistory'
+    '_class', 'day', 'fetishes', 'money', 'moneyHistory',
+    'version'
   ],
   properties: {
     _id: { type: 'string' },
@@ -31,6 +32,9 @@ Schemas.Game = {
     },
     name: {
       type: 'string'
+    },
+    version: {
+      'enum': [0.5]
     }
   },
   additionalProperties: false

@@ -234,26 +234,6 @@ Object.defineProperty(Array.prototype, "_append", {
   }
 });
 
-Object.defineProperty(Object.prototype, "_toString", {
-  enumerable: false,
-  writable: false,
-  configurable: true,
-  value: function(form) {
-    var items = [];
-    for (var key in this) {
-      // A bit of a circular dependency here - the __ function is defined in modules/game/game.js, and relies on information provided in content/game.js to be actually useful. Cheating, I know, but nothing can render to the screen until game.js is loaded anyway, so it's not too bad.
-      var t = __(this[key], form);
-      if (items.indexOf(t) == -1) {
-        items.push(t);
-      }
-    }
-    if (items.length == 1) { return items[0]; }
-
-    var str = items.slice(0, -1).join(', ');
-    return str + ' and ' + items._last();
-  }
-});
-
 Storage.prototype.getObject = function(key) {
   var value = this.getItem(key);
   return value && JSON.parse(value);

@@ -14,14 +14,12 @@ Mission.create = function(_id, context) {
     mission.end = mission.parseConditions(mission.end, context);
   }
   if (mission.display) {
-    var message = new Message(mission.display, mission.context());
+    var message = Message.send(mission.display, mission.context());
     // We save the rendered strings, since they probably contain context-sensitive data, but not the full Message object.
     mission.display.label = message.label;
     mission.display.image = message.image;
     mission.display.group = message.group;
     mission.display.text = message.text;
-    delete mission.display._class;
-    g.messages.push(message);
   }
   return mission;
 };
@@ -35,20 +33,22 @@ Mission.prototype.getEnd = function() {
 };
 
 Mission.prototype.checkDay = function(done) {
-  var mission = this;
   var conditions = this.getEnd() || {};
   var result = this.checkConditions(conditions);
   if (result) {
-    mission.setContext(result);
-    delete g.missions[mission._id];
-    g.missionsDone[mission._id] = true;
-    mission.getResults(function(results) {
+    this.setContext(result);
+    delete g.missions[this._id];
+    g.missionsDone[this._id] = true;
+    var mission = this;
+    this.getResults(function(results) {
       mission.applyResults(results, done);
     });
     return;
+  } else if (conditions.max && conditions.max.day <= g.day) {
+    delete g.missions[this._id];
   }
-  if (mission.display && conditions.max && conditions.max.day && conditions.max.day - 1 == g.day) {
-    g.messages.push(new Message(mission.display));
+  if (this.display && conditions.max && conditions.max.day && conditions.max.day - 1 == g.day) {
+    Message.send(this.display);
   }
   done();
 };

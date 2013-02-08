@@ -8,7 +8,10 @@ Schemas.buildingDelta = {
       description: 'This delta will be applied to each girl living in the building.'
     },
     clean: { $ref: 'statDelta' },
-    reputation: { $ref: 'statDelta' }
+    reputation: { $ref: 'statDelta' },
+    status: {
+      'enum': ['Owned', 'For Sale', 'Town', 'Gone']
+    }
   },
   additionalProperties: false
 };

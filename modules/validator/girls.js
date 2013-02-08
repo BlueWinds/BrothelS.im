@@ -33,6 +33,9 @@ Schemas.girlDelta = {
         ]
       }
     },
+    status: {
+      'enum': ['Hired', 'For Hire', 'Town', 'Gone']
+    },
     happiness: { $ref: 'statDelta' },
     endurance: { $ref: 'statDelta' },
     obedience: { $ref: 'statDelta' },
@@ -196,6 +199,11 @@ Schemas.Girl = {
           type: 'number',
           minimum: 0,
           description: "payRatio modifies the amount that the girl wants to get paid. The default is 1 - so this girl here only wants 80% of the pay of someone else with her stats."
+        },
+        contentComplete: {
+          type: 'integer',
+          minimum: 1,
+          description: "The contentComplete special rule marks the fact that the player has gone through this girl's custom content to sufficient degree that customers should start offering to take her away."
         }
       },
       additionalProperties: true

@@ -21,17 +21,23 @@ e.GameUpgrade04.push(function(game, next) {
   next();
 });
 
-var Message = function(obj, context) {
+var Message = function(obj) {
   $.extend(true, this, obj);
   this._class = 'Message';
+};
+
+Message.send = function(obj, context) {
+  var message = new Message(obj);
   if (context) {
-    this.group = ejs.render(this.group, context);
-    this.weight = this.weight || 0;
-    this.label = ejs.render(this.label, context);
-    this.image = ejs.render(this.image, context);
-    this.text = ejs.render(this.text, context);
-    this.delta = this.delta || {};
+    message.group = ejs.render(message.group, context);
+    message.weight = message.weight || 0;
+    message.label = ejs.render(message.label, context);
+    message.image = ejs.render(message.image, context);
+    message.text = ejs.render(message.text, context);
+    message.delta = message.delta || {};
   }
+  g.messages.push(message);
+  return message;
 };
 
 e.GameNew.push(function(done) {

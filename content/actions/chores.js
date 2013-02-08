@@ -14,7 +14,7 @@ Actions.Rest = {
       },
       girl: {
         endurance: 12,
-        happiness: 5
+        happiness: 3
       }
     }
   ]

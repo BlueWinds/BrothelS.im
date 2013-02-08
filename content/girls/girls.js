@@ -14,15 +14,15 @@ Girl.config = {
     base: 200,
     happiness: 0,
     endurance: 0,
-    obedience: -3,
-    modesty: 1,
+    obedience: 0,
+    modesty: 2,
     charisma: 2,
-    constitution: 1,
+    constitution: 2,
     intelligence: 5,
     soft: 5,
-    hard: 10,
+    hard: 8,
     anal: 10,
-    fetish: 20
+    fetish: 15
   },
   startHappiness: 75
 };

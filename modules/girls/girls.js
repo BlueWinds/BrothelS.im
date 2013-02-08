@@ -186,3 +186,18 @@ e.GameRender.push(function(done) {
   });
   done();
 });
+
+Girl.renderConditions = function(conditions) {
+  var text = [];
+  $.each(conditions.max || {}, function(stat, value) {
+    if (typeof(value) != "number") { return; }
+    var span = '<span class="delta stat ' + stat + '">' + (stat == "money" ? "$" + value : value) + '-</span>';
+    text.push(span);
+  });
+  $.each(conditions.min || {}, function(stat, value) {
+    if (typeof(value) != "number") { return; }
+    var span = '<span class="delta stat ' + stat + '">' + (stat == "money" ? "$" + value : value) + '+</span>';
+    text.push(span);
+  });
+  return '<span>' + text.join(', ') + '</span>';
+};

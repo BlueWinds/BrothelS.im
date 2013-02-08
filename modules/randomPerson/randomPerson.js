@@ -29,6 +29,9 @@ function Person(obj) {
     if (info.image) {
       obj.image = Math.choice(info.image);
     }
+    if (info.description) {
+      obj.description = Math.choice(info.description);
+    }
     var idx = 0;
     var chance = 0.5;
     while (obj.wants.length < 3) {
