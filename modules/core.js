@@ -231,6 +231,7 @@ Object.defineProperty(Array.prototype, "_append", {
   configurable: true,
   value: function(items) {
     this.push.apply(this, items);
+    return this;
   }
 });
 

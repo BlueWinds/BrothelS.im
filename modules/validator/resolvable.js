@@ -197,7 +197,7 @@ Schemas.liveResolvable = {
       'enum': Object.keys(Girls)
     },
     building: {
-      'enum': Object.keys(Buildings)
+      'enum': Object.keys(Buildings)._append(['Inn'])
     },
     variants: {
       type: ['function', 'array'],

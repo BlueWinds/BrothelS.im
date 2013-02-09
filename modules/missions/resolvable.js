@@ -24,8 +24,8 @@ Resolvable.create = function(_id, _class, context) {
 
 Resolvable.prototype.context = function() {
   var context = {};
-  if (this.girl) { context.girl = g.girls[this.girl]; }
-  if (this.building) { context.building = g.buildings[this.building]; }
+  if (this.girl && g.girls[this.girl]) { context.girl = g.girls[this.girl]; }
+  if (this.building && g.buildings[this.building]) { context.building = g.buildings[this.building]; }
   if (this.time) { context.time = this.time; }
   context[this._class.toLowerCase()] = this;
   return context;

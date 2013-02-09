@@ -304,7 +304,7 @@ Actions.Advertise = {
       label: 'Advertise',
       group: '<<- girl.name >>',
       image: '<<- girl.image() >>',
-      text: "<<= girl.name >> worked the street in front of the <<- building ? building.name : 'inn' >>, chatting up everyone who passed by. While not terribly successful from a business standpoint, it was good for her."
+      text: "<<= girl.name >> worked the street in front of the <<- action.building >>, chatting up everyone who passed by. While not terribly successful from a business standpoint, it was good for her."
     },
     girl: {
       endurance: -10,

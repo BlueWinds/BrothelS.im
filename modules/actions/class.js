@@ -200,7 +200,7 @@ Girl.prototype.potentialActions = function(time) {
 };
 
 Girl.prototype.awayFromHome = function() {
-  return this.actions.morning.awayFromHome || this.actions.evening.awayFromHome;
+  return (this.actions.morning && this.actions.morning.awayFromHome) || (this.actions.evening && this.actions.evening.awayFromHome);
 };
 
 Game.prototype.ownerAction = function(time) {

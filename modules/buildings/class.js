@@ -240,5 +240,5 @@ Building.prototype.parseConditions = Girl.prototype.parseConditions;
 
 Building.prototype.setStatus = function(status) {
   this.status = status;
-  g.invokeAllSync('BuildingSetStatus', this);
+  e.invokeAllSync('BuildingSetStatus', this);
 };
