@@ -46,7 +46,7 @@ Missions.secondBuilding = {
       message: {
         group: 'Guild Permits',
         label: 'Guild Permits',
-        image: '<<- girl.image() >>',
+        image: 'content/missions/GuildHQ.jpg',
         text: "Looking at the balance sheet, you sigh and have to admit - there's no way you're going to able to meet the demands of both bribing your way through an entire office full of officials and still have enough money left to make opening a second location worthwhile. It's unfortunate, but that's life - perhaps next time.",
         weight: -1
       },
@@ -67,7 +67,7 @@ Missions.secondBuilding = {
         {
           group: 'Guild Permits',
           label: 'Guild Permits',
-          image: '<<- girl.image() >>',
+          image: 'content/missions/GuildHQ.jpg',
           text: "You head over to the Guild hall alone. It's an impressive building, but you're not here to admire the architecture. The first barrier is a secretary, a slightly worn older woman who insists there are no permits left and you'd better just head home. $500 jogs her memory, and she remembers that one of the applicants was turned down, and there's still one left. You're given directions down one hall, up a flight of stairs, third door on the left.",
           delta: false,
           weight: -2
@@ -75,7 +75,7 @@ Missions.secondBuilding = {
         {
           group: 'Guild Permits',
           label: 'Guild Permits',
-          image: '<<- girl.image() >>',
+          image: 'content/missions/GuildHQ.jpg',
           text: "The rest of the afternoon is passed by more of the same. Every step of the way feels like you're bleeding, each drop of blood replaced with a stack of gold or a promise of it to come later. You finally get what you're after - a freshly minted piece of paper bearing your last name (with a fake first one), which more or less amounts to a promise that the Guild or the City Guard won't come knocking if you purchase a second location and start housing girls there."
         }
       ]
@@ -85,7 +85,7 @@ Missions.secondBuilding = {
         {
           group: 'Guild Permits',
           label: 'Guild Permits',
-          image: '<<- girl.image() >>',
+          image: 'content/missions/GuildHQ.jpg',
           weight: -2,
           delta: false,
           text: "You head over to the Guild hall with <<- girl.name >> in tow. It's an impressive building, but you're not here to admire the architecture. The first barrier is a secretary, a slightly worn older woman who insists there are no permits left and you'd better just head home. $500 jogs her memory, and she remembers that one of the applicants was turned down, and there's still one left. You're given directions down one hall, up a flight of stairs, third door on the left."

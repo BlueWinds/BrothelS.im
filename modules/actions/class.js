@@ -164,7 +164,7 @@ Girl.prototype.setAction = function(action) {
 
 Girl.prototype.verifyAction = function(time, rebuild) {
   var a = this.actions[time];
-  if (a.locked) { return; }
+  if (a && a.locked) { return; }
   a = a && a.label && a.checkConditions() && !a.checkDisabled();
   if (!a) {
     this.setAction(this.action('Rest', { time: time }));
