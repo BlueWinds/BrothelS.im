@@ -38,10 +38,10 @@ Girls.Saber = {
     Rest: $.extend(true, {}, Actions.Rest, {
       results: [{
         message: {
-          text: 'Saber is a spiritual being whose magical artifacts replenishes endurance upon resting.'
+          text: 'Though no longer a purely spiritual being, Saber still seems to recover from wounds and exhaustion more rapidly than anyone else you\'ve met.'
         },
         girl: {
-          endurance: 100
+          endurance: 22
         }
       }]
     }),
