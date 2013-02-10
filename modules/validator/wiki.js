@@ -5,9 +5,10 @@ $(function() {
   var loaded = 0;
   var scripts = ["game.js", "girls.js", "messages.js", "buildings.js", "resolvable.js", "missions.js", "actions.js", "events.js"];
   scripts.forEach(function(script) {
-    $.ajax('http://brothels.im/modules/validator/' + script, {
-      success: function() {
+    $.getScript('http://brothels.im/modules/validator/' + script, {
+      complete: function() {
         loaded++;
+        console.log(loaded);
         if (loaded == scripts.length) { scriptsLoaded(); }
       }
     });
