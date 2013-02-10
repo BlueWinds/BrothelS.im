@@ -57,13 +57,13 @@ Schemas.parsableBuildingConditions = {
   description: 'Like normal building conditions, except "+3" or "-3" are acceptable values.',
   properties: {
     name: {
-      'enum': Object.keys(Buildings)
+      'enum': Object.keys(window.Buildings || {})
     },
     status: {
       'enum': ['Owned', 'For Sale', 'Town', 'Gone']
     },
     room: {
-      'enum': Object.keys(Rooms)
+      'enum': Object.keys(window.Rooms || {})
     }
   },
   patternProperties: {
@@ -206,7 +206,7 @@ Schemas.liveBuilding = {
       'enum': ['Building']
     },
     name: {
-      'enum': Object.keys(Buildings)
+      'enum': Object.keys(window.Buildings || {})
     },
     status: {
       'enum': ['Owned', 'For Sale', 'Town', 'Gone']
@@ -238,7 +238,7 @@ Schemas.liveBuilding = {
 Schemas.Game.required.push('buildings', 'maxBuildings');
 Schemas.Game.properties.buildings = {
   type: 'object',
-  required: Object.keys(Buildings),
+  required: Object.keys(window.Buildings || {}),
   additionalProperties: { $ref: 'liveBuilding' }
 };
 Schemas.Game.properties.maxBuildings = {

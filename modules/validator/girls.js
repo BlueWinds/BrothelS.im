@@ -259,7 +259,7 @@ Schemas.liveGirl = {
   ],
   properties: {
     name: {
-      'enum': Object.keys(Girls)
+      'enum': Object.keys(window.Girls || {})
     },
     _class: {
       'enum': ['Girl']
@@ -310,7 +310,7 @@ Schemas.liveGirl = {
       required: [ 'pay' ],
       properties: {
         pay: {
-          'enum': Object.keys(Girl.config.pay).map(parseFloat)
+          'enum': Object.keys(window.Girl && window.Girl.config.pay || {}).map(parseFloat)
         },
         soft: { type: 'boolean' },
         hard: { type: 'boolean' },
@@ -335,7 +335,7 @@ Schemas.liveGirl = {
 Schemas.Game.required.push('girls', 'maxGirls');
 Schemas.Game.properties.girls = {
   type: 'object',
-  required: Object.keys(Girls),
+  required: Object.keys(window.Girls || {}),
   additionalProperties: { $ref: 'liveGirl' }
 };
 Schemas.Game.properties.maxGirls = {
