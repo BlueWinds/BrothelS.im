@@ -115,9 +115,13 @@ Object.defineProperty(Object.prototype, "_filter", {
       for (i in this) {
         if (this[i][key] && this[i][key][value] === value2) { result.push(this[i]); }
       }
-    } else {
+    } else if (value !== undefined) {
       for (i in this) {
         if (this[i][key] === value) { result.push(this[i]); }
+      }
+    } else {
+      for (i in this) {
+        if (this[i][key] !== undefined) { result.push(this[i]); }
       }
     }
     return result;

@@ -122,8 +122,8 @@ e.GameRender.push(function(done) {
     return;
   }
   var button = $('<button>').html('Missions').button();
-  if ($.isEmptyObject(g.missions)) {
-    button.button('disabled', true);
+  if (!g.missions._filter('display').length) {
+    button.button('option', 'disabled', true);
   }
   $('#top-right').prepend(button);
   button.click(function() {

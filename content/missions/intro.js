@@ -266,7 +266,7 @@ Missions.buyRooms = {
     image: "<<- building.image() >>",
     group: 'Introduction',
     weight: -1,
-    text: "<blockquote>As you may have noticed, we have an awful lot of unused space around here. When we have some spare money, we should renovate it into something more useful!</blockquote> You can do that by clicking on the building, then select a room from the list on the right-hand side and hitting \"Add Room\".<br><br><em>Adding <strong>Bedrooms</strong> will let additional girls live and work in a building, while a <strong>Dungeon</strong> will open up the Lockdown action, a different way to increase <<- __('obedience') >>.</em>"
+    text: "<blockquote>As you may have noticed, we have an awful lot of unused space around here. When we have some spare money, we should renovate it into something more useful!</blockquote> You can do that by clicking on the building, then dragging a room from the Available Rooms list on the right-hand side into the building. Ones you can't affort will be greyed out.<br><br><em>Adding <strong>Bedrooms</strong> will let additional girls live and work in a building, while a <strong>Dungeon</strong> will open up the Lockdown action, a different way to increase <<- __('obedience') >>. Some other rooms have daily effects on every girl living in the building - these are listed beneath the description.</em>"
   },
   end: {
     min: { day: '+3' }
