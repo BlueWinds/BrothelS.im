@@ -28,7 +28,7 @@ Schemas.buildingConditions = {
   description: 'A set of conditions to match against a building.',
   properties: {
     name: {
-      'enum': Object.keys(Buildings)
+      'enum': Object.keys(Buildings || {})
     },
     status: {
       'enum': ['Owned', 'For Sale', 'Town', 'Gone']
