@@ -69,7 +69,7 @@ Girls['Dark Magician Girl'] = {
             image: 'content/girls/DarkMagicianGirl/images/Exercise2.jpg',
             group: 'Dark Magician Girl',
             label: 'Healing',
-            text: 'Dark Magician Girl drew upon her power to revitalize <<= action.option >>, restoring her energy (<span class="endurance delta">+<<= action.special.endurance >></span>, <span class="happiness delta">+<<= action.special.happiness || 0 >></span>).'
+            text: 'Dark Magician Girl drew upon her power to revitalize <<= action.option >>, restoring her energy (<span class="endurance delta">+<<= action.special.endurance || 0 >></span>, <span class="happiness delta">+<<= action.special.happiness || 0 >></span>).'
           },
           girl: {
             endurance: -8,
