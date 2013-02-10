@@ -1,5 +1,6 @@
 "use strict";
 Schemas.Game = {
+  id: 'Game',
   type: ['object', 'null'],
   required: [
     '_class', 'day', 'fetishes', 'money', 'moneyHistory',

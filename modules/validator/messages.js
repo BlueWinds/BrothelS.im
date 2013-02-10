@@ -1,5 +1,6 @@
 "use strict";
 Schemas.Message = {
+  id: 'Message',
   type: 'object',
   description: 'Replacement patterns are available on all strings inside a message.',
   required: [
@@ -36,6 +37,7 @@ Schemas.Message = {
 };
 
 Schemas.liveMessage = {
+  id: 'liveMessage',
   type: 'object',
   required: [
   '_class', 'weight',

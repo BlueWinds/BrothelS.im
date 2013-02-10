@@ -2,6 +2,7 @@
 Schemas.Context.properties.action = { $ref: 'liveAction' };
 
 Schemas.Tags = {
+  id: 'Tags',
   type: 'object',
   additionalProperties: {
     type: 'number',
@@ -21,6 +22,7 @@ Schemas.Tags = {
 };
 
 Schemas.Action = {
+  id: 'Action',
   anyOf: [{ $ref: 'Resolvable' }],
   required: [ 'group', 'label', 'description' ],
   properties: {
@@ -111,6 +113,7 @@ Schemas.Action = {
 };
 
 Schemas.liveAction = {
+  id: 'liveAction',
   anyOf: [{ $ref: 'liveResolvable' }],
   required: [
     'description', 'girl', 'group', 'label',

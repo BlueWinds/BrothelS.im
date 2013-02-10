@@ -1,5 +1,6 @@
 "use strict";
 Schemas.Context = {
+  id: 'Context',
   type: 'object',
   properties: {
     girl: { $ref: 'liveGirl' },
@@ -13,6 +14,7 @@ Schemas.Context = {
 };
 
 Schemas.Conditions = {
+  id: 'Conditions',
   type: 'object',
   description: 'A set of conditions that can be compared to a Context, or can build a Context (failing if no matching Context can be created given the Condition\'s constraints).',
   properties: {
@@ -76,6 +78,7 @@ Schemas.Conditions = {
 };
 
 Schemas.parsableConditions = {
+  id: 'parsableConditions',
   type: 'object',
   properties: {
     girl: { $ref: 'parsableGirlConditions' },
@@ -118,6 +121,7 @@ Schemas.parsableConditions = {
 };
 
 Schemas.Result = {
+  id: 'Result',
   type: 'object',
   description: 'A set of results, always applied with a Context (though what the Context contains of course varies).',
   properties: {
@@ -139,6 +143,7 @@ Schemas.Result = {
 };
 
 Schemas.Resolvable = {
+  id: 'Resolvable',
   type: 'object',
   description: 'Resolvable is a very abstract concept - it includes Actions, Events and Missions - anything that checks a set of Conditions, builds a Context and then applies a Result using it.',
   required: [
@@ -184,6 +189,7 @@ Schemas.Resolvable = {
 };
 
 Schemas.liveResolvable = {
+  id: 'liveResolvable',
   'type': 'object',
   required: [
     '_class', '_id', 'results'

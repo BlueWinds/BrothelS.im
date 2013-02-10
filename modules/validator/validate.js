@@ -13,17 +13,15 @@ e.Ready.push(function(done) {
       var success = tv4.validate(obj, type);
       if (!success) {
         tv4.error.subErrors.forEach(function(error) {
-          var subError = $('<div>');
+          var subError = $('<div>').appendTo('#error');
           $('<div>').html(type + ' - ' + (obj.name || obj._id)).appendTo(subError);
           $('<div>').html(error.message + ':').appendTo(subError);
           $('<div>').html((obj.name || obj._id) + error.dataPath).appendTo(subError);
-          $('#error').append(subError);
         });
-        var error = $('<div>');
+        var error = $('<div>').appendTo('#error');
         $('<div>').html(type + ' - ' + (obj.name || obj._id)).appendTo(error);
         $('<div>').html(tv4.error.message + ':').appendTo(error);
         $('<div>').html((obj.name || obj._id) + tv4.error.dataPath).appendTo(error);
-        $('#error').append(error);
         console.log(tv4.error);
         console.log(obj);
       }
@@ -34,12 +32,17 @@ e.Ready.push(function(done) {
 
 e.Autorender.push(function(element, done) {
   if (!tv4.validate(g, 'Game')) {
-    var error = $('<div>');
+    tv4.error.subErrors.forEach(function(error) {
+      var subError = $('<div>').appendTo('#error');
+      $('<div>').html(error.message + ':').appendTo(subError);
+      $('<div>').html(error.dataPath).appendTo(subError);
+      $('<div>').html(error.schemaPath).appendTo(error);
+    });
+    var error = $('<div>').appendTo('#error');
     $('<div>').html('Live Game');
     $('<div>').html(tv4.error.message).appendTo(error);
     $('<div>').html('g' + tv4.error.dataPath).appendTo(error);
     $('<div>').html(tv4.error.schemaPath).appendTo(error);
-    $('#error').append(error);
     console.log(tv4.error);
     console.log(g);
   }

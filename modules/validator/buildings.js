@@ -1,5 +1,6 @@
 "use strict";
 Schemas.buildingDelta = {
+  id: 'buildingDelta',
   type: 'object',
   properties: {
     money: { type: 'number' },
@@ -22,6 +23,7 @@ Schemas.girlDelta.properties.building = {
 };
 
 Schemas.buildingConditions = {
+  id: 'buildingConditions',
   type: 'object',
   description: 'A set of conditions to match against a building.',
   properties: {
@@ -50,6 +52,7 @@ Schemas.buildingConditions = {
 };
 
 Schemas.parsableBuildingConditions = {
+  id: 'parsableBuildingConditions',
   type: 'object',
   description: 'Like normal building conditions, except "+3" or "-3" are acceptable values.',
   properties: {
@@ -82,6 +85,7 @@ Schemas.girlConditions.properties.building = {
 };
 
 Schemas.Room = {
+  id: 'Room',
   type: 'object',
   required: [
     'type', 'description', 'price'
@@ -115,6 +119,7 @@ Schemas.Room = {
 };
 
 Schemas.liveRoom = {
+  id: 'liveRoom',
   required: ['type'],
   properties: {
     type: {
@@ -124,6 +129,7 @@ Schemas.liveRoom = {
 };
 
 Schemas.Building = {
+  id: 'Building',
   type: 'object',
   required: [
     'name', 'status', 'description',
@@ -188,6 +194,7 @@ Schemas.Building = {
 };
 
 Schemas.liveBuilding = {
+  id: 'liveBuilding',
   type: 'object',
   required: [
     '_class', 'name', 'status',

@@ -1,11 +1,13 @@
 "use strict";
 Schemas.Stat = {
+  id: 'Stat',
   type: 'integer',
   minimum: 0,
   maximum: 100
 };
 
 Schemas.statDelta = {
+  id: 'statDelta',
   type: 'number',
   'default': 0,
   minimum: -100,
@@ -13,6 +15,7 @@ Schemas.statDelta = {
 };
 
 Schemas.parsableStat = {
+  id: 'parsableStat',
   type: ['integer', 'string'],
   pattern: '\\+|-[0-9]+',
   minimum: 0,
@@ -20,6 +23,7 @@ Schemas.parsableStat = {
 };
 
 Schemas.girlDelta = {
+  id: 'girlDelta',
   type: 'object',
   properties: {
     money: { type: 'number' },
@@ -56,6 +60,7 @@ Schemas.girlDelta = {
 };
 
 Schemas.girlConditions = {
+  id: 'girlConditions',
   type: 'object',
   description: 'A set of conditions to match against a girl.',
   properties: {
@@ -98,6 +103,7 @@ Schemas.girlConditions = {
 };
 
 Schemas.parsableGirlConditions = {
+  id: 'parsableGirlConditions',
   type: 'object',
   description: 'As usual girlConditions, except "+3" or "-3" are acceptable values.',
   properties: {
@@ -142,6 +148,7 @@ Schemas.parsableGirlConditions = {
 };
 
 Schemas.Girl = {
+  id: 'Girl',
   description: "A girl's definition, from which an individual instance of her is created for a game.",
   type: 'object',
   required: [
@@ -239,6 +246,7 @@ Schemas.Girl = {
 };
 
 Schemas.liveGirl = {
+  id: 'liveGirl',
   type: 'object',
   required: [
     'name', '_class', 'status',

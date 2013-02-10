@@ -1,5 +1,6 @@
 "use strict";
 Schemas.Mission = {
+  id: 'Mission',
   anyOf: [{ $ref: 'Resolvable' }],
   properties: {
     _id: {},
@@ -31,6 +32,7 @@ Schemas.Mission = {
 };
 
 Schemas.liveMission = {
+  id: 'liveMission',
   anyOf: [{ $ref: 'liveResolvable' }],
   properties: {
     variants: {},

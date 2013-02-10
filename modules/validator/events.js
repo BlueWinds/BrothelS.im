@@ -2,6 +2,7 @@
 Schemas.Context.properties.event = { $ref: 'liveEvent' };
 
 Schemas.Event = {
+  id: 'Event',
   anyOf: [ { $ref: 'Resolvable' } ],
   required: [
     'tags', 'conditions'
