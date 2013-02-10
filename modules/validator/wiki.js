@@ -9,6 +9,10 @@ initSchema = function(loadPath) {
   var series = [];
   series.push(function(next) {
     $('head').append('<link href="' + loadPath + 'libraries/jSunny/jSunny.css" type="text/css" rel="stylesheet">');
+    $.getScript(loadPath + 'libraries/jquery-ui-1.10.js', next);
+  });
+  series.push(function(next) {
+    $('head').append('<link href="' + loadPath + 'libraries/ui-darkness.css" type="text/css" rel="stylesheet">');
     $.getScript(loadPath + 'libraries/jSunny/jSunny.js', next);
   });
   scripts.forEach(function(script) {
