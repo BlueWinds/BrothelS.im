@@ -65,7 +65,7 @@ Schemas.girlConditions = {
   description: 'A set of conditions to match against a girl.',
   properties: {
     name: {
-      'enum': Object.keys(Girls || {})
+      'enum': Object.keys(window.Girls || {})
     },
     status: {
       'enum': ['Hired', 'For Hire', 'Town', 'Gone'],

@@ -131,7 +131,7 @@ Schemas.liveAction = {
     },
     description: { type: 'string' },
     girl: {
-      'enum': Object.keys(Girls)
+      'enum': Object.keys(window.Girls || {})
     },
     group: { type: 'string' },
     label: { type: 'string' },
