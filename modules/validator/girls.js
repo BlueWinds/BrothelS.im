@@ -108,7 +108,7 @@ Schemas.parsableGirlConditions = {
   description: 'As usual girlConditions, except "+3" or "-3" are acceptable values.',
   properties: {
     name: {
-      'enum': Object.keys(Girls)
+      'enum': Object.keys(window.Girls || {})
     },
     status: {
       'enum': ['Hired', 'For Hire', 'Town', 'Gone']

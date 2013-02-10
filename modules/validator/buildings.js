@@ -34,7 +34,7 @@ Schemas.buildingConditions = {
       'enum': ['Owned', 'For Sale', 'Town', 'Gone']
     },
     room: {
-      'enum': Object.keys(Rooms),
+      'enum': Object.keys(window.Rooms || {}),
       description: 'This condition will only match if the building has one or more rooms of the given type.'
     }
   },

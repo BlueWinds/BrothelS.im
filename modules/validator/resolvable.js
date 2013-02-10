@@ -200,10 +200,10 @@ Schemas.liveResolvable = {
       'enum': ['morning', 'evening']
     },
     girl: {
-      'enum': Object.keys(Girls || {})
+      'enum': Object.keys(window.Girls || {})
     },
     building: {
-      'enum': Object.keys(Buildings || {})._append(['Inn'])
+      'enum': Object.keys(window.Buildings || {})._append(['Inn'])
     },
     variants: {
       type: ['function', 'array'],
