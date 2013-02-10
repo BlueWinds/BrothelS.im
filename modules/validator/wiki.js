@@ -10,7 +10,7 @@ $(function() {
         loaded++;
         console.log(loaded);
         if (loaded == scripts.length) { scriptsLoaded(); }
-      }
+      });
     });
   });
   function scriptsLoaded() {
