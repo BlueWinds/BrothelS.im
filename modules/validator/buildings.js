@@ -123,7 +123,7 @@ Schemas.liveRoom = {
   required: ['type'],
   properties: {
     type: {
-      'enum': Object.keys(Rooms)
+      'enum': Object.keys(window.Rooms || {})
     }
   }
 };
