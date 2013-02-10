@@ -4,18 +4,14 @@ var Schemas = {};
 $(function() {
   var loaded = 0;
   var scripts = ["game.js", "girls.js", "messages.js", "buildings.js", "resolvable.js", "missions.js", "actions.js", "events.js"];
-  $.getScript('http://brothels.im/modules/core.js', {
-    complete: function() {
-      scripts.forEach(function(script) {
-        $.getScript('http://brothels.im/modules/validator/' + script, {
-          complete: function() {
-            loaded++;
-            console.log(loaded);
-            if (loaded == scripts.length) { scriptsLoaded(); }
-          }
-        });
-      });
-    }
+  $.getScript('http://brothels.im/modules/core.js', function() {
+    scripts.forEach(function(script) {
+      $.getScript('http://brothels.im/modules/validator/' + script, function() {
+        loaded++;
+        console.log(loaded);
+        if (loaded == scripts.length) { scriptsLoaded(); }
+      }
+    });
   });
   function scriptsLoaded() {
     gameSchemas = new Schema(Schemas.g);
