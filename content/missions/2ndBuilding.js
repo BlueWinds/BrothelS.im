@@ -37,6 +37,8 @@ Missions.secondBuilding = {
         cost *= (Math.random() + 1) / 2;
         context.mission.results[answer].money = Math.round(cost / 100) * 100;
         g.maxBuildings = 2;
+      } else if (answer == 'Stacks of Cash') {
+        g.maxBuildings = 2;
       }
       done(context.mission.results[answer]);
     });
