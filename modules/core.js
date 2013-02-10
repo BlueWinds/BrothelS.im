@@ -274,8 +274,10 @@ Math.weightedRandom = function(variants) {
   return i;
 };
 
-ejs.open = '<<';
-ejs.close = '>>';
+if (window.ejs) {
+  ejs.open = '<<';
+  ejs.close = '>>';
+}
 
 window.onerror = function(message, file, line) {
   var error = $('<div>');
