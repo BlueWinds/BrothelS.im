@@ -11,10 +11,10 @@ $(function() {
   });
   scripts.forEach(function(script) {
     series.push(function(next) {
-      $.getScript('http://brothels.im/modules/validator/' + script, next);
+      $.getScript('modules/validator/' + script, next);
     });
   });
-  $.getScript('http://brothels.im/modules/core.js', function() {
+  $.getScript('modules/core.js', function() {
     e.runSeries(series, function() {
       gameSchemas = new Schema(Schemas.Game);
       $.each(Schemas, function(type, schema) {
