@@ -63,3 +63,12 @@ e.BuildingSetStatus.push(function(building) {
     });
   }
 });
+
+e.GirlSetStatus.push(function(girl) {
+  if (girl.status != 'Hired') {
+    var room = girl.bedroom();
+    if (room) {
+      delete room.girl;
+    }
+  }
+});

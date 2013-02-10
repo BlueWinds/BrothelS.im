@@ -102,6 +102,7 @@ Actions.Whore = {
     }
   },
   disable: Actions.Streetwalk.disable,
+  // The results of this action are handled by a GamePostMorning / GamePostEvening function in modules/prostitution/prostitution.js.
   results: [{}],
   // variants key provided by prostitution module, since it's too complex to put here.
 

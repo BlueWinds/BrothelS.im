@@ -26,6 +26,7 @@ Girl.prototype.interest = function(sex) {
 
     for (var i = 0; i < found; i++) {
       context.customer = new Person(Math.choice(['Very Low Class', 'Low Class']));
+      if (context.girl.endurance < 5) { continue; }
       doCustomer.call(this, context);
     }
     mainMessage.delta = endDelta();
@@ -33,7 +34,6 @@ Girl.prototype.interest = function(sex) {
   };
 
   function doCustomer(context, customerConfig) {
-    if (context.girl.endurance < 5) { return; }
     var endDelta = context.girl.startDelta();
     var sex = context.customer.sexType(context.girl);
     context.sex = sex;
@@ -83,43 +83,33 @@ Girl.prototype.interest = function(sex) {
     return satisfaction;
   }
 
-  var Whores;
-
-  e.GamePreDay.push(function(done) {
-    Whores = {};
-    done();
-  });
-
   e.GirlsPostMorning.push(function(done) {
-    for (var building in Whores) {
-      doWhores({
-        girls: Whores[building],
-        time: 'morning',
-        building: g.buildings[building]
-      });
-    }
-    Whores = {};
+    g.buildings._filter('status', 'Owned').forEach(function(building) {
+      doWhoresBuilding(building, 'morning');
+    });
     done();
   });
   e.GirlsPostEvening.push(function(done) {
-    for (var building in Whores) {
-      doWhores({
-        girls: Whores[building],
-        time: 'evening',
-        building: g.buildings[building]
-      });
-    }
+    g.buildings._filter('status', 'Owned').forEach(function(building) {
+      doWhoresBuilding(building, 'evening');
+    });
     done();
   });
 
-  Actions.Whore.variants = function(context, done) {
-    var building = context.girl.building();
-    Whores[building.name] = Whores[building.name] || [];
-    Whores[building.name].push(context.girl);
-    done({});
-  };
-
-  function doWhores(context) {
+  function doWhoresBuilding(building, time) {
+    var context = {
+      building: building,
+      time: time,
+      girls: []
+    };
+    $.each(building.girls(), function(name, girl) {
+      if (girl.actions[time]._id == 'Whore') {
+        context.girls.push(girl);
+      }
+    });
+    if (!context.girls.length) {
+      return;
+    }
     var count = Person.prostitution.maxWhoreCustomers - Person.prostitution.minWhoreCustomers;
     var power = Math.random() * 2 + 2.7 - context.building.reputation / 20;
     count /= (1 + Math.pow(Math.E, power));
@@ -165,6 +155,7 @@ Girl.prototype.interest = function(sex) {
         context.girl = girl;
         context.customer = customer;
         doCustomer.call(Actions.Whore, context, customerConfig);
+        if (context.girl.endurance < 5) { delete canService[girl.name]; }
       }
     });
 

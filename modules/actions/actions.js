@@ -46,13 +46,6 @@ e.Ready.push(function(done) {
   done();
 });
 
-e.GirlsPostMorning.push(function(done) {
-  g.girls._filter('status', 'Hired').forEach(function(girl) {
-    girl.verifyAction('evening');
-  });
-  done();
-});
-
 e.GirlNew.push(function(girl) {
   // Add action history, if it doesn't exist yet.
   if (!girl.actions.history) {
@@ -60,11 +53,14 @@ e.GirlNew.push(function(girl) {
   }
 });
 
-e.GamePostDay.push(function(done) {
-  g.girls._filter('status', 'Hired').forEach(function(girl) {
-    girl.verifyAction('morning', true);
-    girl.verifyAction('evening', true);
-  });
+e.GirlRunTime.push(function(girl, time, done) {
+  if (girl.status == 'Hired' && (time == 'evening' || !girl.actions[time].allDay)) {
+    girl.verifyAction(time, true);
+    girl.actions[time].getResults(function(results, context) {
+      girl.actions[time].applyResults(results, done, context);
+    });
+    return;
+  }
   done();
 });
 
@@ -133,16 +129,6 @@ e.GameRender.push(function(done) {
       ui.newPanel.accordion('option', 'active', 0);
     });
   });
-  done();
-});
-
-e.GirlRunTime.push(function(girl, time, done) {
-  if (girl.status == 'Hired' && (time == 'evening' || !girl.actions[time].allDay)) {
-    girl.actions[time].getResults(function(results, context) {
-      girl.actions[time].applyResults(results, done, context);
-    });
-    return;
-  }
   done();
 });
 
