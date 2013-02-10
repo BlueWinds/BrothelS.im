@@ -128,10 +128,10 @@
 }
 
 #building-view .available-rooms li.room:nth-of-type(1) { top: 0; left: 0; }
-#building-view .available-rooms li.room:nth-of-type(2) { top: 1em; left: 1.5em; }
-#building-view .available-rooms li.room:nth-of-type(3) { top: 2em; left: 3em; }
-#building-view .available-rooms li.room:nth-of-type(4) { top: 3em; left: 4.5em; }
-#building-view .available-rooms li.room:nth-of-type(5) { top: 4em; left: 6em; }
+#building-view .available-rooms li.room:nth-of-type(2) { top: 1.5em; left: 1.5em; }
+#building-view .available-rooms li.room:nth-of-type(3) { top: 3em; left: 3em; }
+#building-view .available-rooms li.room:nth-of-type(4) { top: 4.5em; left: 4.5em; }
+#building-view .available-rooms li.room:nth-of-type(5) { top: 6em; left: 6em; }
 
 #building-view .available-rooms label {
   font-size: 0.8em;
