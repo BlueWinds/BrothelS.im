@@ -21,7 +21,7 @@ Girls.Yuna = {
     basePath: "content/girls/Yuna/images",
     base: "base.jpg",
     naked: ["naked1.jpg", "naked2.jpg"],
-    tired: "Tired1.jpg",
+    tired: ["Tired1.jpg", "Tired2.jpg"],
     soft: ["soft1.jpg", "soft2.jpg"],
     hard: ["hard1.jpg", "hard2.jpg", "hard3.jpg", "hard4.jpg", "hard5.jpg"],
     anal: ["anal1.jpg", "fetish2.jpg"],
@@ -32,7 +32,8 @@ Girls.Yuna = {
     prison: "Prison.jpg",
     tentacles: ["tentacles1.jpg", "tentacles2.jpg", "tentacles3.jpg"],
     cleaning: ["clean1.jpg", "clean2.jpg"],
-    refuse: ["refuse1.jpg", "refuse2.jpg"]
+    refuse: ["refuse1.jpg", "refuse2.jpg"],
+    summon: ["summon.jpg"]
   },
   Actions: {
     Talk: $.extend(true, {}, Actions.Talk),
@@ -47,7 +48,7 @@ Girls.Yuna = {
       },
       variants: [
         { fetishes: { tentacles: true }, likelyhood: 0.1 },
-        0.4, 0.15, 0.15, 0.15, 0.15
+        0.25, 0.15, 0.15, 0.15, 0.15, 0.15
       ],
       results: [
         {
@@ -55,7 +56,7 @@ Girls.Yuna = {
             {
               label: 'Summon',
               group: '<<- girl.name >>',
-              image: '<<- girl.image() >>',
+              image: '<<- girl.image("summon") >>',
               text: 'Yuna summoned a goddess of plants and herbs, planning to discuss healing techniques with her. But things began to go wrong in the last few minutes of the ritual - healthy green flames darkened, and the scent of burning incense became noxious fumes. It was too late to abort though, and she completed the summoning. Rather than the healthy wooden and plant body she\'d expected, the goddess was somehow forced into a tangled mess of vines and roots. She appologized and was about to banish it when it decided an appology wasn\'t enough...',
               delta: false
             },
@@ -91,7 +92,7 @@ Girls.Yuna = {
           message: {
             label: 'Summon',
             group: '<<- girl.name >>',
-            image: '<<- girl.image("cleaning") >>',
+            image: '<<- girl.image("summon") >>',
             text: "Yuna summoned an ethereal maid <<if (girl.building()) { >>that whisked around  up the <<= girl.building().name >>, cleaning up everything - it's never looked so sparkling!<< } else {>> - but since she doesn't have a permanent residence, it spent hours tidying up the alleyway and cleaning the street rather than doing anything useful.<< } >>"
           },
           girl: {
@@ -106,7 +107,7 @@ Girls.Yuna = {
           message: {
             label: 'Summon',
             group: '<<- girl.name >>',
-            image: '<<- girl.image("tired") >>',
+            image: '<<- girl.image("summon") >>',
             text: "Yuna summoned a spirit of life and healing. They spent several hours speaking of wild things, and by the time it faded away she was invigorated and refreshed."
           },
           girl: {
@@ -119,7 +120,7 @@ Girls.Yuna = {
           message: {
             label: 'Summon',
             group: '<<- girl.name >>',
-            image: '<<- girl.image() >>',
+            image: '<<- girl.image("summon") >>',
             text: 'Though the spirit she summoned initially claimed to be a mighty god, she soon realized it was not terribly powerful afterall - a god, yes, but the god of silver teaspoons. Not a very grand domain. She did get some very nice tea-sets out of the deal though - three of them. She sold two and kept one for herself.'
           },
           girl: {
@@ -145,6 +146,18 @@ Girls.Yuna = {
             analLibido: 5,
             fetishExperience: 3,
             fetishLibido: 5
+          }
+        },
+        {
+          message: {
+            label: 'Summon',
+            group: '<<- girl.name >>',
+            image: '<<- girl.image("summon") >>',
+            text: "Yuna summoned a large winged bird-beast covered with scales, feathers, and sharp claws. Instead of being afraid, she embraced it like an old friend, drawing strength from their bond. After well over an hour of sharing with it the details of her recent <<- girl.happiness > 50 ? 'exploits' : 'hardships' >>, she let it return to the world it came from. She seemed somewhat satisfied with the successful summoning."
+          },
+          girl: {
+            happiness: 10,
+            endurance: -15
           }
         }
       ] // results
@@ -190,6 +203,20 @@ Girls.Yuna.Actions.Talk.results._append([
       obedience: 2,
       modesty: -1,
       happiness: -3,
+      endurance: -5
+    }
+  },
+  {
+    message: {
+      group: 'Yuna',
+      label: 'Talk',
+      image: 'content/girls/Yuna/images/base.jpg',
+      text: "You sit Yuna down and spend the <<- time >> trying to learn more about her. She's cagey about exactly what happened to her homeland, but says she escaped to this one with help from a friend of her late father. She explains that she was separated from her first love, and she's trying to meet as many men as possible in order to find him again. As to what she would do if she found him, perhaps not even she has decided. "
+    },
+    girl: {
+      obedience: 2,
+      modesty: 2,
+      happiness: 3,
       endurance: -5
     }
   }

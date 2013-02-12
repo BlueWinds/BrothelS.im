@@ -28,7 +28,8 @@ $.extend(e, {
     }
     next();
   }],
-  GameUpgrade05: []
+  GameUpgrade05: [],
+  GameUpgrade: []
 });
 
 var __ = function(string, type) {
@@ -103,7 +104,10 @@ Game.loadFromText = function(value) {
         Game.loadFromText(string);
       });
     } else {
-      g.render();
+      e.invokeAll('GameUpgrade', g, function() {
+        g.version = Game.config.version;
+        g.render();
+      });
     }
     $('#save').removeClass('disabled');
   });
