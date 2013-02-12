@@ -212,7 +212,7 @@ Missions.firstBuilding = {
     group: 'Introduction',
     image: 'content/missions/firstBuilding.jpg',
     weight: -1,
-    text: "<blockquote>You know, not having a house sucks. Renting a room at the inn every night is expensive and annoying, and it's only going to get worse as we hire more girls. There's an easy solution - let's buy a house! Not just any house will do, though. We need one of locations specially marked by the Guild as fit sites for a brothel. Eager as ever to promote their trade, they're offering us a steep discount on our fist building. So steep it's almost criminal, in fact. I assure you, incriminating documents of a certain magistrate have <em>nothing</em> to do with it.</blockquote> You can now buy your first building. Each one has its own advantages and disadvantages - read the descriptions of each (visible when you hover over the building's image) to help decide."
+    text: "<blockquote>You know, not having a house sucks. Renting a room at the inn every night is expensive and annoying, and it's only going to get worse as we hire more girls. There's an easy solution - let's buy a house! Not just any house will do, though. We need one of locations specially marked by the Guild as fit sites for a brothel. Eager as ever to promote their trade, they're offering us a steep discount on our first building. So steep it's almost criminal, in fact. I assure you, incriminating documents of a certain magistrate have <em>nothing</em> to do with it.</blockquote> You can now buy your first building. Each one has its own advantages and disadvantages - read the descriptions of each (visible when you hover over the building's image) to help decide."
   },
   end: {
     min: {

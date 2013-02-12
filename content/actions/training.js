@@ -346,7 +346,7 @@ Actions.OD = {
         group: '<<- girl.name >>',
         label: 'Orgasm Denial',
         image: '<<- girl.image("fetish") >>',
-        text: 'Blindfolding <<= girl.name >> and taking away all of her clothes, you bound her libs to each corner of the bed, and began to lick and finger her pussy. Every time she moved so much as an inch, you left the room for five minutes - it took hours for her to finally stay still long enough to achieve an orgasm.'
+        text: 'Blindfolding <<= girl.name >> and taking away all of her clothes, you bound her limbs to each corner of the bed, and began to lick and finger her pussy. Every time she moved so much as an inch, you left the room for five minutes - it took hours for her to finally stay still long enough to achieve an orgasm.'
       },
       girl: {
         endurance: -8,
