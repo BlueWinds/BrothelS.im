@@ -12,12 +12,14 @@ e.Ready.push(function(done) {
     $.each(window[type + 's'], function(key, obj) {
       var success = tv4.validate(obj, type);
       if (!success) {
-        tv4.error.subErrors.forEach(function(error) {
-          var subError = $('<div>').appendTo('#error');
-          $('<div>').html(type + ' - ' + (obj.name || obj._id)).appendTo(subError);
-          $('<div>').html(error.message + ':').appendTo(subError);
-          $('<div>').html((obj.name || obj._id) + error.dataPath).appendTo(subError);
-        });
+        if (tv4.error.subErrors) {
+          tv4.error.subErrors.forEach(function(error) {
+            var subError = $('<div>').appendTo('#error');
+            $('<div>').html(type + ' - ' + (obj.name || obj._id)).appendTo(subError);
+            $('<div>').html(error.message + ':').appendTo(subError);
+            $('<div>').html((obj.name || obj._id) + error.dataPath).appendTo(subError);
+          });
+        }
         var error = $('<div>').appendTo('#error');
         $('<div>').html(type + ' - ' + (obj.name || obj._id)).appendTo(error);
         $('<div>').html(tv4.error.message + ':').appendTo(error);
@@ -32,12 +34,14 @@ e.Ready.push(function(done) {
 
 e.Autorender.push(function(element, done) {
   if (!tv4.validate(g, 'Game')) {
-    tv4.error.subErrors.forEach(function(error) {
-      var subError = $('<div>').appendTo('#error');
-      $('<div>').html(error.message + ':').appendTo(subError);
-      $('<div>').html(error.dataPath).appendTo(subError);
-      $('<div>').html(error.schemaPath).appendTo(error);
-    });
+    if (tv4.error.subErrors) {
+      tv4.error.subErrors.forEach(function(error) {
+        var subError = $('<div>').appendTo('#error');
+        $('<div>').html(error.message + ':').appendTo(subError);
+        $('<div>').html(error.dataPath).appendTo(subError);
+        $('<div>').html(error.schemaPath).appendTo(error);
+      });
+    }
     var error = $('<div>').appendTo('#error');
     $('<div>').html('Live Game');
     $('<div>').html(tv4.error.message).appendTo(error);

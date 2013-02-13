@@ -228,18 +228,15 @@ Schemas.Girl = {
           pattern: "^.+\\.(png|jpg|gif)$"
         }
       },
-      patternProperties: {
-        'refuse|tired|soft|hard|anal|fetish|group|cleaning|exercise|study|prison|naked|tentacles': {
-          type: ['string', 'array'],
-          description: 'Each value in images must be either a filename or an array of filenames.',
-          pattern: "^.+\\.(png|jpg|gif)$",
-          items: {
-            type: 'string',
-            pattern: '^.+\\.(png|jpg|gif)$'
-          }
+      additionalProperties: {
+        type: ['string', 'array'],
+        description: 'Each value in images must be either a filename or an array of filenames.',
+        pattern: "^.+\\.(png|jpg|gif)$",
+        items: {
+          type: 'string',
+          pattern: '^.+\\.(png|jpg|gif)$'
         }
-      },
-      additionalProperties: false
+      }
     }
   },
   additionalProperties: false
