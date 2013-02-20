@@ -21,7 +21,7 @@ Missions.secondBuilding = {
   },
   variants: function(context, done) {
     if (g.money < 50000) {
-      done(this.results.noCash);
+      done(this.base().results.noCash);
       return;
     }
     var text = this.girl + " hurries into the room just as you were sitting down for a nice cup of tea. <blockquote>Hey, if we're going to get a permit to open a second location, then we're going to have to leave <em>now.</em> I've been keeping an eye on them, and there are only two left. Is this something we're going to do?</blockquote> If you are, it's time to decide on a strategy. Convincing the people at the Guild office to give a permit to your second cousin three times removed who they've never met before is going to take some work.";
@@ -31,16 +31,16 @@ Missions.secondBuilding = {
       'Sex and Money': this.girl + ' isn\'t somthing any man could resist, combined with a bag of large denomination, untracable coinage.'
     };
     Game.getUserInput(text, context.girl.image(), options, function(answer) {
+      var result = $.extend(true, {}, context.mission.base().results[answer]);
       if (answer == 'Sex and Money') {
-        var cost = context.mission.results[answer].money;
-        cost *= 1.5 - (context.girl.get('libido') + context.girl.charisma) / 200;
-        cost *= (Math.random() + 1) / 2;
-        context.mission.results[answer].money = Math.round(cost / 100) * 100;
+        result.money *= 1.5 - (context.girl.get('libido') + context.girl.charisma) / 200;
+        result.money *= (Math.random() + 1) / 2;
+        result.money = Math.round(result.money / 100) * 100;
         g.maxBuildings = 2;
       } else if (answer == 'Stacks of Cash') {
         g.maxBuildings = 2;
       }
-      done(context.mission.results[answer]);
+      done(result);
     });
   },
   results: {
@@ -48,7 +48,7 @@ Missions.secondBuilding = {
       message: {
         group: 'Guild Permits',
         label: 'Guild Permits',
-        image: 'content/missions/GuildHQ.jpg',
+        image: 'content/miscImages/GuildHQ.jpg',
         text: "Looking at the balance sheet, you sigh and have to admit - there's no way you're going to able to meet the demands of both bribing your way through an entire office full of officials and still have enough money left to make opening a second location worthwhile. It's unfortunate, but that's life - perhaps next time.",
         weight: -1
       },
@@ -69,7 +69,7 @@ Missions.secondBuilding = {
         {
           group: 'Guild Permits',
           label: 'Guild Permits',
-          image: 'content/missions/GuildHQ.jpg',
+          image: 'content/miscImages/GuildHQ.jpg',
           text: "You head over to the Guild hall alone. It's an impressive building, but you're not here to admire the architecture. The first barrier is a secretary, a slightly worn older woman who insists there are no permits left and you'd better just head home. $500 jogs her memory, and she remembers that one of the applicants was turned down, and there's still one left. You're given directions down one hall, up a flight of stairs, third door on the left.",
           delta: false,
           weight: -2
@@ -77,7 +77,7 @@ Missions.secondBuilding = {
         {
           group: 'Guild Permits',
           label: 'Guild Permits',
-          image: 'content/missions/GuildHQ.jpg',
+          image: 'content/miscImages/GuildHQ.jpg',
           text: "The rest of the afternoon is passed by more of the same. Every step of the way feels like you're bleeding, each drop of blood replaced with a stack of gold or a promise of it to come later. You finally get what you're after - a freshly minted piece of paper bearing your last name (with a fake first one), which more or less amounts to a promise that the Guild or the City Guard won't come knocking if you purchase a second location and start housing girls there."
         }
       ]
@@ -87,7 +87,7 @@ Missions.secondBuilding = {
         {
           group: 'Guild Permits',
           label: 'Guild Permits',
-          image: 'content/missions/GuildHQ.jpg',
+          image: 'content/miscImages/GuildHQ.jpg',
           weight: -2,
           delta: false,
           text: "You head over to the Guild hall with <<- girl.name >> in tow. It's an impressive building, but you're not here to admire the architecture. The first barrier is a secretary, a slightly worn older woman who insists there are no permits left and you'd better just head home. $500 jogs her memory, and she remembers that one of the applicants was turned down, and there's still one left. You're given directions down one hall, up a flight of stairs, third door on the left."

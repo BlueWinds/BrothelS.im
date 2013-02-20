@@ -3,6 +3,7 @@ function Resolvable(obj) {
   $.extend(true, this, obj);
   delete this.initialize;
   delete this.variants;
+  delete this.results;
   delete this.conditions;
   this.constructor = window[this._class];
 }
@@ -106,7 +107,6 @@ Resolvable.prototype.checkConditions = function(cond, context) {
     var girls = context.girl ? [context.girl] : g.girls;
     var matchingGirls = [];
     if (!cond.girl.status) { girls = girls._filter('status', 'Hired'); }
-    delete context.girl;
     for (i in girls) {
       if (girls[i].compare(cond.girl)) {
         matchingGirls.push(girls[i]);
@@ -161,7 +161,7 @@ Resolvable.prototype.getResults = function(done, context) {
     base.variants.call(this, context, done);
     return;
   }
-  if (this.results && base.variants) {
+  if (base.variants) {
     var rand = Math.random();
     for (var i in base.variants) {
       if (typeof(base.variants[i]) == 'number') {
@@ -171,7 +171,7 @@ Resolvable.prototype.getResults = function(done, context) {
         if (this.checkConditions(base.variants[i])) { break; }
       }
     }
-    done(this.results[i]);
+    done(base.results[i]);
     return;
   }
   done(Math.choice(base.results));

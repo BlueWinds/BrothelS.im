@@ -2,7 +2,8 @@
 Events.thugRape = {
   conditions: {
     fetishes: { rape: true },
-    min: { day: 15 }
+    min: { day: 15 },
+    ownerParticipation: false
   },
   tags: {
     slums: 0.08,
@@ -11,7 +12,7 @@ Events.thugRape = {
   variants: function(context, done) {
     // Fights back successfully or not.
     var i = ((context.girl.constitution + context.girl.endurance) / 100 * Math.random() < 0.6) ? 0 : 1;
-    done(this.results[i]);
+    done(this.base().results[i]);
   },
   results: [
     {
@@ -54,7 +55,8 @@ Events.guardRape = {
       avengeGuardWait: -3,
       avengeGuardRape: -3,
       avengeGuardRapeFinal: -3
-    }
+    },
+    ownerParticipation: false
   },
   tags: {
     garrison: 0.05,
@@ -62,6 +64,7 @@ Events.guardRape = {
     docks: 0.03
   },
   variants: function(context, done) {
+    var event = this;
     var options = {
       Submit: 'Go along quitely'
     };
@@ -81,7 +84,7 @@ Events.guardRape = {
       } else if (answer == 'Bribe') {
         i = 3;
       }
-      done(context.event.results[i]);
+      done(event.base().results[i]);
     });
   },
   results: [

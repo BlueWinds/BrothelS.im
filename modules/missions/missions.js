@@ -50,10 +50,18 @@ e.GameUpgrade05.push(function(game, next) {
     if (mission.display) {
       delete mission.display.delta;
     }
-    mission.results = mission.base().results;
   });
   if (game.day > 150 && game.fetishes.rape && game.missionsDone.avengeGuardRapeFinal) {
     game.missions.luxuryHouseDelay = Mission.create('luxuryHouseDelay');
+  }
+  next();
+});
+
+
+e.GameUpgrade.push(function(game, next) {
+  if (game.version < 0.51 && game.missions.avengeGuardRape) {
+    var str = game.missions.avengeGuardRape.display.text.replace('Investigating the Guards', 'Exploring the Garrison');
+    game.missions.avengeGuardRape.display.text = str;
   }
   next();
 });

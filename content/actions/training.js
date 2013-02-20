@@ -169,7 +169,7 @@ Actions.Expose = {
   variants: function(context, done) {
     var i = Math.max(0, 4 - Math.floor(context.girl.modesty / 33 + Math.random() * 2));
     if (i == 4 && Math.random() > context.girl.endurance / 100) { i = 5; }
-    done(this.results[i]);
+    done(this.base().results[i]);
   },
   results: [
     {
@@ -296,7 +296,7 @@ Actions.OD = {
     fetish: __('fetish')
   },
   variants: function(context, done) {
-    done(this.results[this.option]);
+    done(this.base().results[this.option]);
   },
   results: {
     soft: {

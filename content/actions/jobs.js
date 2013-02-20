@@ -68,7 +68,7 @@ Actions.Streetwalk =  {
       anal: [
         'He pounded her ass mercilessly in a dirty alley.',
         'He alternated between her ass and pussy for several minutes before blowing his load in her ass.',
-        'He bent her over a bench in the park and too her ass doggy style.',
+        'He bent her over a bench in the park and took her ass doggy style.',
         'His dick was almost too large to fit, so she had to warm up first using a dildo.'
       ],
       fetish: [
@@ -293,7 +293,7 @@ Actions.Advertise = {
   },
   optionsKey: 'building',
   variants: function(context, done) {
-    var delta = this.results[0];
+    var delta = $.extend(true, {}, this.base().results[0]);
     delta.building.reputation *= context.girl.charisma / 100;
     if (this.option == 'Inn') {
       delta.money = Math.floor(context.girl.charisma / 2 + Math.random() * 50);

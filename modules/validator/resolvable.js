@@ -192,7 +192,7 @@ Schemas.liveResolvable = {
   id: 'liveResolvable',
   'type': 'object',
   required: [
-    '_class', '_id', 'results'
+    '_class', '_id'
   ],
   properties: {
     _id: { type: 'string' },
@@ -204,23 +204,6 @@ Schemas.liveResolvable = {
     },
     building: {
       'enum': Object.keys(window.Buildings || {})._append(['Inn'])
-    },
-    variants: {
-      type: ['function', 'array'],
-      items: {
-        anyOf: [
-          { type: 'number', maximum: 1, minimum: 0 },
-          { $ref: 'Conditions' }
-        ]
-      },
-      minItems: 1
-    },
-    results: {
-      type: ['array', 'object'],
-      items: { $ref: 'Result' },
-      additionalProperties: { $ref: 'Result' },
-      minItems: 1,
-      minProperties: 1
     },
     special: { type: 'object' }
   }

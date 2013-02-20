@@ -13,6 +13,8 @@ function Event(obj) {
 
 Event.prototype = new Resolvable();
 
+Event.prototype.getTags = Action.prototype.getTags;
+
 Event.prototype.context = function() {
   var context = Resolvable.prototype.context.call(this);
   context.action = this.action;
@@ -23,9 +25,11 @@ Event.create = function(_id, context) {
   var event = Resolvable.create(_id, 'Event', context);
   if (!event) { return event; }
   var chance = 0;
-  for (var tag in event.tags) {
-    if (context.action.tags[tag]) {
-      chance += event.tags[tag] * context.action.tags[tag];
+  var actionTags = context.action.getTags(context);
+  var eventTags = event.getTags(context);
+  for (var tag in eventTags) {
+    if (actionTags[tag]) {
+      chance += eventTags[tag] * actionTags[tag];
     }
   }
   if (Math.random() > chance) {

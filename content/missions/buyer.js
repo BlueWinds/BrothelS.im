@@ -39,7 +39,7 @@ Missions.girlBuyer = {
   variants: function(context, done) {
     var client = this.special.client;
     if (!context.girl.compare(this.special.delta)) {
-      done(this.results.fail);
+      done(this.base().results.fail);
       return;
     }
     var text = client.name + ' has returned in 30 days, as promised, to collect ' + context.girl.name + " if she's interested in coming with him. In person, this time. " + client.description + " As when you asked her before, it seems she could go either way - she likes working for you, but traveling to foreign lands also sounds exciting.";
@@ -48,7 +48,7 @@ Missions.girlBuyer = {
       'Keep her here': "She enjoys it here, and it's a good life. Stay."
     };
     Game.getUserInput(text, client.image, options, function(answer) {
-      var result = context.mission.results[answer];
+      var result = context.mission.base().results[answer];
       if (answer == 'Send her off') {
         result.money *= Math.random() * 0.8 + 0.6;
         result.money = Math.floor(result.money);

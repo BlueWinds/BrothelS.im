@@ -61,7 +61,7 @@ Girls['Dark Magician Girl'] = {
           endurance: 30
         });
         this.special = this.special();
-        done(this.results[0]);
+        done(this.base().results[0]);
       },
       results: [
         {

@@ -63,8 +63,8 @@ Schemas.Action = {
       description: 'The hover-text for this action. Text replacement is of course available.'
     },
     tags: {
-      anyOf: [{ $ref: 'Tags' }],
-      description: 'Tags represent where this action occurs, though they can also be more intangible properties, such as "using magic" or "alone". The location-based tags should generally add up to 1 (though this is not a hard requirement). If tags is ommited entirely, the action cannot trigger any events. Use this if the action is one-time, important, or otherwise really shouldn\'t be interrupted by random interference.',
+      anyOf: [{ $ref: 'Tags' }, { type: 'function' }],
+      description: 'Tags represent where this action occurs, though they can also be more intangible properties, such as "using magic" or "alone". The location-based tags should generally add up to 1 (though this is not a hard requirement). If tags is ommited entirely, the action cannot trigger any events. Use this if the action is one-time, important, or otherwise really shouldn\'t be interrupted by random interference.\n\nIf tags is a function, it should take one argument (context) and return an object of tags.',
       'default': {}
     },
     allDay: {
@@ -120,8 +120,6 @@ Schemas.liveAction = {
     'tags', 'time', 'gerund'
   ],
   properties: {
-    variants: {},
-    results: {},
     special: {},
     building: {},
     time: {},
@@ -175,4 +173,9 @@ Schemas.liveGirl.properties.actions.properties.history = {
 Schemas.Result.properties.lock = {
   type: 'boolean',
   description: 'A locked action disables all others until its Results include the "unlock" key, usually used for scripting multi-day actions. Set this to true or false to unlock the current action. Lock should ONLY be found in results returned from actions, though this is not currently machine-validated.'
+};
+
+Schemas.Conditions.properties.ownerParticipation = {
+  type: 'boolean',
+  description: 'If the player is accompanying the girl. This is always false unless the current context contains an Action that requires ownerParticipation.'
 };

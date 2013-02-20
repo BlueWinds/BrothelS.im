@@ -35,8 +35,6 @@ Schemas.liveMission = {
   id: 'liveMission',
   anyOf: [{ $ref: 'liveResolvable' }],
   properties: {
-    variants: {},
-    results: {},
     special: {},
     girl: {},
     building: {},

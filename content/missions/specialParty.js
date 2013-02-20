@@ -71,7 +71,7 @@ Actions.attendParty = {
   // Intentionally empty - do not interrupt.
   tags: {},
   variants: function(context, done) {
-    var delta = this.results[0];
+    var delta = $.extend(true, {}, this.base().results[0]);
     var client = g.missions.specialParty.special.client;
     delta.money += context.girl.get(client.wants[0]) * 10;
     delta.money += context.girl.get(client.wants[1]) * 5;

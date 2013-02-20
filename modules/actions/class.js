@@ -96,7 +96,7 @@ Action.prototype.checkDisabled = function(cond, context) {
   }
   realAction = g.ownerAction(this.time);
   if (realAction && this.girl !== realAction.girl && this.ownerParticipation) {
-    return 'You are already ' + realAction.gerund + ' with ' + this.girl + ' in the ' + this.time;
+    return 'You are already ' + realAction.gerund + ' with ' + realAction.girl + ' in the ' + this.time;
   }
   if (this.base().disable) {
     return this.base().disable.call(this, context);
@@ -117,6 +117,15 @@ Action.prototype.applyResults = function(results, done, context) {
     }
   }
   Resolvable.prototype.applyResults.call(this, results, done, context);
+};
+
+Action.prototype.getTags = function(context) {
+  var base = this.base();
+  if (typeof(base.tags) == 'function') {
+    context = context || this.context();
+    return base.tags.call(this, context);
+  }
+  return base.tags || {};
 };
 
 (function() {
@@ -223,3 +232,15 @@ Building.prototype.girls = function() {
   });
   return girls;
 };
+
+(function() {
+  var oldCheckConditions = Resolvable.prototype.checkConditions;
+  Resolvable.prototype.checkConditions = function(cond, context) {
+    cond = cond || this.base().conditions;
+    var result = oldCheckConditions.call(this, cond, context);
+    if (!result) { return result; }
+    if (cond && cond.ownerParticipation && !context.action.ownerParticipation) { return false; }
+    if (cond && cond.ownerParticipation === false && context.action && context.action.ownerParticipation) { return false; }
+    return result;
+  };
+})();

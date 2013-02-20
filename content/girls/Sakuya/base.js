@@ -54,7 +54,7 @@ Girls.Sakuya = {
     }),
     Clean: $.extend(true, {}, Actions.Clean, {
       variants: function(context, done) {
-        var delta = this.results[0];
+        var delta = $.extend(true, {}, this.base().results[0]);
         delta.building.clean += context.girl.specialRules.magic / 10;
         if (context.girl.specialRules.magic > 99) {
           delete delta.girl.specialRules.magic;
@@ -211,7 +211,7 @@ Girls.Sakuya = {
         max: { day: '+60' }
       },
       variants: function(context, done) {
-        var mission = this;
+        var results = this.base().results;
         var building = context.girl.building() ? context.girl.building().name : 'inn';
         var text = "Knowing that this is the day the Scarlet Devil will be coming to collect Sakuya, the two of you wait out in front of the " + building + ", waiting for her. It's almost midnight when she finally arrives. You hadn't noticed her bat wings before.<blockquote>Sakuya! It's great to see you. I was angry at first, but, well, the mansion has been so lonely without you, and what happened wasn't really your fault. Come home, won't you dear?</blockquote> She holds out her hand. Out of long habit, Sakuya stands and steps forward to take it, but then hesitates, glancing back at you. She's uncertain what to do - should she go with the Scarlet Devil, or stay with you?";
         var options = {
@@ -221,31 +221,31 @@ Girls.Sakuya = {
         Game.getUserInput(text, 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg', options, function(answer) {
           var delta = { message: [] };
           if (answer == '"Don\'t go!"') {
-            delta.message.push(mission.results.dontGo1.message);
-            delta.message.push(mission.results.dontGo2.message);
+            delta.message.push(results.dontGo1.message);
+            delta.message.push(results.dontGo2.message);
             if (context.girl.specialRules.magic >= 50) {
               delta.girl = {
                 obedience: -10,
                 constitution: 7
               };
-              delta.message.push(mission.results.dontGoWin1.message);
-              delta.message.push(mission.results.dontGoWin2.message);
+              delta.message.push(results.dontGoWin1.message);
+              delta.message.push(results.dontGoWin2.message);
             } else {
               delta.girl = {
                 constitution: -10,
                 obedience: -10,
                 money: -5000
               };
-              delta.message.push(mission.results.dontGoLoose1.message);
-              delta.message.push(mission.results.dontGoLoose2.message);
+              delta.message.push(results.dontGoLoose1.message);
+              delta.message.push(results.dontGoLoose2.message);
             }
           } else {
             context.girl.apply('status', 'Gone');
             if (context.girl.modesty >= 75 && context.girl.obedience >= 90) {
-              delta.message = mission.results.staySilentGood.message;
+              delta.message = results.staySilentGood.message;
               delta.money = 24000;
             } else {
-              delta.message = mission.results.staySilentBad.message;
+              delta.message = results.staySilentBad.message;
               delta.money = 2000;
             }
           }

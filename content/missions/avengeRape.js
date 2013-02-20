@@ -4,8 +4,9 @@ Missions.avengeGuardWait = {
     min: { day: '+1' }
   },
   variants: function(context, done) {
+    var results = this.base().results;
     if ((context.girl.specialRules.guardRapeWait || 0) < 5) {
-      done(this.results.repeat);
+      done(results.repeat);
       return;
     }
     var text = "Several days ago, " + context.girl.name + " was raped by the city guard. Though reluctant to talk about the traumatic experience, she's hardly eaten since, and you finally decide to take action when, at dinner, she breaks into tears in the middle of the meal, everyone watching silently as one of the other girls hurries her away with a comforting arm around her shoulder.";
@@ -15,7 +16,7 @@ Missions.avengeGuardWait = {
       "She'll get over it": "It's a rough world - you're sorry she had to go through that, but what can you do?"
     };
     Game.getUserInput(text, context.girl.image('prison'), options, function(answer) {
-      done(context.mission.results[answer]);
+      done(results[answer]);
     });
   },
   results: {
@@ -87,7 +88,7 @@ Missions.avengeGuardRape = {
     group: 'Investigate City Guard',
     weight: -1,
     image: 'content/missions/evilGuard.jpg',
-    text: "Before you can go any further, you first need some information. Who were <<- girl.name >>'s attackers? She has a rough description of them, but you need names. The city is too large to try and find them using only a description of their cocks, their hair color and the fact that they work as city guards. It would also be best to get a better idea of the exact laws pertaining to the situation - you'll probably end up breaking a few, but better to know what you're getting into.<br><br><em><<- girl.name >> will need to <strong>Study</strong> until her <<- __('intelligence') >> is at least <<- mission.end.girl.min.intelligence >>, as well as spending some time <strong>Investigating the Guards</strong>.</em>"
+    text: "Before you can go any further, you first need some information. Who were <<- girl.name >>'s attackers? She has a rough description of them, but you need names. The city is too large to try and find them using only a description of their cocks, their hair color and the fact that they work as city guards. It would also be best to get a better idea of the exact laws pertaining to the situation - you'll probably end up breaking a few, but better to know what you're getting into.<br><br><em><<- girl.name >> will need to <strong>Study</strong> until her <<- __('intelligence') >> is at least <<- mission.end.girl.min.intelligence >>, as well as spending some time <strong>Exploring the Garrison</strong>.</em>"
   },
   end: {
     girl: {
@@ -105,59 +106,45 @@ Missions.avengeGuardRape = {
   }]
 };
 
-Actions.investigateGuards = {
-  label: 'Investigate Guards',
-  gerund: 'Investigating Guards',
-  group: 'Chores',
-  description: "You and <<- girl.name >> will spend some time looking investigating, learning more about her attackers.",
+Events.investigateGuards = {
+  tags: {
+    garrison: 0.5
+  },
   conditions: {
     time: 'morning',
     missions: { avengeGuardRape: 1 },
     girl: {
       min: {
-        endurance: 15,
         specialRules: { investigateGuards: 1 }
       },
       max: {
         specialRules: { investigateGuards: 5 }
       }
-    }
+    },
+    ownerParticipation: true
   },
   initialize: function(context) {
     if (g.missions.avengeGuardRape.girl != context.girl.name) { return false; }
   },
-  ownerParticipation: true,
-  tags: {
-    garrison: 1
-  },
   variants: [
     {
-      girl: {
-        max: { specialRules: { investigateGuards: 1 } }
-      },
-      likelyhood: 0.5
+      girl: { max: { specialRules: { investigateGuards: 1 } } }
     },
     {
       girl: {
         min: { specialRules: { investigateGuards: 2 } },
         max: { specialRules: { investigateGuards: 2 } }
-      },
-      likelyhood: 0.5
+      }
     },
     {
       girl: {
         min: { specialRules: { investigateGuards: 3 } },
         max: { specialRules: { investigateGuards: 4 } }
-      },
-      likelyhood: 0.5
+      }
     },
     {
-      girl: {
-        min: { specialRules: { investigateGuards: 5 } }
-      },
-      likelyhood: 0.5
-    },
-    1
+      girl: { min: { specialRules: { investigateGuards: 5 } } }
+    }
   ],
   results: [
     { // 1
@@ -165,14 +152,14 @@ Actions.investigateGuards = {
         {
           label: 'Investigate Guards',
           group: '<<- girl.name >>',
-          image: 'content/missions/barracksGate.jpg',
+          image: 'content/miscImages/garrisonGate.jpg',
           text: "You and <<- girl.name >> arrive at the gates of the garrison, a small fortress walled off from the rest of the city and sitting on the far side of a bridge. Originally the castle from which the lord ruled, the nobility moved to the far end of the city into Uptown, nearly 150 years ago, when it became apparent that invasion was no longer a danger (everyone who might want to invade having decided they'd rather just visit and take back memories or concubines).",
           delta: false
         },
         {
           label: 'Investigate Guards',
           group: '<<- girl.name >>',
-          image: 'content/missions/barracksGate.jpg',
+          image: 'content/miscImages/garrisonGate.jpg',
           text: "The gate is open all hours of the day, but you're stopped before entering by a bored looking woman. She asks about your business, and you respond with a half truth - the two of you are searching for a group of guards you met a few days ago, in order to \"thank\" them for their assistance. You'll want to speak to the captain for that, she responds, not caring to listen to <<- girl.name >>'s descriptions. The captain is out at the moment, but if you'd care to return later..."
         }
       ],
@@ -213,7 +200,7 @@ Actions.investigateGuards = {
         {
           label: 'Investigate Guards',
           group: '<<- girl.name >>',
-          image: 'content/missions/barracksGate.jpg',
+          image: 'content/miscImages/garrisonGate.jpg',
           text: "The two of you have become almost a common sight at the garrison - though not entirely sure why you keep showing up, no one has complained yet, and the guard at the gate passes you through without comment. Today is the day to put the plan you made with one of the guards into action. As before, <<- girl.name >> announces a show in the barracks, while you and your contact take a step outside.",
           delta: false,
           weight: -1
@@ -240,24 +227,13 @@ Actions.investigateGuards = {
         analExperience: 6,
         specialRules: { investigateGuards: 1 }
       }
-    },
-    { // fail
-      message: {
-        label: 'Investigate Guards',
-        group: '<<- girl.name >>',
-        image: 'content/missions/barracksGate.jpg',
-        text: "Traffic seems quite heavy as you make your way to the garrison, only to stand in a further line as you wait for entrance. Finally, tired and irritable as you arrive at the gate, your visit seems insufficiently important for the man asking everyone's business at the gates to allow you in. Perhaps he's in on the circle that hurt <<- girl.name >> - that might explain why you two alone, out of all the visitors, are turned away. A wasted day."
-      },
-      girl: {
-        endurance: -12,
-        happiness: -5
-      }
     }
   ]
 };
 
 Missions.avengeGuardRapeFinal = {
   variants: function(context, done) {
+    var results = this.base().results;
     var text = "Finally, you have a list of names and have seen the faces for yourself. The relevant laws are clear enough - while it would be illegal for you to take matters into your own hands, precedent suggests that virtually any punishment you care to inflict on " + context.girl.name + "'s rapists would result in nothing more than a slap on the wrist. Only one thing left to do - serve justice.";
     var options = {
       "Turn them in": "Give the list of names to Kin Xun. He's likely to be harsh.",
@@ -265,7 +241,7 @@ Missions.avengeGuardRapeFinal = {
       Blackmail: "Hold what you know over their head for profit."
     };
     Game.getUserInput(text, 'content/missions/evilGuard.jpg', options, function(answer) {
-      done(context.mission.results[answer]);
+      done(results[answer]);
     });
   },
   results: {
