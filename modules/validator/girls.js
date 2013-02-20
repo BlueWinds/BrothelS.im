@@ -307,7 +307,7 @@ Schemas.liveGirl = {
       required: [ 'pay' ],
       properties: {
         pay: {
-          'enum': Object.keys(window.Girl && window.Girl.config.pay || {}).map(parseFloat)
+          'enum': Object.keys(window.Girl && && window.Girl.config && window.Girl.config.pay || {}).map(parseFloat)
         },
         soft: { type: 'boolean' },
         hard: { type: 'boolean' },
