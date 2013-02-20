@@ -1,3 +1,6 @@
 [submodule "libraries/jSunny"]
 	path = libraries/jSunny
 	url = git://github.com/threewestwinds/jSunny.git
+[submodule "libraries/jSchemaView"]
+	path = libraries/jSchemaView
+	url = git://github.com/threewestwinds/jSchemaView.git
