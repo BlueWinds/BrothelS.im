@@ -39,8 +39,8 @@ window.initSchema = function(loadPath) {
   });
 
   function loadSchema(schema) {
-    if (schema && gameSchemas.getSchema(schema)) {
-      gameSchemas.getSchema(schema).render();
+    if (schema && gameSchemas.getId(schema)) {
+      gameSchemas.getId(schema).render();
     }
   }
 };
