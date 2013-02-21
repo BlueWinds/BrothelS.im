@@ -33,7 +33,8 @@ Girls.Yuna = {
     tentacles: ["tentacles1.jpg", "tentacles2.jpg", "tentacles3.jpg"],
     cleaning: ["clean1.jpg", "clean2.jpg"],
     refuse: ["refuse1.jpg", "refuse2.jpg"],
-    summon: ["summon.jpg"]
+    summon: ["summon.jpg"],
+    pregnant: "Tired2.jpg"
   },
   Actions: {
     Talk: $.extend(true, {}, Actions.Talk),

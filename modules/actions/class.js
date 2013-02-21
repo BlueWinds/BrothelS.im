@@ -52,7 +52,7 @@ Action.prototype.setOption = function(option) {
 Action.prototype.checkDisabled = function(cond, context) {
   context = context || this.context();
   var realAction = context.girl.actions[this.time];
-  if (realAction && realAction.locked) {
+  if (realAction && realAction.locked && realAction._id != this._id) {
     return context.girl.name + ' cannot ' + this.label + ' until she\'s done ' + realAction.gerund + '.';
   }
   cond = cond || this.base().enableConditions;

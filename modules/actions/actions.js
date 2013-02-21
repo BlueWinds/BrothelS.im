@@ -88,6 +88,7 @@ e.GameRender.push(function(done) {
         var $this = $(this);
         var action = $this.children('ul').attr('name');
         action = context.actions[action];
+        if (girl.actions[context.time]._id == action._id) { return; }
         $('li.this', div).fadeOut('fast', function() {
           $(this).fadeIn('fast').appendTo($this.children('ul'));
         });
@@ -95,10 +96,13 @@ e.GameRender.push(function(done) {
       });
       $('.action ol.dropdown li', div).click(function() {
         var action = $(this).closest('.action').children('ul').attr('name');
-        action = context.actions[action];
+        action = girl.actions[context.time];
         $(this).parent().children('li').removeClass('selected');
         $(this).addClass('selected');
         action.setOption($(this).attr('name'));
+        if (action.allDay) {
+          girl.actions[context.time == 'morning' ? 'evening' : 'morning'].setOption($(this).attr('name'));
+        }
       });
       e.invokeAll('Autorender', div);
       return div;

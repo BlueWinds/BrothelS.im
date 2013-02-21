@@ -31,7 +31,8 @@ Girls.Saber = {
     study: ["Study1.jpg", "Study2.jpg"],
     naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg"],
     prison: ["Prison1.jpg", "Prison2.jpg"],
-    tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg"]
+    tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg"],
+    pregnant: "Tired1.jpg"
   },
   Actions: {
     Talk: $.extend(true, {}, Actions.Talk),

@@ -85,7 +85,11 @@ Girl.prototype.apply = function(stat, delta) {
       delta *= this.intelligence / 100;
     }
     if (stat != 'endurance' && stat != 'happiness') {
-      delta *= (133 - delta) / 100;
+      if (delta > 0) {
+        delta *= (133 - this[stat]) / 100;
+      } else {
+        delta *= (this[stat] + 33) / 100;
+      }
     }
     if (delta % 1) {
       delta = (Math.random() > delta % 1) ? Math.floor(delta) : Math.ceil(delta);

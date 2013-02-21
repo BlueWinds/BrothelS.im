@@ -21,18 +21,19 @@ Event.prototype.context = function() {
   return context;
 };
 
-Event.create = function(_id, context) {
+Event.create = function(_id, context, actionTags) {
   var event = Resolvable.create(_id, 'Event', context);
   if (!event) { return event; }
   var chance = 0;
-  var actionTags = context.action.getTags(context);
+  actionTags = actionTags || context.action.getTags(context);
   var eventTags = event.getTags(context);
   for (var tag in eventTags) {
     if (actionTags[tag]) {
       chance += eventTags[tag] * actionTags[tag];
     }
   }
-  if (Math.random() > chance) {
+  var rand = Math.random();
+  if (rand > chance) {
     return false;
   }
   event.action = context.action;
@@ -63,10 +64,11 @@ e.GameInit.push(function(done) {
 });
 
 Event.get = function(context) {
-  if (!context.action.tags) { return; }
+  var tags = context.action.getTags();
+  if ($.isEmptyObject(tags)) { return; }
   var event;
   for (var _id in Events) {
-    event = Event.create(_id, context);
+    event = Event.create(_id, context, tags);
     if (event) { return event; }
   }
   var base = context.girl.base();

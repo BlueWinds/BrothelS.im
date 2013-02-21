@@ -32,7 +32,8 @@ Girls.Sophitia = {
     study: ["Study1.jpg", "Study2.jpg"],
     naked: ["Naked1.jpg", "Naked2.jpg"],
     prison: "Prison.jpg",
-    tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg", "Tentacles5.jpg"]
+    tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg", "Tentacles5.jpg"],
+    pregnant: "Pregnant.jpg"
   },
   Actions: {
     Talk: $.extend(true, {}, Actions.Talk)

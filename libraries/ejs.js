@@ -299,7 +299,13 @@ exports.render = function(str, options){
   }
 
   options.__proto__ = options.locals;
-  return fn.call(options.scope, options);
+  try {
+    return fn.call(options.scope, options);
+  } catch(err) {
+    console.log(str);
+    console.log(options);
+    throw err;
+  }
 };
 
 /**
