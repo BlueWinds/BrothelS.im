@@ -65,7 +65,7 @@ Girl.prototype.apply = function(stat, delta) {
     return;
   }
   if (typeof(delta) == 'number') {
-    if (this.specialRules.dependentStats) {
+    if (this.specialRules && this.specialRules.dependentStats) {
       var dependency;
       if (delta > 0) {
         dependency = this.specialRules.dependentStats[stat];
@@ -74,10 +74,13 @@ Girl.prototype.apply = function(stat, delta) {
       }
       if (dependency) {
         dependency = $.extend({}, dependency);
-        dependency._multiply(delta);
-        if (dependency[stat]) {
+        dependency._multiply(Math.abs(delta));
+        if (dependency[stat] !== undefined) {
           delta += dependency[stat];
           delete dependency[stat];
+        }
+        if (!$.isEmptyObject(dependency)) {
+          this.apply(dependency);
         }
       }
     }

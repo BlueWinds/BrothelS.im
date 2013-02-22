@@ -385,7 +385,7 @@ Actions.Lockdown = {
         group: '<<- girl.name >>',
         label: 'Lockdown',
         image: '<<- girl.image("fetish") >>',
-        text: '<<= girl.name >> spent the day bound, gagged and naked in the dungeon, hands tied above her head and wishing something interesting would happen. It was cold underground, and by the time you check back in to release her, she\'s very, very ready for a long, hot bath.'
+        text: "<<= girl.name >> spent the day bound, gagged and naked in the dungeon, hands tied above her head and wishing something interesting would happen. It was cold underground, and by the time you check back in to release her, she's very, very ready for a long, hot bath."
       },
       girl: {
         endurance: -12,

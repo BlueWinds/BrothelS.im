@@ -2,7 +2,7 @@
 Actions.Explore = {
   label: 'Explore',
   gerund: 'Exploring',
-  group: 'Training',
+  group: 'Chores',
   description: '<<- girl.name >> will visit some part of the city with you, to see what there is to see.',
   ownerParticipation: true,
   options: {

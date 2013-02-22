@@ -16,6 +16,12 @@ Girls.Saber = {
   hardLibido: 0,
   analLibido: 0,
   fetishLibido: 0,
+  specialRules: {
+    dependentStats: {
+      '-happiness': { happiness: -0.5 },
+      happiness: { happiness: -0.33 }
+    }
+  },
   images: {
     basePath: "content/girls/Saber/images",
     base: "Base.jpg",
@@ -45,6 +51,16 @@ Girls.Saber = {
           endurance: 22
         }
       }]
+    }),
+    Lockdown: $.extend(true, {}, Actions.Lockdown, {
+      results: [
+	{
+	  girl: { happiness: -18 }
+	},
+	{
+	  girl: { happiness: -18 }
+	}
+      ]
     }),
     Exercise: {
       label: 'Patrol',
@@ -207,3 +223,55 @@ Girls.Saber = {
     } // Patrol
   }
 };
+
+Girls.Saber.Actions.Talk.results._append([
+  {
+    message: {
+      group: 'Saber',
+      label: 'Talk',
+      image: '<<- girl.image() >>',
+      text: "Saber is quiet and reserved, not shy but private. She answers your direct questions, but has little to add of her own. You try to encourage her to speak up more, but she doesn't much understand the point - words are for communication, nothing more. The idea of bonding doesn't even cross her mind. Eventually you give up, and allow her to return to... whatever she was doing before you entered her room. Meditation, perhaps."
+    },
+    girl: {
+      obedience: 1,
+    }
+  },
+  {
+    message: {
+      group: 'Saber',
+      label: 'Talk',
+      image: '<<- girl.image() >>',
+      text: "Determined to get Saber to open up a little bit, you decided that a change of surroundings might be helpful, and take her out to <<- time == 'morning' ? 'lunch' : 'dinner' >>. Discussion seems to work well over a shared rice-pot and curry - while not chatty by a long shot, she is at least willing to hold a conversation, rather than respond to questions with single syllable answers.<br><br>Time flies, and you reach out for a second helping... only to notice that the rice is all gone. And the curry. And the basil on the side. Saber seems to have already finished everything. Nothing to be done - you order a second serving. She eats more than her share of that as well."
+    },
+    girl: {
+      obedience: 1.5,
+      happiness: 2
+    },
+    money: -30
+  },
+  {
+    message: {
+      group: 'Saber',
+      label: 'Talk',
+      image: '<<- girl.image() >>',
+      text: "You ask why she prefers to be called Saber instead of Arthuria - it's a very pretty name, and it's more fitting for her to be a woman than a weapon. She takes so long to reply that you wonder if the question has offended - finaly, just when you're about to try somthing easier to talk about, she answers.<blockquote>It... there were no happy endings for me. I did far better as a weapon than I ever did as a human.</blockquote>"
+    },
+    girl: {
+      obedience: 2,
+      happiness: -3
+    }
+  },
+  {
+    message: {
+      group: 'Saber',
+      label: 'Talk',
+      image: 'content/girls/Saber/images/Exercise1.jpg',
+      text: "Saber seems in no mood to sit around and talk, so you instead take her for a walk in the park. It is a nearly perfect <<- time >>, and she looks very pretty in her clothing, modest as it is. You see her watching a group of young people playing some game or other that involves a great deal of energetic running away from each other - and as you get closer, one of them stumbles and into the two of you. Saber catches the young man - no younger than her, really - and he rather than appologizing, just shouts \"You're it!\" and runs away, looking over his shoulder so see if she's going to chase him.<br><br>She looks at you for permission, and you nod. There are worse ways to spend some time than being young again."
+    },
+    girl: {
+      obedience: 1.5,
+      happiness: 3,
+      endurance: -7
+    }
+  }
+]);
