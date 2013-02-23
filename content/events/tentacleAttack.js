@@ -129,7 +129,7 @@ Events.tentacleManVisit = {
     }
   },
   variants: function(context, done) {
-    var text = context.girl.name + " is in a good mood as she walks through the University with you. You inquire about Dr. Ander - he's quite well known, apparently, and the student directs you to a building set a little away from the rest of the university. Dr. Ander opens the door after the second knock.<blockquote>Welcome, welcome! I'm so glad you came. Especially you, Mrs. " + girl.name + " - I haven't been able to stop thinking about you since we last met. So, are you here to take me up on my offer? Give me a few hours of your time, and...</blockquote> You don't catch the rest of what he said, because it was whispered into her ear.";
+    var text = context.girl.name + " is in a good mood as she walks through the University with you. You inquire about Dr. Ander - he's quite well known, apparently, and the student directs you to a building set a little away from the rest of the university. Dr. Ander opens the door after the second knock.<blockquote>Welcome, welcome! I'm so glad you came. Especially you, Mrs. " + context.girl.name + " - I haven't been able to stop thinking about you since we last met. So, are you here to take me up on my offer? Give me a few hours of your time, and...</blockquote> You don't catch the rest of what he said, because it was whispered into her ear.";
     var options = {
       'Let him entertain her': "Dr. Ander will take her into the back room and do... whatever it is " + context.girl.name + " seems so keen on.",
       'Just talk': "You and " + context.girl.name + " should get to know him better."
