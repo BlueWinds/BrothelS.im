@@ -459,6 +459,7 @@ Actions.tenacleManAbduction = {
           tentacleManSearch: false
         }
       },
+      lock: false,
       mission: 'tentaclePregnancy'
     }
   }

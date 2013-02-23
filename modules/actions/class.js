@@ -150,7 +150,7 @@ Girl.actions = function(time) {
 Girl.prototype.action = function(_id, context) {
   context.girl = this;
   var action = Action.create(_id, context);
-  if (action && this.actions[context.time] && _id == this.actions[context.time]._id) {
+  if (this.actions[context.time] && _id == this.actions[context.time]._id) {
     if (this.actions[context.time].option) {
       action.setOption(this.actions[context.time].option);
     }
