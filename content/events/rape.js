@@ -20,7 +20,8 @@ Events.thugRape = {
         group: '<<- girl.name >>',
         image: '<<- girl.image("group") >>',
         label: 'Attacked by Thugs',
-        text: "<<= girl.name >> was heading into the city to <<= action.label >> when a pot-bellied man stepped in front of her, blocking her way. She tried to go around wordlessly, but it was only then that she noticed her predicament - a narrow alley, and three more of his friends blocking her retreat. She opened her mouth to scream, but he was too fast, clamping a hand over her mouth.<br><br>She kicked at his groin and bit at his hand, but one of the other men wrapped strong arms around her knees, immobilizing her while another produced rope and bound her. It was an efficient job - all she could make was muffled moans around the gag, and squirm slightly as they tore her clothes to shreds. Her eyes watered at the size of the cocks presented before her face and pressed at her ass, but she shuddered in relief as one of the men produced a tube of lubrication. No one came to help her as, one after another, they bent her over a pile of crates and satisfied their lust. It took hours. The last man took some pity on <<= girl.name >>\'s tear-streaked and grimy face, and fingered her to orgasm while he fucked her."
+        text: "<<= girl.name >> was heading into the city to <<= action.label >> when a pot-bellied man stepped in front of her, blocking her way. She tried to go around wordlessly, but it was only then that she noticed her predicament - a narrow alley, and three more of his friends blocking her retreat. She opened her mouth to scream, but he was too fast, clamping a hand over her mouth.<br><br>She kicked at his groin and bit at his hand, but one of the other men wrapped strong arms around her knees, immobilizing her while another produced rope and bound her. It was an efficient job - all she could make was muffled moans around the gag, and squirm slightly as they tore her clothes to shreds. Her eyes watered at the size of the cocks presented before her face and pressed at her ass, but she shuddered in relief as one of the men produced a tube of lubrication. No one came to help her as, one after another, they bent her over a pile of crates and satisfied their lust. It took hours. The last man took some pity 
+on <<= girl.name >>\'s tear-streaked and grimy face, and fingered her to orgasm while he fucked her."
       },
       girl: {
         endurance: -25,
@@ -93,7 +94,7 @@ Events.guardRape = {
         {
           group: '<<- girl.name >>',
           image: '<<- girl.image("fetish") >>',
-          label: 'Raped by gity guards',
+          label: 'Raped by city guards',
           text: "<< if (event.special.answer == 'Submit') { >>Going along quietly, the guard led her away.<< } else if (event.special.answer == 'Run') { >><<= girl.name >> tried to wrench her arms free, but his grip was too strong - her attempt to flee failed before it had even properly begun. He half-led, half dragged her away.<< } else if (event.special.answer == 'Fight') { >>Knowing she was at a serious disadvantage with her hands already bound, she took the first opportunity to strike at the guard, going for the eyes. She was too slow though, and he stepped our of reach, kicking one of her legs out from under her. Producing a second pair of handcuffs for her ankles (not pleasant at all), he carried her away.<< } >> Four other men and two women looked up as he dragged <<= girl.name >> into the guardhouse, announcing that he'd caught a naughty little girl who needed to be punished. She looked to the other women pleadingly, but received the same evil leers as from the men.",
           delta: false,
           weight: -2
@@ -101,7 +102,7 @@ Events.guardRape = {
         {
           group: '<<- girl.name >>',
           image: '<<- girl.image("prison") >>',
-          label: 'Raped by gity guards',
+          label: 'Raped by city guards',
           text: "They fitted a ball-gag into her mouth, methodically stripped her of all her clothing, and strapped her arms and legs to the table. Most of them resumed playing cards, moving the game to the floor, but one stayed behind long enough to stick a dildo in both her pussy and ass before leaving her there, bound gagged and immobile. Whenever a player won a hand, they stood up and came over to have their way with her, removing the dildo from the hole of their choice only long enough to fuck her before returning it to place. The women were the worst - they'd play with the dildo until she was about to cum, then wait until she calmed down to continue, leaving her completely unsatisfied.",
           delta: false,
           weight: -2
@@ -109,7 +110,7 @@ Events.guardRape = {
         {
           group: '<<- girl.name >>',
           image: '<<- girl.image("tired") >>',
-          label: 'Raped by gity guards',
+          label: 'Raped by city guards',
           text: "When they finished their game, they stood and opened to door, ready to leave. <<= girl.name >> made the loudest moan she could around the ball-gag, but they just... left. She began to fear she'd be left here forever, but it wasn't long until the next shift of guards arrived. They untied her, helped her rub the stiffness from her limbs and gave her her clothes back, but offered no apologies stronger than sympathetic looks as she left in a hurry.",
           weight: -2
         }
