@@ -205,7 +205,7 @@ Events.tentacleManVisitYou = {
     }
     // We have to apply the progress special rule here, so that the girl meets the conditions for the action we want to set.
     context.girl.apply('specialRules', { tentacleManProgress: 1 });
-    var action = context.girl.action('tenacleManAbduction', context);
+    var action = context.girl.action('tentacleManAbduction', context);
     action.locked = true;
     context.girl.setAction(action);
     done(this.base().results.abduction);
@@ -253,7 +253,7 @@ Events.tentacleManVisitYou = {
   }
 };
 
-Actions.tenacleManAbduction = {
+Actions.tentacleManAbduction = {
   label: 'Missing',
   group: 'Jobs',
   description: "<<- girl.name >> did not return home last night. You wonder where she's gotten off to.",
