@@ -55,7 +55,7 @@ e.GirlNew.push(function(girl) {
 
 e.GirlRunTime.push(function(girl, time, done) {
   if (girl.status == 'Hired' && (time == 'evening' || !girl.actions[time].allDay)) {
-    girl.verifyAction(time, true);
+    girl.verifyAction(time, true, true);
     girl.actions[time].getResults(function(results, context) {
       girl.actions[time].applyResults(results, done, context);
     });
@@ -96,10 +96,11 @@ e.GameRender.push(function(done) {
       });
       $('.action ol.dropdown li', div).click(function() {
         var action = $(this).closest('.action').children('ul').attr('name');
-        action = girl.actions[context.time];
+        action = context.actions[action];
         $(this).parent().children('li').removeClass('selected');
         $(this).addClass('selected');
         action.setOption($(this).attr('name'));
+        girl.setAction(action);
         if (action.allDay) {
           girl.actions[context.time == 'morning' ? 'evening' : 'morning'].setOption($(this).attr('name'));
         }

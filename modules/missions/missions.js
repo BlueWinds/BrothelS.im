@@ -63,6 +63,9 @@ e.GameUpgrade.push(function(game, next) {
     var str = game.missions.avengeGuardRape.display.text.replace('Investigating the Guards', 'Exploring the Garrison');
     game.missions.avengeGuardRape.display.text = str;
   }
+  if (game.version < 0.512 && game.missionsDone.buyRooms) {
+    game.missionsDone.exploreCity = true;
+  }
   next();
 });
 

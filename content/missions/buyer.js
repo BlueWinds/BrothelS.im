@@ -102,6 +102,7 @@ Missions.girlBuyer = {
 };
 
 Missions.girlBuyerMinDelay = {
+  conditions: false,
   end: {
     min: { day: '+25' }
   },

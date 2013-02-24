@@ -5,6 +5,9 @@ Actions.Explore = {
   group: 'Chores',
   description: '<<- girl.name >> will visit some part of the city with you, to see what there is to see.',
   ownerParticipation: true,
+  conditions: {
+    missions: { exploreCity: 3 }
+  },
   options: {
     Redlight: 'Redlight', //:"The redlight district. Though relatively small, it's quite busy since sex is the nation's primary product.",
     Slums: 'Slums', //: "There are better parts of town, but none more populous or unwatched by the law.",
@@ -164,7 +167,7 @@ Actions.Explore = {
         group: '<<- girl.name >>',
         label: 'Explore Uptown',
         image: 'content/miscImages/uptownMorning.jpg',
-        text: 'Uptown is a quiet place in the morning. Not sleepy, but unhurried. The wealthy with business to attend to have already left, while those with little to do are not nearly as boisterous as people in other parts of the city - there are appearances to maintain, afterall. <<- girl.name >> << girl.modesty < 50 { >>attracts some murmors and sidelong glances from a couple of noble ladies. You can\'t quite tell if they\'re condemning her revealing clothing or secretly envious of how good she looks.<< } else { >>fits in rather nicely with the surroundings, elegant and demure. No one would guess she works at a brothel.<< } >>'
+        text: "Uptown is a quiet place in the morning. Not sleepy, but unhurried. The wealthy with business to attend to have already left, while those with little to do are not nearly as boisterous as people in other parts of the city - there are appearances to maintain, afterall. <<- girl.name >> << if (girl.modesty < 50) { >>attracts some murmors and sidelong glances from a couple of noble ladies. You can't quite tell if they're condemning her revealing clothing or secretly envious of how good she looks.<< } else { >>fits in rather nicely with the surroundings, elegant and demure. No one would guess she works at a brothel.<< } >>"
       },
       girl: {
         endurance: -6,

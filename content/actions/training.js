@@ -3,6 +3,7 @@ Actions.Exercise = {
   label: 'Exercise',
   group: 'Training',
   description: '<<= girl.name >> will spend time jogging around the city and otherwise exercising outdoors to increase her <<- __("constitution") >>.',
+  conditions: {},
   enableConditions: {
     girl: {
       min: { endurance: 15 }
@@ -13,7 +14,6 @@ Actions.Exercise = {
     park: 0.5,
     market: 0.1
   },
-  variants: [0.4, 0.4, 0.2],
   results: [
     {
       message: {
@@ -75,7 +75,6 @@ Actions.Study = {
     slums: 0.1,
     university: 0.1
   },
-  variants: [0.3, 0.4, 0.2, 0.1],
   results: [
     {
       message: {
@@ -378,7 +377,6 @@ Actions.Lockdown = {
     }
   },
   tags: { indoors: 1 },
-  variants: [0.5, 0.5],
   results: [
     {
       message: {

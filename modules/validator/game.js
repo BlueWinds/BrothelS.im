@@ -35,7 +35,7 @@ Schemas.Game = {
       type: 'string'
     },
     version: {
-      'enum': [0.501]
+      'enum': [Game.config.version]
     }
   },
   additionalProperties: false

@@ -12,7 +12,6 @@ Events.tentacleAttack = {
     redlight: 0.02,
     university: 0.02
   },
-  variants: [ 0.33, 0.34, 0.33 ],
   results: [
     {
       message: {
@@ -466,6 +465,7 @@ Actions.tentacleManAbduction = {
 };
 
 Missions.tentaclePregnancy = {
+  conditions: false,
   display: {
     label: 'Strange pregnancy',
     group: '<<- girl.name >>',
@@ -567,5 +567,6 @@ Missions.tentaclePregnancy = {
 
 // Just an empty mission we can complete silently, to prevent tentacleManGreet from triggering again after Dr. Ander has been turned in.
 Missions.tentacleManGone = {
+  conditions: false,
   results: [{}]
 };

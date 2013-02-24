@@ -11,7 +11,8 @@ Mission.introMissions = {
   firstBuilding: true,
   cleanBuilding: true,
   explainWhore: true,
-  buyRooms: true
+  buyRooms: true,
+  exploreCity: true
 };
 
 Missions.introConstitution = {
@@ -37,6 +38,7 @@ Missions.introConstitution = {
 };
 
 Missions.obedienceAndModesty = {
+  conditions: false,
   display: {
     label: 'Obedience and Modesty',
     group: 'Introduction',
@@ -56,13 +58,6 @@ Missions.obedienceAndModesty = {
 };
 
 Missions.enduranceAndHappiness = {
-  display: {
-    label: 'Endurance and Happiness',
-    group: 'Introduction',
-    image: '<<- girl.image("tired") >>',
-    weight: -1,
-    text: "<<- girl.name >> is starting to look a little bit worn out from all the work getting ready for the grand opening. There's only one cure for this, of course - time off. You should have her <strong>Rest</strong> a couple of times until she recovers most of her <<- __('endurance') >>. She'll automatically start Resting when her endurance becomes too low for her current action - but you may want to let her take some time off before she's completely exhausted.<br><br>High <<- __('happiness') >> makes a girl less likely to refuse sex, and customers will enjoy themselves more with a girl who enjoys her work. In addition to Resting, you can change a girl's daily wage by clicking on her picture or stats, then rolling the spinner up or down. A girl's demand for wages goes up as her stats raise.<br><br><em><<- __('endurance') >> doesn't have any effect beyond disables actions other than <strong>Rest</strong> - you don't need to manage it carefully, expecially since a girl will start resting of her own accord when her endurance is too low.</em>"
-  },
   conditions: {
     girl: {
       max: { endurance: 30 }
@@ -70,6 +65,13 @@ Missions.enduranceAndHappiness = {
     missions: {
       enduranceAndHappiness: -3
     }
+  },
+  display: {
+    label: 'Endurance and Happiness',
+    group: 'Introduction',
+    image: '<<- girl.image("tired") >>',
+    weight: -1,
+    text: "<<- girl.name >> is starting to look a little bit worn out from all the work getting ready for the grand opening. There's only one cure for this, of course - time off. You should have her <strong>Rest</strong> a couple of times until she recovers most of her <<- __('endurance') >>. She'll automatically start Resting when her endurance becomes too low for her current action - but you may want to let her take some time off before she's completely exhausted.<br><br>High <<- __('happiness') >> makes a girl less likely to refuse sex, and customers will enjoy themselves more with a girl who enjoys her work. In addition to Resting, you can change a girl's daily wage by clicking on her picture or stats, then rolling the spinner up or down. A girl's demand for wages goes up as her stats raise.<br><br><em><<- __('endurance') >> doesn't have any effect beyond disables actions other than <strong>Rest</strong> - you don't need to manage it carefully, expecially since a girl will start resting of her own accord when her endurance is too low.</em>"
   },
   end: {
     girl: {
@@ -83,6 +85,7 @@ Missions.enduranceAndHappiness = {
 };
 
 Missions.charismaAndIntelligence = {
+  conditions: false,
   display: {
     label: 'Charisma and Intelligence',
     group: 'Introduction',
@@ -104,6 +107,7 @@ Missions.charismaAndIntelligence = {
 };
 
 Missions.libidoAndExperience = {
+  conditions: false,
   display: {
     label: 'Libido and Experience',
     group: 'Introduction',
@@ -122,6 +126,7 @@ Missions.libidoAndExperience = {
 };
 
 Missions.firstMoney = {
+  conditions: false,
   display: {
     label: 'Streetwalking',
     group: 'Introduction',
@@ -138,6 +143,7 @@ Missions.firstMoney = {
 };
 
 Missions.firstThousand = {
+  conditions: false,
   display: {
     label: 'Earn $1000',
     group: 'Introduction',
@@ -178,6 +184,7 @@ Missions.firstThousand = {
 };
 
 Missions.secondGirl = {
+  conditions: false,
   display: {
     label: 'Hire a Girl',
     group: 'Introduction',
@@ -207,6 +214,7 @@ Missions.secondGirl = {
 };
 
 Missions.firstBuilding = {
+  conditions: false,
   display: {
     label: 'Buy a Building',
     group: 'Introduction',
@@ -225,6 +233,7 @@ Missions.firstBuilding = {
 };
 
 Missions.cleanBuilding = {
+  conditions: false,
   display: {
     label: 'Building Stats',
     image: 'content/missions/firstBuilding.jpg',
@@ -243,6 +252,7 @@ Missions.cleanBuilding = {
 };
 
 Missions.explainWhore = {
+  conditions: false,
   display: {
     label: 'Whoring and Reputation',
     image: 'content/girls/Kirino/images/Base.png',
@@ -261,12 +271,30 @@ Missions.explainWhore = {
 };
 
 Missions.buyRooms = {
+  conditions: false,
   display: {
     label: 'Adding Rooms',
     image: "<<- building.image() >>",
     group: 'Introduction',
     weight: -1,
     text: "<blockquote>As you may have noticed, we have an awful lot of unused space around here. When we have some spare money, we should renovate it into something more useful!</blockquote> You can do that by clicking on the building, then dragging a room from the Available Rooms list on the right-hand side into the building. Ones you can't afford will be greyed out.<br><br><em>Adding <strong>Bedrooms</strong> will let additional girls live and work in a building, while a <strong>Dungeon</strong> will open up the Lockdown action, a different way to increase <<- __('obedience') >>. Some other rooms have daily effects on every girl living in the building - these are listed beneath the description.</em>"
+  },
+  end: {
+    min: { day: '+3' }
+  },
+  results: [{
+    mission: 'exploreCity',
+  }]
+};
+
+Missions.exploreCity = {
+  conditions: false,
+  display: {
+    label: 'Explore the City',
+    image: "content/miscImages/uptownMorning.jpg",
+    group: 'Introduction',
+    weight: -1,
+    text: "<blockquote>Well, here we are! You're off to a good start - there's not a whole lot more I can teach you, though I'm sure there's still plenty you're planning on teaching me.</blockquote> Kirino giggles at her naughty thought. A dirty mind, that girl. Still, she's right - now that you're well on your way to being established, you don't need Kirino's guidance any more.<br><br><em>You can now <strong>Explore</strong> various parts of the city with your girls. You may meet some interesting people. This is also the end of the tutorial - good luck.</em></em>"
   },
   end: {
     min: { day: '+3' }

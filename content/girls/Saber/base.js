@@ -66,6 +66,7 @@ Girls.Saber = {
       label: 'Patrol',
       group: 'Chores',
       description: 'Saber will roam the streets seeking out enemies to battle (this will increase her <<- __("constitution") >>.',
+      conditions: Actions.Exercise.conditions,
       enableConditions: {
         girl: {
           min: { endurance: 50 }
@@ -75,8 +76,7 @@ Girls.Saber = {
         { fetishes: { tentacles: true }, likelyhood: 0.1 },
         { fetishes: { tentacles: true }, likelyhood: 0.1 },
         { fetishes: { rape: true }, likelyhood: 0.1 },
-        { fetishes: { rape: true }, likelyhood: 0.1 },
-        0.2, 0.15, 0.65
+        { fetishes: { rape: true }, likelyhood: 0.1 }
       ],
       tags: {
         slums: 0.2,
@@ -199,7 +199,7 @@ Girls.Saber = {
             label: 'Patrol',
             group: '<<- girl.name >>',
             image: '<<- girl.image() >>',
-            text: 'Saber encountered a passing knight, who praised her sword, sheathed as it was. After talking a while, they eventually sparred - she went easy on him, and they separated after a few inconclusive rounds. His praise shifted from her sword to her sword-skill, and finally to her beauty - she blushed and thanked him, leaving hastily before he could get any further in his train of compliments.'
+            text: "Saber encountered a passing knight, who praised her sword, sheathed as it was. After talking a while, they eventually sparred - she went easy on him, and they separated after a few inconclusive rounds. His praise shifted from her sword to her sword-skill, and finally to her beauty - she blushed and thanked him, leaving hastily before he could get any further in his train of compliments."
           },
           girl: {
             happiness: 3,

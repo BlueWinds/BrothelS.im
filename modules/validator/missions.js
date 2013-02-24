@@ -9,8 +9,7 @@ Schemas.Mission = {
     results: {},
     special: {},
     conditions: {
-      anyOf: [{ $ref: 'Conditions' }],
-      description: 'The mission will begin as soon as all of these conditions match, as long as a mission with the same name is not already running (since only one mission of each _id can run at a time, it would overwrite the existing one). If conditions is not present, then this mission will never start on its own - it can only be triggered from a Result.'
+      description: 'The mission will begin as soon as all of these conditions match, as long as a mission with the same name is not already running (since only one mission of each _id can run at a time, it would overwrite the existing one). If conditions is "false", then this mission will never start on its own - it can only be triggered from a Result.'
     },
     display: {
       anyOf: [{ $ref: 'Message' }],
@@ -66,8 +65,10 @@ Schemas.Game.properties.missionsDone =  {
 };
 
 Schemas.Result.properties.mission = {
-  type: 'string',
-  description: 'A Mission to start. If there is a girl in the context, if can be a mission specific to her. The mission will inherit the current context, and its Conditions will *not* be checked.'
+  description: 'A Mission to start. If there is a girl in the context, if can be a mission specific to her. The mission will inherit the current context, and its Conditions will *not* be checked.',
+  'enum': Object.keys(Missions)._append($.map(Girls, function(girl) {
+    if (girl.Missions) { return Object.keys(girl.Missions); }
+  }))
 };
 Schemas.Result.properties.missionsDone = {
   type: 'object',

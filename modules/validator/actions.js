@@ -3,14 +3,15 @@ Schemas.Context.properties.action = { $ref: 'liveAction' };
 
 Schemas.Tags = {
   id: 'Tags',
-  type: 'object',
+  type: ['object', 'function'],
   additionalProperties: {
     type: 'number',
     minimum: 0,
     maximum: 1,
     'default': 0
   },
-  description: 'garrison: City guard and military.\n' +
+  description: 'If tags is a function, then it should accept a single argument "context" and return an object that matches this schema.\n' +
+  'garrison: City guard and military.\n' +
   'university: Students, classes, temples, etc.\n' +
   'slums: The bad part of town.\n' +
   'docks: Ships, foreigners, traders.\n' +
@@ -24,7 +25,7 @@ Schemas.Tags = {
 Schemas.Action = {
   id: 'Action',
   anyOf: [{ $ref: 'Resolvable' }],
-  required: [ 'group', 'label', 'description' ],
+  required: [ 'group', 'label', 'description', 'tags' ],
   properties: {
     _id: {},
     initialize: {},
@@ -32,8 +33,7 @@ Schemas.Action = {
     results: {},
     special: {},
     conditions: {
-      anyOf: [{ $ref: 'Conditions' }],
-      description: 'The action will show up in the GUI when its conditions match (it may still be disabled by enableConditions below).',
+      description: 'The action will show up in the GUI when its conditions match (it may still be disabled by enableConditions below). If "false", then the action will never show up "on its own", but may still be explictly created/added by girl.setAction(girl.action(_id, context)). If you use this feature, be aware that the action will "fall off" at the end of the day (lock it if you want it to stick around).',
       'default': {}
     },
     enableConditions: {
@@ -63,9 +63,8 @@ Schemas.Action = {
       description: 'The hover-text for this action. Text replacement is of course available.'
     },
     tags: {
-      anyOf: [{ $ref: 'Tags' }, { type: 'function' }],
-      description: 'Tags represent where this action occurs, though they can also be more intangible properties, such as "using magic" or "alone". The location-based tags should generally add up to 1 (though this is not a hard requirement). If tags is ommited entirely, the action cannot trigger any events. Use this if the action is one-time, important, or otherwise really shouldn\'t be interrupted by random interference.\n\nIf tags is a function, it should take one argument (context) and return an object of tags.',
-      'default': {}
+      anyOf: [{ $ref: 'Tags' }],
+      description: 'Tags represent where this action occurs, though they can also be more intangible properties, such as "using magic" or "alone". The location-based tags should generally add up to 1 (though this is not a hard requirement). If tags is ommited entirely, the action cannot trigger any events. Use this if the action is one-time, important, or otherwise really shouldn\'t be interrupted by random interference.\n\nIf tags is a function, it should take one argument (context) and return an object of tags.'
     },
     allDay: {
       'enum': [true],
@@ -116,8 +115,7 @@ Schemas.liveAction = {
   id: 'liveAction',
   anyOf: [{ $ref: 'liveResolvable' }],
   required: [
-    'description', 'girl', 'group', 'label',
-    'tags', 'time', 'gerund'
+    'description', 'girl', 'group', 'label', 'time', 'gerund'
   ],
   properties: {
     special: {},
@@ -134,7 +132,6 @@ Schemas.liveAction = {
     group: { type: 'string' },
     label: { type: 'string' },
     gerund: { type: 'string' },
-    tags: { $ref: 'Tags' },
     option: { type: 'string' },
     optionsKey: { type: 'string' },
     disabled: {

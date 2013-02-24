@@ -58,6 +58,7 @@ Missions.luxuryHouseDelay = {
   }]
 };
 Missions.luxuryHouseSale = {
+  conditions: false,
   display: {
     label: 'House for Sale',
     group: 'House for Sale',

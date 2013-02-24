@@ -4,20 +4,19 @@ Actions.Rest = {
   group: 'Chores',
   description: 'Giving a girl time off increases both <<- __("endurance") >> and <<- __("happiness") >>.',
   tags: { indoors: 1 },
-  results: [
-    {
-      message: {
-        group: '<<- girl.name >>',
-        label: 'Rest',
-        image: '<<- girl.image("tired") >>',
-        text: '<<= girl.name >> took some time off to recover.'
-      },
-      girl: {
-        endurance: 12,
-        happiness: 3
-      }
+  conditions: {},
+  results: [{
+    message: {
+      group: '<<- girl.name >>',
+      label: 'Rest',
+      image: '<<- girl.image("tired") >>',
+      text: '<<= girl.name >> took some time off to recover.'
+    },
+    girl: {
+      endurance: 12,
+      happiness: 3
     }
-  ]
+  }]
 };
 
 Actions.Clean = {

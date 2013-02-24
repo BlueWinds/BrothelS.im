@@ -147,7 +147,7 @@ Schemas.Resolvable = {
   type: 'object',
   description: 'Resolvable is a very abstract concept - it includes Actions, Events and Missions - anything that checks a set of Conditions, builds a Context and then applies a Result using it.',
   required: [
-    '_id', 'results'
+    '_id', 'conditions', 'results'
   ],
   properties: {
     _id: { type: 'string' },
@@ -156,25 +156,18 @@ Schemas.Resolvable = {
       'arguments': ['context'],
       description: 'An optional function called when this Resolvable is created. If it returns "false" (the boolean, not just anything that == false), it is the same as if the action\'s Conditions did not match (the action won\'t be available, the event won\'t trigger, etc). It should not modify anything outside of "this.special" - the Resolvable itself - since, for example, Actions are created many times (and thus this function called repeatedly).'
     },
+    conditions: {
+      anyOf: [{ $ref: 'Conditions' }, { 'enum': [false] }]
+    },
     variants: {
       type: ['function', 'array'],
-      description: "If not present, a random choice will be selected from results. If it's a function, it must call done(delta), where delta is a Result. If variants is an array, its items are checked in turn until one matches, and the result matching its index is applied (the easiest way to understand this is by example - see content/girls/Yuna/base.js, in Girls.Yuna.Actions.Summon).",
+      description: "If not present, a random choice will be selected from results. If it's a function, it must call done(delta), where delta is a Result. If variants is an array, each Condition is checked in turn until one matches, and the result matching its index is applied. If none match, then any remaining elements from Results are selected from randomly.",
       'arguments': ['context', 'done'],
-      items: {
-        anyOf: [
-          { type: 'number', maximum: 1, minimum: 0,
-            description: 'The numerical elements should sum up to exactly 1 - each number is the likelyhood that that result will be chosen.'
-          },
-          {
-            anyOf: [{ $ref: 'Conditions' }],
-            description: 'If the conditions match, the result corresponding to this element will be applied.'
-          }
-        ]
-      },
+      items: { $ref: 'Conditions' },
       minItems: 1
     },
     results: {
-      description: "A set of results for this Resolvable. Which one is applied is determined by 'variants' above. If variants is an array, then this must also be an array of the same length. If variants is a function, then it can use whatever method it pleases to look up items from results.",
+      description: "A set of results for this Resolvable. Which one is applied is determined by 'variants' above. If variants is an array, then this must also be an array of the same length. If variants is a function, then it can use whatever method it pleases to look up items from this.base().results.",
       type: ['array', 'object'],
       items: { $ref: 'Result' },
       additionalProperties: { $ref: 'Result' },

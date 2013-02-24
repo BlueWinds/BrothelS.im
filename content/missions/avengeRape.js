@@ -1,5 +1,6 @@
 "use strict";
 Missions.avengeGuardWait = {
+  conditions: false,
   end: {
     min: { day: '+1' }
   },
@@ -83,6 +84,7 @@ Missions.avengeGuardWait = {
 };
 
 Missions.avengeGuardRape = {
+  conditions: false,
   display: {
     label: 'Speak with Guard Captain',
     group: 'Investigate City Guard',
@@ -232,6 +234,7 @@ Events.investigateGuards = {
 };
 
 Missions.avengeGuardRapeFinal = {
+  conditions: false,
   variants: function(context, done) {
     var results = this.base().results;
     var text = "Finally, you have a list of names and have seen the faces for yourself. The relevant laws are clear enough - while it would be illegal for you to take matters into your own hands, precedent suggests that virtually any punishment you care to inflict on " + context.girl.name + "'s rapists would result in nothing more than a slap on the wrist. Only one thing left to do - serve justice.";

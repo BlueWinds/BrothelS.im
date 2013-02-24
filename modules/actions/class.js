@@ -4,13 +4,14 @@ function Action(obj) {
   delete this.enableConditions;
   delete this.options;
   delete this.disable;
+  delete this.tags;
   if (!this.gerund) { this.gerund = this.label + 'ing'; }
 }
 
 Action.prototype = new Resolvable();
 
-Action.create = function(_id, context) {
-  var action = Resolvable.create(_id, 'Action', context);
+Action.create = function(_id, context, allowFalseConditions) {
+  var action = Resolvable.create(_id, 'Action', context, allowFalseConditions);
   if (!action) { return action; }
   var option = context.option || Object.keys(action.options())[0];
   if (option) { action.setOption(option); }
@@ -149,7 +150,7 @@ Girl.actions = function(time) {
 
 Girl.prototype.action = function(_id, context) {
   context.girl = this;
-  var action = Action.create(_id, context);
+  var action = Action.create(_id, context, true);
   if (this.actions[context.time] && _id == this.actions[context.time]._id) {
     if (this.actions[context.time].option) {
       action.setOption(this.actions[context.time].option);
@@ -171,10 +172,10 @@ Girl.prototype.setAction = function(action) {
   this.actions[action.time] = action;
 };
 
-Girl.prototype.verifyAction = function(time, rebuild) {
+Girl.prototype.verifyAction = function(time, rebuild, allowFalseConditions) {
   var a = this.actions[time];
   if (a && a.locked) { return; }
-  a = a && a.label && a.checkConditions() && !a.checkDisabled();
+  a = a && a.label && a.checkConditions(undefined, undefined, allowFalseConditions) && !a.checkDisabled();
   if (!a) {
     this.setAction(this.action('Rest', { time: time }));
   }
@@ -235,9 +236,9 @@ Building.prototype.girls = function() {
 
 (function() {
   var oldCheckConditions = Resolvable.prototype.checkConditions;
-  Resolvable.prototype.checkConditions = function(cond, context) {
+  Resolvable.prototype.checkConditions = function(cond, context, allowFalseConditions) {
     cond = cond || this.base().conditions;
-    var result = oldCheckConditions.call(this, cond, context);
+    var result = oldCheckConditions.call(this, cond, context, allowFalseConditions);
     if (!result) { return result; }
     if (cond && cond.ownerParticipation && !context.action.ownerParticipation) { return false; }
     if (cond && cond.ownerParticipation === false && context.action && context.action.ownerParticipation) { return false; }

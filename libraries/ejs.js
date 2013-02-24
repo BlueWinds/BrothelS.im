@@ -258,7 +258,12 @@ var compile = exports.compile = function(str, options){
   ].join("\n");
 
   if (options.debug) console.log(str);
-  var fn = new Function('locals, filters, escape', str);
+  try {
+    var fn = new Function('locals, filters, escape', str);
+  } catch(err) {
+    console.log(str);
+    throw err;
+  }
   return function(locals){
     return fn.call(this, locals, filters, utils.escape);
   }

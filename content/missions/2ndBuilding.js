@@ -110,6 +110,7 @@ Missions.secondBuilding = {
 };
 
 Missions.secondBuildingDelay = {
+  conditions: false,
   end: {
     min: { day: '+75' }
   },

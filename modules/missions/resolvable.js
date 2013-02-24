@@ -8,12 +8,12 @@ function Resolvable(obj) {
   this.constructor = window[this._class];
 }
 
-Resolvable.create = function(_id, _class, context) {
+Resolvable.create = function(_id, _class, context, allowFalseConditions) {
   var base = Resolvable.base(_id, _class, context);
   var res = new window[_class](base);
   res.constructor = window[_class];
   res._class = _class;
-  context = res.checkConditions(base.conditions, context);
+  context = res.checkConditions(base.conditions, context, allowFalseConditions);
   if (!context) { return false; }
   if (base.initialize) {
     var ret = base.initialize.call(res, context);
@@ -75,9 +75,12 @@ Resolvable.prototype.base = function() {
   return Resolvable.base(this._id, this._class, this.context());
 };
 
-Resolvable.prototype.checkConditions = function(cond, context) {
+Resolvable.prototype.checkConditions = function(cond, context, allowFalseConditions) {
   cond = cond || this.base().conditions;
   context = context || this.context(context);
+  if (cond === false) {
+    return allowFalseConditions ? context : false;
+  }
   if (!cond) { return context; }
   if (cond.fetishes) {
     for (var fet in cond.fetishes) {
@@ -162,19 +165,22 @@ Resolvable.prototype.getResults = function(done, context) {
     return;
   }
   if (base.variants) {
-    var rand = Math.random();
-    for (var i in base.variants) {
-      if (typeof(base.variants[i]) == 'number') {
-        rand -= base.variants[i];
-        if (rand <= 0) { break; }
+    var extra = [];
+    for (var i in base.results) {
+      if (base.variants[i]) {
+        if (this.checkConditions(base.variants[i])) {
+          done(base.results[i]);
+          return;
+        }
       } else {
-        if (this.checkConditions(base.variants[i])) { break; }
+        extra.push(i);
       }
     }
-    done(base.results[i]);
+    done(base.results[Math.choice(extra)]);
     return;
+  } else {
+   done(Math.choice(base.results));
   }
-  done(Math.choice(base.results));
 };
 
 Resolvable.prototype.applyResults = function(results, done, context) {

@@ -10,6 +10,7 @@ Missions.specialPartyStart = {
 };
 
 Missions.specialParty = {
+  conditions: false,
   initialize: function() {
     this.special.client = new Person('High Class');
   },
@@ -31,6 +32,7 @@ Missions.specialParty = {
 };
 
 Missions.specialPartyDelay = {
+  conditions: false,
   end: {
     min: { day: '+25' },
     max: { day: '+25' }

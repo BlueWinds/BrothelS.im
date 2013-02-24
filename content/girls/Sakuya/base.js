@@ -120,6 +120,7 @@ Girls.Sakuya = {
       }]
     },
     SakuyaSomethingToSaySoon: {
+      conditions: false,
       end: {
         min: { day: '+5' }
       },
@@ -128,6 +129,7 @@ Girls.Sakuya = {
       }]
     },
     SakuyaSomethingToSay: {
+      conditions: false,
       display: {
         label: 'Something to Say',
         image: 'content/girls/Sakuya/images/Study3.jpg',
@@ -200,6 +202,7 @@ Girls.Sakuya = {
       }]
     },
     ScarletDevilTraining: {
+      conditions: false,
       display: {
         label: 'Train Sakuya',
         group: 'Enter the Devil',

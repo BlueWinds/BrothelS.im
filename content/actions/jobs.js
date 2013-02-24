@@ -178,10 +178,7 @@ Actions.Acolyte = {
     {
       girl: { min: { modesty: 65} },
       likelyhood: 0.25
-    },
-    0.33,
-    0.33,
-    0.34
+    }
   ],
   results: [
     {

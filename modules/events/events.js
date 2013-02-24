@@ -60,8 +60,8 @@ e.Ready.push(function(done) {
     event._id = _id;
   });
   $.each(Girls, function(name, girl) {
-    if (!girl.events) { return; }
-    $.each(girl.events, function(_id, event) {
+    if (!girl.Events) { return; }
+    $.each(girl.Events, function(_id, event) {
       event._id = _id;
     });
   });
