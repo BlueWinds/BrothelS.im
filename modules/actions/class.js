@@ -19,7 +19,6 @@ Action.create = function(_id, context, allowFalseConditions) {
   if (action.disabled) { action.description = action.disabled; }
   action.label = ejs.render(action.label, context);
   action.description = ejs.render(action.description, context);
-  action.tags = action.tags || {};
   action.gerund = ejs.render(action.gerund, context);
   return action;
 };
@@ -178,6 +177,10 @@ Girl.prototype.verifyAction = function(time, rebuild, allowFalseConditions) {
   a = a && a.label && a.checkConditions(undefined, undefined, allowFalseConditions) && !a.checkDisabled();
   if (!a) {
     this.setAction(this.action('Rest', { time: time }));
+  }
+  if (a.option) {
+    var options = a.options();
+    if (!options[a.option]) { a.setOption(Object.keys(options)[0]); }
   }
   if (rebuild) {
     a = this.actions[time];

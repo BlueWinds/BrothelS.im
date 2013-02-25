@@ -198,7 +198,7 @@ Girls.Yuna = {
       conditions: {
         girl: {
           min: {
-            specialRules: { summonCount: 7 }
+            specialRules: { summonCount: 4 }
           }
         },
         missions: {
@@ -254,7 +254,7 @@ Girls.Yuna = {
             charisma: 2,
             modesty: 2
           },
-          mission: "YunaPriestessWedding"
+          mission: ["YunaPriestessWedding", "YunaPriestessWeddingInvisible"]
         },
         { // fail
           message: {
@@ -270,22 +270,30 @@ Girls.Yuna = {
         }
       ]
     },
+    YunaPriestessWeddingInvisible: {
+      conditions: false,
+      end: {
+        min: { day: '+27' },
+        max: { day: '+27' }
+      },
+      results: [{}]
+    },
     YunaPriestessWedding: {
       conditions: false,
       end: {
-        min: { day: '+21' },
-        max: { day: '+21' }
+        min: { day: '+28' },
+        max: { day: '+28' }
       },
       display: {
         label: 'Position Vacant: High Priestess',
         group: 'Yuna',
         image: 'content/girls/Yuna/missionImages/interestPass.jpg',
-        text: "After the meeting with High Priest Detic at the temple and catching his eye, he arranged for her to speak with Caosuin about a possible union. Rector Caosuin announces the date of the wedding as though it were already a sure thing. But he cautions her that if she is serious that she must ensure that she is of suitable virtue by the time of the marriage. Being High Priestess is a weighty responsibility.<br><br><em>Yuna should have at least <<- __('modesty') >> 90 and <<- __('obedience') >> 65 by <strong>Day <<- mission.end.max.day >></strong> if she intends to go through with this.</em>",
+        text: "After the meeting with High Priest Detic at the temple and catching his eye, he arranged for her to speak with Caosuin about a possible union. Rector Caosuin announces the date of the wedding as though it were already a sure thing. But he cautions her that if she is serious that she must ensure that she is of suitable virtue by the time of the marriage. Being High Priestess is a weighty responsibility.<br><br><em>Yuna should have at least <<- __('modesty') >> 85 and <<- __('obedience') >> 65 by <strong>Day <<- mission.end.max.day >></strong> if she intends to go through with this.</em>",
         weight: -1
       },
       variants: function(context, done) {
         var results = this.base().results;
-        if (context.girl.obedience < 65 || context.girl.modesty < 90) {
+        if (context.girl.obedience < 65 || context.girl.modesty < 85) {
           done(results.fail);
           return;
         }
@@ -304,7 +312,7 @@ Girls.Yuna = {
             label: "Yuna's Wedding Day",
             group: 'Yuna',
             image: '<<- girl.image("tired") >>',
-            text: "It's finally the day of Yuna and High Priest Detic's wedding, but Yuna has cold feet and has decided not to attend. As much as you urge her to at the very least put in an appearance, she'd rather stay here than embarass the High Priest by turning him down in front of a crowd. You can only imagine how packed the temple must be right now... This may have serious repercussions.",
+            text: "It's finally the day of Yuna and High Priest Detic's wedding, but Yuna has cold feet and has decided not to attend. As much as you urge her to at the very least put in an appearance, she'd rather stay here than embarass the High Priest by turning him down in front of a crowd. You can only imagine how packed the temple must be right now... This may have serious repercussions.<br><br>It's still a city-wide day of celebration, and you're not surprised to find <<- g.girls._filter('status', 'Hired')._accumulate('name')._toString() >> gone when you look for them, taking the day off to attend the city-wide party and try to catch a glimpse of the new bride (apparently there still is one - you wonder who).",
             weight: -1
           },
           girl: {
@@ -317,7 +325,7 @@ Girls.Yuna = {
             label: "Yuna's Wedding Day",
             group: 'Yuna',
             image: '<<- girl.image("tired") >>',
-            text: "Yuna seems more relieved than anything, when you tell her to stay home and miss her own wedding. It seems that she's quite content with this way of life, and would miss the friends she's made terribly. For both your sakes, you hope the High Priest is a forgiving man, and that this stunt doesn't draw too much unwanted attention.",
+            text: "Yuna seems more relieved than anything when you tell her to stay home and miss her own wedding. It seems that she's quite content with this way of life, and would miss the friends she's made terribly. For both your sakes, you hope the High Priest is a forgiving man, and that this stunt doesn't draw too much unwanted attention.<br><br>It's still a city-wide day of celebration, and you're not surprised to find <<- g.girls._filter('status', 'Hired')._accumulate('name')._toString() >> gone when you look for them, taking the day off to attend the city-wide party and try to catch a glimpse of the new bride (apparently there still is one - you wonder who).",
             weight: -2
           },
           girl: {
@@ -341,7 +349,7 @@ Girls.Yuna = {
               label: "Yuna's Wedding Day",
               group: 'Yuna',
               image: 'content/girls/Yuna/missionImages/Husband.jpg',
-              text: "High Priest Detic and throngs of worshipers are waiting. The wedding ceremony is extravagant and beautiful - while another country might have looked askance at a brothel master giving away the bride to the high priest, such things are only mildly in distaste here. Despite the butterflies in her stomach and heart pounding in her breast, Yuna hides it well, playing her part as though she were born to it. When Detic pronounces her high priest, she in return prounces them married. Only you can tell how nervous she is - but you can also tell that she'll grow into the roll well. Detic is a fine match.",
+              text: "High Priest Detic and throngs of worshipers are waiting. The wedding ceremony is extravagant and beautiful - while another country might have looked askance at a brothel master giving away the bride to the high priest, such things are only mildly in distaste here. Despite the butterflies in her stomach and heart pounding in her breast, Yuna hides it well, playing her part as though she were born to it. When Detic pronounces her high priestess, she in return prounces them married. Only you can tell how nervous she is - but you can also tell that she'll grow into the roll well. Detic is a fine match.",
               weight: -2,
               delta: false
             },
@@ -349,7 +357,7 @@ Girls.Yuna = {
               label: "Yuna's Wedding Day",
               group: 'Yuna',
               image: 'content/girls/Yuna/missionImages/weddingPacked.jpg',
-              text: "After the cerimony, the bride and groom disappear into the recesses of the temple - no solomn pretenses like 'you may now kiss the bride.' The temple grounds are filled to the brim with a veritable who's-who of the rich and powerful, a crowd you're not sad to find yourself treated as a part of. You hang around for the rest of the day, hoping to catch a moment with Yuna, but you only manage to see her at a distance. As happy as you are for her, it's also a bit of a sad ending. You never got a chance to say goodbye.<br><br>It's a city-wide day of celebration, and you're not surprised to find <<- g.girls._filter('status', 'Hired')._toString() >> gone when you return home, taking the day off to attend the city-wide party and try to catch a glimpse of the new bride.",
+              text: "After the ceremony, the bride and groom disappear into the recesses of the temple - no solomn pretenses like 'you may now kiss the bride.' The temple grounds are filled to the brim with a veritable who's-who of the rich and powerful, a crowd you're not sad to find yourself treated as a part of. You hang around for the rest of the day, hoping to catch a moment with Yuna, but you only manage to see her at a distance. As happy as you are for her, it's also a bit of a sad ending. You never got a chance to say goodbye.<br><br>It's a city-wide day of celebration, and you're not surprised to find <<- g.girls._filter('status', 'Hired')._accumulate('name')._toString() >> gone when you return home, taking the day off to attend the city-wide party and try to catch a glimpse of the new bride.",
               weight: -2
             }
           ],
@@ -483,3 +491,30 @@ Girls.Yuna.Actions.Talk.results._append([
     }
   }
 ]);
+
+Events.YunaWedding = {
+  tags: {
+    garrison: 1,
+    university: 1,
+    slums: 1,
+    docks: 1,
+    park: 1,
+    market: 1,
+    redlight: 1,
+    uptown: 1,
+    indoors: 1
+  },
+  conditions: {
+    missions: {
+      YunaPriestessWedding: 1,
+      YunaPriestessWeddingInvisible: 2
+    }
+  },
+  results: [{
+    girl: {
+      endurance: 4,
+      happiness: 3,
+      charisma: 3
+    }
+  }]
+};

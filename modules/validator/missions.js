@@ -1,4 +1,10 @@
 "use strict";
+Schemas.MissionName = {
+  enum: Object.keys(Missions)._append($.map(Girls, function(girl) {
+    if (girl.Missions) { return Object.keys(girl.Missions); }
+  }))
+};
+
 Schemas.Mission = {
   id: 'Mission',
   anyOf: [{ $ref: 'Resolvable' }],
@@ -65,11 +71,16 @@ Schemas.Game.properties.missionsDone =  {
 };
 
 Schemas.Result.properties.mission = {
-  description: 'A Mission to start. If there is a girl in the context, if can be a mission specific to her. The mission will inherit the current context, and its Conditions will *not* be checked.',
-  'enum': Object.keys(Missions)._append($.map(Girls, function(girl) {
-    if (girl.Missions) { return Object.keys(girl.Missions); }
-  }))
+  description: 'A Mission or list of Missions to start. If there is a girl in the context, if can be a mission specific to her. The mission will inherit the current context, and its Conditions will *not* be checked.',
+  anyOf: [
+    { $ref: 'MissionName' },
+    {
+      type: 'array',
+      items: { $ref: 'MissionName' }
+    }
+  ]
 };
+
 Schemas.Result.properties.missionsDone = {
   type: 'object',
   description: 'A set of missions to either add to or remove from the game\'s missionsDone list (via true or false). By default, all missions will mark themselves as done.',

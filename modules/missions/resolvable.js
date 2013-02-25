@@ -210,14 +210,18 @@ Resolvable.prototype.applyResults = function(results, done, context) {
     });
   }
   if (results.mission) {
-    var mission = Mission.create(results.mission, context);
-    if (mission) {
-      if (mission.getEnd()) {
-        g.missions[results.mission] = mission;
-      } else {
-        series.push(function(next) { mission.checkDay(next); });
+    var missions = typeof(results.mission) == 'object' ? results.mission : [results.mission];
+    missions.forEach(function(_id) {
+      context = $.extend({}, context);
+      var mission = Mission.create(_id, context);
+      if (mission) {
+        if (mission.getEnd()) {
+          g.missions[results.mission] = mission;
+        } else {
+          series.push(function(next) { mission.checkDay(next); });
+        }
       }
-    }
+    });
   }
   if (results.missionsDone) {
     for (var _id in results.missionsDone) {
