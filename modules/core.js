@@ -18,12 +18,12 @@ var e = {
   runSeries: function(items) {
     var args = Array.prototype.slice.call(arguments, 1);
     var done = typeof(args._last()) == 'function' ? args.pop() : function() {};
-    if (!items || !items.length) { done(); return; }
+    if (!items || !items.length) { setTimeout(done, 0); return; }
     var $this = this;
     function next() {
       i++;
       if (i == items.length) {
-        if (typeof(done) == 'function') { done(); }
+        if (typeof(done) == 'function') { setTimeout(done, 0); }
         return;
       }
       items[i].apply($this, args);
