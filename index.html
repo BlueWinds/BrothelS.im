@@ -285,10 +285,10 @@
             </div>
           << }) >>
           << if (g.missionsDone.firstMoney) { >>
-            <div id="pay">
+            <div class="pay">
               <label><strong>Pay</strong></label>
               <div class="slider"></div>
-              <div id="pay-results">
+              <div class="pay-results">
                 <span class="delta money">$<<- Math.floor(girl.actions.pay * girl.desiredPay()) >></span>
                 <span class="delta happiness"><<- girl.payHappiness() < 0 ? girl.payHappiness() : "+" + girl.payHappiness() >></span>
               </div>

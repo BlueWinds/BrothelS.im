@@ -54,28 +54,28 @@ span.adj {
   color: #FFF;
 }
 
-#pay label {
+.pay label {
   margin-top: 1em;
   width: 3em;
 }
 
-#pay .slider {
+.pay .slider {
   display: inline-block;
   height: 0.3em;
   margin-bottom: 0.3em;
   width: 7em;
 }
 
-#pay .slider .ui-slider-handle {
+.pay .slider .ui-slider-handle {
   top: -0.5em;
   width: 0.7em;
 }
 
-#pay-results {
+.pay-results {
   margin-lefT: 3.5em;
 }
 
-#pay .delta {
+.pay .delta {
   margin-left: 1em;
 }
 
