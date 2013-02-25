@@ -45,9 +45,6 @@ Message.send = function(obj, context) {
 
 e.GameNew.push(function(done) {
   g.messages = [];
-  setTimeout(function() {
-    $('#show-messages').click();
-  }, 1);
   done();
 });
 
@@ -59,7 +56,7 @@ e.GamePreDay.push(function(done) {
 e.GamePostDay.push(function(done) {
   setTimeout(function() {
     $('#show-messages').click();
-  }, 0);
+  }, 1000);
   done();
 });
 

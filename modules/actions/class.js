@@ -178,7 +178,7 @@ Girl.prototype.verifyAction = function(time, rebuild, allowFalseConditions) {
   if (!a) {
     this.setAction(this.action('Rest', { time: time }));
   }
-  if (a.option) {
+  if (a && a.option) {
     var options = a.options();
     if (!options[a.option]) { a.setOption(Object.keys(options)[0]); }
   }
