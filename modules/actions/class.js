@@ -174,16 +174,16 @@ Girl.prototype.setAction = function(action) {
 Girl.prototype.verifyAction = function(time, rebuild, allowFalseConditions) {
   var a = this.actions[time];
   if (a && a.locked) { return; }
-  a = a && a.label && a.checkConditions(undefined, undefined, allowFalseConditions) && !a.checkDisabled();
+  a = a && a.checkConditions(undefined, undefined, allowFalseConditions) && !a.checkDisabled() && a;
   if (!a) {
     this.setAction(this.action('Rest', { time: time }));
+    a = this.actions[time];
   }
-  if (a && a.option) {
+  if (a.option) {
     var options = a.options();
     if (!options[a.option]) { a.setOption(Object.keys(options)[0]); }
   }
   if (rebuild) {
-    a = this.actions[time];
     this.setAction(this.action(a._id, {time: time}));
     if (a.option) { this.actions[time].setOption(a.option); }
   }
