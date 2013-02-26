@@ -5,8 +5,8 @@ function Mission(obj) {
 
 Mission.prototype = new Resolvable();
 
-Mission.create = function(_id, context) {
-  var mission = Resolvable.create(_id, 'Mission', context);
+Mission.create = function(_id, context, allowFalseConditions) {
+  var mission = Resolvable.create(_id, 'Mission', context, allowFalseConditions);
   if (!mission) { return mission; }
   if (typeof(mission.end) == 'function') {
     delete mission.end;

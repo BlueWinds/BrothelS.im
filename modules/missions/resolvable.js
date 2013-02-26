@@ -213,7 +213,7 @@ Resolvable.prototype.applyResults = function(results, done, context) {
     var missions = typeof(results.mission) == 'object' ? results.mission : [results.mission];
     missions.forEach(function(_id) {
       context = $.extend({}, context);
-      var mission = Mission.create(_id, context);
+      var mission = Mission.create(_id, context, true);
       if (mission) {
         if (mission.getEnd()) {
           g.missions[results.mission] = mission;

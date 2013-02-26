@@ -49,14 +49,16 @@ Missions.noRapeLuxuryHouse = {
   }]
 };
 Missions.luxuryHouseDelay = {
-  conditions: {
-    building: { name: 'Luxurious House', status: 'Town' }
-  },
+  conditions: false,
   end: { min: { day: '+3' }},
+  variants: [
+    { building: { name: 'Luxurious House', status: 'Town' } }
+  ],
   results: [{
     mission: 'luxuryHouseSale'
-  }]
+  }, {}]
 };
+
 Missions.luxuryHouseSale = {
   conditions: false,
   display: {
