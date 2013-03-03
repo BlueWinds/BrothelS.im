@@ -4,7 +4,7 @@ Schemas.Game = {
   type: ['object', 'null'],
   required: [
     '_class', 'day', 'fetishes', 'money', 'moneyHistory',
-    'version'
+    'version', 'randomSeed'
   ],
   properties: {
     _id: { type: 'string' },
@@ -36,6 +36,10 @@ Schemas.Game = {
     },
     version: {
       'enum': [Game.config.version]
+    },
+    randomSeed: {
+      type: 'number',
+      description: 'A seed string used in the random number generator - useful for debugging, since it can re-create the exact same results when an exported save is loaded somewhere else. Holding Ctrl while clicking Next Turn will use this number instead of a random seed.'
     }
   },
   additionalProperties: false

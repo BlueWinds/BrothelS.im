@@ -284,7 +284,7 @@ Actions.tentacleManAbduction = {
     if (context.girl.specialRules.tentacleManSearch >= 10) {
       done(results.Found);
     } else {
-      done(results['Day' + (context.girl.specialRules.tentacleManProgress - 3)]);
+      done(results['Day' + (context.girl.specialRules.tentacleManProgress - 2)]);
     }
   },
   results: {
@@ -299,7 +299,7 @@ Actions.tentacleManAbduction = {
       message: {
         group: '<<- girl.name >>',
         image: 'content/events/missing.jpg',
-        label: 'Missing - Day <<- girl.specialRules.tentacleManProgress - 3 >>',
+        label: 'Missing - Day <<- girl.specialRules.tentacleManProgress - 2 >>',
         text: "<<- girl.name >> has been gone too long to just have gotten lost. You visit the Garrison to alert the city guard that she's missing (this sort of thing is exactly their job, after all) and you're assured that they'll do whatever they can to locate your missing girl. The man who listens to your case seems sincere - he while they're not exactly going to turn the city upside-down just yet, a reputation for safe and orderly streets is an absolute necessity for a city that makes its money from visitors.",
         weight: -1
       },

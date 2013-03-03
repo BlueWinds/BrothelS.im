@@ -8,6 +8,11 @@ Actions.Explore = {
   conditions: {
     missions: { exploreCity: 3 }
   },
+  enableConditions: {
+    girl: {
+      min: { endurance: 20 }
+    }
+  },
   options: {
     Redlight: 'Redlight', //:"The redlight district. Though relatively small, it's quite busy since sex is the nation's primary product.",
     Slums: 'Slums', //: "There are better parts of town, but none more populous or unwatched by the law.",

@@ -12,6 +12,7 @@ var Game = function(obj) {
     obj.moneyHistory = obj.moneyHistory.slice(obj.moneyHistory.length - Game.config.moneyHistoryLength);
   }
   $.extend(this, obj);
+  this.randomSeed = this.randomSeed || Math.random();
 };
 
 Game.prototype.nextPayment = function() {
@@ -27,8 +28,8 @@ Game.prototype.nextPayment = function() {
 Game.prototype.render = function() {
   e.invokeAll('GamePreRender', function() {
     $('#content').html(ejs.render($('#game_view_template').html()));
-    $('#next').click(function() {
-      g.nextTurn();
+    $('#next').click(function(event) {
+      g.nextTurn(event.ctrlKey);
     });
     e.invokeAll('GameRender', function() {
       e.invokeAll('Autorender', $('#content'));
@@ -36,11 +37,15 @@ Game.prototype.render = function() {
   });
 };
 
-Game.prototype.nextTurn = function() {
+Game.prototype.nextTurn = function(noReseed) {
   this.moneyHistory.push(this.money);
   if (this.moneyHistory.length > Game.config.moneyHistoryLength) {
     this.moneyHistory = this.moneyHistory.slice(this.moneyHistory.length - Game.config.moneyHistoryLength);
   }
+  if (!noReseed) {
+    this.randomSeed = Math.random();
+  }
+  Math.seedrandom(this.randomSeed);
   e.runSeries([
     function(next) {
       if (g.autosave) { Game.save('Autosave'); }

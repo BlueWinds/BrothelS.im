@@ -39,15 +39,15 @@ e.GameUpgrade04.push(function(game, next) {
 });
 e.GameUpgrade.push(function(game, next) {
   if (game.version < 0.52) {
-    var girl = g.girls.DarkMagicianGirl;
-    delete g.girls['Dark Magician Girl'];
+    var girl = game.girls['Dark Magician Girl'];
+    delete game.girls['Dark Magician Girl'];
     girl.name = 'Mana';
-    g.girls.Mana = girl;
+    game.girls.Mana = girl;
     if (girl.actions.morning) {
       girl.actions.morning.girl = 'Mana';
       girl.actions.evening.girl = 'Mana';
     }
-    g.missions.filter('girl', 'Dark Magician Girl').forEach(function(mission) {
+    g.missions._filter('girl', 'Dark Magician Girl').forEach(function(mission) {
       mission.girl = 'Mana';
       if (mission.display) {
         mission.display.image = mission.display.image.replace('DarkMagicianGirl', 'Mana');
@@ -55,11 +55,15 @@ e.GameUpgrade.push(function(game, next) {
         mission.display.text = mission.display.text.replace(/Dark Magician Girl/g, 'Mana');
       }
     });
-    g.messages.filter('group', 'Dark Magician Girl').forEach(function(message) {
+    g.messages._filter('group', 'Dark Magician Girl').forEach(function(message) {
       message.group = 'Mana';
       message.image = message.image.replace('DarkMagicianGirl', 'Mana');
       message.text = message.text.replace(/Dark Magician Girl/g, 'Mana');
     });
+    var room = Building.roomsByType('Bedroom', 'Owned')._filter('girl', 'Dark Magician Girl');
+    if (room.length) {
+      room[0].girl = 'Mana';
+    }
   }
   next();
 });
