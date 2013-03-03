@@ -283,7 +283,7 @@ Missions.buyRooms = {
     min: { day: '+3' }
   },
   results: [{
-    mission: 'exploreCity',
+    mission: 'exploreCity'
   }]
 };
 

@@ -5,68 +5,6 @@ e.GirlsPostMorning = [];
 e.GirlsPostEvening = [];
 e.GirlRunTime = [];
 e.GirlSetStatus = [];
-e.GameUpgrade03.push(function(game, next) {
-  for (var name in game.girls) {
-    game.girls[name]._class = 'Girl';
-  }
-  next();
-});
-e.GameUpgrade04.push(function(game, next) {
-  var stats = {
-    'soft libido': 'softLibido',
-    'soft experience': 'softExperience',
-    'hard libido': 'hardLibido',
-    'hard experience': 'hardExperience',
-    'anal libido': 'analLibido',
-    'anal experience': 'analExperience',
-    'fetish libido': 'fetishLibido',
-    'fetish experience': 'fetishExperience'
-  };
-  if (!game.girls.Kirino.specialRules) {
-    game.girls.Kirino.specialRules = {};
-  }
-  game.girls.Kirino.specialRules.payRatio = Girls.Kirino.specialRules.payRatio;
-  for (var name in game.girls) {
-    if (!game.girls[name].hireDay) {
-      game.girls[name].hireDay = 0;
-    }
-    for (var old in stats) {
-      game.girls[name][stats[old]] = game.girls[name][old];
-      delete game.girls[name][old];
-    }
-  }
-  next();
-});
-e.GameUpgrade.push(function(game, next) {
-  if (game.version < 0.52) {
-    var girl = game.girls['Dark Magician Girl'];
-    delete game.girls['Dark Magician Girl'];
-    girl.name = 'Mana';
-    game.girls.Mana = girl;
-    if (girl.actions.morning) {
-      girl.actions.morning.girl = 'Mana';
-      girl.actions.evening.girl = 'Mana';
-    }
-    g.missions._filter('girl', 'Dark Magician Girl').forEach(function(mission) {
-      mission.girl = 'Mana';
-      if (mission.display) {
-        mission.display.image = mission.display.image.replace('DarkMagicianGirl', 'Mana');
-        mission.display.group = mission.display.group.replace('Dark Magician Girl', 'Mana');
-        mission.display.text = mission.display.text.replace(/Dark Magician Girl/g, 'Mana');
-      }
-    });
-    g.messages._filter('group', 'Dark Magician Girl').forEach(function(message) {
-      message.group = 'Mana';
-      message.image = message.image.replace('DarkMagicianGirl', 'Mana');
-      message.text = message.text.replace(/Dark Magician Girl/g, 'Mana');
-    });
-    var room = Building.roomsByType('Bedroom', 'Owned')._filter('girl', 'Dark Magician Girl');
-    if (room.length) {
-      room[0].girl = 'Mana';
-    }
-  }
-  next();
-});
 
 e.Ready.push(function(done) {
   $.each(Girls, function(name, girl) {

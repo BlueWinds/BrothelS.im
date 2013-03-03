@@ -1,5 +1,5 @@
 body {
-  background: #1A1A1A;
+  background: #000;
   color: #DDD;
   margin: 0;
   padding: 0;
@@ -54,11 +54,10 @@ body {
 }
 
 #menu {
-  height: 30px;
-  background: #351510;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#1A1A1A');
-  background: -webkit-gradient(linear, left top, left bottom, from(#666666), to(#1A1A1A));
-  background: -moz-linear-gradient(center top , #666666, #1A1A1A);
+  height: 200px;
+  background: #000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#222), to(#000));
+  background: -moz-linear-gradient(center top , #222, #000);
   position: absolute;
   width: 100%;
 }
@@ -122,13 +121,6 @@ blockquote {
   padding-left: 1em;
 }
 
-blockquote:after {
-  color: #666;
-  content: " " close-quote;
-  font-size: 3em;
-  line-height: 0.1em;
-  vertical-align: -0.4em;
-}
 blockquote:before {
   color: #666;
   content: open-quote;
@@ -136,6 +128,13 @@ blockquote:before {
   line-height: 0.1em;
   margin-right: 0.25em;
   vertical-align: -0.3em;
+}
+blockquote:after {
+  color: #666;
+  content: " " close-quote;
+  font-size: 3em;
+  line-height: 0.1em;
+  vertical-align: -0.4em;
 }
 
 blockquote p:first-child {

@@ -262,7 +262,7 @@ Girls.Yuna = {
             group: 'Yuna',
             image: 'content/girls/Yuna/missionImages/interestFail.jpg',
             text: "Yuna attends a pre-dawn gathering with High Priest Doric at his temple. She is but one of a dozen girls, all of whom seem eager for the still-mourning priest's attention. She goes largely unnoticed, and returns shortly afterwards staring blankly. It seems that the disinterest was mutual.",
-            weight: -1,
+            weight: -1
           },
           girl: {
             happiness: -3

@@ -104,7 +104,6 @@ Action.prototype.checkDisabled = function(cond, context) {
 };
 
 Action.prototype.applyResults = function(results, done, context) {
-  if (!results) { console.trace(); }
   context = context || this.context();
   if (results.lock === true) {
     this.locked = true;

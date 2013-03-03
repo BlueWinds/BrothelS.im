@@ -1,15 +1,6 @@
 "use strict";
 var RandomPeople = {};
 
-e.GameUpgrade03.push(function(game, next) {
-  if (g.missions.specialParty) {
-    var old = g.missions.specialParty.people[0];
-    old.type = old._class;
-    g.missions.specialParty.people[0] = new Person(old);
-  }
-  next();
-});
-
 function Person(obj) {
   this._class = 'Person';
   if (!obj) {

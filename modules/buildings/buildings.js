@@ -1,20 +1,5 @@
 "use strict";
 e.BuildingSetStatus = [];
-e.GameUpgrade03.push(function(game, next) {
-  for (var name in g.buildings) {
-    game.buildings[name]._class = 'Building';
-    game.buildings[name].maxRooms = Buildings[name].maxRooms;
-  }
-  next();
-});
-e.GameUpgrade04.push(function(game, next) {
-  $.each(game.buildings, function(name, building) {
-    building.rooms.forEach(function(room) {
-      room.type = room.type.charAt(0).toUpperCase() + room.type.slice(1);
-    });
-  });
-  next();
-});
 
 var Buildings = {};
 

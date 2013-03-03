@@ -103,7 +103,7 @@ Girl.prototype.interest = function(sex) {
       girls: []
     };
     $.each(building.girls(), function(name, girl) {
-      if (girl.actions[time]._id == 'Whore' && girl.actions[time].special.done == true) {
+      if (girl.actions[time]._id == 'Whore' && girl.actions[time].special.done === true) {
         context.girls.push(girl);
       }
     });

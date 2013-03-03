@@ -1,27 +1,4 @@
 "use strict";
-e.GameUpgrade03.push(function(game, next) {
-  var messages = game.messages;
-  game.messages = [];
-  for (var group in messages) {
-    for (var i in messages[group]) {
-      var message = messages[group][i];
-      message.label = message.type;
-      delete message.type;
-      delete message.time;
-      message.group = group;
-      game.messages.push(message);
-    }
-  }
-  next();
-});
-
-e.GameUpgrade04.push(function(game, next) {
-  delete game.messagesShown;
-  g.messages.forEach(function(message) {
-    message._class = 'Message';
-  });
-  next();
-});
 
 var Message = function(obj) {
   $.extend(true, this, obj);

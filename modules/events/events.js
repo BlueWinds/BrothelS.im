@@ -1,26 +1,5 @@
 "use strict";
 var Events = {};
-e.GameUpgrade04.push(function(game, next) {
-  for (var name in game.girls) {
-    delete game.girls[name].events;
-  }
-  next();
-});
-e.GameUpgrade.push(function(game, next) {
-  if (game.version < 0.511) {
-    game.girls._filter('status', 'Hired').forEach(function(girl) {
-      if (girl.actions.morning._id == 'tenacleManAbduction') {
-        girl.actions.morning._id = 'tentacleManAbduction';
-        girl.actions.evening._id = 'tentacleManAbduction';
-        if (!girl.specialRules.tentacleManProgress) {
-          delete girl.actions.morning.locked;
-          delete girl.actions.evening.locked;
-        }
-      }
-    });
-  }
-  next();
-});
 
 function Event(obj) {
   Resolvable.call(this, obj);

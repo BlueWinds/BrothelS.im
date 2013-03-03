@@ -14,61 +14,6 @@ e.Ready.push(function(done) {
   done();
 });
 
-e.GameUpgrade03.push(function(game, done) {
-  // If firstBuilding && !introConstitution, then this was a pre-new-tutorial game, and we should add
-  // the intro missions so that the actions they introduce aren't disabled.
-  game.missionsDone = game.missionsDone || {};
-  $.extend(game.missionsDone, Mission.introMissions);
-  for (var mission in Mission.introMissions) {
-    delete game.missions[mission];
-  }
-  game.maxGirls = 5;
-  game.maxBuildings = 1;
-  delete game.missions.specialParty;
-  var context = { day: Math.ceil((game.day - 10) / 30) * 30 - 15 };
-  if (context.day > game.day - 5) {
-    context.day += 30;
-  }
-  game.missions.specialPartyDelay = Mission.create('specialPartyDelay', context);
-  for (mission in Girls.Sakuya.Missions) {
-    if (game.missions[mission]) {
-      g.girls.Sakuya = new Girl(g.girls.Sakuya);
-      context = { girl: g.girls.Sakuya };
-      game.missions[mission] = Mission.create(mission, context);
-    }
-  }
-  done();
-});
-
-e.GameUpgrade04.push(function(game, next) {
-  delete game.missions.setFirstAction;
-  next();
-});
-
-e.GameUpgrade05.push(function(game, next) {
-  $.each(g.missions, function(_id, mission) {
-    if (mission.display) {
-      delete mission.display.delta;
-    }
-  });
-  if (game.day > 150 && game.fetishes.rape && game.missionsDone.avengeGuardRapeFinal) {
-    game.missions.luxuryHouseDelay = Mission.create('luxuryHouseDelay');
-  }
-  next();
-});
-
-
-e.GameUpgrade.push(function(game, next) {
-  if (game.version < 0.51 && game.missions.avengeGuardRape) {
-    var str = game.missions.avengeGuardRape.display.text.replace('Investigating the Guards', 'Exploring the Garrison');
-    game.missions.avengeGuardRape.display.text = str;
-  }
-  if (game.version < 0.512 && game.missionsDone.buyRooms) {
-    game.missionsDone.exploreCity = true;
-  }
-  next();
-});
-
 Mission.checkStart = function(day, done) {
   var context = {
     day: day

@@ -8,28 +8,7 @@ $.extend(e, {
   GameRender: [],
   GamePreDay: [],
   GameNextDay: [],
-  GamePostDay: [],
-  GameUpgrade03: [function(g, next) {
-    g._class = 'Game';
-    var list = localStorage.getObject('saved-games')._toArray();
-    list.push('saved-games', 'current-game');
-    for (var _id in localStorage) {
-      if (list.indexOf(_id) == -1) {
-        delete localStorage[_id];
-      }
-    }
-    next();
-  }],
-  GameUpgrade04: [function(game, next) {
-    for (var fetish in game.fetishes) {
-      if (!game.fetishes[fetish]) {
-        delete game.fetishes[fetish];
-      }
-    }
-    next();
-  }],
-  GameUpgrade05: [],
-  GameUpgrade: []
+  GamePostDay: []
 });
 
 var __ = function(string, type) {
@@ -78,6 +57,7 @@ Game.load = function(name) {
 };
 
 Game.loadFromText = function(value) {
+  value.replace(/T\(/g, '__(');
   g = JSON.parse(value, function(key, value) {
     if (value === null) { return; }
     if (value._class && window[value._class]) {
@@ -86,29 +66,7 @@ Game.loadFromText = function(value) {
     return value;
   });
   e.invokeAll('GameInit', function() {
-    if (!g.girls.Kirino._class) {
-      e.invokeAll('GameUpgrade03', g, function() {
-        Game.loadFromText(JSON.stringify(g));
-      });
-      return;
-    } else if (g.girls.Kirino['soft libido']) {
-      e.invokeAll('GameUpgrade04', g, function() {
-        Game.loadFromText(JSON.stringify(g));
-      });
-      return;
-    } else if (!g.version) {
-      g.version = 0.5;
-      e.invokeAll('GameUpgrade05', g, function() {
-        var string = JSON.stringify(g);
-        string.replace(/T\(/g, '__(');
-        Game.loadFromText(string);
-      });
-    } else {
-      e.invokeAll('GameUpgrade', g, function() {
-        g.version = Game.config.version;
-        g.render();
-      });
-    }
+    g.render();
     $('#save').removeClass('disabled');
   });
 };

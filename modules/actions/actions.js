@@ -1,28 +1,4 @@
 "use strict";
-e.GameUpgrade03.push(function(game, next) {
-  for (var name in g.girls) {
-    var girl = g.girls[name];
-    delete girl.actions.morningLabel;
-    delete girl.actions.eveningLabel;
-    delete girl.actions.morningOption;
-    delete girl.actions.eveningOption;
-  }
-  delete g.ownerAction;
-  next();
-});
-
-e.GameUpgrade05.push(function(game, done) {
-  $.each(game.girls, function(name, girl) {
-    if (girl.status == 'Hired') {
-      girl.setAction(girl.action('Rest', { time: 'morning' }));
-      girl.setAction(girl.action('Rest', { time: 'evening' }));
-    } else {
-      delete girl.actions.morning;
-      delete girl.actions.evening;
-    }
-  });
-  done();
-});
 
 var Actions = {};
 

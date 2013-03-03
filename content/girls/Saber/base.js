@@ -54,12 +54,12 @@ Girls.Saber = {
     }),
     Lockdown: $.extend(true, {}, Actions.Lockdown, {
       results: [
-	{
-	  girl: { happiness: -18 }
-	},
-	{
-	  girl: { happiness: -18 }
-	}
+  {
+    girl: { happiness: -18 }
+  },
+  {
+    girl: { happiness: -18 }
+  }
       ]
     }),
     Exercise: {
@@ -233,7 +233,7 @@ Girls.Saber.Actions.Talk.results._append([
       text: "Saber is quiet and reserved, not shy but private. She answers your direct questions, but has little to add of her own. You try to encourage her to speak up more, but she doesn't much understand the point - words are for communication, nothing more. The idea of bonding doesn't even cross her mind. Eventually you give up, and allow her to return to... whatever she was doing before you entered her room. Meditation, perhaps."
     },
     girl: {
-      obedience: 1,
+      obedience: 1
     }
   },
   {
