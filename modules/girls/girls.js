@@ -37,6 +37,32 @@ e.GameUpgrade04.push(function(game, next) {
   }
   next();
 });
+e.GameUpgrade.push(function(game, next) {
+  if (game.version < 0.52) {
+    var girl = g.girls.DarkMagicianGirl;
+    delete g.girls['Dark Magician Girl'];
+    girl.name = 'Mana';
+    g.girls.Mana = girl;
+    if (girl.actions.morning) {
+      girl.actions.morning.girl = 'Mana';
+      girl.actions.evening.girl = 'Mana';
+    }
+    g.missions.filter('girl', 'Dark Magician Girl').forEach(function(mission) {
+      mission.girl = 'Mana';
+      if (mission.display) {
+        mission.display.image = mission.display.image.replace('DarkMagicianGirl', 'Mana');
+        mission.display.group = mission.display.group.replace('Dark Magician Girl', 'Mana');
+        mission.display.text = mission.display.text.replace(/Dark Magician Girl/g, 'Mana');
+      }
+    });
+    g.messages.filter('group', 'Dark Magician Girl').forEach(function(message) {
+      message.group = 'Mana';
+      message.image = message.image.replace('DarkMagicianGirl', 'Mana');
+      message.text = message.text.replace(/Dark Magician Girl/g, 'Mana');
+    });
+  }
+  next();
+});
 
 e.Ready.push(function(done) {
   $.each(Girls, function(name, girl) {
