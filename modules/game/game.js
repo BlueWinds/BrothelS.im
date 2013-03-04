@@ -178,7 +178,7 @@ e.Ready.push(function(done) {
       $('#game-name', form).val(g.name);
     }
     $('#export-game', form).click(function(event) {
-      var textarea = $('<textarea>').text(JSON.stringify(g)).css('width', '15em').css('height', '10em');
+      var textarea = $('<textarea>').text(JSON.stringify(g, null, 2)).css('width', '15em').css('height', '10em');
       $('<div>').append(textarea).dialog({
         title: 'Save the text below'
       }).css('overflow', 'auto');
