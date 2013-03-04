@@ -117,7 +117,7 @@ Actions.Explore = {
         group: '<<- girl.name >>',
         label: 'Explore Market',
         image: 'content/miscImages/marketEvening.jpg',
-        text: "The evening market has an aspect of a small-scale permanent fair, as the day's vegetable stands and candle-booths give way to sweat and savory treats, jewelry and perfumes, and, occasionally, the sort of goods that might be scandalous in a more reserved society. You catch <<- girl.name >> looking at a well-stocked stall full of dildos <<- girl.modesty < 50 ? 'hungrily' : 'out of the corner of her eye' >>, and as if she'd like to stop in. She blushes and shakes her head."
+        text: "The evening market has an aspect of a small-scale permanent fair, as the day's vegetable stands and candle-booths give way to sweat and savory treats, jewelry and perfumes, and, occasionally, the sort of goods that might be scandalous in a more reserved society. You catch <<- girl.name >> looking at a well-stocked stall full of dildos <<- girl.modesty < 50 ? 'hungrily' : 'out of the corner of her eye' >>, and ask if she'd like to stop in. She blushes and shakes her head."
       },
       girl: {
         endurance: -6
