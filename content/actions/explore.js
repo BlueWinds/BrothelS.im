@@ -17,7 +17,7 @@ Actions.Explore = {
     Redlight: 'Redlight', //:"The redlight district. Though relatively small, it's quite busy since sex is the nation's primary product.",
     Slums: 'Slums', //: "There are better parts of town, but none more populous or unwatched by the law.",
     Docks: 'Docks', //: "As the primary port of an island nation, the port never sleeps.",
-    // Market: 'Market', //: "Anything can be bought or sold in the central market - if not in broad daylight, then at least in one of the smaller, nondescript buildings nearby.",
+    Market: 'Market', //: "Anything can be bought or sold in the central market - if not in broad daylight, then at least in one of the smaller, nondescript buildings nearby.",
     Park: 'Park', //: "The crown maintains several large parks inside the city limits, at public expense.",
     University: 'University', //: "Though unusual for such a small kingdom to maintain a presigious institution of learning, young male foreign nobles are oddly enthusiastic about going to school here...",
     Uptown: 'Uptown', //: "The best part of the city, raised on a hill above the smell and dirt of the rest of the city.",
@@ -40,7 +40,7 @@ Actions.Explore = {
         text: 'You and <<- girl.name >> wander through the streets of the redlight district, looking for something interesting. While there\'s plenty aimed to catch your eye, most of the attractions are closed in the morning. You may have better luck in the evening.'
       },
       girl: {
-        endurance: -3
+        endurance: 3
       }
     },
     'eveningRedlight': {
@@ -51,7 +51,7 @@ Actions.Explore = {
         text: 'You and <<- girl.name >> wander through the streets of the redlight district, looking for something interesting. While there\'s plenty aimed to catch your eye, none of the attractions seem particularly interesting to the two of you at the moment.'
       },
       girl: {
-        endurance: -3
+        endurance: 3
       }
     },
     'morningSlums': {
@@ -104,18 +104,20 @@ Actions.Explore = {
         group: '<<- girl.name >>',
         label: 'Explore Market',
         image: 'content/miscImages/marketMorning.jpg',
-        text: ''
+        text: "The market is a fine place to explore in the morning - bustling, lively, full of the populace going about their daily business. Though famous as a sex-capital, the vast majority of people have nothing to do with the oldest profession. Shoes still need to be made, bread baked and iron bent and pounded into nails. You end up buying a sweet treat for both you and <<- girl.name >>, but nothing otherwise catches your attention."
       },
       girl: {
-        endurance: -6
-      }
+        endurance: -6,
+        happiness: 2
+      },
+      money: -10
     },
     'eveningMarket': {
       message: {
         group: '<<- girl.name >>',
         label: 'Explore Market',
         image: 'content/miscImages/marketEvening.jpg',
-        text: ''
+        text: "The evening market has an aspect of a small-scale permanent fair, as the day's vegetable stands and candle-booths give way to sweat and savory treats, jewelry and perfumes, and, occasionally, the sort of goods that might be scandalous in a more reserved society. You catch <<- girl.name >> looking at a well-stocked stall full of dildos <<- girl.modesty < 50 ? 'hungrily' : 'out of the corner of her eye' >>, and as if she'd like to stop in. She blushes and shakes her head."
       },
       girl: {
         endurance: -6
@@ -129,7 +131,7 @@ Actions.Explore = {
         text: "Clean and well cared for, the central city park is always full of people jogging on the circular footpath around the outside, picnicking on the grass, or resting under the shade of trees. The two of you spend some time taking in the sights, spending a pleasant morning in the sun."
       },
       girl: {
-        endurance: -4,
+        endurance: 4,
         happiness: 2
       }
     },
@@ -141,7 +143,7 @@ Actions.Explore = {
         text: "The central park is just as busy in the evening as during the day, and definitely louder. The fun here is relatively wholesome - with a heavy presence kept by the city watch, anyone looking for shady dealings had best do so elsewhere. Dinner under the stars seems to be the order of the day, so the two of you stretch out and enjoy a break from the nonstop action of the rest of life."
       },
       girl: {
-        endurance: -4,
+        endurance: 4,
         happiness: 3
       }
     },
