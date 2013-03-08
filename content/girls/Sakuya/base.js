@@ -84,6 +84,9 @@ Girls.Sakuya = {
         girl: {
           min: {
             specialRules: { magic: 10 }
+          }, 
+          max: {
+            specialRules: { exclusivePlot: 0 }
           }
         },
         missions: { ScarletDevilDream: -3 }
@@ -114,7 +117,10 @@ Girls.Sakuya = {
           }
         ],
         girl: {
-          specialRules: { magic: 5 }
+          specialRules: {
+            magic: 5,
+            exclusivePlot: 1
+          }
         },
         mission: 'SakuyaSomethingToSaySoon'
       }]
@@ -223,7 +229,10 @@ Girls.Sakuya = {
           'Stay silent': "The Scarlet Devil will return with Sakuya to their homeland, and you'll receive a great deal of money if you've trained her well."
         };
         Game.getUserInput(text, 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg', options, function(answer) {
-          var delta = { message: [] };
+          var delta = {
+            message: [],
+            specialRules: { exclusivePlot: false }
+          };
           if (answer == '"Don\'t go!"') {
             delta.message.push(results.dontGo1.message);
             delta.message.push(results.dontGo2.message);

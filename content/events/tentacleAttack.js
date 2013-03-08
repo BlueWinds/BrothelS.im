@@ -193,7 +193,10 @@ Events.tentacleManVisitYou = {
         specialRules: { tentacleManProgress: 2 }
       },
       max: {
-        specialRules: { tentacleManProgress: 3 }
+        specialRules: {
+          tentacleManProgress: 3,
+          exclusivePlot: 0
+        }
       }
     }
   },
@@ -247,6 +250,9 @@ Events.tentacleManVisitYou = {
         label: 'Missing',
         text: "You asked <<- girl.name >> to <<- action.label >> this evening, but as far as you can tell, she never did. After nipping out to get a few groceries, she never returned. Well, distractions have been known to happen - perhaps you shouldn't worry just yet?<br><br><em>You can select your response as if you were choosing an option for an <<- girl.name >>'s action.</em>",
         weight: -1
+      },
+      girl: {
+        specialRules: { exclusivePlot: 1 }
       }
     }
   }
@@ -520,7 +526,8 @@ Missions.tentaclePregnancy = {
       girl: {
         endurance: -15,
         happiness: 5,
-        obedience: 3
+        obedience: 3,
+        specialRules: { exclusivePlot: false }
       },
       mission: 'tentacleManGone'
     },
