@@ -233,7 +233,7 @@ Actions.Expose = {
         group: '<<- girl.name >>',
         label: 'Expose',
         image: '<<- girl.image("naked") >>',
-        text: '<<= girl.name >> left her clothes in a pile on her bed and stepped out into the street. Though this city is famed for its prostitutes and brothels, still the sight of a fully naked woman shamelessly flaunting herself is an unusual one, and turned many heads. <<= Math.choice(["Almost immediately", "Ten minutes", "Half an hour", "An Hour"]) >> into her walk, she heard a whistle and some shouting - she spent the rest of the <<= time >> running from the guards - an exhilarating chase, breasts bouncing and wind whipping private bits.'
+        text: '<<= girl.name >> left her clothes in a pile on her bed and stepped out into the street. Though this city is famed for its prostitutes and brothels, still the sight of a fully naked woman shamelessly flaunting herself is an unusual one, and turned many heads. <<= Math.choice(["Almost immediately", "Ten minutes", "Half an hour", "An hour"]) >> into her walk, she heard a whistle and some shouting - she spent the rest of the <<= time >> running from the guards - an exhilarating chase, breasts bouncing and wind whipping private bits.'
       },
       girl: {
         endurance: -10,

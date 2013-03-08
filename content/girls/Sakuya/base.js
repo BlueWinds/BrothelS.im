@@ -1,6 +1,6 @@
 "use strict";
 Girls.Sakuya = {
-  description: "<p>Sakuya is clearly not from around here. She speaks the language with little accent, but there's still something... otherworldly about her. She bills herself as a maid, and a brief demonstration suggests she is indeed quite good at is. It would take a bit of convincing to get her to work as a prostitute, but she doesn't seem unwilling...</p>",
+  description: "<p>Sakuya is clearly not from around here. She speaks the language with little accent, but there's still something... otherworldly about her. She bills herself as a maid, and a brief demonstration suggests she is indeed quite good at it. It would take a bit of convincing to get her to work as a prostitute, but she doesn't seem unwilling...</p>",
   status: 'For Hire',
   happiness: 0,
   endurance: 100,
