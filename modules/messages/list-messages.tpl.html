@@ -19,7 +19,7 @@
         <img src="<<- message.image >>">
         << if (message.delta && !$.isEmptyObject(message.delta)) { >>
           <div class="message-delta">
-            <<- e.render('render-delta', message.delta) >>
+            <<- e.render('render-delta', { delta: message.delta }, true) >>
           </div>
         << } >>
         <div class="message-content">

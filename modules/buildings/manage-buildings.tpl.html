@@ -18,7 +18,7 @@
         <div>
           <label>Daily:</label>
           <div class="daily-delta">
-            <<- e.render('render-delta', building.dailyDelta()) >>
+            <<- e.render('render-delta', { delta: building.dailyDelta() }, true) >>
           </div>
         </div>
         <button class="manage" name="<<- building.name >>"><<- action >></button>

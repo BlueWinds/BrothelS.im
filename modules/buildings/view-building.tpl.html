@@ -5,7 +5,7 @@
         <h6><<- building.name >></h6>
         <img src="<<- building.image() >>" title="<<= building.description() >>">
         <div class="daily-delta">
-          <<- e.render('render-delta', building.dailyDelta()) >>
+          <<- e.render('render-delta', { delta: building.dailyDelta() }, true) >>
         </div>
       </div>
       <ul class="built-rooms"><< $.each(building.rooms, function(index, room) { >>
@@ -20,7 +20,7 @@
           </ul><< } else { >>
             <p><<- Rooms[room.type].description >></p>
             << if (Rooms[room.type].daily) { >><div class="daily-delta">
-              <<- e.render('render-delta', Rooms[room.type].daily) >>
+              <<- e.render('render-delta', { delta: Rooms[room.type].daily }, true) >>
             </div><< } >>
           << } >>
         </li>
@@ -36,7 +36,7 @@
             </label>
             <p><<- room.description >></p>
             << if (room.daily) { >><div class="daily-delta">
-              <<- e.render('render-delta', room.daily) >>
+              <<- e.render('render-delta', { delta: room.daily }, true) >>
             </div><< } >>
           </li>
         << }) >>

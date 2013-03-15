@@ -1,7 +1,7 @@
 << $.each(delta, function(stat, value) {
   var text;
   if (typeof(value) == 'object') {
-    text = e.render('render-delta', value);
+    text = e.render('render-delta', { delta: value }, true);
   } else if (stat == 'money') {
     text = value < 0 ? '-$' + (-value) : '+$' + value;
     stat += ' delta';
