@@ -436,7 +436,7 @@ Actions.tentacleManAbduction = {
           group: '<<- girl.name >>',
           image: '<<- girl.image("pregnant") >>',
           label: 'Missing - Day 4',
-          text: "She doesn't get more, though. The creature breaks the connection with its new offspring and slowly withdraws, oozing away tiredly through the cell bars and leaving <<- girl.name >> weak on the cell floor. She calls after it to come back - the floor does not tingle and massage, her hand shoved up to the wrist in her pussy and fisting madly does not stretch and suck. She cries after it to come back, to make another baby with her, but it's already gone. She can feel her belly slowly deflating, leaking liquid out both pussy and ass. That much is ok, at least - with a satisfied smile she finally falls asleep, secure in the knowledge that the baby is still inside her...",
+          text: "She doesn't get more, though. The creature breaks the connection with its new offspring and slowly withdraws, oozing away tiredly through the cell bars and leaving <<- girl.name >> weak on the cell floor. She calls after it to come back - the floor does not tingle and massage, her hand shoved up to the wrist in her pussy and fisting madly does not stretch and suck. She cries after it to come back, to make another baby with her, but it's already gone. She can feel her belly slowly deflating, leaking liquid out both pussy and ass. That much is okay, at least - with a satisfied smile she finally falls asleep, secure in the knowledge that the baby is still inside her...",
           weight: -1
         }
       ],

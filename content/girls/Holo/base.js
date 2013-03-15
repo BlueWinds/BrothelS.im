@@ -295,7 +295,7 @@ Girls.Holo = {
               group: 'Holo',
               label: 'Debt Paid',
               image: 'content/girls/Holo/images/Tired1.jpg',
-              text: "<blockquote>Hmph. Don't just stand there, idiot, apologize! If you're glad I'm ok, you should have come far sooner.</blockquote> You attempt to calm her down a bit with an apology and fact that you came as soon as you could, but she's having none of it, sticking up her nose and turning her back on you, tail swishing agitatedly. Despite the brave face, you suspect that she's actually deeply hurt, but unwilling to be vulnerable enough to talk about it.<blockquote>I'm not talking to you.</blockquote>",
+              text: "<blockquote>Hmph. Don't just stand there, idiot, apologize! If you're glad I'm okay, you should have come far sooner.</blockquote> You attempt to calm her down a bit with an apology and fact that you came as soon as you could, but she's having none of it, sticking up her nose and turning her back on you, tail swishing agitatedly. Despite the brave face, you suspect that she's actually deeply hurt, but unwilling to be vulnerable enough to talk about it.<blockquote>I'm not talking to you.</blockquote>",
               weight: -2
             }
           ],
