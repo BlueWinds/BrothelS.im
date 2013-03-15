@@ -1,0 +1,13 @@
+<div id="load-game-form" class="center">
+  <div>
+    <select required="required" id="game-name">
+      << games.forEach(function(name) { >>
+        <option value="<<- name >>"><<- name >></option>
+      << }) >>
+    </select>
+  </div>
+  <button id="load-game">Load Game</button>
+  <button id="delete-game">Delete Game</button>
+  <textarea></textarea>
+  <button id="import-game">Import Game</button>
+</div>

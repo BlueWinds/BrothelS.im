@@ -50,5 +50,11 @@ e.GameInit.unshift(function(done) {
       room[0].girl = 'Mana';
     }
   }
+  if (g.version < 0.521) {
+    $.each(g.girls, function(name, girl) {
+      delete girl.reputation;
+    });
+  }
+  g.version = Game.config.version;
   done();
 });

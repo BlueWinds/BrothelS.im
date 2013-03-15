@@ -1,16 +1,17 @@
 "use strict";
 var Girls = {};
-e.GirlNew = [];
-e.GirlsPostMorning = [];
-e.GirlsPostEvening = [];
-e.GirlRunTime = [];
-e.GirlSetStatus = [];
 
 e.Ready.push(function(done) {
-  $.each(Girls, function(name, girl) {
-    girl.name = name;
+  $('head').append('<link href="modules/girls/style.css" type="text/css" rel="stylesheet">');
+  e.addTemplate('list-girls', 'modules/girls/list-girls.tpl.html');
+  e.addTemplate('hire-girls', 'modules/girls/hire-girls.tpl.html');
+  e.addTemplate('view-girl', 'modules/girls/view-girl.tpl.html');
+  e.loadAll(Girl.girls, function() {
+    $.each(Girls, function(name, girl) {
+      girl.name = name;
+    });
+    done();
   });
-  done();
 });
 
 e.GameNew.push(function(done) {
@@ -79,9 +80,9 @@ e.GamePostDay.push(function(done) {
 });
 
 e.GameRender.push(function(done) {
-  var div = $(ejs.render($('#girls_list_template').html(), {
+  var div = e.render('list-girls', {
     girls: g.girls._filter('status', 'Hired')
-  }).trim()).prependTo('#content .second');
+  }).prependTo('#content .second');
   $('.girl .left, .girl .middle', div).click(function() {
     var girl = g.girls[$(this).parent().attr('name')];
 
@@ -89,7 +90,7 @@ e.GameRender.push(function(done) {
       girl: girl,
       girls: g.girls._filter('status', 'Hired')
     };
-    var mainView = $(ejs.render($('#girls_view_template').html(), context).trim());
+    var mainView = e.render('view-girl', context);
 
     $('.girl-view', mainView).each(function() {
       var view = $(this);
@@ -138,10 +139,10 @@ e.GameRender.push(function(done) {
   });
 
   $('#hire-girl').click(function() {
-    var lst = $(ejs.render($('#girls_hire_template').html(), {
+    var lst = e.render('hire-girls', {
       girls: g.girls._filter('status', 'For Hire'),
       hireHappiness: Girl.config.startHappiness
-    }).trim());
+    });
     $('button.hire', lst).each(function() {
       var girl = g.girls[$(this).attr('name')];
       if (girl.hirePrice() > g.money) {

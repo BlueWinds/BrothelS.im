@@ -1,4 +1,10 @@
 "use strict";
+e.GirlNew = [];
+e.GirlsPostMorning = [];
+e.GirlsPostEvening = [];
+e.GirlRunTime = [];
+e.GirlSetStatus = [];
+
 function Girl(obj) {
   var girl = this;
   var base;
@@ -11,9 +17,10 @@ function Girl(obj) {
       specialRules: $.extend(true, {}, base.specialRules),
       actions: {}
     };
+  } else {
+    base = this.base();
   }
   $.extend(this, obj);
-  base = this.base();
 
   // Add missing stats from base
   Girl.stats.forEach(function(stat) {

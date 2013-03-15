@@ -35,16 +35,18 @@ Event.create = function(_id, context, actionTags) {
 };
 
 e.Ready.push(function(done) {
-  $.each(Events, function(_id, event) {
-    event._id = _id;
-  });
-  $.each(Girls, function(name, girl) {
-    if (!girl.Events) { return; }
-    $.each(girl.Events, function(_id, event) {
+  e.loadAll(Event.events, function() {
+    $.each(Events, function(_id, event) {
       event._id = _id;
     });
+    $.each(Girls, function(name, girl) {
+      if (!girl.Events) { return; }
+      $.each(girl.Events, function(_id, event) {
+        event._id = _id;
+      });
+    });
+    done();
   });
-  done();
 });
 
 e.GameInit.push(function(done) {

@@ -2,16 +2,20 @@
 var Missions = {};
 
 e.Ready.push(function(done) {
-  $.each(Missions, function(_id, mission) {
-    mission._id = _id;
-  });
-  $.each(Girls, function(name, girl) {
-    if (!girl.Missions) { return; }
-    $.each(girl.Missions, function(_id, mission) {
+  $('head').append('<link href="modules/missions/style.css" type="text/css" rel="stylesheet">');
+  e.addTemplate('list-missions', 'modules/missions/list-missions.tpl.html');
+  e.loadAll(Mission.missions, function() {
+    $.each(Missions, function(_id, mission) {
       mission._id = _id;
     });
+    $.each(Girls, function(name, girl) {
+      if (!girl.Missions) { return; }
+      $.each(girl.Missions, function(_id, mission) {
+        mission._id = _id;
+      });
+    });
+    done();
   });
-  done();
 });
 
 Mission.checkStart = function(day, done) {
@@ -32,9 +36,9 @@ Mission.checkStart = function(day, done) {
   $.each(Girls, function(name, girl) {
     if (!girl.Missions) { return; }
     $.each(girl.Missions, function(_id, mission) {
-      context = { day: day, girl: g.girls[girl.name] };
+      context = { day: day, girl: g.girls[name] };
       if (!mission.conditions || g.missions[_id]) { return; }
-      mission = Mission.create(_id, context, true);
+      mission = Mission.create(_id, context);
       if (mission) {
         g.missions[_id] = mission;
         if (!mission.getEnd()) {
@@ -83,9 +87,9 @@ e.GameRender.push(function(done) {
   }
   $('#top-right').prepend(button);
   button.click(function() {
-    var view = $(ejs.render($('#missions_list_template').html(), {
+    var view = e.render('list-missions', {
       missions: g.missions
-    }).trim());
+    });
     view.dialog({
       title: 'Missions',
       maxHeight: '100%'

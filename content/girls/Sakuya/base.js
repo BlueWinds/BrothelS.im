@@ -23,7 +23,7 @@ Girls.Sakuya = {
     refuse: "Refuse.jpg",
     tired: ["Tired1.jpg", "Tired2.jpg"],
     soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg", "Soft6.jpg"],
-    hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg"],
+    hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg"],
     anal: ["Anal1.jpg", "Anal2.jpg", "Anal3.jpg", "Anal4.jpg"],
     fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4.jpg", "Fetish5.jpg", "Fetish6.jpg"],
     group: ["Group1.jpg", "Group2.jpg"],
@@ -65,7 +65,7 @@ Girls.Sakuya = {
       results: [
         {
           message: {
-            text: 'Sakuya spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <<= building.name >>. You can hardly believe how effective it was - one would swear it should take an hour to get the stains out of those sheets, but you turned your back for a moment and they were done, wash water splashed all over the walls.<< if (girl.specialRules.ScarletDevilTalk == 1) { >><br><br><em>Magic <<= girl.specialRules.magic >> <<- girl.specialRules.magic < 100 ? \'<span class="delta">(+1)</span>\' : "" >></em><< } >>'
+            text: 'Sakuya spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <<- building.name >>. You can hardly believe how effective it was - one would swear it should take an hour to get the stains out of those sheets, but you turned your back for a moment and they were done, wash water splashed all over the walls.<< if (girl.specialRules.ScarletDevilTalk == 1) { >><br><br><em>Magic <<- girl.specialRules.magic >> <<- girl.specialRules.magic < 100 ? \'<span class="delta">(+1)</span>\' : "" >></em><< } >>'
           },
           girl: {
             endurance: -8,
@@ -84,7 +84,7 @@ Girls.Sakuya = {
         girl: {
           min: {
             specialRules: { magic: 10 }
-          }, 
+          },
           max: {
             specialRules: { exclusivePlot: 0 }
           }
@@ -107,13 +107,13 @@ Girls.Sakuya = {
             label: 'Signs and Portents',
             group: 'Late at night',
             image: 'content/girls/Sakuya/missionImages/Nightmare1.jpg',
-            text: "For just the briefest of moments you're no longer standing in the <<= girl.building() ? girl.building().name : 'inn' >>, but on your knees, naked, looking up at the someone. It's too dark to see any features, the only light coming from red-tinted windows... and a glowing pair of eyes, staring down disapprovingly. The chair is massive, padded, at the top of a dais, lined with velvet."
+            text: "For just the briefest of moments you're no longer standing in the <<- girl.building() ? girl.building().name : 'inn' >>, but on your knees, naked, looking up at the someone. It's too dark to see any features, the only light coming from red-tinted windows... and a glowing pair of eyes, staring down disapprovingly. The chair is massive, padded, at the top of a dais, lined with velvet."
           },
           {
             label: 'Signs and Portents',
             group: 'Late at night',
             image: 'content/girls/Sakuya/images/Tired1.jpg',
-            text: "The flash is gone as quickly as it came, and you're back in the <<= girl.building() ? girl.building().name : 'inn' >>, shaking Sakuya awake. She opens bleary eyes, a look of fear flickering across her face and then gone as she recognizes you. She's not interested in talking about her dream, but it does seem to have upset her. Eventually you give up on trying to be comforting and go back to bed."
+            text: "The flash is gone as quickly as it came, and you're back in the <<- girl.building() ? girl.building().name : 'inn' >>, shaking Sakuya awake. She opens bleary eyes, a look of fear flickering across her face and then gone as she recognizes you. She's not interested in talking about her dream, but it does seem to have upset her. Eventually you give up on trying to be comforting and go back to bed."
           }
         ],
         girl: {
@@ -213,7 +213,7 @@ Girls.Sakuya = {
         label: 'Train Sakuya',
         group: 'Enter the Devil',
         image: 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg',
-        text: "<blockquote>Sakuya has put me through a lot of trouble. I want you to make sure she never does it again - much more <<- __('obedience', 'adj') >> than she used to be, but still <<- __('modesty', 'adj') >>. I'll be back on day <strong></strong> to collect her. I will pay very well if you succeed. Failure will be punished.</blockquote> You rub your wrist where she held it, remembering the painfully strong grip that you're sure could have crushed bone if she'd chosen.<br><br>When you tell the story to Sakuya, she simply repeats that if you want her to keep working for you, you should give her plenty of time to practice magic. She's conflicted - returning home does have a certain appeal, but the Mistress didn't always treat her well.<br><br><em>Raise Sakuya's <<- __('obedience') >> to 90 and <<- __('modesty') >> to 75 if you want to please the Scarlet Devil, or raise her Magic to at least 50 (by having her Clean) if you plan to refuse to hand Sakuya over. She will return at the end of <strong>day <<= mission.end.min.day >></strong>.</em>",
+        text: "<blockquote>Sakuya has put me through a lot of trouble. I want you to make sure she never does it again - much more <<- __('obedience', 'adj') >> than she used to be, but still <<- __('modesty', 'adj') >>. I'll be back on day <strong></strong> to collect her. I will pay very well if you succeed. Failure will be punished.</blockquote> You rub your wrist where she held it, remembering the painfully strong grip that you're sure could have crushed bone if she'd chosen.<br><br>When you tell the story to Sakuya, she simply repeats that if you want her to keep working for you, you should give her plenty of time to practice magic. She's conflicted - returning home does have a certain appeal, but the Mistress didn't always treat her well.<br><br><em>Raise Sakuya's <<- __('obedience') >> to 90 and <<- __('modesty') >> to 75 if you want to please the Scarlet Devil, or raise her Magic to at least 50 (by having her Clean) if you plan to refuse to hand Sakuya over. She will return at the end of <strong>day <<- mission.end.min.day >></strong>.</em>",
         weight: -1
       },
       end: {

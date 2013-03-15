@@ -69,7 +69,7 @@ Girls.Mana = {
       results: [
         {
           message: {
-            image: 'content/girls/Mana/images/Exercise2.jpg',
+            image: 'content/girls/Mana/images/Healing.jpg',
             group: 'Mana',
             label: 'Healing',
             text: 'Mana drew upon her power to revitalize <<= action.option >>, restoring her energy (<span class="endurance delta">+<<= action.special.endurance || 0 >></span>, <span class="happiness delta">+<<= action.special.happiness || 0 >></span>).'

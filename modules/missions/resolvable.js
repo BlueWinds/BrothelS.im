@@ -51,24 +51,20 @@ Resolvable.prototype.setContext = function(context) {
 };
 
 Resolvable.base = function(_id, _class, context) {
-  var base = {};
   var prop = _class + 's';
-  if (window[prop][_id]) {
-    $.extend(true, base, window[prop][_id]);
-  }
   if (context.girl) {
-   var girl = context.girl.base();
-   if (girl && girl[prop] && girl[prop][_id]) {
-     $.extend(true, base, girl[prop][_id]);
+    var girl = context.girl.base();
+    if (girl && girl[prop] && girl[prop][_id]) {
+      return $.extend(true, {}, girl[prop][_id]);
     }
   }
   if (context.building) {
-   var building = context.building.base();
-   if (building && building[prop] && building[prop][_id]) {
-     $.extend(true, base, building[prop][_id]);
+    var building = context.building.base();
+    if (building && building[prop] && building[prop][_id]) {
+      return $.extend(true, {}, building[prop][_id]);
     }
   }
-  return base;
+  return $.extend(true, {}, window[prop][_id]);
 };
 
 Resolvable.prototype.base = function() {
@@ -154,6 +150,7 @@ Resolvable.prototype.checkConditions = function(cond, context, allowFalseConditi
       }
     }
   }
+  if (cond.option && this.option != cond.option) { return false; }
   return context;
 };
 
@@ -179,7 +176,7 @@ Resolvable.prototype.getResults = function(done, context) {
     done(base.results[Math.choice(extra)]);
     return;
   } else {
-   done(Math.choice(base.results));
+    done(Math.choice(base.results));
   }
 };
 

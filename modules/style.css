@@ -15,8 +15,7 @@ body {
 
 #header-wrapper {
   background: url("../content/miscImages/header_sky.jpg") repeat scroll 50% 0 transparent;
-  height: 100px;
-  margin: -15px 0 -25px;
+  height: 85px;
   position: relative;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -53,13 +52,10 @@ body {
   letter-spacing: -1px;
 }
 
-#menu {
-  height: 200px;
-  background: #000;
-  background: -webkit-gradient(linear, left top, left bottom, from(#222), to(#000));
-  background: -moz-linear-gradient(center top , #222, #000);
-  position: absolute;
-  width: 100%;
+#content-wrapper {
+  background: -webkit-gradient(linear, left top, left 180px, from(#222), to(#000));
+  background: -moz-linear-gradient(top, #333, #000 180px);
+  background: linear-gradient(to bottom, #333, #000 150px);
 }
 
 .column {

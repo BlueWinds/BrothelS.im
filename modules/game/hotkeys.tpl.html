@@ -1,0 +1,14 @@
+<div>
+  <p>These shortcuts are available from the main game view.</p>
+  <ul><< $.each(Game.hotkeys, function(key, desc) { if (desc.label) { >>
+    <li>
+      <label><strong><<- desc.label >></strong></label> - <<- desc.description >>
+    </li>
+  << } }) >></ul>
+  <p>These shortcuts are available in any dialog.</p>
+  <ul>
+    <li><label><strong>Escape</strong></label> - Close Dialog</li>
+    <li><label><strong>Left</strong></label> - Previous item</li>
+    <li><label><strong>Right</strong></label> - Next item</li>
+  </ul>
+</div>

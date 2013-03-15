@@ -1,0 +1,57 @@
+<div class="vertical-tabs navigable">
+  <ul>
+    << for (var i in girls) { >>
+      <li><a href="#girl-tab-<<- i >>"><<- girls[i].name >></a></li>
+    << } >>
+  </ul>
+  << for (i in girls) { >>
+    <div id="girl-tab-<<- i >>" class="<<- (girl.name == girls[i].name) ? 'active' : '' >>">
+      <div name="<<- girls[i].name >>" class="ui-helper-clearfix girl-view">
+        <div class="column pct-30 left center">
+          <img src="<<- girls[i].image('base') >>" title="<<= girls[i].base().description >>">
+        </div>
+        <div class="column pct-70">
+          <div class="column pct-55 middle">
+            << Girl.stats.forEach(function(stat) { >>
+              <div>
+                <label><<- __(stat) >></label>
+                <<- girls[i].S(stat) >>
+              </div>
+            << }) >>
+            << if (g.missionsDone.firstMoney) { >>
+              <div class="pay">
+                <label><strong>Pay</strong></label>
+                <div class="slider"></div>
+                <div class="pay-results">
+                  <span class="delta money">$<<- Math.floor(girls[i].actions.pay * girls[i].desiredPay()) >></span>
+                  <span class="delta happiness"><<- girls[i].payHappiness() < 0 ? girls[i].payHappiness() : "+" + girls[i].payHappiness() >></span>
+                </div>
+              </div>
+            << } >>
+          </div>
+          <div class="column pct-45 right">
+            << Girl.sex.forEach(function(sex) { >>
+              <div>
+                <label class="checkbox <<- girls[i].actions[sex] ? 'checked' : '' >>" id="<<- sex >>">
+                  <<- __(sex) >>
+                </label>
+              </div>
+              <div>
+                <label><<- __("libido") >>:</label>
+                <span class="<<- sex >> libido">
+                  <<- girls[i].S(sex + "Libido") >>
+                </span>
+              </div>
+              <div>
+                <label><<- __("experience") >>:</label>
+                <span class="<<- sex >> experience">
+                  <<- girls[i].S(sex + "Experience") >>
+                </span>
+              </div>
+            << }) >>
+          </div>
+        </div>
+      </div>
+    </div>
+  << } /* End of "for (i in girls)"*/>>
+</div>

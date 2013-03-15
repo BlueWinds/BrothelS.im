@@ -1,0 +1,37 @@
+<table class="action-list"><tbody>
+  << $.each(actions._sortToObject('group'), function(group, action_group) { >>
+    <tr>
+      <td class="group">
+        <label><<- group >></label>
+      </td>
+      <td>
+        << action_group.forEach(function(action) { >>
+          <div class="action <<- action.disabled ? 'disabled' : '' >>">
+            <label>
+              <span title="<<= action.description >>" class="<<- action.option && action.options()._toArray().length > 1 ? 'options' : '' >>"><<- action.label >></span>
+              << if (action.option && action.options()._toArray().length > 1) { >>
+                <ol class="dropdown">
+                  << $.each(action.options(), function(label, description) { >>
+                    <li name="<<- label >>" class="<<- label == action.option ? 'selected' : '' >>"><<- description >></li>
+                  << }) >>
+                </ol>
+              << } >>
+            </label>
+            <ul name="<<- action._id >>" class="others-<<- (otherActions[action._id] || []).length - (girl.actions[time] && girl.actions[time]._id == action._id) >>">
+              << for (var i in otherActions[action._id]) { >>
+                << if (otherActions[action._id][i] != girl.name) { >>
+                  <li class="other">
+                    <img src="<<- g.girls[otherActions[action._id][i]].image() >>" title="<<= otherActions[action._id][i] >>">
+                  </li>
+                << } >>
+              << } >>
+              << if (girl.actions[time] && girl.actions[time]._id == action._id) { >>
+                <li class="this"><img src="<<- girl.image() >>"></li>
+              << } >>
+            </ul>
+          </div>
+        << }) >>
+      </td>
+    </tr>
+  << }) >>
+</tbody></table>

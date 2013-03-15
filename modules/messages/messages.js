@@ -59,10 +59,10 @@ e.GameRender.push(function(done) {
     groups = Object.keys(groups).sort(function(a, b) {
       return groups[a] - groups[b];
     });
-    var view = $(ejs.render($('#messages_list_template').html(), {
+    var view = e.render('list-messages', {
       groups: groups,
       messages: messages
-    }).trim());
+    });
     view.appendTo('body');
     e.invokeAll('Autorender', view, function() {
       view.dialog({
@@ -72,5 +72,11 @@ e.GameRender.push(function(done) {
       view.closest('.ui-dialog').addClass('tab-dialog');
     });
   });
+  done();
+});
+
+e.Ready.push(function(done) {
+  $('head').append('<link href="modules/messages/messages.css" type="text/css" rel="stylesheet">');
+  e.addTemplate('list-messages', 'modules/messages/list-messages.tpl.html');
   done();
 });

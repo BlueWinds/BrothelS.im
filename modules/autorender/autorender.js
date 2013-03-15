@@ -127,6 +127,7 @@ e.Autorender.push(function(element, done) {
 });
 
 $(function() {
+  $('head').append('<link href="modules/autorender/autorender.css" type="text/css" rel="stylesheet">');
   $.ui.dialog.prototype.options.show = 'fade';
   $.ui.dialog.prototype.options.hide = 'fade';
   $.ui.dialog.prototype.options.modal = true;

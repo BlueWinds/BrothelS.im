@@ -2,16 +2,8 @@
 
 var Actions = {};
 
-e.Ready.push(function(done) {
-  $.each(Actions, function(_id, action) {
-    action._id = _id;
-  });
-  $.each(Girls, function(name, girl) {
-    if (!girl.Actions) { return; }
-    $.each(girl.Actions, function(_id, action) {
-      action._id = _id;
-    });
-  });
+e.Ready.splice(0, 0, function(done) {
+  $('head').append('<link href="modules/actions/style.css" type="text/css" rel="stylesheet">');
   $(document).keydown(function(event) {
     if (!$('.ui-dialog').length && event.keyCode <= 53 && event.keyCode >= 49) {
       $('#girls div[name="morning"]').eq(event.keyCode - 49).click();
@@ -19,7 +11,20 @@ e.Ready.push(function(done) {
       return false;
     }
   });
-  done();
+  e.addTemplate('list-actions', 'modules/actions/list-actions.tpl.html');
+  e.addTemplate('view-actions', 'modules/actions/view-actions.tpl.html');
+  e.loadAll(Action.actions, function() {
+    $.each(Actions, function(_id, action) {
+      action._id = _id;
+    });
+    $.each(Girls, function(name, girl) {
+      if (!girl.Actions) { return; }
+      $.each(girl.Actions, function(_id, action) {
+        action._id = _id;
+      });
+    });
+    done();
+  });
 });
 
 e.GirlNew.push(function(girl) {
@@ -59,7 +64,7 @@ e.GameRender.push(function(done) {
         otherActions: Girl.actions(time),
         actions: girl.potentialActions(time)
       };
-      var div = $(ejs.render($('#actions_girl_template').html(), context).trim());
+      var div = e.render('view-actions', context);
       $('.action:not(.disabled)', div).click(function() {
         var $this = $(this);
         var action = $this.children('ul').attr('name');
@@ -89,7 +94,7 @@ e.GameRender.push(function(done) {
       girl: girl,
       time: time
     };
-    var view = $(ejs.render($('#actions_list_template').html(), context).trim());
+    var view = e.render('list-actions', context);
     var tab = $('.girl[name="' + girl.name + '"] .' + time, view);
     tab.append(renderActions(girl, time));
     if (tab[0] !== $('.girl .morning', view)[0]) {

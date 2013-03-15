@@ -46,6 +46,9 @@ Schemas.Conditions = {
     building: {
       anyOf: [{ $ref: 'buildingConditions' }],
       description: 'Must match the building in the current context - if none is already there, it will add the a random building which matches.'
+    },
+    option: {
+      description: "Must match this resolvable's currently selected option. Currently only Actions have options, but that will change soon."
     }
   },
   patternProperties: {

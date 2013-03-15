@@ -1,0 +1,33 @@
+<div class="column pct-50" id="girls">
+  << if (girls.length < g.maxGirls) { >>
+    <h3 class="center">
+      <a id="hire-girl">Hire Girl</a>
+    </h3>
+  << } >>
+  << girls.forEach(function(girl) { >>
+    <div class="ui-helper-clearfix no-cursor girl" name="<<- girl.name >>">
+      <div class="column pct-20 left">
+        <img src="<<- girl.image('base') >>">
+      </div>
+      <div class="column pct-40 center middle">
+        <h6><<- girl.name >></h6>
+        <div><<- girl.S("endurance") >> | <<- girl.S("happiness") >></div>
+        <<
+          var stats = [];
+          Girl.stats.forEach(function(stat) {
+            if (stat != "endurance" && stat != "happiness") {
+              stats.push(girl.S(stat));
+            }
+          });
+        >>
+        <div>
+          <<- stats.join(" | ") >>
+        </div>
+      </div>
+      <div class="column pct-40 right">
+        <div name="morning">Morning: <strong><<- girl.actions.morning.label >></strong></div>
+        <div name="evening">Evening: <strong><<- girl.actions.evening.label >></strong></div>
+      </div>
+    </div>
+  << }) >>
+</div>

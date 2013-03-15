@@ -12,7 +12,7 @@ Girls.Holo = {
   softLibido: 20,
   softExperience: 10,
   hardLibido: 20,
-  hardExperience: 30,
+  hardExperience: 40,
   analLibido: 10,
   analExperience: 0,
   fetishLibido: 10,
@@ -21,10 +21,11 @@ Girls.Holo = {
     basePath: "content/girls/Holo/images",
     base: "Base.png",
     refuse: ["Refuse1.jpg", "Refuse2.jpg", "Refuse3.jpg", "Refuse4.jpg"],
-    tired: ["Tired1.jpg", "Tired2.jpg", "Tired3.jpg", "Tired4.jpg", "Tired5.jpg", "Tired6.jpg"],
+    tired: ["Tired1.jpg", "Tired2.jpg", "Tired3.jpg", "Tired4.jpg"],
+    drunk: ["Drunk1.jpg", "Drunk2.jpg"], // Evening rest
     soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg"],
-    hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg", "Hard5.jpg"],
-    anal: ["Anal1.jpg", "Anal2.jpg"],
+    hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg", "Hard5.jpg", "Hard6.jpg"],
+    anal: ["Anal1.jpg", "Anal2.jpg", "Anal3.jpg", "Anal4.jpg"],
     fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg"],
     group: "Group1.jpg",
     cleaning: ["Cleaning1.jpg", "Cleaning2.jpg"],
@@ -35,7 +36,11 @@ Girls.Holo = {
     tentacles: "Tentacles1.jpg",
     pregnant: "Pregnant.jpg"
   },
-  specialRules: {},
+  specialRules: {
+    dependentStats: {
+      obedience: { obedience: -0.5 }
+    }
+  },
   Actions: {
     Talk: $.extend(true, {}, Actions.Talk),
     Rest: $.extend(true, {}, Actions.Rest, {
@@ -56,8 +61,8 @@ Girls.Holo = {
           message: {
             group: 'Holo',
             label: 'Rest',
-            image: '<<- girl.image("tired") >>',
-            text: 'Holo took some time off to recover, sleeping in until almost lunchtime.'
+            image: '<<- girl.image("drunk") >>',
+            text: 'Holo took some time off to recover, and inevitably headed to the local tavern. Many beers later, she staggered back to her room, announcing loudly her intentions to experiment more with this so-called "<<- Math.choice(["vodka", "whisky", "mead", "rum", "gin"]) >>".'
           },
           girl: {
             endurance: 8,
@@ -107,8 +112,8 @@ Girls.Holo = {
         },
         {
           girl: { max: { specialRules: { debtAbduction: 9 } } }
-        },
-        1
+        }
+        // Day 10 just matches automatically.
       ],
       results: [
         { // Days 1-2
@@ -225,7 +230,7 @@ Girls.Holo = {
             }
           },
           lock: false,
-          mission: 'tentaclePregnancy'
+          mission: 'HoloDepartWait'
         }
       ] // results
     } // debtAbduction
@@ -266,6 +271,9 @@ Girls.Holo = {
       results: {
         "Pay Holo's debt": {
           money: -30000,
+          girl: {
+            specialRules: { paidRansom: 30000 }
+          },
           message: [
             {
               group: 'Holo',
@@ -287,10 +295,11 @@ Girls.Holo = {
               group: 'Holo',
               label: 'Debt Paid',
               image: 'content/girls/Holo/images/Tired1.jpg',
-              text: "PLACEHOLDER - what does Holo think about the incident?",
+              text: "<blockquote>Hmph. Don't just stand there, idiot, apologize! If you're glad I'm ok, you should have come far sooner.</blockquote> You attempt to calm her down a bit with an apology and fact that you came as soon as you could, but she's having none of it, sticking up her nose and turning her back on you, tail swishing agitatedly. Despite the brave face, you suspect that she's actually deeply hurt, but unwilling to be vulnerable enough to talk about it.<blockquote>I'm not talking to you.</blockquote>",
               weight: -2
             }
-          ]
+          ],
+          mission: 'HoloDepartWait'
         },
         "Don't Pay": {
           message: {
@@ -331,6 +340,9 @@ Girls.Holo = {
       results: {
         "Pay Holo's debt": {
           money: -30000,
+          girl: {
+            specialRules: { paidRansom: 30000 }
+          },
           message: [
             {
               group: 'Holo',
@@ -352,13 +364,74 @@ Girls.Holo = {
               group: 'Holo',
               label: 'Debt Paid',
               image: 'content/girls/Holo/images/Tired1.jpg',
-              text: "PLACEHOLDER - what does Holo think about the incident after she's been abused for five days?",
+              text: "<blockquote>I can name every person who has ever snubbed me, and now I have one more to add to the list. You! Idiot. You should have come to rescue me immediately.</blockquote> You attempt to calm her down a bit with an apology and fact that you did at least come eventually, but she's having none of it, sticking up her nose and turning her back on you, tail swishing agitatedly. Despite the brave face, you suspect that she's actually deeply hurt, but unwilling to be vulnerable enough to talk about it. <blockquote>You have no idea how humiliating that was.</blockquote>",
               weight: -2
             }
-          ]
+          ],
+          mission: 'HoloDepartWait'
         },
         "Don't Pay": {
           // Nothing happens if they pass up this chance - action continues as normal.
+        }
+      }
+    },
+    HoloDepartWait: {
+      conditions: false,
+      end: { min: { day: '+30' }},
+      results: [{ mission: 'HoloDepart' }]
+    },
+    HoloDepart: {
+      conditions: false,
+      end: {
+        min: { day: '+5' },
+        max: { day: '+5' }
+      },
+      display: {
+        group: 'Holo',
+        label: 'Preparing to Depart',
+        image: 'content/girls/Holo/Depart.jpg',
+        text: "Though she tries to hide it, you can't help but notice that the amount of time Holo spends staring at the sky has increased noticeably in the past month. More than that though, you know she's been saving most of her wages, and her room has started to look sparser... as though she were getting rid of things she won't be able to take with her.<br><br><em>If you want Holo to stick around, make sure she has <<- _('happiness') >> 75 or higher by <strong>Day <<- mission.end.max.day >></strong>.</em>",
+        weight: -1
+      },
+      variants: function(context, done) {
+        var text = "You step outside for an early morning walk when you run into Holo, dressed and packed as though she's going to be going on a long journey. You ask her where she's headed, and she replies that she's finally saved enough to continue her journey northward to her hometown of Yoitz. She's carrying everything she owns, including a ticket for passage on a ship sailing northward from the island today. You ask if she is intent on going now, and her reply is brief and bittersweet.<blockquote>There is no better time to part than when we wish to never leave.</blockquote>";
+        var options = {
+          'Beg her to stay': "With \"wise words\" like that, there's no way to really wants to go.",
+          'Let her leave': "You wish her well - she's said from the beginning that her stay with you was only temporary, a stopover on her journey north."
+        };
+        Game.getUserInput(text, 'content/girls/Holo/Depart.jpg', options, function(answer) {
+          if (answer == 'Beg her to stay' && context.girl.happiness < 75) {
+            answer = 'Let her leave';
+          }
+          var result = $.extend({}, context.mission.base().results[answer]);
+          if (answer == 'Let her leave') {
+            result.money = context.girl.specialRules.paidRansom || 0;
+            result.money += context.girl.hirePrice();
+          }
+          done(result);
+        });
+      },
+      results: {
+        'Beg her to stay': {
+          message: {
+            group: 'Holo',
+            label: 'Sticking around',
+            image: 'content/girls/Holo/images/Exercise2.jpg',
+            text: "You plead with Holo to stay, promising every apple-based food you can think of. Holo shows no interest in food today, though she is clearly not fully resolved to leave. She hesitates a little, then expresses her real concern.<blockquote>I am tired of being alone. Loneliness is a disease that can lead to death. They might as well be the same thing.</blockquote>The loneliness is clear in her eyes. She may have a long list of clients, but what she craves is more companionship. You add spending more time with her to the list of food-related promises. Her ears perk up, and she gets a wry grin.<blockquote>I believe you to be much cuter when you are panicking. I am very pretty, so humans have been known to fall for me. I am Holo the Sage Wolf, and there will be plenty of time to look for my homeland when you are old and grey.</blockquote>She shoves her bag into your arms without warning and turns on her heel, back into the <<- girl.building() ? girl.building().name : 'inn' >>. Crisis averted, though you groan to think of exactly how much money it will cost to keep your apple-based promises.",
+            weight: -2
+          },
+          girl: { happiness: 10 }
+        },
+        'Let her leave': {
+          message: {
+            group: 'Holo',
+            label: 'A sad departure',
+            image: 'content/girls/Holo/Depart2.jpg',
+            text: "<<- mission.special.ignore ? 'She doesn\'t seem to hear your pleas - or perhaps she doesn\'t wish to hear them as she' : 'Holo thanks you for your help and' >> walks away. You can't tell from behind what expression her face wears, but her ears droop low. You watch her until she walks around the corner, but she doesn't look back.<br><br>When you return to your room later that day, you find an envelope that has been slipped under your door. It contains Holo's heartfelt thanks, repayment of the money you originally paid to hire her<<- girl.specialRules.paidRansom ? ' along with the ransom money you paid to Medio Trading Company' : '' >>, and the following farewell.<blockquote>If tomorrow is better than today, and the day after that surpasses them both, time flies because you expect it to be like that forever. What happens when we reach the end of that perpetual journey? It will begin with a sense of dissatisfaction. That is why parting here is the right thing to do. I never want to stop giving thanks for the day we met.</blockquote>",
+            weight: -2
+          },
+          // money added by variants function above
+          girl: { status: 'Gone' }
         }
       }
     }
@@ -418,7 +491,7 @@ Girls.Holo.Actions.Talk.results._append([
       group: 'Holo',
       label: 'Talk',
       image: 'content/girls/Holo/images/Talk2.jpg',
-      text: "You and Holo go for a walk, and you take time to point out the other girls in her profession, hoping that she might pick up some tips from their expertise. Instead, she folds her arms and gets inexplicably cross. You continue your walk into busier streets to see if that helps, but it still take a while to extract the reason for her annoyance.<blockquote>It appears that human males see nothing wrong with paying attention to more than one female at once.</blockquote>"
+      text: "You and Holo go for a walk, and you take time to point out the other girls in her profession, hoping that she might pick up some tips from their expertise. Instead, she folds her arms and gets inexplicably cross. You continue your walk into busier streets to see if that helps, but it still take a while to extract the reason for her annoyance.<blockquote>It appears that humans see nothing wrong with paying attention to more than one female at once.</blockquote>"
     }
   }
 ]);

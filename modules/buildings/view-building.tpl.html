@@ -1,0 +1,54 @@
+<div id="building-view">
+  << buildings.forEach(function(building) { >><div class="building ui-helper-clearfix" name="<<- building.name >>">
+    <div class="column pct-75 left">
+      <div class="info">
+        <h6><<- building.name >></h6>
+        <img src="<<- building.image() >>" title="<<= building.description() >>">
+        <div class="daily-delta">
+          <<- e.render('render-delta', building.dailyDelta()) >>
+        </div>
+      </div>
+      <ul class="built-rooms"><< $.each(building.rooms, function(index, room) { >>
+        <li class="room" name="<<- room.type >>" index="<<- index >>">
+          <label><<- room.type >></label>
+          << if (room.type == "Bedroom") { >><ul>
+            << if (room.girl) { >>
+              <li class="girl" name="<<- room.girl >>">
+                <img src="<<- g.girls[room.girl].image() >>">
+              </li>
+            << } >>
+          </ul><< } else { >>
+            <p><<- Rooms[room.type].description >></p>
+            << if (Rooms[room.type].daily) { >><div class="daily-delta">
+              <<- e.render('render-delta', Rooms[room.type].daily) >>
+            </div><< } >>
+          << } >>
+        </li>
+      << }) >></ul>
+    </div>
+    <div class="column pct-25">
+      <label>Available Rooms</label>
+      <ul class="available-rooms">
+        << building.potentialRooms()._sort("price").forEach(function(room) { >>
+          <li class="room<<- room.price > g.money || building.rooms.length >= building.maxRooms ? ' disabled' : ''>>" name="<<- room.type >>">
+            <label>
+              <<- room.type >> - $<<- room.price >>
+            </label>
+            <p><<- room.description >></p>
+            << if (room.daily) { >><div class="daily-delta">
+              <<- e.render('render-delta', room.daily) >>
+            </div><< } >>
+          </li>
+        << }) >>
+      </ul>
+    </div>
+  </div><< }) >>
+  <div>
+    <h6>Inn</h6>
+    <ul id="inn"><< innGirls.forEach(function(girl) { >>
+      <li class="girl" name="<<- girl.name >>">
+        <img src="<<- girl.image() >>">
+      </li>
+    << }) >></ul>
+  </div>
+</div>

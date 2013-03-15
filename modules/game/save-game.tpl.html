@@ -1,0 +1,16 @@
+<div id="save-game-form">
+  <div>
+    <label title="If you use the same name as another saved game, the other save will be overwritten." for="game-name">Title</label>
+    <input required="required" id="game-name">
+  </div>
+  <label id="autosave" class="checkbox <<- g.autosave ? 'checked' : '' >>" title="The game will be saved after every third turn automatically.">Autosave</label>
+  <div id="fetishes">
+    <label title="You can turn fetishes on and off for the current game here.">Fetishes</label>
+    << Game.fetishes.forEach(function(fetish) { >>
+      <div>
+        <label class="checkbox <<- g && g.fetishes && g.fetishes[fetish] ? 'checked' : '' >>" name="<<- fetish >>" title="<<= Game.fetishDescriptions[fetish] >>"><<- fetish.capitalize() >></label>
+      </div>
+    << }) >>
+  </div>
+  <button id="save-game">Save Game</button><button id="export-game">Export Game</button>
+</div>

@@ -1,4 +1,10 @@
 "use strict";
+Building.buildings = [
+  'content/buildings/LuxuriousHouse/base.js',
+  'content/buildings/Onsen/base.js',
+  'content/buildings/Theater/base.js'
+];
+
 Building.config = {
   startMaxBuildings: 0,
   noRoomDailyCost: 60,

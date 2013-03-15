@@ -27,7 +27,7 @@ Game.prototype.nextPayment = function() {
 
 Game.prototype.render = function() {
   e.invokeAll('GamePreRender', function() {
-    $('#content').html(ejs.render($('#game_view_template').html()));
+    $('#content').html(e.render('view-game'));
     $('#next').click(function(event) {
       g.nextTurn(event.ctrlKey);
     });

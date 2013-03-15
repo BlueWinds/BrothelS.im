@@ -26,7 +26,7 @@ Girls.Saber = {
     basePath: "content/girls/Saber/images",
     base: "Base.jpg",
     refuse: ["Refuse1.jpg", "Refuse2.png"],
-    tired: ["Tired1.jpg", "Tired2.jpg"],
+    tired: ["Tired1.jpg", "Tired2.jpg", "Tired3.jpg"],
     soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg"],
     hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg", "Hard5.jpg", "Hard6.jpg", "Hard7.jpg"],
     anal: ["Anal1.jpg", "Anal2.jpg", "Anal3.jpg", "Anal4.jpg"],

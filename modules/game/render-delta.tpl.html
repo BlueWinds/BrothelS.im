@@ -1,0 +1,13 @@
+<< $.each(delta, function(stat, value) {
+  var text;
+  if (typeof(value) == 'object') {
+    text = e.render('render-delta', value);
+  } else if (stat == 'money') {
+    text = value < 0 ? '-$' + (-value) : '+$' + value;
+    stat += ' delta';
+  } else {
+    text = value < 0 ? value : '+' + value;
+    stat += ' delta';
+  } >>
+  <span class="<<- stat >>"><<- text >></span>
+<< }) >>

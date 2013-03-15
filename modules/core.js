@@ -32,8 +32,23 @@ var e = {
     var i = -1;
     next();
   },
+  loadAll: function() {
+    var args = $.extend([], arguments)._flatten();
+    head.js.apply(this, args);
+  },
+  addTemplate: function(name, url, done) {
+    var promise = $.ajax(url).done(function(data) {
+      e.render.cache[name] = ejs.compile(data);
+    });
+    if (done) { promise.done(done); }
+  },
+  render: function(name, context) {
+    return $(e.render.cache[name](context || {}));
+  },
   Ready: []
 };
+
+e.render.cache = {};
 
 Storage.prototype.setObject = function(key, value) {
   this.setItem(key, JSON.stringify(value));
@@ -135,7 +150,7 @@ Object.defineProperty(Object.prototype, "_flatten", {
   value: function() {
     var flat = [];
     for (var key in this) {
-      if (this[key][0]) {
+      if (typeof(this[key]) == 'object') {
         Array.prototype.push.apply(flat, this[key]);
       } else {
         flat.push(this[key]);

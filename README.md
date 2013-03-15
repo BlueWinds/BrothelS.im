@@ -1,18 +1,15 @@
-Adding new content
+Running the game
 =============
 
-First, download and extract the game to your local drive. See that "zip" button at the top-left of this page (if you're reading this from GitHub)? Yeah, use that. If you're not reading this on Github, you've probably already finished this step. ;)
+From the server (recommended):
+  1. Visit brothels.im, or dev.brothels.im (dev is less stable, but sometimes has neat features and additional content not yet introduced).
 
-Now, what type of content are you creating? Girls go under content/girls, Missions under content/missions, Events... you get the picture. Girls and Buildings require a folder to themselves (content/girls/Kirino, for example), inside of which is base.js. Events, Missions and Actions can just go in the matching folder (content/missions, content/events, etc.).
+From your local machine (simple version):
+  1. Double click on WebServerLite.jar
+    a. If your computer is unsure how to run this file, you need to download and install Java Runtime Environment. http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html
+  2. Open your browser, and put 127.0.0.1 in the address bar.
 
-Next, open up a file of the same type as the item you want to create. **The best** way to create new things is to tweak old ones - makes it less likely that you'll forget an important line. Copy the text from your example file into the new javascript file you've just created and start editing.
-
-Documentation is primarily found in content/doc.js - it includes information about all available options for every content type. Girls, Buildings, Events, Missions, etc. - it's all in there, though not organized all that well. This stuff really needs its own wiki or something. ^^;; The documentation is best referred to when you're confused, rather than read straight through, and it's used even better in conjunction with examining am already-functioning piece of content with functionality similar to what you're trying to create.
-
-For girls and buildings, Kirino and the Theater are nice, vanilla examples. For an idea of a fully-functioning mission tree, take a look inside Sakuya's base.js. tentacleAttack.js is a good sample event file to look at, while training.js is a good place to start for actions.
-
-**IMPORTANT**
-When you're done editing your javascript file, open up "index.html". See around line 56, where it says Actions? You have to add your new file to the approriate place. Copy one of those lines and add it to the bottom of the list, changing the src attribute so that it points to the file you created. If you forget this step, then the game won't load your file. An easy mistake to make.
+Note that WebServerLite.jar is just a bloody simple webserver which echoes files in its directory to 127.0.0.1. There's nothing dynamic about this program - it's just that modern browsers are pretty picky about ajax requests on the file:// protocol (with good reason - doesn't make it any less annoying).
 
 License
 =============

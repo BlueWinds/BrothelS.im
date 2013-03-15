@@ -1,0 +1,11 @@
+<div class="ui-widget-overlay"></div>
+<div id="required-user-input" class="ui-helper-clearfix">
+  <img src="<<- image >>">
+  <p><<- text >></p>
+  <hr class="clear">
+  <div class="center">
+    << $.each(options, function(value, label) { >>
+      <button title="<<= label >>"><<- value >></button>
+    << }) >>
+  </div>
+</div>

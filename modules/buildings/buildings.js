@@ -1,13 +1,18 @@
 "use strict";
-e.BuildingSetStatus = [];
 
 var Buildings = {};
 
 e.Ready.push(function(done) {
-  $.each(Buildings, function(name, building) {
-    building.name = name;
+  $('head').append('<link href="modules/buildings/style.css" type="text/css" rel="stylesheet">');
+  e.addTemplate('list-buildings', 'modules/buildings/list-buildings.tpl.html');
+  e.addTemplate('manage-buildings', 'modules/buildings/manage-buildings.tpl.html');
+  e.addTemplate('view-building', 'modules/buildings/view-building.tpl.html');
+  e.loadAll(Building.buildings, function() {
+    $.each(Buildings, function(name, building) {
+      building.name = name;
+    });
+    done();
   });
-  done();
 });
 
 e.GameNew.push(function(done) {
@@ -43,9 +48,9 @@ e.GamePostDay.push(function(done) {
 });
 
 e.GameRender.push(function(done) {
-  var div = $(ejs.render($('#buildings_list_template').html(), {
+  var div = e.render('list-buildings', {
     buildings: g.buildings._filter('status', 'Owned')
-  }).trim()).appendTo('#content .second');
+  }).appendTo('#content .second');
   $('.building .right', div).click(function() {
     var dialog = $('<div>');
     function render(element, autorender) {
@@ -59,7 +64,7 @@ e.GameRender.push(function(done) {
         }
       });
 
-      var view = $(ejs.render($('#buildings_view_template').html(), context).trim());
+      var view = e.render('view-buildings', context);
       element.html(view);
       $('.building', view).each(function() {
         var name = $(this).attr('name');
@@ -136,10 +141,10 @@ e.GameRender.push(function(done) {
     render(dialog.dialog(opt));
   });
   $('.building .left, .building .middle').click(function() {
-    var lst = $(ejs.render($('#buildings_manage_template').html(), {
+    var lst = e.render('manage-buildings', {
       buildings: g.buildings._filter('status', 'Owned'),
       action: 'Sell'
-    }).trim());
+    });
     $('button.manage', lst).each(function() {
       var building = g.buildings[$(this).attr('name')];
         $(this).click(function() {
@@ -154,10 +159,10 @@ e.GameRender.push(function(done) {
     });
   });
   $('#buy-building').click(function() {
-    var lst = $(ejs.render($('#buildings_manage_template').html(), {
+    var lst = e.render('manage-buildings', {
       action: 'Buy',
       buildings: g.buildings._filter('status', 'For Sale')
-    }).trim());
+    });
     $('button.manage', lst).each(function() {
       var building = g.buildings[$(this).attr('name')];
       if (building.price() > g.money) {

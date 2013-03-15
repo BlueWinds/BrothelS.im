@@ -1,6 +1,6 @@
 /*global Game */
 Game.config = {
-  version: 0.52,
+  version: 0.521,
   startMoney: 0,
   gameLength: 720,
   payments: [

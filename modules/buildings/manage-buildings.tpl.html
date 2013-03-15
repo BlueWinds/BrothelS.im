@@ -1,0 +1,28 @@
+<div id="manage-buildings">
+  << buildings.forEach(function(building) { >>
+    <div class="ui-helper-clearfix no-cursor building" name="<<- building.name >>">
+      <div class="column pct-30">
+        <img src="<<- building.image() >>" title="<<= building.description() >>">
+      </div>
+      <div class="column pct-40 middle">
+        <h6 class="center"><<- building.name >></h6>
+        <div><label>Reputation:</label><<- building.S("reputation") >></div>
+        <div><label>Clean:</label><<- building.S("clean") >></div>
+        <div><label>Rooms:</label><<- building.S("rooms") >></div>
+        << building.rooms.forEach(function (room) { >>
+          <div class="room <<- room.type >>"><<- room.type.capitalize() >></div>
+        << }) >>
+      </div>
+      <div class="column pct-30 right">
+        <div><label>Price:</label><strong class="money">$<<- building.price(action) >></strong></div>
+        <div>
+          <label>Daily:</label>
+          <div class="daily-delta">
+            <<- e.render('render-delta', building.dailyDelta()) >>
+          </div>
+        </div>
+        <button class="manage" name="<<- building.name >>"><<- action >></button>
+      </div>
+    </div>
+  << }) >>
+</div>

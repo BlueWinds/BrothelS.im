@@ -1,0 +1,31 @@
+<div class="vertical-tabs navigable" id="messages">
+  <ul>
+    << for (var i in groups) { >>
+      <li>
+        <a href="#message-tab-<<- i >>"><<- groups[i] >></a>
+      </li>
+    << } >>
+  </ul>
+  << for (i in groups) { >>
+    << var time = '' >>
+    <div id="message-tab-<<- i >>" class="accordion"><< messages[groups[i]]._sort("weight").forEach( function(message) { >>
+      << var text = message.label >>
+      << if (message.time && message.time != time) {
+          time = message.time;
+          text = time.capitalize() + ' - ' + text;
+      } >>
+      <h3><<- text >></h3>
+      <div class="message ui-helper-clearfix <<- message.text.length > 300 ? 'long' : '' >>">
+        <img src="<<- message.image >>">
+        << if (message.delta && !$.isEmptyObject(message.delta)) { >>
+          <div class="message-delta">
+            <<- e.render('render-delta', message.delta) >>
+          </div>
+        << } >>
+        <div class="message-content">
+          <<- message.text >>
+        </div>
+      </div>
+    << }) >></div>
+  << } >>
+</div>

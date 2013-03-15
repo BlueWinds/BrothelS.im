@@ -22,15 +22,15 @@ Girls.Yuna = {
     base: "base.jpg",
     naked: ["naked1.jpg", "naked2.jpg"],
     tired: ["Tired1.jpg", "Tired2.jpg"],
-    soft: ["soft1.jpg", "soft2.jpg"],
+    soft: ["soft1.jpg", "soft2.jpg", "Soft3.jpg"],
     hard: ["hard1.jpg", "hard2.jpg", "hard3.jpg", "hard4.jpg", "hard5.jpg"],
-    anal: ["anal1.jpg", "fetish2.jpg"],
+    anal: ["anal1.jpg", "Anal2.jpg"],
     fetish: ["fetish1.jpg", "fetish2.jpg", "fetish3.jpg", "fetish4.jpg"],
     group: ["Group1.jpg", "Group2.jpg", "Group3.jpg"],
     study: "Study1.jpg",
     exercise: ["Exercise1.jpg", "Exercise2.jpg"],
     prison: "Prison.jpg",
-    tentacles: ["tentacles1.jpg", "tentacles2.jpg", "tentacles3.jpg"],
+    tentacles: ["Tentacles1.jpg", "tentacles2.jpg", "tentacles3.jpg"],
     cleaning: ["clean1.jpg", "clean2.jpg"],
     refuse: ["refuse1.jpg", "refuse2.jpg"],
     summon: ["summon.jpg", "summon1.jpg"],
@@ -467,12 +467,11 @@ Girls.Yuna.Actions.Talk.results._append([
       group: 'Yuna',
       label: 'Talk',
       image: 'content/girls/Yuna/images/Talk.jpg',
-      text: "You and Yuna sit out on the front steps of the <<- girl.building() ? girl.building().name : 'inn' >>, watching traffic pass and listening to the sounds of the busy city. You ask her if she's enjoying her work here - she agrees that it's fun sometimes. You ask about the customers she's serviced lately - she sighs and rolls her eyes. Not the best behavior. You confiscate her top and pull her bra down around her waist as punishment, right there in public. She gets red, but you refuse to let her fix it for half an hour."
+      text: "You visit Yuna at her room in the <<- girl.building() ? girl.building().name : 'inn' >>. She welcomes you inside and invites you to sit down for some traditional tea that she has prepared. She <<- girl.happiness > 50 ? 'seems to be doing okay, but' : 'doesn\'t seem to be doing so well, and' >> when you ask her about herself, she immediately begins to tell you a about her childhood - it seems she's been thinking about it a lot recently. Her father was a priest and her mother was a prostitute he met while working overseas. Unfortunately, her mother died when she was four and her father when she was seven - she has only vague memories to them. Even so, she feels that both professions are part of who she is. By the time the tea is finished, Yuna seems drained from dredging up old memories, but happy to have finally gotten them off her chest."
     },
     girl: {
       obedience: 2,
-      modesty: -1,
-      happiness: -3,
+      happiness: -2,
       endurance: -5
     }
   },

@@ -50,7 +50,7 @@ Game.load = function(name) {
   if (value) {
     Game.loadFromText(value);
   } else {
-    $('#content').html($('#game_intro_template').html());
+    $('#content').html(e.render('intro'));
     e.invokeAll('Autorender', $('#content'), function() {});
     $('#save').addClass('disabled');
   }
@@ -129,7 +129,7 @@ e.Ready.push(function(done) {
     if ($(this).hasClass('disabled')) {
       return;
     }
-    var form = $(ejs.render($('#game_new_template').html()).trim());
+    var form = e.render('new-game');
     $('#fetishes .checkbox').click(function() {
       $(this).toggleClass('checked');
     });
@@ -159,7 +159,7 @@ e.Ready.push(function(done) {
     if ($(this).hasClass('disabled')) {
       return;
     }
-    var form = $(ejs.render($('#game_save_template').html(), {}).trim());
+    var form = e.render('save-game');
     $('#fetishes .checkbox', form).click(function() {
       var check = !$(this).hasClass('checked');
       var fetish = $(this).attr('name');
@@ -202,9 +202,9 @@ e.Ready.push(function(done) {
     if ($(this).hasClass('disabled')) {
       return;
     }
-    var form = $(ejs.render($('#game_load_template').html(), {
+    var form = e.render('load-game', {
       games: Game.list()
-    }).trim());
+    });
     $('#delete-game', form).click(function(event) {
       event.preventDefault();
       var name = $('#game-name').val();
@@ -243,12 +243,22 @@ e.Ready.push(function(done) {
     }
   });
   $('#hotkeys').click(function() {
-    var dialog = $(ejs.render($('#game_hotkeys_template').html(), {}).trim());
+    var dialog = e.render('hotkeys');
     dialog.dialog({
       title: 'Hotkeys'
     });
   });
-  done();
+  e.addTemplate('hotkeys', 'modules/game/hotkeys.tpl.html');
+  e.addTemplate('load-game', 'modules/game/load-game.tpl.html');
+  e.addTemplate('new-game', 'modules/game/new-game.tpl.html');
+  e.addTemplate('render-delta', 'modules/game/render-delta.tpl.html');
+  e.addTemplate('save-game', 'modules/game/save-game.tpl.html');
+  e.addTemplate('user-input', 'modules/game/user-input.tpl.html');
+  e.addTemplate('intro', 'modules/game/intro.tpl.html',
+    function() {
+      e.addTemplate('view-game', 'modules/game/view-game.tpl.html', done);
+    }
+  );
 });
 
 Game.getUserInput = function(text, image, options, done) {
@@ -257,7 +267,7 @@ Game.getUserInput = function(text, image, options, done) {
     image: image,
     options: options
   };
-  var form = $(ejs.render($('#game_user_input_template').html(), context).trim());
+  var form = e.render('user-input', context);
   $('button', form).click(function(event) {
     event.preventDefault();
     var value = $(this).text();
@@ -286,7 +296,3 @@ e.Autorender.push(function(element, done) {
   });
   done();
 });
-
-Game.renderDelta = function(delta) {
-  return ejs.render($('#render_delta_template').html(), { delta: delta });
-};

@@ -1,0 +1,17 @@
+<div class="vertical-tabs navigable" id="actions">
+  <ul>
+    << for (var i in girls) { >>
+      <li>
+        <a href="#action-tab-<<- i >>"><<- girls[i].name >></a>
+      </li>
+    << } >>
+  </ul>
+  << for (i in girls) { >>
+    <div id="action-tab-<<- i >>" class="accordion girl <<- girl.name == girls[i].name ? 'active' : '' >>" name="<<- girls[i].name >>">
+      <h3>Morning</h3>
+      <div class="ui-helper-clearfix morning <<- time == 'morning' ? 'active' : '' >>"></div>
+      <h3>Evening</h3>
+      <div class="ui-helper-clearfix evening <<- time == 'evening' ? 'active' : '' >>"></div>
+    </div>
+  << } >>
+</div>

@@ -1,4 +1,14 @@
 "use strict";
+Girl.girls = [
+  'content/girls/Holo/base.js',
+  'content/girls/Jill/base.js',
+  'content/girls/Kirino/base.js',
+  'content/girls/Mana/base.js',
+  'content/girls/Saber/base.js',
+  'content/girls/Sakuya/base.js',
+  'content/girls/Sophitia/base.js',
+  'content/girls/Yuna/base.js'
+];
 Girl.config = {
   startMaxGirls: 1,
   pay: {
