@@ -7,12 +7,10 @@ e.Ready.push(function(done) {
   e.addTemplate('list-buildings', 'modules/buildings/list-buildings.tpl.html');
   e.addTemplate('manage-buildings', 'modules/buildings/manage-buildings.tpl.html');
   e.addTemplate('view-building', 'modules/buildings/view-building.tpl.html');
-  e.loadAll(Building.buildings, function() {
-    $.each(Buildings, function(name, building) {
-      building.name = name;
-    });
-    done();
+  $.each(Buildings, function(name, building) {
+    building.name = name;
   });
+  done();
 });
 
 e.GameNew.push(function(done) {

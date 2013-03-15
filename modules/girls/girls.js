@@ -6,12 +6,10 @@ e.Ready.push(function(done) {
   e.addTemplate('list-girls', 'modules/girls/list-girls.tpl.html');
   e.addTemplate('hire-girls', 'modules/girls/hire-girls.tpl.html');
   e.addTemplate('view-girl', 'modules/girls/view-girl.tpl.html');
-  e.loadAll(Girl.girls, function() {
-    $.each(Girls, function(name, girl) {
-      girl.name = name;
-    });
-    done();
+  $.each(Girls, function(name, girl) {
+    girl.name = name;
   });
+  done();
 });
 
 e.GameNew.push(function(done) {

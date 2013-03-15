@@ -33,7 +33,8 @@ var e = {
     next();
   },
   loadAll: function() {
-    var args = $.extend([], arguments)._flatten();
+    var args = $.extend([], arguments);
+    args = args._flatten();
     head.js.apply(this, args);
   },
   addTemplate: function(name, url, done) {
@@ -150,7 +151,7 @@ Object.defineProperty(Object.prototype, "_flatten", {
   value: function() {
     var flat = [];
     for (var key in this) {
-      if (typeof(this[key]) == 'object') {
+      if (typeof(this[key]) == 'object' || typeof(this[key]) == 'array') {
         Array.prototype.push.apply(flat, this[key]);
       } else {
         flat.push(this[key]);

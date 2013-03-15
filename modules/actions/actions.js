@@ -2,7 +2,7 @@
 
 var Actions = {};
 
-e.Ready.splice(0, 0, function(done) {
+e.Ready.push(function(done) {
   $('head').append('<link href="modules/actions/style.css" type="text/css" rel="stylesheet">');
   $(document).keydown(function(event) {
     if (!$('.ui-dialog').length && event.keyCode <= 53 && event.keyCode >= 49) {
@@ -13,18 +13,16 @@ e.Ready.splice(0, 0, function(done) {
   });
   e.addTemplate('list-actions', 'modules/actions/list-actions.tpl.html');
   e.addTemplate('view-actions', 'modules/actions/view-actions.tpl.html');
-  e.loadAll(Action.actions, function() {
-    $.each(Actions, function(_id, action) {
+  $.each(Actions, function(_id, action) {
+    action._id = _id;
+  });
+  $.each(Girls, function(name, girl) {
+    if (!girl.Actions) { return; }
+    $.each(girl.Actions, function(_id, action) {
       action._id = _id;
     });
-    $.each(Girls, function(name, girl) {
-      if (!girl.Actions) { return; }
-      $.each(girl.Actions, function(_id, action) {
-        action._id = _id;
-      });
-    });
-    done();
   });
+  done();
 });
 
 e.GirlNew.push(function(girl) {

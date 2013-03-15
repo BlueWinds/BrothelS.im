@@ -4,32 +4,43 @@
 var Schemas = {};
 
 e.Ready.push(function(done) {
-  var classes = ['Girl', 'Room', 'Building', 'Mission', 'Action', 'Event'];
-  for (var schema in Schemas) {
-    tv4.addSchema(schema, Schemas[schema]);
-  }
-  classes.forEach(function(type) {
-    $.each(window[type + 's'], function(key, obj) {
-      var success = tv4.validate(obj, type);
-      if (!success) {
-        if (tv4.error.subErrors) {
-          tv4.error.subErrors.forEach(function(error) {
-            var subError = $('<div>').appendTo('#error');
-            $('<div>').html(type + ' - ' + (obj.name || obj._id)).appendTo(subError);
-            $('<div>').html(error.message + ':').appendTo(subError);
-            $('<div>').html((obj.name || obj._id) + error.dataPath).appendTo(subError);
-          });
+  e.loadAll([
+    "modules/validator/game.js",
+    "modules/validator/girls.js",
+    "modules/validator/messages.js",
+    "modules/validator/buildings.js",
+    "modules/validator/resolvable.js",
+    "modules/validator/missions.js",
+    "modules/validator/actions.js",
+    "modules/validator/events.js"
+  ], function() {
+    var classes = ['Girl', 'Room', 'Building', 'Mission', 'Action', 'Event'];
+    for (var schema in Schemas) {
+      tv4.addSchema(schema, Schemas[schema]);
+    }
+    classes.forEach(function(type) {
+      $.each(window[type + 's'], function(key, obj) {
+        var success = tv4.validate(obj, type);
+        if (!success) {
+          if (tv4.error.subErrors) {
+            tv4.error.subErrors.forEach(function(error) {
+              var subError = $('<div>').appendTo('#error');
+              $('<div>').html(type + ' - ' + (obj.name || obj._id)).appendTo(subError);
+              $('<div>').html(error.message + ':').appendTo(subError);
+              $('<div>').html((obj.name || obj._id) + error.dataPath).appendTo(subError);
+            });
+          }
+          var error = $('<div>').appendTo('#error');
+          $('<div>').html(type + ' - ' + (obj.name || obj._id)).appendTo(error);
+          $('<div>').html(tv4.error.message + ':').appendTo(error);
+          $('<div>').html((obj.name || obj._id) + tv4.error.dataPath).appendTo(error);
+          console.log(tv4.error);
+          console.log(obj);
         }
-        var error = $('<div>').appendTo('#error');
-        $('<div>').html(type + ' - ' + (obj.name || obj._id)).appendTo(error);
-        $('<div>').html(tv4.error.message + ':').appendTo(error);
-        $('<div>').html((obj.name || obj._id) + tv4.error.dataPath).appendTo(error);
-        console.log(tv4.error);
-        console.log(obj);
-      }
+      });
     });
+    done();
   });
-  done();
 });
 
 e.Autorender.push(function(element, done) {

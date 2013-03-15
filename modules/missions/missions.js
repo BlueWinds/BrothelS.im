@@ -4,18 +4,16 @@ var Missions = {};
 e.Ready.push(function(done) {
   $('head').append('<link href="modules/missions/style.css" type="text/css" rel="stylesheet">');
   e.addTemplate('list-missions', 'modules/missions/list-missions.tpl.html');
-  e.loadAll(Mission.missions, function() {
-    $.each(Missions, function(_id, mission) {
+  $.each(Missions, function(_id, mission) {
+    mission._id = _id;
+  });
+  $.each(Girls, function(name, girl) {
+    if (!girl.Missions) { return; }
+    $.each(girl.Missions, function(_id, mission) {
       mission._id = _id;
     });
-    $.each(Girls, function(name, girl) {
-      if (!girl.Missions) { return; }
-      $.each(girl.Missions, function(_id, mission) {
-        mission._id = _id;
-      });
-    });
-    done();
   });
+  done();
 });
 
 Mission.checkStart = function(day, done) {

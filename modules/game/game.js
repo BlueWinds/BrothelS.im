@@ -11,6 +11,8 @@ $.extend(e, {
   GamePostDay: []
 });
 
+Game.includes = [];
+
 var __ = function(string, type) {
   type = type || 'noun';
   if (Game.strings[type] && Game.strings[type][string]) {
@@ -256,7 +258,9 @@ e.Ready.push(function(done) {
   e.addTemplate('user-input', 'modules/game/user-input.tpl.html');
   e.addTemplate('intro', 'modules/game/intro.tpl.html',
     function() {
-      e.addTemplate('view-game', 'modules/game/view-game.tpl.html', done);
+      e.addTemplate('view-game', 'modules/game/view-game.tpl.html', function() {
+        e.loadAll(Game.includes, done);
+      });
     }
   );
 });

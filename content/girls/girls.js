@@ -1,5 +1,5 @@
 "use strict";
-Girl.girls = [
+Game.includes.push(
   'content/girls/Holo/base.js',
   'content/girls/Jill/base.js',
   'content/girls/Kirino/base.js',
@@ -8,7 +8,8 @@ Girl.girls = [
   'content/girls/Sakuya/base.js',
   'content/girls/Sophitia/base.js',
   'content/girls/Yuna/base.js'
-];
+);
+
 Girl.config = {
   startMaxGirls: 1,
   pay: {
