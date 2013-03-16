@@ -62,7 +62,7 @@ e.GameRender.push(function(done) {
         }
       });
 
-      var view = e.render('view-buildings', context);
+      var view = e.render('view-building', context);
       element.html(view);
       $('.building', view).each(function() {
         var name = $(this).attr('name');
