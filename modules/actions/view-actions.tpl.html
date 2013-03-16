@@ -1,11 +1,13 @@
 <table class="action-list"><tbody>
-  << $.each(actions._sortToObject('group'), function(group, action_group) { >>
+  << var groups = actions._sortToObject('group'); >>
+  << Object.keys(groups).sort().forEach(function(group) { >>
+    << var action_group = groups[group]; >>
     <tr>
       <td class="group">
         <label><<- group >></label>
       </td>
       <td>
-        << action_group.forEach(function(action) { >>
+        << action_group.sort(function(a, b) { return a.label <= b.label ? -1 : 1; }).forEach(function(action) { >>
           <div class="action <<- action.disabled ? 'disabled' : '' >>">
             <label>
               <span title="<<= action.description >>" class="<<- action.option && action.options()._toArray().length > 1 ? 'options' : '' >>"><<- action.label >></span>

@@ -44,6 +44,9 @@ Girls.Holo = {
   Actions: {
     Talk: $.extend(true, {}, Actions.Talk),
     Rest: $.extend(true, {}, Actions.Rest, {
+      variants: [
+        { time: 'morning' }
+      ],
       results: [
         {
           message: {
@@ -81,15 +84,15 @@ Girls.Holo = {
         }
       ]
     }),
-    DebtSlavery: {
-      label: 'Debt Slaver',
+    HoloDebtAbducted: {
+      label: 'Debt Slavery',
       group: 'Jobs',
       description: "Holo is working for the Medio Trading Company to pay off her debt.",
       gerund: 'being missing',
       conditions: {
         girl: {
           min: {
-            specialRules: { debtAbduction: 1 }
+            specialRules: { HoloDebtAbducted: 1 }
           }
         }
       },
@@ -131,8 +134,9 @@ Girls.Holo = {
           message: {
             group: 'Holo',
             image: 'content/events/missing.jpg',
-            label: 'Debt Slavery - Day <<- girl.specialRules.debtAbduction >>',
-            text: "Holo is... somewhere. You assume she's still in the city, since ten days doesn't seem long enough to take her anywhere else and bring her back in time."
+            label: 'Debt Slavery - Day <<- girl.specialRules.debtAbduction - 1 >>',
+            text: "Holo is... somewhere. You assume she's still in the city, since ten days doesn't seem long enough to take her anywhere else and bring her back in time.",
+            weight: -1
           }
         },
         { // Days 3-4
@@ -149,8 +153,9 @@ Girls.Holo = {
           message: {
             group: 'Holo',
             image: 'content/events/missing.jpg',
-            label: 'Debt Slavery - Day <<- girl.specialRules.debtAbduction >>',
-            text: "Holo is... somewhere. You assume she's still in the city, since ten days doesn't seem long enough to take her anywhere else and bring her back in time."
+            label: 'Debt Slavery - Day <<- girl.specialRules.debtAbduction - 1 >>',
+            text: "Holo is... somewhere. You assume she's still in the city, since ten days doesn't seem long enough to take her anywhere else and bring her back in time.",
+            weight: -1
           }
         },
         { // Day 5
@@ -168,8 +173,9 @@ Girls.Holo = {
           message: {
             group: 'Holo',
             image: 'content/events/missing.jpg',
-            label: 'Debt Slavery - Day <<- girl.specialRules.debtAbduction >>',
-            text: "Holo is... somewhere. You assume she's still in the city, since ten days doesn't seem long enough to take her anywhere else and bring her back in time."
+            label: 'Debt Slavery - Day <<- girl.specialRules.debtAbduction - 1 >>',
+            text: "Holo is... somewhere. You assume she's still in the city, since ten days doesn't seem long enough to take her anywhere else and bring her back in time.",
+            weight: -1
           }
         },
         { // Days 6-7
@@ -187,8 +193,9 @@ Girls.Holo = {
           message: {
             group: 'Holo',
             image: 'content/events/missing.jpg',
-            label: 'Debt Slavery - Day <<- girl.specialRules.debtAbduction >>',
-            text: "Holo is... somewhere. You assume she's still in the city, since ten days doesn't seem long enough to take her anywhere else and bring her back in time."
+            label: 'Debt Slavery - Day <<- girl.specialRules.debtAbduction - 1 >>',
+            text: "Holo is... somewhere. You assume she's still in the city, since ten days doesn't seem long enough to take her anywhere else and bring her back in time.",
+            weight: -1
           }
         },
         { // Days 8-9
@@ -206,8 +213,9 @@ Girls.Holo = {
           message: {
             group: 'Holo',
             image: 'content/events/missing.jpg',
-            label: 'Debt Slavery - Day <<- girl.specialRules.debtAbduction >>',
-            text: "Holo is... somewhere. You assume she's still in the city, since ten days doesn't seem long enough to take her anywhere else and bring her back in time."
+            label: 'Debt Slavery - Day <<- girl.specialRules.debtAbduction - 1 >>',
+            text: "Holo is... somewhere. You assume she's still in the city, since ten days doesn't seem long enough to take her anywhere else and bring her back in time.",
+            weight: -1
           }
         },
         { // Day 10
@@ -225,7 +233,7 @@ Girls.Holo = {
             constitution: -6,
             happiness: -10,
             specialRules: {
-              debtAbduction: false,
+              HoloDebtAbducted: false,
               exclusivePlot: false
             }
           },
@@ -252,7 +260,7 @@ Girls.Holo = {
       },
       variants: function(context, done) {
         var results = this.base().results;
-        var text = "You wake in the morning to find an envelope slid under your bedroom door. It contains a note and some fur clipped from Holo's tail. The note spells out clearly that Holo owes a substantial amount of money to Medio Trading Company, and the local branch has been authorized to take her into debt-slavery as part of that land's usury laws - it also contains a writ from the king of this place to collect, by any means necessary. Though she never let you know, it seems as though Holo's situation was much the same as your own when she arrived, and her creditors are far less understanding.<br><br>The note gives two options for paying the $30000 that Holo owes, the first of which invites you to pay her debt outright for her safe return and gives an address. Alternatively, Medio Trading Company intends to whore out Holo themselves, giving the assurance that they'll return Holo in ten days. You can only imagine what kind of conditions Holo would have to work in to make them $3000 daily, and it likely involves some particularly depraved jobs for high-paying clients, with little - if any - time for rest. The risk to Holo's health seems severe.";
+        var text = "You're woken around midnight by the sound of knocking, and find an envelope slid under your bedroom door. It contains a note and some fur clipped from Holo's tail. The note spells out clearly that Holo owes a substantial amount of money to Medio Trading Company, and the local branch has been authorized to take her into debt-slavery as part of that land's usury laws - it also contains a writ from the king of this place to collect, by any means necessary. Though she never let you know, it seems as though Holo's situation was much the same as your own when she arrived, and her creditors are far less understanding.<br><br>The note gives two options for paying the $30000 that Holo owes, the first of which invites you to pay her debt outright for her safe return and gives an address. Alternatively, Medio Trading Company intends to whore out Holo themselves, giving the assurance that they'll return Holo in ten days. You can only imagine what kind of conditions Holo would have to work in to make them $3000 daily, and it likely involves some particularly depraved jobs for high-paying clients, with little - if any - time for rest. The risk to Holo's health seems severe.";
         var options = {
           "Pay Holo's debt": "You don't much like the sound of this. It's a lot of money, but... better dollars than blood and tears.",
           "Don't Pay": "She got herself into this, and ten days isn't that long. She'll be back soon."
@@ -261,6 +269,7 @@ Girls.Holo = {
           if (answer == "Don't Pay") {
             // We have to apply the progress special rule here, so that the girl meets the conditions for the action we want to set.
             context.girl.apply('specialRules', { HoloDebtAbducted: 1 });
+            context.time = 'morning';
             var action = context.girl.action('HoloDebtAbducted', context);
             action.locked = true;
             context.girl.setAction(action);
@@ -295,7 +304,7 @@ Girls.Holo = {
               group: 'Holo',
               label: 'Debt Paid',
               image: 'content/girls/Holo/images/Tired1.jpg',
-              text: "<blockquote>Hmph. Don't just stand there, idiot, apologize! If you're glad I'm okay, you should have come far sooner.</blockquote> You attempt to calm her down a bit with an apology and fact that you came as soon as you could, but she's having none of it, sticking up her nose and turning her back on you, tail swishing agitatedly. Despite the brave face, you suspect that she's actually deeply hurt, but unwilling to be vulnerable enough to talk about it.<blockquote>I'm not talking to you.</blockquote>",
+              text: "<blockquote>Hmph. Don't just stand there, idiot, apologize! If you're glad I'm okay, you should have come far sooner.</blockquote> You attempt to calm her down a bit with an apology and fact that you came as soon as you could (as well as a reminder that you've just paid out a substantial amount of money on her account), but she's having none of it, sticking up her nose and turning her back on you, tail swishing agitatedly. Despite the brave face, you suspect that she's actually deeply hurt by forcing her debt on you, but unwilling to be vulnerable enough to talk about it.<blockquote>I'm not talking to you.</blockquote>",
               weight: -2
             }
           ],
@@ -306,8 +315,7 @@ Girls.Holo = {
             group: 'Holo',
             label: 'Debt Slavery',
             image: 'content/girls/Holo/images/Prison.jpg',
-            text: "Well, she's gone. The note said ten days - you only hope they intend to keep their word, since you have no idea where to start looking - and don't really want to anger the king by going against the personal allowance the company that's abducted Holo has received from him. She'll be back on <strong>Day <<- g.day + 10 >>.</strong>",
-            weight: -2
+            text: "Well, she's gone. The note said ten days - you only hope they intend to keep their word, since you have no idea where to start looking - and don't really want to anger the king by going against the personal allowance the company that's abducted Holo has received from him. She'll be back on <strong>Day <<- g.day + 11 >>.</strong>"
           },
           girl: {
             specialRules: {
@@ -349,23 +357,20 @@ Girls.Holo = {
               label: 'Debt Paid',
               image: 'content/miscImages/GuildHQ.jpg',
               text: "The price for paying Holo's debt is just a little more than that of a solid gold bar, the sort stamped with the King's mark and known as an absolute standard of worth more convenient for large transactions than a whole bag of coins. You take one of these from the Guild Hall, where much of your money is stored as credit (far less likely to get stolen that way, and it's a free service for licensed members). Taking the money to the address listed in the note, you are surprised to find it not far from the Guild Hall. You knock on the door - a peep-hole opens to ask your business, then the door when you explain what you're here for.",
-              delta: false,
-              weight: -2
+              delta: false
             },
             {
               group: 'Holo',
               label: 'Debt Paid',
               image: 'content/girls/Holo/images/Prison.jpg',
               text: "Stepping inside, you're asked to wait a few minutes while someone with the authority to settle such sizable debts is found and brought out. He arrives with Holo in tow, bound and gagged but still expected to hobble along on her own power. She glares at her captor almost constantly while he verifies the money you brought - no wonder she's been gagged. You cut away the rope as soon as she's free again, but warn her with a look to stay quiet until you're outside - then again with strong words, when she opens her mouth, ready to let out some frustration immediately anyway.",
-              weight: -2,
               delta: false
             },
             {
               group: 'Holo',
               label: 'Debt Paid',
               image: 'content/girls/Holo/images/Tired1.jpg',
-              text: "<blockquote>I can name every person who has ever snubbed me, and now I have one more to add to the list. You! Idiot. You should have come to rescue me immediately.</blockquote> You attempt to calm her down a bit with an apology and fact that you did at least come eventually, but she's having none of it, sticking up her nose and turning her back on you, tail swishing agitatedly. Despite the brave face, you suspect that she's actually deeply hurt, but unwilling to be vulnerable enough to talk about it. <blockquote>You have no idea how humiliating that was.</blockquote>",
-              weight: -2
+              text: "<blockquote>I can name every person who has ever snubbed me, and now I have one more to add to the list. You! Idiot. You should have come to rescue me immediately.</blockquote> You attempt to calm her down a bit with an apology and fact that you did at least come eventually, but she's having none of it, sticking up her nose and turning her back on you, tail swishing agitatedly. Despite the brave face, you suspect that she's actually deeply hurt, but unwilling to be vulnerable enough to talk about it. <blockquote>You have no idea how humiliating that was.</blockquote>"
             }
           ],
           mission: 'HoloDepartWait'
