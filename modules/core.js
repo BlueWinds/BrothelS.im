@@ -44,14 +44,8 @@ var e = {
     if (done) { promise.done(done); }
   },
   render: function(name, context, string) {
-    try {
-      var item = e.render.cache[name](context || {});
-      return string ? item : $(item);
-    } catch(err) {
-      console.log(name);
-      console.log(context);
-      throw err;
-    }
+    var item = e.render.cache[name](context || {});
+    return string ? item : $(item);
   },
   Ready: []
 };
