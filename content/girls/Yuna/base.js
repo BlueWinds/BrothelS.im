@@ -19,21 +19,21 @@ Girls.Yuna = {
   fetishExperience: 5,
   images: {
     basePath: "content/girls/Yuna/images",
-    base: "base.jpg",
-    naked: ["naked1.jpg", "naked2.jpg"],
-    tired: ["Tired1.jpg", "Tired2.jpg"],
-    soft: ["soft1.jpg", "soft2.jpg", "Soft3.jpg"],
-    hard: ["hard1.jpg", "hard2.jpg", "hard3.jpg", "hard4.jpg", "hard5.jpg"],
-    anal: ["anal1.jpg", "Anal2.jpg"],
-    fetish: ["fetish1.jpg", "fetish2.jpg", "fetish3.jpg", "fetish4.jpg"],
-    group: ["Group1.jpg", "Group2.jpg", "Group3.jpg"],
+    base: "Base.jpg",
+    naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg"],
+    tired: ["Tired1.jpg", "Tired2.jpg", "Tired3.jpg"],
+    soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg"],
+    hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg", "Hard5.jpg", "Hard6.jpg", "Hard7.jpg"],
+    anal: ["Anal1.jpg", "Anal2.jpg"],
+    fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4.jpg"],
+    group: ["Group1.jpg", "Group2.jpg", "Group3.jpg", "Group4.jpg"],
     study: "Study1.jpg",
-    exercise: ["Exercise1.jpg", "Exercise2.jpg"],
+    exercise: ["Exercise1.jpg", "Exercise2.jpg", "Exercise3.jpg"],
     prison: "Prison.jpg",
-    tentacles: ["Tentacles1.jpg", "tentacles2.jpg", "tentacles3.jpg"],
-    cleaning: ["clean1.jpg", "clean2.jpg"],
-    refuse: ["refuse1.jpg", "refuse2.jpg"],
-    summon: ["summon.jpg", "summon1.jpg"],
+    tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg"],
+    cleaning: ["Clean1.jpg", "Clean2.jpg"],
+    refuse: ["Refuse1.jpg", "Refuse2.jpg"],
+    summon: ["Summon1.jpg", "Summon2.jpg", "Summon3.jpg"],
     pregnant: "Tired2.jpg"
   },
   Actions: {
@@ -228,7 +228,7 @@ Girls.Yuna = {
       display: {
         label: 'Position Vacant: High Priestess',
         group: 'Yuna',
-        image: 'content/girls/Yuna/images/clean1.jpg',
+        image: 'content/girls/Yuna/images/Clean1.jpg',
         text: "<blockquote>The High Priest is an upright man, but do you think I should marry him? I don't know...</blockquote> Yuna is on the list of candidates to meet the recently widowed High Priest Detic - he'll be holding a pre-dawn gathering on <strong>Day <<- mission.end.max.day >></strong>.<br><br><em>She'll need at least <<- __('modesty') >> 55 and <<- __('charisma') >> 65 to have a chance at catching his notice.</em>",
         weight: -1
       },
@@ -398,7 +398,7 @@ Girls.Yuna = {
         message: {
           label: "A Visit from Yuna",
           group: 'Yuna',
-          image: 'content/girls/Yuna/images/summon.jpg',
+          image: 'content/girls/Yuna/images/Base.jpg',
           text: "Just after sunrise, you hear soft knocking at your front door. Yuna has come to visit you, though she looks around furtively as she enters; it's probably not very becoming of a High Priestess to consort with brothel owner so soon after being married. The two of you talk briefly, and she tells you how happy she is in her new role. Her husband is kind, she's in a position to help people, and she is learning a lot from the best tutors about the workings of her new homeland.<blockquote>I can never thank you enough for supporting me when I was in trouble. Please, accept this money as my thanks. And know that I'll never forget my times here, or my... training.</blockquote>",
           weight: -1
         },
@@ -466,7 +466,7 @@ Girls.Yuna.Actions.Talk.results._append([
     message: {
       group: 'Yuna',
       label: 'Talk',
-      image: 'content/girls/Yuna/images/Talk.jpg',
+      image: 'content/girls/Yuna/images/Clean2.jpg',
       text: "You visit Yuna at her room in the <<- girl.building() ? girl.building().name : 'inn' >>. She welcomes you inside and invites you to sit down for some traditional tea that she has prepared. She <<- girl.happiness > 50 ? 'seems to be doing okay, but' : 'doesn\'t seem to be doing so well, and' >> when you ask her about herself, she immediately begins to tell you a about her childhood - it seems she's been thinking about it a lot recently. Her father was a priest and her mother was a prostitute he met while working overseas. Unfortunately, her mother died when she was four and her father when she was seven - she has only vague memories to them. Even so, she feels that both professions are part of who she is. By the time the tea is finished, Yuna seems drained from dredging up old memories, but happy to have finally gotten them off her chest."
     },
     girl: {
@@ -479,7 +479,7 @@ Girls.Yuna.Actions.Talk.results._append([
     message: {
       group: 'Yuna',
       label: 'Talk',
-      image: 'content/girls/Yuna/images/base.jpg',
+      image: 'content/girls/Yuna/images/Base.jpg',
       text: "You sit Yuna down and spend the <<- time >> trying to learn more about her. She's cagey about exactly what happened to her homeland, but says she escaped to this one with help from a friend of her late father. She explains that she was separated from her first love, and she's trying to meet as many men as possible in order to find him again. As to what she would do if she found him, perhaps not even she has decided. "
     },
     girl: {

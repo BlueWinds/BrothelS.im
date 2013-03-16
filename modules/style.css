@@ -277,6 +277,9 @@ li:focus {
 #new-game-form label, #save-game-form label {
   display: block;
 }
+#import-game-file {
+  display: none;
+}
 
 #top-right {
   text-align: center;

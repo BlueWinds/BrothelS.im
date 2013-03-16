@@ -179,15 +179,8 @@ e.Ready.push(function(done) {
     if (g.name) {
       $('#game-name', form).val(g.name);
     }
-    $('#export-game', form).click(function(event) {
-      var textarea = $('<textarea>').text(JSON.stringify(g, null, 2)).css('width', '15em').css('height', '10em');
-      $('<div>').append(textarea).dialog({
-        title: 'Save the text below'
-      }).css('overflow', 'auto');
-      textarea.select();
-      event.preventDefault();
-      return false;
-    });
+    var blob = new Blob([JSON.stringify(g, null, 2)], { type: 'text/json' });
+    $('#export-game', form).attr('href', URL.createObjectURL(blob));
     $('#save-game', form).click(function(event) {
       event.preventDefault();
       Game.save($('#game-name', form).val());
@@ -220,12 +213,16 @@ e.Ready.push(function(done) {
     });
     $('#import-game', form).click(function(event) {
       event.preventDefault();
-      var game = $('textarea', form).val();
-      if (game) {
-        Game.loadFromText(game);
+      $('#import-game-file').click();
+      return false;
+    });
+    $('#import-game-file', form).change(function() {
+      var reader = new FileReader();
+      reader.onload = function() {
+        Game.loadFromText(reader.result);
         form.dialog('close');
       }
-      return false;
+      reader.readAsText(this.files[0]);
     });
     $('#load-game', form).click(function(event) {
       event.preventDefault();
