@@ -121,7 +121,7 @@ Actions.Whore = {
     // The message for each building.
     message: '<<= customers.length >> customers visited the <<= building.name >> in the <<= time >>. <strong><<- girls._accumulate("name")._toString() >></strong> worked there, servicing <<= count >> of them.',
     // Reuse the uncooperative message from Streetwalking.
-    uncooperative: Actions.Streetwalk.uncooperative,
+    uncooperative: Actions.Streetwalk.special.uncooperative,
     // Message for each customer serviced.
     customerMessage: '<<= customer.name + " the " + customer.profession >> wanted <<- __(customer.sex[0]) >> with a girl who was <<- customer.wants.slice(0, 2)._toString("adj") >>. He chose <<= girl.name >>, and they agreed on <strong><<- __(sex) >></strong>.<br><br><<- result >>',
     sexResults: {

@@ -221,7 +221,7 @@ e.Ready.push(function(done) {
       reader.onload = function() {
         Game.loadFromText(reader.result);
         form.dialog('close');
-      }
+      };
       reader.readAsText(this.files[0]);
     });
     $('#load-game', form).click(function(event) {

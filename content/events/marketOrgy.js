@@ -70,7 +70,7 @@ Events.marketOrgy = {
     },
     { // nothing
       message: {
-        group: 'content/events/gloryHole.jpg',
+        group: '<<- girl.name >>',
         image: '<<- time == "morning" ? "content/miscImages/marketMorning.jpg" : "content/miscImages/marketEvening.jpg" >>',
         label: 'Missed Opportunity',
         text: "While exploring the market with you, <<- girl.name >> takes a moment to use a public restroom. It seems to take a while - your mouth is thoroughly watering by the time she returns from the kabob stall you were waiting next to. She explains that there was quite a line at the restroom, both men and women's side - one of the stalls on each side was completely \"occupied.\" You press her for a slightly less vague answer, and it finally comes out that there was a woman collecting money for use of a gloryhole, and she had quite a line."

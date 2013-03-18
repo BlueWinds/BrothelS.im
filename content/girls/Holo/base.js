@@ -427,6 +427,7 @@ Girls.Holo = {
           "Pay Holo's debt": "You don't much like the sound of this. It's a lot of money, but... better dollars than blood and tears.",
           "Don't Pay": "She got herself into this, and five more days isn't that long. She'll be back soon."
         };
+        if (g.money < 30000) { delete options["Pay Holo's debt"]; }
         Game.getUserInput(text, 'content/girls/Holo/images/Refuse1.jpg', options, function(answer) {
           if (answer == "Pay Holo's debt") {
             // We have to apply the progress special rule here, so that the girl meets the conditions for the action we want to set.
@@ -487,7 +488,7 @@ Girls.Holo = {
         group: 'Holo',
         label: 'Preparing to Depart',
         image: 'content/girls/Holo/Depart.jpg',
-        text: "Though she tries to hide it, you can't help but notice that the amount of time Holo spends staring at the sky has increased noticeably in the past month. More than that though, you know she's been saving most of her wages, and her room has started to look sparser... as though she were getting rid of things she won't be able to take with her.<br><br><em>If you want Holo to stick around, make sure she has <<- _('happiness') >> 75 or higher by <strong>Day <<- mission.end.max.day >></strong>.</em>",
+        text: "Though she tries to hide it, you can't help but notice that the amount of time Holo spends staring at the sky has increased noticeably in the past month. More than that though, you know she's been saving most of her wages, and her room has started to look sparser... as though she were getting rid of things she won't be able to take with her.<br><br><em>If you want Holo to stick around, make sure she has <<- __('happiness') >> 75 or higher by <strong>Day <<- mission.end.max.day >></strong>.</em>",
         weight: -1
       },
       variants: function(context, done) {

@@ -174,14 +174,14 @@ Actions.Expose = {
     } else if (context.girl.mondesty > 15) {
       i = Math.choice([2, 3]);
     } else if (context.girl.modesty > 3 && Math.random() > 0.5) {
-      i = Math.random() > context.girl.endurance / 100 ? 5 : 4;
+      i = Math.random() > context.girl.endurance / 100 && g.missionsDone.libidoAndExperience ? 5 : 4;
     } else {
       i = context.time == 'morning' ? 6 : 7;
     }
     done(this.base().results[i]);
   },
   results: [
-    {
+    { // 0
       message: {
         group: '<<- girl.name >>',
         label: 'Expose',
@@ -195,7 +195,7 @@ Actions.Expose = {
         obedience: 0.2
       }
     },
-    {
+    { // 1
       message: {
         group: '<<- girl.name >>',
         label: 'Expose',
@@ -209,7 +209,7 @@ Actions.Expose = {
         softLibido: 0.1
       }
     },
-    {
+    { // 2
       message: {
         group: '<<- girl.name >>',
         label: 'Expose',
@@ -223,7 +223,7 @@ Actions.Expose = {
         obedience: -0.5
       }
     },
-    {
+    { // 3
       message: {
         group: '<<- girl.name >>',
         label: 'Expose',
@@ -238,7 +238,7 @@ Actions.Expose = {
         }
       }
     },
-    {
+    { // 4
       message: {
         group: '<<- girl.name >>',
         label: 'Expose',
@@ -253,7 +253,7 @@ Actions.Expose = {
         obedience: -2
       }
     },
-    {
+    { // 5
       message: [
         {
           group: '<<- girl.name >>',
@@ -278,7 +278,7 @@ Actions.Expose = {
       },
       money: -150
     },
-    {
+    { // 6
       message: {
         group: '<<- girl.name >>',
         label: 'Expose',
@@ -291,7 +291,7 @@ Actions.Expose = {
         happiness: 4
       }
     },
-    {
+    { // 7
       message: {
         group: '<<- girl.name >>',
         label: 'Expose',

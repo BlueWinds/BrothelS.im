@@ -25,6 +25,7 @@ module.exports = function(grunt) {
         trailing: true
       },
       globals: {
+        URL: true,
         head: true,
         ejs: true,
         tv4: true,
