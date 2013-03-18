@@ -38,7 +38,10 @@ Girls.Holo = {
   },
   specialRules: {
     dependentStats: {
-      obedience: { obedience: -0.5 }
+      obedience: { obedience: -0.5 },
+      softLibido: { softLibido: 0.5 },
+      hardLibido: { hardLibido: 0.5 },
+      analLibido: { analLibido: 0.5 }
     }
   },
   Actions: {
@@ -233,7 +236,6 @@ Girls.Holo = {
             constitution: -6,
             happiness: -10,
             specialRules: {
-              HoloDebtAbducted: false,
               exclusivePlot: false
             }
           },
@@ -267,7 +269,7 @@ Girls.Holo = {
             group: 'Holo',
             label: 'Unfortunate Incident',
             image: 'content/girls/Holo/Nora1.jpg',
-            text: 'Holo returns home in the <<- time >> escorted by a member of the city guard. It seems that she was the center of an... incident in the market, involving a flock of sheep and a very annoyed shepherdess who had to beat off with a stick - literally. After you promise to take care of the issue, he leaves her in your care.<br><br>Holo alternates between chastized and defiant - defiant to your face, but sighing with drooping ears when she thinks you aren\'t looking.'
+            text: 'Holo returns home in the <<- time >> escorted by a member of the city guard. It seems that she was the center of an... incident in the market, involving a flock of sheep and a very annoyed shepherdess who had to beat her off with a stick - literally. After you promise to take care of the issue, he leaves her in your care.<br><br>Holo alternates between chastized and defiant - defiant to your face, but sighing with drooping ears when she thinks you aren\'t looking.'
           },
           girl: {
             obedience: 2.5,
@@ -280,7 +282,7 @@ Girls.Holo = {
             group: 'Holo',
             label: 'Another Incident...',
             image: 'content/girls/Holo/images/Refuse2.jpg',
-            text: "Much to your annoyance, Holo has <em>again</em> returned home from the market accompanied by one of the guards - this time (being the third incident of the sort), you have to pay a fine to get her back. With an exhasperated sigh, you ask her what exactly her problem is with sheep - and she'd better explain, or you'll take the fine out of her paycheck.<blockquote>I am Holo the Wise Wolf. It is therefor only natural that I should hate shepherds and attempt to take my rightful dues. I nearly had one this time, too.</blockquote>You roll your eyes and suggest that if she <em>absolutely must</em> have one of the sheep, she could do something crazy like pay for one, instead of howling and charging at the flock. She shakes her head - clearly you don't understand at all."
+            text: "Much to your annoyance, Holo has <em>again</em> returned home from the market accompanied by one of the guards - this time (being the third incident of the sort), you have to pay a fine to get her back. With an exasperated sigh, you ask her what exactly her problem is with sheep - and she'd better explain, or you'll take the fine out of her paycheck.<blockquote>I am Holo the Wise Wolf. It is therefor only natural that I should hate shepherds and attempt to take my rightful dues. I nearly had one this time, too.</blockquote>You roll your eyes and suggest that if she <em>absolutely must</em> have one of the sheep, she could do something crazy like pay for one, instead of howling and charging at the flock. She shakes her head - clearly you don't understand at all."
           },
           money: -75,
           girl: {
@@ -315,15 +317,16 @@ Girls.Holo = {
               group: 'Holo',
               label: 'Afternoon visit',
               image: 'content/girls/Holo/Nora2.jpg',
-              text: "She's hesitant to enter an establishment such as yours, but you wave aside her fears - nothing happens in here that one doesn't ask for, and besides, it would be rude to refuse tea. You and Nora get to know eachother while Holo gets the tea ready. Time flies in her pleasant company, and it's only after half an hour that you wonder where Holo has gotten off to. You check the kitchen - she's nowhere to be found. On a hunch, you ask Nora where her herd is, and jumping to her feet, she leads you running out of the house."
+              text: "She's hesitant to enter an establishment such as yours, but you wave aside her fears - nothing happens in here that one doesn't ask for, and besides, it would be rude to refuse tea. You and Nora get to know each other while Holo gets the tea ready. Time flies in her pleasant company, and it's only after half an hour that you wonder where Holo has gotten off to. You check the kitchen - she's nowhere to be found. On a hunch, you ask Nora where her herd is, and jumping to her feet, she leads you running out of the house."
             },
             {
               group: 'Holo',
               label: 'Afternoon visit',
               image: 'content/girls/Holo/Smirk.jpg',
-              text: "The two of you arrive breathless at the market. As you suspected, Holo is sitting on the edge of the fence while the herd of sheep are pressed against the far wall of their small enclosure. She grins at your approach, picking her teeth. The shepherdess glares at your wolf, who hops off the fence unconcerned and approaches the two of you with a fanged grin.<blockquote>No mere human is a match for Holo the Wise Wolf.</blockquote>Nora does a quick count - nothing missing. Fortunately, Holo seems to consider having outsmarted her good enough for a victory, and simply bought some mutton to enjoy. You apologize profusely as Holo saunters off - really, you had no idea what she was intending when she brought Nora over. You are easily forgiven - and hopefully proving that she <em>could</em> have had the whole flock was enough to keep Holo out of further trouble."
+              text: "The two of you arrive breathless at the market. As you suspected, Holo is sitting on the edge of the fence while the herd of sheep are pressed against the far wall of their small enclosure. She grins at your approach, picking her teeth. The shepherdess glares at your wolf-girl, who hops off the fence unconcerned and approaches the two of you with a fanged grin.<blockquote>No mere human is a match for Holo the Wise Wolf.</blockquote>Nora does a quick count - nothing missing. Fortunately, Holo seems to consider having outsmarted her good enough for a victory, and simply bought some mutton to enjoy. You apologize profusely as Holo saunters off - really, you had no idea what she was intending when she brought Nora over. You are easily forgiven - and hopefully proving that she <em>could</em> have had the whole flock was enough to keep Holo out of further trouble."
             }
-          ]
+          ],
+          girl: { happiness: 10 }
         }
       ]
     }
@@ -332,10 +335,12 @@ Girls.Holo = {
     HoloDebt: {
       conditions: {
         min: { girls: 3, money: 40000 },
-        missions: { HoloNoteDelay: -3 },
         girl: {
           max: {
-            specialRules: { exclusivePlot: 0 }
+            specialRules: {
+              exclusivePlot: 0,
+              HoloDebtAbducted: 0
+            }
           }
         }
       },

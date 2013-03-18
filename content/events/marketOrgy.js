@@ -28,7 +28,7 @@ Events.marketOrgy = {
           group: '<<- girl.name >>',
           image: '<<- girl.image("soft") >>',
           label: 'Marketplace Gloryhole',
-          text: "While exploring the market with you, <<- girl.name >> takes a moment to use a public restroom. It seems to take a while - you've browsed through a set of imported rugs <em>quite</em> thoroughly by the time she returns. A faint wiff of semen tells you that the bathroom isn't all she's been doing. There was a gloryhole, she admits sheepishly when you ask her about it, and well, she couldn't resist the hard cock thrust her way.<br><br>Since she's obviously horny, and you're never one to miss a chance to make a quick buck, you suggest that she might enjoy spending some more time there while you arrange for a certain bathroom stall to become significantly more expensive and busy than its neighbors. <<- girl.name >> agrees - it sounds like fun.",
+          text: "While exploring the market with you, <<- girl.name >> takes a moment to use a public restroom. It seems to take a while - you've browsed through a set of imported rugs <em>quite</em> thoroughly by the time she returns. A faint whiff of semen tells you that the bathroom isn't all she's been doing. There was a gloryhole, she admits sheepishly when you ask her about it, and well, she couldn't resist the hard cock thrust her way.<br><br>Since she's obviously horny, and you're never one to miss a chance to make a quick buck, you suggest that she might enjoy spending some more time there while you arrange for a certain bathroom stall to become significantly more expensive and busy than its neighbors. <<- girl.name >> agrees - it sounds like fun.",
           delta: false
         },
         {
