@@ -236,7 +236,8 @@ Girls.Holo = {
             constitution: -6,
             happiness: -10,
             specialRules: {
-              exclusivePlot: false
+              exclusivePlot: false,
+              HoloDebtAbducted: false
             }
           },
           lock: false,
@@ -342,7 +343,8 @@ Girls.Holo = {
               HoloDebtAbducted: 0
             }
           }
-        }
+        },
+        missions: { HoloDept: -3 }
       },
       end: {
         min: { day: '+9' },
