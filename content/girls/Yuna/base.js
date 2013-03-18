@@ -20,7 +20,7 @@ Girls.Yuna = {
   images: {
     basePath: "content/girls/Yuna/images",
     base: "Base.jpg",
-    naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg"],
+    naked: ["Naked1.jpg", "Naked2.jpg"],
     tired: ["Tired1.jpg", "Tired2.jpg", "Tired3.jpg"],
     soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg"],
     hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg", "Hard5.jpg", "Hard6.jpg", "Hard7.jpg"],
