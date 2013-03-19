@@ -344,7 +344,7 @@ Girls.Holo = {
             }
           }
         },
-        missions: { HoloDept: -3 }
+        missions: { HoloDebt: -3 }
       },
       end: {
         min: { day: '+9' },
