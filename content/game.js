@@ -113,8 +113,8 @@ Game.hotkeys = {
     label: 'R',
     description: 'Room Management dialog'
   },
-  61: {
-    label: '=/+',
+  190: {
+    label: '.',
     description: 'Increase image sizes',
     allowDialogs: true,
     callback: function() {
@@ -123,8 +123,8 @@ Game.hotkeys = {
       e.invokeAll('Autorender', $('head'));
     }
   },
-  173: {
-    label: '-',
+  188: {
+    label: ',',
     description: 'Decrease image sizes',
     allowDialogs: true,
     callback: function() {
