@@ -235,8 +235,13 @@ e.Ready.push(function(done) {
     });
   });
   $(document).keydown(function(event) {
-    if (!$('.ui-dialog').length && Game.hotkeys[event.keyCode]) {
-      $(Game.hotkeys[event.keyCode].selector).click();
+    var item = Game.hotkeys[event.keyCode];
+    if (item && (!$('.ui-dialog').length || item.allowDialogs)) {
+      if (item.callback) {
+        item.callback(event);
+      } else {
+        $(item.selector).click();
+      }
       event.preventDefault();
       return false;
     }

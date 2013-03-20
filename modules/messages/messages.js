@@ -20,6 +20,20 @@ Message.send = function(obj, context) {
   return message;
 };
 
+e.Autorender.push(function(element, done) {
+  $('#image-size').remove();
+  var text = '.message img, .mission img { max-width: ' + Game.config.imageSize + 'em; }';
+  if (Game.config.imageSize === 0) {
+    text += 'img { visibility: hidden; }';
+    $('head title').remove();
+  } else if (!$('head title').length) {
+    $('<title>BrothelS.im</title>').prependTo('head');
+  }
+  $('<style type="text/css">').attr('id', 'image-size')
+  .appendTo('head').html(text);
+  done();
+});
+
 e.GameNew.push(function(done) {
   g.messages = [];
   setTimeout(function() {

@@ -1,4 +1,5 @@
 /*global Game */
+'use strict';
 Game.config = {
   version: 0.521,
   startMoney: 0,
@@ -9,7 +10,8 @@ Game.config = {
     24000, 27000, 30000, 34000, 38000, 42000,
     46000, 50000, 55000, 60000, 65000, 75000
   ],
-  moneyHistoryLength: 30
+  moneyHistoryLength: 30,
+  imageSize: localStorage.getItem('imageSize') !== null ? parseInt(localStorage.getItem('imageSize'), 10) : 20
 };
 
 Game.tooltips = {};
@@ -110,5 +112,25 @@ Game.hotkeys = {
     selector: '#buildings .right:first',
     label: 'R',
     description: 'Room Management dialog'
+  },
+  61: {
+    label: '=/+',
+    description: 'Increase image sizes',
+    allowDialogs: true,
+    callback: function() {
+      Game.config.imageSize = Math.min(40, Game.config.imageSize + 1);
+      localStorage.setItem('imageSize', Game.config.imageSize);
+      e.invokeAll('Autorender', $('head'));
+    }
+  },
+  173: {
+    label: '-',
+    description: 'Decrease image sizes',
+    allowDialogs: true,
+    callback: function() {
+      Game.config.imageSize = Math.max(0, Game.config.imageSize - 1);
+      localStorage.setItem('imageSize', Game.config.imageSize);
+      e.invokeAll('Autorender', $('head'));
+    }
   }
 };
