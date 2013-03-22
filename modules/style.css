@@ -360,3 +360,11 @@ textarea {
   font-weight: 700;
   margin: 10px;
 }
+
+li[keycode] {
+  cursor: pointer;
+  text-decoration: underline;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}

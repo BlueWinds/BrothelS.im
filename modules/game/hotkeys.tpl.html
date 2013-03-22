@@ -1,7 +1,7 @@
 <div>
   <p>These shortcuts are available from the main game view.</p>
   <ul><< $.each(Game.hotkeys, function(key, desc) { if (desc.label) { >>
-    <li>
+    <li <<- desc.allowDialogs ? 'keyCode="' + key + '"' : '' >>>
       <label><strong><<- desc.label >></strong></label> - <<- desc.description >>
     </li>
   << } }) >></ul>

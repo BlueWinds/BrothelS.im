@@ -93,6 +93,10 @@ span.adj {
   margin: 1em auto;
 }
 
+.girl img {
+  visibility: inherit;
+}
+
 #hire-girls .girl {
   width: 30em;
 }

@@ -6,6 +6,10 @@
   border: none;
 }
 
+.action-list img {
+  visibility: inherit;
+}
+
 .group > label {
   font-weight: 700;
   margin: 0;

@@ -17,13 +17,13 @@ var e = {
   // (items, [arg1, ...])
   runSeries: function(items) {
     var args = Array.prototype.slice.call(arguments, 1);
-    var done = typeof(args._last()) == 'function' ? args.pop() : function() {};
+    var done = typeof(args._last()) == 'function' ? args.pop() : $.noop;
     if (!items || !items.length) { setTimeout(done, 0); return; }
     var $this = this;
     function next() {
       i++;
       if (i == items.length) {
-        if (typeof(done) == 'function') { setTimeout(done, 0); }
+        setTimeout(done, 0);
         return;
       }
       items[i].apply($this, args);

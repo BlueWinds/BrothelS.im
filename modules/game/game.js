@@ -251,6 +251,17 @@ e.Ready.push(function(done) {
     dialog.dialog({
       title: 'Hotkeys'
     });
+    $('li', dialog).click(function(event) {
+      var item = Game.hotkeys[$(this).attr('keyCode')];
+      console.log(item);
+      if (item && item.allowDialogs) {
+        if (item.callback) {
+          item.callback(event);
+        } else {
+          $(item.selector).click();
+        }
+      }
+    });
   });
   e.addTemplate('hotkeys', 'modules/game/hotkeys.tpl.html');
   e.addTemplate('load-game', 'modules/game/load-game.tpl.html');
