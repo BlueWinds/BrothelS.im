@@ -134,7 +134,8 @@ $(function() {
   $.ui.dialog.prototype.options.width = 'auto';
   $.ui.dialog.prototype.options.resizable = false;
   $.ui.dialog.prototype.options.draggable = false;
-  $.ui.tabs.prototype._tabKeydown = function() {};
+  $.ui.tabs.prototype._tabKeydown = $.noop;
+  $.ui.accordion.prototype.options.animate = 200;
   $.ui.sortable.prototype.options.distance = 20;
   $(document).on('dialogclose', function(event) {
     $(event.target).dialog('destroy').remove();
