@@ -370,7 +370,7 @@ Actions.OD = {
         group: '<<- girl.name >>',
         label: 'Orgasm Denial',
         image: '<<- girl.image("anal") >>',
-        text: 'Stripping off all of <<- girl.name >>\'s clothes, you had her lay across the bed face down, feet kicked up in the air while you settled in behind her. Playing with her pussy for a minute to get her wet, you finally produced a well lubricated dildo and pressed it against her ass, lightly then with increasing pressure until it finally slid in with a pop. You slid off the bed to bring your dead level with her pussy, licking and sucking on her love button while you continued to play with the dildo with one hand, pressing it further in, rotating it around and generally bringing her to the very edge of orgasm before backing off, only to begin again in a few minutes.'
+        text: 'Stripping off all of <<- girl.name >>\'s clothes, you had her lay across the bed face down, feet kicked up in the air while you settled in behind her. Playing with her pussy for a minute to get her wet, you finally produced a well lubricated dildo and pressed it against her ass, lightly then with increasing pressure until it finally slid in with a pop. You slid off the bed to bring your face dead level with her pussy, licking and sucking on her love button while you continued to play with the dildo with one hand, pressing it further in, rotating it around and generally bringing her to the very edge of orgasm before backing off, only to begin again in a few minutes.'
       },
       girl: {
         endurance: -7,
@@ -422,7 +422,7 @@ Actions.Lockdown = {
         group: '<<- girl.name >>',
         label: 'Lockdown',
         image: '<<- girl.image("fetish") >>',
-        text: "<<- girl.name >> spent the day bound, gagged and naked in the dungeon, hands tied above her head and wishing something interesting would happen. It was cold underground, and by the time you check back in to release her, she's very, very ready for a long, hot bath."
+        text: "<<- girl.name >> spent the day bound, gagged and naked in the dungeon, hands tied above her head and wishing something interesting would happen. It was cold underground, and by the time you check back in to release her, she\'s very, very ready for a long, hot bath."
       },
       girl: {
         endurance: -12,
@@ -437,7 +437,7 @@ Actions.Lockdown = {
         group: '<<- girl.name >>',
         label: 'Lockdown',
         image: '<<- girl.image("fetish") >>',
-        text: "<<- girl.name >> spent the day in the dungeon's stockade without clothes. You checked in occasionally to spank her. She doesn't cry, though you can see her eyes watering once, and by the time you release her her bottom is bright red. She may sit gingerly tomorrow."
+        text: "<<- girl.name >> spent the day in the dungeon\'s stockade without clothes. You checked in occasionally to spank her. She doesn\'t cry, though you can see her eyes watering once, and by the time you release her her bottom is bright red. She may sit gingerly tomorrow."
       },
       girl: {
         endurance: -12,
