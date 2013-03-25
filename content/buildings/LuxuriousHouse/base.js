@@ -31,10 +31,10 @@ Buildings['Luxurious House'] = {
         endurance: 4
       }
     },
-    clean: 'The fine apointments make living here a pleasure - though expensive to keep in style, this must be one of those "finer things" the rich are always going on about.',
+    clean: 'The fine appointments make living here a pleasure - though expensive to keep in style, this must be one of those "finer things" the rich are always going on about.',
     dirty: 'Even with finger-smudges on the glass and a dent in one wall from a particularly rowdy lovemaking session, this house is still nicer than anywhere you\'ve been before. It\'s a wonder the last owner parted with it so easily.'
   },
-  description: "<p>Though quite small, this well appointed and elegant building is available at a steep discount from what it would normally be worth. For sale by one Kim Xun, he has no comment on who the previous owner might have been, and the sale of the building seems more of a bothersome chore for him than a chance to make money.</p>"
+  description: "<p>Though quite small, this well-appointed and elegant building is available at a steep discount from what it would normally be worth. For sale by one Kim Xun, he has no comment on who the previous owner might have been, and the sale of the building seems more of a bothersome chore for him than a chance to make money.</p>"
 };
 
 Missions.noRapeLuxuryHouse = {
