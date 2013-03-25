@@ -2,7 +2,7 @@
 Actions.Streetwalk =  {
   label: 'Streetwalk',
   group: 'Jobs',
-  description: '<<= girl.name >> will wander the streets looking for customers to service. This tends to be quite tiring, and not as profitable as other options, but it won\'t count against the customers or reputation of your buildings.',
+  description: '<<= girl.name >> will wander the streets looking for customers to service. This tends to be quite tiring, and not as profitable as other options, but it won\'t count against the customers or the reputation of your buildings.',
   conditions: {
     missions: {
       firstMoney: 3
@@ -141,7 +141,7 @@ Actions.Whore = {
         'They moved together though a veritable Kama Sutra of sex positions, some of which she\'d never heard of before, much less practiced. Her next lay is going to be in for a treat.'
       ],
       anal: [
-        'Even with plenty of toy use and lubrication, it still took quite some time to fit his massive dick into her tight ass hole. He was gentle though, and she enjoyed herself despite the pain.',
+        'Even with plenty of toy use and lubrication, it still took quite some time to fit his massive dick into her tight asshole. He was gentle though, and she enjoyed herself despite the pain.',
         'Though he was in a hurry and wanted to get started right away, she insisted on taking it slowly, moving from kissing to oral before finally letting him take her ass doggy style.',
         'He didn\'t actually want to fuck her ass, just plug it was a huge toy while they had sex the old fashioned way.',
         'He had her sit on the edge of the bed and lay back while he teased her pussy with his tongue, slowly working first one finger then two into her ass. By the time he had three in, she was cooing with delight and welcomed the replacement of the fingers with his cock.'
