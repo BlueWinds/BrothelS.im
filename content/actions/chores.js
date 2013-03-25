@@ -63,7 +63,7 @@ Actions.Clean = {
         group: '<<- girl.name >>',
         label: 'Clean <<- building.name >>',
         image: '<<- girl.modesty > 40 ? girl.image("cleaning") : girl.image("naked") >>',
-        text: "<<- girl.name >> carefully chooses some cleaning supplies, <<- girl.modesty > 40 ? 'puts on some old clothes' : 'puts her clothes aside to keep them from getting dirty' >>,  and gets to work cleaning the bathrooms in << building.name >>. It's tough work and fairly draining, but she gets the place look as good as you've ever seen it."
+        text: "<<- girl.name >> carefully chooses some cleaning supplies, <<- girl.modesty > 40 ? 'puts on some old clothes' : 'puts her clothes aside to keep them from getting dirty' >>,  and gets to work cleaning the bathrooms in << building.name >>. It\'s tough work and fairly draining, but she gets the place looking as good as you\'ve ever seen it."
       },
       money: -10,
       building: { clean: 11 },
@@ -125,7 +125,7 @@ Actions.Talk = {
         group: '<<- girl.name >>',
         label: 'Talk',
         image: '<<- girl.image("exercise") >>',
-        text: "You walk through the city, <<= girl.name >> following one step behind you, speaking of small things, how she's getting on, the weather, and similar. You give her a disapproving glance whenever she volunteers an opinion or changes the subject. Eventually gets that this is as much training as a chance to talk, and falls more easily into her submissive role."
+        text: "You walk through the city, <<= girl.name >> following one step behind you, speaking of small things, how she\'s getting on, the weather, and similar. You give her a disapproving glance whenever she volunteers an opinion or changes the subject. Eventually she gets that this is as much training as a chance to talk, and falls more easily into her submissive role."
       },
       girl: {
         obedience: 2.5,
@@ -139,7 +139,7 @@ Actions.Talk = {
         group: '<<- girl.name >>',
         label: 'Talk',
         image: '<<- girl.image() >>',
-        text: "You and <<- girl.name >> sit out on the front steps of the <<- girl.building() ? girl.building().name : 'inn' >>, watching traffic pass and listening to the sounds of the busy city. You ask her if she's enjoying her work here - she agrees that it's fun sometimes. You ask about the customers she's serviced lately - she sighs and rolls her eyes. Not the best behavior. You confiscate her top and pull her bra down around her waist as punishment, right there in public. She gets red, but you refuse to let her fix it for half an hour."
+        text: "You and <<- girl.name >> sit out on the front steps of the <<- girl.building() ? girl.building().name : 'inn' >>, watching traffic pass and listening to the sounds of the busy city. You ask her if she\'s enjoying her work here - she agrees that it\'s fun sometimes. You ask about the customers she\'s serviced lately - she sighs and rolls her eyes. Not the best behavior. You confiscate her top and pull her bra down around her waist as punishment, right there in public. She gets red, but you refuse to let her fix it for half an hour."
       },
       girl: {
         obedience: 2,
