@@ -83,7 +83,7 @@ Actions.Acolyte = {
         group: '<<- girl.name >>',
         label: 'Acolyte',
         image: '<<- girl.image("study") >>',
-        text: "<<= girl.name >> volunteered at a temple, and spent several hours teetering on a rickety ladder, dusting stained glass windows that hadn't been touched in years. She was surprised to discover, hidden away in the rafters, what could only be a dildo. One wonders how it made its way into the rafters of a temple..."
+        text: "<<= girl.name >> volunteered at a temple, and spent several hours teetering on a rickety ladder, dusting stained glass windows that hadn\'t been touched in years. She was surprised to discover, hidden away in the rafters, what could only be a dildo. One wonders how it made its way into the rafters of a temple..."
       },
       girl: {
         endurance: -5,
@@ -111,7 +111,7 @@ Actions.Acolyte = {
 Actions.Advertise = {
   label: 'Advertise',
   group: 'Jobs',
-  description: "<<= girl.name >> will stand in front of a building, talking to strangers and trying to get them to come inside for a visit. This will increase her <<- __('charisma') >><< if (g.buildings._filter('status', 'Owned').length) { >> and the building's <<- __('reputation') >><< } else { >> and the inn's owner will pay you a small amount.<< } >>.",
+  description: "<<= girl.name >> will stand in front of a building, talking to strangers and trying to get them to come inside for a visit. This will increase her <<- __('charisma') >><< if (g.buildings._filter('status', 'Owned').length) { >> and the building's <<- __('reputation') >><< } else { >> and the inn\'s owner will pay you a small amount.<< } >>.",
   conditions: {
     missions: { charismaAndIntelligence: 3 }
   },
