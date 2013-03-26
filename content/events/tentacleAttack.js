@@ -18,7 +18,7 @@ Events.tentacleAttack = {
         group: '<<- girl.name >>',
         image: '<<- girl.image("tentacles") >>',
         label: 'Attacked by Tentacles',
-        text: "<<= girl.name >> was heading into the city to <<= action.label >>, hurrying along a narrow street. The lamps seemed spaced oddly far apart - and a moment later she could tell she was right be worried.<br><br>Several tentacles quickly lashed out and wrapped themselves around <<= girl.name >>. Quickly they dragged her into a tiny alley. Abruptly, with no foreplay or ceremony at all, the rope-like vines thrust into her, ripping through her panties seemingly without resistance on their way to her intimate areas. She screamed out, expecting pain, but it was muffled twofold - first by another appendage in her mouth, and second by a burst of ecstasy that left stars in her eyes. The creature didn\'t wait for her to recover, intent on its own pleasure - its limbs were well lubricated, slipping in and out in an increasing crescendo.<br><br>Unable to call out for help or move in the slightest, <<= girl.name >>\'s ass and pussy were used mercilessly for an hour and a half. Finally, at the sound of someone else approaching, the beast soundlessly withdrew down the sewer grate. The footsteps never reached her - whoever it was must have had better sense than to approach a dark alley at night. She lay in a senseless daze for several minutes before picking herself up and hurrying home."
+        text: "<<= girl.name >> was heading into the city to <<= action.label >>, hurrying along a narrow street. The lamps seemed spaced oddly far apart - and a moment later she could tell she was right be worried.<br><br>Several tentacles quickly lashed out and wrapped themselves around <<= girl.name >>. Quickly they dragged her into a tiny alley. Abruptly, with no foreplay or ceremony at all, the rope-like vines thrust into her, ripping through her panties seemingly without resistance on their way to her intimate areas. She screamed out, expecting pain, but it was muffled twofold - first by another appendage in her mouth, and second by a burst of ecstasy that left stars in her eyes. The creature didn\'t wait for her to recover, intent on its own pleasure - its limbs were well-lubricated, slipping in and out in an increasing crescendo.<br><br>Unable to call out for help or move in the slightest, <<= girl.name >>\'s ass and pussy were used mercilessly for an hour and a half. Finally, at the sound of someone else approaching, the beast soundlessly withdrew down the sewer grate. The footsteps never reached her - whoever it was must have had better sense than to approach a dark alley at night. She lay in a senseless daze for several minutes before picking herself up and hurrying home."
       },
       girl: {
         endurance: -40,
@@ -42,7 +42,7 @@ Events.tentacleAttack = {
           group: '<<- girl.name >>',
           image: '<<- girl.image("tentacles") >>',
           label: 'Attacked by Tentacles',
-          text: "It wasn't long before a seemingly endless stream of cum flooded her womb, bowels and stomach. Delirious with lust, she moaned and licked her lips in an attempt to coax out more of the delicious, sticky white substance - successfully. Her belly began to swell obscenely.<br><br>Finally the city guard arrived to drive the creature off. <<= girl.name >> was no use - she just moaned and orgasmed repeatedly as arrows flew around her to pinion the thing\'s wings to the roof and finally kill it. She lay shuddering, still lost in lust and bliss, suspended in midair by the dead beast\'s impaling limbs. Finally the guards managed to reach the roof and free her."
+          text: "It wasn\'t long before a seemingly endless stream of cum flooded her womb, bowels and stomach. Delirious with lust, she moaned and licked her lips in an attempt to coax out more of the delicious, sticky white substance - successfully. Her belly began to swell obscenely.<br><br>Finally the City Guard arrived to drive the creature off. <<= girl.name >> was no use - she just moaned and orgasmed repeatedly as arrows flew around her to pinion the thing\'s wings to the roof and finally kill it. She lay shuddering, still lost in lust and bliss, suspended in midair by the dead beast\'s impaling limbs. Finally the guards managed to reach the roof and free her."
         }
       ],
       girl: {
@@ -97,7 +97,7 @@ Events.tentacleManGreet = {
       group: '<<- girl.name >>',
       image: 'content/events/DrAnder.jpg',
       label: 'Met with Dr. Ander',
-      text: "You were taking a <<- time >> stroll through the finer parts of the city when a handsome young man struck up a conversation, captivated by <<= girl.name >>\'s beauty. He introduced himself as Dr. Ander, son of a Duke and professor at the university. He\'s not shy about going straight after what he wants - he\'d like <<- girl.name >> to spend some exclusive time with him, and his descriptions of exactly how he plans to treat her have her blushing and (you can\'t help but notice) more than a little wet. Finally he departs, and you\'re almost surprised <<- girl.name >> doesn\'t grab after his wrist and insist on a quick fuck right then and there. Odd, you didn\'t think he was <i>that</i> attractive.",
+      text: "You were taking a <<- time >> stroll through the finer parts of the city when a handsome young man struck up a conversation, captivated by <<= girl.name >>\'s beauty. He introduced himself as Dr. Ander, son of a Duke and professor at the University. He\'s not shy about going straight after what he wants - he\'d like <<- girl.name >> to spend some exclusive time with him, and his descriptions of exactly how he plans to treat her have her blushing and (you can\'t help but notice) more than a little wet. Finally he departs, and you\'re almost surprised <<- girl.name >> doesn\'t grab after his wrist and insist on a quick fuck right then and there. Odd, you didn\'t think he was <i>that</i> attractive.",
       weight: -1
     },
     girl: {
@@ -128,7 +128,7 @@ Events.tentacleManVisit = {
     }
   },
   variants: function(context, done) {
-    var text = context.girl.name + " is in a good mood as she walks through the University with you. You inquire about Dr. Ander - he\'s quite well known, apparently, and the student directs you to a building set a little away from the rest of the university. Dr. Ander opens the door after the second knock.<blockquote>Welcome, welcome! I\'m so glad you came. Especially you, Ms. " + context.girl.name + " - I haven\'t been able to stop thinking about you since we last met. So, are you here to take me up on my offer? Give me a few hours of your time, and...</blockquote> You don\'t catch the rest of what he said, because it was whispered into her ear.";
+    var text = context.girl.name + " is in a good mood as she walks through the University with you. You inquire about Dr. Ander - he\'s quite well known, apparently, and the student directs you to a building set a little away from the rest of the University. Dr. Ander opens the door after the second knock.<blockquote>Welcome, welcome! I\'m so glad you came. Especially you, Ms. " + context.girl.name + " - I haven\'t been able to stop thinking about you since we last met. So, are you here to take me up on my offer? Give me a few hours of your time, and...</blockquote> You don\'t catch the rest of what he said, because it was whispered into her ear.";
     var options = {
       'Let him entertain her': "Dr. Ander will take her into the back room and do... whatever it is " + context.girl.name + " seems so keen on.",
       'Just talk': "You and " + context.girl.name + " should get to know him better."
@@ -144,7 +144,7 @@ Events.tentacleManVisit = {
         group: '<<- girl.name >>',
         image: 'content/events/DrAnder.jpg',
         label: 'Talk with Dr. Ander',
-        text: "You decline the offer politely - he isn\'t going to pay, after all, and <<- girl.name >>'s reaction to him worries you a little. He still insists that you at least stay for tea - he summons an assistant, a young woman wearing a low-cut blouse and short skirt, who obediently goes to prepare some. The three of you pull together chairs in a classroom and talk of small things, until the university bell signals a change in hours. Dr. Ander thanks you for your company, but he really must be going now - do drop in if you\'re ever in the university again.",
+        text: "You decline the offer politely - he isn\'t going to pay, after all, and <<- girl.name >>\'s reaction to him worries you a little. He still insists that you at least stay for tea - he summons an assistant, a young woman wearing a low-cut blouse and short skirt, who obediently goes to prepare some. The three of you pull together chairs in a classroom and talk of small things, until the University bell signals a change in hours. Dr. Ander thanks you for your company, but he really must be going now - do drop in if you\'re ever in the University again.",
         weight: -1
       },
       girl: {
@@ -160,7 +160,7 @@ Events.tentacleManVisit = {
         group: '<<- girl.name >>',
         image: '<<- girl.image() >>',
         label: 'Spend time with Dr. Ander',
-        text: "Who are you to stand in the way of two people who can obviously think of little other than screwing each other\'s brains out? When you don\'t object, <<- girl.name >> blushes and takes his hand. The two of them disappear into a back room, leaving you somewhat at a loss for what to do next.<br><br> Not for long though - a young woman wearing a low-cut blouse and short skirt arrives, introducing herself as Maria, one of Dr. Ander\'s assistants. Despite the generous cleavage and great amount of leg on display, she\'s quite meek, and asks if there\'s anything she can get you while Dr. Ander is busy. You opt for some tea, which she's happy to prepare, and some conversation with the gorgeous student, which she\'s happy to provide.<br><br><<- girl.name >> returns an hour and a half later, glowing and disheveled, unaccompanied by Dr. Ander. Maria excuses herself, and you give <<- girl.name >> a few minutes in the bathroom to compose herself before heading out.",
+        text: "Who are you to stand in the way of two people who can obviously think of little other than screwing each other\'s brains out? When you don\'t object, <<- girl.name >> blushes and takes his hand. The two of them disappear into a back room, leaving you somewhat at a loss for what to do next.<br><br> Not for long though - a young woman wearing a low-cut blouse and short skirt arrives, introducing herself as Maria, one of Dr. Ander\'s assistants. Despite the generous cleavage and great amount of leg on display, she\'s quite meek, and asks if there\'s anything she can get you while Dr. Ander is busy. You opt for some tea, which she\'s happy to prepare, and some conversation with the gorgeous student, which she\'s happy to provide.<br><br><<- girl.name >> returns an hour and a half later, glowing and disheveled, unaccompanied by Dr. Ander. Maria excuses herself, and you give <<- girl.name >> a few minutes in the bathroom to compose herself before heading out.",
         weight: -1
       },
       girl: {
@@ -219,7 +219,7 @@ Events.tentacleManVisitYou = {
           group: '<<- girl.name >>',
           image: 'content/events/DrAnder.jpg',
           label: 'Visit by Dr. Ander',
-          text: "<<- girl.name >> was getting ready to <<- action.label >> when she spots a familiar face coming down the street towards the <<- girl.building() ? girl.building().name : 'Inn' >>. He sees her looking out the window and waves - she\'s clearly the one he\'s coming to see. Her previous plans forgotten, <<- girl.name >> heads out to meet him. He\'d like more of her time, of course, and this time he brought money, since he\'s the one doing the calling. It's not a bad amount of money, and <<- girl.name >> might revolt if you refused, and so off she goes, arm in arm with the young doctor.",
+          text: "<<- girl.name >> was getting ready to <<- action.label >> when she spots a familiar face coming down the street towards the <<- girl.building() ? girl.building().name : 'Inn' >>. He sees her looking out the window and waves - she\'s clearly the one he\'s coming to see. Her previous plans forgotten, <<- girl.name >> heads out to meet him. He\'d like more of her time, of course, and this time he brought money, since he\'s the one doing the calling. It\'s not a bad amount of money, and <<- girl.name >> might revolt if you refused, and so off she goes, arm in arm with the young doctor.",
           weight: -1,
           delta: false
         },
@@ -227,7 +227,7 @@ Events.tentacleManVisitYou = {
           group: '<<- girl.name >>',
           image: '<<- girl.image() >>',
           label: 'Visit by Dr. Ander',
-          text: "She returns around one in the morning, exhausted but pleased. As before, she\'s not particularly interested in talking about what they did together, but since you can tell she\'s walking funny and sits gingerly, you suspect the fine young doctor may have moved on to a different hole. Perhaps the red circle she blushes and tries to hide on her arm is from a rope digging in.",
+          text: "She returns around one in the morning, exhausted but pleased. As before, she\'s not particularly interested in talking about what they did together, but since you can tell she\'s walking funny and sits gingerly, you suspect the fine young doctor may have moved on to a different hole. Perhaps the red circle she blushes about and tries to hide on her arm is from a rope digging in.",
           weight: -1
         }
       ],
@@ -248,7 +248,7 @@ Events.tentacleManVisitYou = {
         group: '<<- girl.name >>',
         image: 'content/events/missing.jpg',
         label: 'Missing',
-        text: "You asked <<- girl.name >> to <<- action.label >> this evening, but as far as you can tell, she never did. After nipping out to get a few groceries, she never returned. Well, distractions have been known to happen - perhaps you shouldn\'t worry just yet?<br><br><em>You can select your response as if you were choosing an option for an <<- girl.name >>'s action.</em>",
+        text: "You asked <<- girl.name >> to <<- action.label >> this evening, but as far as you can tell, she never did. After nipping out to get a few groceries, she never returned. Well, distractions have been known to happen - perhaps you shouldn\'t worry just yet?<br><br><em>You can select your response as if you were choosing an option for an <<- girl.name >>\'s action.</em>",
         weight: -1
       },
       girl: {
@@ -306,7 +306,7 @@ Actions.tentacleManAbduction = {
         group: '<<- girl.name >>',
         image: 'content/events/missing.jpg',
         label: 'Missing - Day <<- girl.specialRules.tentacleManProgress - 2 >>',
-        text: "<<- girl.name >> has been gone too long to just have gotten lost. You visit the Garrison to alert the city guard that she\'s missing (this sort of thing is exactly their job, after all) and you\'re assured that they\'ll do whatever they can to locate your missing girl. The man who listens to your case seems sincere - while they\'re not exactly going to turn the city upside-down just yet, a reputation for safe and orderly streets is an absolute necessity for a city that makes its money from visitors.",
+        text: "<<- girl.name >> has been gone too long to just have gotten lost. You visit the Garrison to alert the City Guard that she\'s missing (this sort of thing is exactly their job, after all) and you\'re assured that they\'ll do whatever they can to locate your missing girl. The man who listens to your case seems sincere - while they\'re not exactly going to turn the city upside-down just yet, a reputation for safe and orderly streets is an absolute necessity for a city that makes its money from visitors.",
         weight: -1
       },
       girl: {
@@ -320,7 +320,7 @@ Actions.tentacleManAbduction = {
         group: '<<- girl.name >>',
         image: 'content/events/missing.jpg',
         label: 'Missing - Day <<- girl.specialRules.tentacleManProgress - 3 >>',
-        text: "<<- girl.name >> has been gone too long to just have gotten lost. You visit the Garrison to alert the city guard that she\'s missing (this sort of thing is exactly their job, after all) and you\'re assured that they\'ll do whatever they can to locate your missing girl. You mention that there's a rather large reward for her safe return - the guard asks exactly how much, and you name a figure. A few exchanges later, it's apparent that he's not asking about the reward in general, but <em>his</em> reward in specific. You pass over some money, confident that it\'s a bribe well worth making if it gets <<- girl.name >> home safe sooner.",
+        text: "<<- girl.name >> has been gone too long to just have gotten lost. You visit the Garrison to alert the City Guard that she\'s missing (this sort of thing is exactly their job, after all) and you\'re assured that they\'ll do whatever they can to locate your missing girl. You mention that there's a rather large reward for her safe return - the guard asks exactly how much, and you name a figure. A few exchanges later, it's apparent that he's not asking about the reward in general, but <em>his</em> reward in specific. You pass over some money, confident that it\'s a bribe well worth making if it gets <<- girl.name >> home safe sooner.",
         weight: -1
       },
       girl: {
@@ -428,7 +428,7 @@ Actions.tentacleManAbduction = {
           group: '<<- girl.name >>',
           image: '<<- girl.image("tentacles") >>',
           label: 'Missing - Day 4',
-          text: "It\'s been nearly twenty-four hours since <<- girl.name >> was engulfed in this living goo, twenty four-hours of total stimulation that would have been impossible at this level had she not been prepared in the pool. Slowly, ever so slowly, the creature has been inserting more and more of itself into her, stretching her holes and pressing ever deeper. At this point, only half of the mass remains outside, the rest swelling her belly obscenely - a nine-month pregnant woman impregnated only a single day ago. She\'s had so many orgasms that they\'ve begun to blur together, a continuous stream of shuddering pleasure that has wiped away all thought except <i>more, more, more</i>.",
+          text: "It\'s been nearly twenty-four hours since <<- girl.name >> was engulfed in this living goo, twenty-four hours of total stimulation that would have been impossible at this level had she not been prepared in the pool. Slowly, ever so slowly, the creature has been inserting more and more of itself into her, stretching her holes and pressing ever deeper. At this point, only half of the mass remains outside, the rest swelling her belly obscenely - a nine-month pregnant woman impregnated only a single day ago. She\'s had so many orgasms that they\'ve begun to blur together, a continuous stream of shuddering pleasure that has wiped away all thought except <i>more, more, more</i>.",
           weight: -1,
           delta: false
         },
@@ -453,7 +453,7 @@ Actions.tentacleManAbduction = {
         group: '<<- girl.name >>',
         image: '<<- girl.image("tired") >>',
         label: 'Found!',
-        text: "<<- girl.name >> was found by the city guard today, collapsed naked on the bridge leading to the garrison. They think she escaped from... wherever she was being held sometime around midnight, and made her way towards a familiar landmark (the garrison's tallest spires are visible from almost anywhere in the city) before collapsing. She\'s returned to your care, with the promise that someone will be by once she\'s had a few days to recover to take her statement - for now, you agree it\'s best not to press her on exactly what happened. She\'ll speak up soon. You hope.",
+        text: "<<- girl.name >> was found by the City Guard today, collapsed naked on the bridge leading to the Garrison. They think she escaped from... wherever she was being held sometime around midnight, and made her way towards a familiar landmark (the Garrison's tallest spires are visible from almost anywhere in the city) before collapsing. She\'s returned to your care, with the promise that someone will be by once she\'s had a few days to recover to take her statement - for now, you agree it\'s best not to press her on exactly what happened. She\'ll speak up soon. You hope.",
         weight: -1
       },
       girl: {
@@ -486,9 +486,9 @@ Missions.tentaclePregnancy = {
   variants: function(context, done) {
     var text = "It\'s late at night when you hear a furtive knock on the door. You head down to tell whoever it is to go away, you\'re closed for the evening, but instantly recognize Dr. Ander. You pull him inside and shut the door to see what he wants. You have your suspicions that he was behind " + context.girl.name + "\'s disappearance, and you don\'t want him escaping before you can find out. He\'s more than a bit nervous, faced with your angry scowl.<blockquote>Please, I only wish to speak with " + context.girl.name + ". I want to make sure she\'s alright.</blockquote>You decline, and confront him with what you suspect. He doesn\'t deny it - and he wants to pay you $2000 to allow him to take the spawn resulting from his experiments. Also to not turn him in, of course. You call his bluff, and he raises the offer to $3000, starting to sweat.";
     var options = {
-      'Call the guard': "Hold Dr. Ander here to answer for his crimes. You'll almost certainly never hear from him again.",
-      'Take the money': "Take the money and let the good doctor continue his work. He'll deliver " + context.girl.name + "\'s monsterous child and take it away.",
-      'Deliver the baby': "You're not about to get the guard involved, since they\'d probably kill the baby against " + context.girl.name + "\'s wishes, but yo\u're not about to let the doctor touch her again."
+      'Call the guard': "Hold Dr. Ander here to answer for his crimes. You\'ll almost certainly never hear from him again.",
+      'Take the money': "Take the money and let the good doctor continue his work. He\'ll deliver " + context.girl.name + "\'s monsterous child and take it away.",
+      'Deliver the baby': "You\'re not about to get the guard involved, since they\'d probably kill the baby against " + context.girl.name + "\'s wishes, but you\'re not about to let the doctor touch her again."
     };
     Game.getUserInput(text, 'content/events/DrAnder.jpg', options, function(answer) {
       var result = context.mission.base().results[answer];
@@ -502,7 +502,7 @@ Missions.tentaclePregnancy = {
           label: 'Strange pregnancy',
           group: '<<- girl.name >>',
           image: 'content/events/DrAnder.jpg',
-          text: "You tell Dr. Ander to wait here for a moment while you fetch <<- girl.name >>, and leave him sitting nervously alone. Instead, you flag down a young boy, pass him a coin and tell him to fetch the city guard immediately while you head back to guard the door and make sure the good doctor doesn\'t decide to leave.<br><br>It doesn\'t take long - even late at night (<em>especially</em> late at night) the red-light district has a strong guard presence. You explain the situation to the two guards that arrive - they nod, and one leaves to fetch their sergeant. Dr. Ander has some influential friends, and they want an officer present before they make any move. Before the other guard can return, your prisoner opens the door, perhaps to see what\'s taking you so long - when he sees both you and a guard standing outside waiting, he doesn\'t need to ask what\'s going on - he just blanches, stumbles back, and sits down heavily. You close the door again.",
+          text: "You tell Dr. Ander to wait here for a moment while you fetch <<- girl.name >>, and leave him sitting nervously alone. Instead, you flag down a young boy, pass him a coin and tell him to fetch the City Guard immediately while you head back to guard the door and make sure the good doctor doesn\'t decide to leave.<br><br>It doesn\'t take long - even late at night (<em>especially</em> late at night) the Red-Light District has a strong guard presence. You explain the situation to the two guards that arrive - they nod, and one leaves to fetch their sergeant. Dr. Ander has some influential friends, and they want an officer present before they make any move. Before the other guard can return, your prisoner opens the door, perhaps to see what\'s taking you so long - when he sees both you and a guard standing outside waiting, he doesn\'t need to ask what\'s going on - he just blanches, stumbles back, and sits down heavily. You close the door again.",
           weight: -2,
           delta: false
         },
@@ -560,7 +560,7 @@ Missions.tentaclePregnancy = {
         label: 'Strange pregnancy',
         group: '<<- girl.name >>',
         image: '<<- girl.image("pregnant") >>',
-        text: "You shake your head. He\'s done enough harm already, isn\'t it time he just got the hell out of your lives? He isn\'t pleased, but at least you don\'t seem to be in the mood to get him arrested, so he leaves without too much complaint.<br><br>You\'re summoned next door by the sounds of <<- girl.name >> panting and moaning. You find her frantically rubbing her clit and groping her breast, clothes in disarray on the floor. At first you think the wet spot underneath her is just cum, but it keeps growing, and doesn\'t sink into the sheet properly - more like gelatin than water. Paralyzed by the strange sight, you watch as her belly slowly deflates, expelling the baby tentacle monster. It is extremely gelatinous and almost completely transparent. Its eyes are the last to come out, as watery and see-through as the rest of its body.<br><br>It sprays a gout of green gas in your direction, and you cough, breathing some in due to the unexpectedness of the attack. Taking the distraction, it slithers with surprising rapidity through a crack in the wall. You doubt you\'ll see it again, unless it\'s in a couple of years when it seeks to make children of its own. The beasts are exceedingly difficult to locate unless they want to be found.",
+        text: "You shake your head. He\'s done enough harm already, isn\'t it time he just got the hell out of your lives? He isn\'t pleased, but at least you don\'t seem to be in the mood to get him arrested, so he leaves without too much complaint.<br><br>You\'re summoned next door by the sounds of <<- girl.name >> panting and moaning. You find her frantically rubbing her clit and groping her breast, clothes in disarray on the floor. At first you think the wet spot underneath her is just cum, but it keeps growing, and doesn\'t sink into the sheet properly - more like gelatin than water. Paralyzed by the strange sight, you watch as her belly slowly deflates, expelling the baby tentacle monster. It is extremely gelatinous and almost completely transparent. Its eyes are the last to come out, as watery and see-through as the rest of its body.<br><br>It sprays a gout of green gas in your direction, and you cough, breathing some in due to the unexpectedness of the attack. Taking advantage of the distraction, it slithers with surprising rapidity through a crack in the wall. You doubt you\'ll see it again, unless it\'s in a couple of years when it seeks to make children of its own. The beasts are exceedingly difficult to locate unless they want to be found.",
         weight: -2
       },
       girl: {
