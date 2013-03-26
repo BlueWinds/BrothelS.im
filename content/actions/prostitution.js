@@ -24,7 +24,7 @@ Actions.Streetwalk =  {
     for (var i in Girl.sex) {
       if (context.girl.actions[Girl.sex[i]]) { return; }
     }
-    return 'You must allow her to perform at least one type of sex before she can Streetwalk.';
+    return 'You must allow her to perform at least one type of sex act before she can Streetwalk.';
   },
   tags: {
     slums: 0.25,
@@ -62,13 +62,13 @@ Actions.Streetwalk =  {
       hard: [
         'He fucked her silly in the plain view of passersby.',
         'They found an abandoned lot for privacy, and he came in her pussy.',
-        'He fucked her in an ally, but pulled out to give her a facial.',
+        'He fucked her in an alley, but pulled out to give her a facial.',
         'They kissed and fondled each other, than made slow love beneath a tree in the park.'
       ],
       anal: [
         'He pounded her ass mercilessly in a dirty alley.',
         'He alternated between her ass and pussy for several minutes before blowing his load in her ass.',
-        'He bent her over a bench in the park and took her ass doggy style.',
+        'He bent her over a bench in the park and took her ass doggy-style.',
         'His dick was almost too large to fit, so she had to warm up first using a dildo.'
       ],
       fetish: [
@@ -126,10 +126,10 @@ Actions.Whore = {
     customerMessage: '<<= customer.name + " the " + customer.profession >> wanted <<- __(customer.sex[0]) >> with a girl who was <<- customer.wants.slice(0, 2)._toString("adj") >>. He chose <<= girl.name >>, and they agreed on <strong><<- __(sex) >></strong>.<br><br><<- result >>',
     sexResults: {
       soft: [
-        'They kissed awkwardly for a minute until it became apparent he was completely inexperienced. She took the lead and guided him in how to pleasure a woman, before finishing him off with a blow-job.',
+        'They kissed awkwardly for a minute until it became apparent he was completely inexperienced. She took the lead and guided him in how to pleasure a woman, before finishing him off with a blow job.',
         'He was incredibly hot, and they wasted no time in stripping and ravaging each other\'s bodies.',
         'He straddled her and pushed her tits together, fucking them roughly without much concern for her pleasure.',
-        'She lay over him in 69 position, fondling his balls and slowly licking up and down his shaft while he nibbled on her pussy, both of them steadily growing more enthusiastic until she eagerly swallowed his cum.',
+        'She lay over him in the 69 position, fondling his balls and slowly licking up and down his shaft while he nibbled on her pussy, both of them steadily growing more enthusiastic until she eagerly swallowed his cum.',
         'He stood against the wall while she gave him a hand job, staring up into his eyes with irresistible cuteness.',
         'He had trouble getting it up at first, but her persistent tongue and ceaseless hands eventually got him hard, and he ended up spraying a massive load across her hair.'
       ],
@@ -142,14 +142,14 @@ Actions.Whore = {
       ],
       anal: [
         'Even with plenty of toy use and lubrication, it still took quite some time to fit his massive dick into her tight asshole. He was gentle though, and she enjoyed herself despite the pain.',
-        'Though he was in a hurry and wanted to get started right away, she insisted on taking it slowly, moving from kissing to oral before finally letting him take her ass doggy style.',
+        'Though he was in a hurry and wanted to get started right away, she insisted on taking it slowly, moving from kissing to oral before finally letting him take her ass doggy-style.',
         'He didn\'t actually want to fuck her ass, just plug it was a huge toy while they had sex the old fashioned way.',
         'He had her sit on the edge of the bed and lay back while he teased her pussy with his tongue, slowly working first one finger then two into her ass. By the time he had three in, she was cooing with delight and welcomed the replacement of the fingers with his cock.'
       ],
       fetish: [
-        'He stripped her naked and suspended her from a conveniently placed ceiling hook - she was worried about suspension at first, but he seemed to know what he was doing. He fucked her mouth and spanked her, making her beg for more cum to swallow (which he provided) before he would her down.',
+        'He stripped her naked and suspended her from a conveniently placed ceiling hook - she was worried about suspension at first, but he seemed to know what he was doing. He fucked her mouth and spanked her, making her beg for more cum to swallow (which he provided) before he would let her down.',
         'Bound and helpless before him, he teased her clit, nipples and thighs with a feather for nearly half an hour, until she finally broke down and begged to be fucked. He satisfied himself with her ass, continuing to tease her pussy all the while.',
-        'Providing her a schoolgirl costume to wear, he spanked her, and tied her arms behind her back. She alternated between apologized for being so naughty and slurping messily on his cock.',
+        'Providing her a schoolgirl costume to wear, he spanked her, and tied her arms behind her back. She alternated between apologizing for being so naughty and slurping messily on his cock.',
         'He didn\'t want anything particularly extreme, just a bit of instruction on the proper way to tie up a girl without hurting her. She was happy to oblige in a bit of light rope-play.'
       ]
     }
