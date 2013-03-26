@@ -65,7 +65,7 @@ Missions.girlBuyer = {
         label: 'Girl for <<- mission.special.client.name >>',
         group: 'Sell a girl',
         image: '<<- mission.special.client.image >>',
-        text: "Over the intervening weeks, it seems that <<- mission.special.client.name >>\'s enthusiasm has cooled. He was scheduled to come by today and make the final offer in person, but instead receive a message, delivered to your door by one of his servants. It explains that the situation has changed, and he has to leave in a rush, with barely enough time to get his own things together, etc.. It's nothing more than an excuse, transparent to <<- girl.name >> and you. Whether she wanted to go or not, the fact that he\'s lost interest in her has to be disappointing on some level. Oh well.",
+        text: "Over the intervening weeks, it seems that <<- mission.special.client.name >>\'s enthusiasm has cooled. He was scheduled to come by today and make the final offer in person, but instead receive a message, delivered to your door by one of his servants. It explains that the situation has changed, and he has to leave in a rush, with barely enough time to get his own things together, etc.. It\'s nothing more than an excuse, transparent to <<- girl.name >> and you. Whether she wanted to go or not, the fact that he\'s lost interest in her has to be disappointing on some level. Oh well.",
         weight: -1
       },
       girl: { happiness: -7 },
