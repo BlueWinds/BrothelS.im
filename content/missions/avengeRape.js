@@ -14,7 +14,7 @@ Missions.avengeGuardWait = {
     var options = {
       "Comfort her": "Follow " + context.girl.name + " and comfort her.",
       "Get angry": "Bastards. No one treats your girls like that and gets away with it.",
-      "She'll get over it": "It's a rough world - you're sorry she had to go through that, but what can you do?"
+      "She'll get over it": "It\'s a rough world - you\'re sorry she had to go through that, but what can you do?"
     };
     Game.getUserInput(text, context.girl.image('prison'), options, function(answer) {
       done(results[answer]);
@@ -275,7 +275,7 @@ Missions.avengeGuardRapeFinal = {
           label: 'Revenge on Guards',
           group: 'Investigate City Guard',
           image: 'content/missions/stockadeBukkake.jpg',
-          text: "The guards wake up, hours later, just as the sun rises. Sore from repeated use, covered in cum and still locked in the pillories used to punish criminals, the first thing they see is <<- girl.name >> sitting across the square watching them smugly. She tosses the key at their feet - unable to retrieve it themselves, they'll have to convince a good citizen to unlock them. Given \"free,\" \"public use\" and \"cum dump\" is written across each of their asses and foreheads, it may take a while. Perhaps they'll think of the consequences before they cross one of your girls next time."
+          text: "The guards wake up, hours later, just as the sun rises. Sore from repeated use, covered in cum and still locked in the pillories used to punish criminals, the first thing they see is <<- girl.name >> sitting across the square watching them smugly. She tosses the key at their feet - unable to retrieve it themselves, they\'ll have to convince a good citizen to unlock them. Given \"free,\" \"public use\" and \"cum dump\" is written across each of their asses and foreheads, it may take a while. Perhaps they\'ll think of the consequences before they cross one of your girls next time."
         }
       ],
       money: -300,
@@ -292,7 +292,7 @@ Missions.avengeGuardRapeFinal = {
         group: 'Investigate City Guard',
         weight: -2,
         image: '<<- girl.image("study") >>',
-        text: "With their names, testimony from both <<- girl.name >> and your contact in the City Guard, you finally have enough information that they\'ll have to take your threat of revealing what they\'ve been doing to Kim Xun. Leave a note explaining the exact situation at one of their home addresses, along with your demand - their resignation from the guard, a written apology, and $1000.<br><br>You honestly didn\'t expect it to work, but early the next morning one of the guards, the ringleader, knocks on your door and hands you the letter, signed by all seven of them, exactly as you\'d asked for. He\'s clearly quite scared, and asks for repeated reassurance that you won\'t turn them in before he\'ll hand it over. The courts here are rather soft, not nearly enough to cause such a reaction until you realize it\'s not the law they\'re afraid of, but the captain. You promise one final time that you\'re content to let the incident lie, and he hands you the apology.<br><br><<- girl.name >> has been watching quietly from further inside. As you hand her the apology, she starts to cry, kisses you on the cheek, and runs into her room holding the letter. She\'s going to be alright."
+        text: "With their names, testimony from both <<- girl.name >> and your contact in the City Guard, you finally have enough information that they\'ll have to take your threat of revealing what they\'ve been doing to Kim Xun. Leave a note explaining the exact situation at one of their home addresses, along with your demand - their resignation from the guard, a written apology, and $1000.<br><br>You honestly didn\'t expect it to work, but early the next morning one of the guards, the ringleader, knocks on your door and hands you the letter, signed by all of them, exactly as you\'d asked for. He\'s clearly quite scared, and asks for repeated reassurance that you won\'t turn them in before he\'ll hand it over. The courts here are rather soft, not nearly enough to cause such a reaction until you realize it\'s not the law they\'re afraid of, but the captain. You promise one final time that you\'re content to let the incident lie, and he hands you the apology.<br><br><<- girl.name >> has been watching quietly from further inside. As you hand her the apology, she starts to cry, kisses you on the cheek, and runs into her room holding the letter. She\'s going to be alright."
       },
       money: 1000,
       girl: {
