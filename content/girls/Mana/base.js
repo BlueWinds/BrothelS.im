@@ -1,6 +1,6 @@
 "use strict";
 Girls.Mana = {
-  description: "<p>An inhabitant of an ancient kingdom, Mana promised that she would become a master magician in memory of her teacher. Her soul spent the next thousand years trapped in various magical items before finally being freed again by a kind owner. She\'s not exactly sure how she ended up here - lost in an unknown land and without anyone she knew and could rely on, she decided to start looking for a job. Any job, really.</p>",
+  description: "<p>An inhabitant of an ancient kingdom, Mana promised that she would become a master magician in memory of her teacher. However, an accident while training meant her soul spent the next thousand years trapped in various magical items before finally being freed again by a kind owner. She\'s not exactly sure how she ended up here - lost in an unknown land and without anyone she knew and could rely on, she decided to start looking for a job. Any job, really.</p>",
   status: 'For Hire',
   happiness: 0,
   endurance: 100,
@@ -90,7 +90,7 @@ Girls.Mana.Actions.Talk.results._append([
       group: 'Mana',
       label: 'Talk',
       image: 'content/girls/Mana/images/Tired1.jpg',
-      text: "You settle down on the bench where you\'ve agreed to meet her, and wait. And wait. And wai... oh, there she is, only half an hour late. Mana runs down the street towards you, waving her arms enthusiastically to ensure you know she's seen you and is coming. You wince in sympathy as she stumbles - perhaps she should pay more attention to the ground, and less to waving at you... Oh ouch. You're out of your seat and running towards her even as the carriage that flattened her rolls to a stop.<br><br>The driver apologizes profusely, but it really wasn\'t his fault that Mana dashed in front of his wheels without looking. You spend the rest of the <<- time >> tending to her injuries back at the <<- girl.building() ? girl.building().name : 'Inn'>>."
+      text: "You settle down on the bench where you\'ve agreed to meet her, and wait. And wait. And wai... oh, there she is, only half an hour late. Mana runs down the street towards you, waving her arms enthusiastically to ensure you know she\'s seen you and is coming. You wince in sympathy as she stumbles - perhaps she should pay more attention to the ground, and less to waving at you... Oh ouch. You\'re out of your seat and running towards her even as the carriage that flattened her rolls to a stop.<br><br>The driver apologizes profusely, but it really wasn\'t his fault that Mana dashed in front of his wheels without looking. You spend the rest of the <<- time >> tending to her injuries back at the <<- girl.building() ? girl.building().name : 'Inn'>>."
     },
     girl: {
       obedience: 2.5,
