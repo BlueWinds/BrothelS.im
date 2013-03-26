@@ -37,7 +37,7 @@ Events.thugRape = {
         group: '<<- girl.name >>',
         image: '<<- girl.image("exercise") >>',
         label: 'Attacked by Thugs',
-        text: "<<= girl.name >> was heading into the city to <<= action.label >> when a pot-bellied man stepped in front of her, blocking her way. She tried to go around wordlessly, but it was only then that she noticed her predicament - a narrow alley, and three more of his friends blocking her retreat.<br><br>She was hardly helpless though - with a shout, she stomped on his foot, causing him to double over in agony. One of the men behind grabbed for her wrist, but she twisted away, planted a fist in his nose, and took off running. They didn't pursue far - only to the end of the alley, the street being too public for a struggle. After such a close call, she was in no mood to <<= action.label >> and returned home, slamming the door with a fiery look in her eyes."
+        text: "<<= girl.name >> was heading into the city to <<= action.label >> when a pot-bellied man stepped in front of her, blocking her way. She tried to go around wordlessly, but it was only then that she noticed her predicament - a narrow alley, and three more of his friends blocking her retreat.<br><br>She was hardly helpless though - with a shout, she stomped on his foot, causing him to double over in agony. One of the men behind grabbed for her wrist, but she twisted away, planted a fist in his nose, and took off running. They didn\'t pursue far - only to the end of the alley, the street being too public for a struggle. After such a close call, she was in no mood to <<= action.label >> and returned home, slamming the door with a fiery look in her eyes."
       },
       girl: {
         endurance: -12,
@@ -66,9 +66,9 @@ Events.guardRape = {
   variants: function(context, done) {
     var event = this;
     var options = {
-      Submit: 'Go along quitely'
+      Submit: 'Go along quietly'
     };
-    var text = context.girl.name + ' is heading into the city when a member of the city guard calls her over. Without a word he clips on a pair of handcuffs, catching her completely by surprise. She protests loudly that she has no idea what she\'s done, but the fact that he hasn\'t responded and is is starting to move makes her worry. What does ' + context.girl.name + ' do?';
+    var text = context.girl.name + ' is heading into the city when a member of the City Guard calls her over. Without a word he clips on a pair of handcuffs, catching her completely by surprise. She protests loudly that she has no idea what she\'s done, but the fact that he hasn\'t responded and is starting to move makes her worry. What does ' + context.girl.name + ' do?';
     if (context.girl.obedience < 90) { options.Run = 'Attempt to flee.'; }
     if (context.girl.obedience < 60) { options.Fight = 'Headbutt the guard and try to steal the keys.'; }
     if (context.girl.intelligence > 40) { options.Bribe = 'Attempt the bribe the guard into letting her leave.'; }
@@ -93,7 +93,7 @@ Events.guardRape = {
         {
           group: '<<- girl.name >>',
           image: '<<- girl.image("fetish") >>',
-          label: 'Raped by city guards',
+          label: 'Raped by City Guards',
           text: "<< if (event.special.answer == 'Submit') { >>Going along quietly, the guard led her away.<< } else if (event.special.answer == 'Run') { >><<= girl.name >> tried to wrench her arms free, but his grip was too strong - her attempt to flee failed before it had even properly begun. He half-led, half dragged her away.<< } else if (event.special.answer == 'Fight') { >>Knowing she was at a serious disadvantage with her hands already bound, she took the first opportunity to strike at the guard, going for the eyes. She was too slow though, and he stepped our of reach, kicking one of her legs out from under her. Producing a second pair of handcuffs for her ankles (not pleasant at all), he carried her away.<< } >> Four other men and two women looked up as he dragged <<= girl.name >> into the guardhouse, announcing that he\'d caught a naughty little girl who needed to be punished. She looked to the other women pleadingly, but received the same evil leers as from the men.",
           delta: false,
           weight: -2
@@ -101,7 +101,7 @@ Events.guardRape = {
         {
           group: '<<- girl.name >>',
           image: '<<- girl.image("prison") >>',
-          label: 'Raped by city guards',
+          label: 'Raped by City Guards',
           text: "They fitted a ball-gag into her mouth, methodically stripped her of all her clothing, and strapped her arms and legs to the table. Most of them resumed playing cards, moving the game to the floor, but one stayed behind long enough to stick a dildo in both her pussy and ass before leaving her there - bound, gagged and immobile. Whenever a player won a hand, they stood up and came over to have their way with her, removing the dildo from the hole of their choice only long enough to fuck her before returning it to place. The women were the worst - they\'d play with the dildo until she was about to cum, then wait until she calmed down to continue, leaving her completely unsatisfied.",
           delta: false,
           weight: -2
@@ -109,7 +109,7 @@ Events.guardRape = {
         {
           group: '<<- girl.name >>',
           image: '<<- girl.image("tired") >>',
-          label: 'Raped by city guards',
+          label: 'Raped by City Guards',
           text: "When they finished their game, they stood and opened to door, ready to leave. <<= girl.name >> made the loudest moan she could around the ball-gag, but they just... left. She began to fear she\'d be left here forever, but it wasn\'t long until the next shift of guards arrived. They untied her, helped her rub the stiffness from her limbs and gave her her clothes back, but offered no apologies stronger than sympathetic looks as she left in a hurry.",
           weight: -2
         }
@@ -158,7 +158,7 @@ Events.guardRape = {
         group: '<<- girl.name >>',
         image: '<<- girl.image("study") >>',
         label: 'Bribed City Guards',
-        text: "<<= girl.name >> was heading into the city to <<= action.label >> when member of the city guard called her over. The cause became apparent almost immediately when without a word he clipped on a pair of handcuffs, catching her completely by surprise. He ignored her protests that she had no idea what she'd done, and half led, half dragged her away.<br><br>She could see what was coming, and rather than go quietly, she stubbornly refused to move until he explained <em>exactly</em> why she was under arrest. The lame excuse he presented confirmed her fears, and she frantically came up with a plan. The penalty should surely be a fine, rather than jail-time, she insisted, and after mentioning a rather large figure, she could see he was definitely interested. She didn\'t have it on her, of course, but if he\'d just <em>unlock the handcuffs</em>, she\'d get the money from home. Once she\'d handed over the down-payment, <<= girl.name >> took off running, and didn\'t look back.",
+        text: "<<= girl.name >> was heading into the city to <<= action.label >> when member of the City Guard called her over. The cause became apparent almost immediately when without a word he clipped on a pair of handcuffs, catching her completely by surprise. He ignored her protests that she had no idea what she\'d done, and half led, half dragged her away.<br><br>She could see what was coming, and rather than go quietly, she stubbornly refused to move until he explained <em>exactly</em> why she was under arrest. The lame excuse he presented confirmed her fears, and she frantically came up with a plan. The penalty should surely be a fine, rather than jail-time, she insisted, and after mentioning a rather large figure, she could see he was definitely interested. She didn\'t have it on her, of course, but if he\'d just <em>unlock the handcuffs</em>, she\'d get the money from home. Once she\'d handed over the down-payment, <<= girl.name >> took off running, and didn\'t look back.",
         weight: -2
       },
       girl: {
