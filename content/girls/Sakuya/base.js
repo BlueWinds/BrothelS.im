@@ -100,7 +100,7 @@ Girls.Sakuya = {
             label: 'Signs and Portents',
             group: 'Late at night',
             image: 'content/girls/Sakuya/missionImages/Nightmare.jpg',
-            text: "Late at night, you\'re woken by moaning coming from a nearby room. Not terribly unusual, except for the fact that this doesn\'t sound like pleasure - and it\'s coming from Sakuya's room, not someone you\'d expect to have a midnight paramour. Pulling on a robe, you step out to take a look.<br><br>The door is cracked open, so you peek inside - it\'s definitely Sakuya, curled up in a ball and having a nightmare. With a look of concern, you step over to shake her out of it...",
+            text: "Late at night, you\'re woken by moaning coming from a nearby room. Not terribly unusual, except for the fact that this doesn\'t sound like pleasure - and it\'s coming from Sakuya\'s room, not someone you\'d expect to have a midnight paramour. Pulling on a robe, you step out to take a look.<br><br>The door is cracked open, so you peek inside - it\'s definitely Sakuya, curled up in a ball and having a nightmare. With a look of concern, you step over to shake her out of it...",
             weight: -1
           },
           {
@@ -175,7 +175,7 @@ Girls.Sakuya = {
             label: 'Something to Say',
             group: 'Sakuya',
             weight: -2,
-            text: '<blockquote>She will be here soon. If... if you wish me to remain here, I will need to practice.</blockquote> She sounds conflicted, both homesick and slightly scared of her mistress. You ask her what she means by "practice" - she just smiles and begins to glow, a mandala of energy and knives filling the space behind her. It flickers, much to her dismay, and then fades.<br><br><em>From now on, when Sakuya Cleans, you\'ll see her magical ability improve.</em>'
+            text: '<blockquote>She will be here soon. If... if you wish me to remain here, I will need to practice.</blockquote> She sounds conflicted, both homesick and slightly scared of her mistress. You ask her what she means by \"practice\" - she just smiles and begins to glow, a mandala of energy and knives filling the space behind her. It flickers, much to her dismay, and then fades.<br><br><em>From now on, when Sakuya Cleans, you\'ll see her magical ability improve.</em>'
           }
         ],
         girl: {
@@ -201,7 +201,7 @@ Girls.Sakuya = {
           group: 'Enter the Devil',
           image: 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg',
           label: 'Train Sakuya',
-          text: "You\'re out in the city on a late night errand to pick up an extra set of condoms for your girls when a scene catches your eye. It\'s not unusual for a man to be bent over, listening to a young girl whispering in his ear, but you do notice a splash of wet redness as she steps back, in the moment before she wipes her lips on a napkin. She sees you watching - and suddenly, you can\'t move, frozen by her hypnotic power. In a daze, the man she was... whispering to... wanders away as she approaches you.<blockquote>You. I\'ve been looking for you. Didn\'t think you\'d be so cute though.</blockquote>She has a childish voice and demeanor, but you\'re not fooled - this creature is incredibly dangerous and powerful.<blockquote>Oh don\'t worry, I\'m not going to hurt you. I like you! You found Sakuya for me! Now, here\'s what I want you to do. I want you to train Sakuya for a bit longer while I take care of some things in the city, then I\'m going to come and collect her.</blockquote>",
+          text: "You\'re out in the city on a late night errand to pick up an extra set of condoms for your girls when a scene catches your eye. It\'s not unusual for a man to be bent over, listening to a young girl whispering in his ear, but you notice a splash of wet redness as she steps back, in the moment before she wipes her lips on a napkin. She sees you watching - and suddenly, you can\'t move, frozen by her hypnotic power. In a daze, the man she was... whispering to... wanders away as she approaches you.<blockquote>You. I\'ve been looking for you. Didn\'t think you\'d be so cute though.</blockquote>She has a childish voice and demeanor, but you\'re not fooled - this creature is incredibly dangerous and powerful.<blockquote>Oh don\'t worry, I\'m not going to hurt you. I like you! You found Sakuya for me! Now, here\'s what I want you to do. I want you to train Sakuya for a bit longer while I take care of some things in the city, then I\'m going to come and collect her.</blockquote>",
           weight: -1
         },
         mission: 'ScarletDevilTraining'
@@ -290,7 +290,7 @@ Girls.Sakuya = {
             group: 'Enter the Devil',
             label: 'Confrontation',
             image: 'content/girls/Sakuya/missionImages/WinFight.jpg',
-            text: "The battle doesn't take long. Sakuya finally manages to penetrate her foe's defenses, one of the blue bolts knocking the Devil from her feet with a startled expression. Sakuya flickers to her side instantly kneeling on her chest with a fierce expression and her face and a pair of knives in her hand. She stabs the knives into the ground on either side of the Devil\'s head with ferocious strength, leaving buried to the hilt in cracked cobblestones, half an inch from either side of her former mistress\' head. The moon is pale again.",
+            text: "The battle doesn\'t take long. Sakuya finally manages to penetrate her foe\'s defenses, one of the blue bolts knocking the Devil from her feet with a startled expression. Sakuya flickers to her side instantly kneeling on her chest with a fierce expression and her face and a pair of knives in her hand. She stabs the knives into the ground on either side of the Devil\'s head with ferocious strength, leaving buried to the hilt in cracked cobblestones, half an inch from either side of her former mistress\' head. The moon is pale again.",
             delta: false
           }
         },
@@ -299,7 +299,7 @@ Girls.Sakuya = {
             group: 'Enter the Devil',
             label: 'Confrontation',
             image: 'content/girls/Sakuya/images/Base.jpg',
-            text: "She stands, the blue aura finally fading, and returns to where she deposited you at the start of the fight, offering a hand to help you to your feet - you take it, knees wobbly and hair sticky from blood that ran out of your ears. The area around the fight is completely trashed, two inch gouges in solid stone and anything softer completely destroyed. It\'ll be a hell of a cleanup job. An unexpected sound - a giggle - causes you and Sakuya to look over your shoulders.<blockquote>Teeheehee. You're so cute, Sakuya, all grown up...</blockquote> Sakuya blushes and throws a knife at the Devil, which she casually deflects with one hand.<blockquote>Don't worry about the damage - I brought a new maid, just in case things didn\'t work out with you. We\'ll have it patched up by morning. Oh, and do at least <em>pretend</em> to guard your left.</blockquote> And... she's gone. Just... gone. One moment present, the next vanished. Sakuya tells you she won\'t be back. You believe her."
+            text: "She stands, the blue aura finally fading, and returns to where she deposited you at the start of the fight, offering a hand to help you to your feet - you take it, knees wobbly and hair sticky from blood that ran out of your ears. The area around the fight is completely trashed, two inch gouges in solid stone and anything softer completely destroyed. It\'ll be a hell of a cleanup job. An unexpected sound - a giggle - causes you and Sakuya to look over your shoulders.<blockquote>Teeheehee. You\'re so cute, Sakuya, all grown up...</blockquote> Sakuya blushes and throws a knife at the Devil, which she casually deflects with one hand.<blockquote>Don\'t worry about the damage - I brought a new maid, just in case things didn\'t work out with you. We\'ll have it patched up by morning. Oh, and do at least <em>pretend</em> to guard your left.</blockquote> And... she\'s gone. Just... gone. One moment present, the next vanished. Sakuya tells you she won\'t be back. You believe her."
           }
         },
         dontGoLoose1: {
@@ -316,7 +316,7 @@ Girls.Sakuya = {
             group: 'Enter the Devil',
             label: 'Confrontation',
             image: 'content/girls/Sakuya/images/Fetish3.jpg',
-            text: "Rather than leading her away as you\'d expect, she lets out an entirely unexpected giggle, and leads her over to you. Adding an overly-dramatic sigh, she speaks.<blockquote>I guess if she really wants to stay...</blockquote>She places the leash in your completely-paralized hand, and closes your fingers over it. Leaning over to whisper something in Sakuya\'s ear, she giggles again and vanishes. Free to move again, you remove Sakuya\'s blindfold and ask what the Devil said to her.<blockquote>She's not paying for all this.</blockquote> The area around the fight is completely trashed, two inch gouges in solid stone and anything softer completely destroyed. It\'ll be a hell of a cleanup job, and with the Devil nowhere to be seen, it looks like you\'ll be footing the bill..."
+            text: "Rather than leading her away as you\'d expect, she lets out an entirely unexpected giggle, and leads her over to you. Adding an overly-dramatic sigh, she speaks.<blockquote>I guess if she really wants to stay...</blockquote>She places the leash in your completely-paralized hand, and closes your fingers over it. Leaning over to whisper something in Sakuya\'s ear, she giggles again and vanishes. Free to move again, you remove Sakuya\'s blindfold and ask what the Devil said to her.<blockquote>She\'s not paying for all this.</blockquote> The area around the fight is completely trashed, two inch gouges in solid stone and anything softer completely destroyed. It\'ll be a hell of a cleanup job, and with the Devil nowhere to be seen, it looks like you\'ll be footing the bill..."
           }
         },
         staySilentGood: {
@@ -333,7 +333,7 @@ Girls.Sakuya = {
             group: 'Enter the Devil',
             label: 'Confrontation',
             image: 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg',
-            text: "It\'s not right that she live so far from home among strangers, and the Scarlet Devil looks like she\'d be upset (and possibly violent) over a refusal. You nod to Sakuya - she takes her mistress's outstretched hand and turns to face you to say goodbye. A flicker of disapproval crosses Scarlet\'s face, but she doesn\'t interrupt. <blockquote>I will have payment delivered by morning.</blockquote> The Devil frowns at you, clearly not as pleased with you as you had expected, but happy to have Sakuya back nonetheless. She kisses her maid\'s cheek, and they\'re gone. Not walking together down the street, but there one moment, gone the next, the same way Sakuya used to do while cleaning. With a sigh you turn homeward.",
+            text: "It\'s not right that she live so far from home among strangers, and the Scarlet Devil looks like she\'d be upset (and possibly violent) over a refusal. You nod to Sakuya - she takes her mistress\'s outstretched hand and turns to face you to say goodbye. A flicker of disapproval crosses Scarlet\'s face, but she doesn\'t interrupt. <blockquote>I will have payment delivered by morning.</blockquote> The Devil frowns at you, clearly not as pleased with you as you had expected, but happy to have Sakuya back nonetheless. She kisses her maid\'s cheek, and they\'re gone. Not walking together down the street, but there one moment, gone the next, the same way Sakuya used to do while cleaning. With a sigh you turn homeward.",
             weight: -1
           }
         }
@@ -348,7 +348,7 @@ Girls.Sakuya.Actions.Talk.results._append([
       group: 'Sakuya',
       label: 'Talk',
       image: 'content/girls/Sakuya/images/Naked1.jpg',
-      text: "In the early <<- time >> you knock on Sakyua's door, expecting to find her resting. Instead when she opens the door you see her almost completely naked, an unusual change from her modest habits. It looks as though she\'s been stretching. Surprisingly unselfconscious, she pats the bed, inviting you to sit down while she gets dressed.<br><br>The two of you spend some time discussing business - she\'s <<- girl.happiness > 60 ? 'quite pleased with' : 'not enjoying' >> her work here. She seems somewhat restless as you talk - perhaps she hadn\'t finished her exercises when you came in."
+      text: "In the early <<- time >> you knock on Sakyua\'s door, expecting to find her resting. Instead when she opens the door you see her almost completely naked, an unusual change from her modest habits. It looks as though she\'s been stretching. Surprisingly unselfconscious, she pats the bed, inviting you to sit down while she gets dressed.<br><br>The two of you spend some time discussing business - she\'s <<- girl.happiness > 60 ? 'quite pleased with' : 'not enjoying' >> her work here. She seems somewhat restless as you talk - perhaps she hadn\'t finished her exercises when you came in."
     },
     girl: {
       obedience: 1.5,
@@ -374,7 +374,7 @@ Girls.Sakuya.Actions.Talk.results._append([
       group: 'Sakuya',
       label: 'Talk',
       image: 'content/girls/Sakuya/images/Exercise2.jpg',
-      text: "You and Sakuya head out for a short walk. It\'s a nice <<- time >>, and the two of you discuss pleasant nothings such as the upcoming festival, Sakuya\'s ongoing love for the special spiced bread they make at a certain stall in the markets, and what she misses about home. Not very much, it seems - except her mistress, occasionally. She finds her relationship with you odd - working for you, but... it takes a while to get her to finish the sentence. But not dominated or controlled by you, it finally comes out. You suspect she might enjoy a stronger hand on the leash, as it were. Perhaps a literal leash, even."
+      text: "You and Sakuya head out for a short walk. It\'s a nice <<- time >>, and the two of you discuss pleasant nothings such as the upcoming festival, Sakuya\'s ongoing love for the special spiced bread they make at a certain stall in the Market, and what she misses about home. Not very much, it seems - except her mistress, occasionally. She finds her relationship with you odd - working for you, but... it takes a while to get her to finish the sentence. But not dominated or controlled by you, it finally comes out. You suspect she might enjoy a stronger hand on the leash, as it were. Perhaps a literal leash, even."
     },
     girl: {
       obedience: 1.5,
