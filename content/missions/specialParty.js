@@ -91,7 +91,7 @@ Actions.attendParty = {
           group: '<<- girl.name >>',
           label: '<<- action.label >>',
           image: '<<= g.missions.specialParty.special.client.image >>',
-          text: "<< var client = g.missions.specialParty.special.client >><<= girl.name >> arrived at <<= client.name >>'s inn early, wearing her finest clothing. She was met in the common room by a servant - the master wasn\'t ready quite yet, having stayed up a little too late last night. The servant apologized for the commonness of the surroundings - at home, <<= client.name >> had a fine mansion, but not planning on staying in this city long, had decided to make do by renting a set of rooms. <<= girl.name >> nodded and smiled - in her eyes, the inn was quite a fine one, nothing to be apologizing over at all.<br><br><<= client.name >> finally arrived and took her hand.",
+          text: "<< var client = g.missions.specialParty.special.client >><<= girl.name >> arrived at <<= client.name >>\'s inn early, wearing her finest clothing. She was met in the common room by a servant - the master wasn\'t ready quite yet, having stayed up a little too late last night. The servant apologized for the commonness of the surroundings - at home, <<= client.name >> had a fine mansion, but not planning on staying in this city long, had decided to make do by renting a set of rooms. <<= girl.name >> nodded and smiled - in her eyes, the inn was quite a fine one, nothing to be apologizing over at all.<br><br><<= client.name >> finally arrived and took her hand.",
           delta: false
         },
         {
