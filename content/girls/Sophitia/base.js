@@ -1,6 +1,6 @@
 "use strict";
 Girls.Sophitia = {
-  description: "<p>The daughter of a baker, Sophitia worked at her family bakery. She always treasured her country's culture and prayed often to the city guardian. One day, as she bathed in a forest spring, the god of the forge revealed himself, and told her of the evil sword whose existence threatened to bring much pain to the world. He ordered her to seek to destroy this foul blade.</p><p>At first Sophitia was reluctant to take the holy mission, for she was only a baker's daughter, but the god insisted. She tracked down the wielder of this powerful sword - and was gravely wounded in the fight without even inconveniencing him.</p><p>Afraid to face the wrath of her god, she fled for distant lands... and ended up here.</p>",
+  description: "<p>The daughter of a baker, Sophitia worked at her family bakery. She always treasured her country\'s culture and prayed often to the city guardian. One day, as she bathed in a forest spring, the god of the forge revealed himself, and told her of the evil sword whose existence threatened to bring much pain to the world. He ordered her to seek to destroy this foul blade.</p><p>At first Sophitia was reluctant to take the holy mission, for she was only a baker\'s daughter, but the god insisted. She tracked down the wielder of this powerful sword - and was gravely wounded in the fight without even inconveniencing him.</p><p>Afraid to face the wrath of her god, she fled for distant lands... and ended up here.</p>",
   status: 'For Hire',
   happiness: 0,
   endurance: 100,
@@ -46,7 +46,7 @@ Girls.Sophitia.Actions.Talk.results._append([
       group: 'Sophitia',
       label: 'Talk',
       image: 'content/girls/Sophitia/images/Tired.jpg',
-      text: "Talking with Sophitia is one of the nicer jobs you've had - she's pleasant to be around, curious without being intrusive, solid, honest and straightforward to a fault. You wonder how she ended up here, working for you - she'd seem more at home running a small shop or herding children in a schoolyard than raising her skirt for money."
+      text: "Talking with Sophitia is one of the nicer tasks you\'ve had - she\'s pleasant to be around, curious without being intrusive - solid, honest and straightforward to a fault. You wonder how she ended up here, working for you - she\'d seem more at home running a small shop or herding children in a schoolyard than raising her skirt for money."
     },
     girl: {
       obedience: 1.5,
@@ -58,7 +58,7 @@ Girls.Sophitia.Actions.Talk.results._append([
       group: 'Sophitia',
       label: 'Talk',
       image: 'content/girls/Sophitia/images/Study1.jpg',
-      text: "When you knock on her door, Sophitia is sitting on a couch reading. She smiles as you enter, inviting you to take the only chair in the room without rising. She rests the book over one knee - you can't read the cover, but it looks like a cheesy romance from here. You ask her about it, and learn that it is indeed a romance, the heroine of which is a distressed bakers daughter. Curious reading material for a whore, but she doesn't seem to think it odd at all."
+      text: "When you knock on her door, Sophitia is sitting on a couch reading. She smiles as you enter, inviting you to take the only chair in the room without rising. She rests the book over one knee - you can\'t read the cover, but it looks like a cheesy romance from here. You ask her about it, and learn that it is indeed a romance, the heroine of which is a distressed bakers daughter. Curious reading material for a whore, but she doesn\'t seem to think it odd at all."
     },
     girl: {
       obedience: 1.5,
@@ -70,7 +70,7 @@ Girls.Sophitia.Actions.Talk.results._append([
       group: 'Sophitia',
       label: 'Talk',
       image: 'content/girls/Sakuya/images/Study2.jpg',
-      text: "You and Sophitia spend several hours checking over the rules and regulations that govern the Guild, and therefor your brothel. She seems to have nearly infinite patience for such a boring task, taking notes even as the material threatens to send you napping."
+      text: "You and Sophitia spend several hours checking over the rules and regulations that govern the Guild, and therefore your brothel. She seems to have nearly infinite patience for such a boring task, taking notes even as the material threatens to send you napping."
     },
     girl: {
       obedience: 1.5,
