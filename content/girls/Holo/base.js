@@ -270,7 +270,7 @@ Girls.Holo = {
             group: 'Holo',
             label: 'Unfortunate Incident',
             image: 'content/girls/Holo/Nora1.jpg',
-            text: 'Holo returns home in the <<- time >> escorted by a member of the city guard. It seems that she was the center of an... incident in the market, involving a flock of sheep and a very annoyed shepherdess who had to beat her off with a stick - literally. After you promise to take care of the issue, he leaves her in your care.<br><br>Holo alternates between chastened and rebellious - defiant to your face, but sighing with drooping ears when she thinks you aren\'t looking.'
+            text: 'Holo returns home in the <<- time >> escorted by a member of the City Guard. It seems that she was the center of an... incident in the Market, involving a flock of sheep and a very annoyed shepherdess who had to beat her off with a stick - literally. After you promise to take care of the issue, he leaves her in your care.<br><br>Holo alternates between chastened and rebellious - defiant to your face, but sighing with drooping ears when she thinks you aren\'t looking.'
           },
           girl: {
             obedience: 2.5,
@@ -283,7 +283,7 @@ Girls.Holo = {
             group: 'Holo',
             label: 'Another Incident...',
             image: 'content/girls/Holo/images/Refuse2.jpg',
-            text: "Much to your annoyance, Holo has <em>again</em> returned home from the market accompanied by one of the guards - this time (being the third incident of the sort), you have to pay a fine to get her back. With an exasperated sigh, you ask her what exactly her problem is with sheep - and she'd better explain, or you\'ll take the fine out of her paycheck.<blockquote>I am Holo the Wise Wolf. It is therefor only natural that I should hate shepherds and attempt to take my rightful dues. I nearly had one this time, too.</blockquote>You roll your eyes and suggest that if she <em>absolutely must</em> have one of the sheep, she could do something crazy like pay for one, instead of howling and charging at the flock. She shakes her head - clearly you don\'t understand at all."
+            text: "Much to your annoyance, Holo has <em>again</em> returned home from the Market accompanied by one of the guards - this time (being the third incident of the sort), you have to pay a fine to get her back. With an exasperated sigh, you ask her what exactly her problem is with sheep - and she\'d better explain, or you\'ll take the fine out of her paycheck.<blockquote>I am Holo the Wise Wolf. It is therefore only natural that I should hate shepherds and attempt to take my rightful dues. I nearly had one this time, too.</blockquote>You roll your eyes and suggest that if she <em>absolutely must</em> have one of the sheep, she could do something crazy like pay for one, instead of howling and charging at the flock. She shakes her head - clearly you don\'t understand at all."
           },
           money: -75,
           girl: {
@@ -297,7 +297,7 @@ Girls.Holo = {
             group: 'Holo',
             label: 'More sheep?',
             image: 'content/girls/Holo/Enek.jpg',
-            text: "You are almost surprised to see Holo returning home from the market unaccompanied and in a good mood. Her smirk gives you pause though - nothing good can come of this. You\'re about to ask what she\'s done this time, but she beats you to it.<blockquote>I did not do anything this time. But did you know that the fine for a dog attacking a \"human\" is more than twice the fine for a \"human\" attacking livestock?</blockquote>The smirk changes to a grin as she deposits a stack of coin neatly on the table. Then it transmutes slowly to a sour expression as she thinks back on the incident. <blockquote>I was <em>preparing</em> for another attempt when her dog attacked me first.</blockquote>"
+            text: "You are almost surprised to see Holo returning home from the Market unaccompanied and in a good mood. Her smirk gives you pause though - nothing good can come of this. You\'re about to ask what she\'s done this time, but she beats you to it.<blockquote>I did not do anything this time. But did you know that the fine for a dog attacking a \"human\" is more than twice the fine for a \"human\" attacking livestock?</blockquote>The smirk changes to a grin as she deposits a stack of coin neatly on the table. Then it transmutes slowly to a sour expression as she thinks back on the incident. <blockquote>I was <em>preparing</em> for another attempt when her dog attacked me first.</blockquote>"
           },
           money: 160,
           girl: {
@@ -312,7 +312,7 @@ Girls.Holo = {
               group: 'Holo',
               label: 'Afternoon visit',
               image: 'content/girls/Holo/NoraHolo.jpg',
-              text: "Holo returns from her trip to the market sooner than you expected - not alone or in trouble, but accompanied by a pretty young lady. You recognize her from Holo's descriptions - this is the shepherdess she keeps getting into trouble with. Why are they talking happily together then? Holo introduces you to Nora - she\'s polite and timid, but quite friendly, and you invite her to stay for a while."
+              text: "Holo returns from her trip to the Market sooner than you expected - not alone or in trouble, but accompanied by a pretty young lady. You recognize her from Holo\'s descriptions - this is the shepherdess she keeps getting into trouble with. Why are they talking happily together then? Holo introduces you to Nora - she\'s polite and timid, but quite friendly, and you invite her to stay for a while."
             },
             {
               group: 'Holo',
@@ -380,7 +380,7 @@ Girls.Holo = {
               group: 'Holo',
               label: 'Debt Paid',
               image: 'content/miscImages/GuildHQ.jpg',
-              text: "The price for paying Holo's debt is just a little more than that of a solid gold bar, the sort stamped with the King's mark and known as an absolute standard of worth more convenient for large transactions than a whole bag of coins. You take one of these from the Guild Hall, where much of your money is stored as credit (far less likely to get stolen that way, and it\'s a free service for licensed members). Taking the money to the address listed in the note, you are surprised to find it not far from the Guild Hall. You knock on the door - a peep-hole opens to ask your business, then the door when you explain what you\'re here for.",
+              text: "The price for paying Holo\'s debt is just a little more than that of a solid gold bar, the sort stamped with the King\'s mark and known as an absolute standard of worth more convenient for large transactions than a whole bag of coins. You take one of these from the Guild Hall, where much of your money is stored as credit (far less likely to get stolen that way, and it\'s a free service for licensed members). Taking the money to the address listed in the note, you are surprised to find it not far from the Guild Hall. You knock on the door - a peep-hole opens to ask your business, then the door when you explain what you\'re here for.",
               delta: false,
               weight: -2
             },
@@ -396,7 +396,7 @@ Girls.Holo = {
               group: 'Holo',
               label: 'Debt Paid',
               image: 'content/girls/Holo/images/Tired1.jpg',
-              text: "<blockquote>Hmph. Don't just stand there, idiot, apologize! If you\'re glad I'm okay, you should have come far sooner.</blockquote> You attempt to calm her down a bit with an apology and fact that you came as soon as you could (as well as a reminder that you\'ve just paid out a substantial amount of money on her account), but she\'s having none of it, sticking up her nose and turning her back on you, tail swishing agitatedly. Despite the brave face, you suspect that she\'s actually deeply hurt by forcing her debt on you, but unwilling to be vulnerable enough to talk about it.<blockquote>I\'m not talking to you.</blockquote>",
+              text: "<blockquote>Hmph. Don\'t just stand there, idiot, apologize! If you\'re glad I'm okay, you should have come far sooner.</blockquote> You attempt to calm her down a bit with an apology and fact that you came as soon as you could (as well as a reminder that you\'ve just paid out a substantial amount of money on her account), but she\'s having none of it, sticking up her nose and turning her back on you, tail swishing agitatedly. Despite the brave face, you suspect that she\'s actually deeply hurt by forcing her debt on you, but unwilling to be vulnerable enough to talk about it.<blockquote>I\'m not talking to you.</blockquote>",
               weight: -2
             }
           ],
@@ -422,7 +422,7 @@ Girls.Holo = {
       conditions: false,
       variants: function(context, done) {
         var results = this.base().results;
-        var text = "You look again at the envelope containing Holo\'s whereabouts. It\'s been five days now, and your doubts are starting to creep in - is it right to leave her at the mercy of an uncaring debt-collection agency? You may take advantage of her to make some money, sure, and sometimes your trainings are a little hard, but you always care for your girls. $30000 - it\'s a lot of money, and you wouldn\'t expect them to reduce the amount, just because she\'s served half of their required time, but they should still be willing to take your cash and return her...";
+        var text = "You look again at the envelope containing Holo\'s whereabouts. It\'s been five days now, and your doubts are starting to creep in - is it right to leave her at the mercy of an uncaring debt-collection agency? You may take advantage of her to make some money, sure, and sometimes your training methods are a little harsh, but you always care for your girls. $30000 - it\'s a lot of money, and you wouldn\'t expect them to reduce the amount, just because she\'s served half of their required time, but they should still be willing to take your cash and return her...";
         var options = {
           "Pay Holo's debt": "You don\'t much like the sound of this. It\'s a lot of money, but... better dollars than blood and tears.",
           "Don't Pay": "She got herself into this, and five more days isn\'t that long. She\'ll be back soon."
@@ -456,7 +456,7 @@ Girls.Holo = {
               group: 'Holo',
               label: 'Debt Paid',
               image: 'content/girls/Holo/images/Prison.jpg',
-              text: "Stepping inside, you\'re asked to wait a few minutes while someone with the authority to settle such sizable debts is found and brought out. He arrives with Holo in tow, bound and gagged but still expected to hobble along on her own power. She glares at her captor almost constantly while he verifies the money you brought - no wonder she's been gagged. You cut away the rope as soon as she\'s free again, but warn her with a look to stay quiet until you\'re outside - then again with strong words, when she opens her mouth, ready to let out some frustration immediately anyway.",
+              text: "Stepping inside, you\'re asked to wait a few minutes while someone with the authority to settle such sizable debts is found and brought out. He arrives with Holo in tow, bound and gagged but still expected to hobble along on her own power. She glares at her captor almost constantly while he verifies the money you brought - no wonder she\'s been gagged. You cut away the rope as soon as she\'s free again, but warn her with a look to stay quiet until you\'re outside - then again with strong words, when she opens her mouth, ready to let out some frustration immediately anyway.",
               delta: false
             },
             {
@@ -495,7 +495,7 @@ Girls.Holo = {
         var text = "You step outside for an early morning walk when you run into Holo, dressed and packed as though she\'s going on a long journey. You ask her where she\'s headed, and she replies that she\'s finally saved enough to continue her journey northward to her hometown of Yoitz. She's carrying everything she owns, including a ticket for passage on a ship sailing northward from the island today. You ask if she is intent on going now, and her reply is brief and bittersweet.<blockquote>There is no better time to part than when we wish to never leave.</blockquote>";
         var options = {
           'Beg her to stay': "With \"wise words\" like that, there's no way she really wants to go.",
-          'Let her leave': "You wish her well - she\'s said from the beginning that her stay with you was only temporary, a stopover on her journey north."
+          'Let her leave': "You wish her well - she\'s said from the beginning that her stay with you was only temporary, a stop-over on her journey north."
         };
         Game.getUserInput(text, 'content/girls/Holo/Depart.jpg', options, function(answer) {
           if (answer == 'Beg her to stay' && context.girl.happiness < 75) {
@@ -542,7 +542,7 @@ Girls.Holo.Actions.Talk.results._append([
       group: 'Holo',
       label: 'Talk',
       image: 'content/girls/Holo/images/Talk1.jpg',
-      text: "You spend the better part of the <<- time >> trying to learn more about Holo's past, her hometown, her upbringing - anything that might help you understand her. She responds to all of your questions, but she expertly keeps the actual answers to herself. The more she conceals, the more you want to learn, but she seems to be playing with you, seeing how much she can say without actually revealing anything. She slips adages into conversation that sound like veiled advice.<blockquote>A trip is the most fun before one sets out on it. With dogs, the bark and not the bite is more frightening, and women are almost always prettier when they are shrouded in mystery.</blockquote>"
+      text: "You spend the better part of the <<- time >> trying to learn more about Holo\'s past, her hometown, her upbringing - anything that might help you understand her. She responds to all of your questions, but she expertly keeps the actual answers to herself. The more she conceals, the more you want to learn, but she seems to be playing with you, seeing how much she can say without actually revealing anything. She slips adages into conversation that sound like veiled advice.<blockquote>A trip is the most fun before one sets out on it. With dogs, the bark and not the bite is more frightening, and women are almost always prettier when they are shrouded in mystery.</blockquote>"
     },
     girl: {
       obedience: 1.5
@@ -553,7 +553,7 @@ Girls.Holo.Actions.Talk.results._append([
       group: 'Holo',
       label: 'Talk',
       image: 'content/girls/Holo/images/Refuse3.jpg',
-      text: "You and Holo head to a nearby tavern for <<- time == 'morning' ? 'lunch' : 'dinner' >>, and she clings to your arm on the way in excitement. When you're inside, you take a seat and call the barmaid over. You tell Holo you\'ll order her <<- time == 'morning' ? 'honeyed peaches' : 'as much beer as she can drink' >> if she will ask for it with a please. Holo crosses her arms and tries to get your sympathy with an injured expression. The barmaid sees your shaking head and moves on to wait on other tables. Though it takes almost ten minutes, you get eventually get your please and she gets her <<- time == 'morning' ? 'peaches' : 'beer' >>."
+      text: "You and Holo head to a nearby tavern for <<- time == 'morning' ? 'lunch' : 'dinner' >>, and she clings to your arm on the way in excitement. When you\'re inside, you take a seat and call the barmaid over. You tell Holo you\'ll order her <<- time == 'morning' ? 'honeyed peaches' : 'as much beer as she can drink' >> if she will ask for it with a please. Holo crosses her arms and tries to get your sympathy with an injured expression. The barmaid sees your shaking head and moves on to wait on other tables. Though it takes almost ten minutes, you get eventually get your please and she gets her <<- time == 'morning' ? 'peaches' : 'beer' >>."
     },
     girl: {
       obedience: 2.5
@@ -577,7 +577,7 @@ Girls.Holo.Actions.Talk.results._append([
       group: 'Holo',
       label: 'Talk',
       image: 'content/girls/Holo/images/Exercise2.jpg',
-      text: "You and Holo go for a walk through the marketplace, <<- time == 'morning' ? 'which is bustling with people' : 'still busy despite the late hour' >>. A lovely dress for sale catches your eye, and though Holo\'s ears twitch and she looks at you hopefully, you don\'t stop. When pressed, you tell her that someone with a tail like hers doesn\'t need a dress to be noticed. She seems satisfied with that, but adds more.<blockquote>I know it\'s difficult to look past my brilliant tail, brain, and looks, but I also have excellent ears and eyes.</blockquote>"
+      text: "You and Holo go for a walk through the Market, <<- time == 'morning' ? 'which is bustling with people' : 'still busy despite the late hour' >>. A lovely dress for sale catches your eye, and though Holo\'s ears twitch and she looks at you hopefully, you don\'t stop. When pressed, you tell her that someone with a tail like hers doesn\'t need a dress to be noticed. She seems satisfied with that, but adds more.<blockquote>I know it\'s difficult to look past my brilliant tail, brain, and looks, but I also have excellent ears and eyes.</blockquote>"
     },
     girl: {
       obedience: 1.5,
