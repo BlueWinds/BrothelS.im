@@ -1,6 +1,6 @@
 "use strict";
 Girls.Yuna = {
-  description: "A summoner with powerful allies, Yuna fled the devastation of her homeland by mysterious forces, arriving here some months ago. She initially sought to gather allies to return home and rescue her land, but with little money and everyone busy with their own problems, she\'s been getting desperate for a job. Any job.",
+  description: "A summoner with powerful abilities, Yuna fled the devastation of her homeland by mysterious forces, arriving here some months ago. She initially sought to gather allies to return home and rescue her land, but with little money and everyone busy with their own problems, she\'s been getting desperate for a job. Any job.",
   status: 'For Hire',
   happiness: 25,
   endurance: 100,
@@ -93,7 +93,7 @@ Girls.Yuna = {
             label: 'Summon',
             group: '<<- girl.name >>',
             image: '<<- girl.image() >>',
-            text: 'Yuna failed to summon anything interesting. <<= Math.choice(["She couldn\'t concentrate, and managed nothing more than making herself tired.", "She did succeed in summoning a tiny little flame will-o-wisp, but it had nothing of value to offer.", "The spell was on the verge of success when she lost control, barely managing to prevent ane explosion of magic from destroying the area."]) >>'
+            text: 'Yuna failed to summon anything interesting. <<= Math.choice(["She couldn\'t concentrate, and managed nothing more than making herself tired.", "She did succeed in summoning a tiny little flame will-o-wisp, but it had nothing of value to offer.", "The spell was on the verge of success when she lost control, barely managing to prevent the explosion of magic from destroying the area."]) >>'
           },
           girl: {
             happiness: -5,
@@ -108,7 +108,7 @@ Girls.Yuna = {
             label: 'Summon',
             group: '<<- girl.name >>',
             image: '<<- girl.image("summon") >>',
-            text: "Yuna summoned an ethereal maid <<if (girl.building()) { >>that whisked around  up the <<= girl.building().name >>, cleaning up everything - it's never looked so sparkling!<< } else {>> - but since she doesn't have a permanent residence, it spent hours tidying up the alleyway and cleaning the street rather than doing anything useful.<< } >>"
+            text: "Yuna summoned an ethereal maid <<if (girl.building()) { >>that whisked around  up the <<= girl.building().name >>, cleaning up everything - it\'s never looked so sparkling!<< } else {>> - but since she doesn't have a permanent residence, it spent hours tidying up the alleyway and cleaning the street rather than doing anything useful.<< } >>"
           },
           girl: {
             building: {
@@ -382,7 +382,7 @@ Girls.Yuna = {
           label: "A Visit from the Tax Collector",
           group: 'Yuna',
           image: 'content/girls/Yuna/missionImages/taxCollectors.jpg',
-          text: "Just after sunrise, you hear a pounding at your door. You stagger sleepily towards it, but awaken suddenly when you realize who your visitors are: Collectors of the temple tax. Though the temple tax is usually only paid by temple worshipers, the well-armed men tell you that to help recoup the costs of the wedding, the lord of the city has approved a temporary extension to the residents of your street. Their paperwork looks legitimate, and you notice that it is marked with the personal seal of High Priest Detic. You hear that the wedding did go on without Yuna - a veiled bride of uncertain name - but you\'d guess that he didn\'t take kindly to his intended skipping out. You have no option but to pay the men.",
+          text: "Just after sunrise, you hear a pounding at your door. You stagger sleepily towards it, but awaken suddenly when you realize who your visitors are - Collectors of the temple tax. Though the temple tax is usually only paid by temple worshipers, the well-armed men tell you that to help recoup the costs of the wedding, the lord of the city has approved a temporary extension to the residents of your street. Their paperwork looks legitimate, and you notice that it is marked with the personal seal of High Priest Detic. You hear that the wedding did go on without Yuna - a veiled bride of uncertain name - but you\'d guess that he didn\'t take kindly to his intended skipping out. You have no option but to pay the men.",
           weight: -1
         },
         money: -4000
@@ -441,7 +441,7 @@ Girls.Yuna.Actions.Talk.results._append([
       group: 'Yuna',
       label: 'Talk',
       image: 'content/girls/Yuna/images/Exercise2.jpg',
-      text: "As you and Yuna sit down to spend some time together, she instead suggests that you take a walk through the city instead. A \"walk\" doesn't seem to be exactly what she had in mind though, as you end up, somehow, in the marketplace, looking at clothing. It\'s hard to object when she decides to start trying on outfits - especially when they involve as little cloth as the ones she\'s picking out. Finally, you end up buying something for her, a pair of pants that seem like they might fall off at any moment. You hope that they do."
+      text: "As you and Yuna sit down to spend some time together, she instead suggests that you take a walk through the city instead. A \"walk\" doesn't seem to be exactly what she had in mind though, as you end up, somehow, in the Market, looking at clothing. It\'s hard to object when she decides to start trying on outfits - especially when they involve as little cloth as the ones she\'s picking out. Finally, you end up buying something for her, a pair of pants that seem like they might fall off at any moment. You hope that they do."
     },
     girl: {
       obedience: 1,
@@ -455,7 +455,7 @@ Girls.Yuna.Actions.Talk.results._append([
       group: 'Yuna',
       label: 'Talk',
       image: 'content/girls/Yuna/images/Study1.jpg',
-      text: "<blockquote>What do you think of my new dress?</blockquote> Yuna twirls in front of you, showing off. It's very... much like every other dress you\'ve seen her wearing, as a matter of fact. She does seem very fond of this particular style. You avoid mentioning the fact, and instead comment on how its colors differ subtly from her usual costume."
+      text: "<blockquote>What do you think of my new dress?</blockquote> Yuna twirls in front of you, showing off. It\'s very... much like every other dress you\'ve seen her wearing, as a matter of fact. She does seem very fond of this particular style. You avoid mentioning the fact, and instead comment on how its colors differ subtly from her usual costume."
     },
     girl: {
       obedience: 1.5,
