@@ -70,7 +70,7 @@ Girls.Sophitia.Actions.Talk.results._append([
       group: 'Sophitia',
       label: 'Talk',
       image: 'content/girls/Sakuya/images/Study2.jpg',
-      text: "You and Sophitia spend several hours checking over the rules and regulations that govern the Guild, and therefore your brothel. She seems to have nearly infinite patience for such a boring task, taking notes even as the material threatens to send you napping."
+      text: "You and Sophitia spend several hours checking over the rules and regulations that govern The Guild, and therefore your brothel. She seems to have nearly infinite patience for such a boring task, taking notes even as the material threatens to send you napping."
     },
     girl: {
       obedience: 1.5,
