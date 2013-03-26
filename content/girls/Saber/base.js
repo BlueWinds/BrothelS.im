@@ -92,7 +92,7 @@ Girls.Saber = {
               label: 'Patrol',
               group: '<<- girl.name >>',
               image: '<<- girl.image() >>',
-              text: 'Mucking through a seldom visited back allyway in the slums, Saber saw a dark mass half-blocking an enterance to the sewers. Though she recognized the shape, it seemed already-dead, given some of the massive gouges visible along its flank and the complete lack of movement. She went closer to investigate, carelessly stepping amid its flacid appendages...',
+              text: 'Mucking through a seldom visited back alleyway in the slums, Saber saw a dark mass half-blocking an enterance to the sewers. Though she recognized the shape, it seemed already-dead, given some of the massive gouges visible along its flank and the complete lack of movement. She went closer to investigate, carelessly stepping amid its flacid appendages...',
               delta: false
             },
             {
@@ -130,7 +130,7 @@ Girls.Saber = {
               label: 'Patrol',
               group: '<<- girl.name >>',
               image: '<<- girl.image("naked") >>',
-              text: "A trio of guards on patrol demanded to examine Saber's sword - law abiding as she was, she complied without hesitation. A mistake, as they then drew their own and demanded that she \"entertain\" them with a striptease. Saber hesitantly removed article after article of clothing until she was fully naked, as a crowd began to gather to watch the free show. Her scowls didn't do much to drive anyone away. Finally, one of the guards grew tired of watching, and pulled out his dick, thrusting it towards her.",
+              text: "A trio of guards on patrol demanded to examine Saber\'s sword - law abiding as she was, she complied without hesitation. A mistake, as they then drew their own and demanded that she \"entertain\" them with a striptease. Saber hesitantly removed article after article of clothing until she was fully naked, as a crowd began to gather to watch the free show. Her scowls didn\'t do much to drive anyone away. Finally, one of the guards grew tired of watching, and pulled out his dick, thrusting it towards her.",
               delta: false
             },
             {
@@ -186,7 +186,7 @@ Girls.Saber = {
             label: 'Patrol',
             group: '<<- girl.name >>',
             image: '<<- girl.image("exercise") >>',
-            text: "Exploring the most unsavory parts of the city, Saber encountered a band of ruffians. Unable to catch her by surprise, they were no match for even her sheathed sword, and she handed them over to the town guard who promised to take care of the issue. A young woman should be able to walk safely anywhere, not just in public places."
+            text: "Exploring the most unsavory parts of the city, Saber encountered a band of ruffians. Unable to catch her by surprise, they were no match for even her sheathed sword, and she handed them over to the City Guard who promised to take care of the issue. A young woman should be able to walk safely anywhere, not just in public places."
           },
           girl: {
             happiness: 1,
@@ -266,7 +266,7 @@ Girls.Saber.Actions.Talk.results._append([
       group: 'Saber',
       label: 'Talk',
       image: 'content/girls/Saber/images/Exercise1.jpg',
-      text: "Saber seems in no mood to sit around and talk, so you instead take her for a walk in the park. It is a nearly perfect <<- time >>, and she looks very pretty in her clothing, modest as it is. You see her watching a group of young people playing some game or other that involves a great deal of energetic running away from each other - and as you get closer, one of them stumbles and into the two of you. Saber catches the young man - no younger than her, really - and he rather than appologizing, just shouts \"You're it!\" and runs away, looking over his shoulder so see if she\'s going to chase him.<br><br>She looks at you for permission, and you nod. There are worse ways to spend some time than being young again."
+      text: "Saber seems in no mood to sit around and talk, so you instead take her for a walk in the park. It is a nearly perfect <<- time >>, and she looks very pretty in her clothing, modest as it is. You see her watching a group of young people playing some game or other that involves a great deal of energetic running away from each other - and as you get closer, one of them stumbles and into the two of you. Saber catches the young man - no younger than her, really - and he rather than appologizing, just shouts \"You\'re it!\" and runs away, looking over his shoulder so see if she\'s going to chase him.<br><br>She looks at you for permission, and you nod. There are worse ways to spend some time than being young again."
     },
     girl: {
       obedience: 1.5,
