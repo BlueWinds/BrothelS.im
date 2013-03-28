@@ -24,7 +24,7 @@ Rooms.Washroom = {
 
 Rooms.Kitchen = {
   price: 750,
-  description: "A kitchen keeps your girls happier since they don't always have to go out for food.",
+  description: "A kitchen keeps your girls happier since they don\'t always have to go out for food.",
   daily: {
     money: -10,
     girl: {

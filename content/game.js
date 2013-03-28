@@ -18,7 +18,7 @@ Game.tooltips = {};
 
 Game.fetishDescriptions = {
   tentacles: 'Tentacled monsters roam the land, searching for human women to satisfy their dark lusts.',
-  rape: 'The city guard is not as zealous about enforcing women\'s rights as it should be, and men sometimes take them unwillingly. This does not include mind-control/magic/reluctance - this toggle just controls physical violation by humans.'
+  rape: 'The City Guard is not as zealous about enforcing women\'s rights as it should be, and men sometimes take them unwillingly. This does not include mind-control/magic/reluctance - this toggle just controls physical violation by humans.'
 };
 
 Game.strings = {

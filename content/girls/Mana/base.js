@@ -1,6 +1,6 @@
 "use strict";
 Girls.Mana = {
-  description: "<p>An inhabitant of an ancient kingdom, Mana promised that she would become a master magician in memory of her teacher. Her soul spent the next thousand years trapped in various magical items before finally being freed again by a kind owner. She's not exactly sure how she ended up here - lost in an unknown land and without anyone she knew and could rely on, she decided to start looking for a job. Any job, really.</p>",
+  description: "<p>An inhabitant of an ancient kingdom, Mana promised that she would become a master magician in memory of her teacher. However, an accident while training meant her soul spent the next thousand years trapped in various magical items before finally being freed again by a kind owner. She\'s not exactly sure how she ended up here - lost in an unknown land and without anyone she knew and could rely on, she decided to start looking for a job. Any job, really.</p>",
   status: 'For Hire',
   happiness: 0,
   endurance: 100,
@@ -90,7 +90,7 @@ Girls.Mana.Actions.Talk.results._append([
       group: 'Mana',
       label: 'Talk',
       image: 'content/girls/Mana/images/Tired1.jpg',
-      text: "You settle down on the bench where you've agreed to meet her, and wait. And wait. And wai... oh, there she is, only half an hour late. Mana runs down the street towards you, waving her arms enthusiastically the ensure you know she's seen you and is coming. You wince in sympathy as she stumbles - perhaps she should pay more attention to the ground, and less to waving at you... Oh ouch. You're out of your seat and running towards her even as the carriage that flattened her rolls to a stop.<br><br>The driver apologizes profusely, but it really wasn't his fault that DMG dashed in front of his wheels without looking. You spend the rest of the <<- time >> tending to her injuries back at the <<- girl.building() ? girl.building().name : 'Inn'>>."
+      text: "You settle down on the bench where you\'ve agreed to meet her, and wait. And wait. And wai... oh, there she is, only half an hour late. Mana runs down the street towards you, waving her arms enthusiastically to ensure you know she\'s seen you and is coming. You wince in sympathy as she stumbles - perhaps she should pay more attention to the ground, and less to waving at you... Oh ouch. You\'re out of your seat and running towards her even as the carriage that flattened her rolls to a stop.<br><br>The driver apologizes profusely, but it really wasn\'t his fault that Mana dashed in front of his wheels without looking. You spend the rest of the <<- time >> tending to her injuries back at the <<- girl.building() ? girl.building().name : 'Inn'>>."
     },
     girl: {
       obedience: 2.5,
@@ -102,7 +102,7 @@ Girls.Mana.Actions.Talk.results._append([
       group: 'Mana',
       label: 'Talk',
       image: 'content/girls/Mana/images/Exercise1.jpg',
-      text: "After several days of pestering, you finally relent to Mana's seeminly endless chatter and take her out to visit a new shop that recently opened nearby. She runs ahead, and when you catch up, you find her nearly plastered to the window display, eyeing an endless supply of candy and sweet baked goods. Laughing at her enthusiasm as the two of you enter, you announce that you'll get her any one thing. This proves to be... a mistake.<br><br>The giant lollipop in the center of the store? The one that looked like an ornamental stand? It was real, it was for sale, and you had to carry it home since it was too heavy for Mana to carry. You wonder how long it will take her to finish it, and whether you should invest in some earplugs in the meantime."
+      text: "After several days of pestering, you finally relent to Mana\'s seeminly endless chatter and take her out to visit a new shop that recently opened nearby. She runs ahead, and when you catch up, you find her nearly plastered to the window display, eyeing an endless supply of candy and sweet baked goods. Laughing at her enthusiasm as the two of you enter, you announce that you\'ll get her any one thing. This proves to be... a mistake.<br><br>The giant lollipop in the center of the store? The one that looked like an ornamental stand? It was real, it was for sale, and you had to carry it home since it was too heavy for Mana to carry. You wonder how long it will take her to finish it, and whether you should invest in some earplugs in the meantime."
     },
     girl: {
       obedience: 1,
@@ -115,7 +115,7 @@ Girls.Mana.Actions.Talk.results._append([
       group: 'Mana',
       label: 'Talk',
       image: 'content/girls/Mana/images/Tired3.jpg',
-      text: "Unlike some of the other girls with mysterious pasts, Mana isn't shy telling you about her history. She doesn't seem to miss being an immortal powerful spirit - the battles were exciting, and she got to save the world on more than one occasion if her stories are to be believed, but lacking physical form was a significant drawback. Battles were <em>all</em> she got to see. She much prefers her new life, where she can eat ice cream, run around in the park, and, yes, fuck."
+      text: "Unlike some of the other girls with mysterious pasts, Mana isn\'t shy telling you about her history. She doesn\'t seem to miss being an immortal powerful spirit - the battles were exciting, and she got to save the world on more than one occasion if her stories are to be believed, but lacking physical form was a significant drawback. Battles were <em>all</em> she got to see. She much prefers her new life, where she can eat ice cream, run around in the park, and, yes, fuck."
     },
     girl: {
       obedience: 2,

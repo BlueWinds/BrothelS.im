@@ -46,7 +46,7 @@ Actions.Exercise = {
         group: '<<- girl.name >>',
         label: 'Exercise',
         image: '<<- girl.image("tired") >>',
-        text: '<<- girl.name >> jogged around the city. The sky was overcast and cloudy, and it began to rain as she neared the end of her run, leaving <<- girl.name >> to miserable and soaked when she returned.'
+        text: '<<- girl.name >> jogged around the city. The sky was overcast and cloudy, and it began to rain as she neared the end of her run, leaving <<- girl.name >> miserable and soaked when she returned.'
       },
       girl: {
         endurance: -20,
@@ -61,7 +61,7 @@ Actions.Exercise = {
 Actions.Study = {
   label: 'Study',
   group: 'Training',
-  description: '<<- girl.name >> will attend courses at the local university to increase her <<- __("intelligence") >>.',
+  description: '<<- girl.name >> will attend courses at the local University to increase her <<- __("intelligence") >>.',
   conditions: {
     missions: { charismaAndIntelligence: 3 }
   },
@@ -200,7 +200,7 @@ Actions.Expose = {
         group: '<<- girl.name >>',
         label: 'Expose',
         image: '<<- girl.image("exercise") >>',
-        text: '<<- girl.name >> wore a short skirt, wandering through the city park. She stopped by the playground to watch the children for a while - and when a little boy hurt himself, she bent down to help him. Not an event worthy of remark, save that it bared her panties and part of her ass to the boy\'s father, who whistled in appreciation. She blushed furiously, and ran home in embarrassment.'
+        text: '<<- girl.name >> wore a short skirt, wandering through the City Park. She stopped by the playground to watch the children for a while - and when a little boy hurt himself, she bent down to help him. Not an event worthy of remark, save that it bared her panties and part of her ass to the boy\'s father, who whistled in appreciation. She blushed furiously, and ran home in embarrassment.'
       },
       girl: {
         endurance: -4,
@@ -214,7 +214,7 @@ Actions.Expose = {
         group: '<<- girl.name >>',
         label: 'Expose',
         image: '<<- girl.image("exercise") >>',
-        text: '<<- girl.name >> wore a skimpy outfit, miniskirt and too-small t-shirt. << if (time == "morning") { >>She wandered through the busiest parts of the city, treating select passersby to a brief glimpse of her pantiles pussy as she bent over to "retrieve" a dropped object. The tiny top didn\'t leave much to the imagination.<< } else { >>She stopped by the park, and, feeling brave, left everything except her panties on the shore. Ignoring the "no swimming" signs, she was pretty sure a few people caught sight of her in the moonlight.<< } >>'
+        text: '<<- girl.name >> wore a skimpy outfit, miniskirt and too-small t-shirt. << if (time == "morning") { >>She wandered through the busiest parts of the city, treating select passersby to a brief glimpse of her pantieless pussy as she bent over to "retrieve" a dropped object. The tiny top didn\'t leave much to the imagination.<< } else { >>She stopped by the park, and, feeling brave, left everything except her panties on the shore. Ignoring the "no swimming" signs, she was pretty sure a few people caught sight of her in the moonlight.<< } >>'
       },
       girl: {
         endurance: -5,
@@ -266,7 +266,7 @@ Actions.Expose = {
           group: '<<- girl.name >>',
           label: 'Expose',
           image: '<<- girl.image("prison") >>',
-          text: 'She wasn\'t fast enough. They soon caught up with <<- girl.name >>, bringing her escapade to a rough and crashing halt. The guards took her to the town gaol and locked her up. It was miserable and cold, but in light of her nakedness at least she got her own cell. Since she didn\'t have any money on her, you were called in and had to pay her fine.'
+          text: 'She wasn\'t fast enough. They soon caught up with <<- girl.name >>, bringing her escapade to a rough and crashing halt. The guards took her to the Garrison and locked her up. It was miserable and cold, but in light of her nakedness at least she got her own cell. Since she didn\'t have any money on her, you were called in and had to pay her fine.'
         }
       ],
       girl: {
@@ -283,7 +283,7 @@ Actions.Expose = {
         group: '<<- girl.name >>',
         label: 'Expose',
         image: '<<- girl.image("naked") >>',
-        text: '<<- girl.name >> visited the crowded town square and stood on the low wall of the fountain. She began an unannounced striptease, slowly removing each piece of clothing and dropping it into the water below. By the time <<- girl.name >> was completely naked, she had a large audience of appreciative onlookers cheering and asking for more. She held their undivided attention for another twenty minutes as she danced and posed for them, letting them see her from every angle. Not wanting to risk arrest, she walked through the crowd when she was finished, getting several propositions on her way home.'
+        text: '<<- girl.name >> visited the crowded Market square and stood on the low wall of the fountain. She began an unannounced striptease, slowly removing each piece of clothing and dropping it into the water below. By the time <<- girl.name >> was completely naked, she had a large audience of appreciative onlookers cheering and asking for more. She held their undivided attention for another twenty minutes as she danced and posed for them, letting them see her from every angle. Not wanting to risk arrest, she walked through the crowd when she was finished, getting several propositions on her way home.'
       },
       girl: {
         endurance: -10,
@@ -296,7 +296,7 @@ Actions.Expose = {
         group: '<<- girl.name >>',
         label: 'Expose',
         image: '<<- girl.image("naked") >>',
-        text: 'Completely liberated from the burden of clothing, <<- girl.name >> went for an evening walk through the streets of the city. Her fellow streetwalkers could not help but look on in awe at her brazenness - and her body! A cool breeze and many furtive glances caressed her as she made her way through the park and crossed the market. As no complaints were registered with the patrolling city guards, they let her pass by with only a wink as payment. As the sun set, she returned to her room refreshed and excited.'
+        text: 'Completely liberated from the burden of clothing, <<- girl.name >> went for an evening walk through the streets of the city. Her fellow streetwalkers could not help but look on in awe at her brazenness - and her body! A cool breeze and many furtive glances caressed her as she made her way through the park and crossed the Market. As no complaints were registered with the patrolling City Guards, they let her pass by with only a wink as payment. As the sun set, she returned to her room refreshed and excited.'
       },
       girl: {
         endurance: -10,
@@ -356,7 +356,7 @@ Actions.OD = {
         group: '<<- girl.name >>',
         label: 'Orgasm Denial',
         image: '<<- girl.image("hard") >>',
-        text: 'You pushed <<- girl.name >> up against the wall while rubbing her pussy with one hand through her underwear. As she got more worked up, you introduced a dildo, pushing it inside up to the hilt without removing her clothing. Nibbling on her ear and whispering in her ear, you continued to play mercilessly with her sex, never quite providing enough stimulation to bring her to orgasm.'
+        text: 'You pushed <<- girl.name >> up against the wall while rubbing her pussy with one hand through her underwear. As she got more worked up, you introduced a dildo, pushing it inside up to the hilt without removing her clothing. Nibbling on her neck and whispering in her ear, you continued to play mercilessly with her sex, never quite providing enough stimulation to bring her to orgasm.'
       },
       girl: {
         endurance: -6,
@@ -370,7 +370,7 @@ Actions.OD = {
         group: '<<- girl.name >>',
         label: 'Orgasm Denial',
         image: '<<- girl.image("anal") >>',
-        text: 'Stripping off all of <<- girl.name >>\'s clothes, you had her lay across the bed face down, feet kicked up in the air while you settled in behind her. Playing with her pussy for a minute to get her wet, you finally produced a well lubricated dildo and pressed it against her ass, lightly then with increasing pressure until it finally slid in with a pop. You slid off the bed to bring your dead level with her pussy, licking and sucking on her love button while you continued to play with the dildo with one hand, pressing it further in, rotating it around and generally bringing her to the very edge of orgasm before backing off, only to begin again in a few minutes.'
+        text: 'Stripping off all of <<- girl.name >>\'s clothes, you had her lay across the bed face down, feet kicked up in the air while you settled in behind her. Playing with her pussy for a minute to get her wet, you finally produced a well-lubricated dildo and pressed it against her ass, lightly then with increasing pressure until it finally slid in with a pop. You slid off the bed to bring your face dead-level with her pussy, licking and sucking on her love button while you continued to play with the dildo with one hand, pressing it further in, rotating it around and generally bringing her to the very edge of orgasm before backing off, only to begin again in a few minutes.'
       },
       girl: {
         endurance: -7,
@@ -422,7 +422,7 @@ Actions.Lockdown = {
         group: '<<- girl.name >>',
         label: 'Lockdown',
         image: '<<- girl.image("fetish") >>',
-        text: "<<- girl.name >> spent the day bound, gagged and naked in the dungeon, hands tied above her head and wishing something interesting would happen. It was cold underground, and by the time you check back in to release her, she's very, very ready for a long, hot bath."
+        text: "<<- girl.name >> spent the day bound, gagged and naked in the dungeon, hands tied above her head and wishing something interesting would happen. It was cold underground, and by the time you check back in to release her, she\'s very, very ready for a long, hot bath."
       },
       girl: {
         endurance: -12,
@@ -437,7 +437,7 @@ Actions.Lockdown = {
         group: '<<- girl.name >>',
         label: 'Lockdown',
         image: '<<- girl.image("fetish") >>',
-        text: "<<- girl.name >> spent the day in the dungeon's stockade without clothes. You checked in occasionally to spank her. She doesn't cry, though you can see her eyes watering once, and by the time you release her her bottom is bright red. She may sit gingerly tomorrow."
+        text: "<<- girl.name >> spent the day in the dungeon\'s stockade without clothes. You checked in occasionally to spank her. She doesn\'t cry, though you can see her eyes watering once, and by the time you release her her bottom is bright red. She may sit gingerly tomorrow."
       },
       girl: {
         endurance: -12,

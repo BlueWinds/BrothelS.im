@@ -1,5 +1,5 @@
 Girls.Saber = {
-  description: "<p>Her full name is Arturia Pendragon, once king of a country lost in the mists of time and wielder of a holy sword.<p><p>On her death, she was transmuted into a spiritual guardian of the world, but through some process she's unwilling to discuss, has again become incarnate. Saber possesses magical artifacts that allow her to recover from almost any wound, and has almost unimaginable skill with a sword.</p><p>Despite her royal heritage and highly marketable skills, she seems willing to work for you...</p>",
+  description: "<p>Her full name is Arturia Pendragon, once queen of a country lost in the mists of time and wielder of a holy sword.<p><p>On her death, she was transmuted into a spiritual guardian of the world, but through some process she\'s unwilling to discuss, has again become incarnate. Saber possesses magical artifacts that allow her to recover from almost any wound, and has almost unimaginable skill with a sword.</p><p>Despite her royal heritage and highly marketable skills, she seems willing to work for you...</p>",
   status: 'For Hire',
   happiness: 0,
   endurance: 100,
@@ -92,14 +92,14 @@ Girls.Saber = {
               label: 'Patrol',
               group: '<<- girl.name >>',
               image: '<<- girl.image() >>',
-              text: 'Mucking through a seldom visited back allyway in the slums, Saber saw a dark mass half-blocking an enterance to the sewers. Though she recognized the shape, it seemed already-dead, given some of the massive gouges visible along its flank and the complete lack of movement. She want closer to investigate, carelessly stepping amid its flacid apendages...',
+              text: 'Mucking through a seldom visited back alleyway in the slums, Saber saw a dark mass half-blocking an enterance to the sewers. Though she recognized the shape, it seemed already-dead, given some of the massive gouges visible along its flank and the complete lack of movement. She went closer to investigate, carelessly stepping amid its flacid appendages...',
               delta: false
             },
             {
               label: 'Patrol',
               group: '<<- girl.name >>',
               image: '<<- girl.image("tentacles") >>',
-              text: 'The monster sprang to life, limbs coiling around her instantly while a stinger plunged into her thigh. Saber struggled in the tightening coils, and managed to free herself - but the aphrodesiac effects of the stinger were too much, and before she could slay the beast her sword slipped from her trembling hand. It pinned the young woman down as she gasped with blind ecstacy, and took its time thoroughly testing the limits of her every hole.<br><br> Finding Saber\'s fair skin and fertile body to its liking, the monster filled her with an endless stream of milky white liquid until her belly distended. Saber squirmed as the aphrodesiac could no longer suppress the pain, and the monster stung Saber again, this time with a proper dose that left her dumb with pleasure and blissfully unaware of the next few hours of endless violation.<br><br>Saber awoke in a large puddle of cum. It continued to leak out as she staggered home, dribbling down her thighs and marking the path she took.'
+              text: 'The monster sprang to life, limbs coiling around her instantly while a stinger plunged into her thigh. Saber struggled in the tightening coils, and managed to free herself - but the aphrodisiac effects of the stinger were too much, and before she could slay the beast her sword slipped from her trembling hand. It pinned the young woman down as she gasped with blind ecstacy, and took its time thoroughly testing the limits of her every hole.<br><br> Finding Saber\'s fair skin and fertile body to its liking, the monster filled her with an endless stream of milky white liquid until her belly distended. Saber squirmed as the aphrodisiac could no longer suppress the pain, and the monster stung Saber again, this time with a proper dose that left her dumb with pleasure and blissfully unaware of the next few hours of endless violation.<br><br>Saber awoke in a large puddle of cum. It continued to leak out as she staggered home, dribbling down her thighs and marking the path she took.'
             }
           ],
           girl: {
@@ -130,7 +130,7 @@ Girls.Saber = {
               label: 'Patrol',
               group: '<<- girl.name >>',
               image: '<<- girl.image("naked") >>',
-              text: "A trio of guards on patrol demanded to examine Saber's sword - law abiding as she was, she complied without hesitation. A mistake, as they then drew their own and demanded that she \"entertain\" them with a striptease. Saber hesitantly removed article after article of clothing until she was fully naked, as a crowd began to gather to watch the free show. Her scowls didn't do much to drive anyone away. Finally, one of the guards grew tired of watching, and pulled out his dick, thrusting it towards her.",
+              text: "A trio of guards on patrol demanded to examine Saber\'s sword - law abiding as she was, she complied without hesitation. A mistake, as they then drew their own and demanded that she \"entertain\" them with a striptease. Saber hesitantly removed article after article of clothing until she was fully naked, as a crowd began to gather to watch the free show. Her scowls didn\'t do much to drive anyone away. Finally, one of the guards grew tired of watching, and pulled out his dick, thrusting it towards her.",
               delta: false
             },
             {
@@ -144,7 +144,7 @@ Girls.Saber = {
               label: 'Patrol',
               group: '<<- girl.name >>',
               image: '<<- girl.image("refuse") >>',
-              text: "A mistake. She kneed the man skull-fucking her in the groin, grabbed the sword on the ground, and had it against the final guard's neck before he had even finished blinking. As tempted as she was to reduce the number of corrupt city guards by force, even this filth didn't deserve to die with their pants around their ankles.<br><br>She settled for breaking all six arms that had dared to touch her, the crowd scattering to the four winds, fearful that she might come after them next."
+              text: "A mistake. She kneed the man skull-fucking her in the groin, grabbed the sword on the ground, and had it against the final guard\'s neck before he had even finished blinking. As tempted as she was to reduce the number of corrupt city guards by force, even this filth didn\'t deserve to die with their pants around their ankles.<br><br>She settled for breaking all six arms that had dared to touch her, the crowd scattering to the four winds, fearful that she might come after them next."
             }
           ],
           girl: {
@@ -168,7 +168,7 @@ Girls.Saber = {
               label: 'Patrol',
               group: '<<- girl.name >>',
               image: '<<- girl.image("group") >>',
-              text: "Wham! She saw stars as someone brought a club down across her temple. Still dazed by the blow, she wasn't fast enough to dodge as a man wrapped strong arms around her, pinning both arms at her sides, keeping her immobilized while another man emerged from the building with rope to bind her. When the blindfold arrived, she saw no more.<br><br>The blindfold was removed in a dark room. and they bound her to a stone pillar, roughly ripping away her clothing to expose tender pale flesh. They took turns shoving everything from apples to batons into her vagina, laughing at her curses and squirms as she stretched to accommodate the large objects.<br> They left Saber in a puddle of tears and semen with her prized sword rammed into her ass hilt first."
+              text: "Wham! She saw stars as someone brought a club down across her temple. Still dazed by the blow, she wasn\'t fast enough to dodge as a man wrapped strong arms around her, pinning both arms at her sides, keeping her immobilized while another man emerged from the building with rope to bind her. When the blindfold arrived, she saw no more.<br><br>The blindfold was removed in a dark room. and they bound her to a stone pillar, roughly ripping away her clothing to expose tender pale flesh. They took turns shoving everything from apples to batons into her vagina, laughing at her curses and squirms as she stretched to accommodate the large objects.<br> They left Saber in a puddle of tears and semen with her prized sword rammed into her ass hilt first."
             }
           ],
           girl: {
@@ -186,7 +186,7 @@ Girls.Saber = {
             label: 'Patrol',
             group: '<<- girl.name >>',
             image: '<<- girl.image("exercise") >>',
-            text: "Exploring the most unsavory parts of the city, Saber encountered a band of ruffians. Unable to catch her by surprise, they were no match for even her sheathed sword, and she handed them over to the town guard who promised to take care of the issue. A young woman should be able to walk safely anywhere, not just in public places."
+            text: "Exploring the most unsavory parts of the city, Saber encountered a band of ruffians. Unable to catch her by surprise, they were no match for even her sheathed sword, and she handed them over to the City Guard who promised to take care of the issue. A young woman should be able to walk safely anywhere, not just in public places."
           },
           girl: {
             happiness: 1,
@@ -230,7 +230,7 @@ Girls.Saber.Actions.Talk.results._append([
       group: 'Saber',
       label: 'Talk',
       image: '<<- girl.image() >>',
-      text: "Saber is quiet and reserved, not shy but private. She answers your direct questions, but has little to add of her own. You try to encourage her to speak up more, but she doesn't much understand the point - words are for communication, nothing more. The idea of bonding doesn't even cross her mind. Eventually you give up, and allow her to return to... whatever she was doing before you entered her room. Meditation, perhaps."
+      text: "Saber is quiet and reserved, not shy but private. She answers your direct questions, but has little to add of her own. You try to encourage her to speak up more, but she doesn\'t much understand the point - words are for communication, nothing more. The idea of bonding doesn\'t even cross her mind. Eventually you give up, and allow her to return to... whatever she was doing before you entered her room. Meditation, perhaps."
     },
     girl: {
       obedience: 1
@@ -254,7 +254,7 @@ Girls.Saber.Actions.Talk.results._append([
       group: 'Saber',
       label: 'Talk',
       image: '<<- girl.image() >>',
-      text: "You ask why she prefers to be called Saber instead of Arthuria - it's a very pretty name, and it's more fitting for her to be a woman than a weapon. She takes so long to reply that you wonder if the question has offended - finaly, just when you're about to try somthing easier to talk about, she answers.<blockquote>It... there were no happy endings for me. I did far better as a weapon than I ever did as a human.</blockquote>"
+      text: "You ask why she prefers to be called Saber instead of Arthuria - it\'s a very pretty name, and it\'s more fitting for her to be a woman than a weapon. She takes so long to reply that you wonder if the question has offended - finaly, just when you're about to try somthing easier to talk about, she answers.<blockquote>It... there were no happy endings for me. I did far better as a weapon than I ever did as a human.</blockquote>"
     },
     girl: {
       obedience: 2,
@@ -266,7 +266,7 @@ Girls.Saber.Actions.Talk.results._append([
       group: 'Saber',
       label: 'Talk',
       image: 'content/girls/Saber/images/Exercise1.jpg',
-      text: "Saber seems in no mood to sit around and talk, so you instead take her for a walk in the park. It is a nearly perfect <<- time >>, and she looks very pretty in her clothing, modest as it is. You see her watching a group of young people playing some game or other that involves a great deal of energetic running away from each other - and as you get closer, one of them stumbles and into the two of you. Saber catches the young man - no younger than her, really - and he rather than appologizing, just shouts \"You're it!\" and runs away, looking over his shoulder so see if she's going to chase him.<br><br>She looks at you for permission, and you nod. There are worse ways to spend some time than being young again."
+      text: "Saber seems in no mood to sit around and talk, so you instead take her for a walk in the park. It is a nearly perfect <<- time >>, and she looks very pretty in her clothing, modest as it is. You see her watching a group of young people playing some game or other that involves a great deal of energetic running away from each other - and as you get closer, one of them stumbles and into the two of you. Saber catches the young man - no younger than her, really - and he rather than appologizing, just shouts \"You\'re it!\" and runs away, looking over his shoulder so see if she\'s going to chase him.<br><br>She looks at you for permission, and you nod. There are worse ways to spend some time than being young again."
     },
     girl: {
       obedience: 1.5,
