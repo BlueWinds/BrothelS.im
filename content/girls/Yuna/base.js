@@ -73,7 +73,7 @@ Girls.Yuna = {
               label: 'Summon',
               group: '<<- girl.name >>',
               image: '<<- girl.image("tentacles") >>',
-              text: 'The vines sprang to life, one thrusting into her open mouth to prevent her completing the banishment, another twisting around one ankle, lifting her upside-down into the air. She gagged on the vine in her mouth, but it only pushed further in, down her throat. Helpless in midair, her staff dropped in the initial panic, Yuna feared for her life. The misformed goddess was not gentle, fucking Yuna mercilessly. Eventually, Yuna passed out.<br><br>She awoke intact, but incredibly stiff and sore. Though they weren\'t aphrodisiactic like those from a proper tentacle beast, at least the vines were slippery and smooth.'
+              text: 'The vines sprang to life, one thrusting into her open mouth to prevent her completing the banishment, another twisting around one ankle, lifting her upside-down into the air. She gagged on the vine in her mouth, but it only pushed further in, down her throat. Helpless in midair, her staff dropped in the initial panic, Yuna feared for her life. The misformed goddess was not gentle, fucking Yuna mercilessly. Eventually, Yuna passed out.<br><br>She awoke intact, but incredibly stiff and sore. Though they weren\'t aphrodisiacal like those from a proper tentacle beast, at least the vines were slippery and smooth.'
             }
           ],
           girl: {
