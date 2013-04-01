@@ -20,11 +20,11 @@ Actions.Streetwalk =  {
       }
     }
   },
-  disable: function(context) {
+  disable: function disableStreetwalk(context) {
     for (var i in Girl.sex) {
       if (context.girl.actions[Girl.sex[i]]) { return; }
     }
-    return 'You must allow her to perform at least one type of sex before she can Streetwalk.';
+    return 'You must allow her to perform at least one type of sex act before she can Streetwalk.';
   },
   tags: {
     slums: 0.25,
@@ -33,7 +33,7 @@ Actions.Streetwalk =  {
     market: 0.25
   },
   // variants key provided by prostitution module, since it's too complex to put here.
-  results: [{
+  results: { done: {
     girl: {
       endurance: -10,
       happiness: -5
@@ -44,7 +44,7 @@ Actions.Streetwalk =  {
       image: '<<- girl.image() >>',
       text: '<<= girl.name >> walked around the city propositioning strangers.'
     }
-  }],
+  }},
   // These are non-standard keys - the variants uses them.
   special: {
     // The message if she refuses.
@@ -55,20 +55,20 @@ Actions.Streetwalk =  {
       soft: [
         'They kissed passionately for a while, then he blushed, mumbled about the time and left in a hurry.',
         'She sucked his dick in the middle of the street, though she didn\'t swallow.',
-        'He caressed her breasts and licked her pussy in an alley way, then they switched places and she gave him a blow job.',
+        'He caressed her breasts and licked her pussy in an alley way, then they switched places and she gave him a blow-job.',
         'She crouched down behind a trash can and gave him a tit job.',
         'He jerked off all over her face and hair, then left in a hurry.'
       ],
       hard: [
         'He fucked her silly in the plain view of passersby.',
         'They found an abandoned lot for privacy, and he came in her pussy.',
-        'He fucked her in an ally, but pulled out to give her a facial.',
+        'He fucked her in an alley, but pulled out to give her a facial.',
         'They kissed and fondled each other, than made slow love beneath a tree in the park.'
       ],
       anal: [
         'He pounded her ass mercilessly in a dirty alley.',
         'He alternated between her ass and pussy for several minutes before blowing his load in her ass.',
-        'He bent her over a bench in the park and took her ass doggy style.',
+        'He bent her over a bench in the park and took her ass doggy-style.',
         'His dick was almost too large to fit, so she had to warm up first using a dildo.'
       ],
       fetish: [
@@ -102,12 +102,12 @@ Actions.Whore = {
     }
   },
   disable: Actions.Streetwalk.disable,
-  variants: function(context, done) {
+  variants: function whoreVariants(context, done) {
     context.action.special.done = true;
     done({});
   },
   // The results of this action are handled by a GamePostMorning / GamePostEvening function in modules/prostitution/prostitution.js.
-  results: [{}],
+  results: { done: {}},
   // variants key provided by prostitution module, since it's too complex to put here.
 
   // These are non-standard keys - the variants function uses them.
@@ -129,7 +129,7 @@ Actions.Whore = {
         'They kissed awkwardly for a minute until it became apparent he was completely inexperienced. She took the lead and guided him in how to pleasure a woman, before finishing him off with a blow-job.',
         'He was incredibly hot, and they wasted no time in stripping and ravaging each other\'s bodies.',
         'He straddled her and pushed her tits together, fucking them roughly without much concern for her pleasure.',
-        'She lay over him in 69 position, fondling his balls and slowly licking up and down his shaft while he nibbled on her pussy, both of them steadily growing more enthusiastic until she eagerly swallowed his cum.',
+        'She lay over him in the 69 position, fondling his balls and slowly licking up and down his shaft while he nibbled on her pussy, both of them steadily growing more enthusiastic until she eagerly swallowed his cum.',
         'He stood against the wall while she gave him a hand job, staring up into his eyes with irresistible cuteness.',
         'He had trouble getting it up at first, but her persistent tongue and ceaseless hands eventually got him hard, and he ended up spraying a massive load across her hair.'
       ],
@@ -141,15 +141,15 @@ Actions.Whore = {
         'They moved together though a veritable Kama Sutra of sex positions, some of which she\'d never heard of before, much less practiced. Her next lay is going to be in for a treat.'
       ],
       anal: [
-        'Even with plenty of toy use and lubrication, it still took quite some time to fit his massive dick into her tight ass hole. He was gentle though, and she enjoyed herself despite the pain.',
-        'Though he was in a hurry and wanted to get started right away, she insisted on taking it slowly, moving from kissing to oral before finally letting him take her ass doggy style.',
+        'Even with plenty of toy use and lubrication, it still took quite some time to fit his massive dick into her tight asshole. He was gentle though, and she enjoyed herself despite the pain.',
+        'Though he was in a hurry and wanted to get started right away, she insisted on taking it slowly, moving from kissing to oral before finally letting him take her ass doggy-style.',
         'He didn\'t actually want to fuck her ass, just plug it was a huge toy while they had sex the old fashioned way.',
         'He had her sit on the edge of the bed and lay back while he teased her pussy with his tongue, slowly working first one finger then two into her ass. By the time he had three in, she was cooing with delight and welcomed the replacement of the fingers with his cock.'
       ],
       fetish: [
-        'He stripped her naked and suspended her from a conveniently placed ceiling hook - she was worried about suspension at first, but he seemed to know what he was doing. He fucked her mouth and spanked her, making her beg for more cum to swallow (which he provided) before he would her down.',
+        'He stripped her naked and suspended her from a conveniently placed ceiling hook - she was worried about suspension at first, but he seemed to know what he was doing. He fucked her mouth and spanked her, making her beg for more cum to swallow (which he provided) before he would let her down.',
         'Bound and helpless before him, he teased her clit, nipples and thighs with a feather for nearly half an hour, until she finally broke down and begged to be fucked. He satisfied himself with her ass, continuing to tease her pussy all the while.',
-        'Providing her a schoolgirl costume to wear, he spanked her, and tied her arms behind her back. She alternated between apologized for being so naughty and slurping messily on his cock.',
+        'Providing her a schoolgirl costume to wear, he spanked her, and tied her arms behind her back. She alternated between apologizingfor being so naughty and slurping messily on his cock.',
         'He didn\'t want anything particularly extreme, just a bit of instruction on the proper way to tie up a girl without hurting her. She was happy to oblige in a bit of light rope-play.'
       ]
     }
@@ -158,24 +158,24 @@ Actions.Whore = {
 
 // More technical stuff follows. Don't poke at this unless you know what you're doing.
 
-Girl.prototype.maxCustomers = function() {
+Girl.prototype.maxCustomers = function maxCustomers() {
   var libido = this.get('libido');
   libido += this.constitution * 3;
   return Math.floor(libido / 400 * Person.prostitution.girlMaxCustomers);
 };
 
-Girl.prototype.interest = function(sex) {
-  var interest = this.obedience + this[sex + 'Libido'] * 2;
-  interest += this[sex + 'Experience'] + this.happiness / 2;
-  interest = (interest / 450 + Math.random());
-  interest -= Person.prostitution.types[sex].r;
+Girl.prototype.interest = function interest(sex) {
+  var i = this.obedience + this[sex + 'Libido'] * 2;
+  i += this[sex + 'Experience'] + this.happiness / 2;
+  i = (i / 450 + Math.random());
+  i -= Person.prostitution.types[sex].r;
   return interest;
 };
 
-(function() {
-  Actions.Streetwalk.variants = function(context, done) {
+(function () {
+  Actions.Streetwalk.variants = function streetwalkVariants(context, done) {
     var endDelta = context.girl.startDelta();
-    var delta = this.base().results[0];
+    var delta = this.base().results.done;
     var mainMessage = Message.send(delta.message, context);
     context.girl.apply(delta.girl);
 
@@ -242,14 +242,14 @@ Girl.prototype.interest = function(sex) {
     return satisfaction;
   }
 
-  e.GirlsPostMorning.push(function(done) {
-    g.buildings._filter('status', 'Owned').forEach(function(building) {
+  e.GirlsPostMorning.push(function whorePostMorning(done) {
+    g.buildings._filter('status', 'Owned').forEach(function whoreEachBuilding(building) {
       doWhoresBuilding(building, 'morning');
     });
     done();
   });
-  e.GirlsPostEvening.push(function(done) {
-    g.buildings._filter('status', 'Owned').forEach(function(building) {
+  e.GirlsPostEvening.push(function whorePostEvening(done) {
+    g.buildings._filter('status', 'Owned').forEach(function whoreEachBuilding(building) {
       doWhoresBuilding(building, 'evening');
     });
     done();
@@ -261,7 +261,7 @@ Girl.prototype.interest = function(sex) {
       time: time,
       girls: []
     };
-    $.each(building.girls(), function(name, girl) {
+    $.each(building.girls(), function whoreEachGirl(name, girl) {
       if (girl.actions[time]._id == 'Whore' && girl.actions[time].special.done === true) {
         context.girls.push(girl);
       }
@@ -274,14 +274,14 @@ Girl.prototype.interest = function(sex) {
     count /= (1 + Math.pow(Math.E, power));
     count += Person.prostitution.minWhoreCustomers;
     var types = [];
-    $.each(Person.prostitution.customerClass, function(type, info) {
+    $.each(Person.prostitution.customerClass, function whoreEachCustomerClass(type, info) {
       if (info.minReputation <= context.building.reputation && info.maxReputation >= context.building.reputation) {
         types.push(type);
       }
     });
 
     var canService = {};
-    context.girls.forEach(function(girl) {
+    context.girls.forEach(function whoreEachGirl(girl) {
       canService[girl.name] = girl.maxCustomers();
     });
 
@@ -293,7 +293,7 @@ Girl.prototype.interest = function(sex) {
 
     var endDelta = context.building.startDelta();
     context.count = 0;
-    context.customers._sort('typeRank', true).forEach(function(customer) {
+    context.customers._sort('typeRank', true).forEach(function whoreEachCustomer(customer) {
       customer.modestyRate = 0;
       var customerConfig = Person.prostitution.customerClass[customer.type];
       var girl, maxSatisfaction = 0.2;

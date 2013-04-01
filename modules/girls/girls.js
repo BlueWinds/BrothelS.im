@@ -1,18 +1,18 @@
 "use strict";
 var Girls = {};
 
-e.Ready.push(function(done) {
+e.Ready.push(function girlsReady(done) {
   $('head').append('<link href="modules/girls/style.css" type="text/css" rel="stylesheet">');
   e.addTemplate('list-girls', 'modules/girls/list-girls.tpl.html');
   e.addTemplate('hire-girls', 'modules/girls/hire-girls.tpl.html');
   e.addTemplate('view-girl', 'modules/girls/view-girl.tpl.html');
-  $.each(Girls, function(name, girl) {
+  $.each(Girls, function (name, girl) {
     girl.name = name;
   });
   done();
 });
 
-e.GameNew.push(function(done) {
+e.GameNew.push(function girlsNewGame(done) {
   g.maxGirls = Girl.config.startMaxGirls;
   g.girls = g.girls || {};
   for (var name in Girls) {
@@ -23,8 +23,8 @@ e.GameNew.push(function(done) {
   done();
 });
 
-e.GameInit.push(function(done) {
-  g.girls._filter('status', 'Hired').forEach(function(girl) {
+e.GameInit.push(function girlsGameInit(done) {
+  g.girls._filter('status', 'Hired').forEach(function (girl) {
     if (!girl.hireDay) {
       girl.hireDay = g.day;
     }
@@ -37,16 +37,16 @@ e.GameInit.push(function(done) {
   done();
 });
 
-e.GamePreDay.push(function(done) {
-  g.girls._filter('status', 'Hired').forEach(function(girl) {
+e.GamePreDay.push(function girlsPreDay(done) {
+  g.girls._filter('status', 'Hired').forEach(function startDelta(girl) {
     girl.turnDelta = girl.startDelta();
   });
   done();
 });
 
-e.GameNextDay.push(function(done) {
+e.GameNextDay.push(function girlsNextDay(done) {
   var names = Object.keys(g.girls);
-  var next = function() {
+  var next = function eachGirlNextDay() {
     i++;
     if (i == names.length) {
       if (time == 'morning') {
@@ -68,8 +68,8 @@ e.GameNextDay.push(function(done) {
   next();
 });
 
-e.GamePostDay.push(function(done) {
-  g.girls._filter('status', 'Hired').forEach(function(girl) {
+e.GamePostDay.push(function girlsPostDay(done) {
+  g.girls._filter('status', 'Hired').forEach(function eachGirlPostDay(girl) {
     g.money -= Math.floor(girl.actions.pay * girl.desiredPay());
     girl.apply('happiness', girl.payHappiness());
     girl.turnDelta = girl.turnDelta();
@@ -77,11 +77,11 @@ e.GamePostDay.push(function(done) {
   done();
 });
 
-e.GameRender.push(function(done) {
+e.GameRender.push(function girlsGameRender(done) {
   var div = e.render('list-girls', {
     girls: g.girls._filter('status', 'Hired')
   }).prependTo('#content .second');
-  $('.girl .left, .girl .middle', div).click(function() {
+  $('.girl .left, .girl .middle', div).click(function openGirlManagement() {
     var girl = g.girls[$(this).parent().attr('name')];
 
     var context = {
@@ -90,7 +90,7 @@ e.GameRender.push(function(done) {
     };
     var mainView = e.render('view-girl', context);
 
-    $('.girl-view', mainView).each(function() {
+    $('.girl-view', mainView).each(function renderGirlManagement() {
       var view = $(this);
       var girl = g.girls[view.attr('name')];
       var desired = girl.desiredPay();
@@ -100,7 +100,7 @@ e.GameRender.push(function(done) {
         step: 0.01,
         min: Math.min.apply(undefined, Object.keys(Girl.config.pay)),
         max: Math.max.apply(undefined, Object.keys(Girl.config.pay)),
-        slide: function(event, ui) {
+        slide: function paySliderChange(event, ui) {
           var closest = 100;
           for (var mult in Girl.config.pay) {
             closest = Math.abs(ui.value - mult) < Math.abs(ui.value - closest) ? mult : closest;
@@ -116,7 +116,7 @@ e.GameRender.push(function(done) {
         }
       }).slider('value', girl.actions.pay);
 
-      $('.checkbox', view).click(function() {
+      $('.checkbox', view).click(function changeSexType() {
         var check = !$(this).hasClass('checked');
         var sex = $(this).attr('id');
         if (check) {
@@ -128,25 +128,23 @@ e.GameRender.push(function(done) {
     });
 
     var opt = {
-      beforeClose: function() {
-        g.render();
-      }
+      beforeClose: g.render
     };
     mainView.dialog(opt);
     mainView.closest('.ui-dialog').addClass('tab-dialog');
   });
 
-  $('#hire-girl').click(function() {
+  $('#hire-girl').click(function openHireGirls() {
     var lst = e.render('hire-girls', {
       girls: g.girls._filter('status', 'For Hire'),
       hireHappiness: Girl.config.startHappiness
     });
-    $('button.hire', lst).each(function() {
+    $('button.hire', lst).each(function hireGirlButton() {
       var girl = g.girls[$(this).attr('name')];
       if (girl.hirePrice() > g.money) {
         $(this).attr('disabled', true);
       } else {
-        $(this).click(function() {
+        $(this).click(function hireGirl() {
           girl.hire();
           g.render();
           $('#hire-girls').dialog('close');
@@ -159,14 +157,14 @@ e.GameRender.push(function(done) {
   done();
 });
 
-Girl.renderConditions = function(conditions) {
+Girl.renderConditions = function renderConditions(conditions) {
   var text = [];
-  $.each(conditions.max || {}, function(stat, value) {
+  $.each(conditions.max || {}, function (stat, value) {
     if (typeof(value) != "number") { return; }
     var span = '<span class="delta stat ' + stat + '">' + (stat == "money" ? "$" + value : value) + '-</span>';
     text.push(span);
   });
-  $.each(conditions.min || {}, function(stat, value) {
+  $.each(conditions.min || {}, function (stat, value) {
     if (typeof(value) != "number") { return; }
     var span = '<span class="delta stat ' + stat + '">' + (stat == "money" ? "$" + value : value) + '+</span>';
     text.push(span);

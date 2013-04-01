@@ -16,7 +16,7 @@ function Building(obj) {
   return this;
 }
 
-Building.prototype.base = function() {
+Building.prototype.base = function getBase() {
   return Buildings[this.name];
 };
 
@@ -24,7 +24,7 @@ Building.stats = [
   'clean', 'reputation'
 ];
 
-Building.create = function(name) {
+Building.create = function create(name) {
   var base = Buildings[name];
   var obj = {
     name: base.name,
@@ -36,17 +36,17 @@ Building.create = function(name) {
   return building;
 };
 
-Building.prototype.girls = function() {
+Building.prototype.girls = function buildingGirls() {
   var girls = {};
-  this.rooms._accumulate('girl').forEach(function(name) {
+  this.rooms._accumulate('girl').forEach(function (name) {
     girls[name] = g.girls[name];
   });
   return girls;
 };
 
-(function() {
+(function () {
   var oldGirlApply = Girl.prototype.apply;
-  Girl.prototype.apply = function(stat, delta) {
+  Girl.prototype.apply = function apply(stat, delta) {
     if (stat == 'building') {
       if (this.building()) {
         this.building().apply(delta);
@@ -57,17 +57,17 @@ Building.prototype.girls = function() {
   };
 
   var oldGirlDelta = Girl.prototype.startDelta;
-  Girl.prototype.startDelta = function() {
+  Girl.prototype.startDelta = function startDelta() {
     var endDelta = oldGirlDelta.call(this);
     if (!this.building()) { return endDelta; }
 
     var delta = this.building().startDelta();
-    return function() {
+    return function () {
       return $.extend(endDelta(), delta());
     };
   };
 
-  Building.prototype.startDelta = function(trackGirl) {
+  Building.prototype.startDelta = function startDelta(trackGirl) {
     var girl = this.girls()._first();
     var delta;
     if (girl && trackGirl) {
@@ -79,7 +79,7 @@ Building.prototype.girls = function() {
   };
 
   var oldCompare = Girl.prototype.compare;
-  Girl.prototype.compare = function(delta, explain) {
+  Girl.prototype.compare = function compareWithDelta(delta, explain) {
     var result = oldCompare.call(this, delta, explain);
     if (!delta.building || (result && explain)) { return result; }
     if (!this.building()) { return explain ? this.name + ' does not have a bedroom yet.' : false; }
@@ -87,14 +87,14 @@ Building.prototype.girls = function() {
   };
 })();
 
-Building.prototype.compare = function(delta, explain) {
+Building.prototype.compare = function compareWithDelta(delta, explain) {
   var result = this._compare(delta);
   // If !explain, then we return a boolean - does it match?
   // If explain, then we return a string saying *why* it doesn't match (or false if it does).
   return explain ? result : !result;
 };
 
-Building.prototype._compare = function(delta) {
+Building.prototype._compare = function _compare(delta) {
   if (delta.name && this.name != delta.name) { return this.name + ' is not ' + delta.name; }
   if (this.status != (delta.status || 'Owned')) { return this.name + ' is not ' + delta.status; }
   if (delta.room) {
@@ -125,7 +125,7 @@ Building.prototype._compare = function(delta) {
   return false;
 };
 
-Building.prototype.apply = function(stat, delta) {
+Building.prototype.apply = function apply(stat, delta) {
   if (typeof(delta) == 'number') {
     if (delta % 1) {
       delta = (Math.random() > delta % 1) ? Math.floor(delta) : Math.ceil(delta);
@@ -137,22 +137,22 @@ Building.prototype.apply = function(stat, delta) {
       this[stat] = Math.floor(Math.max(0, Math.min(100, this[stat])));
     }
   } else if (stat == 'girl') {
-    $.each(this.girls(), function(name, girl) {
+    $.each(this.girls(), function (name, girl) {
       girl.apply(delta);
     });
   } else if (stat == 'status') {
     this.setStatus(delta);
   } else {
     var building = this;
-    $.each(stat, function(key, value) {
+    $.each(stat, function (key, value) {
       building.apply(key, value);
     });
   }
 };
 
-Building.prototype.price = function(action) {
+Building.prototype.price = function price(action) {
   var cost = this.base().basePrice;
-  this.rooms._accumulate('type').forEach(function(type) {
+  this.rooms._accumulate('type').forEach(function (type) {
     cost += Rooms[type].price;
   });
   if (action == 'Sell') {
@@ -161,7 +161,7 @@ Building.prototype.price = function(action) {
   return cost;
 };
 
-Building.prototype.dailyDelta = function() {
+Building.prototype.dailyDelta = function getDailyDelta() {
   var base = this.base(), delta;
   if (this.clean > base.daily.breakpoint) {
     delta = $.extend(true, {}, base.daily.above);
@@ -175,7 +175,7 @@ Building.prototype.dailyDelta = function() {
   return delta;
 };
 
-Building.prototype.runDay = function() {
+Building.prototype.runDay = function runDay() {
   if (this.status != 'Owned') { return; }
   var endDelta = this.startDelta(true);
   var base = this.base(), text;
@@ -195,7 +195,7 @@ Building.prototype.runDay = function() {
   }, { building: this });
 };
 
-Building.prototype.S = function(stat) {
+Building.prototype.S = function renderStat(stat) {
   var str = this[stat];
   if (stat == 'rooms') {
     str = this.rooms.length + ' / ' + this.maxRooms;
@@ -209,38 +209,38 @@ Building.prototype.S = function(stat) {
   return str + '</span>';
 };
 
-Building.prototype.buy = function() {
+Building.prototype.buy = function buy() {
   this.setStatus('Owned');
   g.money -= this.price();
 };
 
-Building.prototype.sell = function() {
+Building.prototype.sell = function sell() {
   this.setStatus('For Sale');
   g.money += this.price('Sell');
 };
 
-Girl.prototype.building = function() {
+Girl.prototype.building = function building() {
   var name = this.name;
   var finalBuilding;
-  g.buildings._filter('status', 'Owned').forEach(function(building) {
-    building.rooms._filter('type', 'Bedroom').forEach(function(room) {
+  g.buildings._filter('status', 'Owned').forEach(function (building) {
+    building.rooms._filter('type', 'Bedroom').forEach(function (room) {
       if (room.girl == name) { finalBuilding = building; }
     });
   });
   return finalBuilding;
 };
 
-Building.prototype.description = function() {
+Building.prototype.description = function description() {
   return ejs.render(this.base().description, {});
 };
 
-Building.prototype.image = function() {
+Building.prototype.image = function getImage() {
   return this.base().image;
 };
 
 Building.prototype.parseConditions = Girl.prototype.parseConditions;
 
-Building.prototype.setStatus = function(status) {
+Building.prototype.setStatus = function setStatus(status) {
   this.status = status;
   e.invokeAllSync('BuildingSetStatus', this);
 };

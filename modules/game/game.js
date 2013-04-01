@@ -13,20 +13,20 @@ $.extend(e, {
 
 Game.includes = [];
 
-var __ = function(string, type) {
+function __(string, type) {
   type = type || 'noun';
   if (Game.strings[type] && Game.strings[type][string]) {
     var _class = string[0] == '-' ? string.substr(1) : string;
     return '<span class="' + _class + ' ' + type + '">' + Game.strings[type][string] + '</span>';
   }
   return string;
-};
+}
 
 Object.defineProperty(Object.prototype, "_toString", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function(form) {
+  value: function _toString(form) {
     var items = [];
     for (var key in this) {
       var t = __(this[key], form);
@@ -42,7 +42,7 @@ Object.defineProperty(Object.prototype, "_toString", {
 
 Game.fetishes = ['tentacles', 'rape'];
 
-Game.load = function(name) {
+Game.load = function loadGame(name) {
   if (!name && name !== false) {
     name = localStorage.getItem('current-game');
   }
@@ -53,27 +53,27 @@ Game.load = function(name) {
     Game.loadFromText(value);
   } else {
     $('#content').html(e.render('intro'));
-    e.invokeAll('Autorender', $('#content'), function() {});
+    e.invokeAll('Autorender', $('#content'), $.noop);
     $('#save').addClass('disabled');
   }
 };
 
-Game.loadFromText = function(value) {
+Game.loadFromText = function loadGameFromText(value) {
   value.replace(/T\(/g, '__(');
-  g = JSON.parse(value, function(key, value) {
+  g = JSON.parse(value, function loadWithClass(key, value) {
     if (value === null) { return; }
     if (value._class && window[value._class]) {
       return new window[value._class](value);
     }
     return value;
   });
-  e.invokeAll('GameInit', function() {
+  e.invokeAll('GameInit', function gameInitDone() {
     g.render();
     $('#save').removeClass('disabled');
   });
 };
 
-Game.save = function(name) {
+Game.save = function saveGame(name) {
   if (name != g.name || !g._id) {
     var S4 = function () {
       return Math.floor(
@@ -90,7 +90,7 @@ Game.save = function(name) {
   localStorage.setItem('current-game', name);
 };
 
-Game.remove = function(name) {
+Game.remove = function removeGame(name) {
   var list = localStorage.getObject('saved-games');
   var _id = list[name];
   localStorage.removeItem(_id);
@@ -98,12 +98,12 @@ Game.remove = function(name) {
   localStorage.setObject('saved-games', list);
 };
 
-Game.list = function() {
+Game.list = function listGames() {
   var list = localStorage.getObject('saved-games');
   return Object.keys(list || {});
 };
 
-Game.start = function(opt) {
+Game.start = function startGame(opt) {
   opt = $.extend({
     day: 0,
     version: Game.config.version,
@@ -112,13 +112,13 @@ Game.start = function(opt) {
   }, opt);
   g = new Game(opt);
   e.runSeries([
-    function(next) { e.invokeAll('GameNew', next); },
-    function(next) { e.invokeAll('GameInit', next); }
+    function doGameNew(next) { e.invokeAll('GameNew', next); },
+    function doGameInit(next) { e.invokeAll('GameInit', next); }
   ], g.render);
 };
 
-e.Ready.push(function(done) {
-  $('#header img').attr('title', 'Return to front page').click(function() {
+e.Ready.push(function gameReady(done) {
+  $('#header img').attr('title', 'Return to front page').click(function openIntro() {
     Game.load(false);
   });
 
@@ -127,22 +127,22 @@ e.Ready.push(function(done) {
     $('#load').addClass('disabled');
   }
 
-  $('#new').click(function() {
+  $('#new').click(function openNewGame() {
     if ($(this).hasClass('disabled')) {
       return;
     }
     var form = e.render('new-game');
-    $('#fetishes .checkbox').click(function() {
+    $('#fetishes .checkbox').click(function checkFetishes() {
       $(this).toggleClass('checked');
     });
-    $('button', form).click(function(event) {
+    $('button', form).click(function newGame(event) {
       event.preventDefault();
       var game = {
         fetishes: {},
         skipIntro: $('#skip-intro').hasClass('checked'),
         autosave: $('#autosave').hasClass('checked')
       };
-      $('#fetishes .checkbox').each(function() {
+      $('#fetishes .checkbox').each(function setFetishes() {
         if ($(this).hasClass('checked')) {
           game.fetishes[$(this).attr('name')] = true;
         }
@@ -157,12 +157,12 @@ e.Ready.push(function(done) {
     $('#save').removeClass('disabled');
   });
 
-  $('#save').click(function() {
+  $('#save').click(function openSaveDialog() {
     if ($(this).hasClass('disabled')) {
       return;
     }
     var form = e.render('save-game');
-    $('#fetishes .checkbox', form).click(function() {
+    $('#fetishes .checkbox', form).click(function setFetish() {
       var check = !$(this).hasClass('checked');
       var fetish = $(this).attr('name');
       if (check) {
@@ -171,7 +171,7 @@ e.Ready.push(function(done) {
         delete g.fetishes[fetish];
       }
     });
-    $('#autosave', form).click(function() {
+    $('#autosave', form).click(function setAutosave() {
       var check = !$(this).hasClass('checked');
       if (check) { g.autosave = true; }
       else { delete g.autosave; }
@@ -181,7 +181,7 @@ e.Ready.push(function(done) {
     }
     var blob = new Blob([JSON.stringify(g, null, 2)], { type: 'text/json' });
     $('#export-game', form).attr('href', URL.createObjectURL(blob));
-    $('#save-game', form).click(function(event) {
+    $('#save-game', form).click(function saveGame(event) {
       event.preventDefault();
       Game.save($('#game-name', form).val());
       form.dialog('close');
@@ -193,14 +193,14 @@ e.Ready.push(function(done) {
     });
   });
 
-  $('#load').click(function() {
+  $('#load').click(function openLoadDialog() {
     if ($(this).hasClass('disabled')) {
       return;
     }
     var form = e.render('load-game', {
       games: Game.list()
     });
-    $('#delete-game', form).click(function(event) {
+    $('#delete-game', form).click(function deleteGame(event) {
       event.preventDefault();
       var name = $('#game-name').val();
       Game.remove(name);
@@ -211,20 +211,20 @@ e.Ready.push(function(done) {
       $('#load-game').click();
       return false;
     });
-    $('#import-game', form).click(function(event) {
+    $('#import-game', form).click(function importGame(event) {
       event.preventDefault();
       $('#import-game-file').click();
       return false;
     });
-    $('#import-game-file', form).change(function() {
+    $('#import-game-file', form).change(function importFromFile() {
       var reader = new FileReader();
-      reader.onload = function() {
+      reader.onload = function fileReaderReady() {
         Game.loadFromText(reader.result);
         form.dialog('close');
       };
       reader.readAsText(this.files[0]);
     });
-    $('#load-game', form).click(function(event) {
+    $('#load-game', form).click(function loadGame(event) {
       event.preventDefault();
       Game.load($('#game-name').val());
       form.dialog('close');
@@ -234,7 +234,7 @@ e.Ready.push(function(done) {
       title: 'Load Game'
     });
   });
-  $(document).keydown(function(event) {
+  $(document).keydown(function hotkey(event) {
     var item = Game.hotkeys[event.keyCode];
     if (item && (!$('.ui-dialog').length || item.allowDialogs)) {
       if (item.callback) {
@@ -246,14 +246,13 @@ e.Ready.push(function(done) {
       return false;
     }
   });
-  $('#hotkeys').click(function() {
+  $('#hotkeys').click(function openHotkeyDialog() {
     var dialog = e.render('hotkeys');
     dialog.dialog({
       title: 'Hotkeys'
     });
-    $('li', dialog).click(function(event) {
+    $('li', dialog).click(function clickHotkey(event) {
       var item = Game.hotkeys[$(this).attr('keyCode')];
-      console.log(item);
       if (item && item.allowDialogs) {
         if (item.callback) {
           item.callback(event);
@@ -270,22 +269,22 @@ e.Ready.push(function(done) {
   e.addTemplate('save-game', 'modules/game/save-game.tpl.html');
   e.addTemplate('user-input', 'modules/game/user-input.tpl.html');
   e.addTemplate('intro', 'modules/game/intro.tpl.html',
-    function() {
-      e.addTemplate('view-game', 'modules/game/view-game.tpl.html', function() {
+    function introLoaded() {
+      e.addTemplate('view-game', 'modules/game/view-game.tpl.html', function () {
         e.loadAll(Game.includes, done);
       });
     }
   );
 });
 
-Game.getUserInput = function(text, image, options, done) {
+Game.getUserInput = function getUserInput(text, image, options, done) {
   var context = {
     text: text,
     image: image,
     options: options
   };
   var form = e.render('user-input', context);
-  $('button', form).click(function(event) {
+  $('button', form).click(function inputSelected(event) {
     event.preventDefault();
     var value = $(this).text();
     form.remove();
@@ -299,12 +298,12 @@ Game.getUserInput = function(text, image, options, done) {
     of: window,
     collision: 'none'
   });
-  e.invokeAll('Autorender', form, function() {});
+  e.invokeAll('Autorender', form, $.noop);
 };
 
-e.Autorender.push(function(element, done) {
-  $.each(Game.tooltips, function(item, tip) {
-    $('.' + item, element).attr('title', tip).each(function() {
+e.Autorender.push(function gameAutorender(element, done) {
+  $.each(Game.tooltips, function addTooltips(item, tip) {
+    $('.' + item, element).attr('title', tip).each(function addTooltip() {
       $(this).tooltip({
         show: { delay: 300 },
         content: tip

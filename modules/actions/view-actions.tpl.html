@@ -10,11 +10,11 @@
         << action_group.sort(function(a, b) { return a.label <= b.label ? -1 : 1; }).forEach(function(action) { >>
           <div class="action <<- action.disabled ? 'disabled' : '' >>">
             <label>
-              <span title="<<= action.description >>" class="<<- action.option && action.options()._toArray().length > 1 ? 'options' : '' >>"><<- action.label >></span>
-              << if (action.option && action.options()._toArray().length > 1) { >>
+              <span title="<<= action.description >>" class="<<- action.option && action.getOptions()._toArray().length > 1 ? 'options' : '' >>"><<- action.label >></span>
+              << if (action.option && action.getOptions()._toArray().length > 1) { >>
                 <ol class="dropdown">
-                  << $.each(action.options(), function(label, description) { >>
-                    <li name="<<- label >>" class="<<- label == action.option ? 'selected' : '' >>"><<- description >></li>
+                  << $.each(action.getOptions(), function(i, option) { >>
+                    <li name="<<- option.key >>" class="<<- option.key == action.option ? 'selected' : '' >>" title="<<- option.title >>"><<- option.label >></li>
                   << }) >>
                 </ol>
               << } >>

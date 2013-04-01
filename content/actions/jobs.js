@@ -21,15 +21,17 @@ Actions.Acolyte = {
   variants: [
     {
       girl: { min: { modesty: 65} },
-      likelyhood: 0.2
+      likelyhood: 0.2,
+      result: 'NaughtyNuns'
     },
     {
       girl: { min: { modesty: 65} },
-      likelyhood: 0.25
+      likelyhood: 0.25,
+      result: 'NaughtyFountain'
     }
   ],
-  results: [
-    {
+  results: {
+    NaughtyNuns: {
       message: [
         {
           group: '<<- girl.name >>',
@@ -52,7 +54,7 @@ Actions.Acolyte = {
         hardExperience: 1.5
       }
     },
-    {
+    NaughtyFountain: {
       message: {
         group: '<<- girl.name >>',
         label: 'Acolyte',
@@ -65,7 +67,7 @@ Actions.Acolyte = {
         happiness: 4
       }
     },
-    {
+    FeedPoor: {
       message: {
         group: '<<- girl.name >>',
         label: 'Acolyte',
@@ -78,7 +80,7 @@ Actions.Acolyte = {
         happiness: 4
       }
     },
-    {
+    CleanRafters: {
       message: {
         group: '<<- girl.name >>',
         label: 'Acolyte',
@@ -92,7 +94,7 @@ Actions.Acolyte = {
         softLibido: 0.7
       }
     },
-    {
+    PlanFestival: {
       message: {
         group: '<<- girl.name >>',
         label: 'Acolyte',
@@ -105,7 +107,7 @@ Actions.Acolyte = {
         happiness: 5
       }
     }
-  ]
+  }
 };
 
 Actions.Advertise = {
@@ -128,16 +130,16 @@ Actions.Advertise = {
     uptown: 0.2,
     market: 0.2
   },
-  options: function() {
-    var options = {};
-    g.buildings._filter('status', 'Owned').forEach(function(building) {
-      options[building.name] = building.name;
+  options: function advertiseOptions() {
+    var options = [];
+    g.buildings._filter('status', 'Owned').forEach(function (building) {
+      options.push({ key: building.name, label: building.name, title: building.name });
     });
-    options.Inn = 'Inn';
+    options.push({ key: 'Inn', label: 'Inn', title: 'Inn' });
     return options;
   },
-  optionsKey: 'building',
-  variants: function(context, done) {
+  optionsInfo: { key: 'building' },
+  variants: function advertiseVariants(context, done) {
     var delta = $.extend(true, {}, this.base().results[0]);
     delta.building.reputation *= context.girl.charisma / 100;
     if (this.option == 'Inn') {
@@ -145,7 +147,7 @@ Actions.Advertise = {
     }
     done(delta);
   },
-  results: [{
+  results: { done: {
     message: {
       label: 'Advertise',
       group: '<<- girl.name >>',
@@ -159,5 +161,5 @@ Actions.Advertise = {
     building: {
       reputation: 2
     }
-  }]
+  }}
 };

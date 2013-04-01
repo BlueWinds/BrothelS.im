@@ -42,28 +42,68 @@ Girls.Sakuya = {
     }
   },
   Actions: {
-    Talk: $.extend(true, {}, Actions.Talk),
+    Talk: $.extend(true, { results: {
+      Sakuya1: {
+        message: {
+          group: 'Sakuya',
+          label: 'Talk',
+          image: 'content/girls/Sakuya/images/Naked1.jpg',
+          text: "In the early <<- time >> you knock on Sakyua's door, expecting to find her resting. Instead when she opens the door you see her almost completely naked, an unusual change from her modest habits. It looks as though she's been stretching. Surprisingly unselfconscious, she pats the bed, inviting you to sit down while she gets dressed.<br><br>The two of you spend some time discussing business - she's <<- girl.happiness > 60 ? 'quite pleased with' : 'not enjoying' >> her work here. She seems somewhat restless as you talk - perhaps she hadn't finished her exercises when you came in."
+        },
+        girl: {
+          obedience: 1.5,
+          happiness: 2,
+          modesty: -1
+        }
+      },
+      Sakuya2: {
+        message: {
+          group: 'Sakuya',
+          label: 'Talk',
+          image: 'content/girls/Sakuya/images/Exercise2.jpg',
+          text: "Sakuya is flushed when she arrives at your office - at first you think she may have had to run in order to be on time, but the fact that she doesn't entirely calm down even as you attempt to start a discussion makes you suspect something else is the cause.<br><br>You finally realize the cause when, shifting uncomfortably in her seat, you catch a glimpse of a rope circling her breast. She must have bound herself under her clothes - and you'd guess one of the ropes is rubbing her crotch as well. She notices where your gaze has led and blushes - you just smile and change the subject."
+        },
+        girl: {
+          obedience: 1.5,
+          endurance: -4,
+          fetishLibido: 1
+        }
+      },
+      Sakuya3: {
+        message: {
+          group: 'Sakuya',
+          label: 'Talk',
+          image: 'content/girls/Sakuya/images/Exercise2.jpg',
+          text: "You and Sakuya head out for a short walk. It's a nice <<- time >>, and the two of you discuss pleasant nothings such as the upcoming festival, Sakuya's ongoing love for the special spiced bread they make at a certain stall in the markets, and what she misses about home. Not very much, it seems - except her mistress, occasionally. She finds her relationship with you odd - working for you, but... it takes a while to get her to finish the sentence. But not dominated or controlled by you, it finally comes out. You suspect she might enjoy a stronger hand on the leash, as it were. Perhaps a literal leash, even."
+        },
+        girl: {
+          obedience: 1.5,
+          happiness: 2,
+          endurance: -5
+        }
+      }
+    }}, Actions.Talk),
     Lockdown: $.extend(true, {}, Actions.Lockdown, {
-      results: [
-        {
+      results: {
+        Generic1: {
           girl: { happiness: 0 }
         },
-        {
+        Generic2: {
           girl: { happiness: 0 }
         }
-      ]
+      }
     }),
     Clean: $.extend(true, {}, Actions.Clean, {
-      variants: function(context, done) {
-        var delta = $.extend(true, {}, this.base().results[0]);
+      variants: function sakuyaCleanVariants(context, done) {
+        var delta = $.extend(true, {}, this.base().results.Generic1);
         delta.building.clean += context.girl.specialRules.magic / 10;
         if (context.girl.specialRules.magic > 99) {
           delete delta.girl.specialRules.magic;
         }
         done(delta);
       },
-      results: [
-        {
+      results: {
+        Generic1: {
           message: {
             text: 'Sakuya spent several hours dusting neglected corners, putting things in order and removing bodily fluids from the rooms of the <<- building.name >>. You can hardly believe how effective it was - one would swear it should take an hour to get the stains out of those sheets, but you turned your back for a moment and they were done, wash water splashed all over the walls.<< if (girl.specialRules.ScarletDevilTalk == 1) { >><br><br><em>Magic <<- girl.specialRules.magic >> <<- girl.specialRules.magic < 100 ? \'<span class="delta">(+1)</span>\' : "" >></em><< } >>'
           },
@@ -75,7 +115,7 @@ Girls.Sakuya = {
           },
           building: { clean: 15 }
         }
-      ] // results
+      } // results
     })
   }, // actions
   Missions: {
@@ -94,7 +134,7 @@ Girls.Sakuya = {
       end: {
         min: { day: '+1' }
       },
-      results: [{
+      results: { Dream: {
         message: [
           {
             label: 'Signs and Portents',
@@ -123,16 +163,16 @@ Girls.Sakuya = {
           }
         },
         mission: 'SakuyaSomethingToSaySoon'
-      }]
+      }}
     },
     SakuyaSomethingToSaySoon: {
       conditions: false,
       end: {
         min: { day: '+5' }
       },
-      results: [{
+      results: { Speaks: {
         mission: 'SakuyaSomethingToSay'
-      }]
+      }}
     },
     SakuyaSomethingToSay: {
       conditions: false,
@@ -143,7 +183,7 @@ Girls.Sakuya = {
         group: 'Sakuya Speaks',
         weight: -1
       },
-      initialize: function(context) {
+      initialize: function sakuyaSomethingToSayInitialize(context) {
         if (context.girl.obedience >= 60 && context.girl.modesty <= 50) {
           delete this.display;
         }
@@ -154,7 +194,7 @@ Girls.Sakuya = {
           max: { modesty: 50 }
         }
       },
-      results: [{
+      results: { Speaks: {
         message: [
           {
             image: 'content/girls/Sakuya/images/Study3.jpg',
@@ -181,7 +221,7 @@ Girls.Sakuya = {
         girl: {
           specialRules: { ScarletDevilTalk: 1 }
         }
-      }]
+      }}
     },
     ScarletDevilArrival: {
       conditions: {
@@ -196,7 +236,7 @@ Girls.Sakuya = {
       end: {
         min: { day: '+1' }
       },
-      results: [{
+      results: { Arrives: {
         message: {
           group: 'Enter the Devil',
           image: 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg',
@@ -205,7 +245,7 @@ Girls.Sakuya = {
           weight: -1
         },
         mission: 'ScarletDevilTraining'
-      }]
+      }}
     },
     ScarletDevilTraining: {
       conditions: false,
@@ -220,50 +260,58 @@ Girls.Sakuya = {
         min: { day: '+60' },
         max: { day: '+60' }
       },
-      variants: function(context, done) {
+      preDay: true,
+      optionsInfo: {
+        text: "Knowing that this is the day the Scarlet Devil will be coming to collect Sakuya, the two of you wait out in front of the <<- girl.building() ? girl.building().name : 'Inn' >>, waiting for her. It's almost midnight when she finally arrives. You hadn't noticed her bat wings before.<blockquote>Sakuya! It's great to see you. I was angry at first, but, well, the mansion has been so lonely without you, and what happened wasn't really your fault. Come home, won't you dear?</blockquote> She holds out her hand. Out of long habit, Sakuya stands and steps forward to take it, but then hesitates, glancing back at you. She's uncertain what to do - should she go with the Scarlet Devil, or stay with you?",
+        image: 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg'
+      },
+      options: [
+        {
+          key: 'dontGo',
+          label: '"Don\'t go!"',
+          title: "It's likely you and Sakuya will have to fight the Scarlet Devil."
+        },
+        {
+          key: 'staySilent',
+          label: 'Stay Silent',
+          title: "The Scarlet Devil will return with Sakuya to their homeland, and you'll receive a great deal of money if you've trained her well."
+        }
+      ],
+      variants: function scarletDevilTrainingVariants(context, done) {
         var results = this.base().results;
-        var building = context.girl.building() ? context.girl.building().name : 'inn';
-        var text = "Knowing that this is the day the Scarlet Devil will be coming to collect Sakuya, the two of you wait out in front of the " + building + ", waiting for her. It's almost midnight when she finally arrives. You hadn't noticed her bat wings before.<blockquote>Sakuya! It's great to see you. I was angry at first, but, well, the mansion has been so lonely without you, and what happened wasn't really your fault. Come home, won't you dear?</blockquote> She holds out her hand. Out of long habit, Sakuya stands and steps forward to take it, but then hesitates, glancing back at you. She's uncertain what to do - should she go with the Scarlet Devil, or stay with you?";
-        var options = {
-          '"Don\'t go!"': "It's likely you and Sakuya will have to fight the Scarlet Devil.",
-          'Stay silent': "The Scarlet Devil will return with Sakuya to their homeland, and you'll receive a great deal of money if you've trained her well."
+        var delta = {
+          message: [],
+          specialRules: { exclusivePlot: false }
         };
-        Game.getUserInput(text, 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg', options, function(answer) {
-          var delta = {
-            message: [],
-            specialRules: { exclusivePlot: false }
-          };
-          if (answer == '"Don\'t go!"') {
-            delta.message.push(results.dontGo1.message);
-            delta.message.push(results.dontGo2.message);
-            if (context.girl.specialRules.magic >= 50) {
-              delta.girl = {
-                obedience: -10,
-                constitution: 7
-              };
-              delta.message.push(results.dontGoWin1.message);
-              delta.message.push(results.dontGoWin2.message);
-            } else {
-              delta.girl = {
-                constitution: -10,
-                obedience: -10,
-                money: -5000
-              };
-              delta.message.push(results.dontGoLoose1.message);
-              delta.message.push(results.dontGoLoose2.message);
-            }
+        if (this.option == 'dontGo') {
+          delta.message.push(results.dontGo1.message);
+          delta.message.push(results.dontGo2.message);
+          if (context.girl.specialRules.magic >= 50) {
+            delta.girl = {
+              obedience: -10,
+              constitution: 7
+            };
+            delta.message.push(results.dontGoWin1.message);
+            delta.message.push(results.dontGoWin2.message);
           } else {
-            context.girl.apply('status', 'Gone');
-            if (context.girl.modesty >= 75 && context.girl.obedience >= 90) {
-              delta.message = results.staySilentGood.message;
-              delta.money = 24000;
-            } else {
-              delta.message = results.staySilentBad.message;
-              delta.money = 2000;
-            }
+            delta.girl = {
+              constitution: -10,
+              obedience: -10,
+              money: -5000
+            };
+            delta.message.push(results.dontGoLoose1.message);
+            delta.message.push(results.dontGoLoose2.message);
           }
-          done(delta);
-        });
+        } else {
+          if (context.girl.modesty >= 75 && context.girl.obedience >= 90) {
+            delta.message = results.staySilentGood.message;
+            delta.money = 24000;
+          } else {
+            delta.message = results.staySilentBad.message;
+            delta.money = 2000;
+          }
+        }
+        done(delta);
       },
       results: {
         dontGo1: {
@@ -326,7 +374,8 @@ Girls.Sakuya = {
             image: 'content/girls/Sakuya/missionImages/ScarletDevil3.jpg',
             text: "It's not right that she live so far from home among strangers, and the Scarlet Devil looks like she'd be upset (and possibly violent) over a refusal. You nod to Sakuya - obedient and submissive, she takes her mistress's outstretched hand and bows her head. Scarlet raises her up and nods kindly. Sakuya turns back to you for a moment.<blockquote>My mistress will have payment delivered by morning.</blockquote> The Devil grins, kisses her maid's cheek, and they're gone. Not walking together down the street, but there one moment, gone the next, the same way Sakuya used to do while cleaning. With a sigh you turn homeward.",
             weight: -1
-          }
+          },
+          girl: { status: 'Gone' }
         },
         staySilentBad: {
           message: {
@@ -335,51 +384,10 @@ Girls.Sakuya = {
             image: 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg',
             text: "It's not right that she live so far from home among strangers, and the Scarlet Devil looks like she'd be upset (and possibly violent) over a refusal. You nod to Sakuya - she takes her mistress's outstretched hand and turns to face you to say goodbye. A flicker of disapproval crosses Scarlet's face, but she doesn't interrupt. <blockquote>I will have have payment delivered by morning.</blockquote> The Devil frowns at you, clearly not as pleased with you as you had expected, but happy to have Sakuya back none the less. She kisses her maid's cheek, and they're gone. Not walking together down the street, but there one moment, gone the next, the same way Sakuya used to do while cleaning. With a sigh you turn homeward.",
             weight: -1
-          }
+          },
+          girl: { status: 'Gone' }
         }
       } // results
     } // ScarletDevilTraining
   } // missions
 };
-
-Girls.Sakuya.Actions.Talk.results._append([
-  {
-    message: {
-      group: 'Sakuya',
-      label: 'Talk',
-      image: 'content/girls/Sakuya/images/Naked1.jpg',
-      text: "In the early <<- time >> you knock on Sakyua's door, expecting to find her resting. Instead when she opens the door you see her almost completely naked, an unusual change from her modest habits. It looks as though she's been stretching. Surprisingly unselfconscious, she pats the bed, inviting you to sit down while she gets dressed.<br><br>The two of you spend some time discussing business - she's <<- girl.happiness > 60 ? 'quite pleased with' : 'not enjoying' >> her work here. She seems somewhat restless as you talk - perhaps she hadn't finished her exercises when you came in."
-    },
-    girl: {
-      obedience: 1.5,
-      happiness: 2,
-      modesty: -1
-    }
-  },
-  {
-    message: {
-      group: 'Sakuya',
-      label: 'Talk',
-      image: 'content/girls/Sakuya/images/Exercise2.jpg',
-      text: "Sakuya is flushed when she arrives at your office - at first you think she may have had to run in order to be on time, but the fact that she doesn't entirely calm down even as you attempt to start a discussion makes you suspect something else is the cause.<br><br>You finally realize the cause when, shifting uncomfortably in her seat, you catch a glimpse of a rope circling her breast. She must have bound herself under her clothes - and you'd guess one of the ropes is rubbing her crotch as well. She notices where your gaze has led and blushes - you just smile and change the subject."
-    },
-    girl: {
-      obedience: 1.5,
-      endurance: -4,
-      fetishLibido: 1
-    }
-  },
-  {
-    message: {
-      group: 'Sakuya',
-      label: 'Talk',
-      image: 'content/girls/Sakuya/images/Exercise2.jpg',
-      text: "You and Sakuya head out for a short walk. It's a nice <<- time >>, and the two of you discuss pleasant nothings such as the upcoming festival, Sakuya's ongoing love for the special spiced bread they make at a certain stall in the markets, and what she misses about home. Not very much, it seems - except her mistress, occasionally. She finds her relationship with you odd - working for you, but... it takes a while to get her to finish the sentence. But not dominated or controlled by you, it finally comes out. You suspect she might enjoy a stronger hand on the leash, as it were. Perhaps a literal leash, even."
-    },
-    girl: {
-      obedience: 1.5,
-      happiness: 2,
-      endurance: -5
-    }
-  }
-]);

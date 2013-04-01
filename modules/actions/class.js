@@ -2,7 +2,6 @@
 function Action(obj) {
   Resolvable.call(this, obj);
   delete this.enableConditions;
-  delete this.options;
   delete this.disable;
   delete this.tags;
   if (!this.gerund) { this.gerund = this.label + 'ing'; }
@@ -10,11 +9,16 @@ function Action(obj) {
 
 Action.prototype = new Resolvable();
 
-Action.create = function(_id, context, allowFalseConditions) {
+Action.create = function createAction(_id, context, allowFalseConditions) {
   var action = Resolvable.create(_id, 'Action', context, allowFalseConditions);
   if (!action) { return action; }
-  var option = context.option || Object.keys(action.options())[0];
-  if (option) { action.setOption(option); }
+  var options = action.getOptions(context);
+  var keys = options._flatten('key');
+  var option = context.option;
+  if (!context.option || keys.indexOf(context.option) == -1) {
+    if (options.length) { option = options[0].key; }
+  }
+  action.setOption(option);
   action.disabled = action.checkDisabled(undefined, context);
   if (action.disabled) { action.description = action.disabled; }
   action.label = ejs.render(action.label, context);
@@ -23,33 +27,7 @@ Action.create = function(_id, context, allowFalseConditions) {
   return action;
 };
 
-Action.prototype.options = function() {
-  var options = this.base().options;
-  if (typeof(options) == 'function') {
-    options = options.call(this, this.context());
-  } else if (options == 'girls') {
-    options = {};
-    g.girls._filter('status', 'Hired').forEach(function(girl) {
-      options[girl.name] = girl.name;
-    });
-    delete options[this.girl];
-  } else if (options == 'buildings') {
-    options = {};
-    g.buildings._filter('status', 'Owned').forEach(function(building) {
-      options[building.name] = building.name;
-    });
-  }
-  return options || {};
-};
-
-Action.prototype.setOption = function(option) {
-  this.option = option;
-  if (this.optionsKey) {
-    this[this.optionsKey] = option;
-  }
-};
-
-Action.prototype.checkDisabled = function(cond, context) {
+Action.prototype.checkDisabled = function checkDisabled(cond, context) {
   context = context || this.context();
   var realAction = context.girl.actions[this.time];
   if (realAction && realAction.locked && realAction._id != this._id) {
@@ -103,7 +81,7 @@ Action.prototype.checkDisabled = function(cond, context) {
   }
 };
 
-Action.prototype.applyResults = function(results, done, context) {
+Action.prototype.applyResults = function applyResults(results, done, context) {
   context = context || this.context();
   if (results.lock === true) {
     this.locked = true;
@@ -119,7 +97,7 @@ Action.prototype.applyResults = function(results, done, context) {
   Resolvable.prototype.applyResults.call(this, results, done, context);
 };
 
-Action.prototype.getTags = function(context) {
+Action.prototype.getTags = function getTags(context) {
   var base = this.base();
   if (typeof(base.tags) == 'function') {
     context = context || this.context();
@@ -128,26 +106,26 @@ Action.prototype.getTags = function(context) {
   return base.tags || {};
 };
 
-(function() {
+(function () {
   // This goes here instead of in Buildings, because otherwise we'd just be writing one function, then undoing the changes under some circumstances with a second, more advanced copy of the exact same one.
   var originalPay = Girl.prototype.desiredPay;
-  Girl.prototype.desiredPay = function() {
+  Girl.prototype.desiredPay = function desiredPay() {
     if (!g.missionsDone.firstMoney) { return 0; }
     var pay = originalPay.call(this);
     return this.building() || this.awayFromHome() ? pay : pay + Building.config.noRoomDailyCost;
   };
 })();
 
-Girl.actions = function(time) {
+Girl.actions = function actions(time) {
   var list = {};
-  g.girls._filter('status', 'Hired').forEach(function(girl) {
+  g.girls._filter('status', 'Hired').forEach(function (girl) {
     list[girl.actions[time]._id] = list[girl.actions[time]._id] || [];
     list[girl.actions[time]._id].push(girl.name);
   });
   return list;
 };
 
-Girl.prototype.action = function(_id, context) {
+Girl.prototype.action = function createAction(_id, context) {
   context.girl = this;
   var action = Action.create(_id, context, true);
   if (this.actions[context.time] && _id == this.actions[context.time]._id) {
@@ -158,7 +136,7 @@ Girl.prototype.action = function(_id, context) {
   return action;
 };
 
-Girl.prototype.setAction = function(action) {
+Girl.prototype.setAction = function setAction(action) {
   if (action.allDay) {
     this.actions.morning = action;
     this.actions.evening = action;
@@ -171,7 +149,7 @@ Girl.prototype.setAction = function(action) {
   this.actions[action.time] = action;
 };
 
-Girl.prototype.verifyAction = function(time, rebuild, allowFalseConditions) {
+Girl.prototype.verifyAction = function verifyAction(time, rebuild, allowFalseConditions) {
   var a = this.actions[time];
   if (a && a.locked) { return; }
   a = a && a.checkConditions(undefined, undefined, allowFalseConditions) && !a.checkDisabled() && a;
@@ -180,8 +158,10 @@ Girl.prototype.verifyAction = function(time, rebuild, allowFalseConditions) {
     a = this.actions[time];
   }
   if (a.option) {
-    var options = a.options();
-    if (!options[a.option]) { a.setOption(Object.keys(options)[0]); }
+    var options = a.getOptions();
+    if (options._accumulate('key').indexOf(a.option) == -1) {
+      a.setOption(options[0].key);
+    }
   }
   if (rebuild) {
     this.setAction(this.action(a._id, {time: time}));
@@ -189,19 +169,20 @@ Girl.prototype.verifyAction = function(time, rebuild, allowFalseConditions) {
   }
 };
 
-Girl.prototype.potentialActions = function(time) {
+Girl.prototype.potentialActions = function potentialActions(time) {
   var actions = {};
   var context = {
     time: time
   };
-  for (var _id in Actions) {
-    actions[_id] = this.action(_id, context);
-  }
+  var _id;
   if (this.base().Actions) {
     for (_id in this.base().Actions) {
-      if (actions[_id] === undefined) {
-        actions[_id] = this.action(_id, context);
-      }
+      actions[_id] = this.action(_id, context);
+    }
+  }
+  for (_id in Actions) {
+    if (actions[_id] === undefined) {
+      actions[_id] = this.action(_id, context);
     }
   }
   for (_id in actions) {
@@ -212,13 +193,13 @@ Girl.prototype.potentialActions = function(time) {
   return actions;
 };
 
-Girl.prototype.awayFromHome = function() {
+Girl.prototype.awayFromHome = function awayFromHome() {
   return (this.actions.morning && this.actions.morning.awayFromHome) || (this.actions.evening && this.actions.evening.awayFromHome);
 };
 
-Game.prototype.ownerAction = function(time) {
+Game.prototype.ownerAction = function ownerAction(time) {
   var action;
-  g.girls._filter('status', 'Hired').forEach(function(girl) {
+  g.girls._filter('status', 'Hired').forEach(function (girl) {
     if (girl.actions[time] && girl.actions[time].ownerParticipation) {
       action = girl.actions[time];
     }
@@ -227,9 +208,9 @@ Game.prototype.ownerAction = function(time) {
 };
 
 // Yep, completely overwriting the original function with this slightly more advanced one.
-Building.prototype.girls = function() {
+Building.prototype.girls = function getGirls() {
   var girls = {};
-  this.rooms._accumulate('girl').forEach(function(name) {
+  this.rooms._accumulate('girl').forEach(function (name) {
     if (!g.girls[name].awayFromHome()) {
       girls[name] = g.girls[name];
     }
@@ -237,9 +218,9 @@ Building.prototype.girls = function() {
   return girls;
 };
 
-(function() {
+(function () {
   var oldCheckConditions = Resolvable.prototype.checkConditions;
-  Resolvable.prototype.checkConditions = function(cond, context, allowFalseConditions) {
+  Resolvable.prototype.checkConditions = function checkConditions(cond, context, allowFalseConditions) {
     cond = cond || this.base().conditions;
     var result = oldCheckConditions.call(this, cond, context, allowFalseConditions);
     if (!result) { return result; }

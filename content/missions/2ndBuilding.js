@@ -12,36 +12,50 @@ Missions.secondBuilding = {
     label: 'Guild Permits',
     image: '<<- girl.image() >>',
     group: 'Guild Permits',
-    text: "<blockquote>Did you hear? <<- (new Person()).name >> just died. What, you haven't heard of him? He's a big name in The Guild around here - owns probably half the brothels in the city. Well anyway, since he doesn't have any heirs and he left most of his property to the Guild, a whole bunch of licenses have just opened up, and I think you should take the chance to snag one of them.</blockquote>Even though you already have a license to operate an Adult Entertainment Building (or a brothel, as everyone except the official license granting you permission to operate one calls them), and in theory they're limited to one per person, it's an unwritten rule that prosperous owners can get permits for their \"second cousin, currently living abroad\" with no questions asked. The Guild limits the number of establishments to prevent the price from dropping too low, but it doesn't much care who operates each particular one - after all, the Guild leaders are the most successful and richest men in the city, nothing more and nothing less.<br><br>The permits are expected to run out by <strong>Day <<- mission.end.max.day >></strong> - and while there are more underhanded means available, the simplest method to get one is via a hefty bribe (<<- girl.name >> estimates $30-50k).",
+    text: "<blockquote>Did you hear? <<- (new Person()).name >> just died. What, you haven't heard of him? He's a big name in The Guild around here - owns probably half the brothels in the city. Well anyway, since he doesn't have any heirs and he left most of his property to the Guild, a whole bunch of licenses have just opened up, and I think you should take the chance to snag one of them.</blockquote>Even though you already have a license to operate an Adult Entertainment Building (or a brothel, as everyone except the official license granting you permission to operate one calls them), and in theory they're limited to one per person, it's an unwritten rule that prosperous owners can get permits for their \"second cousin, currently living abroad\" with no questions asked. The Guild limits the number of establishments to prevent the price from dropping too low, but it doesn't much care who operates each particular one - after all, the Guild leaders are the most successful and richest people in the city, nothing more and nothing less.<br><br>The permits are expected to both be available and run out on <strong>Day <<- mission.end.max.day >></strong> - and while there are more underhanded means available, the simplest method to get one is via a hefty bribe (<<- girl.name >> estimates $30-50k).",
     weight: -1
   },
   end: {
     min: { day: '+25' },
     max: { day: '+25' }
   },
-  variants: function(context, done) {
-    if (g.money < 50000) {
-      done(this.base().results.noCash);
-      return;
+  options: [
+    {
+      key: 'noCash',
+      conditions: { max: { money: 49999 }},
+      immediate: true
+    },
+    {
+      key: 'noThanks',
+      label: 'No thanks',
+      title: "This sounds like way too much trouble and money. You've got a loan to pay off here."
+    },
+    {
+      key: 'cash',
+      label: 'Stacks of cash',
+      title: "Money makes the world go around. Given their job description, they've probably seen enough prostitutes that getting laid isn't going to be an effective bribe."
+    },
+    {
+      key: 'sex',
+      label: 'Sex and Money',
+      title: "<<- girl.name >> isn't somthing any man could resist, combined with a bag of large denomination, untraceable coinage."
     }
-    var text = this.girl + " hurries into the room just as you were sitting down for a nice cup of tea. <blockquote>Hey, if we're going to get a permit to open a second location, then we're going to have to leave <em>now.</em> I've been keeping an eye on them, and there are only two left. Is this something we're going to do?</blockquote> If you are, it's time to decide on a strategy. Convincing the people at the Guild office to give a permit to your second cousin three times removed who they've never met before is going to take some work.";
-    var options = {
-      'No thanks': 'This sounds like way too mouch trouble and money. I\'ve got a loan to pay off here.',
-      'Stacks of Cash': 'Money makes the world go around. Given their job description, they\'ve probably seen enough prostitutes that getting laid isn\'t going to be an effective bribe.',
-      'Sex and Money': this.girl + ' isn\'t somthing any man could resist, combined with a bag of large denomination, untracable coinage.'
-    };
-    Game.getUserInput(text, context.girl.image(), options, function(answer) {
-      var result = $.extend(true, {}, context.mission.base().results[answer]);
-      if (answer == 'Sex and Money') {
-        result.money *= 1.5 - (context.girl.get('libido') + context.girl.charisma) / 200;
-        result.money *= (Math.random() + 1) / 2;
-        result.money = Math.round(result.money / 100) * 100;
-        g.maxBuildings = 2;
-      } else if (answer == 'Stacks of Cash') {
-        g.maxBuildings = 2;
-      }
-      done(result);
-    });
+  ],
+  optionsInfo: {
+    text: "<<- girl.name >> hurries into the room just as you were sitting down for a nice cup of tea. <blockquote>Hey, if we're going to get a permit to open a second location, then we're going to have to leave <em>now.</em> I've been keeping an eye on them, and there are only two left. Is this something we're going to do?</blockquote> If you are, it's time to decide on a strategy. Convincing the people at the Guild office to give a permit to your second cousin three times removed who they've never met before is going to take some work.",
+    image: '<<- girl.image() >>'
+  },
+  variants: function secondBuildingVariants(context, done) {
+    var result = $.extend(true, {}, this.base().results[this.option]);
+    if (this.option == 'sex') {
+      result.money *= 1.5 - (context.girl.get('libido') + context.girl.charisma) / 200;
+      result.money *= (Math.random() + 1) / 2;
+      result.money = Math.round(result.money / 100) * 100;
+      g.maxBuildings = 2;
+    } else if (this.option == 'money') {
+      g.maxBuildings = 2;
+    }
+    done(result);
   },
   results: {
     noCash: {
@@ -114,7 +128,5 @@ Missions.secondBuildingDelay = {
   end: {
     min: { day: '+75' }
   },
-  results: [{
-    mission: 'secondBuilding'
-  }]
+  results: { done: {}}
 };

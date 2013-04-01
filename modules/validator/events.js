@@ -10,6 +10,10 @@ Schemas.Event = {
   properties: {
     _id: {},
     initialize: {},
+    options: {},
+    optionsInfo: {
+      required: ['text', 'image']
+    },
     variants: {},
     results: {},
     special: {},

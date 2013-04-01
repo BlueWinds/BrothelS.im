@@ -2,9 +2,9 @@
 
 var Actions = {};
 
-e.Ready.push(function(done) {
+e.Ready.push(function actionsReady(done) {
   $('head').append('<link href="modules/actions/style.css" type="text/css" rel="stylesheet">');
-  $(document).keydown(function(event) {
+  $(document).keydown(function actionKeydown(event) {
     if (!$('.ui-dialog').length && event.keyCode <= 53 && event.keyCode >= 49) {
       $('#girls div[name="morning"]').eq(event.keyCode - 49).click();
       event.preventDefault();
@@ -13,29 +13,29 @@ e.Ready.push(function(done) {
   });
   e.addTemplate('list-actions', 'modules/actions/list-actions.tpl.html');
   e.addTemplate('view-actions', 'modules/actions/view-actions.tpl.html');
-  $.each(Actions, function(_id, action) {
+  $.each(Actions, function (_id, action) {
     action._id = _id;
   });
-  $.each(Girls, function(name, girl) {
+  $.each(Girls, function (name, girl) {
     if (!girl.Actions) { return; }
-    $.each(girl.Actions, function(_id, action) {
+    $.each(girl.Actions, function (_id, action) {
       action._id = _id;
     });
   });
   done();
 });
 
-e.GirlNew.push(function(girl) {
+e.GirlNew.push(function actionsNewGirl(girl) {
   // Add action history, if it doesn't exist yet.
   if (!girl.actions.history) {
     girl.actions.history = {};
   }
 });
 
-e.GirlRunTime.push(function(girl, time, done) {
+e.GirlRunTime.push(function actionsRunTime(girl, time, done) {
   if (girl.status == 'Hired' && (time == 'evening' || !girl.actions[time].allDay)) {
     girl.verifyAction(time, true, true);
-    girl.actions[time].getResults(function(results, context) {
+    girl.actions[time].getResults(function (results, context) {
       girl.actions[time].applyResults(results, done, context);
     });
     return;
@@ -43,16 +43,16 @@ e.GirlRunTime.push(function(girl, time, done) {
   done();
 });
 
-e.GamePreRender.push(function(done) {
-  g.girls._filter('status', 'Hired').forEach(function(girl) {
+e.GamePreRender.push(function actionPreRender(done) {
+  g.girls._filter('status', 'Hired').forEach(function verifyActions(girl) {
     girl.verifyAction('morning');
     girl.verifyAction('evening');
   });
   done();
 });
 
-e.GameRender.push(function(done) {
-  $('.girl .right > div').click(function() {
+e.GameRender.push(function actionGameRender(done) {
+  $('.girl .right > div').click(function setActionDialog() {
     var time = $(this).attr('name');
     var girl = g.girls[$(this).parent().parent().attr('name')];
     function renderActions(girl, time) {
@@ -63,25 +63,30 @@ e.GameRender.push(function(done) {
         actions: girl.potentialActions(time)
       };
       var div = e.render('view-actions', context);
-      $('.action:not(.disabled)', div).click(function() {
+      $('.action:not(.disabled)', div).click(function setAction() {
         var $this = $(this);
         var action = $this.children('ul').attr('name');
         action = context.actions[action];
         if (girl.actions[context.time]._id == action._id) { return; }
-        $('li.this', div).fadeOut('fast', function() {
+        $('li.this', div).fadeOut('fast', function () {
           $(this).fadeIn('fast').appendTo($this.children('ul'));
         });
         girl.setAction(action);
       });
-      $('.action ol.dropdown li', div).click(function() {
+      $('.action ol.dropdown li', div).click(function chooseOption() {
+        var $this = $(this);
         var action = $(this).closest('.action').children('ul').attr('name');
+        var option = $(this).attr('name');
         action = context.actions[action];
-        $(this).parent().children('li').removeClass('selected');
-        $(this).addClass('selected');
-        action.setOption($(this).attr('name'));
+        $this.parent().children('li').removeClass('selected');
+        $this.addClass('selected');
+        action.setOption(option);
         girl.setAction(action);
+        $('li.this', div).fadeOut('fast', function () {
+          $(this).fadeIn('fast').appendTo($this.closest('div.action').children('ul'));
+        });
         if (action.allDay) {
-          girl.actions[context.time == 'morning' ? 'evening' : 'morning'].setOption($(this).attr('name'));
+          girl.actions[context.time == 'morning' ? 'evening' : 'morning'].setOption(option);
         }
       });
       e.invokeAll('Autorender', div);
@@ -104,11 +109,12 @@ e.GameRender.push(function(done) {
       beforeClose: g.render
     };
     view.dialog(opt);
-    view.closest('.ui-dialog').addClass('tab-dialog').on( "accordionbeforeactivate", function(event, ui) {
+    var dialog = view.closest('.ui-dialog').addClass('tab-dialog');
+    dialog.on("accordionbeforeactivate", function loadActionsIntoTab(event, ui) {
       var girl = ui.newPanel.parent().attr('name');
       var time = ui.newPanel.hasClass('morning') ? 'morning' : 'evening';
       ui.newPanel.html(renderActions(g.girls[girl], time));
-    }).on('tabsbeforeactivate', function(event, ui) {
+    }).on('tabsbeforeactivate', function resetAccordion(event, ui) {
       ui.newPanel.accordion('option', 'active', 1);
       ui.newPanel.accordion('option', 'active', 0);
     });
@@ -116,7 +122,7 @@ e.GameRender.push(function(done) {
   done();
 });
 
-e.GirlSetStatus.push(function(girl) {
+e.GirlSetStatus.push(function actionSetStatus(girl) {
   if (girl.status == 'Hired') {
     girl.setAction(girl.action('Rest', { time: 'morning' }));
     girl.setAction(girl.action('Rest', { time: 'evening' }));

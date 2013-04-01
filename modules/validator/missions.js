@@ -1,6 +1,6 @@
 "use strict";
 Schemas.MissionName = {
-  'enum': Object.keys(Missions)._append($.map(Girls, function(girl) {
+  'enum': Object.keys(Missions)._append($.map(Girls, function (girl) {
     if (girl.Missions) { return Object.keys(girl.Missions); }
   }))
 };
@@ -11,9 +11,17 @@ Schemas.Mission = {
   properties: {
     _id: {},
     initialize: {},
+    options: {},
+    optionsInfo: {
+      required: ['text', 'image']
+    },
     variants: {},
     results: {},
     special: {},
+    preDay: {
+      'enum': [true],
+      description: 'A mission marked "preDay" is evaluated (both to see if it starts and it it ends, and any effects applied) before actions - all others occur after.'
+    },
     conditions: {
       description: 'The mission will begin as soon as all of these conditions match, as long as a mission with the same name is not already running (since only one mission of each _id can run at a time, it would overwrite the existing one). If conditions is "false", then this mission will never start on its own - it can only be triggered from a Result.'
     },

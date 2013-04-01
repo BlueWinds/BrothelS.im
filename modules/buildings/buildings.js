@@ -2,24 +2,24 @@
 
 var Buildings = {};
 
-e.Ready.push(function(done) {
+e.Ready.push(function buildingsReady(done) {
   $('head').append('<link href="modules/buildings/style.css" type="text/css" rel="stylesheet">');
   e.addTemplate('list-buildings', 'modules/buildings/list-buildings.tpl.html');
   e.addTemplate('manage-buildings', 'modules/buildings/manage-buildings.tpl.html');
   e.addTemplate('view-building', 'modules/buildings/view-building.tpl.html');
-  $.each(Buildings, function(name, building) {
+  $.each(Buildings, function (name, building) {
     building.name = name;
   });
   done();
 });
 
-e.GameNew.push(function(done) {
+e.GameNew.push(function buildingsNewGame(done) {
   g.maxBuildings = Building.config.startMaxBuildings;
   g.buildings = g.buildings || {};
   done();
 });
 
-e.GameInit.push(function(done) {
+e.GameInit.push(function buildingsGameInit(done) {
   for (var name in Buildings) {
     if (!g.buildings[name]) {
       g.buildings[name] = Building.create(name);
@@ -28,35 +28,35 @@ e.GameInit.push(function(done) {
   done();
 });
 
-e.GamePreDay.push(function(done) {
-  g.buildings._filter('status', 'Owned').forEach(function(building) {
+e.GamePreDay.push(function buildingsPreDay(done) {
+  g.buildings._filter('status', 'Owned').forEach(function (building) {
     building.turnDelta = building.startDelta();
   });
-  $.each(g.buildings, function(name, building) {
+  $.each(g.buildings, function runBuildingDay(name, building) {
     building.runDay();
   });
   done();
 });
 
-e.GamePostDay.push(function(done) {
-  g.buildings._filter('status', 'Owned').forEach(function(building) {
+e.GamePostDay.push(function buildingsPostDay(done) {
+  g.buildings._filter('status', 'Owned').forEach(function (building) {
     building.turnDelta = building.turnDelta();
   });
   done();
 });
 
-e.GameRender.push(function(done) {
+e.GameRender.push(function buildingsGameRender(done) {
   var div = e.render('list-buildings', {
     buildings: g.buildings._filter('status', 'Owned')
   }).appendTo('#content .second');
-  $('.building .right', div).click(function() {
+  $('.building .right', div).click(function openBuildingDialog() {
     var dialog = $('<div>');
     function render(element, autorender) {
       var context = {
         buildings: g.buildings._filter('status', 'Owned'),
         innGirls: []
       };
-      g.girls._filter('status', 'Hired').forEach(function(girl) {
+      g.girls._filter('status', 'Hired').forEach(function (girl) {
         if (!girl.building()) {
           context.innGirls.push(girl);
         }
@@ -64,18 +64,18 @@ e.GameRender.push(function(done) {
 
       var view = e.render('view-building', context);
       element.html(view);
-      $('.building', view).each(function() {
+      $('.building', view).each(function buildBuildingSortable() {
         var name = $(this).attr('name');
-        var selector = '.building[name="' + name +'"]';
+        var selector = '.building[name="' + name + '"]';
         $('.built-rooms', this).sortable({
           connectWith: selector + ' .available-rooms',
           handle: 'label',
-          receive: function(event, ui) {
+          receive: function buildingBuyRoom(event, ui) {
             var type = ui.item.attr('name');
             g.buildings[name].buyRoom(type);
             render(dialog);
           },
-          update: function(event, ui) {
+          update: function buildingReorderRoom(event, ui) {
             if (ui.item.attr('index') !== undefined && ui.item.closest(this).length) {
               var i = ui.item.parent().children().index(ui.item);
               var old = ui.item.attr('index');
@@ -92,11 +92,11 @@ e.GameRender.push(function(done) {
           handle: 'label',
           helper: 'clone',
           items: 'li:not(.disabled)',
-          start: function(event, ui) {
+          start: function (event, ui) {
             ui.item.css('display', 'list-item');
             $(this).children('.ui-sortable-placeholder').appendTo(this);
           },
-          receive: function(event, ui) {
+          receive: function buildingSellRoom(event, ui) {
             var index = ui.item.attr('index');
             g.buildings[name].sellRoom(index);
             render(dialog);
@@ -106,7 +106,7 @@ e.GameRender.push(function(done) {
       $('#inn, .room[name="Bedroom"] ul', view).sortable({
         connectWith: '#inn, .room[name="Bedroom"] ul',
         opacity: 0.7,
-        receive: function(event, ui) {
+        receive: function buildingRecieveGirl(event, ui) {
           var list = $(this);
           var senderIndex = ui.sender.parent().attr('index');
           if (senderIndex !== undefined) {
@@ -138,35 +138,35 @@ e.GameRender.push(function(done) {
     render(dialog, false);
     render(dialog.dialog(opt));
   });
-  $('.building .left, .building .middle').click(function() {
+  $('.building .left, .building .middle').click(function openManageBuildings() {
     var lst = e.render('manage-buildings', {
       buildings: g.buildings._filter('status', 'Owned'),
       action: 'Sell'
     });
-    $('button.manage', lst).each(function() {
+    $('button.manage', lst).each(function manageBuildingButton() {
       var building = g.buildings[$(this).attr('name')];
-        $(this).click(function() {
-          building.sell();
-          g.render();
-          $('#manage-buildings').dialog('close');
-        });
+      $(this).click(function sellBuilding() {
+        building.sell();
+        g.render();
+        $('#manage-buildings').dialog('close');
+      });
     });
     lst.dialog({
       title: 'Sell Building',
       width: '30em'
     });
   });
-  $('#buy-building').click(function() {
+  $('#buy-building').click(function openBuyBuildings() {
     var lst = e.render('manage-buildings', {
       action: 'Buy',
       buildings: g.buildings._filter('status', 'For Sale')
     });
-    $('button.manage', lst).each(function() {
+    $('button.manage', lst).each(function buyBuildingButton() {
       var building = g.buildings[$(this).attr('name')];
       if (building.price() > g.money) {
         $(this).attr('disabled', true);
       } else {
-        $(this).click(function() {
+        $(this).click(function buyBuilding() {
           building.buy();
           g.render();
           $('#manage-buildings').dialog('close');

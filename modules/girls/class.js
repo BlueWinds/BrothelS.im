@@ -23,12 +23,12 @@ function Girl(obj) {
   $.extend(this, obj);
 
   // Add missing stats from base
-  Girl.stats.forEach(function(stat) {
+  Girl.stats.forEach(function (stat) {
     if (girl[stat] === undefined) {
       girl[stat] = base[stat] !== undefined ? base[stat] : 30;
     }
   });
-  Girl.sexStats.forEach(function(sex) {
+  Girl.sexStats.forEach(function (sex) {
     if (girl[sex] === undefined) {
       girl[sex] = (base[sex] !== undefined ? base[sex] : 30);
     }
@@ -47,18 +47,18 @@ Girl.stats = [
 Girl.sex = ['soft', 'hard', 'anal', 'fetish'];
 Girl.sexStats = ['softLibido', 'softExperience', 'hardLibido', 'hardExperience', 'analLibido', 'analExperience', 'fetishLibido', 'fetishExperience'];
 
-Girl.prototype.base = function() {
+Girl.prototype.base = function getBase() {
   return Girls[this.name];
 };
 
-Girl.prototype.apply = function(stat, delta) {
+Girl.prototype.apply = function apply(stat, delta) {
   if (stat == 'money') {
     g.money += Math.floor(delta);
     return;
   }
   if (stat == 'specialRules') {
     var girl = this;
-    $.each(delta, function(key, value) {
+    $.each(delta, function setSpecialRules(key, value) {
       if (key == 'function') {
         value.call(girl);
         return;
@@ -117,14 +117,14 @@ Girl.prototype.apply = function(stat, delta) {
   }
 };
 
-Girl.prototype.compare = function(delta, explain) {
+Girl.prototype.compare = function compareWithDelta(delta, explain) {
   var result = this._compare(delta);
   // If !explain, then we return a boolean - does it match?
   // If explain, then we return a string saying *why* it doesn't match (or false if it does).
   return explain ? result : !result;
 };
 
-Girl.prototype._compare = function(delta) {
+Girl.prototype._compare = function _compare(delta) {
   if (delta.name && this.name != delta.name) { return this.name + ' is not ' + delta.name; }
   if (delta.status && this.status != delta.status) { return this.name + ' is not ' + delta.status; }
   var stat, rule, newDelta = $.extend(true, {}, delta);
@@ -161,10 +161,10 @@ Girl.prototype._compare = function(delta) {
   return false;
 };
 
-Girl.prototype.desiredPay = function() {
+Girl.prototype.desiredPay = function desiredPay() {
   if (!g.missionsDone.firstMoney) { return 0; }
   var pay = this.hirePrice(50) * Girl.config.payRatio;
-  if (this.intelligence < 20 && this.get('libido') > 50 ) {
+  if (this.intelligence < 20 && this.get('libido') > 50) {
     pay *= (this.intelligence / 40) + this.get('libido') / 100;
   }
   if (this.specialRules.payRatio !== undefined) {
@@ -173,11 +173,11 @@ Girl.prototype.desiredPay = function() {
   return Math.floor(pay);
 };
 
-Girl.prototype.payHappiness = function() {
+Girl.prototype.payHappiness = function payHappiness() {
   return Girl.config.pay[this.actions.pay];
 };
 
-Girl.prototype.hirePrice = function(happiness) {
+Girl.prototype.hirePrice = function hirePrice(happiness) {
   happiness = happiness === undefined ? this.happiness : happiness;
   var prices = Girl.config.hirePrice;
   var cost = prices.base;
@@ -186,14 +186,14 @@ Girl.prototype.hirePrice = function(happiness) {
     cost += this[stat] * prices[stat];
   }
   var girl = this;
-  Girl.sex.forEach(function(type) {
+  Girl.sex.forEach(function (type) {
     cost += (girl[type + 'Libido'] + girl[type + 'Experience']) * prices[type];
   });
   cost *= 1 - happiness / 150;
   return Math.floor(cost);
 };
 
-Girl.prototype.image = function(type) {
+Girl.prototype.image = function getImage(type) {
   var img = this.base().images[type];
   if (!img) { img = this.base().images.base; }
   if (typeof(img) == 'object') {
@@ -203,21 +203,21 @@ Girl.prototype.image = function(type) {
   return img;
 };
 
-Girl.prototype.startDelta = function(s) {
+Girl.prototype.startDelta = function startDelta(s) {
   s = s || Girl.stats;
   var girl = this;
   var delta = {
     money: g.money
   };
-  s.forEach(function(stat) {
+  s.forEach(function (stat) {
     delta[stat] = girl[stat];
   });
   if (s === Girl.stats) {
-    Girl.sexStats.forEach(function(sex) {
+    Girl.sexStats.forEach(function (sex) {
       delta[sex] = girl[sex];
     });
   }
-  return function() {
+  return function endDelta() {
     var change = {};
     if (g.money - delta.money) {
       change.money = g.money - delta.money;
@@ -231,14 +231,14 @@ Girl.prototype.startDelta = function(s) {
   };
 };
 
-Girl.prototype.hire = function() {
+Girl.prototype.hire = function hireGirl() {
   g.money -= this.hirePrice();
   this.apply('status', 'Hired');
   this.happiness = Girl.config.startHappiness;
   this.hireDay = g.day;
 };
 
-Girl.prototype.S = function(stat) {
+Girl.prototype.S = function renderStat(stat) {
   var str = '<span class="' + stat + '">' + this[stat];
   if (this.turnDelta && this.turnDelta[stat]) {
     var delta = this.turnDelta[stat];
@@ -248,7 +248,7 @@ Girl.prototype.S = function(stat) {
   return str + '</span>';
 };
 
-Girl.prototype.get = function(stat) {
+Girl.prototype.get = function getStat(stat) {
   if (stat.substr(0, 1) == '-') {
     return 100 - this.get(stat.substr(1));
   }
@@ -268,7 +268,7 @@ Girl.prototype.get = function(stat) {
   return this[stat];
 };
 
-Girl.prototype.parseConditions = function(conditions) {
+Girl.prototype.parseConditions = function girlParseConditions(conditions) {
   var oldInt;
   for (var cond in {min: 1, max: 1}) {
     if (!conditions[cond]) {
@@ -293,7 +293,7 @@ Girl.prototype.parseConditions = function(conditions) {
   return conditions;
 };
 
-Girl.prototype.setStatus = function(status) {
+Girl.prototype.setStatus = function setStatus(status) {
   this.status = status;
   e.invokeAllSync('GirlSetStatus', this);
 };

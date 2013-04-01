@@ -37,7 +37,61 @@ Girls.Yuna = {
     pregnant: "Tired2.jpg"
   },
   Actions: {
-    Talk: $.extend(true, {}, Actions.Talk),
+    Talk: $.extend(true, { results: {
+      Yuna1: {
+        message: {
+          group: 'Yuna',
+          label: 'Talk',
+          image: 'content/girls/Yuna/images/Exercise2.jpg',
+          text: "As you and Yuna sit down to spend some time together, she instead suggests that you take a walk through the city instead. A \"walk\" doesn't seem to be exactly what she had in mind though, as you end up, somehow, in the marketplace, looking at clothing. It's hard to object when she decides to start trying on outfits - especially when they involve as little cloth as the ones she's picking out. Finally, you end up buying something for her, a pair of pants that seem like they might fall off at any moment. You hope that they do."
+        },
+        girl: {
+          obedience: 1,
+          happiness: 4,
+          modesty: -2,
+          money: -60
+        }
+      },
+      Yuna2: {
+        message: {
+          group: 'Yuna',
+          label: 'Talk',
+          image: 'content/girls/Yuna/images/Study1.jpg',
+          text: "<blockquote>What do you think of my new dress?</blockquote> Yuna twirls in front of you, showing off. It's very... much like every other dress you've seen her wearing, as a matter of fact. She does seem very fond of this particular style. You avoid mentioning the fact, and instead comment on how its colors differ subtly from her usual costume."
+        },
+        girl: {
+          obedience: 1.5,
+          happiness: 1
+        }
+      },
+      Yuna3: {
+        message: {
+          group: 'Yuna',
+          label: 'Talk',
+          image: 'content/girls/Yuna/images/Clean2.jpg',
+          text: "You visit Yuna at her room in the <<- girl.building() ? girl.building().name : 'inn' >>. She welcomes you inside and invites you to sit down for some traditional tea that she has prepared. She <<- girl.happiness > 50 ? 'seems to be doing okay, but' : 'doesn\'t seem to be doing so well, and' >> when you ask her about herself, she immediately begins to tell you a about her childhood - it seems she's been thinking about it a lot recently. Her father was a priest and her mother was a prostitute he met while working overseas. Unfortunately, her mother died when she was four and her father when she was seven - she has only vague memories to them. Even so, she feels that both professions are part of who she is. By the time the tea is finished, Yuna seems drained from dredging up old memories, but happy to have finally gotten them off her chest."
+        },
+        girl: {
+          obedience: 2,
+          happiness: -2,
+          endurance: -5
+        }
+      },
+      Yuna4: {
+        message: {
+          group: 'Yuna',
+          label: 'Talk',
+          image: 'content/girls/Yuna/images/Base.jpg',
+          text: "You sit Yuna down and spend the <<- time >> trying to learn more about her. She's cagey about exactly what happened to her homeland, but says she escaped to this one with help from a friend of her late father. She explains that she was separated from her first love, and she's trying to meet as many men as possible in order to find him again. As to what she would do if she found him, perhaps not even she has decided. "
+        },
+        girl: {
+          obedience: 2,
+          modesty: 2,
+          happiness: 3,
+          endurance: -5
+        }
+      }
+    }}, Actions.Talk),
     Summon: {
       label: 'Summon',
       group: 'Chores',
@@ -57,10 +111,10 @@ Girls.Yuna = {
         market: 0.1
       },
       variants: [
-        { fetishes: { tentacles: true }, likelyhood: 0.1 }
+        { fetishes: { tentacles: true }, likelyhood: 0.1, result: 'TentacleAttack' }
       ],
-      results: [
-        {
+      results: {
+        TentacleAttack: {
           message: [
             {
               label: 'Summon',
@@ -88,7 +142,7 @@ Girls.Yuna = {
             }
           }
         },
-        {
+        Failed: {
           message: {
             label: 'Summon',
             group: '<<- girl.name >>',
@@ -103,7 +157,7 @@ Girls.Yuna = {
             }
           }
         },
-        {
+        Cleaning: {
           message: {
             label: 'Summon',
             group: '<<- girl.name >>',
@@ -121,7 +175,7 @@ Girls.Yuna = {
             }
           }
         },
-        {
+        Healing: {
           message: {
             label: 'Summon',
             group: '<<- girl.name >>',
@@ -137,7 +191,7 @@ Girls.Yuna = {
             }
           }
         },
-        {
+        Money: {
           message: {
             label: 'Summon',
             group: '<<- girl.name >>',
@@ -153,7 +207,7 @@ Girls.Yuna = {
             }
           }
         },
-        {
+        Incubus: {
           message: {
             label: 'Summon',
             group: '<<- girl.name >>',
@@ -175,7 +229,7 @@ Girls.Yuna = {
             }
           }
         },
-        {
+        OldFriend: {
           message: {
             label: 'Summon',
             group: '<<- girl.name >>',
@@ -190,7 +244,7 @@ Girls.Yuna = {
             }
           }
         }
-      ] // results
+      } // results
     } // Summon
   }, // actions
   Missions: {
@@ -208,7 +262,7 @@ Girls.Yuna = {
       end: {
         min: { day: '+2' }
       },
-      results: [{
+      results: { Gossip: {
         message:  {
           label: 'Local Gossip',
           group: 'Local Gossip',
@@ -216,7 +270,7 @@ Girls.Yuna = {
           text: "The gossip from passersby this morning is that Mahha, the High Priestess of the city's largest temple, has died. Though young and attractive, she had been unwell for some months, and the king is expected to declare citywide mourning. With some in shock and others in need of comfort, this doesn't seem to affect how much work your girl<<- g.girls._filter('status', 'Hired').length > 1 ? 's' : '' >> will get today. Mahha is survived by her husband, High Priest Detic.",
           weight: -1
         }
-      }]
+      }}
       // Next item in this path is the YunaCandidatePriestess event.
     },
     YunaForHighPriestess: {
@@ -238,10 +292,11 @@ Girls.Yuna = {
             modesty: 55,
             charisma: 65
           }
-        }
+        },
+        result: 'Success'
       }],
-      results: [
-        { // success
+      results: {
+        Success: {
           message: {
             label: 'Position Vacant: High Priestess',
             group: 'Yuna',
@@ -254,9 +309,9 @@ Girls.Yuna = {
             charisma: 2,
             modesty: 2
           },
-          mission: ["YunaPriestessWedding", "YunaPriestessWeddingInvisible"]
+          mission: "YunaPriestessWedding"
         },
-        { // fail
+        Fail: {
           message: {
             label: 'Position Vacant: High Priestess',
             group: 'Yuna',
@@ -268,15 +323,7 @@ Girls.Yuna = {
             happiness: -3
           }
         }
-      ]
-    },
-    YunaPriestessWeddingInvisible: {
-      conditions: false,
-      end: {
-        min: { day: '+27' },
-        max: { day: '+27' }
-      },
-      results: [{}]
+      }
     },
     YunaPriestessWedding: {
       conditions: false,
@@ -284,6 +331,7 @@ Girls.Yuna = {
         min: { day: '+28' },
         max: { day: '+28' }
       },
+      preDay: true,
       display: {
         label: 'Position Vacant: High Priestess',
         group: 'Yuna',
@@ -291,21 +339,37 @@ Girls.Yuna = {
         text: "After the meeting with High Priest Detic at the temple and catching his eye, he arranged for her to speak with Caosuin about a possible union. Rector Caosuin announces the date of the wedding as though it were already a sure thing. But he cautions her that if she is serious that she must ensure that she is of suitable virtue by the time of the marriage. Being High Priestess is a weighty responsibility.<br><br><em>Yuna should have at least <<- __('modesty') >> 85 and <<- __('obedience') >> 65 by <strong>Day <<- mission.end.max.day >></strong> if she intends to go through with this.</em>",
         weight: -1
       },
-      variants: function(context, done) {
-        var results = this.base().results;
-        if (context.girl.obedience < 65 || context.girl.modesty < 85) {
-          done(results.fail);
-          return;
-        }
-        var text = "It's finally the day of Yuna and High Priest Detic's wedding. You knock on her door early in the morning, only to find that Yuna is already up and ready, clothed in a beautiful dress provided by the temple. Something seems to be troubling her though, as rather than a smile as you'd expected, she's pacing nervously as you enter. She hesitates, looking at you with a conflicted expression. There's only one question she could ask, dressed and ready to marry a man she's met only for half an hour.<blockquote>Am I really doing the right thing?</blockquote>";
-        var options = {
-          "Don't go": "If she's not certain, then it's not what she wants. Besides, helping a whole city is a lot of responsibility, and you still want her help around here.",
-          "Come on, it will start soon": "This is probably the best chance she'll ever have to get out of this life and into something she can be proud of doing."
-        };
-        Game.getUserInput(text, 'content/girls/Yuna/missionImages/weddingDress.jpg', options, function(answer) {
-          done(results[answer]);
-        });
+      optionsInfo: {
+        text: "It's finally the day of Yuna and High Priest Detic's wedding. You knock on her door early in the morning, only to find that Yuna is already up and ready, clothed in a beautiful dress provided by the temple. Something seems to be troubling her though, as rather than a smile as you'd expected, she's pacing nervously as you enter. She hesitates, looking at you with a conflicted expression. There's only one question she could ask, dressed and ready to marry a man she's met only for half an hour.<blockquote>Am I really doing the right thing?</blockquote>",
+        image: 'content/girls/Yuna/missionImages/weddingDress.jpg'
       },
+      options: [
+        {
+          key: 'fail',
+          conditions: { girl: { max: { obedience: 64 }}},
+          immediate: true
+        },
+        {
+          key: 'fail',
+          conditions: { girl: { max: { modesty: 84 }}},
+          immediate: true
+        },
+        {
+          key: 'dontGo',
+          label: "Don't go",
+          title: "If she's not certain, then it's not what she wants. Besides, helping a whole city is a lot of responsibility, and you still want her help around here."
+        },
+        {
+          key: 'comeOn',
+          label: 'Come on, it will start soon',
+          title: "This is probably the best chance she'll ever have to get out of this life and into something she can be proud of doing."
+        }
+      ],
+      variants: [
+        { option: 'fail', result: 'fail' },
+        { option: 'dontGo', result: 'dontGo' },
+        { option: 'comeOn', result: 'comeOn' }
+      ],
       results: {
         fail: {
           message: {
@@ -318,9 +382,9 @@ Girls.Yuna = {
           girl: {
             obedience: -4
           },
-          mission: "YunaRefuseConsequences"
+          mission: ["YunaRefuseConsequences", 'YunaPriestessWeddingInvisible']
         },
-        "Don't go": {
+        dontGo: {
           message: {
             label: "Yuna's Wedding Day",
             group: 'Yuna',
@@ -333,9 +397,9 @@ Girls.Yuna = {
             modesty: -4,
             happiness: 7
           },
-          mission: "YunaRefuseConsequences"
+          mission: ["YunaRefuseConsequences", 'YunaPriestessWeddingInvisible']
         },
-        "Come on, it will start soon": {
+        comeOn: {
           message: [
             {
               label: "Yuna's Wedding Day",
@@ -367,17 +431,26 @@ Girls.Yuna = {
             happiness: 4,
             charisma: 3
           },
-          mission: 'YunaPriestessVisit'
+          mission: ['YunaPriestessVisit', 'YunaPriestessWeddingInvisible']
         }
       } // results
     }, //YunaPriestessWedding
+    YunaPriestessWeddingInvisible: {
+      conditions: false,
+      preDay: true,
+      end: {
+        min: { day: '+1' },
+        max: { day: '+1' }
+      },
+      results: { empty: {} }
+    },
     YunaRefuseConsequences: {
       conditions: false,
       end: {
         min: { day: '+8' },
         max: { day: '+8' }
       },
-      results: [{
+      results: { TaxCollector: {
         message: {
           label: "A Visit from the Tax Collector",
           group: 'Yuna',
@@ -386,7 +459,7 @@ Girls.Yuna = {
           weight: -1
         },
         money: -4000
-      }]
+      }}
     },
     YunaPriestessVisit: {
       conditions: false,
@@ -394,7 +467,7 @@ Girls.Yuna = {
         min: { day: '+8' },
         max: { day: '+8' }
       },
-      results: [{
+      results: { Visit: {
         message: {
           label: "A Visit from Yuna",
           group: 'Yuna',
@@ -403,7 +476,7 @@ Girls.Yuna = {
           weight: -1
         },
         money: 10000
-      }]
+      }}
     }
   },
   Events: {
@@ -417,7 +490,7 @@ Girls.Yuna = {
           YunaForHighPriestess: -3
         }
       },
-      results: [{
+      results: { Vacant: {
         message: {
           label: 'Position Vacant: High Priestess',
           group: 'Yuna',
@@ -430,66 +503,10 @@ Girls.Yuna = {
           endurance: -5,
           happiness: 3
         }
-      }]
+      }}
     }
   } // Events
 };
-
-Girls.Yuna.Actions.Talk.results._append([
-  {
-    message: {
-      group: 'Yuna',
-      label: 'Talk',
-      image: 'content/girls/Yuna/images/Exercise2.jpg',
-      text: "As you and Yuna sit down to spend some time together, she instead suggests that you take a walk through the city instead. A \"walk\" doesn't seem to be exactly what she had in mind though, as you end up, somehow, in the marketplace, looking at clothing. It's hard to object when she decides to start trying on outfits - especially when they involve as little cloth as the ones she's picking out. Finally, you end up buying something for her, a pair of pants that seem like they might fall off at any moment. You hope that they do."
-    },
-    girl: {
-      obedience: 1,
-      happiness: 4,
-      modesty: -2,
-      money: -60
-    }
-  },
-  {
-    message: {
-      group: 'Yuna',
-      label: 'Talk',
-      image: 'content/girls/Yuna/images/Study1.jpg',
-      text: "<blockquote>What do you think of my new dress?</blockquote> Yuna twirls in front of you, showing off. It's very... much like every other dress you've seen her wearing, as a matter of fact. She does seem very fond of this particular style. You avoid mentioning the fact, and instead comment on how its colors differ subtly from her usual costume."
-    },
-    girl: {
-      obedience: 1.5,
-      happiness: 1
-    }
-  },
-  {
-    message: {
-      group: 'Yuna',
-      label: 'Talk',
-      image: 'content/girls/Yuna/images/Clean2.jpg',
-      text: "You visit Yuna at her room in the <<- girl.building() ? girl.building().name : 'inn' >>. She welcomes you inside and invites you to sit down for some traditional tea that she has prepared. She <<- girl.happiness > 50 ? 'seems to be doing okay, but' : 'doesn\'t seem to be doing so well, and' >> when you ask her about herself, she immediately begins to tell you a about her childhood - it seems she's been thinking about it a lot recently. Her father was a priest and her mother was a prostitute he met while working overseas. Unfortunately, her mother died when she was four and her father when she was seven - she has only vague memories to them. Even so, she feels that both professions are part of who she is. By the time the tea is finished, Yuna seems drained from dredging up old memories, but happy to have finally gotten them off her chest."
-    },
-    girl: {
-      obedience: 2,
-      happiness: -2,
-      endurance: -5
-    }
-  },
-  {
-    message: {
-      group: 'Yuna',
-      label: 'Talk',
-      image: 'content/girls/Yuna/images/Base.jpg',
-      text: "You sit Yuna down and spend the <<- time >> trying to learn more about her. She's cagey about exactly what happened to her homeland, but says she escaped to this one with help from a friend of her late father. She explains that she was separated from her first love, and she's trying to meet as many men as possible in order to find him again. As to what she would do if she found him, perhaps not even she has decided. "
-    },
-    girl: {
-      obedience: 2,
-      modesty: 2,
-      happiness: 3,
-      endurance: -5
-    }
-  }
-]);
 
 Events.YunaWedding = {
   tags: {
@@ -505,15 +522,14 @@ Events.YunaWedding = {
   },
   conditions: {
     missions: {
-      YunaPriestessWedding: 1,
-      YunaPriestessWeddingInvisible: 2
+      YunaPriestessWeddingInvisible: 1
     }
   },
-  results: [{
+  results: { Attended: {
     girl: {
       endurance: 4,
       happiness: 3,
       charisma: 3
     }
-  }]
+  }}
 };

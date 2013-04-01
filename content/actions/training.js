@@ -14,8 +14,8 @@ Actions.Exercise = {
     park: 0.5,
     market: 0.1
   },
-  results: [
-    {
+  results: {
+    Generic1: {
       message: {
         group: '<<- girl.name >>',
         label: 'Exercise',
@@ -29,7 +29,7 @@ Actions.Exercise = {
         modesty: -0.5
       }
     },
-    {
+    Generic2: {
       message: {
         group: '<<- girl.name >>',
         label: 'Exercise',
@@ -41,12 +41,12 @@ Actions.Exercise = {
         constitution: 1.5
       }
     },
-    {
+    Generic3: {
       message: {
         group: '<<- girl.name >>',
         label: 'Exercise',
         image: '<<- girl.image("tired") >>',
-        text: '<<- girl.name >> jogged around the city. The sky was overcast and cloudy, and it began to rain as she neared the end of her run, leaving <<- girl.name >> to miserable and soaked when she returned.'
+        text: '<<- girl.name >> jogged around the city. The sky was overcast and cloudy, and it began to rain as she neared the end of her run, leaving <<- girl.name >> miserable and soaked when she returned.'
       },
       girl: {
         endurance: -20,
@@ -55,7 +55,7 @@ Actions.Exercise = {
         obedience: 0.1
       }
     }
-  ]
+  }
 };
 
 Actions.Study = {
@@ -75,8 +75,8 @@ Actions.Study = {
     slums: 0.1,
     university: 0.1
   },
-  results: [
-    {
+  results: {
+    Generic1: {
       message: {
         group: '<<- girl.name >>',
         label: 'Study',
@@ -90,7 +90,7 @@ Actions.Study = {
       },
       money: -100
     },
-    {
+    Generic2: {
       message: {
         group: '<<- girl.name >>',
         label: 'Study',
@@ -103,7 +103,7 @@ Actions.Study = {
       },
       money: -100
     },
-    {
+    Generic3: {
       message: {
         group: '<<- girl.name >>',
         label: 'Study',
@@ -117,7 +117,7 @@ Actions.Study = {
       },
       money: -100
     },
-    {
+    Generic4: {
       message: [
         {
           group: '<<- girl.name >>',
@@ -141,7 +141,7 @@ Actions.Study = {
         modesty: -1.3
       }
     }
-  ]
+  }
 };
 
 Actions.Expose = {
@@ -165,23 +165,27 @@ Actions.Expose = {
     uptown: 0.2,
     market: 0.2
   },
-  variants: function(context, done) {
-    var i;
-    if (context.girl.modesty > 70) {
-      i = 0;
-    } else if (context.girl.mondesty > 33) {
-      i = Math.choice([1, 2]);
-    } else if (context.girl.mondesty > 15) {
-      i = Math.choice([2, 3]);
-    } else if (context.girl.modesty > 3 && Math.random() > 0.5) {
-      i = Math.random() > context.girl.endurance / 100 && g.missionsDone.libidoAndExperience ? 5 : 4;
-    } else {
-      i = context.time == 'morning' ? 6 : 7;
+  variants: [
+    {
+      girl: { min: { modesty: 70 }},
+      result: 'VeryModest'
+    },
+    {
+      girl: { min: { modesty: 33 }},
+      result: ['Park', 'Miniskirt']
+    },
+    {
+      girl: { min: { modesty: 15 }},
+      result: ['Miniskirt', 'Proposition']
+    },
+    { // Don't fine them unless the tutorial is mostly over.
+      missions: { firstMoney: 3 },
+      likelyhood: 0.33,
+      result: 'NakedCaught'
     }
-    done(this.base().results[i]);
-  },
-  results: [
-    { // 0
+  ],
+  results: {
+    VeryModest: {
       message: {
         group: '<<- girl.name >>',
         label: 'Expose',
@@ -195,7 +199,7 @@ Actions.Expose = {
         obedience: 0.2
       }
     },
-    { // 1
+    Park: {
       message: {
         group: '<<- girl.name >>',
         label: 'Expose',
@@ -209,12 +213,12 @@ Actions.Expose = {
         softLibido: 0.1
       }
     },
-    { // 2
+    Miniskirt: {
       message: {
         group: '<<- girl.name >>',
         label: 'Expose',
         image: '<<- girl.image("exercise") >>',
-        text: '<<- girl.name >> wore a skimpy outfit, miniskirt and too-small t-shirt. << if (time == "morning") { >>She wandered through the busiest parts of the city, treating select passersby to a brief glimpse of her pantiles pussy as she bent over to "retrieve" a dropped object. The tiny top didn\'t leave much to the imagination.<< } else { >>She stopped by the park, and, feeling brave, left everything except her panties on the shore. Ignoring the "no swimming" signs, she was pretty sure a few people caught sight of her in the moonlight.<< } >>'
+        text: "<<- girl.name >> wore a skimpy outfit, miniskirt and too-small t-shirt. << if (time == 'morning') { >>She wandered through the busiest parts of the city, treating select passersby to a brief glimpse of her pantieless pussy as she bent over to \"retrieve\" a dropped object. The tiny top didn\'t leave much to the imagination.<< } else { >>She stopped by the park, and, feeling brave, left everything except her panties on the shore. Ignoring the no swimming signs, she was pretty sure a few people caught sight of her in the moonlight.<< } >>"
       },
       girl: {
         endurance: -5,
@@ -223,12 +227,12 @@ Actions.Expose = {
         obedience: -0.5
       }
     },
-    { // 3
+    Proposition: { // 3
       message: {
         group: '<<- girl.name >>',
         label: 'Expose',
         image: '<<- girl.image("exercise") >>',
-        text: '<<- girl.name >> explored the city topless, wearing only a miniskirt that barely reached past her butt. She got plenty of catcalls, and one pair of young men was brave enough to proposition her. << if (girl.building()) { >>She declined for the moment, saying the they could visit her later at the <<- girl.building().name >> if they were still interested.<< } else { >>She declined since she wasn\'t working at the moment, but stroked their cocks through their pants as they talked, leaving them with raging hardons and a mischevious wink as the went on her way.<< } >>'
+        text: "<<- girl.name >> explored the city topless, wearing only a miniskirt that barely reached past her butt. She got plenty of catcalls, and one pair of young men was brave enough to proposition her. << if (girl.building()) { >>She declined for the moment, saying the they could visit her later at the <<- girl.building().name >> if they were still interested.<< } else { >>She declined since she wasn't working at the moment, but stroked their cocks through their pants as they talked, leaving them with raging hardons and a mischevious wink as the went on her way.<< } >>"
       },
       girl: {
         endurance: -5,
@@ -238,7 +242,7 @@ Actions.Expose = {
         }
       }
     },
-    { // 4
+    NakedEscape: {
       message: {
         group: '<<- girl.name >>',
         label: 'Expose',
@@ -253,7 +257,7 @@ Actions.Expose = {
         obedience: -2
       }
     },
-    { // 5
+    NakedCaught: {
       message: [
         {
           group: '<<- girl.name >>',
@@ -266,7 +270,7 @@ Actions.Expose = {
           group: '<<- girl.name >>',
           label: 'Expose',
           image: '<<- girl.image("prison") >>',
-          text: 'She wasn\'t fast enough. They soon caught up with <<- girl.name >>, bringing her escapade to a rough and crashing halt. The guards took her to the town gaol and locked her up. It was miserable and cold, but in light of her nakedness at least she got her own cell. Since she didn\'t have any money on her, you were called in and had to pay her fine.'
+          text: 'She wasn\'t fast enough. They soon caught up with <<- girl.name >>, bringing her escapade to a rough and crashing halt. The guards took her to the Garrison and locked her up. It was miserable and cold, but in light of her nakedness at least she got her own cell. Since she didn\'t have any money on her, you were called in and had to pay her fine.'
         }
       ],
       girl: {
@@ -278,12 +282,12 @@ Actions.Expose = {
       },
       money: -150
     },
-    { // 6
+    StripTease: {
       message: {
         group: '<<- girl.name >>',
         label: 'Expose',
         image: '<<- girl.image("naked") >>',
-        text: '<<- girl.name >> visited the crowded town square and stood on the low wall of the fountain. She began an unannounced striptease, slowly removing each piece of clothing and dropping it into the water below. By the time <<- girl.name >> was completely naked, she had a large audience of appreciative onlookers cheering and asking for more. She held their undivided attention for another twenty minutes as she danced and posed for them, letting them see her from every angle. Not wanting to risk arrest, she walked through the crowd when she was finished, getting several propositions on her way home.'
+        text: '<<- girl.name >> visited the crowded market square and stood on the low wall of the fountain. She began an unannounced striptease, slowly removing each piece of clothing and dropping it into the water below. By the time <<- girl.name >> was completely naked, she had a large audience of appreciative onlookers cheering and asking for more. She held their undivided attention for another twenty minutes as she danced and posed for them, letting them see her from every angle. Not wanting to risk arrest, she walked through the crowd when she was finished, getting several propositions on her way home.'
       },
       girl: {
         endurance: -10,
@@ -291,7 +295,7 @@ Actions.Expose = {
         happiness: 4
       }
     },
-    { // 7
+    NakedPark: {
       message: {
         group: '<<- girl.name >>',
         label: 'Expose',
@@ -304,7 +308,7 @@ Actions.Expose = {
         happiness: 4
       }
     }
-  ]
+  }
 };
 
 Actions.OD = {
@@ -324,20 +328,20 @@ Actions.OD = {
   },
   tags: { indoors: 1 },
   ownerParticipation: true,
-  options: {
-    soft: __('soft'),
-    hard: __('hard'),
-    anal: __('anal'),
-    fetish: __('fetish')
-  },
-  variants: [
-    { option: 'soft' },
-    { option: 'hard' },
-    { option: 'anal' },
-    { option: 'fetish' }
+  options: [
+    { key: 'soft', label: __('soft'), title: '' },
+    { key: 'hard', label: __('hard'), title: '' },
+    { key: 'anal', label: __('anal'), title: '' },
+    { key: 'fetish', label: __('fetish'), title: '' }
   ],
-  results: [
-    { // soft
+  variants: [
+    { option: 'soft', result: 'soft' },
+    { option: 'hard', result: 'hard' },
+    { option: 'anal', result: 'anal' },
+    { option: 'fetish', result: 'fetish' }
+  ],
+  results: {
+    soft: {
       message: {
         group: '<<- girl.name >>',
         label: 'Orgasm Denial',
@@ -351,12 +355,12 @@ Actions.OD = {
         happiness: 3
       }
     },
-    { // hard
+    hard: {
       message: {
         group: '<<- girl.name >>',
         label: 'Orgasm Denial',
         image: '<<- girl.image("hard") >>',
-        text: 'You pushed <<- girl.name >> up against the wall while rubbing her pussy with one hand through her underwear. As she got more worked up, you introduced a dildo, pushing it inside up to the hilt without removing her clothing. Nibbling on her ear and whispering in her ear, you continued to play mercilessly with her sex, never quite providing enough stimulation to bring her to orgasm.'
+        text: 'You pushed <<- girl.name >> up against the wall while rubbing her pussy with one hand through her underwear. As she got more worked up, you introduced a dildo, pushing it inside up to the hilt without removing her clothing. Nibbling on her neck and whispering in her ear, you continued to play mercilessly with her sex, never quite providing enough stimulation to bring her to orgasm.'
       },
       girl: {
         endurance: -6,
@@ -365,12 +369,12 @@ Actions.OD = {
         happiness: 4
       }
     },
-    { // anal
+    anal: {
       message: {
         group: '<<- girl.name >>',
         label: 'Orgasm Denial',
         image: '<<- girl.image("anal") >>',
-        text: 'Stripping off all of <<- girl.name >>\'s clothes, you had her lay across the bed face down, feet kicked up in the air while you settled in behind her. Playing with her pussy for a minute to get her wet, you finally produced a well lubricated dildo and pressed it against her ass, lightly then with increasing pressure until it finally slid in with a pop. You slid off the bed to bring your dead level with her pussy, licking and sucking on her love button while you continued to play with the dildo with one hand, pressing it further in, rotating it around and generally bringing her to the very edge of orgasm before backing off, only to begin again in a few minutes.'
+        text: 'Stripping off all of <<- girl.name >>\'s clothes, you had her lay across the bed face down, feet kicked up in the air while you settled in behind her. Playing with her pussy for a minute to get her wet, you finally produced a well lubricated dildo and pressed it against her ass, lightly then with increasing pressure until it finally slid in with a pop. You slid off the bed to bring your face dead level with her pussy, licking and sucking on her love button while you continued to play with the dildo with one hand, pressing it further in, rotating it around and generally bringing her to the very edge of orgasm before backing off, only to begin again in a few minutes.'
       },
       girl: {
         endurance: -7,
@@ -379,7 +383,7 @@ Actions.OD = {
         happiness: 5
       }
     },
-    { // fetish
+    fetish: {
       message: {
         group: '<<- girl.name >>',
         label: 'Orgasm Denial',
@@ -393,7 +397,7 @@ Actions.OD = {
         happiness: 3
       }
     }
-  ]
+  }
 };
 
 Actions.Lockdown = {
@@ -416,8 +420,8 @@ Actions.Lockdown = {
     }
   },
   tags: { indoors: 1 },
-  results: [
-    {
+  results: {
+    Generic1: {
       message: {
         group: '<<- girl.name >>',
         label: 'Lockdown',
@@ -432,7 +436,7 @@ Actions.Lockdown = {
         intelligence: -4
       }
     },
-    {
+    Generic2: {
       message: {
         group: '<<- girl.name >>',
         label: 'Lockdown',
@@ -447,5 +451,5 @@ Actions.Lockdown = {
         intelligence: -4
       }
     }
-  ]
+  }
 };

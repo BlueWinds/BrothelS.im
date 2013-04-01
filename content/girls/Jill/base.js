@@ -17,7 +17,7 @@ Girls.Jill = {
   hardLibido: 15,
   analLibido: 35,
   fetishLibido: 50,
-  specialRules:{
+  specialRules: {
     dependentStats: {
       "-endurance": { endurance: 0.3 }
     }

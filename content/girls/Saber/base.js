@@ -41,26 +41,76 @@ Girls.Saber = {
     pregnant: "Tired1.jpg"
   },
   Actions: {
-    Talk: $.extend(true, {}, Actions.Talk),
+    Talk: $.extend(true, { results: {
+      Saber1: {
+        message: {
+          group: 'Saber',
+          label: 'Talk',
+          image: '<<- girl.image() >>',
+          text: "Saber is quiet and reserved, not shy but private. She answers your direct questions, but has little to add of her own. You try to encourage her to speak up more, but she doesn't much understand the point - words are for communication, nothing more. The idea of bonding doesn't even cross her mind. Eventually you give up, and allow her to return to... whatever she was doing before you entered her room. Meditation, perhaps."
+        },
+        girl: {
+          obedience: 1
+        }
+      },
+      Saber2: {
+        message: {
+          group: 'Saber',
+          label: 'Talk',
+          image: '<<- girl.image() >>',
+          text: "Determined to get Saber to open up a little bit, you decided that a change of surroundings might be helpful, and take her out to <<- time == 'morning' ? 'lunch' : 'dinner' >>. Discussion seems to work well over a shared rice-pot and curry - while not chatty by a long shot, she is at least willing to hold a conversation, rather than respond to questions with single syllable answers.<br><br>Time flies, and you reach out for a second helping... only to notice that the rice is all gone. And the curry. And the basil on the side. Saber seems to have already finished everything. Nothing to be done - you order a second serving. She eats more than her share of that as well."
+        },
+        girl: {
+          obedience: 1.5,
+          happiness: 2
+        },
+        money: -30
+      },
+      Saber3: {
+        message: {
+          group: 'Saber',
+          label: 'Talk',
+          image: '<<- girl.image() >>',
+          text: "You ask why she prefers to be called Saber instead of Arthuria - it's a very pretty name, and it's more fitting for her to be a woman than a weapon. She takes so long to reply that you wonder if the question has offended - finaly, just when you're about to try somthing easier to talk about, she answers.<blockquote>It... there were no happy endings for me. I did far better as a weapon than I ever did as a human.</blockquote>"
+        },
+        girl: {
+          obedience: 2,
+          happiness: -3
+        }
+      },
+      Saber4: {
+        message: {
+          group: 'Saber',
+          label: 'Talk',
+          image: 'content/girls/Saber/images/Exercise1.jpg',
+          text: "Saber seems in no mood to sit around and talk, so you instead take her for a walk in the park. It is a nearly perfect <<- time >>, and she looks very pretty in her clothing, modest as it is. You see her watching a group of young people playing some game or other that involves a great deal of energetic running away from each other - and as you get closer, one of them stumbles and into the two of you. Saber catches the young man - no younger than her, really - and he rather than appologizing, just shouts \"You're it!\" and runs away, looking over his shoulder so see if she's going to chase him.<br><br>She looks at you for permission, and you nod. There are worse ways to spend some time than being young again."
+        },
+        girl: {
+          obedience: 1.5,
+          happiness: 3,
+          endurance: -7
+        }
+      }
+    }}, Actions.Talk),
     Rest: $.extend(true, {}, Actions.Rest, {
-      results: [{
+      results: { Generic1: {
         message: {
           text: 'Though no longer a purely spiritual being, Saber still seems to recover from wounds and exhaustion more rapidly than anyone else you\'ve met.'
         },
         girl: {
           endurance: 22
         }
-      }]
+      }}
     }),
     Lockdown: $.extend(true, {}, Actions.Lockdown, {
-      results: [
-  {
-    girl: { happiness: -18 }
-  },
-  {
-    girl: { happiness: -18 }
-  }
-      ]
+      results: {
+        Generic1: {
+          girl: { happiness: -18 }
+        },
+        Generic2: {
+          girl: { happiness: -18 }
+        }
+      }
     }),
     Exercise: {
       label: 'Patrol',
@@ -73,10 +123,10 @@ Girls.Saber = {
         }
       },
       variants: [
-        { fetishes: { tentacles: true }, likelyhood: 0.1 },
-        { fetishes: { tentacles: true }, likelyhood: 0.1 },
-        { fetishes: { rape: true }, likelyhood: 0.1 },
-        { fetishes: { rape: true }, likelyhood: 0.1 }
+        { fetishes: { tentacles: true }, likelyhood: 0.1, result: 'tentacleRape' },
+        { fetishes: { tentacles: true }, likelyhood: 0.1, result: 'defeatTentacle' },
+        { fetishes: { rape: true }, likelyhood: 0.1, result: 'guardRape' },
+        { fetishes: { rape: true }, likelyhood: 0.1, result: 'ruffianRape' }
       ],
       tags: {
         slums: 0.2,
@@ -85,8 +135,8 @@ Girls.Saber = {
         university: 0.2,
         market: 0.2
       },
-      results: [
-        { // tentacles, 0
+      results: {
+        tentacleRape: {
           message: [
             {
               label: 'Patrol',
@@ -111,7 +161,7 @@ Girls.Saber = {
             fetishLibido: 3
           }
         },
-        { // defeat tentacles, 1
+        defeatTentacle: {
           message: {
             label: 'Patrol',
             group: '<<- girl.name >>',
@@ -124,7 +174,7 @@ Girls.Saber = {
             constitution: 2.5
           }
         },
-        { // guard rape, 2
+        guardRape: {
           message: [
             {
               label: 'Patrol',
@@ -155,7 +205,7 @@ Girls.Saber = {
             modesty: -2
           }
         },
-        { // ruffian rape, 3
+        ruffianRape: {
           message: [
             {
               label: 'Patrol',
@@ -181,7 +231,7 @@ Girls.Saber = {
             fetishExperience: 5
           }
         },
-        { //defeat ruffians, 4
+        defeatRuffians: {
           message: {
             label: 'Patrol',
             group: '<<- girl.name >>',
@@ -194,7 +244,7 @@ Girls.Saber = {
             constitution: 2.5
           }
         },
-        { // knight, 5
+        meetKnight: {
           message: {
             label: 'Patrol',
             group: '<<- girl.name >>',
@@ -207,7 +257,7 @@ Girls.Saber = {
             constitution: 1.5
           }
         },
-        { // Nothing, 6
+        nothing: {
           message: {
             label: 'Patrol',
             group: '<<- girl.name >>',
@@ -219,59 +269,101 @@ Girls.Saber = {
             constitution: 1
           }
         }
-      ] // results
+      } // results
     } // Patrol
+  },
+  Missions: {
+    SaberConDrop: {
+      conditions: {
+        girl: {
+          min: {
+            hardLibido: 35
+          },
+          max: {
+            specialRules: { fading: 10 }
+          }
+        },
+        missions: { 'SaberFadingWarning': -3 }
+      },
+      variants: [
+        { girl: { max: { specialRules: { fading: 6 }}}, result: 'Day16' },
+        { girl: { max: { specialRules: { fading: 7 }}}, result: 'Day7' },
+        { girl: { max: { specialRules: { fading: 10 }}}, result: 'Day810' },
+        { girl: { max: { specialRules: { fading: 11 }}}, result: 'Day11' }
+        // Otherwise, Day12plus
+      ],
+      results: {
+        Day16: {
+          girl: {
+            constitution: -1,
+            endurance: -2,
+            specialRules: { fading: 1},
+            softLibido: 0.5,
+            hardLibido: 0.5,
+            analLibido: 0.5
+          }
+        },
+        Day7: {
+          girl: {
+            constitution: -2,
+            endurance: -2,
+            specialRules: { fading: 1},
+            softLibido: 0.5,
+            hardLibido: 0.5,
+            analLibido: 0.5
+          },
+          message: {
+            group: 'Saber',
+            label: 'Looking Drained',
+            image: 'content/girls/Saber/images/Tired3.jpg',
+            text: "You've seen Saber be many things, but never exhausted before. Sleep and rest has always been something she approached as a necessity, something that had to be done but never really affected her. Over the last few days though she's been sleeping longer, tiring more quickly... when she finally misses breakfast, you decide to check in on her. If she's sick, you need to know so she can have time off.<br><br>She doesn't wake when you enter her room, a sure sign that something is wrong, nor when you place a hand on her forehead to check for fever - there isn't one, and she doesn't look particularly sick, just sleeping peacefully. Perhaps she's just been staying up too late? If her situation doesn't change, you'll ask her about it in a few days.",
+            weight: -1,
+            delta: false
+          }
+        },
+        Day810: {
+          girl: {
+            constitution: -2,
+            endurance: -2,
+            softLibido: 1,
+            hardLibido: 1,
+            analLibido: 1,
+            specialRules: { fading: 1}
+          }
+        },
+        Day11: {
+          girl: {
+            specialRules: { fading: 1 },
+            constitution: -0.5
+          },
+          mission: 'SaberFadingWarning'
+        },
+        Day12Plus: {
+          girl: {
+            constitution: -0.5,
+            endurance: -3,
+            softLibido: 0.3,
+            hardLibido: 0.3,
+            analLibido: 0.3
+          }
+        }
+      }
+    },
+    SaberFadingWarning: {
+      conditions: false,
+      display: {
+        group: 'Saber',
+        label: 'Looking Drained',
+        image: 'content/girls/Saber/images/Tired3.jpg',
+        text: "Something is wrong with Saber. She's been missing meals, sleeping extra hours, looking paler than usual, and it's about time she told you what's going on. You catch her after lunch - one of the few activities she still attends regularly - and ask her what's wrong. She says nothing at first, looking down at her food, not tasting anything as she continues to eat mechanically. Finally, just when you're about to repeat the question...<blockquote>I'd fading. I had thought... I thought this was a real, human body, that I was finally free, but it isn't.</blockquote> She falls silent again, and you have to prompt her to explain. She certainly feels real. There have been no complaints from any of the men who have... you stop yourself as her ears start to turn red. Right, she doesn't like to talk about that.<blockquote>I need a constant supply of magical energy to maintain myself in a physical form. I can accept, um, energy from men, but unless they're magicians... it doesn't help very much. It's why I... why I'm working for you.</blockquote> It does make a certain amount of sense - Saber seems more lively after a good fucking recently, almost back to her old self, but it doesn't last. You'll have to find a more permanent solution before the problem gets any worse. Perhaps <strong>asking around the University</strong>?",
+        weight: -1
+      },
+      end: {
+        girl: {/* specialRules: */}
+      },
+      results: {
+        done: {}
+      }
+    }
   }
 };
-
-Girls.Saber.Actions.Talk.results._append([
-  {
-    message: {
-      group: 'Saber',
-      label: 'Talk',
-      image: '<<- girl.image() >>',
-      text: "Saber is quiet and reserved, not shy but private. She answers your direct questions, but has little to add of her own. You try to encourage her to speak up more, but she doesn't much understand the point - words are for communication, nothing more. The idea of bonding doesn't even cross her mind. Eventually you give up, and allow her to return to... whatever she was doing before you entered her room. Meditation, perhaps."
-    },
-    girl: {
-      obedience: 1
-    }
-  },
-  {
-    message: {
-      group: 'Saber',
-      label: 'Talk',
-      image: '<<- girl.image() >>',
-      text: "Determined to get Saber to open up a little bit, you decided that a change of surroundings might be helpful, and take her out to <<- time == 'morning' ? 'lunch' : 'dinner' >>. Discussion seems to work well over a shared rice-pot and curry - while not chatty by a long shot, she is at least willing to hold a conversation, rather than respond to questions with single syllable answers.<br><br>Time flies, and you reach out for a second helping... only to notice that the rice is all gone. And the curry. And the basil on the side. Saber seems to have already finished everything. Nothing to be done - you order a second serving. She eats more than her share of that as well."
-    },
-    girl: {
-      obedience: 1.5,
-      happiness: 2
-    },
-    money: -30
-  },
-  {
-    message: {
-      group: 'Saber',
-      label: 'Talk',
-      image: '<<- girl.image() >>',
-      text: "You ask why she prefers to be called Saber instead of Arthuria - it's a very pretty name, and it's more fitting for her to be a woman than a weapon. She takes so long to reply that you wonder if the question has offended - finaly, just when you're about to try somthing easier to talk about, she answers.<blockquote>It... there were no happy endings for me. I did far better as a weapon than I ever did as a human.</blockquote>"
-    },
-    girl: {
-      obedience: 2,
-      happiness: -3
-    }
-  },
-  {
-    message: {
-      group: 'Saber',
-      label: 'Talk',
-      image: 'content/girls/Saber/images/Exercise1.jpg',
-      text: "Saber seems in no mood to sit around and talk, so you instead take her for a walk in the park. It is a nearly perfect <<- time >>, and she looks very pretty in her clothing, modest as it is. You see her watching a group of young people playing some game or other that involves a great deal of energetic running away from each other - and as you get closer, one of them stumbles and into the two of you. Saber catches the young man - no younger than her, really - and he rather than appologizing, just shouts \"You're it!\" and runs away, looking over his shoulder so see if she's going to chase him.<br><br>She looks at you for permission, and you nod. There are worse ways to spend some time than being young again."
-    },
-    girl: {
-      obedience: 1.5,
-      happiness: 3,
-      endurance: -7
-    }
-  }
-]);

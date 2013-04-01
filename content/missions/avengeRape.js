@@ -4,22 +4,37 @@ Missions.avengeGuardWait = {
   end: {
     min: { day: '+1' }
   },
-  variants: function(context, done) {
-    var results = this.base().results;
-    if ((context.girl.specialRules.guardRapeWait || 0) < 5) {
-      done(results.repeat);
-      return;
-    }
-    var text = "Several days ago, " + context.girl.name + " was raped by the city guard. Though reluctant to talk about the traumatic experience, she's hardly eaten since, and you finally decide to take action when, at dinner, she breaks into tears in the middle of the meal, everyone watching silently as one of the other girls hurries her away with a comforting arm around her shoulder.";
-    var options = {
-      "Comfort her": "Follow " + context.girl.name + " and comfort her.",
-      "Get angry": "Bastards. No one treats your girls like that and gets away with it.",
-      "She'll get over it": "It's a rough world - you're sorry she had to go through that, but what can you do?"
-    };
-    Game.getUserInput(text, context.girl.image('prison'), options, function(answer) {
-      done(results[answer]);
-    });
+  optionsInfo: {
+    text: "Several days ago, <<- girl.name >> was raped by the city guard. Though reluctant to talk about the traumatic experience, she's hardly eaten since, and you finally decide to take action when, at dinner, she breaks into tears in the middle of the meal, everyone watching silently as one of the other girls hurries her away with a comforting arm around her shoulder.",
+    image: "<<- girl.image('prison') >>"
   },
+  options: [
+    {
+      key: 'repeat',
+      immediate: true,
+      conditions: { girl: { max: { specialRules: { guardRapeWait: 4 }}}}
+    },
+    {
+      key: 'comfort',
+      label: 'Comfort her',
+      title: "Follow <<- girl.name >> and comfort her."
+    },
+    {
+      key: 'angry',
+      label: 'Get angry',
+      title: "Bastards. No one treats your girls like that and gets away with it."
+    },
+    {
+      key: 'ignore',
+      label: "She'll get over it.",
+      title: "It's a rough world - you're sorry she had to go through that, but what can you do?"
+    }
+  ],
+  variants: [
+    { option: 'comfort', result: 'comfort' },
+    { option: 'angry', result: 'angry' },
+    { option: 'ignore', result: 'ignore' }
+  ],
   results: {
     repeat: {
       girl: {
@@ -28,7 +43,7 @@ Missions.avengeGuardWait = {
       },
       mission: 'avengeGuardWait'
     },
-    "Comfort her": {
+    comfort: {
       mission: 'avengeGuardRape',
       girl: {
         happiness: 3,
@@ -45,7 +60,7 @@ Missions.avengeGuardWait = {
         text: "Following after <<- girl.name >>, you find her alone in her room. The door is locked, but she doesn't object when you enter quietly, staring out the window with vacant eyes. She flinches when you touch her shoulder, then relaxes a bit. You try to be comforting, but there's only two things that can heal this wound - time and justice. Or at least vengeance."
       }
     },
-    "Get angry": {
+    angry: {
       mission: 'avengeGuardRape',
       girl: {
         happiness: 1,
@@ -63,7 +78,7 @@ Missions.avengeGuardWait = {
         text: "Though you'd at first hoped it was a passing incident, the more you think about what was done to <<- girl.name >>, the angrier you get. It's time to fix the problem at the source. You follow her to her room, where you find her sitting at the window, legs pulled up against her chest and staring blankly outside. When you announce your intention to make her attackers pay, she looks up, and you can see the shimmering resentment she'd tried to hide. She's angry too. Time to go break some heads."
       }
     },
-    "She'll get over it": {
+    ignore: {
       message: {
         label: 'Ignore her outburst',
         group: 'Investigate City Guard',
@@ -100,12 +115,12 @@ Missions.avengeGuardRape = {
       }
     }
   },
-  results: [{
+  results: { done: {
     girl: {
       specialRules: { investigateGuards: false }
     },
     mission: 'avengeGuardRapeFinal'
-  }]
+  }}
 };
 
 Events.investigateGuards = {
@@ -125,31 +140,35 @@ Events.investigateGuards = {
     },
     ownerParticipation: true
   },
-  initialize: function(context) {
+  initialize: function investigateGuardsInitialize(context) {
     if (g.missions.avengeGuardRape.girl != context.girl.name) { return false; }
   },
   variants: [
     {
-      girl: { max: { specialRules: { investigateGuards: 1 } } }
+      girl: { max: { specialRules: { investigateGuards: 1 }}},
+      result: 'Visit1'
     },
     {
       girl: {
-        min: { specialRules: { investigateGuards: 2 } },
-        max: { specialRules: { investigateGuards: 2 } }
-      }
+        min: { specialRules: { investigateGuards: 2 }},
+        max: { specialRules: { investigateGuards: 2 }}
+      },
+      result: 'Visit2'
     },
     {
       girl: {
-        min: { specialRules: { investigateGuards: 3 } },
-        max: { specialRules: { investigateGuards: 4 } }
-      }
+        min: { specialRules: { investigateGuards: 3 }},
+        max: { specialRules: { investigateGuards: 4 }}
+      },
+      result: 'Visit34'
     },
     {
-      girl: { min: { specialRules: { investigateGuards: 5 } } }
+      girl: { min: { specialRules: { investigateGuards: 5 }}},
+      result: 'Visit5'
     }
   ],
-  results: [
-    { // 1
+  results: {
+    Visit1: {
       message: [
         {
           label: 'Investigate Guards',
@@ -170,7 +189,7 @@ Events.investigateGuards = {
         specialRules: { investigateGuards: 1 }
       }
     },
-    { // 2
+    Visit2: {
       message: {
         label: 'Investigate Guards',
         group: '<<- girl.name >>',
@@ -183,7 +202,7 @@ Events.investigateGuards = {
         specialRules: { investigateGuards: 1 }
       }
     },
-    { // 3-4
+    Visit34: {
       message: {
         label: 'Investigate Guards',
         group: '<<- girl.name >>',
@@ -197,7 +216,7 @@ Events.investigateGuards = {
         specialRules: { investigateGuards: 1 }
       }
     },
-    { // 5
+    Visit5: {
       message: [
         {
           label: 'Investigate Guards',
@@ -230,25 +249,41 @@ Events.investigateGuards = {
         specialRules: { investigateGuards: 1 }
       }
     }
-  ]
+  }
 };
 
 Missions.avengeGuardRapeFinal = {
   conditions: false,
-  variants: function(context, done) {
-    var results = this.base().results;
-    var text = "Finally, you have a list of names and have seen the faces for yourself. The relevant laws are clear enough - while it would be illegal for you to take matters into your own hands, precedent suggests that virtually any punishment you care to inflict on " + context.girl.name + "'s rapists would result in nothing more than a slap on the wrist. Only one thing left to do - serve justice.";
-    var options = {
-      "Turn them in": "Give the list of names to Kin Xun. He's likely to be harsh.",
-      "Public Humiliation": "Catch them. Strip them. Stick them in a stockade with 'public toilet' written in permanent ink on their ass cheeks.",
-      Blackmail: "Hold what you know over their head for profit."
-    };
-    Game.getUserInput(text, 'content/missions/evilGuard.jpg', options, function(answer) {
-      done(results[answer]);
-    });
+  end: { min: { day: '+1'}},
+  preDay: true,
+  optionsInfo: {
+    text: "Finally, you have a list of names and have seen the faces for yourself. The relevant laws are clear enough - while it would be illegal for you to take matters into your own hands, precedent suggests that virtually any punishment you care to inflict on <<- girl.name >>'s rapists would result in nothing more than a slap on the wrist. Only one thing left to do - serve justice.",
+    image: 'content/missions/evilGuard.jpg'
   },
+  options: [
+    {
+      key: 'turnIn',
+      label: 'Turn them in',
+      title: "Give the list of names to Kin Xun. He's likely to be harsh."
+    },
+    {
+      key: 'humiliation',
+      label: 'Public humiliation',
+      title: "Catch them. Strip them. Stick them in a stockade with 'public toilet' written in permanent ink on their ass cheeks."
+    },
+    {
+      key: 'blackmail',
+      label: 'Blackmail',
+      title: "Hold what you know over their head for profit."
+    }
+  ],
+  variants: [
+    { option: 'turnIn', result: 'turnIn' },
+    { option: 'humiliation', result: 'humiliation' },
+    { option: 'blackmail', result: 'blackmail' }
+  ],
   results: {
-    "Turn them in": {
+    turnIn: {
       message: {
         label: 'Revenge on Guards',
         group: 'Investigate City Guard',
@@ -261,7 +296,7 @@ Missions.avengeGuardRapeFinal = {
       },
       mission: 'luxuryHouseDelay'
     },
-    "Public Humiliation": {
+    humiliation: {
       message: [
         {
           label: 'Revenge on Guards',
@@ -286,7 +321,7 @@ Missions.avengeGuardRapeFinal = {
       },
       mission: 'luxuryHouseDelay'
     },
-    Blackmail: {
+    blackmail: {
       message: {
         label: 'Revenge on Guards',
         group: 'Investigate City Guard',

@@ -5,18 +5,20 @@ Actions.Rest = {
   description: 'Giving a girl time off increases both <<- __("endurance") >> and <<- __("happiness") >>.',
   tags: { indoors: 1 },
   conditions: {},
-  results: [{
-    message: {
-      group: '<<- girl.name >>',
-      label: 'Rest',
-      image: '<<- girl.image("tired") >>',
-      text: '<<= girl.name >> took some time off to recover.'
-    },
-    girl: {
-      endurance: 12,
-      happiness: 3
+  results: {
+    Generic1: {
+      message: {
+        group: '<<- girl.name >>',
+        label: 'Rest',
+        image: '<<- girl.image("tired") >>',
+        text: '<<= girl.name >> took some time off to recover.'
+      },
+      girl: {
+        endurance: 12,
+        happiness: 3
+      }
     }
-  }]
+  }
 };
 
 Actions.Clean = {
@@ -41,9 +43,9 @@ Actions.Clean = {
     }
   },
   options: 'buildings',
-  optionsKey: 'building',
-  results: [
-    {
+  optionsInfo: { key: 'building' },
+  results: {
+    Generic1: {
       message: {
         group: '<<- girl.name >>',
         label: 'Clean <<- building.name >>',
@@ -58,12 +60,12 @@ Actions.Clean = {
         modesty: 0.4
       }
     },
-    {
+    Generic2: {
       message: {
         group: '<<- girl.name >>',
         label: 'Clean <<- building.name >>',
         image: '<<- girl.modesty > 40 ? girl.image("cleaning") : girl.image("naked") >>',
-        text: "<<- girl.name >> carefully chooses some cleaning supplies, <<- girl.modesty > 40 ? 'puts on some old clothes' : 'puts her clothes aside to keep them from getting dirty' >>,  and gets to work cleaning the bathrooms in << building.name >>. It's tough work and fairly draining, but she gets the place look as good as you've ever seen it."
+        text: "<<- girl.name >> carefully chooses some cleaning supplies, <<- girl.modesty > 40 ? 'puts on some old clothes' : 'puts her clothes aside to keep them from getting dirty' >>, and gets to work cleaning the bathrooms in << building.name >>. It's tough work and fairly draining, but she gets the place look as good as you've ever seen it."
       },
       money: -10,
       building: { clean: 11 },
@@ -72,7 +74,7 @@ Actions.Clean = {
         happiness: -3
       }
     }
-  ]
+  }
 };
 
 Actions.Talk = {
@@ -94,8 +96,8 @@ Actions.Talk = {
     }
   },
   ownerParticipation: true,
-  results: [
-    {
+  results: {
+    Generic1: {
       message: {
         group: '<<- girl.name >>',
         label: 'Talk',
@@ -108,7 +110,7 @@ Actions.Talk = {
         happiness: -2
       }
     },
-    {
+    Generic2: {
       message: {
         group: '<<- girl.name >>',
         label: 'Talk',
@@ -120,7 +122,7 @@ Actions.Talk = {
         happiness: 6
       }
     },
-    {
+    Generic3: {
       message: {
         group: '<<- girl.name >>',
         label: 'Talk',
@@ -134,7 +136,7 @@ Actions.Talk = {
         charisma: -1
       }
     },
-    {
+    Generic4: {
       message: {
         group: '<<- girl.name >>',
         label: 'Talk',
@@ -147,5 +149,5 @@ Actions.Talk = {
         happiness: -3
       }
     }
-  ]
+  }
 };

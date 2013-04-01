@@ -36,46 +36,44 @@ Girls.Sophitia = {
     pregnant: "Pregnant.jpg"
   },
   Actions: {
-    Talk: $.extend(true, {}, Actions.Talk)
+    Talk: $.extend(true, { results: {
+      Sophitia1: {
+        message: {
+          group: 'Sophitia',
+          label: 'Talk',
+          image: 'content/girls/Sophitia/images/Tired.jpg',
+          text: "Talking with Sophitia is one of the nicer jobs you've had - she's pleasant to be around, curious without being intrusive, solid, honest and straightforward to a fault. You wonder how she ended up here, working for you - she'd seem more at home running a small shop or herding children in a schoolyard than raising her skirt for money."
+        },
+        girl: {
+          obedience: 1.5,
+          happiness: 5
+        }
+      },
+      Sophitia2: {
+        message: {
+          group: 'Sophitia',
+          label: 'Talk',
+          image: 'content/girls/Sophitia/images/Study1.jpg',
+          text: "When you knock on her door, Sophitia is sitting on a couch reading. She smiles as you enter, inviting you to take the only chair in the room without rising. She rests the book over one knee - you can't read the cover, but it looks like a cheesy romance from here. You ask her about it, and learn that it is indeed a romance, the heroine of which is a distressed bakers daughter. Curious reading material for a whore, but she doesn't seem to think it odd at all."
+        },
+        girl: {
+          obedience: 1.5,
+          happiness: 2
+        }
+      },
+      Sophitia3: {
+        message: {
+          group: 'Sophitia',
+          label: 'Talk',
+          image: 'content/girls/Sakuya/images/Study2.jpg',
+          text: "You and Sophitia spend several hours checking over the rules and regulations that govern the Guild, and therefor your brothel. She seems to have nearly infinite patience for such a boring task, taking notes even as the material threatens to send you napping."
+        },
+        girl: {
+          obedience: 1.5,
+          happiness: 2,
+          endurance: -5
+        }
+      }
+    }}, Actions.Talk)
   }
 };
-
-Girls.Sophitia.Actions.Talk.results._append([
-  {
-    message: {
-      group: 'Sophitia',
-      label: 'Talk',
-      image: 'content/girls/Sophitia/images/Tired.jpg',
-      text: "Talking with Sophitia is one of the nicer jobs you've had - she's pleasant to be around, curious without being intrusive, solid, honest and straightforward to a fault. You wonder how she ended up here, working for you - she'd seem more at home running a small shop or herding children in a schoolyard than raising her skirt for money."
-    },
-    girl: {
-      obedience: 1.5,
-      happiness: 5
-    }
-  },
-  {
-    message: {
-      group: 'Sophitia',
-      label: 'Talk',
-      image: 'content/girls/Sophitia/images/Study1.jpg',
-      text: "When you knock on her door, Sophitia is sitting on a couch reading. She smiles as you enter, inviting you to take the only chair in the room without rising. She rests the book over one knee - you can't read the cover, but it looks like a cheesy romance from here. You ask her about it, and learn that it is indeed a romance, the heroine of which is a distressed bakers daughter. Curious reading material for a whore, but she doesn't seem to think it odd at all."
-    },
-    girl: {
-      obedience: 1.5,
-      happiness: 2
-    }
-  },
-  {
-    message: {
-      group: 'Sophitia',
-      label: 'Talk',
-      image: 'content/girls/Sakuya/images/Study2.jpg',
-      text: "You and Sophitia spend several hours checking over the rules and regulations that govern the Guild, and therefor your brothel. She seems to have nearly infinite patience for such a boring task, taking notes even as the material threatens to send you napping."
-    },
-    girl: {
-      obedience: 1.5,
-      happiness: 2,
-      endurance: -5
-    }
-  }
-]);

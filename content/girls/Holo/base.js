@@ -45,13 +45,70 @@ Girls.Holo = {
     }
   },
   Actions: {
-    Talk: $.extend(true, {}, Actions.Talk),
+    Talk: $.extend(true, { results: {
+      Holo1: {
+        message: {
+          group: 'Holo',
+          label: 'Talk',
+          image: 'content/girls/Holo/images/Talk1.jpg',
+          text: "You spend the better part of the <<- time >> trying to learn more about Holo's past, her hometown, her upbringing - anything that might help you understand her. She responds to all of your questions, but she expertly keeps the actual answers to herself. The more she conceals, the more you want to learn, but she seems to be playing with you, seeing how much she can say without actually revealing anything. She slips adages into conversation that sound like veiled advice.<blockquote>A trip is the most fun before one sets out on it. With dogs, the bark and not the bite is more frightening, and women are almost always prettier when they are shrouded in mystery.</blockquote>"
+        },
+        girl: {
+          obedience: 1.5
+        }
+      },
+      Holo2: {
+        message: {
+          group: 'Holo',
+          label: 'Talk',
+          image: 'content/girls/Holo/images/Refuse3.jpg',
+          text: "You and Holo head to a nearby tavern for <<- time == 'morning' ? 'lunch' : 'dinner' >>, and she clings to your arm on the way in excitement. When you're inside, you take a seat and call the barmaid over. You tell Holo you'll order her <<- time == 'morning' ? 'honeyed peaches' : 'as much beer as she can drink' >> if she will ask for it with a please. Holo crosses her arms and tries to get your sympathy with an injured expression. The barmaid sees your shaking head and moves on to wait on other tables. Though it takes almost ten minutes, you get eventually get your please and she gets her <<- time == 'morning' ? 'peaches' : 'beer' >>."
+        },
+        girl: {
+          obedience: 2.5
+        },
+        money: -5
+      },
+      Holo3: {
+        message: {
+          group: 'Holo',
+          label: 'Talk',
+          image: 'content/girls/Holo/images/Talk2.jpg',
+          text: "You knock on the closed door of Holo's room. A moment later she asks you to come in, just finishing getting dressed, and you see a little more of her than you expected. You start to say something, but she silences the objection with a wave of one hand, Holo dismissing such thoughts as prudish. You both sit on her bed, and you ask her how she's doing at finding her way around Valaia and how she's finding life in general. She has no interest in talking about herself, and instead spends a great deal of effort trying to learn about your history while feigning disinterest. The conversation is enjoyable, even if not very productive."
+        },
+        girl: {
+          obedience: 1,
+          happiness: 2
+        }
+      },
+      Holo4: {
+        message: {
+          group: 'Holo',
+          label: 'Talk',
+          image: 'content/girls/Holo/images/Exercise2.jpg',
+          text: "You and Holo go for a walk through the marketplace, <<- time == 'morning' ? 'which is bustling with people' : 'still busy despite the late hour' >>. A lovely dress for sale catches your eye, and though Holo's ear twitch and she looks at you hopefully, you don't stop. When pressed, you tell her that someone with a tail like hers doesn't need a dress to be noticed. She seems satisfied with that, but adds more.<blockquote>I know it's difficult to look past my brilliant tail, brain, and looks, but I also have excellent ears and eyes.</blockquote>"
+        },
+        girl: {
+          obedience: 1.5,
+          happiness: 2.5
+        }
+      },
+      Holo5: {
+        message: {
+          group: 'Holo',
+          label: 'Talk',
+          image: 'content/girls/Holo/images/Talk2.jpg',
+          text: "You and Holo go for a walk, and you take time to point out the other girls in her profession, hoping that she might pick up some tips from their expertise. Instead, she folds her arms and gets inexplicably cross. You continue your walk into busier streets to see if that helps, but it still take a while to extract the reason for her annoyance.<blockquote>It appears that humans see nothing wrong with paying attention to more than one female at once.</blockquote>"
+        }
+      }
+    }}, Actions.Talk),
     Rest: $.extend(true, {}, Actions.Rest, {
       variants: [
-        { time: 'morning' }
+        { time: 'morning', result: 'morning' },
+        { time: 'evening', result: 'evening' }
       ],
-      results: [
-        {
+      results: {
+        morning: {
           message: {
             group: 'Holo',
             label: 'Rest',
@@ -63,7 +120,7 @@ Girls.Holo = {
             happiness: 1
           }
         },
-        {
+        evening: {
           message: {
             group: 'Holo',
             label: 'Rest',
@@ -75,17 +132,7 @@ Girls.Holo = {
             happiness: 5
           }
         }
-      ]
-    }),
-    Lockdown: $.extend(true, {}, Actions.Lockdown, {
-      results: [
-        {
-          girl: { happiness: 0 }
-        },
-        {
-          girl: { happiness: 0 }
-        }
-      ]
+      }
     }),
     HoloDebtAbducted: {
       label: 'Debt Slavery',
@@ -105,24 +152,29 @@ Girls.Holo = {
       tags: {},
       variants: [
         {
-          girl: { max: { specialRules: { debtAbduction: 2 } } }
+          girl: { max: { specialRules: { debtAbduction: 2 }}},
+          result: 'Day12'
         },
         {
-          girl: { max: { specialRules: { debtAbduction: 4 } } }
+          girl: { max: { specialRules: { debtAbduction: 4 }}},
+          result: 'Day34'
         },
         {
-          girl: { max: { specialRules: { debtAbduction: 5 } } }
+          girl: { max: { specialRules: { debtAbduction: 5 }}},
+          result: 'Day5'
         },
         {
-          girl: { max: { specialRules: { debtAbduction: 7 } } }
+          girl: { max: { specialRules: { debtAbduction: 7 }}},
+          result: 'Day67'
         },
         {
-          girl: { max: { specialRules: { debtAbduction: 9 } } }
+          girl: { max: { specialRules: { debtAbduction: 9 }}},
+          result: 'Day89'
         }
         // Day 10 just matches automatically.
       ],
-      results: [
-        { // Days 1-2
+      results: {
+        Day12: {
           girl: {
             specialRules: {
               debtAbduction: 1
@@ -142,7 +194,7 @@ Girls.Holo = {
             weight: -1
           }
         },
-        { // Days 3-4
+        Day34: {
           girl: {
             specialRules: {
               debtAbduction: 1
@@ -161,7 +213,7 @@ Girls.Holo = {
             weight: -1
           }
         },
-        { // Day 5
+        Day5: {
           girl: {
             specialRules: {
               debtAbduction: 1
@@ -181,7 +233,7 @@ Girls.Holo = {
             weight: -1
           }
         },
-        { // Days 6-7
+        Day67: {
           girl: {
             specialRules: {
               debtAbduction: 1
@@ -201,7 +253,7 @@ Girls.Holo = {
             weight: -1
           }
         },
-        { // Days 8-9
+        Day89: {
           girl: {
             specialRules: {
               debtAbduction: 1
@@ -221,7 +273,7 @@ Girls.Holo = {
             weight: -1
           }
         },
-        { // Day 10
+        Day10: {
           message: {
             group: 'Holo',
             image: '<<- girl.image("tired") >>',
@@ -243,7 +295,7 @@ Girls.Holo = {
           lock: false,
           mission: 'HoloDepartWait'
         }
-      ] // results
+      } // results
     } // debtAbduction
   }, // actions
   Events: {
@@ -260,12 +312,12 @@ Girls.Holo = {
         }
       },
       variants: [
-        { girl: { max: { specialRules: { ShepherdAnnoyance: 1 }}}},
-        { girl: { max: { specialRules: { ShepherdAnnoyance: 2 }}}},
-        { girl: { max: { specialRules: { ShepherdAnnoyance: 3 }}}}
+        { girl: { max: { specialRules: { ShepherdAnnoyance: 1 }}}, result: 'Meeting1' },
+        { girl: { max: { specialRules: { ShepherdAnnoyance: 2 }}}, result: 'Meeting2' },
+        { girl: { max: { specialRules: { ShepherdAnnoyance: 3 }}}, result: 'Meeting3' }
       ],
-      results: [
-        {
+      results: {
+        Meeting1: {
           message: {
             group: 'Holo',
             label: 'Unfortunate Incident',
@@ -278,7 +330,7 @@ Girls.Holo = {
             specialRules: { ShepherdAnnoyance: 1 }
           }
         },
-        {
+        Meeting2: {
           message: {
             group: 'Holo',
             label: 'Another Incident...',
@@ -292,7 +344,7 @@ Girls.Holo = {
             specialRules: { ShepherdAnnoyance: 1 }
           }
         },
-        {
+        Meeting3: {
           message: {
             group: 'Holo',
             label: 'More sheep?',
@@ -306,7 +358,7 @@ Girls.Holo = {
             specialRules: { ShepherdAnnoyance: 1 }
           }
         },
-        {
+        Meeting4: {
           message: [
             {
               group: 'Holo',
@@ -329,7 +381,7 @@ Girls.Holo = {
           ],
           girl: { happiness: 10 }
         }
-      ]
+      }
     }
   },
   Missions: {
@@ -346,31 +398,41 @@ Girls.Holo = {
         },
         missions: { HoloDebt: -3 }
       },
+      preDay: true,
       end: {
         min: { day: '+9' },
         max: { day: '+9' }
       },
-      variants: function(context, done) {
+      optionsInfo: {
+        text: "You're woken around midnight by the sound of knocking, and find an envelope slid under your bedroom door. It contains a note and some fur clipped from Holo's tail. The note spells out clearly that Holo owes a substantial amount of money to Medio Trading Company, and the local branch has been authorized to take her into debt-slavery as part of that land's usury laws - it also contains a writ from the king of this place to collect, by any means necessary. Though she never let you know, it seems as though Holo's situation was much the same as your own when she arrived, and her creditors are far less understanding.<br><br>The note gives two options for paying the $30000 that Holo owes, the first of which invites you to pay her debt outright for her safe return and gives an address. Alternatively, Medio Trading Company intends to whore out Holo themselves, giving the assurance that they'll return Holo in ten days. You can only imagine what kind of conditions Holo would have to work in to make them $3000 daily, and it likely involves some particularly depraved jobs for high-paying clients, with little - if any - time for rest. The risk to Holo's health seems severe.",
+        image: 'content/girls/Holo/images/Refuse1.jpg'
+      },
+      options: [
+        {
+          key: 'pay',
+          label: "Pay Holo's Debt",
+          title: "You don't much like the sound of this. It's a lot of money, but... better coins than blood and tears."
+        },
+        {
+          key: "dontPay",
+          label: "Don't Pay",
+          title: "She got herself into this, and ten days isn't that long. She'll be back soon."
+        }
+      ],
+      variants: function holoDebtVariants(context, done) {
         var results = this.base().results;
-        var text = "You're woken around midnight by the sound of knocking, and find an envelope slid under your bedroom door. It contains a note and some fur clipped from Holo's tail. The note spells out clearly that Holo owes a substantial amount of money to Medio Trading Company, and the local branch has been authorized to take her into debt-slavery as part of that land's usury laws - it also contains a writ from the king of this place to collect, by any means necessary. Though she never let you know, it seems as though Holo's situation was much the same as your own when she arrived, and her creditors are far less understanding.<br><br>The note gives two options for paying the $30000 that Holo owes, the first of which invites you to pay her debt outright for her safe return and gives an address. Alternatively, Medio Trading Company intends to whore out Holo themselves, giving the assurance that they'll return Holo in ten days. You can only imagine what kind of conditions Holo would have to work in to make them $3000 daily, and it likely involves some particularly depraved jobs for high-paying clients, with little - if any - time for rest. The risk to Holo's health seems severe.";
-        var options = {
-          "Pay Holo's debt": "You don't much like the sound of this. It's a lot of money, but... better dollars than blood and tears.",
-          "Don't Pay": "She got herself into this, and ten days isn't that long. She'll be back soon."
-        };
-        Game.getUserInput(text, 'content/girls/Holo/images/Refuse1.jpg', options, function(answer) {
-          if (answer == "Don't Pay") {
-            // We have to apply the progress special rule here, so that the girl meets the conditions for the action we want to set.
-            context.girl.apply('specialRules', { HoloDebtAbducted: 1 });
-            context.time = 'morning';
-            var action = context.girl.action('HoloDebtAbducted', context);
-            action.locked = true;
-            context.girl.setAction(action);
-          }
-          done(results[answer]);
-        });
+        if (this.option == "dontPay") {
+          // We have to apply the progress special rule here, so that the girl meets the conditions for the action we want to set.
+          context.girl.apply('specialRules', { HoloDebtAbducted: 1 });
+          context.time = 'morning';
+          var action = context.girl.action('HoloDebtAbducted', context);
+          action.locked = true;
+          context.girl.setAction(action);
+        }
+        done(results[this.option]);
       },
       results: {
-        "Pay Holo's debt": {
+        pay: {
           money: -30000,
           girl: {
             specialRules: { paidRansom: 30000 }
@@ -402,7 +464,7 @@ Girls.Holo = {
           ],
           mission: 'HoloDepartWait'
         },
-        "Don't Pay": {
+        dontPay: {
           message: {
             group: 'Holo',
             label: 'Debt Slavery',
@@ -420,26 +482,35 @@ Girls.Holo = {
     },
     HoloAbductionEarlyEnd: {
       conditions: false,
-      variants: function(context, done) {
+      preDay: true,
+      options: [
+        {
+          key: 'pay',
+          label: "Pay Holo's Debt",
+          title: "You don't much like the sound of this. It's a lot of money, but... better coins than blood and tears."
+        },
+        {
+          key: "dontPay",
+          label: "Don't Pay",
+          title: "She got herself into this, and five more days isn't that long. She'll be back soon."
+        }
+      ],
+      optionsInfo: {
+        text: "You look again at the envelope containing Holo's whereabouts. It's been five days now, and your doubts are starting to creep in - is it right to leave her at the mercy of an uncaring debt-collection agency? You may take advantage of her to make some money, sure, and sometimes your trainings are a little hard, but you always care for your girls. $30000 - it's a lot of money, and you wouldn't expect them to reduce the amount, just because she's served half of their required time, but they should still be willing to take your cash and return her...",
+        image: 'content/girls/Holo/images/Refuse1.jpg'
+      },
+      variants: function holoAbductionEarlyEndVariants(context, done) {
         var results = this.base().results;
-        var text = "You look again at the envelope containing Holo's whereabouts. It's been five days now, and your doubts are starting to creep in - is it right to leave her at the mercy of an uncaring debt-collection agency? You may take advantage of her to make some money, sure, and sometimes your trainings are a little hard, but you always care for your girls. $30000 - it's a lot of money, and you wouldn't expect them to reduce the amount, just because she's served half of their required time, but they should still be willing to take your cash and return her...";
-        var options = {
-          "Pay Holo's debt": "You don't much like the sound of this. It's a lot of money, but... better dollars than blood and tears.",
-          "Don't Pay": "She got herself into this, and five more days isn't that long. She'll be back soon."
-        };
-        if (g.money < 30000) { delete options["Pay Holo's debt"]; }
-        Game.getUserInput(text, 'content/girls/Holo/images/Refuse1.jpg', options, function(answer) {
-          if (answer == "Pay Holo's debt") {
-            // We have to apply the progress special rule here, so that the girl meets the conditions for the action we want to set.
-            context.girl.apply('specialRules', { HoloDebtAbducted: false });
-            var action = context.girl.action('Rest', context);
-            context.girl.setAction(action);
-          }
-          done(results[answer]);
-        });
+        if (this.option == "pay") {
+          // We have to apply the progress special rule here, so that the girl meets the conditions for the action we want to set.
+          context.girl.apply('specialRules', { HoloDebtAbducted: false });
+          var action = context.girl.action('Rest', context);
+          context.girl.setAction(action);
+        }
+        done(results[this.option]);
       },
       results: {
-        "Pay Holo's debt": {
+        pay: {
           money: -30000,
           girl: {
             specialRules: { paidRansom: 30000 }
@@ -468,7 +539,7 @@ Girls.Holo = {
           ],
           mission: 'HoloDepartWait'
         },
-        "Don't Pay": {
+        dontPay: {
           // Nothing happens if they pass up this chance - action continues as normal.
         }
       }
@@ -476,7 +547,7 @@ Girls.Holo = {
     HoloDepartWait: {
       conditions: false,
       end: { min: { day: '+30' }},
-      results: [{ mission: 'HoloDepart' }]
+      results: { Depart: { mission: 'HoloDepart' }}
     },
     HoloDepart: {
       conditions: false,
@@ -484,6 +555,7 @@ Girls.Holo = {
         min: { day: '+5' },
         max: { day: '+5' }
       },
+      preDay: true,
       display: {
         group: 'Holo',
         label: 'Preparing to Depart',
@@ -491,26 +563,37 @@ Girls.Holo = {
         text: "Though she tries to hide it, you can't help but notice that the amount of time Holo spends staring at the sky has increased noticeably in the past month. More than that though, you know she's been saving most of her wages, and her room has started to look sparser... as though she were getting rid of things she won't be able to take with her.<br><br><em>If you want Holo to stick around, make sure she has <<- __('happiness') >> 75 or higher by <strong>Day <<- mission.end.max.day >></strong>.</em>",
         weight: -1
       },
-      variants: function(context, done) {
-        var text = "You step outside for an early morning walk when you run into Holo, dressed and packed as though she's going to be going on a long journey. You ask her where she's headed, and she replies that she's finally saved enough to continue her journey northward to her hometown of Yoitz. She's carrying everything she owns, including a ticket for passage on a ship sailing northward from the island today. You ask if she is intent on going now, and her reply is brief and bittersweet.<blockquote>There is no better time to part than when we wish to never leave.</blockquote>";
-        var options = {
-          'Beg her to stay': "With \"wise words\" like that, there's no way to really wants to go.",
-          'Let her leave': "You wish her well - she's said from the beginning that her stay with you was only temporary, a stopover on her journey north."
-        };
-        Game.getUserInput(text, 'content/girls/Holo/Depart.jpg', options, function(answer) {
-          if (answer == 'Beg her to stay' && context.girl.happiness < 75) {
-            answer = 'Let her leave';
-          }
-          var result = $.extend({}, context.mission.base().results[answer]);
-          if (answer == 'Let her leave') {
-            result.money = context.girl.specialRules.paidRansom || 0;
-            result.money += context.girl.hirePrice();
-          }
-          done(result);
-        });
+      optionsInfo: {
+        text: "You step outside for an early morning walk when you run into Holo, dressed and packed as though she's going to be going on a long journey. You ask her where she's headed, and she replies that she's finally saved enough to continue her journey northward to her hometown of Yoitz. She's carrying everything she owns, including a ticket for passage on a ship sailing northward from the island today. You ask if she is intent on going now, and her reply is brief and bittersweet.<blockquote>There is no better time to part than when we wish to never leave.</blockquote>",
+        image: 'content/girls/Holo/Depart.jpg'
+      },
+      options: [
+        {
+          key: 'begStay',
+          label: 'Beg her to stay',
+          title: "With \"wise words\" like that, there's no way to really wants to go."
+        },
+        {
+          key: 'letLeave',
+          label: 'Let her leave',
+          title: "You wish her well - she's said from the beginning that her stay with you was only temporary, a stopover on her journey north."
+        }
+      ],
+      variants: function holoDepartVariants(context, done) {
+        context.ignore = false;
+        if (this.option == 'begStay' && context.girl.happiness < 75) {
+          this.option = 'letLeave';
+          context.ignore = true;
+        }
+        var result = $.extend({}, context.mission.base().results[this.option]);
+        if (this.option == 'letLeave') {
+          result.money = context.girl.specialRules.paidRansom || 0;
+          result.money += context.girl.hirePrice();
+        }
+        done(result);
       },
       results: {
-        'Beg her to stay': {
+        begStay: {
           message: {
             group: 'Holo',
             label: 'Sticking around',
@@ -520,12 +603,12 @@ Girls.Holo = {
           },
           girl: { happiness: 10 }
         },
-        'Let her leave': {
+        letLeave: {
           message: {
             group: 'Holo',
             label: 'A sad departure',
             image: 'content/girls/Holo/Depart2.jpg',
-            text: "<<- mission.special.ignore ? 'She doesn\'t seem to hear your pleas - or perhaps she doesn\'t wish to hear them as she' : 'Holo thanks you for your help and' >> walks away. You can't tell from behind what expression her face wears, but her ears droop low. You watch her until she walks around the corner, but she doesn't look back.<br><br>When you return to your room later that day, you find an envelope that has been slipped under your door. It contains Holo's heartfelt thanks, repayment of the money you originally paid to hire her<<- girl.specialRules.paidRansom ? ' along with the ransom money you paid to Medio Trading Company' : '' >>, and the following farewell.<blockquote>If tomorrow is better than today, and the day after that surpasses them both, time flies because you expect it to be like that forever. What happens when we reach the end of that perpetual journey? It will begin with a sense of dissatisfaction. That is why parting here is the right thing to do. I never want to stop giving thanks for the day we met.</blockquote>",
+            text: "<<- ignore ? 'She doesn\'t seem to hear your pleas - or perhaps she doesn\'t wish to hear them as she' : 'Holo thanks you for your help and' >> walks away. You can't tell from behind what expression her face wears, but her ears droop low. You watch her until she walks around the corner, but she doesn't look back.<br><br>When you return to your room later that day, you find an envelope that has been slipped under your door. It contains Holo's heartfelt thanks, repayment of the money you originally paid to hire her<<- girl.specialRules.paidRansom ? ' along with the ransom money you paid to Medio Trading Company' : '' >>, and the following farewell.<blockquote>If tomorrow is better than today, and the day after that surpasses them both, time flies because you expect it to be like that forever. What happens when we reach the end of that perpetual journey? It will begin with a sense of dissatisfaction. That is why parting here is the right thing to do. I never want to stop giving thanks for the day we met.</blockquote>",
             weight: -2
           },
           // money added by variants function above
@@ -535,61 +618,3 @@ Girls.Holo = {
     }
   } // missions
 };
-
-Girls.Holo.Actions.Talk.results._append([
-  {
-    message: {
-      group: 'Holo',
-      label: 'Talk',
-      image: 'content/girls/Holo/images/Talk1.jpg',
-      text: "You spend the better part of the <<- time >> trying to learn more about Holo's past, her hometown, her upbringing - anything that might help you understand her. She responds to all of your questions, but she expertly keeps the actual answers to herself. The more she conceals, the more you want to learn, but she seems to be playing with you, seeing how much she can say without actually revealing anything. She slips adages into conversation that sound like veiled advice.<blockquote>A trip is the most fun before one sets out on it. With dogs, the bark and not the bite is more frightening, and women are almost always prettier when they are shrouded in mystery.</blockquote>"
-    },
-    girl: {
-      obedience: 1.5
-    }
-  },
-  {
-    message: {
-      group: 'Holo',
-      label: 'Talk',
-      image: 'content/girls/Holo/images/Refuse3.jpg',
-      text: "You and Holo head to a nearby tavern for <<- time == 'morning' ? 'lunch' : 'dinner' >>, and she clings to your arm on the way in excitement. When you're inside, you take a seat and call the barmaid over. You tell Holo you'll order her <<- time == 'morning' ? 'honeyed peaches' : 'as much beer as she can drink' >> if she will ask for it with a please. Holo crosses her arms and tries to get your sympathy with an injured expression. The barmaid sees your shaking head and moves on to wait on other tables. Though it takes almost ten minutes, you get eventually get your please and she gets her <<- time == 'morning' ? 'peaches' : 'beer' >>."
-    },
-    girl: {
-      obedience: 2.5
-    },
-    money: -5
-  },
-  {
-    message: {
-      group: 'Holo',
-      label: 'Talk',
-      image: 'content/girls/Holo/images/Talk2.jpg',
-      text: "You knock on the closed door of Holo's room. A moment later she asks you to come in, just finishing getting dressed, and you see a little more of her than you expected. You start to say something, but she silences the objection with a wave of one hand, Holo dismissing such thoughts as prudish. You both sit on her bed, and you ask her how she's doing at finding her way around Valaia and how she's finding life in general. She has no interest in talking about herself, and instead spends a great deal of effort trying to learn about your history while feigning disinterest. The conversation is enjoyable, even if not very productive."
-    },
-    girl: {
-      obedience: 1,
-      happiness: 2
-    }
-  },
-  {
-    message: {
-      group: 'Holo',
-      label: 'Talk',
-      image: 'content/girls/Holo/images/Exercise2.jpg',
-      text: "You and Holo go for a walk through the marketplace, <<- time == 'morning' ? 'which is bustling with people' : 'still busy despite the late hour' >>. A lovely dress for sale catches your eye, and though Holo's ear twitch and she looks at you hopefully, you don't stop. When pressed, you tell her that someone with a tail like hers doesn't need a dress to be noticed. She seems satisfied with that, but adds more.<blockquote>I know it's difficult to look past my brilliant tail, brain, and looks, but I also have excellent ears and eyes.</blockquote>"
-    },
-    girl: {
-      obedience: 1.5,
-      happiness: 2.5
-    }
-  },
-  {
-    message: {
-      group: 'Holo',
-      label: 'Talk',
-      image: 'content/girls/Holo/images/Talk2.jpg',
-      text: "You and Holo go for a walk, and you take time to point out the other girls in her profession, hoping that she might pick up some tips from their expertise. Instead, she folds her arms and gets inexplicably cross. You continue your walk into busier streets to see if that helps, but it still take a while to extract the reason for her annoyance.<blockquote>It appears that humans see nothing wrong with paying attention to more than one female at once.</blockquote>"
-    }
-  }
-]);

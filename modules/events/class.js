@@ -7,13 +7,13 @@ Event.prototype = new Resolvable();
 
 Event.prototype.getTags = Action.prototype.getTags;
 
-Event.prototype.context = function() {
+Event.prototype.context = function getContext() {
   var context = Resolvable.prototype.context.call(this);
   context.action = this.action;
   return context;
 };
 
-Event.create = function(_id, context, actionTags) {
+Event.create = function createEvent(_id, context, actionTags) {
   var event = Resolvable.create(_id, 'Event', context);
   if (!event) { return event; }
   var chance = 0;
@@ -32,7 +32,7 @@ Event.create = function(_id, context, actionTags) {
   return event;
 };
 
-Event.get = function(context) {
+Event.get = function getEvent(context) {
   var tags = context.action.getTags();
   if ($.isEmptyObject(tags)) { return; }
   var event;
@@ -48,14 +48,14 @@ Event.get = function(context) {
   }
 };
 
-(function() {
+(function () {
   var oldGetResults = Action.prototype.getResults;
-  Action.prototype.getResults = function(done, context) {
+  Action.prototype.getResults = function getResults(done, context) {
     context = context || this.context();
     var event = Event.get(context);
     if (event) {
       $.extend(context, event.context());
-      event.getResults(function(results) {
+      event.getResults(function (results) {
         done(results, context);
       }, context);
     } else {

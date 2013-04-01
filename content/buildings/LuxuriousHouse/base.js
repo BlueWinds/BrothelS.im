@@ -5,9 +5,9 @@ Buildings['Luxurious House'] = {
   reputation: 35,
   status: 'Town',
   rooms: [
-      { type: 'Bedroom' },
-      { type: 'Kitchen' },
-      { type: 'Washroom' }
+    { type: 'Bedroom' },
+    { type: 'Kitchen' },
+    { type: 'Washroom' }
   ],
   maxRooms: 3,
   basePrice: 30000,
@@ -31,10 +31,10 @@ Buildings['Luxurious House'] = {
         endurance: 4
       }
     },
-    clean: 'The fine apointments make living here a pleasure - though expensive to keep in style, this must be one of those "finer things" the rich are always going on about.',
+    clean: 'The fine appointments make living here a pleasure - though expensive to keep in style, this must be one of those "finer things" the rich are always going on about.',
     dirty: 'Even with finger-smudges on the glass and a dent in one wall from a particularly rowdy lovemaking session, this house is still nicer than anywhere you\'ve been before. It\'s a wonder the last owner parted with it so easily.'
   },
-  description: "<p>Though quite small, this well appointed and elegant building is available at a steep discount from what it would normally be worth. For sale by one Kim Xun, he has no comment on who the previous owner might have been, and the sale of the building seems more of a bothersome chore for him than a chance to make money.</p>"
+  description: "<p>Though quite small, this well-appointed and elegant building is available at a steep discount from what it would normally be worth. For sale by one Kim Xun, he has no comment on who the previous owner might have been, and the sale of the building seems more of a bothersome chore for him than a chance to make money.</p>"
 };
 
 Missions.noRapeLuxuryHouse = {
@@ -44,19 +44,22 @@ Missions.noRapeLuxuryHouse = {
     likelyhood: 0.03,
     building: { name: 'Luxurious House', status: 'Town' }
   },
-  results: [{
+  results: { done: {
     mission: 'luxuryHouseSale'
-  }]
+  }}
 };
 Missions.luxuryHouseDelay = {
   conditions: false,
   end: { min: { day: '+3' }},
   variants: [
-    { building: { name: 'Luxurious House', status: 'Town' } }
+    { building: { name: 'Luxurious House', status: 'Town' }, result: 'ForSale' }
   ],
-  results: [{
-    mission: 'luxuryHouseSale'
-  }, {}]
+  results: {
+    ForSale: {
+      mission: 'luxuryHouseSale'
+    },
+    Owned: {}
+  }
 };
 
 Missions.luxuryHouseSale = {
@@ -68,9 +71,9 @@ Missions.luxuryHouseSale = {
     text: "There has been some sort of scandal involving the city guard, in which nearly a dozen members were forced to resign in disgrace - apparently, one of them has even had to flee the country. The captain of the guard, Kim Xun, has been tasked with dealing with his property - among which is a Luxurious House in excellent condition.",
     weight: -1
   },
-  results: [{
+  results: { done: {
     building: {
       status: 'For Sale'
     }
-  }]
+  }}
 };

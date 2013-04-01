@@ -1,11 +1,12 @@
 "use strict";
 function Mission(obj) {
   Resolvable.call(this, obj);
+  delete this.preDay;
 }
 
 Mission.prototype = new Resolvable();
 
-Mission.create = function(_id, context, allowFalseConditions) {
+Mission.create = function create(_id, context, allowFalseConditions) {
   var mission = Resolvable.create(_id, 'Mission', context, allowFalseConditions);
   if (!mission) { return mission; }
   if (typeof(mission.end) == 'function') {
@@ -24,7 +25,7 @@ Mission.create = function(_id, context, allowFalseConditions) {
   return mission;
 };
 
-Mission.prototype.getEnd = function() {
+Mission.prototype.getEnd = function getEnd() {
   if (this.end) {
     return this.end;
   } else if (typeof(this.base().end) == 'function') {
@@ -32,7 +33,7 @@ Mission.prototype.getEnd = function() {
   }
 };
 
-Mission.prototype.checkDay = function(done) {
+Mission.prototype.checkDay = function checkDay(done) {
   var conditions = this.getEnd() || {};
   var result = this.checkConditions(conditions);
   if (result) {
@@ -40,7 +41,7 @@ Mission.prototype.checkDay = function(done) {
     delete g.missions[this._id];
     g.missionsDone[this._id] = true;
     var mission = this;
-    this.getResults(function(results) {
+    this.getResults(function (results) {
       mission.applyResults(results, done);
     });
     return;

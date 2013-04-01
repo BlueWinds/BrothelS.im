@@ -32,9 +32,9 @@ Missions.introConstitution = {
       min: { constitution: 81 }
     }
   },
-  results: [{
+  results: { done: {
     mission: 'obedienceAndModesty'
-  }]
+  }}
 };
 
 Missions.obedienceAndModesty = {
@@ -52,9 +52,9 @@ Missions.obedienceAndModesty = {
       max: { modesty: 9 }
     }
   },
-  results: [{
+  results: { done: {
     mission: 'charismaAndIntelligence'
-  }]
+  }}
 };
 
 Missions.enduranceAndHappiness = {
@@ -81,7 +81,7 @@ Missions.enduranceAndHappiness = {
       }
     }
   },
-  results: [{}]
+  results: { done: {}}
 };
 
 Missions.charismaAndIntelligence = {
@@ -101,9 +101,9 @@ Missions.charismaAndIntelligence = {
       }
     }
   },
-  results: [{
+  results: { done: {
     mission: 'libidoAndExperience'
-  }]
+  }}
 };
 
 Missions.libidoAndExperience = {
@@ -120,9 +120,9 @@ Missions.libidoAndExperience = {
       min: { hardLibido: 61 }
     }
   },
-  results: [{
+  results: { done: {
     mission: 'firstMoney'
-  }]
+  }}
 };
 
 Missions.firstMoney = {
@@ -137,9 +137,9 @@ Missions.firstMoney = {
   end: {
     min: { money: '+100' }
   },
-  results: [{
+  results: { done: {
     mission: 'firstThousand'
-  }]
+  }}
 };
 
 Missions.firstThousand = {
@@ -156,11 +156,11 @@ Missions.firstThousand = {
       money: 1000
     }
   },
-  variants: function(context, done) {
+  variants: function firstThousandVariants(context, done) {
     g.maxGirls = 5;
     done(this.base().results[0]);
   },
-  results: [{
+  results: { done: {
     money: 1600,
     mission: 'secondGirl',
     message: [
@@ -180,7 +180,7 @@ Missions.firstThousand = {
         text: "You're on your third drink when you recognize a face - the Guild clerk who issued your registration to run a business. When he comes over, a slightly drunk Kirino plants a big, lusty kiss on his cheek. He smiles, seeming to ignore her, and congratulates you on your progress. He then leaves in rather a hurry to hit on one of the wenches, an ill concealed bulge in his pants from where Kirino's been fondling him under the table. She grins like an idiot and passes you his wallet, thick with cash. Perhaps she's not as drunk as she appears. You buy her another round."
       }
     ]
-  }]
+  }}
 };
 
 Missions.secondGirl = {
@@ -197,11 +197,11 @@ Missions.secondGirl = {
       girls: 2
     }
   },
-  variants: function(context, done) {
+  variants: function secondGirlVariants(context, done) {
     g.maxBuildings = 1;
     done(this.base().results[0]);
   },
-  results: [{
+  results: { done: {
     mission: 'firstBuilding',
     message: {
       image: 'content/missions/secondGirl.png',
@@ -210,7 +210,7 @@ Missions.secondGirl = {
       weight: -1,
       text: "It's an excellent start. At the moment few people in the city know your face - perhaps you should spend more time making acquaintances, especially in the Guild that controls your trade. But so far there just hasn't been time, busy as you've been adjusting to a foreign city, fending off problems so Kirino (and her new friend) can do their jobs without worry and a thousand other pressing tasks (such as finding a place to sleep each night).<br><br>One important thing to notice is that unlike Kirino, this new girl almost certainly demands a wage beyond what she needs to rent a room to sleep in each night. Girls also demand more money as their stats rise - especially <<- __('intelligence') >>.<br><br>While you could hire additional girls, for now you probably want to save up and buy a building as soon as possible - they provide several advantages."
     }
-  }]
+  }}
 };
 
 Missions.firstBuilding = {
@@ -227,9 +227,9 @@ Missions.firstBuilding = {
       buildings: 1
     }
   },
-  results: [{
+  results: { done: {
     mission: 'cleanBuilding'
-  }]
+  }}
 };
 
 Missions.cleanBuilding = {
@@ -246,9 +246,9 @@ Missions.cleanBuilding = {
       day: '+3'
     }
   },
-  results: [{
+  results: { done: {
     mission: 'explainWhore'
-  }]
+  }}
 };
 
 Missions.explainWhore = {
@@ -265,9 +265,9 @@ Missions.explainWhore = {
       min: { reputation: 2 }
     }
   },
-  results: [{
+  results: { done: {
     mission: 'buyRooms'
-  }]
+  }}
 };
 
 Missions.buyRooms = {
@@ -282,9 +282,9 @@ Missions.buyRooms = {
   end: {
     min: { day: '+3' }
   },
-  results: [{
+  results: { done: {
     mission: 'exploreCity'
-  }]
+  }}
 };
 
 Missions.exploreCity = {
@@ -299,5 +299,5 @@ Missions.exploreCity = {
   end: {
     min: { day: '+3' }
   },
-  results: [{}]
+  results: { done: {}}
 };

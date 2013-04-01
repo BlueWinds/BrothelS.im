@@ -36,7 +36,56 @@ Girls.Mana = {
     pregnant: "Pregnant.jpg"
   },
   Actions: {
-    Talk: $.extend(true, {}, Actions.Talk),
+    Talk: $.extend(true, { results: {
+      Mana1: {
+        message: {
+          group: 'Mana',
+          label: 'Talk',
+          image: 'content/girls/Mana/images/Tired1.jpg',
+          text: "You settle down on the bench where you've agreed to meet her, and wait. And wait. And wai... oh, there she is, only half an hour late. Mana runs down the street towards you, waving her arms enthusiastically the ensure you know she's seen you and is coming. You wince in sympathy as she stumbles - perhaps she should pay more attention to the ground, and less to waving at you... Oh ouch. You're out of your seat and running towards her even as the carriage that flattened her rolls to a stop.<br><br>The driver apologizes profusely, but it really wasn't his fault that DMG dashed in front of his wheels without looking. You spend the rest of the <<- time >> tending to her injuries back at the <<- girl.building() ? girl.building().name : 'Inn'>>."
+        },
+        girl: {
+          obedience: 2.5,
+          endurance: -4
+        }
+      },
+      Mana2: {
+        message: {
+          group: 'Mana',
+          label: 'Talk',
+          image: 'content/girls/Mana/images/Exercise1.jpg',
+          text: "After several days of pestering, you finally relent to Mana's seeminly endless chatter and take her out to visit a new shop that recently opened nearby. She runs ahead, and when you catch up, you find her nearly plastered to the window display, eyeing an endless supply of candy and sweet baked goods. Laughing at her enthusiasm as the two of you enter, you announce that you'll get her any one thing. This proves to be... a mistake.<br><br>The giant lollipop in the center of the store? The one that looked like an ornamental stand? It was real, it was for sale, and you had to carry it home since it was too heavy for Mana to carry. You wonder how long it will take her to finish it, and whether you should invest in some earplugs in the meantime."
+        },
+        girl: {
+          obedience: 1,
+          happiness: 7
+        },
+        money: -50
+      },
+      Mana3: {
+        message: {
+          group: 'Mana',
+          label: 'Talk',
+          image: 'content/girls/Mana/images/Tired3.jpg',
+          text: "Unlike some of the other girls with mysterious pasts, Mana isn't shy telling you about her history. She doesn't seem to miss being an immortal powerful spirit - the battles were exciting, and she got to save the world on more than one occasion if her stories are to be believed, but lacking physical form was a significant drawback. Battles were <em>all</em> she got to see. She much prefers her new life, where she can eat ice cream, run around in the park, and, yes, fuck."
+        },
+        girl: {
+          obedience: 2,
+          happiness: 2
+        }
+      },
+      Mana4: {
+        message: {
+          group: 'Mana',
+          label: 'Talk',
+          image: 'content/girls/Mana/images/Base.jpg',
+          text: "You sit on the front porch of the <<- girl.building() ? girl.building().name : 'Inn' >> with Mana, watching traffic pass and talking of small things. The subject eventually turns to magic, and you ask her to show you some tricks. She frowns in concentration, but the most impressive spell she can conjure is a small ball of fire in midair, or catching a tossed apple. Hardly the epic magic she likes to attribute to herself in stories. You compliment her anyway, and the frown soon melts back into the ever-present enthusiastic grin as she gives nearby pedestrians wedgies."
+        },
+        girl: {
+          obedience: 1.5
+        }
+      }
+    }}, Actions.Talk),
     Healing: {
       label: 'Healing',
       group: 'Chores',
@@ -57,7 +106,7 @@ Girls.Mana = {
       },
       tags: { indoors: 1 },
       options: 'girls',
-      variants: function(context, done) {
+      variants: function healingVariants(context, done) {
         this.special = g.girls[this.option].startDelta();
         g.girls[this.option].apply({
           happiness: 3,
@@ -66,8 +115,8 @@ Girls.Mana = {
         this.special = this.special();
         done(this.base().results[0]);
       },
-      results: [
-        {
+      results: {
+        success: {
           message: {
             image: 'content/girls/Mana/images/Healing.jpg',
             group: 'Mana',
@@ -75,62 +124,11 @@ Girls.Mana = {
             text: 'Mana drew upon her power to revitalize <<= action.option >>, restoring her energy (<span class="endurance delta">+<<= action.special.endurance || 0 >></span>, <span class="happiness delta">+<<= action.special.happiness || 0 >></span>).'
           },
           girl: {
-            endurance: -8,
+            endurance: -12,
             happiness: 2
           }
         }
-      ] // results
+      } // results
     } //healing
   } // actions
 };
-
-Girls.Mana.Actions.Talk.results._append([
-  {
-    message: {
-      group: 'Mana',
-      label: 'Talk',
-      image: 'content/girls/Mana/images/Tired1.jpg',
-      text: "You settle down on the bench where you've agreed to meet her, and wait. And wait. And wai... oh, there she is, only half an hour late. Mana runs down the street towards you, waving her arms enthusiastically the ensure you know she's seen you and is coming. You wince in sympathy as she stumbles - perhaps she should pay more attention to the ground, and less to waving at you... Oh ouch. You're out of your seat and running towards her even as the carriage that flattened her rolls to a stop.<br><br>The driver apologizes profusely, but it really wasn't his fault that DMG dashed in front of his wheels without looking. You spend the rest of the <<- time >> tending to her injuries back at the <<- girl.building() ? girl.building().name : 'Inn'>>."
-    },
-    girl: {
-      obedience: 2.5,
-      endurance: -4
-    }
-  },
-  {
-    message: {
-      group: 'Mana',
-      label: 'Talk',
-      image: 'content/girls/Mana/images/Exercise1.jpg',
-      text: "After several days of pestering, you finally relent to Mana's seeminly endless chatter and take her out to visit a new shop that recently opened nearby. She runs ahead, and when you catch up, you find her nearly plastered to the window display, eyeing an endless supply of candy and sweet baked goods. Laughing at her enthusiasm as the two of you enter, you announce that you'll get her any one thing. This proves to be... a mistake.<br><br>The giant lollipop in the center of the store? The one that looked like an ornamental stand? It was real, it was for sale, and you had to carry it home since it was too heavy for Mana to carry. You wonder how long it will take her to finish it, and whether you should invest in some earplugs in the meantime."
-    },
-    girl: {
-      obedience: 1,
-      happiness: 7
-    },
-    money: -50
-  },
-  {
-    message: {
-      group: 'Mana',
-      label: 'Talk',
-      image: 'content/girls/Mana/images/Tired3.jpg',
-      text: "Unlike some of the other girls with mysterious pasts, Mana isn't shy telling you about her history. She doesn't seem to miss being an immortal powerful spirit - the battles were exciting, and she got to save the world on more than one occasion if her stories are to be believed, but lacking physical form was a significant drawback. Battles were <em>all</em> she got to see. She much prefers her new life, where she can eat ice cream, run around in the park, and, yes, fuck."
-    },
-    girl: {
-      obedience: 2,
-      happiness: 2
-    }
-  },
-  {
-    message: {
-      group: 'Mana',
-      label: 'Talk',
-      image: 'content/girls/Mana/images/Base.jpg',
-      text: "You sit on the front porch of the <<- girl.building() ? girl.building().name : 'Inn' >> with Mana, watching traffic pass and talking of small things. The subject eventually turns to magic, and you ask her to show you some tricks. She frowns in concentration, but the most impressive spell she can conjure is a small ball of fire in midair, or catching a tossed apple. Hardly the epic magic she likes to attribute to herself in stories. You compliment her anyway, and the frown soon melts back into the ever-present enthusiastic grin as she gives nearby pedestrians wedgies."
-    },
-    girl: {
-      obedience: 1.5
-    }
-  }
-]);

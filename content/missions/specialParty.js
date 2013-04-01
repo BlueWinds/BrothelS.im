@@ -4,14 +4,14 @@ Missions.specialPartyStart = {
     min: { day: 10 },
     max: { day: 10 }
   },
-  results: [{
+  results: { done: {
     mission: 'specialParty'
-  }]
+  }}
 };
 
 Missions.specialParty = {
   conditions: false,
-  initialize: function() {
+  initialize: function specialPartyInitialize() {
     this.special.client = new Person('High Class');
   },
   display: {
@@ -25,9 +25,9 @@ Missions.specialParty = {
     min: { day: '+5' },
     max: { day: '+5' }
   },
-  results: [{
+  results: { done: {
     mission: 'specialPartyDelay'
-  }],
+  }},
   special: {}
 };
 
@@ -37,9 +37,9 @@ Missions.specialPartyDelay = {
     min: { day: '+25' },
     max: { day: '+25' }
   },
-  results: [{
+  results: { done: {
     mission: 'specialParty'
-  }]
+  }}
 };
 
 Actions.attendParty = {
@@ -52,7 +52,7 @@ Actions.attendParty = {
       specialParty: 1
     }
   },
-  initialize: function() {
+  initialize: function attendPartyInitialize() {
     var m = g.missions.specialParty;
     if (g.day != m.end.min.day) { return false; }
   },
@@ -64,7 +64,7 @@ Actions.attendParty = {
       }
     }
   },
-  disable: function(context) {
+  disable: function attendPartyDisable(context) {
     var attending = Girl.actions('evening').attendParty;
     if (attending && attending[0] != context.girl.name) {
       return 'Only one girl can attend.';
@@ -72,20 +72,25 @@ Actions.attendParty = {
   },
   // Intentionally empty - do not interrupt.
   tags: {},
-  variants: function(context, done) {
-    var delta = $.extend(true, {}, this.base().results[0]);
+  variants: function attendPartyVariants(context, done) {
+    var delta = $.extend(true, {}, Math.choice(this.base().results));
     var client = g.missions.specialParty.special.client;
     delta.money += context.girl.get(client.wants[0]) * 10;
     delta.money += context.girl.get(client.wants[1]) * 5;
     delta.money += context.girl.get(client.wants[2]) * 1;
+    if (delta.girl.endurance > -40) {
+      // This is non-sexual ending, so no sex traits.
+      done(delta);
+      return;
+    }
     delta.girl[client.sex[0] + 'Libido'] = 8;
     delta.girl[client.sex[0] + 'Experience'] = 10;
     delta.girl[client.sex[1] + 'Libido'] = 5;
     delta.girl[client.sex[1] + 'Experience'] = 4;
     done(delta);
   },
-  results: [
-    {
+  results: {
+    PartyOn: {
       message: [
         {
           group: '<<- girl.name >>',
@@ -114,6 +119,67 @@ Actions.attendParty = {
         charisma: 5
       },
       money: 0
+    },
+    RunningLate: {
+      message: [
+        {
+          group: '<<- girl.name >>',
+          label: '<<- action.label >>',
+          image: '<<= g.missions.specialParty.special.client.image >>',
+          text: "Despite leaving early, the streets are particularly crowded with party-goers tonight, and <<= girl.name >> finds it difficult to weave her way through them wearing her evening dress. She arrives at <<= client.name >>'s inn slightly late, entering to find <<= client.name >> himself waiting. He chastises her for her tardiness and suggests with a raised eyebrow that he will find a way to discipline her later in the night. Skipping the formalities of introduction, he wastes no time taking her hand and leading her out to the main street so that neither of them miss another moment of the excitement.",
+          delta: false
+        },
+        {
+          group: '<<- girl.name >>',
+          label: '<<- action.label >>',
+          image: 'content/missions/festival.jpg',
+          text: "The night supplies an intoxicating mix of music and alcohol, drums in the distance blending with warm night air and enticing scents. Rather than spend time with the traditional dancing and candle ceremony though, <<= client.name >> takes <<= girl.name >> to some less reputable entertainment - a series of wrestling matches in a warehouse near the docks. One bout is scheduled, while it's traditional that the impromptu matches that follow spill out of the ring and into the over-eager front row (he promises that they'll leave before the real brawling begins after that). By the time the fighting has started to get... rowdy... the crowd has started to thin, and <<- girl.name >> sees many bodies in various states of undress as they leave, getting to know each other much better in the nearby well-lit alleyways.",
+          delta: false
+        },
+        {
+          group: '<<- girl.name >>',
+          label: '<<- action.label >>',
+          image: '<<= girl.image(g.missions.specialParty.special.client.sex[0]) >>',
+          text: "It's not until they return to his lavish room at the inn that <<= girl.name >>'s night really begins. <<= client.name >> strips her and binds her thoroughly. He runs his fingers up and down her body, exploring softly every patch of skin and paying particular attention to her intimate areas. The touches start to get rougher as he moves on to sexual 'punishment'. By the time the night is over, she has been punished not only for her lateness but also for many other misdeeds and naughty acts. It's almost dawn by the time they finish, and <<= client.name >> is very appreciative to have had <<= girl.name >>'s cooperation. He gives more than the agreed amount of money and tells her that he would be very happy to have her accompany him in the future, especially if she's in need of correction again. As her joints are feeling stiff from awkward positions, he has his maid walk her back to her room to get some rest. The maid is also appreciative - this has been her first night off in weeks!"
+        }
+      ],
+      girl: {
+        happiness: 25,
+        endurance: -40,
+        charisma: 5
+      },
+      money: 0
+    },
+    NoSex: {
+      message: [
+        {
+          group: '<<- girl.name >>',
+          label: '<<- action.label >>',
+          image: '<<= g.missions.specialParty.special.client.image >>',
+          text: "<<= girl.name >> arrives at <<= client.name >>'s inn right on time, just as he is just descending the stairs from his second-floor room. He is a little older that she expected, and she curtsies gracefully to him in respect. He greets her with a chivalrous hand kiss, and then the two of them head out to the main street to enjoy the festivities.",
+          delta: false
+        },
+        {
+          group: '<<- girl.name >>',
+          label: '<<- action.label >>',
+          image: 'content/missions/festival.jpg',
+          text: "<<= client.name >> and <<= girl.name >> begin by watching the central avenue parade, led by a detachment of Valaia's city guards in full ceremonial uniform. They're followed by everything from fire-eaters to a troupe of scantily clad cat-girls spreading kisses on the cheek and flowers in the hair of anyone who strays too close, showing off the island's splendid culture. This month the parade floats are mainly themed on <<- Math.choice(['the city's most notable whores', 'the area's extensive folklore', 'the kings and queens of the past and present', 'a particularly unsavory incident in the city's history', 'the female form', 'animal-shaped representations of the city's most notable regions']) >>. After this, he takes her the traditional dancing circle, and though <<= girl.name >> is not as experienced with the types of dancing unique to this area, <<= client.name >> takes it slow and holds her close. Upon seeing her move so elegantly in her evening dress, several younger men ask for the next dance, but she turns them all down - she has eyes (or at least elegantly pretends to have only eyes) for one man.",
+          delta: false
+        },
+        {
+          group: '<<- girl.name >>',
+          label: '<<- action.label >>',
+          image: '<<= g.missions.specialParty.special.client.image >>',
+          text: "As the evening draws to a close, the pair return to the inn. <<= client.name >> thanks <<= girl.name >> for a wonderful time, and that he was glad for the company. He pays her in full and lets her return home with no sexual services rendered. <<- girl.get('libido') < 75 ? 'She is relieved to have spent the evening having had such an enjoyable date, though a little disappointed to have missed the experience of being a fine lady in the bedroom of a dignified gentleman.' : 'She is disappointed not to have been able to get into his pants, and she is very tempted to pro bono work on her way home. It's not until she\'s alone in her room that she can remedy how anticlimactic the night became. She is now particularly desperate for any kind of penetration from her next client.' >>"
+        }
+      ],
+      girl: {
+        happiness: 25,
+        endurance: -17,
+        charisma: 6,
+        intelligence: 5
+      },
+      money: 300
     }
-  ]
+  }
 };

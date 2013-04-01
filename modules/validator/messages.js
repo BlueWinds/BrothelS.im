@@ -40,7 +40,7 @@ Schemas.liveMessage = {
   id: 'liveMessage',
   type: 'object',
   required: [
-  '_class', 'weight',
+    '_class', 'weight',
     'group', 'label', 'image', 'text'
   ],
   properties: {

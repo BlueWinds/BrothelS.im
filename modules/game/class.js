@@ -1,5 +1,5 @@
 "use strict";
-var Game = function(obj) {
+function Game(obj) {
   g = this;
   this._class = 'Game';
   // Update old fetish settings
@@ -13,9 +13,9 @@ var Game = function(obj) {
   }
   $.extend(this, obj);
   this.randomSeed = this.randomSeed || Math.random();
-};
+}
 
-Game.prototype.nextPayment = function() {
+Game.prototype.nextPayment = function nextPayment() {
   if (this.day >= Game.config.gameLength) { return false; }
   var pl = Game.config.gameLength / (Game.config.payments.length - 1);
   var day = Math.floor(this.day / pl) * pl + pl;
@@ -25,19 +25,19 @@ Game.prototype.nextPayment = function() {
   };
 };
 
-Game.prototype.render = function() {
-  e.invokeAll('GamePreRender', function() {
+Game.prototype.render = function render() {
+  e.invokeAll('GamePreRender', function donePreRender() {
     $('#content').html(e.render('view-game'));
-    $('#next').click(function(event) {
+    $('#next').click(function nextTurn(event) {
       g.nextTurn(event.ctrlKey);
     });
-    e.invokeAll('GameRender', function() {
+    e.invokeAll('GameRender', function doneRender() {
       e.invokeAll('Autorender', $('#content'));
     });
   });
 };
 
-Game.prototype.nextTurn = function(noReseed) {
+Game.prototype.nextTurn = function nextTurn(noReseed) {
   this.moneyHistory.push(this.money);
   if (this.moneyHistory.length > Game.config.moneyHistoryLength) {
     this.moneyHistory = this.moneyHistory.slice(this.moneyHistory.length - Game.config.moneyHistoryLength);
@@ -47,13 +47,13 @@ Game.prototype.nextTurn = function(noReseed) {
   }
   Math.seedrandom(this.randomSeed);
   e.runSeries([
-    function(next) {
+    function autosave(next) {
       if (g.autosave) { Game.save('Autosave'); }
       next();
     },
-    function(next) { e.invokeAll('GamePreDay', next); },
-    function(next) { e.invokeAll('GameNextDay', next); },
-    function(next) {
+    function doPreDay(next) { e.invokeAll('GamePreDay', next); },
+    function doNextDay(next) { e.invokeAll('GameNextDay', next); },
+    function incrementDay(next) {
       var payment = g.nextPayment();
       g.day += 1;
       if (payment && g.day == payment.day) {
@@ -61,6 +61,6 @@ Game.prototype.nextTurn = function(noReseed) {
       }
       next();
     },
-    function(next) { e.invokeAll('GamePostDay', next); }
+    function doPostDay(next) { e.invokeAll('GamePostDay', next); }
   ], g.render);
 };

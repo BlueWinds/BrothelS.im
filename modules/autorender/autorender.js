@@ -1,8 +1,8 @@
 "use strict";
 e.Autorender = [];
-e.Autorender.push(function(element, done) {
+e.Autorender.push(function autorender(element, done) {
   $('button, a.button', element).button();
-  $('*[title]', element).each(function() {
+  $('*[title]', element).each(function createTooltips() {
     $(this).tooltip({
       show: {
         delay: 300
@@ -21,7 +21,7 @@ e.Autorender.push(function(element, done) {
   });
   $('.accordion', element).accordion({
     heightStyle: 'content'
-  }).each(function() {
+  }).each(function addAccordion() {
     var accordion = $(this);
     if (accordion.find('.ui-accordion-content.active').length) {
       var active = accordion.find('.ui-accordion-content').index(accordion.find('.ui-accordion-content.active'));
@@ -58,7 +58,7 @@ e.Autorender.push(function(element, done) {
       var close = $('<a class="close button">x</button>').appendTo(nav).button();
 
       var tabCount = $('.ui-tabs-panel', view).length;
-      prev.click(function() {
+      prev.click(function clickPrev() {
         var activeTab = view.tabs('option', 'active');
         var tab = $('.ui-tabs-panel', view).eq(activeTab);
         var activeAccord = accordion && tab.accordion('option', 'active');
@@ -75,7 +75,7 @@ e.Autorender.push(function(element, done) {
           tab.accordion('option', 'active', activeAccord);
         }
       });
-      next.click(function() {
+      next.click(function clickNext() {
         var activeTab = view.tabs('option', 'active');
         var tab = $('.ui-tabs-panel', view).eq(activeTab);
         var activeAccord = accordion && tab.accordion('option', 'active');
@@ -92,11 +92,11 @@ e.Autorender.push(function(element, done) {
         }
       });
 
-      close.click(function() {
+      close.click(function clickClose() {
         view.dialog('close');
       });
 
-      var checkActive = function() {
+      var checkActive = function checkActive() {
         prev.button('option', 'disabled', false);
         next.button('option', 'disabled', false);
         var activeTab = view.tabs('option', 'active');
@@ -120,13 +120,13 @@ e.Autorender.push(function(element, done) {
     }
   }
   $('.horizontal-tabs', view).tabs();
-  $('label.checkbox', view).click(function() {
+  $('label.checkbox', view).click(function toggleCheckbox() {
     $(this).toggleClass('checked');
   });
   done();
 });
 
-$(function() {
+$(function () {
   $('head').append('<link href="modules/autorender/autorender.css" type="text/css" rel="stylesheet">');
   $.ui.dialog.prototype.options.show = 'fade';
   $.ui.dialog.prototype.options.hide = 'fade';
@@ -137,12 +137,12 @@ $(function() {
   $.ui.tabs.prototype._tabKeydown = $.noop;
   $.ui.accordion.prototype.options.animate = 200;
   $.ui.sortable.prototype.options.distance = 20;
-  $(document).on('dialogclose', function(event) {
+  $(document).on('dialogclose', function dialogClose(event) {
     $(event.target).dialog('destroy').remove();
-  }).on("dialogcreate", function(event) {
+  }).on("dialogcreate", function dialogCreate(event) {
     e.invokeAll('Autorender', event.target);
   });
-  $(document).keydown(function(event) {
+  $(document).keydown(function nextPrevHotkey(event) {
     if (event.keyCode == 37) {
       $('.nav > .previous.button').click();
     } else if (event.keyCode == 39) {

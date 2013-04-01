@@ -48,7 +48,13 @@ Schemas.Conditions = {
       description: 'Must match the building in the current context - if none is already there, it will add the a random building which matches.'
     },
     option: {
-      description: "Must match this resolvable's currently selected option. Currently only Actions have options, but that will change soon."
+      description: "Must match this resolvable's currently selected option."
+    },
+    result: {
+      type: ['array', 'string'],
+      description: "This is the key of the Result to use, or a list of keys to choose between randomly. Not strictly part of Conditions, I'm not sure where else to put it.",
+      items: { type: 'string' },
+      minItems: 1
     }
   },
   patternProperties: {
@@ -162,19 +168,103 @@ Schemas.Resolvable = {
     conditions: {
       anyOf: [{ $ref: 'Conditions' }, { 'enum': [false] }]
     },
+    options: {
+      description: 'options is either a string, an array, or a function that returns such an array (see below for details on each). For Actions, this list shows up in the action selection screen for the user - for Events and Missions, it shows up as a dialog, prompting the user to select one.',
+      anyOf: [
+        {
+          'enum': ['girls', 'buildings'],
+          description: 'If options is one of these special strings, then it will be replaced with a list of Hired girls or Owned buildings.'
+        },
+        {
+          type: 'array',
+          items: {
+            type: 'object',
+            required: [ 'key' ],
+            properties: {
+              key: {
+                type: 'string',
+                description: 'This value will be set to (this).option if selected.'
+              },
+              conditions: {
+                $ref: 'Conditions',
+                description: 'This option will only be displayed if the conditions match.',
+                'default': {}
+              }
+            },
+            anyOf: [
+              {
+                required: [ 'label', 'title' ],
+                properties: {
+                  key: {},
+                  conditions: {},
+                  label: {
+                    type: 'string',
+                    description: 'The button or dropdown text displayed. Text replacement is available.'
+                  },
+                  title: {
+                    type: 'string',
+                    description: 'The tooltip for this option. Text replacement is available.'
+                  }
+                },
+                additionalProperties: false
+              },
+              {
+                required: [ 'conditions', 'immediate' ],
+                properties: {
+                  key: {},
+                  conditions: {},
+                  immediate: {
+                    'enum': [true],
+                    description: 'If immediate is set and the conditions match, then this option will be selected immediately, without prompting the user.'
+                  }
+                },
+                additionalProperties: false
+              }
+            ]
+          },
+          description: 'If a list, then each item whose conditions (if any) match will be displayed..'
+        },
+        {
+          type: 'function',
+          'arguments': ['context'],
+          description: 'If options is a function, it must return an array as described above.'
+        }
+      ],
+      'default': {}
+    },
+    optionsInfo: {
+      type: 'object',
+      description: 'Additional information on how to handle the options array (see the properties below).',
+      properties: {
+        key: {
+          type: 'string',
+          description: 'The key to store the option selected by the user under. options: "buildings", optionsInfo: { key: "building" } is useful in order to have the user select a building, then add it to the current context.'
+        },
+        text: {
+          type: 'string',
+          description: 'The text used in the popup displayed to the user (ignored for Actions, which do not have a popup).'
+        },
+        image: {
+          type: 'string',
+          description: 'The image used in the popup. Ignored for Actions.'
+        }
+      },
+      additionalProperties: false
+    },
     variants: {
       type: ['function', 'array'],
       description: "If not present, a random choice will be selected from results. If it's a function, it must call done(delta), where delta is a Result. If variants is an array, each Condition is checked in turn until one matches, and the result matching its index is applied. If none match, then any remaining elements from Results are selected from randomly.",
       'arguments': ['context', 'done'],
-      items: { $ref: 'Conditions' },
+      items: {
+        anyOf: [{ $ref: 'Conditions' }],
+        required: ['result']
+      },
       minItems: 1
     },
     results: {
-      description: "A set of results for this Resolvable. Which one is applied is determined by 'variants' above. If variants is an array, then this must also be an array of the same length. If variants is a function, then it can use whatever method it pleases to look up items from this.base().results.",
-      type: ['array', 'object'],
-      items: { $ref: 'Result' },
+      description: "A set of results for this Resolvable. Which one is applied is determined by 'variants' above. If none of the variants matched (or variants was not present), then any results not referenced by *any* variants are chosen between randomly.",
+      type: 'object',
       additionalProperties: { $ref: 'Result' },
-      minItems: 1,
       minProperties: 1
     },
     special: {
@@ -201,6 +291,7 @@ Schemas.liveResolvable = {
     building: {
       'enum': Object.keys(window.Buildings || {})._append(['Inn'])
     },
-    special: { type: 'object' }
+    special: { type: 'object' },
+    option: { type: 'string' }
   }
 };

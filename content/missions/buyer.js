@@ -16,11 +16,11 @@ Missions.girlBuyer = {
     weight: -1
   },
   special: {},
-  initialize: function(context) {
+  initialize: function girlBuyerInitialize(context) {
     var client = new Person('High Class');
     var delta = { min: {}, max: {} };
     this.special.client = client;
-    client.wants.forEach(function(want) {
+    client.wants.forEach(function eachClientWant(want) {
       if (['libido', '-libido', 'experience', '-experience', 'endurance', '-endurance'].indexOf(want) != -1) {
         return;
       }
@@ -30,35 +30,41 @@ Missions.girlBuyer = {
         delta.min[want] = '+5';
       }
     });
-    this.special.delta = context.girl.parseConditions(delta);
+    this.special.conditions = context.girl.parseConditions(delta);
   },
+  preDay: true,
   end: {
     min: { day: '+30' },
     max: { day: '+30' }
   },
-  variants: function(context, done) {
-    var client = this.special.client;
-    if (!context.girl.compare(this.special.delta)) {
-      done(this.base().results.fail);
-      return;
-    }
-    var text = client.name + ' has returned in 30 days, as promised, to collect ' + context.girl.name + " if she's interested in coming with him. In person, this time. " + client.description + " As when you asked her before, it seems she could go either way - she likes working for you, but traveling to foreign lands also sounds exciting.";
-    var options = {
-      'Send her off': "Life's too great of an adventure to spend stuck in one place.",
-      'Keep her here': "She enjoys it here, and it's a good life. Stay."
-    };
-    Game.getUserInput(text, client.image, options, function(answer) {
-      var result = context.mission.base().results[answer];
-      if (answer == 'Send her off') {
-        result.money *= Math.random() * 0.8 + 0.6;
-        result.money = Math.floor(result.money);
-        g.messages = g.messages.filter(function(message) {
-          return (message.group != context.girl.name);
-        });
-      }
-      done(result);
-    });
+  optionsInfo: {
+    text: "<<- mission.special.client.name >> has returned in 30 days, as promised, to collect <<- girl.name >> if she's interested in coming with him. In person, this time. <<- mission.special.client.description >> As when you asked her before, it seems she could go either way - she likes working for you, but traveling to foreign lands also sounds exciting.",
+    image: "<<- mission.special.client.image >>"
   },
+  options: function buyerOptions(context) {
+    if (!context.girl.compare(this.special.conditions)) {
+      return [
+        { key: 'fail', immediate: true }
+      ];
+    }
+    return [
+      {
+        key: 'sendOff',
+        label: 'Send her off',
+        title: "Life's too great of an adventure to spend stuck in one place."
+      },
+      {
+        key: 'stayHere',
+        label: 'Keep her here',
+        title: "She enjoys it here, and it's a good life. Stay."
+      }
+    ];
+  },
+  variants: [
+    { option: 'fail', result: 'fail' },
+    { option: 'sendOff', result: 'sendOff' },
+    { option: 'stayHere', result: 'stayHere' }
+  ],
   results: {
     fail: {
       message: {
@@ -71,7 +77,7 @@ Missions.girlBuyer = {
       girl: { happiness: -7 },
       mission: 'girlBuyerMinDelay'
     },
-    'Send her off': {
+    sendOff: {
       message: {
         label: 'Girl for <<- mission.special.client.name >>',
         group: '<<- girl.name >>',
@@ -85,7 +91,7 @@ Missions.girlBuyer = {
       money: 25000,
       mission: 'girlBuyerMinDelay'
     },
-    'Keep her here': {
+    stayHere: {
       message: {
         label: 'Girl for <<- mission.special.client.name >>',
         group: '<<- girl.name >>',
@@ -106,5 +112,5 @@ Missions.girlBuyerMinDelay = {
   end: {
     min: { day: '+25' }
   },
-  results: [{}]
+  results: { done: {} }
 };

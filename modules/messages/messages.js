@@ -1,12 +1,18 @@
 "use strict";
 
-var Message = function(obj) {
+e.Ready.push(function messagesReady(done) {
+  $('head').append('<link href="modules/messages/messages.css" type="text/css" rel="stylesheet">');
+  e.addTemplate('list-messages', 'modules/messages/list-messages.tpl.html');
+  done();
+});
+
+function Message(obj) {
   $.extend(true, this, obj);
   this.weight = this.weight || 0;
   this._class = 'Message';
-};
+}
 
-Message.send = function(obj, context) {
+Message.send = function sendMessage(obj, context) {
   var message = new Message(obj);
   if (context) {
     message.group = ejs.render(message.group, context);
@@ -20,7 +26,7 @@ Message.send = function(obj, context) {
   return message;
 };
 
-e.Autorender.push(function(element, done) {
+e.Autorender.push(function messagesAutorender(element, done) {
   $('#image-size').remove();
   var text = '.message img, .mission img { max-width: ' + Game.config.imageSize + 'em; }';
   if (Game.config.imageSize === 0) {
@@ -34,63 +40,58 @@ e.Autorender.push(function(element, done) {
   done();
 });
 
-e.GameNew.push(function(done) {
+e.GameNew.push(function messagesGameNew(done) {
   g.messages = [];
-  setTimeout(function() {
+  setTimeout(function openMessages() {
     $('#show-messages').click();
   }, 1000);
   done();
 });
 
-e.GamePreDay.push(function(done) {
+e.GamePreDay.push(function messagesPreDay(done) {
   g.messages = [];
   done();
 });
 
-e.GamePostDay.push(function(done) {
-  setTimeout(function() {
+e.GamePostDay.push(function messagesPostDay(done) {
+  setTimeout(function openMessages() {
     $('#show-messages').click();
   }, 1);
   done();
 });
 
-e.GameRender.push(function(done) {
+e.GameRender.push(function messagesGameRender(done) {
   var button = $('<button id="show-messages">').html('Messages');
   if (!g.messages.length) {
     button.attr('disabled', 'disabled');
   }
   $('#top-right').prepend(button);
-  button.click(function() {
+  button.click(function openMessages() {
     if ($(this).attr('disabled')) { return; }
     var messages = {};
     var groups = {};
-    g.messages.forEach(function(message) {
+    g.messages.forEach(function sortGroups(message) {
       var group = message.group;
       messages[group] = messages[group] || [];
       messages[group].push(message);
       groups[group] = Math.min(groups[group] || 100, message.weight);
     });
-    groups = Object.keys(groups).sort(function(a, b) {
+    groups = Object.keys(groups).sort(function (a, b) {
       return groups[a] - groups[b];
     });
     var view = e.render('list-messages', {
       groups: groups,
       messages: messages
     });
-    view.appendTo('body');
-    e.invokeAll('Autorender', view, function() {
+    view.addClass('hidden').appendTo('body');
+    e.invokeAll('Autorender', view, function () {
       view.dialog({
         title: 'Messages',
         maxHeight: '100%'
       });
       view.closest('.ui-dialog').addClass('tab-dialog');
+      view.removeClass('hidden');
     });
   });
-  done();
-});
-
-e.Ready.push(function(done) {
-  $('head').append('<link href="modules/messages/messages.css" type="text/css" rel="stylesheet">');
-  e.addTemplate('list-messages', 'modules/messages/list-messages.tpl.html');
   done();
 });

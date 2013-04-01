@@ -3,7 +3,7 @@
 
 var Schemas = {};
 
-e.Ready.push(function(done) {
+e.Ready.push(function validateReady(done) {
   e.loadAll([
     "modules/validator/game.js",
     "modules/validator/girls.js",
@@ -13,17 +13,17 @@ e.Ready.push(function(done) {
     "modules/validator/missions.js",
     "modules/validator/actions.js",
     "modules/validator/events.js"
-  ], function() {
+  ], function schemasLoaded() {
     var classes = ['Girl', 'Room', 'Building', 'Mission', 'Action', 'Event'];
     for (var schema in Schemas) {
       tv4.addSchema(schema, Schemas[schema]);
     }
-    classes.forEach(function(type) {
-      $.each(window[type + 's'], function(key, obj) {
+    classes.forEach(function eachSchemaClass(type) {
+      $.each(window[type + 's'], function eachBase(key, obj) {
         var success = tv4.validate(obj, type);
         if (!success) {
           if (tv4.error.subErrors) {
-            tv4.error.subErrors.forEach(function(error) {
+            tv4.error.subErrors.forEach(function displaySubError(error) {
               var subError = $('<div>').appendTo('#error');
               $('<div>').html(type + ' - ' + (obj.name || obj._id)).appendTo(subError);
               $('<div>').html(error.message + ':').appendTo(subError);
@@ -43,10 +43,10 @@ e.Ready.push(function(done) {
   });
 });
 
-e.Autorender.push(function(element, done) {
+e.Autorender.push(function validateAutorender(element, done) {
   if (!tv4.validate(g, 'Game')) {
     if (tv4.error.subErrors) {
-      tv4.error.subErrors.forEach(function(error) {
+      tv4.error.subErrors.forEach(function displaySubError(error) {
         var subError = $('<div>').appendTo('#error');
         $('<div>').html(error.message + ':').appendTo(subError);
         $('<div>').html(error.dataPath).appendTo(subError);
@@ -64,9 +64,9 @@ e.Autorender.push(function(element, done) {
   done();
 });
 
-(function() {
+(function () {
   var oldApply = Resolvable.prototype.applyResults;
-  Resolvable.prototype.applyResults = function(results, done, context) {
+  Resolvable.prototype.applyResults = function validateAppliedResults(results, done, context) {
     if (!tv4.validate(results, 'Result')) {
       console.log(tv4.error);
       console.log(this);

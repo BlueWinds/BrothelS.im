@@ -117,7 +117,7 @@ Game.hotkeys = {
     label: '.',
     description: 'Increase image sizes',
     allowDialogs: true,
-    callback: function() {
+    callback: function increaseSize() {
       Game.config.imageSize = Math.min(40, Game.config.imageSize + 1);
       localStorage.setItem('imageSize', Game.config.imageSize);
       e.invokeAll('Autorender', $('head'));
@@ -127,7 +127,7 @@ Game.hotkeys = {
     label: ',',
     description: 'Decrease image sizes',
     allowDialogs: true,
-    callback: function() {
+    callback: function decreaseSize() {
       Game.config.imageSize = Math.max(0, Game.config.imageSize - 1);
       localStorage.setItem('imageSize', Game.config.imageSize);
       e.invokeAll('Autorender', $('head'));

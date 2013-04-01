@@ -4,11 +4,13 @@ function Resolvable(obj) {
   delete this.initialize;
   delete this.variants;
   delete this.results;
+  delete this.options;
+  delete this.optionsInfo;
   delete this.conditions;
   this.constructor = window[this._class];
 }
 
-Resolvable.create = function(_id, _class, context, allowFalseConditions) {
+Resolvable.create = function create(_id, _class, context, allowFalseConditions) {
   var base = Resolvable.base(_id, _class, context);
   var res = new window[_class](base);
   res.constructor = window[_class];
@@ -23,7 +25,7 @@ Resolvable.create = function(_id, _class, context, allowFalseConditions) {
   return res;
 };
 
-Resolvable.prototype.context = function() {
+Resolvable.prototype.context = function getContext() {
   var context = {};
   if (this.girl && g.girls[this.girl]) { context.girl = g.girls[this.girl]; }
   if (this.building && g.buildings[this.building]) { context.building = g.buildings[this.building]; }
@@ -32,7 +34,7 @@ Resolvable.prototype.context = function() {
   return context;
 };
 
-Resolvable.prototype.setContext = function(context) {
+Resolvable.prototype.setContext = function setContext(context) {
   if (context.girl) {
     this.girl = context.girl && context.girl.name;
   } else {
@@ -50,7 +52,7 @@ Resolvable.prototype.setContext = function(context) {
   }
 };
 
-Resolvable.base = function(_id, _class, context) {
+Resolvable.base = function base(_id, _class, context) {
   var prop = _class + 's';
   if (context.girl) {
     var girl = context.girl.base();
@@ -67,11 +69,11 @@ Resolvable.base = function(_id, _class, context) {
   return $.extend(true, {}, window[prop][_id]);
 };
 
-Resolvable.prototype.base = function() {
+Resolvable.prototype.base = function getBase() {
   return Resolvable.base(this._id, this._class, this.context());
 };
 
-Resolvable.prototype.checkConditions = function(cond, context, allowFalseConditions) {
+Resolvable.prototype.checkConditions = function checkConditions(cond, context, allowFalseConditions) {
   cond = cond || this.base().conditions;
   context = context || this.context(context);
   if (cond === false) {
@@ -129,24 +131,24 @@ Resolvable.prototype.checkConditions = function(cond, context, allowFalseConditi
   if (cond.missions) {
     for (var _id in cond.missions) {
       switch (cond.missions[_id]) {
-        case -3:
-          if (g.missions[_id] || g.missionsDone[_id]) { return false; }
-          break;
-        case -2:
-          if (g.missionsDone[_id]) { return false; }
-          break;
-        case -1:
-          if (g.missions[_id]) { return false; }
-          break;
-        case 1:
-          if (!g.missions[_id]) { return false; }
-          break;
-        case 2:
-          if (!g.missionsDone[_id]) { return false; }
-          break;
-        case 3:
-          if (!g.missions[_id] && !g.missionsDone[_id]) { return false; }
-          break;
+      case -3:
+        if (g.missions[_id] || g.missionsDone[_id]) { return false; }
+        break;
+      case -2:
+        if (g.missionsDone[_id]) { return false; }
+        break;
+      case -1:
+        if (g.missions[_id]) { return false; }
+        break;
+      case 1:
+        if (!g.missions[_id]) { return false; }
+        break;
+      case 2:
+        if (!g.missionsDone[_id]) { return false; }
+        break;
+      case 3:
+        if (!g.missions[_id] && !g.missionsDone[_id]) { return false; }
+        break;
       }
     }
   }
@@ -154,10 +156,65 @@ Resolvable.prototype.checkConditions = function(cond, context, allowFalseConditi
   return context;
 };
 
-Resolvable.prototype.getResults = function(done, context) {
+Resolvable.prototype.getOptions = function getOptions(context) {
+  var options = this.base().options;
+  if (!options) { return []; }
+  var newOptions = [];
+  if (typeof(options) == 'function') {
+    newOptions = options.call(this, context);
+  } else if (options == 'girls') {
+    g.girls._filter('status', 'Hired').forEach(function (girl) {
+      newOptions.push({ key: girl.name, label: girl.name, title: girl.name });
+    });
+    delete newOptions[this.girl];
+  } else if (options == 'buildings') {
+    g.buildings._filter('status', 'Owned').forEach(function (building) {
+      newOptions.push({
+        key: building.name,
+        label: building.name,
+        title: building.name
+      });
+    });
+  } else {
+    newOptions = options;
+  }
+  var $this = this;
+  newOptions = newOptions.filter(function (option) {
+    if (!options.conditions) { return true; }
+    return $this.checkConditions(option.conditions, context);
+  });
+  return newOptions;
+};
+
+Resolvable.prototype.setOption = function setOption(option) {
   var base = this.base();
+  if (option) {
+    this.option = option;
+  } else {
+    delete this.option;
+  }
+  if (base.optionsInfo && base.optionsInfo.key) {
+    if (option) {
+      this[base.optionsInfo.key] = option;
+    } else {
+      delete this[base.optionsInfo.key];
+    }
+  }
+};
+
+Resolvable.prototype.getResults = function getResults(done, context) {
+  var base = this.base();
+  context = context || this.context();
+  var options = this.getOptions(context);
+  if (!this.option && base.options) {
+    var $this = this;
+    Game.getUserInput(base.optionsInfo.text, base.optionsInfo.image, options, function (answer) {
+      $this.setOption(answer);
+      $this.getResults(done, context);
+    });
+    return;
+  }
   if (typeof(base.variants) == 'function') {
-    context = context || this.context();
     base.variants.call(this, context, done);
     return;
   }
@@ -180,8 +237,8 @@ Resolvable.prototype.getResults = function(done, context) {
   }
 };
 
-Resolvable.prototype.applyResults = function(results, done, context) {
-  var series = [function(next) {
+Resolvable.prototype.applyResults = function applyResults(results, done, context) {
+  var series = [function (next) {
     e.invokeAll('ApplyResults', results, context, next);
   }];
   var changes = [];
@@ -199,23 +256,23 @@ Resolvable.prototype.applyResults = function(results, done, context) {
   if (results.building && context.building) { context.building.apply(results.building); }
   if (results.message) {
     var delta = {};
-    changes.forEach(function(d) { delta._add(d()); });
+    changes.forEach(function (d) { delta._add(d()); });
     var messages = results.message.length ? results.message : [results.message];
-    messages.forEach(function(message) {
+    messages.forEach(function (message) {
       var live = Message.send(message, context);
       live.delta = message.delta === false ? {} : delta;
     });
   }
   if (results.mission) {
     var missions = typeof(results.mission) == 'object' ? results.mission : [results.mission];
-    missions.forEach(function(_id) {
+    missions.forEach(function startMission(_id) {
       context = $.extend({}, context);
       var mission = Mission.create(_id, context, true);
       if (mission) {
         if (mission.getEnd()) {
           g.missions[results.mission] = mission;
         } else {
-          series.push(function(next) { mission.checkDay(next); });
+          series.push(function (next) { mission.checkDay(next); });
         }
       }
     });
@@ -230,7 +287,7 @@ Resolvable.prototype.applyResults = function(results, done, context) {
   e.runSeries(series, done);
 };
 
-Resolvable.prototype.parseConditions = function(conditions, context) {
+Resolvable.prototype.parseConditions = function parseConditions(conditions, context) {
   conditions = $.extend(true, {}, conditions);
   var oldInt;
   for (var cond in {min: 1, max: 1}) {

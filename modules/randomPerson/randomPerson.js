@@ -38,7 +38,7 @@ function Person(obj) {
   $.extend(true, this, obj);
 }
 
-Person.prototype.sexType = function(girl) {
+Person.prototype.sexType = function sexType(girl) {
   var sex = '';
   for (var i in this.sex) {
     sex = this.sex[i];
@@ -49,7 +49,7 @@ Person.prototype.sexType = function(girl) {
   return sex;
 };
 
-Person.prototype.satisfaction = function(girl) {
+Person.prototype.satisfaction = function getSatisfaction(girl) {
   var satisfaction = 0;
   var sex = this.sexType(girl);
   for (var i in this.sex) {

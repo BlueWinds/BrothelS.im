@@ -1,5 +1,5 @@
 "use strict";
-e.GameInit.unshift(function(done) {
+e.GameInit.unshift(function updatesGameInit(done) {
   if (!g.version) {
     $('#load-game-form').dialog('close');
     throw new TypeError("Saves from versions below 0.5 are no longer supported.");
@@ -9,7 +9,7 @@ e.GameInit.unshift(function(done) {
     g.missions.avengeGuardRape.display.text = str;
   }
   if (g.version < 0.511) {
-    g.girls._filter('status', 'Hired').forEach(function(girl) {
+    g.girls._filter('status', 'Hired').forEach(function fixTentacleAbduction(girl) {
       if (girl.actions.morning._id == 'tenacleManAbduction') {
         girl.actions.morning._id = 'tentacleManAbduction';
         girl.actions.evening._id = 'tentacleManAbduction';
@@ -32,7 +32,7 @@ e.GameInit.unshift(function(done) {
       girl.actions.morning.girl = 'Mana';
       girl.actions.evening.girl = 'Mana';
     }
-    g.missions._filter('girl', 'Dark Magician Girl').forEach(function(mission) {
+    g.missions._filter('girl', 'Dark Magician Girl').forEach(function fixManaName(mission) {
       mission.girl = 'Mana';
       if (mission.display) {
         mission.display.image = mission.display.image.replace('DarkMagicianGirl', 'Mana');
@@ -40,7 +40,7 @@ e.GameInit.unshift(function(done) {
         mission.display.text = mission.display.text.replace(/Dark Magician Girl/g, 'Mana');
       }
     });
-    g.messages._filter('group', 'Dark Magician Girl').forEach(function(message) {
+    g.messages._filter('group', 'Dark Magician Girl').forEach(function fixManaMessages(message) {
       message.group = 'Mana';
       message.image = message.image.replace('DarkMagicianGirl', 'Mana');
       message.text = message.text.replace(/Dark Magician Girl/g, 'Mana');
@@ -51,7 +51,7 @@ e.GameInit.unshift(function(done) {
     }
   }
   if (g.version < 0.521) {
-    $.each(g.girls, function(name, girl) {
+    $.each(g.girls, function (name, girl) {
       delete girl.reputation;
     });
   }

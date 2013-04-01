@@ -1,13 +1,13 @@
 "use strict";
 var e = {
   // (hook, [arg1, ...], done)
-  invokeAll: function(hook) {
+  invokeAll: function invokeAll(hook) {
     var args = Array.prototype.slice.call(arguments, 0);
     args[0] = e[hook];
     e.runSeries.apply(this, args);
   },
   // (hook, [arg1, ...])
-  invokeAllSync: function(hook) {
+  invokeAllSync: function invokeAllSync(hook) {
     if (!e[hook]) { return; }
     var args = Array.prototype.slice.call(arguments, 1);
     for (var i in e[hook]) {
@@ -15,7 +15,7 @@ var e = {
     }
   },
   // (items, [arg1, ...])
-  runSeries: function(items) {
+  runSeries: function runSeries(items) {
     var args = Array.prototype.slice.call(arguments, 1);
     var done = typeof(args._last()) == 'function' ? args.pop() : $.noop;
     if (!items || !items.length) { setTimeout(done, 0); return; }
@@ -32,18 +32,18 @@ var e = {
     var i = -1;
     next();
   },
-  loadAll: function() {
+  loadAll: function loadAll() {
     var args = $.extend([], arguments);
     args = args._flatten();
     head.js.apply(this, args);
   },
-  addTemplate: function(name, url, done) {
-    var promise = $.ajax(url).done(function(data) {
+  addTemplate: function addTemplate(name, url, done) {
+    var promise = $.ajax(url).done(function (data) {
       e.render.cache[name] = ejs.compile(data);
     });
     if (done) { promise.done(done); }
   },
-  render: function(name, context, string) {
+  render: function render(name, context, string) {
     var item = e.render.cache[name](context || {});
     return string ? item : $(item);
   },
@@ -52,7 +52,7 @@ var e = {
 
 e.render.cache = {};
 
-Storage.prototype.setObject = function(key, value) {
+Storage.prototype.setObject = function setObject(key, value) {
   this.setItem(key, JSON.stringify(value));
 };
 
@@ -60,7 +60,7 @@ Object.defineProperty(Object.prototype, "_first", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function() {
+  value: function _first() {
     return this[Object.keys(this)[0]];
   }
 });
@@ -69,7 +69,7 @@ Object.defineProperty(Object.prototype, "_last", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function() {
+  value: function _last() {
     return this[Object.keys(this)[Object.keys(this).length - 1]];
   }
 });
@@ -78,7 +78,7 @@ Object.defineProperty(Object.prototype, "_multiply", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function(val) {
+  value: function _multiply(val) {
     for (var i in this) {
       this[i] *= val;
     }
@@ -90,7 +90,7 @@ Object.defineProperty(Object.prototype, "_add", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function(delta) {
+  value: function _add(delta) {
     var i;
     if (typeof(delta) == 'object') {
       for (i in delta) {
@@ -114,7 +114,7 @@ Object.defineProperty(Object.prototype, "_prefix", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function(str) {
+  value: function _prefix(str) {
     for (var i in this) {
       this[i] = str + this[i];
     }
@@ -126,7 +126,7 @@ Object.defineProperty(Object.prototype, "_filter", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function(key, value, value2) {
+  value: function _filter(key, value, value2) {
     var result = [], i;
     if (value2) {
       for (i in this) {
@@ -149,7 +149,7 @@ Object.defineProperty(Object.prototype, "_flatten", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function() {
+  value: function _flatten() {
     var flat = [];
     for (var key in this) {
       if (typeof(this[key]) == 'object' || typeof(this[key]) == 'array') {
@@ -166,7 +166,7 @@ Object.defineProperty(Object.prototype, "_accumulate", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function(key) {
+  value: function _accumulate(key) {
     var acc = [];
     for (var i in this) {
       if (this[i][key] !== undefined) {
@@ -181,7 +181,7 @@ Object.defineProperty(Object.prototype, "_sum", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function(key) {
+  value: function _sum(key) {
     if (key) {
       return this._accumulate(key)._sum();
     }
@@ -195,7 +195,7 @@ Object.defineProperty(Object.prototype, "_toObject", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function(key) {
+  value: function _toObject(key) {
     var obj = {};
     for (var i in this) {
       obj[this[i][key]] = this[i];
@@ -208,7 +208,7 @@ Object.defineProperty(Object.prototype, "_toArray", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function() {
+  value: function _toArray() {
     var arr = [];
     for (var i in this) {
       arr.push(this[i]);
@@ -221,7 +221,7 @@ Object.defineProperty(Object.prototype, "_sortToObject", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function(key) {
+  value: function _sortToObject(key) {
     var obj = {};
     for (var i in this) {
       if (!obj[this[i][key]]) {
@@ -237,9 +237,9 @@ Object.defineProperty(Object.prototype, "_sort", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function(key, reverse) {
+  value: function _sort(key, reverse) {
     var ret = this._toArray();
-    ret.sort(function(a, b) {
+    ret.sort(function (a, b) {
       return reverse ? b[key] - a[key] : a[key] - b[key];
     });
     return ret;
@@ -250,41 +250,41 @@ Object.defineProperty(Array.prototype, "_append", {
   enumerable: false,
   writable: false,
   configurable: true,
-  value: function(items) {
+  value: function _append(items) {
     this.push.apply(this, items);
     return this;
   }
 });
 
-Storage.prototype.getObject = function(key) {
+Storage.prototype.getObject = function getObject(key) {
   var value = this.getItem(key);
   return value && JSON.parse(value);
 };
 
-String.prototype.capitalize = function() {
+String.prototype.capitalize = function capitalize() {
   return this.charAt(0).toUpperCase() + this.slice(1);
 };
 
-Math.shuffle = function (myArray) {
+Math.shuffle = function shuffle(myArray) {
   var i = myArray.length;
-  if ( i === 0 ) {
+  if (i === 0) {
     return;
   }
-  while ( --i ) {
-    var j = Math.floor( Math.random() * ( i + 1 ) );
+  while (--i) {
+    var j = Math.floor(Math.random() * (i + 1));
     var tempi = myArray[i];
     var tempj = myArray[j];
     myArray[i] = tempj;
     myArray[j] = tempi;
   }
 };
-Math.choice = function(obj) {
+Math.choice = function choice(obj) {
   var keys = Object.keys(obj);
   var i = Math.floor(Math.random() * keys.length);
   return obj[keys[i]];
 };
 
-Math.weightedRandom = function(variants) {
+Math.weightedRandom = function weightedRandom(variants) {
   var i = 0;
   var rand = Math.random();
   while (i < variants.length) {
@@ -300,7 +300,7 @@ if (window.ejs) {
   ejs.close = '>>';
 }
 
-window.onerror = function(message, file, line) {
+window.onerror = function onerror(message, file, line) {
   var error = $('<div>');
   $('<div class="text">').html(message).appendTo(error);
   $('<div class="file">').html(file).appendTo(error);

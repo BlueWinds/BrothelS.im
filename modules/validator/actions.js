@@ -70,30 +70,9 @@ Schemas.Action = {
       'enum': [true],
       description: 'This action takes both the morning and evening slots.'
     },
-    options: {
-      description: 'options is either an object, with each key being the label and the value being the hovertext (replacement patterns are available for both), or a function that returns such an object.',
-      anyOf: [
-        {
-          'enum': ['girls', 'buildings'],
-          description: 'If options is one of these special strings, then it will be replaced with a list of Hired girls or Owned buildings.'
-        },
-        {
-          type: 'object',
-          additionalProperties: { type: 'string' },
-          description: 'If an object, each key is the label and the value being the hovertext (replacement patterns are available for both).'
-        },
-        {
-          type: 'function',
-          'arguments': ['context'],
-          description: 'If options is a function, it must return an object of options (label: hovertext).'
-        }
-      ],
-      'default': {}
-    },
-    optionsKey: {
-      type: 'string',
-      description: 'The key to store the option selected by the user under. options: "buildings", optionsKey: "building" is useful in order to have the user select a building, then add it to the current context.',
-      'default': 'option'
+    options: {},
+    optionsInfo: {
+      required: ['key']
     },
     option: {
       type: 'string',

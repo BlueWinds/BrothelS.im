@@ -12,13 +12,13 @@ Events.tentacleAttack = {
     redlight: 0.02,
     university: 0.02
   },
-  results: [
-    {
+  results: {
+    Anal: {
       message: {
         group: '<<- girl.name >>',
         image: '<<- girl.image("tentacles") >>',
         label: 'Attacked by Tentacles',
-        text: "<<= girl.name >> was heading into the city to <<= action.label >>, hurrying along a narrow street. The lamps seemed spaced oddly far apart - and a moment later she could tell she was right be worried.<br><br>Several tentacles quickly lashed out and wrapped themselves around <<= girl.name >>. Quickly they dragged into a tiny alley. Abruptly, with no foreplay or ceremony at all, the rope-like vines thrust into her, ripping through her panties seemingly without resistance on their way to her intimate areas. She screamed out, expecting pain, but it was muffled twofold, first by another appendage in her mouth, and second by a burst of ecstasy that left stars in her eyes. The creature didn't wait for her to recover, intent on its own pleasure - its limbs were well lubricated, slipping in and out in an increasing crescendo.<br><br>Unable to call out for help or move in the slightest, <<= girl.name >>'s ass and pussy were used mercilessly for an hour and a half. Finally, at the sound of someone else approaching, the beast soundlessly withdrew down the sewer grate. The footsteps never reached her - whoever it was must have had better sense than to approach a dark ally at night. She lay in a senseless daze for several minutes before picking herself up and hurrying home."
+        text: "<<= girl.name >> was heading into the city to <<= action.label >>, hurrying along a narrow street. The lamps seemed spaced oddly far apart - and a moment later she could tell she was right be worried.<br><br>Several tentacles quickly lashed out and wrapped themselves around <<= girl.name >>. Quickly they dragged into a tiny alley. Abruptly, with no foreplay or ceremony at all, the rope-like vines thrust into her, ripping through her panties seemingly without resistance on their way to her intimate areas. She screamed out, expecting pain, but it was muffled twofold - first by another appendage in her mouth, and second by a burst of ecstasy that left stars in her eyes. The creature didn't wait for her to recover, intent on its own pleasure - its limbs were well lubricated, slipping in and out in an increasing crescendo.<br><br>Unable to call out for help or move in the slightest, <<= girl.name >>'s ass and pussy were used mercilessly for an hour and a half. Finally, at the sound of someone else approaching, the beast soundlessly withdrew down the sewer grate. The footsteps never reached her - whoever it was must have had better sense than to approach a dark ally at night. She lay in a senseless daze for several minutes before picking herself up and hurrying home."
       },
       girl: {
         endurance: -40,
@@ -29,7 +29,7 @@ Events.tentacleAttack = {
         obedience: 5
       }
     },
-    {
+    Fetish: {
       message: [
         {
           group: '<<- girl.name >>',
@@ -55,7 +55,7 @@ Events.tentacleAttack = {
         obedience: 3
       }
     },
-    {
+    Soft: {
       message: {
         group: '<<- girl.name >>',
         image: '<<- girl.image("tentacles") >>',
@@ -71,7 +71,7 @@ Events.tentacleAttack = {
         obedience: 3
       }
     }
-  ]
+  }
 };
 
 Events.tentacleManGreet = {
@@ -92,7 +92,7 @@ Events.tentacleManGreet = {
       }
     }
   },
-  results: [{
+  results: { done: {
     message: {
       group: '<<- girl.name >>',
       image: 'content/events/DrAnder.jpg',
@@ -105,7 +105,7 @@ Events.tentacleManGreet = {
       softLibido: 1,
       specialRules: { tentacleManProgress: 1 }
     }
-  }]
+  }}
 };
 
 Events.tentacleManVisit = {
@@ -127,19 +127,28 @@ Events.tentacleManVisit = {
       }
     }
   },
-  variants: function(context, done) {
-    var text = context.girl.name + " is in a good mood as she walks through the University with you. You inquire about Dr. Ander - he's quite well known, apparently, and the student directs you to a building set a little away from the rest of the university. Dr. Ander opens the door after the second knock.<blockquote>Welcome, welcome! I'm so glad you came. Especially you, Mrs. " + context.girl.name + " - I haven't been able to stop thinking about you since we last met. So, are you here to take me up on my offer? Give me a few hours of your time, and...</blockquote> You don't catch the rest of what he said, because it was whispered into her ear.";
-    var options = {
-      'Let him entertain her': "Dr. Ander will take her into the back room and do... whatever it is " + context.girl.name + " seems so keen on.",
-      'Just talk': "You and " + context.girl.name + " should get to know him better."
-    };
-    Game.getUserInput(text, 'content/events/DrAnder.jpg', options, function(answer) {
-      var result = context.event.base().results[answer];
-      done(result);
-    });
+  options: [
+    {
+      key: 'letHim',
+      label: 'Let him entertain her',
+      title: "Dr. Ander will take her into the back room and do... whatever it is <<- girl.name >> seems so keen on."
+    },
+    {
+      key: 'justTalk',
+      label: 'Just talk',
+      title: "You and <<- girl.name >> should get to know him better first."
+    }
+  ],
+  optionsInfo: {
+    text: "<<- girl.name >> is in a good mood as she walks through the University with you. You inquire about Dr. Ander - he's quite well known, apparently, and the student directs you to a building set a little away from the rest of the university. Dr. Ander opens the door after the second knock.<blockquote>Welcome, welcome! I'm so glad you came. Especially you, Mrs. <<- girl.name >> - I haven't been able to stop thinking about you since we last met. So, are you here to take me up on my offer? Give me a few hours of your time, and...</blockquote> You don't catch the rest of what he said, because it was whispered into her ear.",
+    image: 'content/events/DrAnder.jpg'
   },
+  variants: [
+    { option: 'letHim', result: 'letHim' },
+    { option: 'justTalk', result: 'justTalk' }
+  ],
   results: {
-    'Just talk': {
+    justTalk: {
       message: {
         group: '<<- girl.name >>',
         image: 'content/events/DrAnder.jpg',
@@ -155,7 +164,7 @@ Events.tentacleManVisit = {
         }
       }
     },
-    'Let him entertain her': {
+    letHim: {
       message: {
         group: '<<- girl.name >>',
         image: '<<- girl.image() >>',
@@ -200,7 +209,7 @@ Events.tentacleManVisitYou = {
       }
     }
   },
-  variants: function(context, done) {
+  variants: function tentacleManVisitYouVariants(context, done) {
     if (context.girl.specialRules.tentacleManProgress == 2) {
       done(this.base().results.firstVisit);
       return;
@@ -279,12 +288,12 @@ Actions.tentacleManAbduction = {
   awayFromHome: true,
   // Intentionally empty - do not interrupt.
   tags: {},
-  options: {
-    'Wait Patiently': 'Wait Patiently',
-    'Alert the Guard': 'Alert the Guard',
-    'Launch Investigation': 'Launch investigation'
-  },
-  variants: function(context, done) {
+  options: [
+    { key: 'wait', label: 'Wait Patiently', title: 'Wait Patiently' },
+    { key: 'alertGuard', label: 'Alert the Guard', title: 'Alert the Guard' },
+    { key: 'investigation', label: 'Launch Investigation', title: 'Launch investigation' }
+  ],
+  variants: function abductionVariants(context, done) {
     var results = this.base().results;
     this.applyResults(results[this.option], context);
     if (context.girl.specialRules.tentacleManSearch >= 10) {
@@ -294,14 +303,14 @@ Actions.tentacleManAbduction = {
     }
   },
   results: {
-    'Wait Patiently': {
+    wait: {
       girl: {
         specialRules: {
           tentacleManSearch: 2
         }
       }
     },
-    'Alert the Guard': {
+    alertGuard: {
       message: {
         group: '<<- girl.name >>',
         image: 'content/events/missing.jpg',
@@ -315,7 +324,7 @@ Actions.tentacleManAbduction = {
         }
       }
     },
-    'Launch Investigation': {
+    investigation: {
       message: {
         group: '<<- girl.name >>',
         image: 'content/events/missing.jpg',
@@ -380,7 +389,7 @@ Actions.tentacleManAbduction = {
       }
     },
     Day3: {
-      message:[
+      message: [
         {
           group: '<<- girl.name >>',
           image: 'content/events/missing.jpg',
@@ -415,7 +424,7 @@ Actions.tentacleManAbduction = {
       }
     },
     Day4: {
-      message:[
+      message: [
         {
           group: '<<- girl.name >>',
           image: 'content/events/missing.jpg',
@@ -476,27 +485,41 @@ Missions.tentaclePregnancy = {
     label: 'Strange pregnancy',
     group: '<<- girl.name >>',
     image: '<<- girl.image("pregnant") >>',
-    text: "In the days since her disappearance, <<- girl.name >> has been oddly content and agreeable. She doesn't say anything, but you can soon tell the cause - she has a noticeable bulge in her stomach. Given the effective and reliable birth control she's been on since she started working for you, it's a little odd - and the rate at which its growing is <i>more</i> than a little odd. If you so much as suggest summoning a doctor or aborting the pregnancy, <<- girl.name >> objects so vehemently that you don't have the heart to contradict her. At this rate, you estimate the whole thing should be over in no more than two weeks (<strong>Day <<-mission.end.max.day >>)</strong>.",
+    text: "In the days since her disappearance and return, <<- girl.name >> has been oddly content and agreeable. She doesn't say anything, but you can soon tell the cause - she has a noticeable bulge in her stomach. Given the effective and reliable birth control she's been on since she started working for you, it's a little odd - and the rate at which its growing is <i>more</i> than a little odd. If you so much as suggest summoning a doctor or aborting the pregnancy, <<- girl.name >> objects so vehemently that you don't have the heart to contradict her. At this rate, you estimate the whole thing should be over in no more than two weeks (<strong>Day <<-mission.end.max.day >>)</strong>.",
     weight: -1
   },
   end: {
     min: { day: '+13' },
     max: { day: '+13' }
   },
-  variants: function(context, done) {
-    var text = "It's late at night when you hear a furtive knock on the door. You head down to tell whoever it is to go away, you're closed for the evening, but instantly recognize Dr. Ander. You pull him inside and shut the door to see what he wants. You have your suspicions that he was behind " + context.girl.name + "'s disappearance, and you don't want him escaping before you can find out. He's more than a bit nervous, faced with your scary face.<blockquote>Please, I only wish to speak with " + context.girl.name + ". I want to make sure she's allright.</blockquote>You decline, and confront him with what you suspect. He doesn't deny it - and he wants to pay you $2000 to allow him to take the spawn resulting from his experiments. Also to not turn him in, of course. You call his bluff, and he raises the offer to $3000, starting to sweat.";
-    var options = {
-      'Call the guard': "Hold Dr. Ander here to answer for his crimes. You'll almost certainly never hear from him again.",
-      'Take the money': "Take the money and let the good doctor continue his work. He'll deliver " + context.girl.name + "'s monsterous child and take it away.",
-      'Deliver the baby': "You're not about to get the guard involved, since they'd probably kill the baby against " + context.girl.name + "'s wishes, but you're not about to let the doctor touch her again."
-    };
-    Game.getUserInput(text, 'content/events/DrAnder.jpg', options, function(answer) {
-      var result = context.mission.base().results[answer];
-      done(result);
-    });
+  options: [
+    {
+      key: 'callGuard',
+      label: 'Call the guard',
+      title: "Hold Dr. Ander here to answer for his crimes. You'll almost certainly never hear from him again."
+    },
+    {
+      key: 'takeMoney',
+      label: 'Take the money',
+      title: "Take the money and let the good doctor continue his work. He'll deliver <<- girl.name >>'s monsterous child and take it away."
+    },
+    {
+      key: 'deliverYourself',
+      label: 'Deliver the baby',
+      title: "You're not about to get the guard involved, since they'd probably kill the baby against <<- girl.name >>'s wishes, but you're not about to let the doctor touch her again."
+    }
+  ],
+  optionsInfo: {
+    text: "It's late at night when you hear a furtive knock on the door. You head down to tell whoever it is to go away, you're closed for the evening, but instantly recognize Dr. Ander. You pull him inside and shut the door to see what he wants. You have your suspicions that he was behind <<- girl.name >>'s disappearance, and you don't want him escaping before you can find out. He's more than a bit nervous, faced with your scary face.<blockquote>Please, I only wish to speak with <<- girl.name >>. I want to make sure she's allright.</blockquote>You decline, and confront him with what you suspect. He doesn't deny it - and he wants to pay you $2000 to allow him to take the spawn resulting from his experiments. Also to not turn him in, of course. You call his bluff, and he raises the offer to $3000, starting to sweat.",
+    image: 'content/events/DrAnder.jpg'
   },
+  variants: [
+    { option: 'callGuard', result: 'callGuard' },
+    { option: 'takeMoney', result: 'takeMoney' },
+    { option: 'deliverYourself', result: 'deliverYourself' }
+  ],
   results: {
-    'Call the guard': {
+    callGuard: {
       message: [
         {
           label: 'Strange pregnancy',
@@ -529,9 +552,9 @@ Missions.tentaclePregnancy = {
         obedience: 3,
         specialRules: { exclusivePlot: false }
       },
-      mission: 'tentacleManGone'
+      missionsDone: { tentacleManGone: true }
     },
-    'Take the money': {
+    takeMoney: {
       message: [
         {
           label: 'Strange pregnancy',
@@ -555,7 +578,7 @@ Missions.tentaclePregnancy = {
       },
       money: 3000
     },
-    'Deliver the baby': {
+    deliverYourself: {
       message: {
         label: 'Strange pregnancy',
         group: '<<- girl.name >>',
@@ -570,10 +593,4 @@ Missions.tentaclePregnancy = {
       }
     }
   }
-};
-
-// Just an empty mission we can complete silently, to prevent tentacleManGreet from triggering again after Dr. Ander has been turned in.
-Missions.tentacleManGone = {
-  conditions: false,
-  results: [{}]
 };

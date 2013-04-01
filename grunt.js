@@ -1,5 +1,5 @@
 var module;
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   "use strict";
 
   // Project configuration.
@@ -16,9 +16,11 @@ module.exports = function(grunt) {
         bitwise: true,
         camelcase: true,
         curly: true,
+        indent: 2,
         immed: true,
         latedef: true,
         newcap: true,
+        noarg: true,
         undef: true,
         unused: true,
         strict: true,
