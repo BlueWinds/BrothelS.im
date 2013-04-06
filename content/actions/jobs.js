@@ -140,10 +140,11 @@ Actions.Advertise = {
   },
   optionsInfo: { key: 'building' },
   variants: function advertiseVariants(context, done) {
-    var delta = $.extend(true, {}, this.base().results[0]);
-    delta.building.reputation *= context.girl.charisma / 100;
+    var delta = $.extend(true, {}, this.base().results.done);
     if (this.option == 'Inn') {
       delta.money = Math.floor(context.girl.charisma / 2 + Math.random() * 50);
+    } else {
+      delta.building.reputation *= context.girl.charisma / 100;
     }
     done(delta);
   },

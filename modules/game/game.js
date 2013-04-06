@@ -286,7 +286,7 @@ Game.getUserInput = function getUserInput(text, image, options, done) {
   var form = e.render('user-input', context);
   $('button', form).click(function inputSelected(event) {
     event.preventDefault();
-    var value = $(this).text();
+    var value = $(this).attr('value');
     form.remove();
     done(value);
     return false;

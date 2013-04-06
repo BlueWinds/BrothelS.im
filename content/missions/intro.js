@@ -158,7 +158,7 @@ Missions.firstThousand = {
   },
   variants: function firstThousandVariants(context, done) {
     g.maxGirls = 5;
-    done(this.base().results[0]);
+    done(this.base().results.done);
   },
   results: { done: {
     money: 1600,
@@ -199,7 +199,7 @@ Missions.secondGirl = {
   },
   variants: function secondGirlVariants(context, done) {
     g.maxBuildings = 1;
-    done(this.base().results[0]);
+    done(this.base().results.done);
   },
   results: { done: {
     mission: 'firstBuilding',

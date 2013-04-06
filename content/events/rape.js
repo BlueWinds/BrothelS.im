@@ -103,7 +103,7 @@ Events.guardRape = {
     } else if (this.option == 'Bribe') {
       i = 'bribed';
     }
-    done(event.base().results[i]);
+    done(this.base().results[i]);
   },
   results: {
     raped: {

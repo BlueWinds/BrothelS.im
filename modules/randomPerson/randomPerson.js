@@ -39,30 +39,21 @@ function Person(obj) {
 }
 
 Person.prototype.sexType = function sexType(girl) {
-  var sex = '';
-  for (var i in this.sex) {
-    sex = this.sex[i];
-    if (girl.actions[sex]) {
-      break;
-    }
-  }
-  return sex;
+  return this.sex.filter(function (a) { return girl.actions[a]; })[0];
 };
 
 Person.prototype.satisfaction = function getSatisfaction(girl) {
-  var satisfaction = 0;
   var sex = this.sexType(girl);
-  for (var i in this.sex) {
-    if (sex == this.sex[i]) {
-      break;
-    }
-    satisfaction -= 0.25;
-  }
-  satisfaction += girl.charisma / 200;
-  satisfaction += girl.get(this.wants[0]) / 100;
-  satisfaction += girl.get(this.wants[1]) / 300;
+  var satisfaction = girl.get(this.wants[0]) * 0.66;
+  satisfaction += girl.get(this.wants[1]) * 0.33;
+  satisfaction -= this.sex.indexOf(sex) * 12.5;
   if (girl.happiness < 50) {
-    satisfaction *= girl.happiness / 100 + 0.5;
+    satisfaction -= 50;
+    satisfaction += girl.happiness;
   }
-  return satisfaction;
+  return satisfaction / 100;
+};
+
+Person.prototype.base = function base() {
+  return Person.prostitution.customerClass[this.type];
 };

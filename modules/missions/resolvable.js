@@ -208,7 +208,7 @@ Resolvable.prototype.getResults = function getResults(done, context) {
   var options = this.getOptions(context);
   if (!this.option && base.options) {
     var $this = this;
-    Game.getUserInput(base.optionsInfo.text, base.optionsInfo.image, options, function (answer) {
+    Game.getUserInput(ejs.render(base.optionsInfo.text, context), ejs.render(base.optionsInfo.image, context), options, function (answer) {
       $this.setOption(answer);
       $this.getResults(done, context);
     });
@@ -219,15 +219,19 @@ Resolvable.prototype.getResults = function getResults(done, context) {
     return;
   }
   if (base.variants) {
-    var extra = [];
-    for (var i in base.results) {
-      if (base.variants[i]) {
-        if (this.checkConditions(base.variants[i])) {
-          done(base.results[i]);
-          return;
-        }
+    var extra = Object.keys(base.results);
+    var deleteVariants = function (a) { delete extra[a]; };
+    for (var i in base.variants) {
+      var variant = base.variants[i];
+      if (this.checkConditions(variant)) {
+        var result = typeof(variant.result) == 'string' ? variant.result : Math.choice(variant.result);
+        done(base.results[result]);
+        return;
+      }
+      if (typeof(variant.result) == 'string') {
+        delete extra[variant.result];
       } else {
-        extra.push(i);
+        variant.result.forEach(deleteVariants);
       }
     }
     done(base.results[Math.choice(extra)]);

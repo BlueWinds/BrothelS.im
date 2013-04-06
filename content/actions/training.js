@@ -312,9 +312,9 @@ Actions.Expose = {
 };
 
 Actions.OD = {
-  label: 'Orgasm Denial',
+  label: 'OD',
   group: 'Training',
-  description: 'You will bring <<- girl.name >> close to orgasm, and keep her there for as long as possible before release.',
+  description: 'Orgasm Denial - You will bring <<- girl.name >> close to orgasm, and keep her there for as long as possible before release.',
   conditions: {
     missions: { libidoAndExperience: 3 }
   },

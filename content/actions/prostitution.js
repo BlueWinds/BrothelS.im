@@ -164,23 +164,23 @@ Girl.prototype.maxCustomers = function maxCustomers() {
   return Math.floor(libido / 400 * Person.prostitution.girlMaxCustomers);
 };
 
-Girl.prototype.interest = function interest(sex) {
-  var i = this.obedience + this[sex + 'Libido'] * 2;
-  i += this[sex + 'Experience'] + this.happiness / 2;
-  i = (i / 450 + Math.random());
+Girl.prototype.interest = function interest(sex, outdoors) {
+  var i = this[sex + 'Libido'] + this[sex + 'Experience'];
+  i /= 2;
   i -= Person.prostitution.types[sex].r;
-  return interest;
+  if (outdoors) { i -= this.modesty * 0.66; }
+  return i / 100;
 };
 
 (function () {
   Actions.Streetwalk.variants = function streetwalkVariants(context, done) {
+    context.outdoors = true;
     var endDelta = context.girl.startDelta();
     var delta = this.base().results.done;
     var mainMessage = Message.send(delta.message, context);
     context.girl.apply(delta.girl);
 
-    var found = Math.pow(context.girl.charisma / 100, 0.5);
-    found *= (Math.random() / 2 + 0.5);
+    var found = Math.random() * 0.67 + 0.33;
     found = Math.ceil(found * context.girl.maxCustomers());
 
     for (var i = 0; i < found; i++) {
@@ -192,14 +192,14 @@ Girl.prototype.interest = function interest(sex) {
     done({});
   };
 
-  function doCustomer(context, customerConfig) {
+  function doCustomer(context) {
     var endDelta = context.girl.startDelta();
     var sex = context.customer.sexType(context.girl);
     context.sex = sex;
-    var interest = context.girl.interest(sex);
-    if (interest - context.girl.modesty * context.customer.modestyRate / 100 <= 0) {
-      if (customerConfig) {
-        context.girl.apply(customerConfig.bad);
+    var interest = context.girl.interest(sex, context.outdoors);
+    if (interest + context.girl.obedience / 200 <= 0) {
+      if (context.building) {
+        context.building.apply(context.customer.base().bad);
       }
       context.result = this.special.uncooperative;
       context.girl.apply(Person.prostitution.refuseDelta);
@@ -212,21 +212,21 @@ Girl.prototype.interest = function interest(sex) {
       }, context);
       return 0;
     }
-    var satisfaction = context.customer.satisfaction(context.girl) + interest;
+    var satisfaction = context.customer.satisfaction(context.girl);
     var delta = $.extend({}, Person.prostitution.types[sex]);
 
-    delta.money *= satisfaction;
+    delta.money *= 1 + satisfaction;
     delta.money *= Person.prostitution.customerClass[context.customer.type].pays;
     context.girl.apply(delta.girl);
     g.money += Math.floor(delta.money);
     if (this.special.eachCustomer) {
       context.girl.apply(this.special.eachCustomer);
     }
-    if (customerConfig) {
-      if (satisfaction >= customerConfig.minSatisfaction) {
-        context.girl.apply(customerConfig.good);
+    if (context.building) {
+      if (satisfaction >= context.customer.base().minSatisfaction) {
+        context.building.apply(context.customer.base().good);
       } else {
-        context.girl.apply(customerConfig.bad);
+        context.building.apply(context.customer.base().bad);
       }
     }
 
@@ -259,7 +259,8 @@ Girl.prototype.interest = function interest(sex) {
     var context = {
       building: building,
       time: time,
-      girls: []
+      girls: [],
+      count: 0
     };
     $.each(building.girls(), function whoreEachGirl(name, girl) {
       if (girl.actions[time]._id == 'Whore' && girl.actions[time].special.done === true) {
@@ -270,14 +271,11 @@ Girl.prototype.interest = function interest(sex) {
       return;
     }
     var count = Person.prostitution.maxWhoreCustomers - Person.prostitution.minWhoreCustomers;
-    var power = Math.random() * 2 + 2.7 - context.building.reputation / 20;
-    count /= (1 + Math.pow(Math.E, power));
+    count *= Math.random() * 0.5 + building.replacement / 200;
     count += Person.prostitution.minWhoreCustomers;
-    var types = [];
-    $.each(Person.prostitution.customerClass, function whoreEachCustomerClass(type, info) {
-      if (info.minReputation <= context.building.reputation && info.maxReputation >= context.building.reputation) {
-        types.push(type);
-      }
+    var types = Object.keys(Person.prostitution.customerClass).filter(function (t) {
+      var a = Person.prostitution.customerClass[t];
+      return a.minReputation < building.reputation && a.maxReputation > building.reputation;
     });
 
     var canService = {};
@@ -291,37 +289,30 @@ Girl.prototype.interest = function interest(sex) {
       context.customers.push(new Person(type));
     }
 
-    var endDelta = context.building.startDelta();
-    context.count = 0;
+    var endDelta = building.startDelta();
     context.customers._sort('typeRank', true).forEach(function whoreEachCustomer(customer) {
-      customer.modestyRate = 0;
-      var customerConfig = Person.prostitution.customerClass[customer.type];
-      var girl, maxSatisfaction = 0.2;
+      var girl, maxSatisfaction = -1;
       for (var name in canService) {
-        var sex = customer.sexType(g.girls[name]);
-        var satisfaction = g.girls[name].interest(sex);
-        satisfaction += customer.satisfaction(g.girls[name]);
+        var satisfaction = customer.satisfaction(g.girls[name]);
         if (satisfaction > maxSatisfaction) {
           girl = g.girls[name];
           maxSatisfaction = satisfaction;
         }
       }
-      if (girl) {
-        // We've now found the girl we're looking for.
-        canService[girl.name] -= 1;
-        context.count++;
-        if (!canService[girl.name]) { delete canService[girl.name]; }
-        context.girl = girl;
-        context.customer = customer;
-        doCustomer.call(Actions.Whore, context, customerConfig);
-        if (context.girl.endurance < 5) { delete canService[girl.name]; }
-      }
+      // We've now found the girl we're looking for.
+      canService[girl.name] -= 1;
+      context.count++;
+      if (!canService[girl.name]) { delete canService[girl.name]; }
+      context.girl = girl;
+      context.customer = customer;
+      doCustomer.call(Actions.Whore, context);
+      if (context.girl.endurance < 5) { delete canService[girl.name]; }
     });
 
     Message.send({
-      group: context.building.name,
+      group: building.name,
       label: 'Customers arrived',
-      image: context.building.image(),
+      image: building.image(),
       text: Actions.Whore.special.message,
       delta: endDelta(),
       weight: 1

@@ -9,7 +9,7 @@ Person.prostitution = {
   },
   types: {
     soft: {
-      r: 0.3,
+      r: 10,
       money: 100,
       girl: {
         endurance: -5,
@@ -17,7 +17,7 @@ Person.prostitution = {
       }
     },
     hard: {
-      r: 0.4,
+      r: 20,
       money: 150,
       girl: {
         endurance: -7,
@@ -26,7 +26,7 @@ Person.prostitution = {
       }
     },
     anal: {
-      r: 0.5,
+      r: 30,
       money: 200,
       girl: {
         endurance: -9,
@@ -36,8 +36,8 @@ Person.prostitution = {
       }
     },
     fetish: {
-      r: 0.7,
-      money: 450,
+      r: 40,
+      money: 300,
       girl: {
         endurance: -10,
         fetishExperience: 1,
@@ -51,42 +51,42 @@ Person.prostitution = {
     'Very Low Class': {
       minReputation: 0,
       maxReputation: 25,
-      pays: 0.8,
-      minSatisfaction: 0.5,
-      bad: { building: { reputation: -0.4 } },
-      good: { building: { reputation: 0.7 } }
+      pays: 0.75,
+      minSatisfaction: 0.2,
+      bad: { reputation: -0.4 },
+      good: { reputation: 0.7 }
     },
     'Low Class': {
       minReputation: 10,
       maxReputation: 60,
-      pays: 1.2,
-      minSatisfaction: 0.6,
-      bad: { building: { reputation: -0.5 } },
-      good: { building: { reputation: 0.7 } }
+      pays: 0.9,
+      minSatisfaction: 0.3,
+      bad: { reputation: -0.5 },
+      good: { reputation: 0.7 }
     },
     'Middle Class': {
       minReputation: 25,
       maxReputation: 90,
-      pays: 1.5,
-      minSatisfaction: 0.7,
-      bad: { building: { reputation: -0.5 } },
-      good: { building: { reputation: 0.8 } }
+      pays: 1.2,
+      minSatisfaction: 0.4,
+      bad: { reputation: -0.5 },
+      good: { reputation: 0.8 }
     },
     'Upper Class': {
       minReputation: 60,
       maxReputation: 100,
-      pays: 1.9,
-      minSatisfaction: 1,
-      bad: { building: { reputation: -0.7 } },
-      good: { building: { reputation: 1 } }
+      pays: 1.3,
+      minSatisfaction: 0.5,
+      bad: { reputation: -0.7 },
+      good: { reputation: 1 }
     },
     'High Class': {
       minReputation: 80,
       maxReputation: 100,
-      pays: 2.3,
-      minSatisfaction: 1.3,
-      bad: { building: { reputation: -1.3 } },
-      good: { building: { reputation: 1.3 } }
+      pays: 2,
+      minSatisfaction: 0.75,
+      bad: { reputation: -1.3 },
+      good: { reputation: 1.3 }
     }
   }
 };

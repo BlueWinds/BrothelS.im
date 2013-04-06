@@ -4,8 +4,8 @@
   <p><<- text >></p>
   <hr class="clear">
   <div class="center">
-    << $.each(options, function(value, label) { >>
-      <button title="<<= label >>"><<- value >></button>
+    << options.forEach(function(option) { >>
+      <button title="<<= option.title >>" value="<<- option.key >>"><<- option.label >></button>
     << }) >>
   </div>
 </div>
