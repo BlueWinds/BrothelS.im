@@ -178,12 +178,23 @@ Resolvable.prototype.getOptions = function getOptions(context) {
   } else {
     newOptions = options;
   }
-  var $this = this;
-  newOptions = newOptions.filter(function (option) {
-    if (!options.conditions) { return true; }
-    return $this.checkConditions(option.conditions, context);
-  });
-  return newOptions;
+  options = [];
+  for (var i in newOptions) {
+    var option = $.extend({}, newOptions[i]);
+    if (!option.conditions) {
+      if (option.title) { option.title = ejs.render(option.title, context); }
+      if (option.label) { option.label = ejs.render(option.label, context); }
+      options.push(option);
+      continue;
+    }
+    if (this.checkConditions(option.conditions, context)) {
+      if (option.immediate) {
+        return [option];
+      }
+      options.push(option);
+    }
+  }
+  return options;
 };
 
 Resolvable.prototype.setOption = function setOption(option) {
@@ -205,40 +216,45 @@ Resolvable.prototype.setOption = function setOption(option) {
 Resolvable.prototype.getResults = function getResults(done, context) {
   var base = this.base();
   context = context || this.context();
-  var options = this.getOptions(context);
   if (!this.option && base.options) {
-    var $this = this;
-    Game.getUserInput(ejs.render(base.optionsInfo.text, context), ejs.render(base.optionsInfo.image, context), options, function (answer) {
-      $this.setOption(answer);
-      $this.getResults(done, context);
-    });
-    return;
+    var options = this.getOptions(context);
+    if (options.length > 1) {
+      var $this = this;
+      var image = ejs.render(base.optionsInfo.image, context);
+      var text = ejs.render(base.optionsInfo.text, context);
+      Game.getUserInput(text, image, options, function (answer) {
+        $this.setOption(answer);
+        $this.getResults(done, context);
+      });
+      return;
+    } else {
+      this.setOption(options[0].key);
+    }
   }
   if (typeof(base.variants) == 'function') {
     base.variants.call(this, context, done);
     return;
   }
-  if (base.variants) {
-    var extra = Object.keys(base.results);
-    var deleteVariants = function (a) { delete extra[a]; };
-    for (var i in base.variants) {
-      var variant = base.variants[i];
-      if (this.checkConditions(variant)) {
-        var result = typeof(variant.result) == 'string' ? variant.result : Math.choice(variant.result);
-        done(base.results[result]);
-        return;
-      }
-      if (typeof(variant.result) == 'string') {
-        delete extra[variant.result];
-      } else {
-        variant.result.forEach(deleteVariants);
-      }
-    }
-    done(base.results[Math.choice(extra)]);
-    return;
-  } else {
+  if (!base.variants) {
     done(Math.choice(base.results));
+    return;
   }
+  var extra = Object.keys(base.results);
+  var deleteVariants = function (a) { extra.splice(extra.indexOf(a), 1); };
+  for (var i in base.variants) {
+    var variant = base.variants[i];
+    if (this.checkConditions(variant)) {
+      var result = typeof(variant.result) == 'string' ? variant.result : Math.choice(variant.result);
+      done(base.results[result]);
+      return;
+    }
+    if (typeof(variant.result) == 'string') {
+      extra.splice(extra.indexOf(variant.result), 1);
+    } else {
+      variant.result.forEach(deleteVariants);
+    }
+  }
+  done(base.results[Math.choice(extra)]);
 };
 
 Resolvable.prototype.applyResults = function applyResults(results, done, context) {

@@ -81,7 +81,7 @@ Missions.avengeGuardWait = {
     ignore: {
       message: {
         label: 'Ignore her outburst',
-        group: 'Investigate City Guard',
+        group: '<<- girl.name',
         weight: -2,
         image: '<<- girl.image("tired") >>',
         text: "It's a sad thing that the city guard here is so corrupt - if you were back home, you might tear the place apart getting justice for her, but here in a foreign nation, you don't want to make waves. <<- girl.name >> isn't a fragile little flower, to shatter at a single blow - she'll be back to her normal self soon."

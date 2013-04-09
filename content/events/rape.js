@@ -54,7 +54,8 @@ Events.guardRape = {
     missions: {
       avengeGuardWait: -3,
       avengeGuardRape: -3,
-      avengeGuardRapeFinal: -3
+      avengeGuardRapeFinal: -3,
+      exploreCity: 2
     },
     ownerParticipation: false
   },

@@ -271,11 +271,11 @@ Girl.prototype.interest = function interest(sex, outdoors) {
       return;
     }
     var count = Person.prostitution.maxWhoreCustomers - Person.prostitution.minWhoreCustomers;
-    count *= Math.random() * 0.5 + building.replacement / 200;
+    count *= Math.random() * 0.5 + building.reputation / 200;
     count += Person.prostitution.minWhoreCustomers;
     var types = Object.keys(Person.prostitution.customerClass).filter(function (t) {
       var a = Person.prostitution.customerClass[t];
-      return a.minReputation < building.reputation && a.maxReputation > building.reputation;
+      return a.minReputation <= building.reputation && a.maxReputation >= building.reputation;
     });
 
     var canService = {};
@@ -291,7 +291,7 @@ Girl.prototype.interest = function interest(sex, outdoors) {
 
     var endDelta = building.startDelta();
     context.customers._sort('typeRank', true).forEach(function whoreEachCustomer(customer) {
-      var girl, maxSatisfaction = -1;
+      var girl = null, maxSatisfaction = -1;
       for (var name in canService) {
         var satisfaction = customer.satisfaction(g.girls[name]);
         if (satisfaction > maxSatisfaction) {
@@ -299,14 +299,16 @@ Girl.prototype.interest = function interest(sex, outdoors) {
           maxSatisfaction = satisfaction;
         }
       }
-      // We've now found the girl we're looking for.
-      canService[girl.name] -= 1;
-      context.count++;
-      if (!canService[girl.name]) { delete canService[girl.name]; }
-      context.girl = girl;
-      context.customer = customer;
-      doCustomer.call(Actions.Whore, context);
-      if (context.girl.endurance < 5) { delete canService[girl.name]; }
+      if (girl) {
+        // We've now found the girl we're looking for.
+        canService[girl.name] -= 1;
+        context.count++;
+        if (!canService[girl.name]) { delete canService[girl.name]; }
+        context.girl = girl;
+        context.customer = customer;
+        doCustomer.call(Actions.Whore, context);
+        if (context.girl.endurance < 5) { delete canService[girl.name]; }
+      }
     });
 
     Message.send({
