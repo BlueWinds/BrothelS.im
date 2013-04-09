@@ -214,13 +214,13 @@ Building.prototype.S = function renderStat(stat) {
 };
 
 Building.prototype.buy = function buy() {
-  this.setStatus('Owned');
   g.money -= this.price();
+  this.setStatus('Owned');
 };
 
 Building.prototype.sell = function sell() {
-  this.setStatus('For Sale');
   g.money += this.price('Sell');
+  this.setStatus('For Sale');
 };
 
 Girl.prototype.building = function building() {

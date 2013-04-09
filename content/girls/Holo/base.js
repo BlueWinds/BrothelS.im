@@ -546,7 +546,7 @@ Girls.Holo = {
     },
     HoloDepartWait: {
       conditions: false,
-      end: { min: { day: '+30' }},
+      end: { min: { day: '+60' }},
       results: { Depart: { mission: 'HoloDepart' }}
     },
     HoloDepart: {

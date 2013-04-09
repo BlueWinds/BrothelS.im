@@ -223,7 +223,7 @@ e.Ready.push(function gameReady(done) {
   });
   $(document).keydown(function hotkey(event) {
     var item = Game.hotkeys[event.keyCode];
-    if (item && (!$('.ui-dialog').length || item.allowDialogs)) {
+    if (item && (!$('.ui-dialog, #required-user-input').length || item.allowDialogs)) {
       if (item.callback) {
         item.callback(event);
       } else {
@@ -273,7 +273,7 @@ Game.getUserInput = function getUserInput(text, image, options, done) {
   var form = e.render('user-input', context);
   $('button', form).click(function inputSelected(event) {
     event.preventDefault();
-    var value = $(this).attr('value');
+    var value = $(this).attr('value') || $('input', form).val();
     form.remove();
     done(value);
     return false;

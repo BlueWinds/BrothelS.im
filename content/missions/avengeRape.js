@@ -125,7 +125,7 @@ Missions.avengeGuardRape = {
 
 Events.investigateGuards = {
   tags: {
-    garrison: 0.5
+    garrison: 0.75
   },
   conditions: {
     time: 'morning',
@@ -236,7 +236,7 @@ Events.investigateGuards = {
           label: 'Investigate Guards',
           group: '<<- girl.name >>',
           image: '<<- girl.image("fetish") >>',
-          text: "It's to little late to stop things now - no telling what might happen if you tried to stop intervene. <<- girl.name >> goes from enjoying herself to scared, signaling to you that she'd like to leave as the new group approaches her with ropes and a gag. Still, you gird yourself up to defend her, about to move when a shout stops you in your tracks. Or... perhaps it wasn't a shout so much as the magic that accompanied it, freezing every motion in the room.<br><br><blockquote>Soldiers, into the courtyard for inspection!</blockquote> Kin Xun roars, and the magic releases everyone. Not hesitating even to pull up pants the guards salute and march rigidly out the door where they stand at attention (and in the case of the men recently fucking <<- girl.name >>, \"attention\"), unmoving. You attempt to explain, but he silences you with a glare and tells you to just go. You cut <<- girl.name >>'s bonds away with a knife, gather up her clothing, and hurry away. Your contact smiles and slips a note into your pocket as you pass the unmoving line of guards, the movement garnering an evil glare from Kin Xun. You check the paper - a list of names. Perfect.",
+          text: "It's to little late to stop things now - no telling what might happen if you tried to intervene. <<- girl.name >> goes from enjoying herself to scared, signaling to you that she'd like to leave as the new group approaches her with ropes and a gag. Still, you gird yourself up to defend her, about to move when a shout stops you in your tracks. Or... perhaps it wasn't a shout so much as the powerful magic that accompanied it, freezing every motion in the room, all the way down to the dust in the air. Like insects trapped in amber, you start to panic, unable to breathe or twitch even an eyelid... <br><br><blockquote>Soldiers, into the courtyard for inspection!</blockquote> Kin Xun roars, and the magic releases everyone. Not hesitating even to pull up pants the guards salute and march rigidly out the door where they stand at attention (and in the case of the men recently fucking <<- girl.name >>, \"attention\"), unmoving. You attempt to explain, but he silences you with a glare and tells you to just go. You cut <<- girl.name >>'s bonds away with a knife, gather up her clothing, and hurry away. Your contact smiles and slips a note into your pocket as you pass the unmoving line of guards, the movement garnering an evil glare from Kin Xun. You check the paper - a list of names. Perfect.",
           delta: false
         }
       ],

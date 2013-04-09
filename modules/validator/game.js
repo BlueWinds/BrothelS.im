@@ -4,7 +4,7 @@ Schemas.Game = {
   type: ['object', 'null'],
   required: [
     '_class', 'day', 'fetishes', 'money', 'moneyHistory',
-    'version', 'randomSeed'
+    'player', 'version', 'randomSeed'
   ],
   properties: {
     _id: { type: 'string' },
@@ -33,6 +33,23 @@ Schemas.Game = {
     },
     name: {
       type: 'string'
+    },
+    player: {
+      type: 'object',
+      properties: {
+        title: {
+          type: 'string',
+          description: "How other characters generally address the player."
+        },
+        gender: {
+          'enum': ['male', 'female']
+        },
+        name: {
+          type: 'string',
+          description: "The player-entered name for their character."
+        }
+      },
+      additionalProperties: false
     },
     version: {
       'enum': [Game.config.version]

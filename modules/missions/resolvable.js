@@ -160,13 +160,14 @@ Resolvable.prototype.getOptions = function getOptions(context) {
   var options = this.base().options;
   if (!options) { return []; }
   var newOptions = [];
+  context = context || this.context();
   if (typeof(options) == 'function') {
     newOptions = options.call(this, context);
   } else if (options == 'girls') {
     g.girls._filter('status', 'Hired').forEach(function (girl) {
+      if (girl.name == context.girl.name) { return; }
       newOptions.push({ key: girl.name, label: girl.name, title: girl.name });
     });
-    delete newOptions[this.girl];
   } else if (options == 'buildings') {
     g.buildings._filter('status', 'Owned').forEach(function (building) {
       newOptions.push({
@@ -277,6 +278,7 @@ Resolvable.prototype.applyResults = function applyResults(results, done, context
   if (results.message) {
     var delta = {};
     changes.forEach(function (d) { delta._add(d()); });
+    if (results.money && !changes.length) { delta.money = results.money; }
     var messages = results.message.length ? results.message : [results.message];
     messages.forEach(function (message) {
       var live = Message.send(message, context);

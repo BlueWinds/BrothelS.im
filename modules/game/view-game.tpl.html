@@ -8,20 +8,6 @@
     << if (g.moneyHistory.length > 5) { >>
       <div class="bar-sparkline"><<- g.moneyHistory.join(",") + "," + g.money >></div>
     << } >>
-    << if (g.nextPayment()) { >>
-      <div>
-        Payment of
-        <strong class="money">$<<- g.nextPayment().amount >></strong>
-        due on day
-        <span class="days"><<- g.nextPayment().day >></span>
-      </div>
-      <div>
-        <span class="days"><<- Game.config.gameLength - g.day >> days</span>
-        to end of debt
-      </div>
-    << } else { >>
-      <div> Loan paid off - finally free!</div>
-    << } >>
   </div>
   <div id="top-right" class="column pct-50 center">
     <button id="next" class="big">Next Turn</button>

@@ -55,6 +55,9 @@ e.GameInit.unshift(function updatesGameInit(done) {
       delete girl.reputation;
     });
   }
+  if (g.version < 0.6) {
+    g.player = {};
+  }
   g.version = Game.config.version;
   done();
 });

@@ -1,15 +1,8 @@
 /*global Game */
 'use strict';
 Game.config = {
-  version: 0.521,
+  version: 0.6,
   startMoney: 0,
-  gameLength: 720,
-  payments: [
-    0, 1000, 2000, 3000, 4000, 5000, 7000,
-    9000, 11000, 13000, 15000, 18000, 21000,
-    24000, 27000, 30000, 34000, 38000, 42000,
-    46000, 50000, 55000, 60000, 65000, 75000
-  ],
   moneyHistoryLength: 30,
   imageSize: localStorage.getItem('imageSize') !== null ? parseInt(localStorage.getItem('imageSize'), 10) : 20
 };

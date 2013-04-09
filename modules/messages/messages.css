@@ -4,47 +4,30 @@
   width: 40em;
 }
 
-.message img {
-  vertical-align: middle;
-}
-
-.message .message-delta {
-  display: inline-block;
-  margin-left: 1em;
-  max-width: 2em;
-  vertical-align: middle;
-}
-
-.message .message-content {
-  display: inline-block;
-  margin-left: 1em;
-  max-width: 15em;
-  vertical-align: middle;
-}
-
-.message-delta {
-  text-align: center;
-}
-
 .message-delta .delta {
   display: block;
 }
 
-.message.long img {
+.message img {
   float: left;
   margin-right: 1em;
   margin-bottom: 1em;
+  vertical-align: middle;
 }
 
-.message.long > div {
+.message > div {
   display: block;
+  margin-left: 1em;
   margin-right: 1em;
   max-width: none;
 }
 
-.message.long .message-delta {
+.message .message-delta {
+  display: inline-block;
   float: left;
   margin: .8em;
+  text-align: center;
+  vertical-align: middle;
 }
 
 #messages h3.ui-accordion-header span {

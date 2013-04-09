@@ -15,7 +15,7 @@
           text = time.capitalize() + ' - ' + text;
       } >>
       <h3><<- text >></h3>
-      <div class="message ui-helper-clearfix <<- message.text.length > 300 ? 'long' : '' >>">
+      <div class="message ui-helper-clearfix">
         <img src="<<- message.image >>">
         << if (message.delta && !$.isEmptyObject(message.delta)) { >>
           <div class="message-delta">

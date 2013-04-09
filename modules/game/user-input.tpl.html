@@ -4,8 +4,13 @@
   <p><<- text >></p>
   <hr class="clear">
   <div class="center">
-    << options.forEach(function(option) { >>
-      <button title="<<= option.title >>" value="<<- option.key >>"><<- option.label >></button>
-    << }) >>
+    << if (typeof options == 'string') { >>
+      <input>
+      <button><<- options >></button>
+    << } else { >>
+      << options.forEach(function(option) { >>
+        <button title="<<= option.title >>" value="<<- option.key >>"><<- option.label >></button>
+      << }) >>
+    << } >>
   </div>
 </div>

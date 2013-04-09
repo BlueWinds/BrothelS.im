@@ -4,5 +4,6 @@ Game.includes.push(
   'content/missions/buyer.js',
   'content/missions/intro.js',
   'content/missions/specialParty.js',
-  'content/missions/tentacleAttacks.js'
+  'content/missions/tentacleAttacks.js',
+  'content/missions/loan.js'
 );

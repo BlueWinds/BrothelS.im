@@ -125,7 +125,7 @@ Girls.Mana = {
           endurance: 30
         });
         this.special = this.special();
-        done(this.base().results[0]);
+        done(this.base().results.success);
       },
       results: {
         success: {

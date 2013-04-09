@@ -376,7 +376,7 @@ Girls.Yuna = {
             label: "Yuna's Wedding Day",
             group: 'Yuna',
             image: '<<- girl.image("tired") >>',
-            text: "It's finally the day of Yuna and High Priest Detic's wedding, but Yuna has cold feet and has decided not to attend. As much as you urge her to at the very least put in an appearance, she'd rather stay here than embarass the High Priest by turning him down in front of a crowd. You can only imagine how packed the temple must be right now... This may have serious repercussions.<br><br>It's still a city-wide day of celebration, and you're not surprised to find <<- g.girls._filter('status', 'Hired')._accumulate('name')._toString() >> gone when you look for them, taking the day off to attend the city-wide party and try to catch a glimpse of the new bride (apparently there still is one - you wonder who).",
+            text: "It's finally the day of Yuna and High Priest Detic's wedding, but Yuna has cold feet and has decided not to attend. As much as you urge her to at the very least put in an appearance, she'd rather stay here than embarass the High Priest by turning him down in front of a crowd. You can only imagine how packed the temple must be right now... This may have serious repercussions.<br><br>It's still a city-wide day of celebration, and you're not surprised to find <<- g.girls._filter('status', 'Hired')._accumulate('name')._toString() >> gone when you look for them, taking the day off to attend the city-wide party and try to catch a glimpse of the new bride.",
             weight: -1
           },
           girl: {
@@ -421,7 +421,7 @@ Girls.Yuna = {
               label: "Yuna's Wedding Day",
               group: 'Yuna',
               image: 'content/girls/Yuna/missionImages/weddingPacked.jpg',
-              text: "After the ceremony, the bride and groom disappear into the recesses of the temple - no solomn pretenses like 'you may now kiss the bride.' The temple grounds are filled to the brim with a veritable who's-who of the rich and powerful, a crowd you're not sad to find yourself treated as a part of. You hang around for the rest of the day, hoping to catch a moment with Yuna, but you only manage to see her at a distance. As happy as you are for her, it's also a bit of a sad ending. You never got a chance to say goodbye.<br><br>It's a city-wide day of celebration, and you're not surprised to find <<- g.girls._filter('status', 'Hired')._accumulate('name')._toString() >> gone when you return home, taking the day off to attend the city-wide party and try to catch a glimpse of the new bride.",
+              text: "After the ceremony, the bride and groom disappear into the recesses of the temple - no solemn pretenses like 'you may now kiss the bride.' The temple grounds are filled to the brim with a veritable who's-who of the rich and powerful, a crowd you're not sad to find yourself treated as a part of. You hang around for the rest of the day, hoping to catch a moment with Yuna, but you only manage to see her at a distance. As happy as you are for her, it's also a bit of a sad ending. You never got a chance to say goodbye.<br><br>It's a city-wide day of celebration, and you're not surprised to find <<- g.girls._filter('status', 'Hired')._accumulate('name')._toString() >> gone when you return home, taking the day off to attend the city-wide party and try to catch a glimpse of the new bride.",
               weight: -2
             }
           ],

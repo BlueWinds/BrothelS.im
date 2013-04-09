@@ -15,16 +15,6 @@ function Game(obj) {
   this.randomSeed = this.randomSeed || Math.random();
 }
 
-Game.prototype.nextPayment = function nextPayment() {
-  if (this.day >= Game.config.gameLength) { return false; }
-  var pl = Game.config.gameLength / (Game.config.payments.length - 1);
-  var day = Math.floor(this.day / pl) * pl + pl;
-  return {
-    day: day,
-    amount: Game.config.payments[day / pl]
-  };
-};
-
 Game.prototype.render = function render() {
   e.invokeAll('GamePreRender', function donePreRender() {
     $('#content').html(e.render('view-game'));
@@ -54,13 +44,36 @@ Game.prototype.nextTurn = function nextTurn(noReseed) {
     function doPreDay(next) { e.invokeAll('GamePreDay', next); },
     function doNextDay(next) { e.invokeAll('GameNextDay', next); },
     function incrementDay(next) {
-      var payment = g.nextPayment();
       g.day += 1;
-      if (payment && g.day == payment.day) {
-        g.money -= payment.amount;
-      }
       next();
     },
     function doPostDay(next) { e.invokeAll('GamePostDay', next); }
   ], g.render);
 };
+
+Game.prototype.averageIncome = function averageIncome() {
+  var diff = 0;
+  var items = 0;
+  var old = this.moneyHistory[0];
+  for (var i in this.moneyHistory) {
+    if (this.moneyHistory[i] > old) {
+      diff += this.moneyHistory[i] - old;
+      items++;
+    }
+    old = g.moneyHistory[i];
+  }
+  items = Math.max(items, 7);
+  return Math.floor(diff / items);
+};
+
+Game.prototype.gameOver = function gameOver(text, image) {
+  var options = [{
+    label: 'Game Over',
+    title: 'Oops',
+    key: ''
+  }];
+  Game.getUserInput(text, image, options, function gameOverUserInput(){
+    $('#header img').click();
+  });
+
+}
