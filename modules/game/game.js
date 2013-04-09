@@ -123,14 +123,8 @@ e.Ready.push(function gameReady(done) {
   });
 
   $('#save').addClass('disabled');
-  if (Game.list().length === 0) {
-    $('#load').addClass('disabled');
-  }
 
   $('#new').click(function openNewGame() {
-    if ($(this).hasClass('disabled')) {
-      return;
-    }
     var form = e.render('new-game');
     $('#fetishes .checkbox').click(function checkFetishes() {
       $(this).toggleClass('checked');
@@ -185,7 +179,6 @@ e.Ready.push(function gameReady(done) {
       event.preventDefault();
       Game.save($('#game-name', form).val());
       form.dialog('close');
-      $('#load').removeClass('disabled');
       return false;
     });
     form.dialog({
@@ -194,9 +187,6 @@ e.Ready.push(function gameReady(done) {
   });
 
   $('#load').click(function openLoadDialog() {
-    if ($(this).hasClass('disabled')) {
-      return;
-    }
     var form = e.render('load-game', {
       games: Game.list()
     });
@@ -205,10 +195,7 @@ e.Ready.push(function gameReady(done) {
       var name = $('#game-name').val();
       Game.remove(name);
       form.dialog('close');
-      if (Game.list().length === 0) {
-        $('#load').addClass('disabled');
-      }
-      $('#load-game').click();
+      $('#load').click();
       return false;
     });
     $('#import-game', form).click(function importGame(event) {

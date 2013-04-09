@@ -6,8 +6,8 @@ Girls.Mana = {
   endurance: 100,
   obedience: 60,
   modesty: 20,
-  charisma: 40,
-  intelligence: 60,
+  charisma: 60,
+  intelligence: 40,
   constitution: 50,
   softLibido: 50,
   softExperience: 20,
@@ -83,6 +83,18 @@ Girls.Mana = {
         },
         girl: {
           obedience: 1.5
+        }
+      },
+      Mana5: {
+        message: {
+          group: 'Mana',
+          label: 'Talk',
+          image: 'content/girls/Mana/images/Base.jpg',
+          text: "It's a beautiful <<- time >>, and Mana expresses a sudden and desperate urge to visit the other streetwalkers. She implores you with a longing 'Pleeeease!' every time you voice an objection. Interrupting a girl when she's working isn't very professional, but you eventually cave in on the condition that she doesn't start talking to anyone who has a client.<br><br>You're both walking down familiar streets in the red-light district when Mana sees a buxom brunette prostitute from afar. You're not familiar with the girl, but you can tell that she's just accepted an offer from a confident young man, and the two of them slip discreetly into a nearby alley. As you turn to remind Mana that she promised not to interfere, you can see that she has already run ahead towards the pair. But instead of talking to her, Mana keeps her distance and watches from the safety some large crates. Soon, the both of you are watching him take the brunette from behind. When they are done and he has paid and left, Mana is silent so as not to give away her location. From the satisfied look on her face, you guess that she didn't want to talk so much as watch some sex."
+        },
+        girl: {
+          happiness: 4,
+          hardLibido: 2
         }
       }
     }}, Actions.Talk),

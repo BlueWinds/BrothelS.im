@@ -19,6 +19,10 @@ Missions.secondBuilding = {
     min: { day: '+25' },
     max: { day: '+25' }
   },
+  optionsInfo: {
+    text: "<<- girl.name >> hurries into the room just as you were sitting down for a nice cup of tea. <blockquote>Hey, if we're going to get a permit to open a second location, then we're going to have to leave <em>now.</em> I've been keeping an eye on them, and there are only two left. Is this something we're going to do?</blockquote> If you are, it's time to decide on a strategy. Convincing the people at the Guild office to give a permit to your second cousin three times removed who they've never met before is going to take some work.",
+    image: '<<- girl.image() >>'
+  },
   options: [
     {
       key: 'noCash',
@@ -41,10 +45,6 @@ Missions.secondBuilding = {
       title: "<<- girl.name >> isn't somthing any man could resist, combined with a bag of large denomination, untraceable coinage."
     }
   ],
-  optionsInfo: {
-    text: "<<- girl.name >> hurries into the room just as you were sitting down for a nice cup of tea. <blockquote>Hey, if we're going to get a permit to open a second location, then we're going to have to leave <em>now.</em> I've been keeping an eye on them, and there are only two left. Is this something we're going to do?</blockquote> If you are, it's time to decide on a strategy. Convincing the people at the Guild office to give a permit to your second cousin three times removed who they've never met before is going to take some work.",
-    image: '<<- girl.image() >>'
-  },
   variants: function secondBuildingVariants(context, done) {
     var result = $.extend(true, {}, this.base().results[this.option]);
     if (this.option == 'sex') {
@@ -92,7 +92,7 @@ Missions.secondBuilding = {
           group: 'Guild Permits',
           label: 'Guild Permits',
           image: 'content/miscImages/GuildHQ.jpg',
-          text: "The rest of the afternoon is passed by more of the same. Every step of the way feels like you're bleeding, each drop of blood replaced with a stack of gold or a promise of it to come later. You finally get what you're after - a freshly minted piece of paper bearing your last name (with a fake first one), which more or less amounts to a promise that the Guild or the City Guard won't come knocking if you purchase a second location and start housing girls there."
+          text: "The rest of the afternoon is passed by more of the same. Every step of the way feels like you're bleeding, each drop of blood replaced with a stack of gold or a promise of it to come later. You finally get what you're after - a freshly minted piece of paper bearing your last name (with a fake first one), which more or less amounts to a promise that the Guild or the City Guard won't come knocking if you purchase a second location and start housing girls there.<br><br>When you spend some time looking at the prices for the buildings, it makes your head swim. You'd almost forgotten Kirino's words when you bought your first building - the Guild paid for more than 90% of the cost. Well, money is meant to be spent, you suppose..."
         }
       ]
     },
@@ -110,7 +110,7 @@ Missions.secondBuilding = {
           group: 'Guild Permits',
           label: 'Guild Permits',
           image: '<<- girl.image("group") >>',
-          text: "In an experience better described as harrowing than erotic, you spend the afternoon frantically attempting to prevent the gangbang and bribe-fest from escalating out of control. It seems every ten minutes someone new comes in to see what the fuss is about, and you have to either pay out even more money or increase the number of men and women trying to satisfy themselves with <<- girl.name >>.<br><br>You finally get what you're after, a freshly minted piece of paper bearing your last name (with a fake first one), which more or less amounts to a promise that the Guild or the City Guard won't come knocking if you purchase a second location and start housing girls there, and half an hour later manage to escape with a cum soaked and exhausted girl in tow. As much as she loves sex, it's not something she'd like to do too often."
+          text: "In an experience better described as harrowing than erotic, you spend the afternoon frantically attempting to prevent the gangbang and bribe-fest from escalating out of control. It seems every ten minutes someone new comes in to see what the fuss is about, and you have to either pay out even more money or increase the number of men and women trying to satisfy themselves with <<- girl.name >>.<br><br>You finally get what you're after, a freshly minted piece of paper bearing your last name (with a fake first one), which more or less amounts to a promise that the Guild or the City Guard won't come knocking if you purchase a second location and start housing girls there, and half an hour later manage to escape with a cum soaked and exhausted girl in tow. As much as she loves sex, it's not something she'd like to do too often.<br><br>When you spend some time looking at the prices for the buildings, it makes your head swim. You'd almost forgotten Kirino's words when you bought your first building - the Guild paid for more than 90% of the cost. Well, money is meant to be spent, you suppose..."
         }
       ],
       money: -55000,

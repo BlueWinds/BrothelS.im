@@ -16,7 +16,7 @@
       <div class="column pct-30 right">
         <div><label>Price:</label><strong class="money">$<<- building.price(action) >></strong></div>
         <div>
-          <label>Daily:</label>
+          <label title="These statistic changes are applied every day to the building or to each girl occupying it. You can modify these numbers by cleaning the building (or letting it get dirtier), or by purchasing new rooms.">Daily:</label>
           <div class="daily-delta">
             <<- e.render('render-delta', { delta: building.dailyDelta() }, true) >>
           </div>

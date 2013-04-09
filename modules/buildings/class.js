@@ -157,6 +157,10 @@ Building.prototype.price = function price(action) {
   });
   if (action == 'Sell') {
     cost *= Building.config.sellRatio;
+  } else {
+    if (g.buildings._filter('status', 'Owned').length) {
+      cost *= Building.config.secondCostRatio;
+    }
   }
   return cost;
 };

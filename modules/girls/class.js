@@ -163,7 +163,7 @@ Girl.prototype._compare = function _compare(delta) {
 
 Girl.prototype.desiredPay = function desiredPay() {
   if (!g.missionsDone.firstMoney) { return 0; }
-  var pay = this.hirePrice(50) * Girl.config.payRatio;
+  var pay = this.hirePrice(this.happiness, true) * Girl.config.payRatio;
   if (this.intelligence < 20 && this.get('libido') > 50) {
     pay *= (this.intelligence / 40) + this.get('libido') / 100;
   }
@@ -177,7 +177,7 @@ Girl.prototype.payHappiness = function payHappiness() {
   return Girl.config.pay[this.actions.pay];
 };
 
-Girl.prototype.hirePrice = function hirePrice(happiness) {
+Girl.prototype.hirePrice = function hirePrice(happiness, noMultiplier) {
   happiness = happiness === undefined ? this.happiness : happiness;
   var prices = Girl.config.hirePrice;
   var cost = prices.base;
@@ -190,6 +190,10 @@ Girl.prototype.hirePrice = function hirePrice(happiness) {
     cost += (girl[type + 'Libido'] + girl[type + 'Experience']) * prices[type];
   });
   cost *= 1 - happiness / 150;
+  if (!noMultiplier) {
+    var girls = g.girls._filter('status', 'Hired').length;
+    cost *= Math.pow(Girl.config.hirePriceMultiplier, girls - 1);
+  }
   return Math.floor(cost);
 };
 

@@ -129,7 +129,7 @@ Actions.Explore = {
         group: '<<- girl.name >>',
         label: 'Exlore Docks',
         image: 'content/miscImages/docksMorning.jpg',
-        text: 'The Docks are divided into two sections. You explore the larger, larger southern wharves this morning - they deal with great sea-going vessels and small fishing boats alike, and if you have time to spare, are an excellent place to take a sneak peak at goods before they arrive in the market. Despite several hours of searching however, you and <<- girl.name >> don\'t find anything particularly worth the effort of walking so far.'
+        text: 'The Docks are divided into two sections. You explore the larger southern wharves this morning - they deal with great sea-going vessels and small fishing boats alike, and if you have time to spare, are an excellent place to take a sneak peak at goods before they arrive in the market. Despite several hours of searching however, you and <<- girl.name >> don\'t find anything particularly worth the effort of walking so far.'
       },
       girl: {
         endurance: -9

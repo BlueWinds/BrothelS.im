@@ -35,7 +35,8 @@ Girl.config = {
     anal: 10,
     fetish: 15
   },
-  startHappiness: 75
+  startHappiness: 75,
+  hirePriceMultiplier: 2.5
 };
 
 $.extend(Game.tooltips, {

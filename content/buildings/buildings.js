@@ -8,7 +8,8 @@ Game.includes.push(
 Building.config = {
   startMaxBuildings: 0,
   noRoomDailyCost: 60,
-  sellRatio: 0.5
+  sellRatio: 0.5,
+  secondCostRatio: 10
 };
 
 $.extend(Game.tooltips, {
