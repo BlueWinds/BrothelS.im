@@ -18,6 +18,14 @@ Schemas.Mission = {
     variants: {},
     results: {},
     special: {},
+    girl: {
+      'enum': [false],
+      description: 'A mission can mark that it should not inherit the girl context of whatever mission triggers it (if any).'
+    },
+    building: {
+      'enum': [false],
+      description: 'A mission can mark that it should not inherit the building context of whatever mission triggers it (if any).'
+    },
     preDay: {
       'enum': [true],
       description: 'A mission marked "preDay" is evaluated (both to see if it starts and it it ends, and any effects applied) before actions - all others occur after.'

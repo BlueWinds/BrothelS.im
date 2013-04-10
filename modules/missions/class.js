@@ -7,7 +7,10 @@ function Mission(obj) {
 Mission.prototype = new Resolvable();
 
 Mission.create = function create(_id, context, allowFalseConditions) {
-  var mission = Resolvable.create(_id, 'Mission', context, allowFalseConditions);
+  var base = Resolvable.base(_id, 'Mission', context);
+  if (base.girl === false) { delete context.girl; }
+  if (base.building === false) { delete context.building; }
+  var mission = Resolvable.create(_id, 'Mission', context, allowFalseConditions, base);
   if (!mission) { return mission; }
   if (typeof(mission.end) == 'function') {
     delete mission.end;

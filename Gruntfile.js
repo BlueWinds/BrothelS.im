@@ -1,4 +1,6 @@
+/* global require, __dirname */
 var module;
+var fs = require('fs');
 module.exports = function doGrunt(grunt) {
   "use strict";
 
@@ -55,12 +57,24 @@ module.exports = function doGrunt(grunt) {
           Buildings: true,
           Rooms: true,
           g: true,
-          Person: true
+          Person: true,
+          gameVersion: true
         }
       }
     }
   });
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.registerTask('addVersion', function () {
+    var done = this.async();
+    var index = __dirname + '/index.html';
+    fs.readFile(index, 'utf-8', function (err, data) {
+      var version = data.match(/Version = ([0-9\.]+)/)[0];
+      version = version.substr(10);
+      data = (data).replace(/\?v=[0-9\.]+/g, '?v=' + version);
+      grunt.log.ok('Set script query-string to ' + version);
+      fs.writeFile(index, data, done);
+    });
+  });
   // Default task.
-  grunt.registerTask('default', 'jshint');
+  grunt.registerTask('default', ['jshint', 'addVersion']);
 };

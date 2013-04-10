@@ -35,10 +35,11 @@ var e = {
   loadAll: function loadAll() {
     var args = $.extend([], arguments);
     args = args._flatten();
+    args = args.map(function (i) { return i + '?v=' + gameVersion });
     head.js.apply(this, args);
   },
   addTemplate: function addTemplate(name, url, done) {
-    var promise = $.ajax(url).done(function (data) {
+    var promise = $.ajax(url + '?v=' + gameVersion).done(function (data) {
       e.render.cache[name] = ejs.compile(data);
     });
     if (done) { promise.done(done); }

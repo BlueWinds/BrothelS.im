@@ -19,7 +19,7 @@ Missions.firstPayment = {
     max: { day: '+30' }
   },
   variants: function (context, done) {
-    var text = "You're not familiar with the lady you're supposed to deliver payment to, but one of your contacts in the Guild knows where to find her, a small house in Uptown. Though not a mansion as almost all of the surrounding buildings are, it's never the less in the most expensive part of town. You leave all of your girls to their work and head off to pay your respects (and your dues). The door opens after the first knock, revealing a young woman of university age. When you ask after Lady Meghan she smiles and invites you in - that's her.<br><br>The house seems to consist of only three rooms, kitchen joined to living room by an open counter and bedroom partitioned off with a curtain. You decline a cup of tea in her rather cramped living room, preferring to get straight to business. She seems entirely at home surrounded by bookshelves packed into every available space, dirty dishes perched wherever they can find space.";
+    var text = "You're not familiar with the lady you're supposed to deliver payment to, but one of your contacts in the Guild knows where to find her, a small house in Uptown. Though not a mansion as almost all of the surrounding buildings are, it's never the less in the most expensive part of town. You leave all of your girls to their work and head off to pay your respects (and your dues). The door opens after the first knock, revealing a young woman of university age. When you ask after Lady Meghan she smiles and invites you in - that's her.<br><br>The house seems to consist of only three rooms, kitchen joined to living room by an open counter and bedroom partitioned off with a curtain. You decline a cup of tea in her rather cramped living room, preferring to get straight to business. She seems entirely at home surrounded by bookshelves, dirty dishes perched wherever they can find space.";
     var pay = Math.max(0, Math.min(g.money, 10000));
     if (pay == 10000) {
       text += "You pass her the note and a bag of coins. She nods. Was that a faint hint of disapproval crossing her features as she saw the emblem impressed on the bottom of the note? It would seem odd, that you'd have to deliver your payment to someone who disapproved of the concept, but such is life. Meghan counts the money rapidly, then <blockquote>Your payment has been received in full...</blockquote>";
@@ -81,7 +81,7 @@ Missions.secondPaymentWait = {
 Missions.secondPayment = {
   conditions: false,
   special: {},
-  initialize: function (context) {
+  initialize: function () {
     // 1000, or seven days of income, whichever is greater.
     this.special.amount = Math.min(1000, g.averageIncome() * 7);
   },

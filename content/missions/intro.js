@@ -127,6 +127,7 @@ Missions.libidoAndExperience = {
 
 Missions.firstMoney = {
   conditions: false,
+  girl: false,
   display: {
     label: 'Streetwalking',
     group: 'Introduction',

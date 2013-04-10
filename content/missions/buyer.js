@@ -71,7 +71,7 @@ Missions.girlBuyer = {
         label: 'Girl for <<- mission.special.client.name >>',
         group: 'Sell a girl',
         image: '<<- mission.special.client.image >>',
-        text: "Over the intervening weeks, it seems that <<- mission.special.client.name >>'s enthusiasm has cooled. He was scheduled to come by today and make the final offer in person, but instead receive a message, delivered to your door by one of his servants. It explains that the situation has changed, and he has to leave in a rush, with barely enough time to get his own things together, etc.. It's nothing more than an excuse, transparent <<- girl.name >> and you. Whether she wanted to go or not, the fact that he's lost interest in her has to be disappointing on some level. Oh well.",
+        text: "Over the intervening weeks, it seems that <<- mission.special.client.name >>'s enthusiasm has cooled. He was scheduled to come by today and make the final offer in person, but sends a message, delivered to your door by one of his servants. It explains that the situation has changed, and he has to leave in a rush, with barely enough time to get his own things together, etc. It's nothing more than an excuse, transparent to both you and <<- girl.name >>. Whether she wanted to go or not, the fact that he's lost interest in her has to be disappointing on some level. Oh well.",
         weight: -1
       },
       girl: { happiness: -7 },
@@ -82,7 +82,7 @@ Missions.girlBuyer = {
         label: 'Girl for <<- mission.special.client.name >>',
         group: '<<- girl.name >>',
         image: '<<- girl.image() >>',
-        text: "With a smile, you thank <<- girl.name >> for her company over the past months, and tell her that life's too great an adventure to turn down opportunity when it knocks. She bows to <<- mission.special.client.name >> and kisses his hand before he pulls you aside to take care of the business portion of the transaction with quite a thick stack of bills.<br><br>His ship doesn't leave until morning, so you and <<- girl.name >> have some final time to spend together. You help her pack, and once that's done, still for a while to share stories, discussion, and <<- girl.get('libido') < 50 ? 'a chaste kiss' : 'a passionate farewell fuck' >>. Then with a wave, she's off to the docks. You doubt you'll see her again.",
+        text: "With a smile, you thank <<- girl.name >> for her company over the past months, and tell her that life's too great an adventure to turn down opportunity when it knocks. She bows to <<- mission.special.client.name >> and kisses his hand before he pulls you aside to take care of the business portion of the transaction with quite a thick stack of bills.<br><br>His ship doesn't leave until morning, so you and <<- girl.name >> have some final time together. You help her pack, and once that's done, still have time to share stories, discussion, and <<- girl.get('libido') < 50 ? 'a chaste kiss' : 'a passionate farewell fuck' >>. Then with a wave, she's off to the docks. You doubt you'll see her again.",
         weight: -2
       },
       girl: {

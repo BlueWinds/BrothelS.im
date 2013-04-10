@@ -11,6 +11,7 @@ function Game(obj) {
   if (obj.moneyHistory.length > Game.config.moneyHistoryLength) {
     obj.moneyHistory = obj.moneyHistory.slice(obj.moneyHistory.length - Game.config.moneyHistoryLength);
   }
+  obj.player = obj.player || {};
   $.extend(this, obj);
   this.randomSeed = this.randomSeed || Math.random();
 }

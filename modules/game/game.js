@@ -106,7 +106,7 @@ Game.list = function listGames() {
 Game.start = function startGame(opt) {
   opt = $.extend({
     day: 0,
-    version: Game.config.version,
+    version: gameVersion,
     money: Game.config.startMoney,
     moneyHistory: []
   }, opt);

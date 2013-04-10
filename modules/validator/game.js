@@ -52,7 +52,7 @@ Schemas.Game = {
       additionalProperties: false
     },
     version: {
-      'enum': [Game.config.version]
+      'enum': [gameVersion]
     },
     randomSeed: {
       type: 'number',

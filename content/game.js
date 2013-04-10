@@ -1,7 +1,6 @@
 /*global Game */
 'use strict';
 Game.config = {
-  version: 0.6,
   startMoney: 0,
   moneyHistoryLength: 30,
   imageSize: localStorage.getItem('imageSize') !== null ? parseInt(localStorage.getItem('imageSize'), 10) : 20

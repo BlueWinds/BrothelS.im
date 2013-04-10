@@ -10,8 +10,8 @@ function Resolvable(obj) {
   this.constructor = window[this._class];
 }
 
-Resolvable.create = function create(_id, _class, context, allowFalseConditions) {
-  var base = Resolvable.base(_id, _class, context);
+Resolvable.create = function create(_id, _class, context, allowFalseConditions, base) {
+  base = base || Resolvable.base(_id, _class, context);
   var res = new window[_class](base);
   res.constructor = window[_class];
   res._class = _class;
