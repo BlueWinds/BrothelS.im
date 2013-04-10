@@ -35,7 +35,9 @@ var e = {
   loadAll: function loadAll() {
     var args = $.extend([], arguments);
     args = args._flatten();
+    var done = args.pop();
     args = args.map(function (i) { return i + '?v=' + gameVersion });
+    args.push(done);
     head.js.apply(this, args);
   },
   addTemplate: function addTemplate(name, url, done) {
