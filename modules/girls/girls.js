@@ -3,13 +3,12 @@ var Girls = {};
 
 e.Ready.push(function girlsReady(done) {
   $('head').append('<link href="modules/girls/style.css" type="text/css" rel="stylesheet">');
-  e.addTemplate('list-girls', 'modules/girls/list-girls.tpl.html');
   e.addTemplate('hire-girls', 'modules/girls/hire-girls.tpl.html');
   e.addTemplate('view-girl', 'modules/girls/view-girl.tpl.html');
   $.each(Girls, function (name, girl) {
     girl.name = name;
   });
-  done();
+  e.addTemplate('list-girls', 'modules/girls/list-girls.tpl.html', done);
 });
 
 e.GameNew.push(function girlsNewGame(done) {
