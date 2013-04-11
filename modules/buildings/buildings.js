@@ -4,13 +4,12 @@ var Buildings = {};
 
 e.Ready.push(function buildingsReady(done) {
   $('head').append('<link href="modules/buildings/style.css" type="text/css" rel="stylesheet">');
-  e.addTemplate('list-buildings', 'modules/buildings/list-buildings.tpl.html');
   e.addTemplate('manage-buildings', 'modules/buildings/manage-buildings.tpl.html');
   e.addTemplate('view-building', 'modules/buildings/view-building.tpl.html');
   $.each(Buildings, function (name, building) {
     building.name = name;
   });
-  done();
+  e.addTemplate('list-buildings', 'modules/buildings/list-buildings.tpl.html', done);
 });
 
 e.GameNew.push(function buildingsNewGame(done) {
