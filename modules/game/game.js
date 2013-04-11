@@ -173,8 +173,12 @@ e.Ready.push(function gameReady(done) {
     if (g.name) {
       $('#game-name', form).val(g.name);
     }
-    var blob = new Blob([JSON.stringify(g, null, 2)], { type: 'text/json' });
-    $('#export-game', form).attr('href', URL.createObjectURL(blob));
+    try {
+      var blob = new Blob([JSON.stringify(g, null, 2)], { type: 'text/json' });
+      $('#export-game', form).attr('href', URL.createObjectURL(blob));
+    } catch (e) {
+      $('#export-game', form).attr('title', 'Your browser appears to be somewhat old fashioned, and does not support this feature. May I suggest Firefox of Chrome?').addClass('ui-state-disabled');
+    }
     $('#save-game', form).click(function saveGame(event) {
       event.preventDefault();
       Game.save($('#game-name', form).val());
