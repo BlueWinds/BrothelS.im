@@ -176,8 +176,10 @@ e.Ready.push(function gameReady(done) {
     try {
       var blob = new Blob([JSON.stringify(g, null, 2)], { type: 'text/json' });
       $('#export-game', form).attr('href', URL.createObjectURL(blob));
-    } catch (e) {
-      $('#export-game', form).attr('title', 'Your browser appears to be somewhat old fashioned (likely Safari 5.1, or Internet Exporer), and does not support this feature. May I suggest Firefox of Chrome?').addClass('ui-state-disabled');
+    } catch (error) {
+      $('#export-game', form).attr('title', 'Your browser appears to be somewhat old fashioned (likely Safari 5.1, or Internet Explorer), and does not support this feature. May I suggest Firefox of Chrome?').click(function() {
+        $('<textarea>').val(JSON.stringify(g, null, 2)).dialog().css('overflow', 'auto').click(function () { $(this).select() });
+      });
     }
     $('#save-game', form).click(function saveGame(event) {
       event.preventDefault();

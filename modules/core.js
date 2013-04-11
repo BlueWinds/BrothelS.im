@@ -47,8 +47,6 @@ var e = {
     if (done) { promise.done(done); }
   },
   render: function render(name, context, string) {
-    console.log(name);
-    console.log(Object.keys(e.render.cache));
     var item = e.render.cache[name](context || {});
     return string ? item : $(item);
   },
