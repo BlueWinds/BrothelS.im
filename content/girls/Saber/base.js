@@ -271,7 +271,7 @@ Girls.Saber = {
           }
         }
       } // results
-    }, // Patrol
+    }/*, // Patrol
     VisitRin: {
       label: 'Visit Rin',
       group: 'Chores',
@@ -332,8 +332,8 @@ Girls.Saber = {
           money: -1000
         },
       } // results
-    }
-  }, // actions
+    }*/
+  }/*, // actions
   Missions: {
     SaberConDrop: {
       conditions: {
@@ -435,7 +435,7 @@ Girls.Saber = {
       },
       results: { done: {
         mission: 'RinEnergySupply',
-        girl: { specialRules: { energySupply: -2 }}
+        girl: { specialRules: { energySupply: -2 }},
         message: {
           group: 'Saber',
           label: 'Visit to Rin',
@@ -696,5 +696,5 @@ Girls.Saber = {
         }
       }
     }
-  }
+  }*/
 };
