@@ -38,7 +38,8 @@ Girls.Saber = {
     naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg"],
     prison: ["Prison1.jpg", "Prison2.jpg"],
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg"],
-    pregnant: "Tired1.jpg"
+    pregnant: "Tired1.jpg",
+    rin: ["SaberRin1.jpg", "SaberRin2.jpg", "SaberRin3.jpg", "SaberRin4.jpg"]
   },
   Actions: {
     Talk: $.extend(true, { results: {
@@ -115,7 +116,7 @@ Girls.Saber = {
     Exercise: {
       label: 'Patrol',
       group: 'Chores',
-      description: 'Saber will roam the streets seeking out enemies to battle (this will increase her <<- __("constitution") >>.',
+      description: 'Saber will roam the streets seeking out enemies to battle (this will increase her <<- __("constitution") >>).',
       conditions: Actions.Exercise.conditions,
       enableConditions: {
         girl: {
@@ -270,8 +271,69 @@ Girls.Saber = {
           }
         }
       } // results
-    } // Patrol
-  },
+    }, // Patrol
+    VisitRin: {
+      label: 'Visit Rin',
+      group: 'Chores',
+      description: 'Saber will pay a visit to Tohsaka Rin to get some magical energy - that is to say, have passionate lesbian sex. You wish you could watch - they look so cute together.',
+      conditions: {
+        max: { specialRules: { energySupply: 0 }},
+        missions: { RinEnergySupply: 1 }
+      },
+      tags: { uptown: 1 },
+      enableConditions: {
+        min: { money: 1000 },
+        girl: { min: { endurance: 20 }}
+      },
+      results: {
+        aggresive: {
+          message: {
+            group: 'Saber',
+            label: 'Visit to Rin',
+            image: '<<- girl.image("rin") >>',
+            text: "Saber is met at the door of the Tohsaka mansion by Rin - and without any warning, there's a hand down her shirt fondling her breast, and another wrapped around her head pulling her in for a kiss. Caught completely off guard, Saber tenses up, but moans into Rin's mouth as the other woman finds her nipple and gives it a tweak. A shivers runs down Saber's spine as, helplessly swept along by Rin's enthusiasm and lust, Rin unbuttons her shirt right there in the hallway. She hardly has time to take a breath before Rin again comes at her from a different angle, trailing kisses down her neck and unclasping her bra with one hand. A cute little gasp escapes her lips as Rin finds her nipple again, this time with her lips. They collapse into a tangle right there in the front hallway, moaning and kissing and licking and panting when Saber finally manages to get Rin naked as well."
+          },
+          girl: {
+            specialRules: { energySupply: 1, RinVisit: 1 },
+            endurance: -12,
+            happiness: 5,
+            softExperience: 3
+          },
+          money: -1000
+        },
+        otherGuests: {
+          message: {
+            group: 'Saber',
+            label: 'Visit to Rin',
+            image: '<<- girl.image("rin") >>',
+            text: "Rin isn't there to meet Saber immediately this time - a servant leads her into a waiting room, announcing that the lady of the house will be with her shortly. She can hear voices coming from the next room - Rin has other guests at the moment, it seems. Still, it's not a long wait before she can hear the visitors excuse themselves and leave by a different door. Tohsaka Rin enters the waiting room with a heavy sigh, though seeing Saber waiting patiently with her hands in her lap does cheer her up a bit. She sits down next to her and leans over - not for a kiss, but to lay her head on Saber's lap. Saber strokes her long, beautiful brown hair for a few minutes while Rin relaxes in her warmth.<br><br>When they eventually get around to making love, it's a slow, tender affair, with much holding and many gentle caresses, exploring each other's bodies carefully. Tohsaka Rin has a beautiful four-post bed. By the time they're done, the expensive silk sheets are in complete disarray, and the two of them lay sleeping in each other's arms."
+          },
+          girl: {
+            specialRules: { energySupply: 1, RinVisit: 1 },
+            endurance: -12,
+            happiness: 5,
+            softExperience: 3
+          },
+          money: -1000
+        },
+        anal: {
+          message: {
+            group: 'Saber',
+            label: 'Visit to Rin',
+            image: '<<- girl.image("rin") >>',
+            text: "Rin seems in quite a good mood when Saber is led to her, waiting in her bedroom with a worrying smile and hiding something behind her back. When Saber asks what it is, Run just smiles wider and tells her to get naked first. Saber blushes, but Rin stands impassively with the same grin. Saber strips slowly, keeping her back to Rin, and finally turns around with her arms crossed over her chest as though that could preserve her modesty in the face of a still fully dressed Rin. The Magus finally produces what she's been holding behind her back this whole time - a jar of oil and an already lubricated rather large dildo. She sets them down on the nightstand and runs up to Saber, catching her around the waist and bending down to lick her belly button. Saber giggles and doesn't resist as Rin tries to lift her. She's not really that strong though, and Saber's heavier than she looks, so Saber laughs and picks Tohsaka up instead.<br><br>After some kissing and fingering, Rin reaches over to the bedstand for the dildo. She first runs it along her own wet pussy before pressing it against Saber's lips. She tentatively licks it, tasting the other woman's moisture before accepting the head into her mouth. Rin lets her suck it for a little while as she turns her attention... not to Saber's pussy, but her rosy little anus. Saber gasps as a finger slides in, and moves her hand to stop Rin, but the other girl ignores the protest and slides in another finger. And a third..."
+          },
+          girl: {
+            specialRules: { energySupply: 1, RinVisit: 1 },
+            endurance: -12,
+            happiness: 2,
+            analExperience: 3
+          },
+          money: -1000
+        },
+      } // results
+    }
+  }, // actions
   Missions: {
     SaberConDrop: {
       conditions: {
@@ -279,11 +341,11 @@ Girls.Saber = {
           min: {
             hardLibido: 35
           },
-          max: {
-            specialRules: { fading: 10 }
-          }
+          max: { specialRules: { energySupply: 0 }}
         },
-        missions: { 'SaberFadingWarning': -3 }
+        missions: {
+          'secondPayment': 2
+        }
       },
       variants: [
         { girl: { max: { specialRules: { fading: 6 }}}, result: 'Day16' },
@@ -355,14 +417,283 @@ Girls.Saber = {
         group: 'Saber',
         label: 'Looking Drained',
         image: 'content/girls/Saber/images/Tired3.jpg',
-        text: "Something is wrong with Saber. She's been missing meals, sleeping extra hours, looking paler than usual, and it's about time she told you what's going on. You catch her after lunch - one of the few activities she still attends regularly - and ask her what's wrong. She says nothing at first, looking down at her food, not tasting anything as she continues to eat mechanically. Finally, just when you're about to repeat the question...<blockquote>I'd fading. I had thought... I thought this was a real, human body, that I was finally free, but it isn't.</blockquote> She falls silent again, and you have to prompt her to explain. She certainly feels real. There have been no complaints from any of the men who have... you stop yourself as her ears start to turn red. Right, she doesn't like to talk about that.<blockquote>I need a constant supply of magical energy to maintain myself in a physical form. I can accept, um, energy from men, but unless they're magicians... it doesn't help very much. It's why I... why I'm working for you.</blockquote> It does make a certain amount of sense - Saber seems more lively after a good fucking recently, almost back to her old self, but it doesn't last. You'll have to find a more permanent solution before the problem gets any worse. Perhaps <strong>asking around the University</strong>?",
+        text: "Something is wrong with Saber. She's been missing meals, sleeping extra hours, looking paler than usual, and it's about time she told you what's going on. You catch her after lunch - one of the few activities she still attends regularly - and ask her what's wrong. She says nothing at first, looking down at her food, not tasting anything as she continues to eat mechanically. Finally, just when you're about to repeat the question...<blockquote>I'm fading. I had thought... I thought this was a real, human body, that I was finally free, but it isn't.</blockquote> She falls silent again, and you have to prompt her to explain. She certainly feels real. There have been no complaints from any of the men who have... you stop yourself as her ears start to turn red. Right, she doesn't like to talk about that.<blockquote>I need a constant supply of magical energy to maintain myself in a physical form. I can accept, um, energy from men, but unless they're magicians... it doesn't help very much. It's why I... why I'm working for you.</blockquote> It does make a certain amount of sense - Saber seems more lively after a good fucking recently, almost back to her old self, but it doesn't last. You'll have to find a more permanent solution before the problem gets any worse. Perhaps <strong>asking around the University</strong>?",
         weight: -1
       },
       end: {
-        girl: {/* specialRules: */}
+        girl: { specialRules: { energySupply: 1 }}
       },
       results: {
         done: {}
+      }
+    },
+    RinEnergySupply: {
+      conditions: false,
+      end: {
+        min: { day: '+7' },
+        max: { day: '+7' }
+      },
+      results: { done: {
+        mission: 'RinEnergySupply',
+        girl: { specialRules: { energySupply: -2 }}
+        message: {
+          group: 'Saber',
+          label: 'Visit to Rin',
+          image: 'content/girls/Saber/missionImages/RinBlush.jpg',
+          text: "It's time for Saber's weekly visit to Tohsaka Rin. You can set her action to <strong>Visit Rin</stron> in the evening (if you miss the chance, or you don't have the $1000, Saber's <<- __('constitution') >> will start dropping again until you catch up on visits)."
+        }
+      }}
+    },
+    SaberPermanentSolution: {
+      conditions: {
+        girl: { min: { specialRules: { RinVisit: 3 }}}
+      },
+      preDay: true,
+      display: {
+        group: 'Saber',
+        label: 'Find magic source for Saber',
+        image: '<<- girl.image() >>',
+        text: "As much as Saber is enjoying her weekly visits to Tohsaka Rin, they're rather expensive, and hardly a permanent solution. During the most recent vision though, Rin shared something interesting - there is a second source of magical energy somewhere in the city that feels like Saber. It wasn't here a week ago, but it might be worth investigating. She's unable to provide a precise location, but suggested that a careful search of the Docks might be in order.",
+        weight: -1
+      },
+      end: {
+        girl: { min: { specialRules: { FindAvalon: 3 }}}
+      },
+      optionsInfo: {
+        text: "Yesterday you located the magical artifact that resonates so closely with Saber that Tohsaka Rin has trouble telling them apart. It's currently in the possession of a spectacularly unhelpful man who seems unwilling to even discuss its existence - and if you don't agree to retrieve it for her, Saber is likely to make the attempt on her own. Letting her do that seems like a spectacularly bad idea ending, at best, with a dozen corpses and an inquest into your involvement. What do you suggest to her?",
+        image: 'content/girls/Saber/missionImages/scarySaber.jpg'
+      },
+      options: [
+        {
+          key: 'sneak',
+          label: 'Be sneaky',
+          title: 'Sneaking in will require you to raise her <<- __("intelligence") >> and <<- __("charisma") >> (to bluff your way past anyone who spots you).'
+        },
+        {
+          key: 'fight',
+          label: 'Smash and grab',
+          title: "You've seen Saber fight - whatever sailors remain on watch will be no match for her. You'll have to raise her <<- __('constitution') >> to make sure she can kock everyone out before they can raise an alarm properly."
+        }
+      ],
+      variants: [
+        { option: 'sneak', result: 'sneak' },
+        { option: 'fight', result: 'fight' }
+      ],
+      results: {
+        sneak: {
+          mission: 'RetrieveAvalonSneak',
+          girl: { specialRules: { FindAvalon: false, VisitRin: false }}
+        },
+        fight: {
+          mission: 'RetrieveAvalonFight',
+          girl: { specialRules: { FindAvalon: false, VisitRin: false }}
+        }
+      }
+    },
+    RetrieveAvalonSneak: {
+      conditions: false,
+      display: {
+        group: 'Saber',
+        label: 'Retrieve Avalon',
+        image: '/content/girls/Saber/missionImages/Avalon.jpg',
+        text: "While such information would normally be quite difficult to come by without arousing suspicion, <<- Math.choice(g.girls._filter('status', 'Hired')).name >> overheard one of the sailors on the ship carrying Saber's treasure mention that they would not be leaving for at least a month. That means you should have plenty of time to brush up on Saber's ability to get aboard the ship undetected.<br><br><em>She'll need at least <<- __('intelligence') >> 45 and <<- __('charisma') >> 40 on <strong>day <<- mission.end.max.day >></strong> to successfully sneak aboard.'</em>",
+        weight: -2
+      },
+      end: {
+        min: { day: '+33' },
+        max: { day: '+33' }
+      },
+      optionInfo: {
+        text: "Saber meets you at the door of the <<- girl.building() ? girl.building().name : 'Inn' >>... and you can't help but laugh at how absurdly over-dressed for the part of spy she is. Her black outfit might as well scream \"I don't want you to look at me.\" She doesn't seem to get the joke, asking you what you're laughing at with a straight face. It's a shame there's no time to make her go dress more normally - the docks are some distance away, and you definitely want to leave and return before before dawn breaks. Ultimately, sneaking aboard the ship isn't nearly as challenging as you had expected. No one even gives you a second glance at the docks. And the ship itself is nearly deserted - they're sailing out in the morning, after all, and most of the crew is enjoying their final night in port.<br><br>You start by searching the captain's quarters - it would be the logical place to store something ",
+        image: "content/girls/Saber/missionImages/SaberSuit.jpg"
+      }
+      options: []
+    },
+
+  },
+  Events: {
+    SaberMagicianMeet: {
+      tags: {
+        university: 0.75
+      },
+      conditions: {
+        missions: {
+          SaberFadingWarning: 1
+        },
+        ownerParticipation: true,
+        girl: { max: { specialRules: { MeghanVisit: 0 }}}
+      },
+      results: {
+        library: {
+          message: {
+            group: 'Saber',
+            label: 'Poking around the Library',
+            image: 'content/girls/Saber/missionImages/librarian.jpg',
+            text: "You and Saber decide that the best place to start is the library - surely there's something that can help, tucked away among the many thousands of books. Gaining entrance, however, is more difficult than expected - you're neither students, faculty, nor really associated with the University in any way. A stubborn librarian guards the entrance and will not let you in for love or money without a note from the administration.<br><br>You're a bit flummoxed by this turn of events, until you think of another place filled with books - Lady Meghan's house. She certainly seemed sympathetic enough to your plight, so perhaps she'd be willing to help Saber as well. You could pay her a visit by <strong>exploring Uptown</strong> in the morning."
+          },
+          girl: {
+            specialRules: { universityVisit: 1 },
+            endurance: -10,
+            happiness: -3
+          }
+        }
+      }
+    },
+    SaberMeetMeghan: {
+      tags: { uptown: 1 },
+      conditions: {
+        girl: { min: { specialRules: { universityVisit: 1 }}},
+        missions: { SaberFadingWarning: 1 },
+        time: 'morning'
+      },
+      variants: [
+        {
+          girl: { max: { specialRules: { MeghanVisit: 0 }}},
+          result: 'firstVisit'
+        },
+        {
+          girl: { min: { specialRules: { MeghanVisit: 2 }}},
+          result: 'secondVisit'
+        }
+      ],
+      results: {
+        firstVisit: {
+          message: [
+            {
+              group: 'Saber',
+              label: 'Vist to Lady Meghan',
+              image: 'content/missions/loan/Meghan2.jpg',
+              text: "Knocking on the door at first yields little results - only the fact that you can see smoke coming from the chimney makes you persist long enough for the lady of the house to eventually answer the door, groggy and rubbing her eyes. She invites the both of you in, and you can't help but notice how her eyes seem to flicker back to Saber whenever there isn't something else demanding her attention. You're about the begin explaining the situation when her curiosity finally bursts - curiosity tinged with, perhaps, a bit of fear.<blockquote>What the hell are you?</blockquote>...<blockquote>Forgive me, I was not expecting such a visitor.</blockquote> Lady Meghan takes a deep breath, exhales it slowly. The outburst put Saber on guard, but she starts to relax as Meghan calms down again. You wait for someone to explain what's going on - this was definitely not the reaction you expected. Meghan finally speaks again."
+            },
+            {
+              group: 'Saber',
+              label: 'Vist to Lady Meghan',
+              image: 'content/girls/Saber/missionImages/scarySaber.jpg',
+              text: "<blockquote>Sorry. It's... she's like a cat, and she's supposed to be a lion, but instead she's just a kitten, and I thought she was really a lion pretending to be a kitten, which they can't do, and lions definitely can't <em>be</em> kittens again, but she's not since the lion is still there. And the kitten can't eat meat, so the lion is eating itself... which isn't what's happening at all, but I don't know how to explain it any better. Um... just forget about it. Please, you came here for a reason. What can I do for you, <<- g.player.name >>?</blockquote> You're not quite sure how to take all that, and Meghan keeps glancing nervously at Saber, who is intentionally looking everywhere <em>except</em> at Meghan, but... well, time to forge on. You explain the situation as best you can, how Saber is running out of magical energy (that must be the lion that's eating itself?) and you were hoping, as a rather powerful wizard herself she might be able to do something about it."
+            },
+            {
+              group: 'Saber',
+              label: 'Vist to Lady Meghan',
+              image: 'content/missions/loan/Meghan.jpg',
+              text: "Yes, she can help you. No, it will not be free. You ask what the price is, and she responds that she's not sure yet - she'll have to do some research first. If the two of you would come back in a couple of days, she'll have some more answers. For perhaps the first time ever she doesn't invite you to stay over for tea, and taking the hint, you depart. On the way home, you ask the silent Saber her opinion on the matter. She hasn't said a word since she first saw Meghan.<blockquote>If I am a lion, she is a hunter. I would worry less if I could see her spear. Be careful.</blockquote>"
+            }
+          ],
+          girl: {
+            specialRules: {
+              MeghanVisit: 1,
+              universityVisit: false
+            },
+            intelligence: 2,
+            endurance: -7
+          }
+        }, // firstVisit
+        wait: {
+          message: {
+            group: 'Saber',
+            label: 'Vist to Lady Meghan',
+            image: 'content/girls/Saber/images/base.jpg',
+            text: "Lady Meghan doesn't seem to be home right now - perhaps she's still figuring out how to help Saber. You could try again in a couple of days."
+          },
+          girl: {
+            specialRules: {
+              MeghanVisit: 1
+            },
+            endurance: -6,
+            happiness: -1
+          }
+        },
+        secondVisit: {
+          message: [
+            {
+              group: 'Saber',
+              label: 'Visit to Meghan...',
+              image: 'content/missions/loan/Meghan.jpg',
+              text: "The door opens almost instantly after you knock. Rather than inviting you in, Lady Meghan steps out into the street with you and Saber. You're about to ask if she's found a solution, but she puts a finger to her lips and shushes you. She stands there thinking for a moment, then closes the door behind her.<blockquote>I said my help wouldn't be free. Well, I want to borrow Saber for a week. Once she's feeling better, that is.</blockquote>You glance at Saber - she hesitates, then nods. Seeing your agreement (not that you have much choice in the matter), Meghan leads you out into the city.",
+              delta: false
+            },
+            {
+              group: 'Saber',
+              label: '...and another.',
+              image: 'content/girls/Saber/missionImages/Rin.jpg',
+              text: "Your destination is an old mansion, not far away and still in the finer parts of Uptown. This time you're greeted at the front gate by a servant who seems to be expecting you. He bows and leads you into a waiting room without a word - a treatment more in line with your expectations for this part of town than Meghan's cluttered one-room-house. You don't have long to wait before the mistress of the house arrives.<br><br>Tohsaka Rin is all smiles and energy, arrogant and a bit rude in an oddly endearing way. She keeps looking at Saber with interest, even as Meghan introduces the two of you and explains the situation - Saber needs a steady and powerful stream of magical energy for to stay in the world, until you can find a more permanent solution. Rin laughs at the phrase \"steady stream of magical energy\", though you can tell it's as much to cover a blush at what it implies as because she finds it amusing.",
+              delta: false
+            },
+            {
+              group: 'Saber',
+              label: 'The solution',
+              image: 'content/girls/Saber/missionImages/RinBlush.jpg',
+              text: "<blockquote>The first, um, treatment will be free. After this, have her visit once per week. I will charge you $1000 per session. Any problems?</blockquote> She uses a stern voice and tries to look scary, but the effect is spoiled by the fact that she's turning red and fidgeting with her hair as she speaks. You agree - you didn't expect to be <em>spending</em> money on sex for one of your girls when you opened a brothel, but in this case you'll have to make an exception. You just don't know anyone else with enough magical energy to keep Saber from fading away. Saber, in turn, is attempting to look as stoic as ever, but you can't miss the lust in her glance when she looks at Tohsaka Rin. Her ears are also red - not embarassement in her case, but rather shame.<blockquote>Well, don't just stand there. Idiots. Shoo. I'll send her along later when we're done.</blockquote>Rin has no intention of budging so much as an inch until you and Meghan are gone."
+            }
+          ],
+          girl: {
+            specialRules: { energySupply: 1 },
+            endurance: -12,
+            happiness: 5,
+            softExperience: 3
+          },
+          mission: 'RinEnergySupply'
+        }
+      } // results
+    },
+    SaberFindAvalon: {
+      tags: { docks: 0.75 },
+      conditions: {
+        ownerParticipation: true,
+        missions: { SaberPermanentSolution: 1 },
+        time: 'morning'
+      },
+      variants: [
+        {
+          likelyhood: 0.5,
+          result: 'nothing'
+        }
+        {
+          girl: { min: { specialRules: { FindAvalon: 2 }}},
+          result: 'done'
+        }
+      ],
+      results: {
+        nothing: {
+          girl: {
+            endurance: -9,
+            happiness: -2,
+            constitution: -1
+          },
+          message: {
+            group: 'Saber',
+            label: 'Explore the Docks',
+            image: 'content/miscImages/docksMorning.jpg',
+            text: "It's a shame that Rin's directions couldn't be any more specific - the docks are... rather large, all told. After spending the morning searching, you don't feel like you've made any progress at all."
+          }
+        },
+        progress: {
+          girl: {
+            specialRules: { FindAvalon: 1 },
+            endurance: -9,
+            constitution: -1
+          },
+          message: {
+            group: 'Saber',
+            label: 'Find magic source for Saber',
+            image: '<<- (new Person("High Class")).image >>',
+            text: "With an entire section of the city to cover, you decide to focus on people rather than places. It's not hard to learn that on the day Tohsaka Rin first sensed the presence of whatever artifact feels so much like Saber exactly three foreign ships docked - one small sailing ship carrying foregin dignitaries, and two merchant traders. You spend some time tracking down the captain of one of the trade ships - he's helpful enough, but professes to have nothing that could possibly be a magical artifact aboard his ship. You believe him. No prize, but still, progress."
+          }
+        },
+        done: {
+          girl: {
+            specialRules: { FindAvalon: 1 },
+            endurance: -9,
+            constitution: -1,
+            happiness: 15
+          },
+          message: {
+            weight: -1,
+            group: 'Saber',
+            label: 'Find magic source for Saber',
+            image: 'content/girls/Saber/missionImages/scarySaber.jpg',
+            text: "Only one ship left - the small passenger vessel. Rin has confirmed that the power source that feels so much like Saber is still in the Docks, so it must be aboard that ship. You have little trouble locating the captain - but unlike the merchants, he's flatly unhelpful, growing cold the instant you mention that you're searching for a magical item. He has it, you're sure. And he's not going to give it up willingly. Once the meeting is over, you finally notice that not all the ice in the room was coming from the captain - Saber has a scary look on her face.<blockquote>It's mine. I can feel it now, and though I don't know how he came across it, it's definitely mine. I want it back, <<- g.player.name >>.</blockquote>"
+          }
+        }
       }
     }
   }
