@@ -73,7 +73,7 @@ Actions.Study = {
   },
   tags: {
     slums: 0.1,
-    university: 0.1
+    university: 0.9
   },
   results: {
     Generic1: {

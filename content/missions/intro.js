@@ -158,7 +158,7 @@ Missions.firstThousand = {
     }
   },
   variants: function firstThousandVariants(context, done) {
-    g.maxGirls = 5;
+    g.maxGirls += 4;
     done(this.base().results.done);
   },
   results: { done: {
