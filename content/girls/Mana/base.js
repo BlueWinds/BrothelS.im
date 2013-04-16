@@ -2,7 +2,7 @@
 Girls.Mana = {
   description: "<p>An inhabitant of an ancient kingdom, Mana promised that she would become a master magician in memory of her teacher. Her soul spent the next thousand years trapped in various magical items before finally being freed again by a kind owner. She's not exactly sure how she ended up here - lost in an unknown land and without anyone she knew and could rely on, she decided to start looking for a job. Any job, really.</p>",
   status: 'For Hire',
-  happiness: 0,
+  happiness: 90,
   endurance: 100,
   obedience: 60,
   modesty: 20,

@@ -2,7 +2,7 @@
 Girls.Holo = {
   description: "<p>Holo has a lovely figure, long flowing hair, wolf ears, and a beautiful brown tail with a splash of white at the end. She sometimes has to wear baggy clothing that hides her unusual features, though she dislikes this as she takes pride in her tail and takes special care of it, constantly combing and maintaining it. She is typically very haughty and self-sufficient and refers to herself as the \"Holo the Wise Wolf\". She is fond of delicious food and alcohol, but especially loves apples. Holo longs to return to Yoitz, her snowy homeland, and has made it this far north via a traveling merchant. Though reluctant, she's willing to work for you to raise the rest of the money she needs for her northern expedition.</p>",
   status: 'For Hire',
-  happiness: 0,
+  happiness: 75,
   endurance: 100,
   obedience: 20,
   charisma: 30,

@@ -52,7 +52,7 @@ e.GamePreRender.push(function actionPreRender(done) {
 });
 
 e.GameRender.push(function actionGameRender(done) {
-  $('.girl .right > div').click(function setActionDialog() {
+  $('.girl').find('.right').children().click(function setActionDialog() {
     var time = $(this).attr('name');
     var girl = g.girls[$(this).parent().parent().attr('name')];
     function renderActions(girl, time) {

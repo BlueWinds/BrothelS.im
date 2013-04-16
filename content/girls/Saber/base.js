@@ -1,7 +1,7 @@
 Girls.Saber = {
   description: "<p>Her full name is Arturia Pendragon, once king of a country lost in the mists of time and wielder of a holy sword.<p><p>On her death, she was transmuted into a spiritual guardian of the world, but through some process she's unwilling to discuss, has again become incarnate. Saber possesses magical artifacts that allow her to recover from almost any wound, and has almost unimaginable skill with a sword.</p><p>Despite her royal heritage and highly marketable skills, she seems willing to work for you...</p>",
   status: 'For Hire',
-  happiness: 0,
+  happiness: 50,
   endurance: 100,
   obedience: 80,
   modesty: 90,
@@ -291,7 +291,7 @@ Girls.Saber = {
             group: 'Saber',
             label: 'Visit to Rin',
             image: '<<- girl.image("rin") >>',
-            text: "Saber is met at the door of the Tohsaka mansion by Rin - and without any warning, there's a hand down her shirt fondling her breast, and another wrapped around her head pulling her in for a kiss. Caught completely off guard, Saber tenses up, but moans into Rin's mouth as the other woman finds her nipple and gives it a tweak. A shivers runs down Saber's spine as, helplessly swept along by Rin's enthusiasm and lust, Rin unbuttons her shirt right there in the hallway. She hardly has time to take a breath before Rin again comes at her from a different angle, trailing kisses down her neck and unclasping her bra with one hand. A cute little gasp escapes her lips as Rin finds her nipple again, this time with her lips. They collapse into a tangle right there in the front hallway, moaning and kissing and licking and panting when Saber finally manages to get Rin naked as well."
+            text: "Saber is met at the door of the Tohsaka mansion by Rin - and without any warning, there's a hand down her shirt fondling her breast, and another wrapped around her head pulling her in for a kiss. Caught completely off guard, Saber tenses up, and gives a surprised gasp into Rin's mouth as the other woman finds her nipple and gives it a tweak. A shiver runs down Saber's spine as, helplessly swept along by Rin's enthusiasm and lust, Rin unbuttons her shirt right there in the hallway. She hardly has time to take a breath before Rin again comes at her from a different angle, trailing kisses down her neck and unclasping her bra with one hand. A cute little moan escapes her lips as Rin finds her nipple again, this time with her lips. They collapse into a tangle right there in the front hallway, moaning and kissing and licking and panting when Saber finally manages to get Rin naked as well."
           },
           girl: {
             specialRules: { energySupply: 1, RinVisit: 1 },
@@ -460,7 +460,7 @@ Girls.Saber = {
         girl: { min: { specialRules: { FindAvalon: 3 }}}
       },
       optionsInfo: {
-        text: "Yesterday you located the magical artifact that resonates so closely with Saber that Tohsaka Rin has trouble telling them apart. It's currently in the possession of a spectacularly unhelpful man who seems unwilling to even discuss its existence - and if you don't agree to retrieve it for her, Saber is likely to make the attempt on her own. Letting her do that seems like a spectacularly bad idea ending, at best, with a dozen corpses and an inquest into your involvement. What do you suggest to her?",
+        text: "Yesterday you located the magical artifact that resonates so closely with Saber that Tohsaka Rin has trouble telling them apart. It's currently in the possession of a spectacularly unhelpful man who seems unwilling to even discuss its existence - and if you don't agree to retrieve it for her, Saber is likely to make the attempt on her own. Letting her do that seems like a bad idea ending with, at best, a dozen corpses and an inquest into your involvement. What do you suggest to her?",
         image: 'content/girls/Saber/missionImages/scarySaber.jpg'
       },
       options: [
@@ -472,7 +472,7 @@ Girls.Saber = {
         {
           key: 'fight',
           label: 'Smash and grab',
-          title: "You've seen Saber fight - whatever sailors remain on watch will be no match for her. You'll have to raise her <<- __('constitution') >> to make sure she can kock everyone out before they can raise an alarm properly."
+          title: "You've seen Saber fight - whatever sailors remain on watch will be no match for her. You'll have to raise her <<- __('constitution') >> to make sure she can knock everyone out before they can raise an alarm properly."
         }
       ],
       variants: [
@@ -615,7 +615,7 @@ Girls.Saber = {
               group: 'Saber',
               label: '...and another.',
               image: 'content/girls/Saber/missionImages/Rin.jpg',
-              text: "Your destination is an old mansion, not far away and still in the finer parts of Uptown. This time you're greeted at the front gate by a servant who seems to be expecting you. He bows and leads you into a waiting room without a word - a treatment more in line with your expectations for this part of town than Meghan's cluttered one-room-house. You don't have long to wait before the mistress of the house arrives.<br><br>Tohsaka Rin is all smiles and energy, arrogant and a bit rude in an oddly endearing way. She keeps looking at Saber with interest, even as Meghan introduces the two of you and explains the situation - Saber needs a steady and powerful stream of magical energy for to stay in the world, until you can find a more permanent solution. Rin laughs at the phrase \"steady stream of magical energy\", though you can tell it's as much to cover a blush at what it implies as because she finds it amusing.",
+              text: "Your destination is an old mansion, not far away and still in the finer parts of Uptown. This time you're greeted at the front gate by a servant who seems to be expecting you. He bows and leads you into a waiting room without a word - a treatment more in line with your expectations for this part of town than Meghan's cluttered one-room-house. You don't have long to wait before the mistress of the house arrives.<br><br>Tohsaka Rin is all smiles and energy, arrogant and a bit rude in an oddly endearing way. She keeps looking at Saber with interest, even as Meghan introduces the two of you and explains the situation - Saber needs a steady and powerful stream of magical energy to stay in the world, until you can find a more permanent solution. Rin laughs at the phrase \"steady stream of magical energy\", though you can tell it's as much to cover a blush at what it implies as because she finds it amusing.",
               delta: false
             },
             {

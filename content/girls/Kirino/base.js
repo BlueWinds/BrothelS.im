@@ -2,7 +2,7 @@
 Girls.Kirino = {
   description: "<p>After an attempted affair with her older brother ended in rejection, Kirino ran away from home - and just kept running, until she ran out of land.</p><p>She's made her living for several years now flitting between one 'project' after another, as she calls them. Working for you is the latest - <em>this time</em>, she insists it will work out.</p>",
   status: 'Hired',
-  happiness: 100,
+  happiness: 90,
   endurance: 100,
   obedience: 60,
   modesty: 10,

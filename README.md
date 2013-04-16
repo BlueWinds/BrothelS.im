@@ -5,16 +5,15 @@ From the server (recommended):
   1. Visit brothels.im, or dev.brothels.im (dev is less stable, but sometimes has neat features and additional content not yet introduced).
 
 From your local machine (simple version):
-  1. Double click on WebServerLite.jar
-    a. If your computer is unsure how to run this file, you need to download and install Java Runtime Environment. http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html
-  2. Open your browser, and put 127.0.0.1 in the address bar.
+  1. Double click on mongoose.exe (Windows), mongoose.sh (Linux) or mongoose.dmg (Mac).
+  2. Visit 127.0.0.1:8080 in your web browser
 
-Note that WebServerLite.jar is just a bloody simple webserver which echoes files in its directory to 127.0.0.1. There's nothing dynamic about this program - it's just that modern browsers are pretty picky about ajax requests on the file:// protocol (with good reason - doesn't make it any less annoying).
+Note that Mongoose is just a bloody simple webserver which echoes files in its directory to 127.0.0.1. There's nothing dynamic about this program - it's just that modern browsers are pretty picky about ajax requests on the file:// protocol (with good reason - doesn't make it any less annoying).
 
 License
 =============
 
-The contents of the "content" folder are provided as is. No claim is made on the images contained within. All text is original, and released into the public domain. The contents of the "libraries" folder are not mine either.
+The contents of the "content" folder are provided as is. No claim is made on the images contained within. All text is original, and released into the public domain. The contents of the "libraries" folder are not mine either. See each file file in that directory for its license header. Mongoose is originally from https://github.com/valenok/mongoose, used under its MIT license.
 
 The contents of the "modules" folder are Copyright 2012 Everblue Design and other contributors. They are released under the GNU General Public License v3.
 
