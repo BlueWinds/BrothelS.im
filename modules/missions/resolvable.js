@@ -250,7 +250,9 @@ Resolvable.prototype.getResults = function getResults(done, context) {
       return;
     }
     if (typeof(variant.result) == 'string') {
-      extra.splice(extra.indexOf(variant.result), 1);
+      if (extra.indexOf(variant.result) != -1) {
+        extra.splice(extra.indexOf(variant.result), 1);
+      }
     } else {
       variant.result.forEach(deleteVariants);
     }

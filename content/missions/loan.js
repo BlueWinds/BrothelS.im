@@ -7,12 +7,17 @@ Missions.firstPayment = {
       firstPayment: -3
     }
   },
+  special: {},
+  initialize: function () {
+    // 10000 + 50% of cash on hand.
+    this.special.amount = Math.floor(10000 + g.money * 0.5);
+  },
   display: {
     group: 'Payment Due',
     label: 'Payment Due',
     image: 'content/missions/loan/Seal.png',
     weight: -3,
-    text: "Well fuck.<br><br>They found you. You knew it was going to happen eventually, but you'd also hoped it would take at least another month or two. A courier delivered the letter midmorning - nothing so crass as a horse head on your pillow, but the effect is much the same. $10000, to be delivered to Lady Meghan in 30 days (<strong>Day <<- mission.end.max.day >></strong>). There's no signature, no pleasantries, just a symbol pressed into the paper, filled with green wax. Quite a large sum, but the message is clear. They know where you are, and your failure has not been forgotten.<br><br><< if (g.money < 10000) { >><em>(Don't worry if you can't save the full amount by the due date.)</em><< } >>"
+    text: "Well fuck.<br><br>They found you. You knew it was going to happen eventually, but you'd also hoped it would take at least another month or two. A courier delivered the letter midmorning - nothing so crass as a horse head on your pillow, but the effect is much the same. $<<- mission.special.amount >>, to be delivered to Lady Meghan in 30 days (<strong>Day <<- mission.end.max.day >></strong>). There's no signature, no pleasantries, just a symbol pressed into the paper, filled with green wax. Quite a large sum, but the message is clear. They know where you are, and your failure has not been forgotten.<br><br><< if (g.money < mission.special.amount) { >><em>(Don't worry if you can't save the full amount by the due date.)</em><< } >>"
   },
   end: {
     min: { day: '+30' },
@@ -20,8 +25,8 @@ Missions.firstPayment = {
   },
   variants: function (context, done) {
     var text = "You're not familiar with the lady you're supposed to deliver payment to, but one of your contacts in the Guild knows where to find her, a small house in Uptown. Though not a mansion as almost all of the surrounding buildings are, it's never the less in the most expensive part of town. You leave all of your girls to their work and head off to pay your respects (and your dues). The door opens after the first knock, revealing a young woman of university age. When you ask after Lady Meghan she smiles and invites you in - that's her.<br><br>The house seems to consist of only three rooms, kitchen joined to living room by an open counter and bedroom partitioned off with a curtain. You decline a cup of tea in her rather cramped living room, preferring to get straight to business. She seems entirely at home surrounded by bookshelves, dirty dishes perched wherever they can find space.";
-    var pay = Math.max(0, Math.min(g.money, 10000));
-    if (pay == 10000) {
+    var pay = Math.max(0, Math.min(g.money, this.special.amount));
+    if (pay == this.special.amount) {
       text += "You pass her the note and a bag of coins. She nods. Was that a faint hint of disapproval crossing her features as she saw the emblem impressed on the bottom of the note? It would seem odd, that you'd have to deliver your payment to someone who disapproved of the concept, but such is life. Meghan counts the money rapidly, then <blockquote>Your payment has been received in full...</blockquote>";
     } else {
       text += "You pass her the note and a " + (pay ? 'partially full' : 'completely empty') + " bag of coins with a nervous cough. You don't have all the money yet, you explain, but if she'll just give you a few more weeks... she looks at the note you handed her, a flicker of disapproval crossing her face. Not at you, oddly enough, but directed slip of paper. <blockquote>I will cover it, just this once. Your payment has been received in full... </blockquote>";
@@ -43,7 +48,7 @@ Missions.firstPayment = {
     Game.getUserInput(text, 'content/missions/loan/Meghan.jpg', options, function genderAnswer(answer) {
       g.player.gender = answer;
       g.player.title = answer == 'male' ? 'Sir' : 'Madame';
-      var result = $.extend({}, results[pay == 10000 ? 'full' : 'partial']);
+      var result = $.extend({}, results[pay == context.mission.special.amount ? 'full' : 'partial']);
       result.money = -pay;
       done(result);
     });
@@ -83,7 +88,7 @@ Missions.secondPayment = {
   special: {},
   initialize: function () {
     // 1000, or seven days of income, whichever is greater.
-    this.special.amount = Math.min(1000, g.averageIncome() * 7);
+    this.special.amount = Math.min(1000, g.averageIncome() * 7 + g.money * 0.5);
   },
   display: {
     group: 'Payment Due',
@@ -103,9 +108,9 @@ Missions.secondPayment = {
       g.gameOver(text, 'content/missions/loan/Seal.png');
       return;
     }
-    g.money -= this.special.amount;
     text = "With a bit more confidence this time, you head for Lady Meghan's house to deliver your payment. She's not so bad, for a collection agent of a nearly world-spanning and completely ruthless trade organization. Knocking on her door yields no result though - no one home. Odd. Given the part of town, you'd have expected at least a servant. Then you remember what the inside of this small house looks like, and realize that there's no room for a maid between all the bookshelves.<br><br>Wondering what to do next, you're about to leave and come back later when you spot Meghan tottering down the street, carrying a massive load of books. Where does she plan to fit them? You rush over as she nearly trips, teetering precariously... and falls into you with a thunderous crash, books flying all over the street. You begin to untangle yourself from the pile of literature and limbs, but Meghan doesn't move. As you move to cradle her head, her eyes flicker open.<blockquote>Ow. Merde... Ow. Sorry. Are you all right...</blockquote>";
-    var results = this.base().results.done;
+    var results = $.extend(true, {}, this.base().results.done);
+    results.money = -this.special.amount;
     Game.getUserInput(text, 'content/missions/loan/Meghan.jpg', 'Your Name', function (answer) {
       g.player.name = answer;
       done(results);

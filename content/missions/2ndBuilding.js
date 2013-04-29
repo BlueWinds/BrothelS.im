@@ -71,13 +71,13 @@ Missions.secondBuilding = {
         secondBuilding: false
       }
     },
-    'No thanks': {
+    noThanks: {
       mission: 'secondBuildingDelay',
       missionsDone: {
         secondBuilding: false
       }
     },
-    'Stacks of Cash': {
+    cash: {
       money: -55000,
       message: [
         {
@@ -96,7 +96,7 @@ Missions.secondBuilding = {
         }
       ]
     },
-    'Sex and Money': {
+    sex: {
       message: [
         {
           group: 'Guild Permits',

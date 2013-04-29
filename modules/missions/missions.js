@@ -35,6 +35,7 @@ Mission.checkStart = function checkStart(day, done, preDay) {
   $.each(Girls, function startGirlMissions(name, girl) {
     if (!girl.Missions) { return; }
     $.each(girl.Missions, function (_id, mission) {
+      if (mission.preDay != preDay) { return; }
       context = { day: day, girl: g.girls[name] };
       if (!mission.conditions || g.missions[_id]) { return; }
       mission = Mission.create(_id, context);
@@ -64,7 +65,7 @@ e.GameNew.push(function missionsNewGame(done) {
 e.GamePreDay.push(function missionsPreDay(done) {
   var series = [];
   $.each(g.missions, function (_id, mission) {
-    if (mission.preDay) {
+    if (mission.base().preDay) {
       series.push(function (next) {
         mission.checkDay(next);
       });
@@ -78,7 +79,7 @@ e.GamePreDay.push(function missionsPreDay(done) {
 e.GameNextDay.push(function missionsNextDay(done) {
   var series = [];
   $.each(g.missions, function (_id, mission) {
-    if (!mission.preDay) {
+    if (!mission.base().preDay) {
       series.push(function (next) {
         mission.checkDay(next);
       });

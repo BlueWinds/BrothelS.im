@@ -68,7 +68,7 @@ Missions.luxuryHouseSale = {
     label: 'House for Sale',
     group: 'House for Sale',
     image: 'content/buildings/LuxuriousHouse/Base.jpg',
-    text: "There has been some sort of scandal involving the city guard, in which nearly a dozen members were forced to resign in disgrace - apparently one of them has had to flee the country. The captain of the guard, Kim Xun, has been tasked with dealing with his property - among which is a Luxurious House in excellent condition.",
+    text: "There has been some sort of scandal involving the city guard, in which nearly a dozen members were forced to resign in disgrace - apparently one of them has had to flee the country. The captain of the guard, Kim Xun, has been tasked with dealing with his property - among which is a Luxurious House in excellent condition. It's now for sale for quite a reasonable price, considering the location.",
     weight: -1
   },
   results: { done: {
