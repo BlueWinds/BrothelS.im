@@ -10,7 +10,7 @@ Buildings['Luxurious House'] = {
     { type: 'Washroom' }
   ],
   maxRooms: 3,
-  basePrice: 30000,
+  basePrice: 20000,
   daily: {
     breakpoint: 50,
     above: {
