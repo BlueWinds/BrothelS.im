@@ -345,7 +345,8 @@ Girls.Saber = {
         },
         missions: {
           'secondPayment': 2,
-          'RetrieveAvalonFinal': -2
+          'RetrieveAvalonFinal': -2,
+          'RetrieveAvalonFail': -2
         }
       },
       variants: [
