@@ -344,7 +344,8 @@ Girls.Saber = {
           max: { specialRules: { energySupply: 0 }}
         },
         missions: {
-          'secondPayment': 2
+          'secondPayment': 2,
+          'RetrieveAvalonFinal': -2
         }
       },
       variants: [

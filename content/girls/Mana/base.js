@@ -42,7 +42,7 @@ Girls.Mana = {
           group: 'Mana',
           label: 'Talk',
           image: 'content/girls/Mana/images/Tired1.jpg',
-          text: "You settle down on the bench where you've agreed to meet her, and wait. And wait. And wai... oh, there she is, only half an hour late. Mana runs down the street towards you, waving her arms enthusiastically the ensure you know she's seen you and is coming. You wince in sympathy as she stumbles - perhaps she should pay more attention to the ground, and less to waving at you... Oh ouch. You're out of your seat and running towards her even as the carriage that flattened her rolls to a stop.<br><br>The driver apologizes profusely, but it really wasn't his fault that DMG dashed in front of his wheels without looking. You spend the rest of the <<- time >> tending to her injuries back at the <<- girl.building() ? girl.building().name : 'Inn'>>."
+          text: "You settle down on the bench where you've agreed to meet her, and wait. And wait. And wai... oh, there she is, only half an hour late. Mana runs down the street towards you, waving her arms enthusiastically the ensure you know she's seen you and is coming. You wince in sympathy as she stumbles - perhaps she should pay more attention to the ground, and less to waving at you... Oh ouch. You're out of your seat and running towards her even as the carriage that flattened her rolls to a stop.<br><br>The driver apologizes profusely, but it really wasn't his fault that Mana dashed in front of his wheels without looking. You spend the rest of the <<- time >> tending to her injuries back at the <<- girl.building() ? girl.building().name : 'Inn'>>."
         },
         girl: {
           obedience: 2.5,

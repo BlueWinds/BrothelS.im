@@ -74,7 +74,7 @@ Girls.Holo = {
           group: 'Holo',
           label: 'Talk',
           image: 'content/girls/Holo/images/Talk2.jpg',
-          text: "You knock on the closed door of Holo's room. A moment later she asks you to come in, just finishing getting dressed, and you see a little more of her than you expected. You start to say something, but she silences the objection with a wave of one hand, Holo dismissing such thoughts as prudish. You both sit on her bed, and you ask her how she's doing at finding her way around Valaia and how she's finding life in general. She has no interest in talking about herself, and instead spends a great deal of effort trying to learn about your history while feigning disinterest. The conversation is enjoyable, even if not very productive."
+          text: "You knock on the closed door of Holo's room. A moment later she asks you to come in, just finishing getting dressed, and you see a little more of her than you expected. You start to say something, but she silences the objection with a wave of one hand, dismissing such thoughts as prudish. You both sit on her bed, and you ask her how she's doing at finding her way around Valaia and how she's finding life in general. She has no interest in talking about herself, and instead spends a great deal of effort trying to learn about your history while feigning disinterest. The conversation is enjoyable, even if not very productive."
         },
         girl: {
           obedience: 1,
