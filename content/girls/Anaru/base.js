@@ -18,15 +18,15 @@ Girls.Anaru = {
   fetishLibido: 5,
   fetishExperience: 0,
   images: {
-    basePath: "content/girls/Holo/images",
+    basePath: "content/girls/Anaru/images",
     base: "Base.png",
     refuse: ["Refuse1.jpg", "Refuse2.jpg", "Refuse3.jpg"],
     tired: ["Tired1.jpg", "Tired2.jpg", "Tired3.jpg", "Tired4.jpg"],
     soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg"],
     hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg", "Hard5.jpg", "Hard6.jpg"],
     anal: ["Anal1.jpg", "Anal2.jpg", "Anal3.jpg", "Anal4.jpg"],
-    fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4"],
-    group: ["Group1.jpg", "Group2.jpg", "Group3.jpg", "Group4.jpg", "Group5.jpg", "Group6.jpg"],
+    fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4.jpg"],
+    group: ["Group1.jpg", "Group2.jpg", "Group3.jpg", "Group4.jpg", "Group5.jpg", "Group6.jpg", "Group7.jpg"],
     cleaning: ["Clean.jpg", "Clean2.jpg", "Clean3.jpg"],
     exercise: ["Exercise1.jpg", "Exercise2.jpg"],
     study: ["Study1.jpg", "Study2.jpg"],
@@ -44,7 +44,6 @@ Girls.Anaru = {
   Actions: {
     Talk: $.extend(true, {
       variants: [
-        { girl: { min: { specialRules: { talk: 4 }}}, result: 'AnaruDirections' },
         { time: 'morning', likelyhood: 0.2, result: 'AnaruTour' },
         { time: 'evening', likelyhood: 0.2, result: 'AnaruEvening' }
       ],
@@ -54,7 +53,7 @@ Girls.Anaru = {
             group: 'Anaru',
             label: 'Talk',
             image: 'content/girls/Anaru/images/Talk1.jpg',
-            text: "You pay a visit to Anaru's room at the <<- girl.building() ? girl.building().name : 'inn' >>. You knock, but there is no answer. Cracking the door to see if she's in, you see a flash of flesh - she's present, but very much in a state of undress. << if (girl.modesty > 15) { >>Anaru gasps and clutches at some nearby clothing in an attempt to cover herself quickly, but you have already seen everything. She is blushing intensely. <blockquote>Please knock!</blockquote> You wait outside and let her dress, but you're not surprised when you're not able to get much conversation out of her this visit.<< } else { >>Anaru smiles demurely, but she does not try to cover up. <blockquote>I'm not quite ready yet. Could I get you to wait just a couple of minutes more?</blockquote> You wait outside and let her dress, and when she invites you back in you find it difficult to give your full attention to the conversation.<< } >>"
+            text: "You pay a visit to Anaru's room at the <<- girl.building() ? girl.building().name : 'inn' >>. You knock, but there is no answer. Cracking the door to see if she's in, you see a flash of flesh - she's present, but very much in a state of undress. << if (girl.modesty > 15) { >>Anaru gasps and clutches at some nearby clothing in an attempt to cover herself quickly, but you have already seen everything. She is blushing intensely. <blockquote>Please knock!</blockquote> You wait outside and let her dress, but you're not surprised when you're not able to get much conversation out of her this visit.<< } else { >>Anaru smiles demurely, but she does not try to cover up. <blockquote>I'm not quite ready yet. Could I get you to wait just a couple of minutes more?</blockquote> You wait outside and let her dress, but when she invites you back in you find it difficult to give your full attention to the conversation.<< } >>"
           },
           girl: {
             obedience: 1.5,
@@ -66,8 +65,8 @@ Girls.Anaru = {
           message: {
             group: 'Anaru',
             label: 'Talk',
-            image: 'content/girls/Anaru/images/Study1.jpg',
-            text: "You spend the <<- time >> with Anaru, using the opportunity to ask her again about how she came to this country. She seems tired of the story, as though she's repeated it dozens of times, but she still manages to give you an abridged version. According to her, she was attending class one day when a mysterious man approached her and bowed at her feet, swearing fealty to her and offering her protection. Perhaps because of his presence, a giant crow attacked them both, and the man brought her through a shoku whirlpool to safety. She ended up this land, and when she lost track of him in a scuffle, she had to find employment with her transferable skills. Luckily, you offered her on-the-job training."
+            image: 'content/girls/Anaru/images/Talk2.jpg',
+            text: "You spend the <<- time >> with Anaru, using the opportunity to ask her again about how she came to this country. She seems tired of the story, as though she's repeated it dozens of times, but she still manages to give you an abridged version. According to her, she was attending class one day when a mysterious man approached her and bowed at her feet, swearing fealty to her and offering her protection. Perhaps because of his presence, a giant crow attacked them both, and the man brought her through a shoku whirlpool to safety. She ended up this land, and when she lost track of him in a scuffle, she had to find employment with her few transferable skills. Luckily, you offered her on-the-job training."
           },
           girl: {
             obedience: 2.5,
@@ -91,8 +90,8 @@ Girls.Anaru = {
           message: {
             group: 'Anaru',
             label: 'Talk',
-            image: 'content/girls/Anaru/images/Base.png',
-            text: "You arrange to have an inexpensive horse-cart tour around the city to get Anaru more familiar with her new surroundings. Sure, walking is cheaper, but this is quicker and has the side benefit of impressing her somewhat - there are no horses where she comes from, it seems. Though she has seen some of the city already, she is clearly impressed as the cart driver takes you past a few of the grander buildings. She seems to radiate contentment when you ride through the park, and she blushes but attempts not to look away as you ride through the redlight district. And the end of the trip, you help her down from the cart and pay the driver. Hopefully it was somewhat educational for Anaru."
+            image: 'content/girls/Anaru/images/Talk4.jpg',
+            text: "You arrange to have an inexpensive horse-cart tour around the city to get Anaru more familiar with her new surroundings. Sure, walking is cheaper, but this is quicker and has the side benefit of impressing her somewhat - horses are rare where she comes from, it seems. Though she has seen some of the city already, she is clearly impressed as the cart driver takes you past a few of the grander buildings. She seems to radiate contentment when you ride through the park, and she blushes but attempts not to look away as you ride through the redlight district. And the end of the trip, you help her down from the cart and pay the driver. Hopefully it was somewhat educational for Anaru."
           },
           girl: {
             obedience: 1.5,
@@ -123,44 +122,11 @@ Girls.Anaru = {
           girl: {
             endurance: -4,
             happiness: -2,
+			obedience: 1,
             specialRules: { talk: 1 }
           }
         }
       }
     }, Actions.Talk)
   }, // actions
-  Events: {
-    MeetJiraiya: {
-      tags: {
-        redlight: 0.7
-      },
-      conditions: {
-        missions: { AnaruDirections1: 1 },
-        ownerParticipation: true
-      },
-      results: { done: {
-        message: {
-          group: 'Anaru',
-          label: 'Talk',
-          image: 'content/girls/Anaru/missions/.jpg',
-          text: "Anaru seems excited today. You're about to head out for the morning when she bursts into your room, practically bubbling with excitement,<blockquote>Did I ever tell about my childhood friend, Menma? I haven't seen her for years, but one of the weaving girls told me she thinks she saw her! Menma stands out because of her silvery blonde hair. Apparently she has a place just near the onsen. As soon as you're free, could we please look for around there?</blockquote>Perhaps <strong>exploring the Redlight District</strong> (where the Onsen is located) with Anaru will be worthwhile. It would certainly make her happy.",
-          weight: -1
-        }
-      }}
-    }
-  },
-  Missions: {
-    AnaruDirections1: {
-      conditions: {
-        girl: { min: { specialRules: { talk: 5 }}}
-      },
-      display: {
-        group: 'Anaru',
-        label: 'Talk',
-        image: 'content/girls/Anaru/images/Directions.jpg',
-        text: "Anaru seems excited today. You're about to head out for the morning when she bursts into your room, practically bubbling with excitement,<blockquote>Did I ever tell about my childhood friend, Menma? I haven't seen her for years, but one of the weaving girls told me she thinks she saw her! Menma stands out because of her silvery blonde hair. Apparently she has a place just near the onsen. As soon as you're free, could we please look for around there?</blockquote>Perhaps <strong>exploring the Redlight District</strong> (where the Onsen is located) with Anaru will be worthwhile. It would certainly make her happy.",
-        weight: -1
-      }
-    }
-  } // missions
 };

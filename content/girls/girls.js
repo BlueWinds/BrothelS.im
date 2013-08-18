@@ -1,5 +1,6 @@
 "use strict";
 Game.includes.push(
+  'content/girls/Anaru/base.js',
   'content/girls/Holo/base.js',
   'content/girls/Jill/base.js',
   'content/girls/Kirino/base.js',
