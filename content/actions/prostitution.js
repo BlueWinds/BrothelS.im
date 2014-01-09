@@ -143,13 +143,13 @@ Actions.Whore = {
       anal: [
         'Even with plenty of toy use and lubrication, it still took quite some time to fit his massive dick into her tight asshole. He was gentle though, and she enjoyed herself despite the pain.',
         'Though he was in a hurry and wanted to get started right away, she insisted on taking it slowly, moving from kissing to oral before finally letting him take her ass doggy-style.',
-        'He didn\'t actually want to fuck her ass, just plug it was a huge toy while they had sex the old fashioned way.',
+        'He didn\'t actually want to fuck her ass, just plug it with a huge toy while they had sex the old fashioned way.',
         'He had her sit on the edge of the bed and lay back while he teased her pussy with his tongue, slowly working first one finger then two into her ass. By the time he had three in, she was cooing with delight and welcomed the replacement of the fingers with his cock.'
       ],
       fetish: [
         'He stripped her naked and suspended her from a conveniently placed ceiling hook - she was worried about suspension at first, but he seemed to know what he was doing. He fucked her mouth and spanked her, making her beg for more cum to swallow (which he provided) before he would let her down.',
         'Bound and helpless before him, he teased her clit, nipples and thighs with a feather for nearly half an hour, until she finally broke down and begged to be fucked. He satisfied himself with her ass, continuing to tease her pussy all the while.',
-        'Providing her a schoolgirl costume to wear, he spanked her, and tied her arms behind her back. She alternated between apologizingfor being so naughty and slurping messily on his cock.',
+        'Providing her a schoolgirl costume to wear, he spanked her, and tied her arms behind her back. She alternated between apologizing for being so naughty and slurping messily on his cock.',
         'He didn\'t want anything particularly extreme, just a bit of instruction on the proper way to tie up a girl without hurting her. She was happy to oblige in a bit of light rope-play.'
       ]
     }
