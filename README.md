@@ -5,7 +5,7 @@ From the server (recommended):
   1. Visit brothels.im, or dev.brothels.im (dev is less stable, but sometimes has neat features and additional content not yet introduced).
 
 From your local machine (simple version):
-  1. Double click on mongoose.exe (Windows), mongoose.sh (Linux) or mongoose.dmg (Mac).
+  1. Double click on mongoose.exe (Windows), mongoose.sh (Linux) or mongoose.app (Mac).
   2. Visit 127.0.0.1:8080 in your web browser
 
 Note that Mongoose is just a bloody simple webserver which echoes files in its directory to 127.0.0.1. There's nothing dynamic about this program - it's just that modern browsers are pretty picky about ajax requests on the file:// protocol (with good reason - doesn't make it any less annoying).

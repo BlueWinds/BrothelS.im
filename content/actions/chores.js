@@ -65,7 +65,7 @@ Actions.Clean = {
         group: '<<- girl.name >>',
         label: 'Clean <<- building.name >>',
         image: '<<- girl.modesty > 40 ? girl.image("cleaning") : girl.image("naked") >>',
-        text: "<<- girl.name >> carefully chooses some cleaning supplies, <<- girl.modesty > 40 ? 'puts on some old clothes' : 'puts her clothes aside to keep them from getting dirty' >>, and gets to work cleaning the bathrooms in << building.name >>. It's tough work and fairly draining, but she gets the place look as good as you've ever seen it."
+        text: "<<- girl.name >> carefully chooses some cleaning supplies, <<- girl.modesty > 40 ? 'puts on some old clothes' : 'puts her clothes aside to keep them from getting dirty' >>, and gets to work cleaning the bathrooms in << building.name >>. It's tough work and fairly draining, but she gets the place to look as good as you've ever seen it."
       },
       money: -10,
       building: { clean: 11 },
