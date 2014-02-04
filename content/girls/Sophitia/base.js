@@ -65,8 +65,8 @@ Girls.Sophitia = {
         message: {
           group: 'Sophitia',
           label: 'Talk',
-          image: 'content/girls/Sakuya/images/Study2.jpg',
-          text: "You and Sophitia spend several hours checking over the rules and regulations that govern the Guild, and therefor your brothel. She seems to have nearly infinite patience for such a boring task, taking notes even as the material threatens to send you napping."
+          image: 'content/girls/Sophitia/images/Study2.jpg',
+          text: "You and Sophitia spend several hours checking over the rules and regulations that govern the Guild, and therefore your brothel. She seems to have nearly infinite patience for such a boring task, taking notes even as the material threatens to send you napping."
         },
         girl: {
           obedience: 1.5,
