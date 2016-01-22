@@ -9,31 +9,36 @@ Girls.Sophitia = {
   charisma: 50,
   intelligence: 20,
   constitution: 40,
-  softExperience: 0,
-  hardExperience: 20,
-  analExperience: 20,
-  fetishExperience: 0,
   softLibido: 10,
+  softExperience: 0,
   hardLibido: 40,
+  hardExperience: 20,
   analLibido: 60,
+  analExperience: 20,
   fetishLibido: 10,
+  fetishExperience: 0,
   images: {
     basePath: "content/girls/Sophitia/images",
     base: "Base.png",
     refuse: "Refuse.jpg",
-    tired: "Tired.jpg",
+    tired: ["Tired1.jpg", "Tired2.jpg"],
     soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg", "Soft6.jpg"],
-    hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg"],
+    hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg", "Hard5.jpg", "Hard6.jpg"],
     anal: ["Anal1.jpg", "Anal2.jpg", "Anal3.jpg", "Anal4.jpg"],
-    fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg"],
-    group: ["Group1.jpg", "Group2.jpg", "Group3.jpg", "Group4.jpg", "Group5.jpg"],
-    cleaning: "Cleaning.jpg",
+    fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4.jpg", "Fetish5.jpg"],
+    group: ["Group1.jpg", "Group2.jpg", "Group3.jpg", "Group4.jpg", "Group5.jpg", "Group6.jpg", "Group7.jpg"],
+    cleaning: ["Clean1.jpg", "Clean2.jpg"],
     exercise: "Exercise.jpg",
     study: ["Study1.jpg", "Study2.jpg"],
-    naked: ["Naked1.jpg", "Naked2.jpg"],
-    prison: "Prison.jpg",
+    naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg", "Naked4.jpg"],
+    prison: ["Prison1.jpg", "Prison2.jpg"],
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg", "Tentacles5.jpg"],
     pregnant: "Pregnant.jpg"
+  },
+  specialRules: {
+    dependentStats: {
+      constitution: { constitution: 0.5 } // As a fighter, Sophitia can train her constitution more effectively.
+    }
   },
   Actions: {
     Talk: $.extend(true, { results: {
@@ -54,7 +59,7 @@ Girls.Sophitia = {
           group: 'Sophitia',
           label: 'Talk',
           image: 'content/girls/Sophitia/images/Study1.jpg',
-          text: "When you knock on her door, Sophitia is sitting on a couch reading. She smiles as you enter, inviting you to take the only chair in the room without rising. She rests the book over one knee - you can't read the cover, but it looks like a cheesy romance from here. You ask her about it, and learn that it is indeed a romance, the heroine of which is a distressed bakers daughter. Curious reading material for a whore, but she doesn't seem to think it odd at all."
+          text: "When you knock on her door, Sophitia is sitting on a couch reading. She smiles as you enter, inviting you to take the only chair in the room without rising. She rests the book over one knee - you can't read the cover, but it looks like a cheesy romance from here. You ask her about it, and learn that it is indeed a romance, the heroine of which is a distressed baker\'s daughter. Curious reading material for a whore, but she doesn't seem to think it odd at all."
         },
         girl: {
           obedience: 1.5,
@@ -73,7 +78,33 @@ Girls.Sophitia = {
           happiness: 2,
           endurance: -5
         }
-      }
-    }}, Actions.Talk)
+      },
+      Sophitia4: {
+        message: {
+          group: 'Sophitia',
+          label: 'Talk',
+          image: 'content/girls/Sophitia/images/Naked1.jpg',
+          text: "It may have been a mistake to let Sophitia decide what to do this <<- time >>. She suggests sparring with wooden swords, and she is quite a proficient swordswoman depsite her humble background. You get disarmed and knocked backwards six or seven times before you forfeit. You leave her to her training so that you can tend to your aching muscles."
+        },
+        girl: {
+          happiness: 4,
+		  constitution: 1,
+          endurance: -8
+        }
+      },
+	  Sophitia5: {
+        message: {
+          group: 'Sophitia',
+          label: 'Talk',
+          image: 'content/girls/Sophitia/images/Talk2.jpg',
+          text: "Your <<- time >> visit to Sophitia starts with a question.<blockquote><<- girl.modesty > 10 ? 'Is this skirt too revealing?' : 'Should I have this skirt taken up a little?' >></blockquote>The answer to this dangerous question is unmistakably yes, but you give a vague response that could be mistaken for whatever she's fishing for.<blockquote><<- girl.hardLibido > 70 ? 'It takes forever to take off when I\'m about to have sex. Look, did you see how long that took me?' : 'The way it is now makes me seem must make me seem like such a loose woman.' >></blockquote>>You nod in agreement, unsure of what to say."
+		  
+        },
+        girl: {
+          obedience: 1.5,
+          happiness: 2,
+        }
+	  }
+	}, Actions.Talk)
   }
 };
