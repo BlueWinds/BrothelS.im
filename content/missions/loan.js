@@ -158,7 +158,7 @@ Missions.LapisAzurai = {
     label: 'A new game',
     image: 'content/missions/loan/Lapis.jpg',
     weight: -10,
-    text: "A note from BlueWinds, the developer:<br><br>If you're enjoying this game, why note check out <a href='https://www.kickstarter.com/projects/bluewinds/lapis-azurai'>my newest one</a>? There's a playable demo - and I promise it's a lot more polished than this, my earliest effort. I make games with your support - please consider contributing and spreading the word."
+    text: "A note from BlueWinds, the developer:<br><br>If you're enjoying this game, why not check out <a href='http://play.winds.blue/'>my newest one</a>? There's a playable demo - and I promise it's a lot more polished than this, my earliest effort. I make games with your support - please consider contributing and spreading the word."
   },
   end: {
     min: { day: '+1' },
