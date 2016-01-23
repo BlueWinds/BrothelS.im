@@ -30,7 +30,7 @@ Girls.Sophitia = {
     cleaning: ["Clean1.jpg", "Clean2.jpg"],
     exercise: "Exercise.jpg",
     study: ["Study1.jpg", "Study2.jpg"],
-    naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg", "Naked4.jpg"],
+    naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg"],
     prison: ["Prison1.jpg", "Prison2.jpg"],
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg", "Tentacles5.jpg"],
     pregnant: "Pregnant.jpg"
@@ -59,7 +59,7 @@ Girls.Sophitia = {
           group: 'Sophitia',
           label: 'Talk',
           image: 'content/girls/Sophitia/images/Study1.jpg',
-          text: "When you knock on her door, Sophitia is sitting on a couch reading. She smiles as you enter, inviting you to take the only chair in the room without rising. She rests the book over one knee - you can't read the cover, but it looks like a cheesy romance from here. You ask her about it, and learn that it is indeed a romance, the heroine of which is a distressed baker\'s daughter. Curious reading material for a whore, but she doesn't seem to think it odd at all."
+          text: "When you knock on her door, Sophitia is sitting on a couch reading. She smiles as you enter, inviting you to take the only chair in the room without rising. She rests the book over one knee - you can't read the cover, but it looks like a cheesy romance from here. You ask her about it, and learn that it is indeed a romance, the heroine of which is a distressed baker's daughter. Curious reading material for a whore, but she doesn't seem to think it odd at all."
         },
         girl: {
           obedience: 1.5,
