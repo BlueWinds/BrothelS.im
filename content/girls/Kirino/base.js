@@ -76,7 +76,7 @@ Girls.Kirino = {
           happiness: 3
         }
       },
-      Kirion4: {
+      Kirino4: {
         message: {
           group: 'Kirino',
           label: 'Talk',

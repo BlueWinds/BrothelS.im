@@ -2,7 +2,7 @@ Running the game
 =============
 
 From the server (recommended):
-  1. Visit brothels.im, or dev.brothels.im (dev is less stable, but sometimes has neat features and additional content not yet introduced).
+  1. Visit brothels.im
 
 From your local machine (simple version):
   1. Double click on mongoose.exe (Windows), mongoose.sh (Linux) or mongoose.app (Mac).
