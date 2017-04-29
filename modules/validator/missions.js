@@ -1,6 +1,6 @@
 "use strict";
 Schemas.MissionName = {
-  'enum': Object.keys(Missions)._append($.map(Girls, function (girl) {
+  'enum': Object.keys(Missions)._append($.map(Girls, girl => {
     if (girl.Missions) { return Object.keys(girl.Missions); }
   }))
 };

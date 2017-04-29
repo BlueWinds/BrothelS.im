@@ -51,7 +51,7 @@ e.GameInit.unshift(function updatesGameInit(done) {
     }
   }
   if (g.version < 0.521) {
-    $.each(g.girls, function (name, girl) {
+    $.each(g.girls, (name, girl) => {
       delete girl.reputation;
     });
   }

@@ -8,8 +8,7 @@
  *  jquery.ui.widget.js
  *  jquery.ui.mouse.js
  */
-(function ($) {
-
+(($ => {
   // Detect touch support
   $.support.touch = 'ontouchend' in document;
 
@@ -18,9 +17,9 @@
     return;
   }
 
-  var mouseProto = $.ui.mouse.prototype,
-      _mouseInit = mouseProto._mouseInit,
-      touchHandled;
+  var mouseProto = $.ui.mouse.prototype;
+  var _mouseInit = mouseProto._mouseInit;
+  var touchHandled;
 
   /**
    * Simulate a mouse event based on a corresponding touch event
@@ -28,7 +27,6 @@
    * @param {String} simulatedType The corresponding mouse event
    */
   function simulateMouseEvent (event, simulatedType) {
-
     // Ignore multi-touch events
     if (event.originalEvent.touches.length > 1) {
       return;
@@ -36,9 +34,9 @@
 
     event.preventDefault();
 
-    var touch = event.originalEvent.changedTouches[0],
-        simulatedEvent = document.createEvent('MouseEvents');
-    
+    var touch = event.originalEvent.changedTouches[0];
+    var simulatedEvent = document.createEvent('MouseEvents');
+
     // Initialize the simulated mouse event using the touch event's coordinates
     simulatedEvent.initMouseEvent(
       simulatedType,    // type
@@ -156,5 +154,4 @@
     // Call the original $.ui.mouse init method
     _mouseInit.call(self);
   };
-
-})(jQuery);
+}))(jQuery);
