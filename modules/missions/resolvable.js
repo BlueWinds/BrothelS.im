@@ -164,12 +164,12 @@ Resolvable.prototype.getOptions = function getOptions(context) {
   if (typeof(options) == 'function') {
     newOptions = options.call(this, context);
   } else if (options == 'girls') {
-    g.girls._filter('status', 'Hired').forEach(function (girl) {
+    g.girls._filter('status', 'Hired').forEach(girl => {
       if (girl.name == context.girl.name) { return; }
       newOptions.push({ key: girl.name, label: girl.name, title: girl.name });
     });
   } else if (options == 'buildings') {
-    g.buildings._filter('status', 'Owned').forEach(function (building) {
+    g.buildings._filter('status', 'Owned').forEach(building => {
       newOptions.push({
         key: building.name,
         label: building.name,
@@ -223,7 +223,7 @@ Resolvable.prototype.getResults = function getResults(done, context) {
       var $this = this;
       var image = ejs.render(base.optionsInfo.image, context);
       var text = ejs.render(base.optionsInfo.text, context);
-      Game.getUserInput(text, image, options, function (answer) {
+      Game.getUserInput(text, image, options, answer => {
         $this.setOption(answer);
         $this.getResults(done, context);
       });
@@ -241,7 +241,7 @@ Resolvable.prototype.getResults = function getResults(done, context) {
     return;
   }
   var extra = Object.keys(base.results);
-  var deleteVariants = function (a) { extra.splice(extra.indexOf(a), 1); };
+  var deleteVariants = a => { extra.splice(extra.indexOf(a), 1); };
   for (var i in base.variants) {
     var variant = base.variants[i];
     if (this.checkConditions(variant)) {
@@ -261,7 +261,7 @@ Resolvable.prototype.getResults = function getResults(done, context) {
 };
 
 Resolvable.prototype.applyResults = function applyResults(results, done, context) {
-  var series = [function (next) {
+  var series = [next => {
     e.invokeAll('ApplyResults', results, context, next);
   }];
   var changes = [];
@@ -279,10 +279,10 @@ Resolvable.prototype.applyResults = function applyResults(results, done, context
   if (results.building && context.building) { context.building.apply(results.building); }
   if (results.message) {
     var delta = {};
-    changes.forEach(function (d) { delta._add(d()); });
+    changes.forEach(d => { delta._add(d()); });
     if (results.money && !changes.length) { delta.money = results.money; }
     var messages = results.message.length ? results.message : [results.message];
-    messages.forEach(function (message) {
+    messages.forEach(message => {
       var live = Message.send(message, context);
       live.delta = message.delta === false ? {} : delta;
     });
@@ -296,7 +296,7 @@ Resolvable.prototype.applyResults = function applyResults(results, done, context
         if (mission.getEnd()) {
           g.missions[results.mission] = mission;
         } else {
-          series.push(function (next) { mission.checkDay(next); });
+          series.push(next => { mission.checkDay(next); });
         }
       }
     });

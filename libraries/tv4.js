@@ -7,7 +7,7 @@ This code is released into the "public domain" by its author.  Anybody may use, 
 If you find a bug or make an improvement, it would be courteous to let the author know, but it is not compulsory.
 **/
 
-(function (global) {
+((global => {
 function validateAll(data, schema) {
 	if (schema['$ref'] != undefined) {
 		schema = global.tv4.getSchema(schema['$ref']);
@@ -454,7 +454,7 @@ function resolveUrl(base, href) {// RFC 3986
 		input.replace(/^(\.\.?(\/|$))+/, '')
 			.replace(/\/(\.(\/|$))+/g, '/')
 			.replace(/\/\.\.$/, '/../')
-			.replace(/\/?[^\/]*/g, function (p) {
+			.replace(/\/?[^\/]*/g, p => {
 				if (p === '/..') {
 					output.pop();
 				} else {
@@ -505,7 +505,7 @@ function ValidationError(message, dataPath, schemaPath, subErrors) {
 	this.subErrors = subErrors ? subErrors : null;
 }
 ValidationError.prototype = {
-	prefixWith: function (dataPrefix, schemaPrefix) {
+	prefixWith(dataPrefix, schemaPrefix) {
 		if (dataPrefix != null) {
 			dataPrefix = dataPrefix.replace("~", "~0").replace("/", "~1");
 			this.dataPath = "/" + dataPrefix + this.dataPath;
@@ -548,7 +548,7 @@ function searchForTrustedSchemas(map, schema, url) {
 
 var publicApi = {
 	schemas: {},
-	validate: function (data, schema) {
+	validate(data, schema) {
 		if (typeof schema == "string") {
 			schema = {"$ref": schema};
 		}
@@ -565,7 +565,7 @@ var publicApi = {
 			return false;
 		}
 	},
-	addSchema: function (url, schema) {
+	addSchema(url, schema) {
 		var map = {};
 		map[url] = schema;
 		normSchema(schema, url);
@@ -575,7 +575,7 @@ var publicApi = {
 		}
 		return map;
 	},
-	getSchema: function (url) {
+	getSchema(url) {
 		if (this.schemas[url] != undefined) {
 			var schema = this.schemas[url];
 			return schema;
@@ -614,10 +614,10 @@ var publicApi = {
 	},
 	missing: [],
 	error: null,
-	normSchema: normSchema,
-	resolveUrl: resolveUrl
+	normSchema,
+	resolveUrl
 };
 
 global.tv4 = publicApi;
-})((typeof module !== 'undefined' && module.exports) ? exports : this);
+}))((typeof module !== 'undefined' && module.exports) ? exports : this);
 

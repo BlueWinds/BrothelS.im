@@ -132,7 +132,7 @@ Actions.Advertise = {
   },
   options: function advertiseOptions() {
     var options = [];
-    g.buildings._filter('status', 'Owned').forEach(function (building) {
+    g.buildings._filter('status', 'Owned').forEach(building => {
       options.push({ key: building.name, label: building.name, title: building.name });
     });
     options.push({ key: 'Inn', label: 'Inn', title: 'Inn' });

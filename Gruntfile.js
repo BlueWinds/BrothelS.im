@@ -67,7 +67,7 @@ module.exports = function doGrunt(grunt) {
   grunt.registerTask('addVersion', function () {
     var done = this.async();
     var index = __dirname + '/index.html';
-    fs.readFile(index, 'utf-8', function (err, data) {
+    fs.readFile(index, 'utf-8', (err, data) => {
       var version = data.match(/Version = ([0-9\.]+)/)[0];
       version = version.substr(10);
       data = (data).replace(/\?v=[0-9\.]+/g, '?v=' + version);

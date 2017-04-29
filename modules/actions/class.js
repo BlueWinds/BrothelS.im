@@ -106,7 +106,7 @@ Action.prototype.getTags = function getTags(context) {
   return base.tags || {};
 };
 
-(function () {
+((() => {
   // This goes here instead of in Buildings, because otherwise we'd just be writing one function, then undoing the changes under some circumstances with a second, more advanced copy of the exact same one.
   var originalPay = Girl.prototype.desiredPay;
   Girl.prototype.desiredPay = function desiredPay() {
@@ -114,11 +114,11 @@ Action.prototype.getTags = function getTags(context) {
     var pay = originalPay.call(this);
     return this.building() || this.awayFromHome() ? pay : pay + Building.config.noRoomDailyCost;
   };
-})();
+}))();
 
 Girl.actions = function actions(time) {
   var list = {};
-  g.girls._filter('status', 'Hired').forEach(function (girl) {
+  g.girls._filter('status', 'Hired').forEach(girl => {
     list[girl.actions[time]._id] = list[girl.actions[time]._id] || [];
     list[girl.actions[time]._id].push(girl.name);
   });
@@ -154,7 +154,7 @@ Girl.prototype.verifyAction = function verifyAction(time, rebuild, allowFalseCon
   if (a && a.locked) { return; }
   a = a && a.checkConditions(undefined, undefined, allowFalseConditions) && !a.checkDisabled() && a;
   if (!a) {
-    this.setAction(this.action('Rest', { time: time }));
+    this.setAction(this.action('Rest', { time }));
     a = this.actions[time];
   }
   if (a.option) {
@@ -164,7 +164,7 @@ Girl.prototype.verifyAction = function verifyAction(time, rebuild, allowFalseCon
     }
   }
   if (rebuild) {
-    this.setAction(this.action(a._id, {time: time}));
+    this.setAction(this.action(a._id, {time}));
     if (a.option) { this.actions[time].setOption(a.option); }
   }
 };
@@ -172,7 +172,7 @@ Girl.prototype.verifyAction = function verifyAction(time, rebuild, allowFalseCon
 Girl.prototype.potentialActions = function potentialActions(time) {
   var actions = {};
   var context = {
-    time: time
+    time
   };
   var _id;
   if (this.base().Actions) {
@@ -199,7 +199,7 @@ Girl.prototype.awayFromHome = function awayFromHome() {
 
 Game.prototype.ownerAction = function ownerAction(time) {
   var action;
-  g.girls._filter('status', 'Hired').forEach(function (girl) {
+  g.girls._filter('status', 'Hired').forEach(girl => {
     if (girl.actions[time] && girl.actions[time].ownerParticipation) {
       action = girl.actions[time];
     }
@@ -210,7 +210,7 @@ Game.prototype.ownerAction = function ownerAction(time) {
 // Yep, completely overwriting the original function with this slightly more advanced one.
 Building.prototype.girls = function getGirls() {
   var girls = {};
-  this.rooms._accumulate('girl').forEach(function (name) {
+  this.rooms._accumulate('girl').forEach(name => {
     if (!g.girls[name].awayFromHome()) {
       girls[name] = g.girls[name];
     }
@@ -218,7 +218,7 @@ Building.prototype.girls = function getGirls() {
   return girls;
 };
 
-(function () {
+((() => {
   var oldCheckConditions = Resolvable.prototype.checkConditions;
   Resolvable.prototype.checkConditions = function checkConditions(cond, context, allowFalseConditions) {
     cond = cond || this.base().conditions;
@@ -228,4 +228,4 @@ Building.prototype.girls = function getGirls() {
     if (cond && cond.ownerParticipation === false && context.action && context.action.ownerParticipation) { return false; }
     return result;
   };
-})();
+}))();

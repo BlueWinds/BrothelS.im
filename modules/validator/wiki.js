@@ -7,23 +7,23 @@ window.initSchema = function initSchema(loadPath) {
   loadPath = loadPath || '';
   var scripts = ["game.js", "girls.js", "messages.js", "buildings.js", "resolvable.js", "missions.js", "actions.js", "events.js"];
   var series = [];
-  series.push(function (next) {
+  series.push(next => {
     $('head').append('<link href="' + loadPath + 'libraries/ui-darkness.css" type="text/css" rel="stylesheet">');
     $.getScript(loadPath + 'libraries/jquery-ui-1.10.js', next);
   });
-  series.push(function (next) {
+  series.push(next => {
     $('head').append('<link href="' + loadPath + 'libraries/jSchemaView/jSchemaView.css" type="text/css" rel="stylesheet">');
     $.getScript(loadPath + 'libraries/jSchemaView/jSchemaView.js', next);
   });
-  scripts.forEach(function (script) {
-    series.push(function (next) {
+  scripts.forEach(script => {
+    series.push(next => {
       $.getScript(loadPath + 'modules/validator/' + script, next);
     });
   });
-  $.getScript(loadPath + 'modules/core.js', function () {
-    e.runSeries(series, function () {
+  $.getScript(loadPath + 'modules/core.js', () => {
+    e.runSeries(series, () => {
       gameSchemas = new Schema(Schemas.Game);
-      $.each(Schemas, function (type, schema) {
+      $.each(Schemas, (type, schema) => {
         gameSchemas.addSchema(schema);
       });
     });

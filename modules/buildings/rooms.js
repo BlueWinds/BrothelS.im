@@ -2,7 +2,7 @@
 var Rooms = {};
 
 e.Ready.push(function roomsReady(done) {
-  $.each(Rooms, function (type, room) {
+  $.each(Rooms, (type, room) => {
     room.type = type;
   });
   done();
@@ -34,7 +34,7 @@ Building.roomKeySum = function roomKeySum(type, key, status) {
 Building.prototype.potentialRooms = function potentialRooms() {
   var rooms = {};
   var building = this;
-  $.each(Rooms, function (type, room) {
+  $.each(Rooms, (type, room) => {
     if (room.maxInBuilding <= building.rooms._filter('type', type).length) {
       return;
     }
@@ -49,7 +49,7 @@ Girl.prototype.bedroom = function bedroom() {
 };
 
 e.BuildingDailyDelta.push(function roomsDailyDelta(building, delta) {
-  building.rooms.forEach(function (room) {
+  building.rooms.forEach(room => {
     if (Rooms[room.type].daily) {
       delta._add(Rooms[room.type].daily);
     }
@@ -58,7 +58,7 @@ e.BuildingDailyDelta.push(function roomsDailyDelta(building, delta) {
 
 e.BuildingSetStatus.push(function roomsSetBuildingStatus(building) {
   if (building.status != 'Owned') {
-    building.rooms.forEach(function (room) {
+    building.rooms.forEach(room => {
       delete room.girl;
     });
   }
