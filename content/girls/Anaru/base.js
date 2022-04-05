@@ -105,7 +105,7 @@ Girls.Anaru = {
             group: 'Anaru',
             label: 'Talk',
             image: 'content/girls/Anaru/images/Tired1.jpg',
-            text: "It's mid-afternoon, and you've yet to keep your appointment with Anaru. Running a business is a distracting undertaking. Still stuck in your room looking through the brothel's paperwork, you hear a knock at the door. Anaru whispers through the door to ask if you're there. You open the door a crack and can see her dimly in the windowless hallway. She is very aluring, and she seems disappointed when you tell her that you don't think that you'll be able to see her this evening. She nods as though she understands, but she leaves you with an open invitation.<blockquote>Come by my room any time. I would love to see you later tonight.</blockquote>"
+            text: "It's mid-afternoon, and you've yet to keep your appointment with Anaru. Running a business is a distracting undertaking. Still stuck in your room looking through the brothel's paperwork, you hear a knock at the door. Anaru whispers through the door to ask if you're there. You open the door a crack and can see her dimly in the windowless hallway. She is very alluring, and she seems disappointed when you tell her that you don't think that you'll be able to see her this evening. She nods as though she understands, but she leaves you with an open invitation.<blockquote>Come by my room any time. I would love to see you later tonight.</blockquote>"
           },
           girl: {
             obedience: 1,
@@ -522,7 +522,7 @@ Girls.Anaru = {
 						label: 'Mirajane at Work',
 						group: 'Anaru',
 						weight: -2,
-						text: 'The large latched door is ajar, and it isn\'t difficult to find her within the warehouse, especially given all the the noisy sex reaching your ears. The two of you sneak up to the warehouse office and find where the sound is coming from, and Anaru looks relieved to see that it is not her friend, Menma. Though you are careful not to make your presence known to the girl and her client, you don\'t waste the opportunity to point out a few tips to Anaru, as you\'re in the presence of a skilled professional.'
+						text: 'The large latched door is ajar, and it isn\'t difficult to find her within the warehouse, especially given all the noisy sex reaching your ears. The two of you sneak up to the warehouse office and find where the sound is coming from, and Anaru looks relieved to see that it is not her friend, Menma. Though you are careful not to make your presence known to the girl and her client, you don\'t waste the opportunity to point out a few tips to Anaru, as you\'re in the presence of a skilled professional.'
 					}				
 				],
 				mission: 'AnaruMenmaInvestigation12',

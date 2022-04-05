@@ -120,14 +120,14 @@ Girls.Yuna = {
               label: 'Summon',
               group: '<<- girl.name >>',
               image: '<<- girl.image("summon") >>',
-              text: 'Yuna summoned a goddess of plants and herbs, planning to discuss healing techniques with her. But things began to go wrong in the last few minutes of the ritual - healthy green flames darkened, and the scent of burning incense became noxious fumes. It was too late to abort though, and she completed the summoning. Rather than the healthy wooden and plant body she\'d expected, the goddess was somehow forced into a tangled mess of vines and roots. She appologized and was about to banish it when it decided an appology wasn\'t enough...',
+              text: 'Yuna summoned a goddess of plants and herbs, planning to discuss healing techniques with her. But things began to go wrong in the last few minutes of the ritual - healthy green flames darkened, and the scent of burning incense became noxious fumes. It was too late to abort though, and she completed the summoning. Rather than the healthy wooden and plant body she\'d expected, the goddess was somehow forced into a tangled mess of vines and roots. She apologized and was about to banish it when it decided an apology wasn\'t enough...',
               delta: false
             },
             {
               label: 'Summon',
               group: '<<- girl.name >>',
               image: '<<- girl.image("tentacles") >>',
-              text: 'The vines sprang to life, one trusting into her open mouth to prevent her completing the banishment, another around one ankle, lifting her upsidedown into the air. She gagged on the vine in her mouth, but it only pushed further in, down her throat. Helpless in midair, staff dropped in the initial panic, Yuna feared for her life. The misformed goddess was not gentle, fucking Yuna mercilessly. Eventually, Yuna passed out.<br><br>She awoke intact, but incredibly stiff and sore. Though they weren\'t aphrodesiac like those from a proper tenticle beast, at least the vines were slippery and smooth.'
+              text: 'The vines sprang to life, one trusting into her open mouth to prevent her completing the banishment, another around one ankle, lifting her down  into the air. She gagged on the vine in her mouth, but it only pushed further in, down her throat. Helpless in midair, staff dropped in the initial panic, Yuna feared for her life. The misformed goddess was not gentle, fucking Yuna mercilessly. Eventually, Yuna passed out.<br><br>She awoke intact, but incredibly stiff and sore. Though they weren\'t aphrodisiac like those from a proper tentacle beast, at least the vines were slippery and smooth.'
             }
           ],
           girl: {
@@ -147,7 +147,7 @@ Girls.Yuna = {
             label: 'Summon',
             group: '<<- girl.name >>',
             image: '<<- girl.image() >>',
-            text: 'Yuna failed to summon anything interesting. <<= Math.choice(["She couldn\'t concentrate, and managed nothing more than making herself tired.", "She did succeed in summoning a tiny little flame will-o-wisp, but it had nothing of value to offer.", "The spell was on the verge of success when she lost control, barely managing to prevent ane explosion of magic from destroying the area."]) >>'
+            text: 'Yuna failed to summon anything interesting. <<= Math.choice(["She couldn\'t concentrate, and managed nothing more than making herself tired.", "She did succeed in summoning a tiny little flame will-o-wisp, but it had nothing of value to offer.", "The spell was on the verge of success when she lost control, barely managing to prevent an explosion of magic from destroying the area."]) >>'
           },
           girl: {
             happiness: -5,
@@ -196,7 +196,7 @@ Girls.Yuna = {
             label: 'Summon',
             group: '<<- girl.name >>',
             image: '<<- girl.image("summon") >>',
-            text: 'Though the spirit she summoned initially claimed to be a mighty god, she soon realized it was not terribly powerful afterall - a god, yes, but the god of silver teaspoons. Not a very grand domain. She did get some very nice tea-sets out of the deal though - three of them. She sold two and kept one for herself.'
+            text: 'Though the spirit she summoned initially claimed to be a mighty god, she soon realized it was not terribly powerful after all - a god, yes, but the god of silver teaspoons. Not a very grand domain. She did get some very nice tea-sets out of the deal though - three of them. She sold two and kept one for herself.'
           },
           girl: {
             money: 300,
@@ -212,7 +212,7 @@ Girls.Yuna = {
             label: 'Summon',
             group: '<<- girl.name >>',
             image: '<<- girl.image("hard") >>',
-            text: "Rather than a god or helpful spirit, Yuna's summoning drew the attention of a demon - an incubus, to be precise. It broke free before she could bind it, and pinned her to the ground with unholy strength, slicing away her clothing with its razor-sharp tail. Rather than fiery as she'd expected, his touch was freezing. Her nipples went hard immediately, a scream dieing in her throat and replace by a gasp of pleasure as he licked at them and fingered her pussy. She shivered, and reached up expectantly - all thoughts of resistance had fled, replaced by a burning need to feel him inside.<br><br>Each orgasm he gave her only seemed to highten her desire for further sex. By the time the spell finally faded and he was forced to return to his own realm due to lack of energy, Yuna had nearly lost her mind with lust, panting and gasping and writhing in ecstasy. She was also nearly frozen - and it seems his touch has drawn out more than just body heat..."
+            text: "Rather than a god or helpful spirit, Yuna's summoning drew the attention of a demon - an incubus, to be precise. It broke free before she could bind it, and pinned her to the ground with unholy strength, slicing away her clothing with its razor-sharp tail. Rather than fiery as she'd expected, his touch was freezing. Her nipples went hard immediately, a scream dying in her throat and replace by a gasp of pleasure as he licked at them and fingered her pussy. She shivered, and reached up expectantly - all thoughts of resistance had fled, replaced by a burning need to feel him inside.<br><br>Each orgasm he gave her only seemed to heighten her desire for further sex. By the time the spell finally faded and he was forced to return to his own realm due to lack of energy, Yuna had nearly lost her mind with lust, panting and gasping and writhing in ecstasy. She was also nearly frozen - and it seems his touch has drawn out more than just body heat..."
           },
           girl: {
             happiness: 10,
@@ -376,7 +376,7 @@ Girls.Yuna = {
             label: "Yuna's Wedding Day",
             group: 'Yuna',
             image: '<<- girl.image("tired") >>',
-            text: "It's finally the day of Yuna and High Priest Detic's wedding, but Yuna has cold feet and has decided not to attend. As much as you urge her to at the very least put in an appearance, she'd rather stay here than embarass the High Priest by turning him down in front of a crowd. You can only imagine how packed the temple must be right now... This may have serious repercussions.<br><br>It's still a city-wide day of celebration, and you're not surprised to find <<- g.girls._filter('status', 'Hired')._accumulate('name')._toString() >> gone when you look for them, taking the day off to attend the city-wide party and try to catch a glimpse of the new bride.",
+            text: "It's finally the day of Yuna and High Priest Detic's wedding, but Yuna has cold feet and has decided not to attend. As much as you urge her to at the very least put in an appearance, she'd rather stay here than embarrass the High Priest by turning him down in front of a crowd. You can only imagine how packed the temple must be right now... This may have serious repercussions.<br><br>It's still a city-wide day of celebration, and you're not surprised to find <<- g.girls._filter('status', 'Hired')._accumulate('name')._toString() >> gone when you look for them, taking the day off to attend the city-wide party and try to catch a glimpse of the new bride.",
             weight: -1
           },
           girl: {
@@ -413,7 +413,7 @@ Girls.Yuna = {
               label: "Yuna's Wedding Day",
               group: 'Yuna',
               image: 'content/girls/Yuna/missionImages/Husband.jpg',
-              text: "High Priest Detic and throngs of worshipers are waiting. The wedding ceremony is extravagant and beautiful - while another country might have looked askance at a brothel master giving away the bride to the high priest, such things are only mildly in distaste here. Despite the butterflies in her stomach and heart pounding in her breast, Yuna hides it well, playing her part as though she were born to it. When Detic pronounces her high priestess, she in return prounces them married. Only you can tell how nervous she is - but you can also tell that she'll grow into the roll well. Detic is a fine match.",
+              text: "High Priest Detic and throngs of worshipers are waiting. The wedding ceremony is extravagant and beautiful - while another country might have looked askance at a brothel master giving away the bride to the high priest, such things are only mildly in distaste here. Despite the butterflies in her stomach and heart pounding in her breast, Yuna hides it well, playing her part as though she were born to it. When Detic pronounces her high priestess, she in return pronounces them married. Only you can tell how nervous she is - but you can also tell that she'll grow into the roll well. Detic is a fine match.",
               weight: -2,
               delta: false
             },
