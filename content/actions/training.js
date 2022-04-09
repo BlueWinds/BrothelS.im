@@ -95,7 +95,7 @@ Actions.Study = {
         group: '<<- girl.name >>',
         label: 'Study',
         image: '<<- girl.image("study") >>',
-        text: '<<- girl.name >> attended a course on <<- Math.choice(["history", "mathematics", "geography", "literature"]) >>. She tried to pay close attention to the professor , but was somewhat distracted by a cute boy sitting in front.'
+        text: '<<- girl.name >> attended a course on <<- Math.choice(["history", "mathematics", "geography", "literature"]) >>. She tried to pay close attention to the professor, but was somewhat distracted by a cute boy sitting in front.'
       },
       girl: {
         endurance: -5,
@@ -232,7 +232,7 @@ Actions.Expose = {
         group: '<<- girl.name >>',
         label: 'Expose',
         image: '<<- girl.image("exercise") >>',
-        text: "<<- girl.name >> explored the city topless, wearing only a miniskirt that barely reached past her butt. She got plenty of catcalls, and one pair of young men was brave enough to proposition her. << if (girl.building()) { >>She declined for the moment, saying the they could visit her later at the <<- girl.building().name >> if they were still interested.<< } else { >>She declined since she wasn't working at the moment, but stroked their cocks through their pants as they talked, leaving them with raging hardons and a mischevious wink as the went on her way.<< } >>"
+        text: "<<- girl.name >> explored the city topless, wearing only a miniskirt that barely reached past her butt. She got plenty of catcalls, and one pair of young men was brave enough to proposition her. << if (girl.building()) { >>She declined for the moment, saying the they could visit her later at the <<- girl.building().name >> if they were still interested.<< } else { >>She declined since she wasn't working at the moment, but stroked their cocks through their pants as they talked, leaving them with raging hard-ons and a mischevious wink as the went on her way.<< } >>"
       },
       girl: {
         endurance: -5,
@@ -442,7 +442,7 @@ Actions.Lockdown = {
         group: '<<- girl.name >>',
         label: 'Lockdown',
         image: '<<- girl.image("fetish") >>',
-        text: "<<- girl.name >> spent the day in the dungeon's stockade without clothes. You checked in occasionally to spank her. She doesn't cry, though you can see her eyes watering once, and by the time you release her her bottom is bright red. She may sit gingerly tomorrow."
+        text: "<<- girl.name >> spent the day in the dungeon's stockade without clothes. You checked in occasionally to spank her. She doesn't cry, though you can see her eyes watering once, and by the time you release her, her bottom is bright red. She may sit gingerly tomorrow."
       },
       girl: {
         endurance: -12,

@@ -22,10 +22,10 @@ Girls.Holo = {
     base: "Base.png",
     refuse: ["Refuse1.jpg", "Refuse2.jpg", "Refuse3.jpg", "Refuse4.jpg"],
     tired: ["Tired1.jpg", "Tired2.jpg", "Tired3.jpg", "Tired4.jpg"],
-    drunk: ["Drunk1.jpg", "Drunk2.jpg"], // Evening rest
-    soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg"],
-    hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg", "Hard5.jpg", "Hard6.jpg"],
-    anal: ["Anal1.jpg", "Anal2.jpg", "Anal3.jpg", "Anal4.jpg"],
+    drunk: ["Drunk1.jpg", "Drunk2.jpg", "Drunk3.jpg"], // Evening rest
+    soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg", "Soft6.jpg"],
+    hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg", "Hard5.jpg", "Hard6.jpg", "Hard7.jpg", "Hard8.jpg", "Hard9.jpg", "Hard10.jpg", "Hard11.jpg", "Hard12.jpg"],
+    anal: ["Anal1.jpg", "Anal2.jpg", "Anal3.jpg", "Anal4.jpg", "Anal5.jpg", "Anal6.jpg"],
     fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg"],
     group: "Group1.jpg",
     cleaning: ["Cleaning1.jpg", "Cleaning2.jpg"],
@@ -34,7 +34,7 @@ Girls.Holo = {
     naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg", "Naked4.jpg", "Naked5.jpg"],
     prison: "Prison.jpg",
     tentacles: "Tentacles1.jpg",
-    pregnant: "Pregnant.jpg"
+    pregnant: ["Pregnant1.jpg", "Pregnant2.jpg"],
   },
   specialRules: {
     dependentStats: {

@@ -54,7 +54,7 @@ Girls.Mana = {
           group: 'Mana',
           label: 'Talk',
           image: 'content/girls/Mana/images/Exercise1.jpg',
-          text: "After several days of pestering, you finally relent to Mana's seeminly endless chatter and take her out to visit a new shop that recently opened nearby. She runs ahead, and when you catch up, you find her nearly plastered to the window display, eyeing an endless supply of candy and sweet baked goods. Laughing at her enthusiasm as the two of you enter, you announce that you'll get her any one thing. This proves to be... a mistake.<br><br>The giant lollipop in the center of the store? The one that looked like an ornamental stand? It was real, it was for sale, and you had to carry it home since it was too heavy for Mana to carry. You wonder how long it will take her to finish it, and whether you should invest in some earplugs in the meantime."
+          text: "After several days of pestering, you finally relent to Mana's seemingly endless chatter and take her out to visit a new shop that recently opened nearby. She runs ahead, and when you catch up, you find her nearly plastered to the window display, eyeing an endless supply of candy and sweet baked goods. Laughing at her enthusiasm as the two of you enter, you announce that you'll get her any one thing. This proves to be... a mistake.<br><br>The giant lollipop in the center of the store? The one that looked like an ornamental stand? It was real, it was for sale, and you had to carry it home since it was too heavy for Mana to carry. You wonder how long it will take her to finish it, and whether you should invest in some earplugs in the meantime."
         },
         girl: {
           obedience: 1,

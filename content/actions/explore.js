@@ -129,7 +129,7 @@ Actions.Explore = {
         group: '<<- girl.name >>',
         label: 'Exlore Docks',
         image: 'content/miscImages/docksMorning.jpg',
-        text: 'The Docks are divided into two sections. You explore the larger southern wharves this morning - they deal with great sea-going vessels and small fishing boats alike, and if you have time to spare, are an excellent place to take a sneak peak at goods before they arrive in the market. Despite several hours of searching however, you and <<- girl.name >> don\'t find anything particularly worth the effort of walking so far.'
+        text: 'The Docks are divided into two sections. You explore the larger southern wharves this morning - they deal with great sea-going vessels and small fishing boats alike, and if you have time to spare, are an excellent place to take a sneak peek at goods before they arrive in the market. Despite several hours of searching however, you and <<- girl.name >> don\'t find anything particularly worth the effort of walking so far.'
       },
       girl: {
         endurance: -9
@@ -221,7 +221,7 @@ Actions.Explore = {
         group: '<<- girl.name >>',
         label: 'Explore Uptown',
         image: 'content/miscImages/uptownMorning.jpg',
-        text: "Uptown is a quiet place in the morning. Not sleepy, but unhurried. The wealthy with business to attend to have already left, while those with little to do are not nearly as boisterous as people in other parts of the city - there are appearances to maintain, afterall. <<- girl.name >> << if (girl.modesty < 50) { >>attracts some murmors and sidelong glances from a couple of noble ladies. You can't quite tell if they're condemning her revealing clothing or secretly envious of how good she looks.<< } else { >>fits in rather nicely with the surroundings, elegant and demure. No one would guess she works at a brothel.<< } >>"
+        text: "Uptown is a quiet place in the morning. Not sleepy, but unhurried. The wealthy with business to attend to have already left, while those with little to do are not nearly as boisterous as people in other parts of the city - there are appearances to maintain, after all. <<- girl.name >> << if (girl.modesty < 50) { >>attracts some murmurs and sidelong glances from a couple of noble ladies. You can't quite tell if they're condemning her revealing clothing or secretly envious of how good she looks.<< } else { >>fits in rather nicely with the surroundings, elegant and demure. No one would guess she works at a brothel.<< } >>"
       },
       girl: {
         endurance: -6,

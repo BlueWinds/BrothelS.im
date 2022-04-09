@@ -84,7 +84,7 @@ Girls.Sophitia = {
           group: 'Sophitia',
           label: 'Talk',
           image: 'content/girls/Sophitia/images/Naked1.jpg',
-          text: "It may have been a mistake to let Sophitia decide what to do this <<- time >>. She suggests sparring with wooden swords, and she is quite a proficient swordswoman depsite her humble background. You get disarmed and knocked backwards six or seven times before you forfeit. You leave her to her training so that you can tend to your aching muscles."
+          text: "It may have been a mistake to let Sophitia decide what to do this <<- time >>. She suggests sparring with wooden swords, and she is quite a proficient swordswoman despite her humble background. You get disarmed and knocked backwards six or seven times before you forfeit. You leave her to her training so that you can tend to your aching muscles."
         },
         girl: {
           happiness: 4,

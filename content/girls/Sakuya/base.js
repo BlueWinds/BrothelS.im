@@ -208,7 +208,7 @@ Girls.Sakuya = {
             label: 'Something to Say',
             group: 'Sakuya',
             weight: -2,
-            text: 'Not satisfied with such a cryptic explanation (you thought she worked for <em>you</em>, afterall), you press her for more information, and she finally explains that before coming to this city, she worked for a woman known as the <strong>Scarlet Devil</strong>, an exceedingly powerful demon, and that she used to have potent magic of her own, until a disaster stipped her of her powers and threw her halfway across the world and into your employ.'
+            text: 'Not satisfied with such a cryptic explanation (you thought she worked for <em>you</em>, afterall), you press her for more information, and she finally explains that before coming to this city, she worked for a woman known as the <strong>Scarlet Devil</strong>, an exceedingly powerful demon, and that she used to have potent magic of her own, until a disaster stripped her of her powers and threw her halfway across the world and into your employ.'
           },
           {
             image: 'content/girls/Sakuya/missionImages/Magic.jpg',
@@ -382,7 +382,7 @@ Girls.Sakuya = {
             group: 'Enter the Devil',
             label: 'Confrontation',
             image: 'content/girls/Sakuya/missionImages/ScarletDevil2.jpg',
-            text: "It's not right that she live so far from home among strangers, and the Scarlet Devil looks like she'd be upset (and possibly violent) over a refusal. You nod to Sakuya - she takes her mistress's outstretched hand and turns to face you to say goodbye. A flicker of disapproval crosses Scarlet's face, but she doesn't interrupt. <blockquote>I will have have payment delivered by morning.</blockquote> The Devil frowns at you, clearly not as pleased with you as you had expected, but happy to have Sakuya back none the less. She kisses her maid's cheek, and they're gone. Not walking together down the street, but there one moment, gone the next, the same way Sakuya used to do while cleaning. With a sigh you turn homeward.",
+            text: "It's not right that she live so far from home among strangers, and the Scarlet Devil looks like she'd be upset (and possibly violent) over a refusal. You nod to Sakuya - she takes her mistress's outstretched hand and turns to face you to say goodbye. A flicker of disapproval crosses Scarlet's face, but she doesn't interrupt. <blockquote>I will have payment delivered by morning.</blockquote> The Devil frowns at you, clearly not as pleased with you as you had expected, but happy to have Sakuya back none the less. She kisses her maid's cheek, and they're gone. Not walking together down the street, but there one moment, gone the next, the same way Sakuya used to do while cleaning. With a sigh you turn homeward.",
             weight: -1
           },
           girl: { status: 'Gone' }
