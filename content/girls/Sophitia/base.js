@@ -88,23 +88,22 @@ Girls.Sophitia = {
         },
         girl: {
           happiness: 4,
-		  constitution: 1,
+          constitution: 1,
           endurance: -8
         }
       },
-	  Sophitia5: {
+      Sophitia5: {
         message: {
           group: 'Sophitia',
           label: 'Talk',
           image: 'content/girls/Sophitia/images/Talk2.jpg',
           text: "Your <<- time >> visit to Sophitia starts with a question.<blockquote><<- girl.modesty > 10 ? 'Is this skirt too revealing?' : 'Should I have this skirt taken up a little?' >></blockquote>The answer to this dangerous question is unmistakably yes, but you give a vague response that could be mistaken for whatever she's fishing for.<blockquote><<- girl.hardLibido > 70 ? 'It takes forever to take off when I\'m about to have sex. Look, did you see how long that took me?' : 'The way it is now makes me seem must make me seem like such a loose woman.' >></blockquote>>You nod in agreement, unsure of what to say."
-		  
         },
         girl: {
           obedience: 1.5,
           happiness: 2,
         }
-	  }
-	}, Actions.Talk)
+      }
+    }}, Actions.Talk)
   }
 };
