@@ -21,19 +21,20 @@ Girls.Mana = {
     basePath: "content/girls/Mana/images",
     base: "Base.jpg",
     refuse: "Refuse.jpg",
-    tired: ["Tired1.jpg", "Tired2.jpg", "Tired3.jpg"],
-    soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg"],
-    hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg"],
-    anal: ["Anal1.jpg", "Anal2.jpg"],
-    fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg"],
+    tired: ["Tired1.jpg", "Tired2.jpg", "Tired3.jpg", "Tired4.jpg", "Tired5.jpg"],
+    soft: ["Soft1.jpg", "Soft2.jpg", "Soft3.jpg", "Soft4.jpg", "Soft5.jpg", "Soft6.jpg", "Soft7.jpg", "Soft8.jpg", "Soft9.jpg", "Soft10.jpg", "Soft11.jpg", "Soft12.jpg"],
+    hard: ["Hard1.jpg", "Hard2.jpg", "Hard3.jpg", "Hard4.jpg", "Hard5.jpg", "Hard6.jpg", "Hard7.jpg", "Hard8.jpg", "Hard9.jpg", "Hard10.jpg", "Hard11.jpg", "Hard12.jpg", "Hard13.jpg"],
+    anal: ["Anal1.jpg", "Anal2.jpg", "Anal3.jpg", "Anal4.jpg", "Anal5.jpg"],
+    fetish: ["Fetish1.jpg", "Fetish2.jpg", "Fetish3.jpg", "Fetish4.jpg", "Fetish5.jpg", "Fetish6.jpg", "Fetish7.jpg"],
     group: ["Group1.jpg", "Group2.jpg", "Group3.jpg"],
-    cleaning: ["Cleaning1.jpg", "Cleaning2.jpg"],
+    cleaning: ["Cleaning1.jpg", "Cleaning2.jpg", "Cleaning3.jpg"],
     exercise: ["Exercise1.jpg", "Exercise2.jpg", "Exercise3.jpg"],
-    study: "Study.jpg",
+    study: ["Study.jpg", "Study2.jpg", "Study3.jpg", "Study4.jpg"]
     prison: "Prison.jpg",
     naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg", "Naked4.jpg", "Naked5.jpg"],
-    tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg"],
-    pregnant: "Pregnant.jpg"
+    tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg", "Tentacles5.jpg"],
+    pregnant: "Pregnant.jpg",
+    healing: ["Healing.jpg", "Healing2.jpg"]
   },
   Actions: {
     Talk: $.extend(true, { results: {
@@ -130,7 +131,7 @@ Girls.Mana = {
       results: {
         success: {
           message: {
-            image: 'content/girls/Mana/images/Healing.jpg',
+            image: '<<- girl.image("healing") >>',
             group: 'Mana',
             label: 'Healing',
             text: 'Mana drew upon her power to revitalize <<= action.option >>, restoring her energy (<span class="endurance delta">+<<= action.special.endurance || 0 >></span>, <span class="happiness delta">+<<= action.special.happiness || 0 >></span>).'
