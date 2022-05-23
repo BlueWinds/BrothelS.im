@@ -295,7 +295,7 @@ Missions.exploreCity = {
     image: "content/miscImages/uptownMorning.jpg",
     group: 'Introduction',
     weight: -1,
-    text: "<blockquote>Well, here we are! You're off to a good start - there's not a whole lot more I can teach you, though I'm sure there's still plenty you're planning on teaching me.</blockquote> Kirino giggles at her naughty thought. A dirty mind, that girl. Still, she's right - now that you're well on your way to being established, you don't need Kirino's guidance any more.<br><br><em>You can now <strong>Explore</strong> various parts of the city with your girls. You may meet some interesting people. This is also the end of the tutorial - good luck.</em></em>"
+    text: "<blockquote>Well, here we are! You're off to a good start - there's not a whole lot more I can teach you, though I'm sure there's still plenty you're planning on teaching me.</blockquote> Kirino giggles at her naughty thought. A dirty mind, that girl. Still, she's right - now that you're well on your way to being established, you don't need Kirino's guidance anymore.<br><br><em>You can now <strong>Explore</strong> various parts of the city with your girls. You may meet some interesting people. This is also the end of the tutorial - good luck.</em></em>"
   },
   end: {
     min: { day: '+3' }
