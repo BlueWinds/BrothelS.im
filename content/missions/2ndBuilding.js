@@ -42,7 +42,7 @@ Missions.secondBuilding = {
     {
       key: 'sex',
       label: 'Sex and Money',
-      title: "<<- girl.name >> isn't somthing any man could resist, combined with a bag of large denomination, untraceable coinage."
+      title: "<<- girl.name >> isn't something any man could resist, combined with a bag of large denomination, untraceable coinage."
     }
   ],
   variants: function secondBuildingVariants(context, done) {
