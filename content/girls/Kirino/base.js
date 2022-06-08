@@ -36,7 +36,7 @@ Girls.Kirino = {
     naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg", "Naked4.jpg", "Naked5.jpg"],
     prison: ["Prison.jpg", "Prison2.jpg"],
     tentacles: "Tentacles1.png",
-    pregnant: ["Pregnant.jpg", "Pregnant2.jpg"],
+    pregnant: ["Pregnant.jpg", "Pregnant2.jpg"]
   },
   Actions: {
     Talk: $.extend(true, { results: {

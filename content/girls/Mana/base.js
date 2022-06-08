@@ -29,7 +29,7 @@ Girls.Mana = {
     group: ["Group1.jpg", "Group2.jpg", "Group3.jpg"],
     cleaning: ["Cleaning1.jpg", "Cleaning2.jpg", "Cleaning3.jpg"],
     exercise: ["Exercise1.jpg", "Exercise2.jpg", "Exercise3.jpg"],
-    study: ["Study.jpg", "Study2.jpg", "Study3.jpg", "Study4.jpg"]
+    study: ["Study.jpg", "Study2.jpg", "Study3.jpg", "Study4.jpg"],
     prison: "Prison.jpg",
     naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg", "Naked4.jpg", "Naked5.jpg"],
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg", "Tentacles5.jpg"],

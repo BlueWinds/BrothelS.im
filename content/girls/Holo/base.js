@@ -34,7 +34,7 @@ Girls.Holo = {
     naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg", "Naked4.jpg", "Naked5.jpg"],
     prison: "Prison.jpg",
     tentacles: "Tentacles1.jpg",
-    pregnant: ["Pregnant1.jpg", "Pregnant2.jpg"],
+    pregnant: ["Pregnant1.jpg", "Pregnant2.jpg"]
   },
   specialRules: {
     dependentStats: {

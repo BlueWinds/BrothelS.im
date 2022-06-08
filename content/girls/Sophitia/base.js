@@ -33,7 +33,7 @@ Girls.Sophitia = {
     naked: ["Naked1.jpg", "Naked2.jpg", "Naked3.jpg"],
     prison: ["Prison1.jpg", "Prison2.jpg", "Prison3.jpg"],
     tentacles: ["Tentacles1.jpg", "Tentacles2.jpg", "Tentacles3.jpg", "Tentacles4.jpg", "Tentacles5.jpg"],
-    pregnant: ["Pregnant.jpg", "Pregnant2.jpg"],
+    pregnant: ["Pregnant.jpg", "Pregnant2.jpg"]
   },
   specialRules: {
     dependentStats: {
@@ -101,7 +101,7 @@ Girls.Sophitia = {
         },
         girl: {
           obedience: 1.5,
-          happiness: 2,
+          happiness: 2
         }
       }
     }}, Actions.Talk)
