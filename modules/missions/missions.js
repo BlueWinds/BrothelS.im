@@ -4,12 +4,12 @@ var Missions = {};
 e.Ready.push(function missionsReady(done) {
   $('head').append('<link href="modules/missions/style.css" type="text/css" rel="stylesheet">');
   e.addTemplate('list-missions', 'modules/missions/list-missions.tpl.html');
-  $.each(Missions, function (_id, mission) {
+  $.each(Missions, (_id, mission) => {
     mission._id = _id;
   });
   $.each(Girls, function idGirlMissions(name, girl) {
     if (!girl.Missions) { return; }
-    $.each(girl.Missions, function (_id, mission) {
+    $.each(girl.Missions, (_id, mission) => {
       mission._id = _id;
     });
   });
@@ -18,31 +18,31 @@ e.Ready.push(function missionsReady(done) {
 
 Mission.checkStart = function checkStart(day, done, preDay) {
   var context = {
-    day: day
+    day
   };
   var series = [];
   $.each(Missions, function startBaseMissions(_id, mission) {
     if (!mission.conditions || g.missions[_id]) { return; }
     if (mission.preDay != preDay) { return; }
-    mission = Mission.create(_id, { day: day });
+    mission = Mission.create(_id, { day });
     if (mission) {
       g.missions[_id] = mission;
       if (!mission.getEnd()) {
-        series.push(function (next) { mission.checkDay(next); });
+        series.push(next => { mission.checkDay(next); });
       }
     }
   });
   $.each(Girls, function startGirlMissions(name, girl) {
     if (!girl.Missions) { return; }
-    $.each(girl.Missions, function (_id, mission) {
+    $.each(girl.Missions, (_id, mission) => {
       if (mission.preDay != preDay) { return; }
-      context = { day: day, girl: g.girls[name] };
+      context = { day, girl: g.girls[name] };
       if (!mission.conditions || g.missions[_id]) { return; }
       mission = Mission.create(_id, context);
       if (mission) {
         g.missions[_id] = mission;
         if (!mission.getEnd()) {
-          series.push(function (next) { mission.checkDay(next); });
+          series.push(next => { mission.checkDay(next); });
         }
       }
     });
@@ -64,28 +64,28 @@ e.GameNew.push(function missionsNewGame(done) {
 });
 e.GamePreDay.push(function missionsPreDay(done) {
   var series = [];
-  $.each(g.missions, function (_id, mission) {
+  $.each(g.missions, (_id, mission) => {
     if (mission.base().preDay) {
-      series.push(function (next) {
+      series.push(next => {
         mission.checkDay(next);
       });
     }
   });
-  e.runSeries(series, function () {
+  e.runSeries(series, () => {
     Mission.checkStart(g.day, done, true);
   });
 });
 
 e.GameNextDay.push(function missionsNextDay(done) {
   var series = [];
-  $.each(g.missions, function (_id, mission) {
+  $.each(g.missions, (_id, mission) => {
     if (!mission.base().preDay) {
-      series.push(function (next) {
+      series.push(next => {
         mission.checkDay(next);
       });
     }
   });
-  e.runSeries(series, function () {
+  e.runSeries(series, () => {
     Mission.checkStart(g.day, done);
   });
 });
@@ -115,7 +115,7 @@ e.GameRender.push(function missionsRenderGame(done) {
 });
 
 e.GirlSetStatus.push(function missionsSetGirlStatus(girl) {
-  g.missions._filter('girl', girl.name).forEach(function (mission) {
+  g.missions._filter('girl', girl.name).forEach(mission => {
     if (!mission.conditions || !mission.conditions.girl || !girl.compare(mission.conditions.girl)) {
       delete g.missions[mission._id];
     }
@@ -123,7 +123,7 @@ e.GirlSetStatus.push(function missionsSetGirlStatus(girl) {
 });
 
 e.BuildingSetStatus.push(function MissionsSetBuildingStatus(building) {
-  g.missions._filter('building', building.name).forEach(function (mission) {
+  g.missions._filter('building', building.name).forEach(mission => {
     if (!mission.conditions || !mission.conditions.building || !building.compare(mission.conditions.building)) {
       delete g.missions[mission._id];
     }

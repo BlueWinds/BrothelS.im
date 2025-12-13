@@ -44,7 +44,7 @@ Mission.prototype.checkDay = function checkDay(done) {
     delete g.missions[this._id];
     g.missionsDone[this._id] = true;
     var mission = this;
-    this.getResults(function (results) {
+    this.getResults(results => {
       mission.applyResults(results, done);
     });
     return;

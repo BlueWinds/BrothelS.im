@@ -36,12 +36,12 @@ var e = {
     var args = $.extend([], arguments);
     args = args._flatten();
     var done = args.pop();
-    args = args.map(function (i) { return i + '?v=' + gameVersion });
+    args = args.map(i => i + '?v=' + gameVersion);
     args.push(done);
     head.js.apply(this, args);
   },
   addTemplate: function addTemplate(name, url, done) {
-    var promise = $.ajax(url + '?v=' + gameVersion).done(function (data) {
+    var promise = $.ajax(url + '?v=' + gameVersion).done(data => {
       e.render.cache[name] = ejs.compile(data);
     });
     if (done) { promise.done(done); }
@@ -130,7 +130,8 @@ Object.defineProperty(Object.prototype, "_filter", {
   writable: false,
   configurable: true,
   value: function _filter(key, value, value2) {
-    var result = [], i;
+    var result = [];
+    var i;
     if (value2) {
       for (i in this) {
         if (this[i][key] && this[i][key][value] === value2) { result.push(this[i]); }
@@ -242,9 +243,7 @@ Object.defineProperty(Object.prototype, "_sort", {
   configurable: true,
   value: function _sort(key, reverse) {
     var ret = this._toArray();
-    ret.sort(function (a, b) {
-      return reverse ? b[key] - a[key] : a[key] - b[key];
-    });
+    ret.sort((a, b) => reverse ? b[key] - a[key] : a[key] - b[key]);
     return ret;
   }
 });
@@ -254,7 +253,7 @@ Object.defineProperty(Array.prototype, "_append", {
   writable: false,
   configurable: true,
   value: function _append(items) {
-    this.push.apply(this, items);
+    this.push(...items);
     return this;
   }
 });

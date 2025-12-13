@@ -1,6 +1,6 @@
 // https://github.com/gregferrell/Random-Name-Generator/, slightly modified to make more English sounding names (removed "x", "z" and several double vowels).
 
-(function(global, className){
+(((global, className) => {
 
 	//function to get random number upto m
 	function getRandom(minVal,maxVal)
@@ -33,81 +33,81 @@
 	//the goodies!
 	function randomName(syl)
 	{
-		//begin variable declaration
-		//defauts
-		var syl = syl || 3,
+        //begin variable declaration
+        //defauts
+        var syl = syl || 3;
 
-		//normal consonants
-		    conso 		= ["b", "c", "d", "f", "g", "h", "j", "k", "l",
-						   "m", "n", "p", "r", "s", "t", "v", "w", "y"],
+        var //normal consonants
+        conso 		= ["b", "c", "d", "f", "g", "h", "j", "k", "l",
+                       "m", "n", "p", "r", "s", "t", "v", "w", "y"];
 
-		    doubleCon	= ["bb", "cc", "dd", "ff", "gg", "ll",
-						   "mm", "nn", "pp", "rr", "ss", "tt", "zz"],
+        var doubleCon	= ["bb", "cc", "dd", "ff", "gg", "ll",
+                       "mm", "nn", "pp", "rr", "ss", "tt", "zz"];
 
-		    jointCon	= ["bl", "br", "ch", "ck", "cks", "cl", "cm", "cn",
-		    			   "cr", "ct", "dr", "fl", "fr", "ft", "fth", "ght",
-		    			   "gl", "gr", "km", "kn", "lb", "ld", "lf", "lk",
-		    			   "lph", "lt", "lth", "mb", "mp", "mph", "ms", "nc",
-		    			   "nch", "nd", "ng", "nk", "nks", "ns", "nt", "nth",
-		    			   "ph", "phr", "pl", "pr", "ps", "rch", "rd", "rds",
-		    			   "rf", "rk", "rl", "rm", "rn", "rp", "rph", "rs",
-		    			   "rt", "rth", "sc", "sh", "shr", "sk", "sl", "sm",
-		    			   "sn", "sp", "st", "str", "sts", "sw", "tch", "th",
-		    			   "thr", "tr", "tsch", "tw", "wh", "xt", "xth"],
+        var jointCon	= ["bl", "br", "ch", "ck", "cks", "cl", "cm", "cn",
+                       "cr", "ct", "dr", "fl", "fr", "ft", "fth", "ght",
+                       "gl", "gr", "km", "kn", "lb", "ld", "lf", "lk",
+                       "lph", "lt", "lth", "mb", "mp", "mph", "ms", "nc",
+                       "nch", "nd", "ng", "nk", "nks", "ns", "nt", "nth",
+                       "ph", "phr", "pl", "pr", "ps", "rch", "rd", "rds",
+                       "rf", "rk", "rl", "rm", "rn", "rp", "rph", "rs",
+                       "rt", "rth", "sc", "sh", "shr", "sk", "sl", "sm",
+                       "sn", "sp", "st", "str", "sts", "sw", "tch", "th",
+                       "thr", "tr", "tsch", "tw", "wh", "xt", "xth"];
 
-			startCon	= ["bl", "ch", "dr", "fl", "fr", "gl", "gr", "kn",
-						   "pl", "pr", "ps", "sc", "sh", "shr", "sk", "sl",
-						   "sm", "sn", "sp", "st", "str", "th", "thr", "tr",
-						   "tw", "wh"],
+        var startCon	= ["bl", "ch", "dr", "fl", "fr", "gl", "gr", "kn",
+                       "pl", "pr", "ps", "sc", "sh", "shr", "sk", "sl",
+                       "sm", "sn", "sp", "st", "str", "th", "thr", "tr",
+                       "tw", "wh"];
 
-		    vowel 		= ["a", "e", "i", "o", "u"],
+        var vowel 		= ["a", "e", "i", "o", "u"];
+        var startVow	= ["ae", "ai", "ou", "au"];
+        var doubleVow	= ["ee", "oo", "ie", "ou"];
 
-		    startVow	= ["ae", "ai", "ou", "au"],
+        var //cache for performance, minor savings
+        consoLen 		= last(conso);
 
-		    doubleVow	= ["ee", "oo", "ie", "ou"],
+        var doubleConLen 	= last(doubleCon);
+        var jointConLen		= last(jointCon);
+        var startConLen 	= last(startCon);
+        var vowelLen 		= last(vowel);
+        var startVowLen		= last(startVow);
+        var doubleVowLen	= last(doubleVow);
 
-		//cache for performance, minor savings
-		    consoLen 		= last(conso),
-		    doubleConLen 	= last(doubleCon),
-		    jointConLen		= last(jointCon),
-   		    startConLen 	= last(startCon),
-		    vowelLen 		= last(vowel),
-		    startVowLen		= last(startVow),
-		    doubleVowLen	= last(doubleVow),
+        var //init blank word
+        word = "";
 
-		//init blank word
-		    word = "",
+        var //random starts with a vowel
+        startWithV = !!getRandom(0, 1);
 
-		//random starts with a vowel
-		    startWithV = !!getRandom(0, 1),
+        var //capture starting vowel and done reuse it if double
+        startVowel = "";
 
-			//capture starting vowel and done reuse it if double
-		    startVowel = "",
+        var //dont use more than one double consonant
+        uDoubleCon = "";
 
-			//dont use more than one double consonant
-			uDoubleCon = "",
+        var //dont use more than one complicated consonat group
+        uJointCon  = "";
 
-			//dont use more than one complicated consonat group
-			uJointCon  = "",
+        var //dont use the same consonant group as the starting one
+        uStartCon  = "";
 
-			//dont use the same consonant group as the starting one
-			uStartCon  = "";
+        //end of variable declaration
 
-		//end of variable declaration
-
-		for(var i = 1; i <= syl; i++)
+        for(var i = 1; i <= syl; i++)
 		{
-			//defaults
-			var curVowel = "",
-				curCon = "",
+            //defaults
+            var curVowel = "";
 
-			//a boolean for last item
-				lastItem = (i === syl);
+            var curCon = "";
 
-			//if this is a starting vowel
-			if(startWithV)
+            var //a boolean for last item
+            lastItem = (i === syl);
+
+            //if this is a starting vowel
+            if(startWithV)
 			{
-				if(i === 1)
+                if(i === 1)
 				{
 					//start with 80% chance for single vowel and
 					//20% chance for a double vowel,
@@ -142,14 +142,14 @@
 					}
 				}
 
-				//more complicated consonant groups should come up less
-				var tempNum = getRandom(6),
+                //more complicated consonant groups should come up less
+                var tempNum = getRandom(6);
 
-				//default for generating a consonant
-				    hasCon = true;
+                var //default for generating a consonant
+                hasCon = true;
 
-				//if last syl
-				if(lastItem)
+                //if last syl
+                if(lastItem)
 				{
 					//if this is the last sylable,
 					//randomize whether or not it ends in a consonant
@@ -157,8 +157,8 @@
 					var hasCon = !!getRandom(0, 1);
 				}
 
-				//bool used to stop consonant gen
-				if(hasCon)
+                //bool used to stop consonant gen
+                if(hasCon)
 				{
 					//1 in 3 chance for a compound consonant
 					if(tempNum === 1)
@@ -180,7 +180,7 @@
 						curCon += "e";
 					}
 				}
-			}
+            }
 			//starting consonant
 			else
 			{
@@ -244,13 +244,13 @@
 				}
 			}
 
-			//add to word in order of which comes first
-			word += (startWithV) ? (curVowel + curCon) : (curCon + curVowel);
-		}
+            //add to word in order of which comes first
+            word += (startWithV) ? (curVowel + curCon) : (curCon + curVowel);
+        }
 
 
-		return word;
-	}
+        return word;
+    }
 
 	global[className] = {};
 
@@ -258,4 +258,4 @@
 	global[className].capitalize = capitalize;
 
 
-})(this, 'nameGen');
+}))(this, 'nameGen');

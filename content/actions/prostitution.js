@@ -172,7 +172,7 @@ Girl.prototype.interest = function interest(sex, outdoors) {
   return i / 100;
 };
 
-(function () {
+((() => {
   Actions.Streetwalk.variants = function streetwalkVariants(context, done) {
     context.outdoors = true;
     var endDelta = context.girl.startDelta();
@@ -257,8 +257,8 @@ Girl.prototype.interest = function interest(sex, outdoors) {
 
   function doWhoresBuilding(building, time) {
     var context = {
-      building: building,
-      time: time,
+      building,
+      time,
       girls: [],
       count: 0
     };
@@ -273,7 +273,7 @@ Girl.prototype.interest = function interest(sex, outdoors) {
     var count = Person.prostitution.maxWhoreCustomers - Person.prostitution.minWhoreCustomers;
     count *= Math.random() * 0.5 + building.reputation / 200;
     count += Person.prostitution.minWhoreCustomers;
-    var types = Object.keys(Person.prostitution.customerClass).filter(function (t) {
+    var types = Object.keys(Person.prostitution.customerClass).filter(t => {
       var a = Person.prostitution.customerClass[t];
       return a.minReputation <= building.reputation && a.maxReputation >= building.reputation;
     });
@@ -291,7 +291,8 @@ Girl.prototype.interest = function interest(sex, outdoors) {
 
     var endDelta = building.startDelta();
     context.customers._sort('typeRank', true).forEach(function whoreEachCustomer(customer) {
-      var girl = null, maxSatisfaction = -1;
+      var girl = null;
+      var maxSatisfaction = -1;
       for (var name in canService) {
         var satisfaction = customer.satisfaction(g.girls[name]);
         if (satisfaction > maxSatisfaction) {
@@ -320,4 +321,4 @@ Girl.prototype.interest = function interest(sex, outdoors) {
       weight: 1
     }, context);
   }
-})();
+}))();

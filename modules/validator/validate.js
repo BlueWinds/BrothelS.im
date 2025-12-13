@@ -64,7 +64,7 @@ e.Autorender.push(function validateAutorender(element, done) {
   done();
 });
 
-(function () {
+((() => {
   var oldApply = Resolvable.prototype.applyResults;
   Resolvable.prototype.applyResults = function validateAppliedResults(results, done, context) {
     if (!tv4.validate(results, 'Result')) {
@@ -81,4 +81,4 @@ e.Autorender.push(function validateAutorender(element, done) {
     }
     return oldApply.call(this, results, done, context);
   };
-})();
+}))();

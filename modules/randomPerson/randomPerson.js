@@ -39,7 +39,7 @@ function Person(obj) {
 }
 
 Person.prototype.sexType = function sexType(girl) {
-  return this.sex.filter(function (a) { return girl.actions[a]; })[0];
+  return this.sex.filter(a => girl.actions[a])[0];
 };
 
 Person.prototype.satisfaction = function getSatisfaction(girl) {

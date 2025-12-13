@@ -98,7 +98,7 @@
  * @param {number=} overflow 
  * @param {number=} startdenom
  */
-(function (pool, math, width, chunks, significance, overflow, startdenom) {
+(((pool, math, width, chunks, significance, overflow, startdenom) => {
 
 
 //
@@ -159,8 +159,12 @@ math['seedrandom'] = function seedrandom(seed, use_entropy) {
 //
 /** @constructor */
 function ARC4(key) {
-  var t, u, me = this, keylen = key.length;
-  var i = 0, j = me.i = me.j = me.m = 0;
+  var t;
+  var u;
+  var me = this;
+  var keylen = key.length;
+  var i = 0;
+  var j = me.i = me.j = me.m = 0;
   me.S = [];
   me.c = [];
 
@@ -263,7 +267,7 @@ overflow = significance * 2;
 mixkey(math.random(), pool);
 
 // End anonymous scope, and pass initial values.
-})(
+}))(
   [],   // pool: entropy pool starts empty
   Math, // math: package containing random, pow, and seedrandom
   256,  // width: each RC4 output is 0 <= x < 256

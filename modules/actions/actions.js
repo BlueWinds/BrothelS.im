@@ -13,12 +13,12 @@ e.Ready.push(function actionsReady(done) {
   });
   e.addTemplate('list-actions', 'modules/actions/list-actions.tpl.html');
   e.addTemplate('view-actions', 'modules/actions/view-actions.tpl.html');
-  $.each(Actions, function (_id, action) {
+  $.each(Actions, (_id, action) => {
     action._id = _id;
   });
-  $.each(Girls, function (name, girl) {
+  $.each(Girls, (name, girl) => {
     if (!girl.Actions) { return; }
-    $.each(girl.Actions, function (_id, action) {
+    $.each(girl.Actions, (_id, action) => {
       action._id = _id;
     });
   });
@@ -35,7 +35,7 @@ e.GirlNew.push(function actionsNewGirl(girl) {
 e.GirlRunTime.push(function actionsRunTime(girl, time, done) {
   if (girl.status == 'Hired' && (time == 'evening' || !girl.actions[time].allDay)) {
     girl.verifyAction(time, true, true);
-    girl.actions[time].getResults(function (results, context) {
+    girl.actions[time].getResults((results, context) => {
       girl.actions[time].applyResults(results, done, context);
     });
     return;
@@ -57,8 +57,8 @@ e.GameRender.push(function actionGameRender(done) {
     var girl = g.girls[$(this).parent().parent().attr('name')];
     function renderActions(girl, time) {
       var context = {
-        girl: girl,
-        time: time,
+        girl,
+        time,
         otherActions: Girl.actions(time),
         actions: girl.potentialActions(time)
       };
@@ -94,8 +94,8 @@ e.GameRender.push(function actionGameRender(done) {
     }
     var context = {
       girls: g.girls._filter('status', 'Hired'),
-      girl: girl,
-      time: time
+      girl,
+      time
     };
     var view = e.render('list-actions', context);
     var tab = $('.girl[name="' + girl.name + '"] .' + time, view);

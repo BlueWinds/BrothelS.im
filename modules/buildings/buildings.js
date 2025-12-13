@@ -6,7 +6,7 @@ e.Ready.push(function buildingsReady(done) {
   $('head').append('<link href="modules/buildings/style.css" type="text/css" rel="stylesheet">');
   e.addTemplate('manage-buildings', 'modules/buildings/manage-buildings.tpl.html');
   e.addTemplate('view-building', 'modules/buildings/view-building.tpl.html');
-  $.each(Buildings, function (name, building) {
+  $.each(Buildings, (name, building) => {
     building.name = name;
   });
   e.addTemplate('list-buildings', 'modules/buildings/list-buildings.tpl.html', done);
@@ -28,7 +28,7 @@ e.GameInit.push(function buildingsGameInit(done) {
 });
 
 e.GamePreDay.push(function buildingsPreDay(done) {
-  g.buildings._filter('status', 'Owned').forEach(function (building) {
+  g.buildings._filter('status', 'Owned').forEach(building => {
     building.turnDelta = building.startDelta();
   });
   $.each(g.buildings, function runBuildingDay(name, building) {
@@ -38,7 +38,7 @@ e.GamePreDay.push(function buildingsPreDay(done) {
 });
 
 e.GamePostDay.push(function buildingsPostDay(done) {
-  g.buildings._filter('status', 'Owned').forEach(function (building) {
+  g.buildings._filter('status', 'Owned').forEach(building => {
     building.turnDelta = building.turnDelta();
   });
   done();
@@ -55,7 +55,7 @@ e.GameRender.push(function buildingsGameRender(done) {
         buildings: g.buildings._filter('status', 'Owned'),
         innGirls: []
       };
-      g.girls._filter('status', 'Hired').forEach(function (girl) {
+      g.girls._filter('status', 'Hired').forEach(girl => {
         if (!girl.building()) {
           context.innGirls.push(girl);
         }
@@ -91,7 +91,7 @@ e.GameRender.push(function buildingsGameRender(done) {
           handle: 'label',
           helper: 'clone',
           items: 'li:not(.disabled)',
-          start: function (event, ui) {
+          start(event, ui) {
             ui.item.css('display', 'list-item');
             $(this).children('.ui-sortable-placeholder').appendTo(this);
           },

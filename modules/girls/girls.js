@@ -5,7 +5,7 @@ e.Ready.push(function girlsReady(done) {
   $('head').append('<link href="modules/girls/style.css" type="text/css" rel="stylesheet">');
   e.addTemplate('hire-girls', 'modules/girls/hire-girls.tpl.html');
   e.addTemplate('view-girl', 'modules/girls/view-girl.tpl.html');
-  $.each(Girls, function (name, girl) {
+  $.each(Girls, (name, girl) => {
     girl.name = name;
   });
   e.addTemplate('list-girls', 'modules/girls/list-girls.tpl.html', done);
@@ -23,7 +23,7 @@ e.GameNew.push(function girlsNewGame(done) {
 });
 
 e.GameInit.push(function girlsGameInit(done) {
-  g.girls._filter('status', 'Hired').forEach(function (girl) {
+  g.girls._filter('status', 'Hired').forEach(girl => {
     if (!girl.hireDay) {
       girl.hireDay = g.day;
     }
@@ -84,7 +84,7 @@ e.GameRender.push(function girlsGameRender(done) {
     var girl = g.girls[$(this).parent().attr('name')];
 
     var context = {
-      girl: girl,
+      girl,
       girls: g.girls._filter('status', 'Hired')
     };
     var mainView = e.render('view-girl', context);
@@ -158,12 +158,12 @@ e.GameRender.push(function girlsGameRender(done) {
 
 Girl.renderConditions = function renderConditions(conditions) {
   var text = [];
-  $.each(conditions.max || {}, function (stat, value) {
+  $.each(conditions.max || {}, (stat, value) => {
     if (typeof(value) != "number") { return; }
     var span = '<span class="delta stat ' + stat + '">' + (stat == "money" ? "$" + value : value) + '-</span>';
     text.push(span);
   });
-  $.each(conditions.min || {}, function (stat, value) {
+  $.each(conditions.min || {}, (stat, value) => {
     if (typeof(value) != "number") { return; }
     var span = '<span class="delta stat ' + stat + '">' + (stat == "money" ? "$" + value : value) + '+</span>';
     text.push(span);

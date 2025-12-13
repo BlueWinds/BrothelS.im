@@ -48,18 +48,18 @@ Event.get = function getEvent(context) {
   }
 };
 
-(function () {
+((() => {
   var oldGetResults = Action.prototype.getResults;
   Action.prototype.getResults = function getResults(done, context) {
     context = context || this.context();
     var event = Event.get(context);
     if (event) {
       $.extend(context, event.context());
-      event.getResults(function (results) {
+      event.getResults(results => {
         done(results, context);
       }, context);
     } else {
       oldGetResults.call(this, done, context);
     }
   };
-})();
+}))();

@@ -38,13 +38,13 @@ Building.create = function create(name) {
 
 Building.prototype.girls = function buildingGirls() {
   var girls = {};
-  this.rooms._accumulate('girl').forEach(function (name) {
+  this.rooms._accumulate('girl').forEach(name => {
     girls[name] = g.girls[name];
   });
   return girls;
 };
 
-(function () {
+((() => {
   var oldGirlApply = Girl.prototype.apply;
   Girl.prototype.apply = function apply(stat, delta) {
     if (stat == 'building') {
@@ -62,9 +62,7 @@ Building.prototype.girls = function buildingGirls() {
     if (!this.building()) { return endDelta; }
 
     var delta = this.building().startDelta();
-    return function () {
-      return $.extend(endDelta(), delta());
-    };
+    return () => $.extend(endDelta(), delta());
   };
 
   Building.prototype.startDelta = function startDelta(trackGirl) {
@@ -85,7 +83,7 @@ Building.prototype.girls = function buildingGirls() {
     if (!this.building()) { return explain ? this.name + ' does not have a bedroom yet.' : false; }
     return this.building().compare(delta.building, explain);
   };
-})();
+}))();
 
 Building.prototype.compare = function compareWithDelta(delta, explain) {
   var result = this._compare(delta);
@@ -137,14 +135,14 @@ Building.prototype.apply = function apply(stat, delta) {
       this[stat] = Math.floor(Math.max(0, Math.min(100, this[stat])));
     }
   } else if (stat == 'girl') {
-    $.each(this.girls(), function (name, girl) {
+    $.each(this.girls(), (name, girl) => {
       girl.apply(delta);
     });
   } else if (stat == 'status') {
     this.setStatus(delta);
   } else {
     var building = this;
-    $.each(stat, function (key, value) {
+    $.each(stat, (key, value) => {
       building.apply(key, value);
     });
   }
@@ -152,7 +150,7 @@ Building.prototype.apply = function apply(stat, delta) {
 
 Building.prototype.price = function price(action) {
   var cost = this.base().basePrice;
-  this.rooms._accumulate('type').forEach(function (type) {
+  this.rooms._accumulate('type').forEach(type => {
     cost += Rooms[type].price;
   });
   if (action == 'Sell') {
@@ -166,7 +164,8 @@ Building.prototype.price = function price(action) {
 };
 
 Building.prototype.dailyDelta = function getDailyDelta() {
-  var base = this.base(), delta;
+  var base = this.base();
+  var delta;
   if (this.clean > base.daily.breakpoint) {
     delta = $.extend(true, {}, base.daily.above);
   } else {
@@ -182,7 +181,8 @@ Building.prototype.dailyDelta = function getDailyDelta() {
 Building.prototype.runDay = function runDay() {
   if (this.status != 'Owned') { return; }
   var endDelta = this.startDelta(true);
-  var base = this.base(), text;
+  var base = this.base();
+  var text;
   if (this.clean > base.daily.breakpoint) {
     text = base.daily.clean;
   } else {
@@ -192,7 +192,7 @@ Building.prototype.runDay = function runDay() {
   Message.send({
     label: this.clean > base.daily.breakpoint ? 'Clean' : 'Dirty',
     image: base.image,
-    text: text,
+    text,
     delta: endDelta(),
     weight: 10,
     group: this.name
@@ -226,8 +226,8 @@ Building.prototype.sell = function sell() {
 Girl.prototype.building = function building() {
   var name = this.name;
   var finalBuilding;
-  g.buildings._filter('status', 'Owned').forEach(function (building) {
-    building.rooms._filter('type', 'Bedroom').forEach(function (room) {
+  g.buildings._filter('status', 'Owned').forEach(building => {
+    building.rooms._filter('type', 'Bedroom').forEach(room => {
       if (room.girl == name) { finalBuilding = building; }
     });
   });

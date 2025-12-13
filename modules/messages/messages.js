@@ -76,15 +76,13 @@ e.GameRender.push(function messagesGameRender(done) {
       messages[group].push(message);
       groups[group] = Math.min(groups[group] || 100, message.weight);
     });
-    groups = Object.keys(groups).sort(function (a, b) {
-      return groups[a] - groups[b];
-    });
+    groups = Object.keys(groups).sort((a, b) => groups[a] - groups[b]);
     var view = e.render('list-messages', {
-      groups: groups,
-      messages: messages
+      groups,
+      messages
     });
     view.addClass('hidden').appendTo('body');
-    e.invokeAll('Autorender', view, function () {
+    e.invokeAll('Autorender', view, () => {
       view.dialog({
         title: 'Messages',
         maxHeight: '100%'

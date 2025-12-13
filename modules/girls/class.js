@@ -23,12 +23,12 @@ function Girl(obj) {
   $.extend(this, obj);
 
   // Add missing stats from base
-  Girl.stats.forEach(function (stat) {
+  Girl.stats.forEach(stat => {
     if (girl[stat] === undefined) {
       girl[stat] = base[stat] !== undefined ? base[stat] : 30;
     }
   });
-  Girl.sexStats.forEach(function (sex) {
+  Girl.sexStats.forEach(sex => {
     if (girl[sex] === undefined) {
       girl[sex] = (base[sex] !== undefined ? base[sex] : 30);
     }
@@ -127,7 +127,9 @@ Girl.prototype.compare = function compareWithDelta(delta, explain) {
 Girl.prototype._compare = function _compare(delta) {
   if (delta.name && this.name != delta.name) { return this.name + ' is not ' + delta.name; }
   if (delta.status && this.status != delta.status) { return this.name + ' is not ' + delta.status; }
-  var stat, rule, newDelta = $.extend(true, {}, delta);
+  var stat;
+  var rule;
+  var newDelta = $.extend(true, {}, delta);
   if (newDelta.min) {
     if (newDelta.min.specialRules) {
       for (rule in newDelta.min.specialRules) {
@@ -185,13 +187,13 @@ Girl.prototype.hirePrice = function hirePrice(noMultiplier) {
     cost += this[stat] * prices[stat];
   }
   var girl = this;
-  Girl.sex.forEach(function (type) {
+  Girl.sex.forEach(type => {
     cost += (girl[type + 'Libido'] + girl[type + 'Experience']) * prices[type];
   });
   cost *= 0.66;
   if (!noMultiplier) {
     var girls = g.girls._filter('status', 'Hired').length;
-    cost *= Math.pow(Girl.config.hirePriceMultiplier, girls - 1);
+    cost *= Girl.config.hirePriceMultiplier ** (girls - 1);
   }
   return Math.floor(cost);
 };
@@ -212,11 +214,11 @@ Girl.prototype.startDelta = function startDelta(s) {
   var delta = {
     money: g.money
   };
-  s.forEach(function (stat) {
+  s.forEach(stat => {
     delta[stat] = girl[stat];
   });
   if (s === Girl.stats) {
-    Girl.sexStats.forEach(function (sex) {
+    Girl.sexStats.forEach(sex => {
       delta[sex] = girl[sex];
     });
   }
@@ -254,7 +256,8 @@ Girl.prototype.get = function getStat(stat) {
   if (stat.substr(0, 1) == '-') {
     return 100 - this.get(stat.substr(1));
   }
-  var sum = 0, i;
+  var sum = 0;
+  var i;
   if (stat == 'experience') {
     for (i in Girl.sex) {
       sum += this[Girl.sex[i] + 'Experience'];

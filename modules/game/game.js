@@ -75,11 +75,9 @@ Game.loadFromText = function loadGameFromText(value) {
 
 Game.save = function saveGame(name) {
   if (name != g.name || !g._id) {
-    var S4 = function () {
-      return Math.floor(
-        Math.random() * 0x10000 /* 65536 */
-      ).toString(16);
-    };
+    var S4 = () => Math.floor(
+      Math.random() * 0x10000 /* 65536 */
+    ).toString(16);
     g.name = name;
     g._id = S4() + S4() + S4();
   }
@@ -177,7 +175,7 @@ e.Ready.push(function gameReady(done) {
       var blob = new Blob([JSON.stringify(g, null, 2)], { type: 'text/json' });
       $('#export-game', form).attr('href', URL.createObjectURL(blob));
     } catch (error) {
-      $('#export-game', form).attr('title', 'Your browser appears to be somewhat old fashioned (likely Safari 5.1, or Internet Explorer), and does not support this feature. May I suggest Firefox of Chrome?').click(function() {
+      $('#export-game', form).attr('title', 'Your browser appears to be somewhat old fashioned (likely Safari 5.1, or Internet Explorer), and does not support this feature. May I suggest Firefox of Chrome?').click(() => {
         $('<textarea>').val(JSON.stringify(g, null, 2)).dialog().css('overflow', 'auto').click(function () { $(this).select() });
       });
     }
@@ -263,7 +261,7 @@ e.Ready.push(function gameReady(done) {
   e.addTemplate('user-input', 'modules/game/user-input.tpl.html');
   e.addTemplate('intro', 'modules/game/intro.tpl.html',
     function introLoaded() {
-      e.addTemplate('view-game', 'modules/game/view-game.tpl.html', function () {
+      e.addTemplate('view-game', 'modules/game/view-game.tpl.html', () => {
         e.loadAll(Game.includes, done);
       });
     }
@@ -272,9 +270,9 @@ e.Ready.push(function gameReady(done) {
 
 Game.getUserInput = function getUserInput(text, image, options, done) {
   var context = {
-    text: text,
-    image: image,
-    options: options
+    text,
+    image,
+    options
   };
   var form = e.render('user-input', context);
   $('button', form).click(function inputSelected(event) {
